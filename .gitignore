@@ -1,8 +1,0 @@
-node_modules/
-package-lock.json
-push.sh
-.idea
-
-#git rm -rf --cached "app/"
-#git rm -rf --cached "site_main.js"
-#git rm -rf --cached ".idea"
