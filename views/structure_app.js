@@ -24,7 +24,7 @@ class StructureApp extends Page {
             flexDirection: ContentBlock.flexDirection.COLUMN,
         });
         let app_views_main_js = new H(1, "app/views/main.js");
-        let app_views_main_js_code = new CodeBlock(`const { Page, Button, TextInput, Notification, NotificationStyle } = require('chui-electron');
+        let app_views_main_js_code = new CodeBlock(`const { Page, Button, TextInput, Notification, NotificationStyle } = require('chuijs');
 class MainPage extends Page {
     constructor() {
         super();
@@ -55,7 +55,7 @@ exports.MainPage = MainPage`);
         let app_js = new H(1, "app/app.js");
         let app_js_code = new CodeBlock(`/** RENDERER ПРОЦЕСС */
 /** ИМПОРТЫ */
-const { AppLayout, render, ipcRenderer } = require('chui-electron');
+const { AppLayout, render, ipcRenderer } = require('chuijs');
 /** СТРАНИЦЫ */
 const { MainPage } = require('../app/views/main');
 class App extends AppLayout {
@@ -81,7 +81,7 @@ ipcRenderer.send('hi', 'Привет!')`);
         });
         let app_index_js = new H(1, "main.js");
         let app_index_js_code = new CodeBlock(`/** main.js */
-const { Main, ipcMain, MenuItem } = require('chui-electron');
+const { Main, ipcMain, MenuItem } = require('chuijs');
 const main = new Main({
     name: "exampleApp",
     width: 600,
