@@ -14,7 +14,7 @@ class Site_main extends Page {
         head.setText('Установка');
 
         let chui_electron = new CodeBlock();
-        chui_electron.setText('npm i chui-electron');
+        chui_electron.setText('npm i chuijs');
         chui_electron.style().fontSize(22);
 
         main_block.add(head, chui_electron);

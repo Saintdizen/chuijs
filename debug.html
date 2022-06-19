@@ -27,6 +27,12 @@
         header.style().backgroundColor('var(--header_background)');
         header.style().blur(10)
         header.style().border('1px solid var(--border_header)')
+        let logo = new Image({ alt: '', width: '200px', height: 'auto', className: 'img_header' })
+        if (app.getTheme().includes('light')) {
+            logo.setSrc("img/left_big_light.png")
+        } else {
+            logo.setSrc("img/left_big_dark.png")
+        }
         header.add(
             new ContentBlock({
                 width: '25%',
@@ -34,7 +40,7 @@
                 justifyContent: ContentBlock.justifyContent.START,
                 alignItems: ContentBlock.alignItems.CENTER,
                 items: [
-                    new Image({ src: 'img/left_big.png', alt: '', width: '200px', height: 'auto', className: 'img_header' })
+                    logo
                 ]
             }),
             new ContentBlock({
@@ -50,8 +56,10 @@
                     new Button("Сменить тему", () => {
                         if (app.getTheme().includes('light')) {
                             app.setTheme('dark')
+                            logo.setSrc("img/left_big_dark.png")
                         } else {
                             app.setTheme('light')
+                            logo.setSrc("img/left_big_light.png")
                         }
                     })
                 ]
