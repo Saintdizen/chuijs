@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2dd3cf23-692a-468f-aa52-a4298a267e89" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/structure_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/structure_app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +53,8 @@
       <option name="presentableId" value="Default" />
       <updated>1655649596435</updated>
       <workItem from="1655649597746" duration="852000" />
-      <workItem from="1655650850331" duration="45000" />
+      <workItem from="1655650850331" duration="441000" />
+      <workItem from="1655651614904" duration="196000" />
     </task>
     <task id="LOCAL-00001" summary="0.0.1">
       <created>1655649627379</created>
@@ -69,7 +70,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655650194359</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="0.0.3">
+      <created>1655650899402</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1655650899402</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -78,6 +86,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="0.0.1" />
     <MESSAGE value="0.0.2" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.2" />
+    <MESSAGE value="0.0.3" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.3" />
   </component>
 </project>
