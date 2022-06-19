@@ -1,0 +1,34 @@
+{
+  "name": "chuijs",
+  "productName": "chuijs",
+  "description": "chuijs",
+  "version": "0.0.1",
+  "private": false,
+  "main": "index.js",
+  "author": {
+    "name": "saintdizen",
+    "email": "saintdizen@gmail.com"
+  },
+  "homepage": "https://chuijs.ru/",
+  "files": [
+    "framework/**/*",
+    "index.js",
+    "package.json",
+    "README.md"
+  ],
+  "keywords": [
+    "Electron",
+    "UI",
+    "Framework",
+    "JavaScript"
+  ],
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "electron": "https://github.com/castlabs/electron-releases#v13.6.2-wvvmp",
+    "electron-store": "^8.0.1",
+    "randomstring": "^1.2.2"
+  }
+}
