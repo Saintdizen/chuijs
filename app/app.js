@@ -1,16 +1,15 @@
-/** RENDERER PROCESS */
-/** IMPORTS */
-const {AppLayout, render} = require('../index');
-
-const {InputsPage} = require('./views/inputs');
-const {ButtonsPage} = require('./views/buttons');
-
+/** RENDERER ПРОЦЕСС */
+/** ИМПОРТЫ */
+const { AppLayout, render, ipcRenderer } = require('chuijs');
+/** СТРАНИЦЫ */
+const { MainPage } = require('../app/views/main');
 class App extends AppLayout {
     constructor() {
         super();
-        //this.setDarkMode();
-        this.setRoute(new InputsPage())
-        this.setRoute(new ButtonsPage())
+        /** РОУТЫ */
+        this.setRoute(new MainPage());
     }
 }
-render(() => new App())
+render(() => new App()).catch(err => console.log(err))
+/** ipcRenderer */
+ipcRenderer.send('hi', 'Привет!')
