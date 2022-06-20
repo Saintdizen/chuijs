@@ -21,6 +21,25 @@ class Route {
             center.removeAttribute('style');
         });
     }
+    setRoute(page) {
+        let button_route = document.createElement('route');
+        let title_menu = document.createElement('route_title');
+        title_menu.innerHTML = page.getTitle();
+        let active_menu = document.createElement('route_active');
+
+        button_route.addEventListener('click', () => {
+            if (!active_menu.classList.contains('route_active')) {
+                for (let act of document.getElementsByTagName('route_active')) {
+                    act.classList.remove('route_active');
+                }
+                this.go(page);
+                active_menu.classList.add("route_active");
+            }
+        });
+        button_route.appendChild(title_menu)
+        button_route.appendChild(active_menu)
+        document.getElementsByTagName('route_views')[0].appendChild(button_route)
+    }
 }
 
 class AppLayout extends Route {
