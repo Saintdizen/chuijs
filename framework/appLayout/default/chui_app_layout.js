@@ -26,7 +26,6 @@ class Route {
         let title_menu = document.createElement('route_title');
         title_menu.innerHTML = page.getTitle();
         let active_menu = document.createElement('route_active');
-
         button_route.addEventListener('click', () => {
             if (!active_menu.classList.contains('route_active')) {
                 for (let act of document.getElementsByTagName('route_active')) {
