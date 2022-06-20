@@ -1,6 +1,7 @@
-const {Page, Button, Dialog, ProgressBar, Styles, Table, Notification, NotificationStyle, Badge, BadgeStyle, Accordion,
-    Details, Label, Pre
+const {Page, Button, Dialog, ProgressBar, Styles, Table, Notification, NotificationStyle, Badge, BadgeStyle, Accordion, Details, Route
 } = require('../../index');
+
+const {InputsPage} = require('./inputs');
 
 class ButtonsPage extends Page {
     constructor() {
@@ -23,10 +24,9 @@ class ButtonsPage extends Page {
         let badge_WARNING = new Badge("WARNING", BadgeStyle.WARNING)
         let badge_CANCEL = new Badge("CANCEL", BadgeStyle.CANCEL)
 
-        dialog.addToBody()
-
         let button = new Button("Button", () => {
-            dialog.open()
+            //dialog.open()
+            new Route().go(new InputsPage())
         })
         this.add(button, dialog)
 

@@ -10,7 +10,7 @@ let header = null;
 let center = null;
 let page_name = null;
 
-class Route extends Page {
+class Route {
     go(page) {
         page_name.innerHTML = page.getTitle();
         for (let child of center.childNodes) { center.removeChild(child); }
@@ -456,7 +456,6 @@ class AppLayout extends Route {
                 }
             }
         })
-
         this.#applayout.appendChild(this.#menu_block)
         this.#menu_block.appendChild(this.#route_views)
         this.#menu_block.appendChild(this.#dark_mode)
@@ -466,10 +465,6 @@ class AppLayout extends Route {
     setCustomHeaderHeight(height) {
         header.style.height = height;
         center.style.paddingTop = height;
-    }
-    setDarkMode() {
-        document.body.setAttribute('theme', 'dark');
-        this.#dark_mode_togle.setValue(true);
     }
     setRoute(page) {
         let button_route = document.createElement('route');
