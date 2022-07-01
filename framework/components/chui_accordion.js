@@ -15,7 +15,29 @@ class Accordion {
                     "margin": "var(--margin)",
                     "font-size": "12pt",
                     "font-weight":"500",
-                    "line-height":"1"
+                    "line-height":"1",
+                    "border": "none",
+                }
+            },
+            {
+                name: "chui_accordion_main_test",
+                style: {
+                    "display": "flex",
+                    "flex-direction": "column",
+                    "height": "max-content",
+                    "width": "max-content",
+                    "font-size": "12pt",
+                    "font-weight":"500",
+                    "line-height":"1",
+                    "margin": "var(--margin)",
+                    "border-radius": "var(--border_radius)",
+                    "border": "none",
+                }
+            },
+            {
+                name: "chui_accordion_main_test:hover",
+                style: {
+                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
                 }
             },
             {
@@ -55,13 +77,14 @@ class Accordion {
                 style: {
                     "padding": "10px 0px",
                     "width": "-webkit-fill-available",
-                    "display": "flex"
+                    "display": "flex",
+                    "border": "none"
                 }
             },
             {
                 name: "accordion_button:hover",
                 style: {
-                    "background": "var(--blue_prime_background)"
+                    "background": "var(--blue_prime_background)",
                 }
             },
             {
@@ -93,6 +116,7 @@ class Accordion {
         ], 'chui_Accordion');
 
         options.forEach(elem => {
+            let main_test = document.createElement(`chui_accordion_main_test`);
             let ab = document.createElement('accordion_button')
             ab.setAttribute('name', this.#name)
             let bt = document.createElement('accordion_button_text')
@@ -103,39 +127,40 @@ class Accordion {
             ab.appendChild(bt)
             ab.appendChild(barrow)
             let ap = document.createElement('accordion_panel')
-            if ((options.indexOf(elem) + 1) !== options.length) {
+            /*if ((options.indexOf(elem) + 1) !== options.length) {
                 ap.style.marginBottom = 'var(--margin)'
-            }
+            }*/
             let html = document.createElement('accordion_panel_html')
             html.innerHTML = elem.p_text
             ap.appendChild(html)
-            this.#chui_accordion.appendChild(ab)
-            this.#chui_accordion.appendChild(ap)
-        })
+            main_test.appendChild(ab)
+            main_test.appendChild(ap)
+            this.#chui_accordion.appendChild(main_test)
 
-        //ФУНКЦИИ
-        let test = this.#chui_accordion.children;
-        let i;
-        for (i = 0; i < test.length; i++) {
-            let elem = test[i];
-            if (elem.tagName === 'ACCORDION_BUTTON') {
-                elem.addEventListener('click', (e) => {
-                    elem.classList.toggle('accordion_active')
-                    let panel = elem.nextElementSibling;
-                    if (panel.style.maxHeight) {
-                        elem.children[1].children[0].style.transform = 'rotate(0deg)'
-                        panel.style.maxHeight = null;
-                        elem.style.borderBottomLeftRadius = 'var(--border_radius)'
-                        elem.style.borderBottomRightRadius = 'var(--border_radius)'
-                    } else {
-                        elem.children[1].children[0].style.transform = 'rotate(180deg)'
-                        elem.style.borderBottomLeftRadius = '0px'
-                        elem.style.borderBottomRightRadius = '0px'
-                        panel.style.maxHeight = panel.scrollHeight + "px";
-                    }
-                })
+            //ФУНКЦИИ
+            let test = main_test.children;
+            let i;
+            for (i = 0; i < test.length; i++) {
+                let elem = test[i];
+                if (elem.tagName === 'ACCORDION_BUTTON') {
+                    elem.addEventListener('click', (e) => {
+                        elem.classList.toggle('accordion_active')
+                        let panel = elem.nextElementSibling;
+                        if (panel.style.maxHeight) {
+                            elem.children[1].children[0].style.transform = 'rotate(0deg)'
+                            panel.style.maxHeight = null;
+                            elem.style.borderBottomLeftRadius = 'var(--border_radius)'
+                            elem.style.borderBottomRightRadius = 'var(--border_radius)'
+                        } else {
+                            elem.children[1].children[0].style.transform = 'rotate(180deg)'
+                            elem.style.borderBottomLeftRadius = '0px'
+                            elem.style.borderBottomRightRadius = '0px'
+                            panel.style.maxHeight = panel.scrollHeight + "px";
+                        }
+                    })
+                }
             }
-        }
+        })
     }
     set() {
         return this.#chui_accordion;

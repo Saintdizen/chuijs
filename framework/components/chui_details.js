@@ -40,7 +40,14 @@ class Details {
                     "margin": "var(--margin)",
                     "font-size": "12pt",
                     "font-weight":"500",
-                    "line-height":"1"
+                    "line-height":"1",
+                    "border-radius": "var(--border_radius)",
+                }
+            },
+            {
+                name: "chui_details:hover",
+                style: {
+                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
                 }
             },
             {

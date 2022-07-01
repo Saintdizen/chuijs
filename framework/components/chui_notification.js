@@ -15,13 +15,13 @@ class Notification {
                     "margin": "var(--margin)",
                     "font-size": "12pt",
                     "padding": "8px 13px",
-                    "box-shadow": "var(--shadow_one) 0px 0px 0px 0px",
                     "background": "var(--badge_cancel_back)",
                     "color": "var(--badge_cancel_text)",
                     "animation-duration": ".5s",
                     "animation-fill-mode": "forwards",
                     "backdrop-filter": "blur(10px)",
                     "border": "2px solid var(--badge_cancel_back)",
+                    "box-shadow": "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
                 }
             },
             {

@@ -156,6 +156,10 @@ class Main {
     }
 }
 
+class CSS {
+    static BORDER_RADIUS = "border-radius";
+}
+
 class Styles {
     static WORD_BREAK = { BREAK_ALL: "break-all", BREAK_WORD: "break-word" }
     static TEXT_ALIGN = { CENTER: 'center', END: 'end', START: 'start' };
@@ -167,6 +171,7 @@ class Styles {
 }
 
 module.exports = {
+    CSS: CSS,
     app: app,
     BrowserWindow: BrowserWindow,
     ipcMain: ipcMain,
