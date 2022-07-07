@@ -2,15 +2,19 @@
 /** IMPORTS */
 const {AppLayout, render} = require('../index');
 
-const {InputsPage} = require('./views/inputs');
-const {ButtonsPage} = require('./views/buttons');
+const {Inputs_Buttons_Page} = require('./views/inputs_buttons');
+const {OthersComponentsPage} = require('./views/others');
+const {Notifications_Badges_Page} = require('./views/notifications_badges');
+const {TablesPage} = require('./views/tables');
 
 class App extends AppLayout {
     constructor() {
         super();
         //this.setDarkMode();
-        this.setRoute(new InputsPage())
-        this.setRoute(new ButtonsPage())
+        this.setRoute(new Inputs_Buttons_Page())
+        this.setRoute(new Notifications_Badges_Page())
+        this.setRoute(new TablesPage())
+        this.setRoute(new OthersComponentsPage())
     }
 }
 render(() => new App()).then(r => console.log(r))
