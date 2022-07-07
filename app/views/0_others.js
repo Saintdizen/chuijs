@@ -39,6 +39,7 @@ class OthersComponentsPage extends Page {
             direction: Styles.DIRECTION.ROW,
             width: Styles.WIDTH.WEBKIT_FILL
         });
+        details.add(new H(1, 'Заголовок'))
         this.add(h1_others, accordion, details)
     }
 }

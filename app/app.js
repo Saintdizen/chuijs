@@ -2,10 +2,10 @@
 /** IMPORTS */
 const {AppLayout, render} = require('../index');
 
-const {Inputs_Buttons_Page} = require('./views/inputs_buttons');
-const {OthersComponentsPage} = require('./views/others');
-const {Notifications_Badges_Page} = require('./views/notifications_badges');
-const {TablesPage} = require('./views/tables');
+const {Inputs_Buttons_Page} = require('./views/1_inputs_buttons');
+const {OthersComponentsPage} = require('./views/0_others');
+const {Notifications_Badges_Page} = require('./views/2_notifications_badges');
+const {TablesPage} = require('./views/3_tables');
 
 class App extends AppLayout {
     constructor() {
