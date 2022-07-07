@@ -1,5 +1,4 @@
 const {Animation} = require('../../modules/chui_animations');
-const {Page} = require('../../modules/chui_page');
 const {Toggle} = require('../../components/chui_toggle');
 const {Icon, Icons} = require('../../components/chui_icons');
 const Store = require('electron-store');
@@ -25,18 +24,16 @@ class Route {
         let button_route = document.createElement('route');
         let title_menu = document.createElement('route_title');
         title_menu.innerHTML = page.getTitle();
-        let active_menu = document.createElement('route_active');
         button_route.addEventListener('click', () => {
-            if (!active_menu.classList.contains('route_active')) {
-                for (let act of document.getElementsByTagName('route_active')) {
+            if (!button_route.classList.contains('route_active')) {
+                for (let act of document.getElementsByTagName('route')) {
                     act.classList.remove('route_active');
                 }
                 this.go(page);
-                active_menu.classList.add("route_active");
+                button_route.classList.add("route_active");
             }
         });
         button_route.appendChild(title_menu)
-        button_route.appendChild(active_menu)
         document.getElementsByTagName('route_views')[0].appendChild(button_route)
     }
 }
@@ -357,9 +354,17 @@ class AppLayout extends Route {
                 }
             },
             {
+                name: "route:hover",
+                style: {
+                    "padding": "8px 13px",
+                    "background": "var(--blue_prime_background)",
+                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
+                }
+            },
+            {
                 name: "route:hover route_title",
                 style: {
-                    "color": "var(--blue_prime_background)"
+                    "color": "var(--text_color_hover)"
                 }
             },
             {
@@ -370,19 +375,20 @@ class AppLayout extends Route {
                 }
             },
             {
-                name: "route_active",
+                name: ".route_active",
                 style: {
-                    "border-radius": "var(--border_radius)",
-                    "padding": "8px",
-                    "height": "0px",
+                    "padding": "8px 13px",
+                    "background": "var(--blue_prime_background)",
+                    "color": "var(--text_color_hover)",
+                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
                 }
             },
             {
-                name: ".route_active",
+                name: ".route_active route_title",
                 style: {
-                    "background": "var(--blue_prime_background)"
+                    "color": "var(--text_color_hover)"
                 }
-            },
+            }
         ], 'AppLayout');
         document.body.setAttribute('theme', 'light')
         document.getElementById('app').append(this.#applayout);
@@ -488,23 +494,21 @@ class AppLayout extends Route {
         let button_route = document.createElement('route');
         let title_menu = document.createElement('route_title');
         title_menu.innerHTML = page.getTitle();
-        let active_menu = document.createElement('route_active');
 
         if (page.getMain()) {
             this.go(page);
-            active_menu.classList.add("route_active");
+            button_route.classList.add("route_active");
         }        
         button_route.addEventListener('click', () => {
-            if (!active_menu.classList.contains('route_active')) {
-                for (let act of document.getElementsByTagName('route_active')) {
+            if (!button_route.classList.contains('route_active')) {
+                for (let act of document.getElementsByTagName('route')) {
                     act.classList.remove('route_active');
                 }
                 this.go(page);
-                active_menu.classList.add("route_active");
+                button_route.classList.add("route_active");
             }
         });
         button_route.appendChild(title_menu)
-        button_route.appendChild(active_menu)
         this.#route_views.appendChild(button_route)
     }
 }

@@ -13,4 +13,4 @@ class App extends AppLayout {
         this.setRoute(new ButtonsPage())
     }
 }
-render(() => new App())
+render(() => new App()).then(r => console.log(r))

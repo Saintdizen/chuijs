@@ -1,17 +1,13 @@
 const {Page, Button, Dialog, ProgressBar, Styles, Table, Notification, NotificationStyle, Badge, BadgeStyle, Accordion, Details, Route
 } = require('../../index');
 
-const {TestRoutePage, TestRoutePage2, TestRoutePage3} = require('./testRoute');
+const {TestRoutePage} = require('./testRoute');
 
 class ButtonsPage extends Page {
     constructor() {
         super();
         this.setTitle('Кнопки');
         this.setMain(true)
-
-        new Route().setRoute(new TestRoutePage())
-        new Route().setRoute(new TestRoutePage2())
-        new Route().setRoute(new TestRoutePage3("KAKAKAKAK"))
 
         let dialog = new Dialog({
             width: "500px",
@@ -30,7 +26,7 @@ class ButtonsPage extends Page {
 
         let button = new Button("Button", () => {
             //dialog.open()
-            new Route().go(new TestRoutePage3("GOGOGOG"))
+            new Route().go(new TestRoutePage("GOGOGOG"))
         })
         this.add(button, dialog)
 
