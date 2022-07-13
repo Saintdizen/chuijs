@@ -8,7 +8,7 @@ class Inputs_Buttons_Page extends Page {
     constructor() {
         super();
         this.setTitle('Поля ввода и Кнопки');
-        this.setMain(true)
+        this.setMain(false)
 
         let h1_inputs = new H(1, "Поля ввода")
         let combo = new ComboBox({title: 'ComboBox'})

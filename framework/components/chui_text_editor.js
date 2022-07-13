@@ -53,12 +53,19 @@ class TextEditor {
                     "overflow": "overlay",
                     "text-align": "start"
                 }
+            },
+            {
+                name: "chui_editor_text_input div",
+                style: {
+                    "margin-bottom": "10px"
+                }
             }
         ], 'TextEditor');
         this.#chui_text_editor.style.width = width;
         this.#chui_text_editor.style.height = height;
-
         this.#text_input.addEventListener("keyup", () => {
+            document.execCommand("removeFormat", false)
+            document.execCommand('formatBlock', false, 'div');
             console.log(this.#getCaretPosition())
         })
         this.#text_input.addEventListener("mouseup", () => {
