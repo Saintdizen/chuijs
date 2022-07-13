@@ -4,7 +4,7 @@ const main = new Main({
     width: 1366,
     height: 768,
     render: `${__dirname}/app/app.js`,
-    devTools: false,
+    devTools: true,
     menuBarVisible: false
 });
 
