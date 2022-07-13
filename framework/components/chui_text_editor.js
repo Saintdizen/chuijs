@@ -50,12 +50,20 @@ class TextEditor {
                     "font-size": "17px",
                     "padding": "0px 14px 14px 14px",
                     "height": "calc(100% - 40px)",
-                    "overflow": "overlay"
+                    "overflow": "overlay",
+                    "text-align": "start"
                 }
             }
         ], 'TextEditor');
         this.#chui_text_editor.style.width = width;
         this.#chui_text_editor.style.height = height;
+
+        this.#text_input.addEventListener("keyup", () => {
+            console.log(this.#getCaretPosition())
+        })
+        this.#text_input.addEventListener("mouseup", () => {
+            console.log(this.#getCaretPosition())
+        })
 
         // FORMAT
         let button_bold_text = new ControlButton(Icons.EDITOR.FORMAT_BOLD, Commands.bold)
@@ -90,6 +98,29 @@ class TextEditor {
     }
     set() {
         return this.#chui_text_editor;
+    }
+
+    #getCaretPosition() {
+        let select = this.#text_input.ownerDocument.defaultView.getSelection();
+        if (select.focusNode.parentNode.tagName === "B") {
+            console.log("bold")
+        }
+        let range = select.getRangeAt(0);
+        let treeWalker = document.createTreeWalker(this.#text_input, NodeFilter.SHOW_TEXT, (node) => {
+                let nodeRange = document.createRange();
+                nodeRange.selectNode(node);
+                return nodeRange.compareBoundaryPoints(Range.END_TO_END, range) < 1 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+                }, false
+        );
+
+        let charCount = 0;
+        while (treeWalker.nextNode()) {
+            charCount += treeWalker.currentNode.length;
+        }
+        if (range.startContainer.nodeType === 3) {
+            charCount += range.startOffset;
+        }
+        return charCount;
     }
 }
 
