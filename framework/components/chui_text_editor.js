@@ -23,7 +23,8 @@ class TextEditor {
     #chui_text_editor = document.createElement('chui_text_editor');
     #editor_controls = document.createElement('chui_editor_controls');
     #text_input = document.createElement('chui_editor_text_input');
-    constructor(width, height) {
+    #status_row = document.createElement('chui_editor_status_row');
+    constructor(height) {
         require('../modules/chui_functions').style_parse([
             {
                 name: "chui_text_editor",
@@ -39,8 +40,8 @@ class TextEditor {
                 name: "chui_editor_controls",
                 style: {
                     "width": "-webkit-fill-available",
-                    "height": "40px",
-                    "margin-bottom": "14px"
+                    "display": "flex",
+                    "padding": "10px"
                 }
             },
             {
@@ -48,7 +49,7 @@ class TextEditor {
                 style: {
                     "width": "-webkit-fill-available",
                     "font-size": "17px",
-                    "padding": "0px 14px 14px 14px",
+                    "padding": "0px 10px 10px 10px",
                     "height": "calc(100% - 40px)",
                     "overflow": "overlay",
                     "text-align": "start"
@@ -59,9 +60,39 @@ class TextEditor {
                 style: {
                     "margin-bottom": "10px"
                 }
+            },
+            {
+                name: "chui_button_format",
+                style: {
+                    "height": "max-content",
+                    "width": "max-content",
+                    "border-radius": "var(--border_radius)",
+                    "padding": "9px",
+                    "font-size": "12pt",
+                    "font-weight": "500",
+                    "background": "transparent",
+                    "color": "var(--button_text_color)",
+                    "box-sizing": "border-box",
+                }
+            },
+            {
+                name: "chui_button_format:hover",
+                style: {
+                    "background": "var(--blue_prime_background)",
+                    "color": "var(--text_color_hover)",
+                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
+                }
+            },
+            {
+                name: "chui_editor_status_row",
+                style: {
+                    "width": "-webkit-fill-available",
+                    "display": "flex",
+                    "padding": "10px"
+                }
             }
         ], 'TextEditor');
-        this.#chui_text_editor.style.width = width;
+        this.#chui_text_editor.style.width = "max-content";
         this.#chui_text_editor.style.height = height;
         this.#text_input.addEventListener("keyup", () => {
             document.execCommand("removeFormat", false)
@@ -86,22 +117,23 @@ class TextEditor {
         let button_justifyRight = new ControlButton(Icons.EDITOR.FORMAT_ALIGN_RIGHT, Commands.justifyRight)
         let button_justifyFull = new ControlButton(Icons.EDITOR.FORMAT_ALIGN_JUSTIFY, Commands.justifyFull)
         //
-        this.#editor_controls.appendChild(button_bold_text);
-        this.#editor_controls.appendChild(button_italic_text);
-        this.#editor_controls.appendChild(button_strikeThrough);
-        this.#editor_controls.appendChild(button_underline);
+        this.#editor_controls.appendChild(button_bold_text.set());
+        this.#editor_controls.appendChild(button_italic_text.set());
+        this.#editor_controls.appendChild(button_strikeThrough.set());
+        this.#editor_controls.appendChild(button_underline.set());
         //
-        this.#editor_controls.appendChild(button_superscript);
-        this.#editor_controls.appendChild(button_subscript);
+        this.#editor_controls.appendChild(button_superscript.set());
+        this.#editor_controls.appendChild(button_subscript.set());
         //
-        this.#editor_controls.appendChild(button_justifyLeft);
-        this.#editor_controls.appendChild(button_justifyCenter);
-        this.#editor_controls.appendChild(button_justifyRight);
-        this.#editor_controls.appendChild(button_justifyFull);
+        this.#editor_controls.appendChild(button_justifyLeft.set());
+        this.#editor_controls.appendChild(button_justifyCenter.set());
+        this.#editor_controls.appendChild(button_justifyRight.set());
+        this.#editor_controls.appendChild(button_justifyFull.set());
         //
         this.#text_input.contentEditable = 'true';
         this.#chui_text_editor.appendChild(this.#editor_controls);
         this.#chui_text_editor.appendChild(this.#text_input);
+        this.#chui_text_editor.appendChild(this.#status_row);
     }
     set() {
         return this.#chui_text_editor;
@@ -134,11 +166,13 @@ class TextEditor {
 class ControlButton {
     #button = undefined;
     constructor(icon, command, value) {
-        this.#button = document.createElement('button_' + command);
+        this.#button = document.createElement('chui_button_format');
         this.#button.innerHTML = new Icon(icon).getHTML();
         this.#button.addEventListener("click", () => {
             document.execCommand(command, false, value);
         })
+    }
+    set() {
         return this.#button;
     }
 }

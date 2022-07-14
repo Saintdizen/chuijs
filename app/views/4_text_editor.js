@@ -6,7 +6,7 @@ class TextEditorPage extends Page {
         this.setTitle('Редактор текста');
         this.setMain(true)
 
-        let textedit = new TextEditor("500px", "300px")
+        let textedit = new TextEditor("300px")
         this.add(textedit)
     }
 }
