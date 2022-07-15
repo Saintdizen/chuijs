@@ -111,6 +111,7 @@ class AppLayout extends Route {
                     "--center_background": "rgb(242, 242, 247)",
                     "--border_header": "rgba(209, 209, 214, 0.5)",
                     "--blue_prime_background": "rgb(0, 112, 245)",
+                    "--blue_prime_background_trans": "rgba(0, 112, 245, 0.4)",
                     //Кнопка
                     "--button_background": "rgba(209, 209, 214, 0.5)",
                     "--button_text_color": "rgb(0, 112, 245)",

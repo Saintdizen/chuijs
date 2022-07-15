@@ -1,4 +1,4 @@
-const {RadioButton} = require("./inputs/chui_radio_button");
+const {RadioButton} = require("./chui_inputs/chui_radio_button");
 
 class RadioGroup {
     #id = require("randomstring").generate();

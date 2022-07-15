@@ -130,7 +130,6 @@ class Select {
         }
         this.#input.setAttribute('id', this.#id_sb);
         this.#input.classList.add('selectbox_input');
-        //this.#input.style.width = `calc(${width} - 52px)`;
         this.#input.type = 'text';
         this.#input.disabled = true
         this.#button_open.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN, undefined, "var(--blue_prime_background)").getHTML();

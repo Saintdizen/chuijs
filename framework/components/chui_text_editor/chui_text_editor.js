@@ -1,6 +1,7 @@
-const {Icon, Icons} = require('./chui_icons');
-const {Label} = require("./chui_label");
-const {Select} = require("./inputs/chui_select_box");
+const {Icons, Icon} = require('../chui_icons');
+const {Label} = require("../chui_label");
+const {TextEditorButtons} = require("./chui_text_editor_buttons");
+const {TextEditorSelects} = require("./chui_text_editor_selects");
 
 const Commands = {
     copy: "copy",
@@ -32,7 +33,7 @@ class TextEditor {
     #cater_position = new Label("0");
     //
     constructor(height = Number(undefined)) {
-        require('../modules/chui_functions').style_parse([
+        require('../../modules/chui_functions').style_parse([
             {
                 name: "chui_text_editor",
                 style: {
@@ -43,7 +44,6 @@ class TextEditor {
                     "flex-direction": "column",
                     "background": "var(--input_background)",
                     "border": "2px solid var(--input_background)",
-                    //"width": "max-content",
                     "height": `${height}px`
                 }
             },
@@ -74,29 +74,6 @@ class TextEditor {
                 }
             },
             {
-                name: "chui_button_format",
-                style: {
-                    "height": "max-content",
-                    "width": "max-content",
-                    "border-radius": "var(--border_radius)",
-                    "padding": "9px",
-                    "font-size": "12pt",
-                    "font-weight": "500",
-                    "margin": "var(--margin)",
-                    "background": "var(--button_background)",
-                    "color": "var(--button_text_color)",
-                    "box-sizing": "border-box",
-                }
-            },
-            {
-                name: "chui_button_format:hover",
-                style: {
-                    "background": "var(--blue_prime_background)",
-                    "color": "var(--text_color_hover)",
-                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
-                }
-            },
-            {
                 name: "chui_editor_status_row",
                 style: {
                     "width": "-webkit-fill-available",
@@ -107,22 +84,50 @@ class TextEditor {
         ], 'TextEditor');
 
         // FORMAT
-        let button_bold_text = new ControlButton(Icons.EDITOR.FORMAT_BOLD, Commands.bold)
-        let button_italic_text = new ControlButton(Icons.EDITOR.FORMAT_ITALIC, Commands.italic)
-        let button_strikeThrough = new ControlButton(Icons.EDITOR.FORMAT_STRIKETHROUGH, Commands.strikeThrough)
-        let button_underline = new ControlButton(Icons.EDITOR.FORMAT_UNDERLINED, Commands.underline)
+        let button_bold_text = new TextEditorButtons(Icons.EDITOR.FORMAT_BOLD, Commands.bold)
+        let button_italic_text = new TextEditorButtons(Icons.EDITOR.FORMAT_ITALIC, Commands.italic)
+        let button_strikeThrough = new TextEditorButtons(Icons.EDITOR.FORMAT_STRIKETHROUGH, Commands.strikeThrough)
+        let button_underline = new TextEditorButtons(Icons.EDITOR.FORMAT_UNDERLINED, Commands.underline)
         //
-        let button_removeFormat = new ControlButton(Icons.EDITOR.FORMAT_CLEAR, Commands.removeFormat)
+        let button_removeFormat = new TextEditorButtons(Icons.EDITOR.FORMAT_CLEAR, Commands.removeFormat)
         //
-        let button_superscript = new ControlButton(Icons.EDITOR.SUPERSCRIPT, Commands.superscript)
-        let button_subscript = new ControlButton(Icons.EDITOR.SUBSCRIPT, Commands.subscript)
+        let button_superscript = new TextEditorButtons(Icons.EDITOR.SUPERSCRIPT, Commands.superscript)
+        let button_subscript = new TextEditorButtons(Icons.EDITOR.SUBSCRIPT, Commands.subscript)
         //
-        let button_justifyLeft = new ControlButton(Icons.EDITOR.FORMAT_ALIGN_LEFT, Commands.justifyLeft)
-        let button_justifyCenter = new ControlButton(Icons.EDITOR.FORMAT_ALIGN_CENTER, Commands.justifyCenter)
-        let button_justifyRight = new ControlButton(Icons.EDITOR.FORMAT_ALIGN_RIGHT, Commands.justifyRight)
-        let button_justifyFull = new ControlButton(Icons.EDITOR.FORMAT_ALIGN_JUSTIFY, Commands.justifyFull)
+        let button_justifyLeft = new TextEditorButtons(Icons.EDITOR.FORMAT_ALIGN_LEFT, Commands.justifyLeft)
+        let button_justifyCenter = new TextEditorButtons(Icons.EDITOR.FORMAT_ALIGN_CENTER, Commands.justifyCenter)
+        let button_justifyRight = new TextEditorButtons(Icons.EDITOR.FORMAT_ALIGN_RIGHT, Commands.justifyRight)
+        let button_justifyFull = new TextEditorButtons(Icons.EDITOR.FORMAT_ALIGN_JUSTIFY, Commands.justifyFull)
         //
-        this.#editor_controls.appendChild(new SelectFontSize().set())
+        let select_headers = new TextEditorSelects({ icon: new Icon(Icons.EDITOR.TITLE).getHTML() })
+        select_headers.addOptions(
+            { name: "xx_small",   value: "1" },
+            { name: "x_small",    value: "2" },
+            { name: "small",      value: "3" },
+            { name: "medium",     value: "4" },
+            { name: "large",      value: "5" },
+            { name: "x_large",    value: "6" },
+            { name: "xx_large",   value: "7" },
+        )
+        select_headers.addValueChangeListener((e) => {
+            document.execCommand('fontSize', false, e.target.value);
+        })
+        this.#editor_controls.appendChild(select_headers.set())
+        //
+        let select_font_size = new TextEditorSelects({ icon: new Icon(Icons.EDITOR.FORMAT_SIZE).getHTML() })
+        select_font_size.addOptions(
+            { name: "xx_small",   value: "1" },
+            { name: "x_small",    value: "2" },
+            { name: "small",      value: "3" },
+            { name: "medium",     value: "4" },
+            { name: "large",      value: "5" },
+            { name: "x_large",    value: "6" },
+            { name: "xx_large",   value: "7" },
+        )
+        select_font_size.addValueChangeListener((e) => {
+            document.execCommand('fontSize', false, e.target.value);
+        })
+        this.#editor_controls.appendChild(select_font_size.set())
         //
         this.#editor_controls.appendChild(button_bold_text.set());
         this.#editor_controls.appendChild(button_italic_text.set());
@@ -187,33 +192,6 @@ class TextEditor {
             charCount += range.startOffset;
         }
         return charCount;
-    }
-}
-
-class SelectFontSize {
-    #select = new Select({
-        placeholder:'Размер',
-        width:'20px'
-    });
-    constructor() {
-        this.#select.addOptions("1", "2", "3")
-    }
-    set() {
-        return this.#select.set()
-    }
-}
-
-class ControlButton {
-    #button = undefined;
-    constructor(icon, command, value) {
-        this.#button = document.createElement('chui_button_format');
-        this.#button.innerHTML = new Icon(icon).getHTML();
-        this.#button.addEventListener("click", () => {
-            document.execCommand(command, false, value);
-        })
-    }
-    set() {
-        return this.#button;
     }
 }
 
