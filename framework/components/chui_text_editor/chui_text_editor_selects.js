@@ -167,7 +167,7 @@ class TextEditorSelects {
         });
         this.#Select_main.appendChild(this.#Select_second)
     }
-    addOptions(...options) {
+    addOptionsFontSize(...options) {
         for (let opt of options) {
             let option = document.createElement(`text_editor_selectbox_option`);
             let fontSize = document.createElement("font");
@@ -179,6 +179,22 @@ class TextEditorSelects {
                 this.#input.setAttribute('value', option.getAttribute('option_value'));
             });
             option.appendChild(fontSize)
+            this.#dropdown.appendChild(option);
+        }
+    }
+    addOptionsHeader(...options) {
+        for (let opt of options) {
+            let option = document.createElement(`text_editor_selectbox_option`);
+            let header = document.createElement(`${opt.value.replace("<", "").replace(">", "")}`);
+            header.innerHTML = opt.name;
+            header.style.padding = '0px';
+            header.style.margin = '0px';
+            option.setAttribute('option_value', opt.value);
+            option.addEventListener('click', () => {
+                this.#input.value = option.getAttribute('option_value');
+                this.#input.setAttribute('value', option.getAttribute('option_value'));
+            });
+            option.appendChild(header)
             this.#dropdown.appendChild(option);
         }
     }

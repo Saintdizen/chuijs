@@ -21,7 +21,9 @@ const Commands = {
     justifyLeft: "justifyLeft",
     justifyRight: "justifyRight",
     justifyCenter: "justifyCenter",
-    justifyFull: "justifyFull"
+    justifyFull: "justifyFull",
+    //
+    formatBlock: "formatBlock"
 }
 
 class TextEditor {
@@ -98,24 +100,25 @@ class TextEditor {
         let button_justifyCenter = new TextEditorButtons(Icons.EDITOR.FORMAT_ALIGN_CENTER, Commands.justifyCenter)
         let button_justifyRight = new TextEditorButtons(Icons.EDITOR.FORMAT_ALIGN_RIGHT, Commands.justifyRight)
         let button_justifyFull = new TextEditorButtons(Icons.EDITOR.FORMAT_ALIGN_JUSTIFY, Commands.justifyFull)
-        //
+        // formatBlock
+        let button_format_quote = new TextEditorButtons(Icons.EDITOR.FORMAT_QUOTE, Commands.formatBlock, "<BLOCKQUOTE>")
         let select_headers = new TextEditorSelects({ icon: new Icon(Icons.EDITOR.TITLE).getHTML() })
-        select_headers.addOptions(
-            { name: "xx_small",   value: "1" },
-            { name: "x_small",    value: "2" },
-            { name: "small",      value: "3" },
-            { name: "medium",     value: "4" },
-            { name: "large",      value: "5" },
-            { name: "x_large",    value: "6" },
-            { name: "xx_large",   value: "7" },
+        select_headers.addOptionsHeader(
+            { name: "H1",   value: "<h1>" },
+            { name: "H2",   value: "<h2>" },
+            { name: "H3",   value: "<h3>" },
+            { name: "H4",   value: "<h4>" },
+            { name: "H5",   value: "<h5>" },
+            { name: "H6",   value: "<h6>" }
         )
         select_headers.addValueChangeListener((e) => {
-            document.execCommand('fontSize', false, e.target.value);
+            document.execCommand('formatBlock', false, e.target.value);
         })
         this.#editor_controls.appendChild(select_headers.set())
+        this.#editor_controls.appendChild(button_format_quote.set())
         //
         let select_font_size = new TextEditorSelects({ icon: new Icon(Icons.EDITOR.FORMAT_SIZE).getHTML() })
-        select_font_size.addOptions(
+        select_font_size.addOptionsFontSize(
             { name: "xx_small",   value: "1" },
             { name: "x_small",    value: "2" },
             { name: "small",      value: "3" },
@@ -152,8 +155,11 @@ class TextEditor {
         this.#status_row.appendChild(this.#cater_position.set())
 
         //
-        this.#text_input.addEventListener("keyup", () => {
-            document.execCommand('formatBlock', false, 'div');
+        this.#text_input.addEventListener("keyup", (e) => {
+            if (e.keyCode === 13) {
+                document.execCommand(Commands.formatBlock, false, 'div');
+                //document.execCommand(Commands.bold, false);
+            }
             this.#cater_position.setText(this.#getCaretPosition().toString());
         })
         this.#text_input.addEventListener("mouseup", () => {

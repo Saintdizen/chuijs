@@ -389,7 +389,31 @@ class AppLayout extends Route {
                 style: {
                     "color": "var(--text_color_hover)"
                 }
+            },
+            {
+                name: "blockquote",
+                style: {
+                    "background": "var(--button_background)",
+                    "border-left": "10px solid var(--blue_prime_background_trans)",
+                    "margin": "1.5em 10px",
+                    "padding": "9px 14px",
+                    "color": "var(--text_color)",
+                    "border-radius": "var(--border_radius)",
+                    "display": "flex",
+                }
             }
+            /*,
+            {
+                name: "blockquote:before",
+                style: {
+                    "color": "var(--blue_prime_background)",
+                    "content": "open-quote",
+                    "font-size": "4em",
+                    "line-height": "0.1em",
+                    "margin-right": "0.25em",
+                    "vertical-align": "-0.4em"
+                }
+            },*/
         ], 'AppLayout');
         document.body.setAttribute('theme', 'light')
         document.getElementById('app').append(this.#applayout);
