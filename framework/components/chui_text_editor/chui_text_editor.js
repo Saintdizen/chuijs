@@ -61,6 +61,7 @@ class TextEditor {
             }
         ], 'TextEditor');
         // Панель управления
+        document.execCommand('defaultParagraphSeparator', false, 'p');
         this.#editor_controls.appendChild(new TextEditorPanel().set())
         //
         this.#text_input.contentEditable = 'true';

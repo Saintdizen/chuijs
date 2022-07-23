@@ -4,6 +4,7 @@ const {Animation} = require("../../modules/chui_animations");
 class Commands {
     static COPY = "copy"
     static CUT = "cut"
+    static PASTE = "paste"
     static DELETE = "delete"
     static UNDO = "undo"
     static REDO = "redo"
@@ -26,6 +27,8 @@ class Commands {
     static FORMAT_BLOCK = "formatBlock"
     static NONE = "none"
     // ITEMS
+    static CREATE_LINK = "createLink"
+    static UNLINK = "unlink"
     static INSERT_IMAGE = "insertImage"
     static INSERT_LINE_BREAK = "insertLineBreak"
     // LIST
@@ -364,13 +367,16 @@ class TextEditorPanel {
         this.#addBlock(button_list_one, button_list_two)
         //
         let button_table = new TextEditorButtons(Icons.EDITOR.TABLE_CHART, Commands.NONE)
+        let button_link = new TextEditorButtons(Icons.CONTENT.LINK, Commands.CREATE_LINK, "https://chuijs.ru/")
+        let button_unlink = new TextEditorButtons(Icons.CONTENT.LINK_OFF, Commands.UNLINK)
         let button_image = new TextEditorButtons(Icons.EDITOR.INSERT_PAGE_BREAK, Commands.INSERT_LINE_BREAK)
         let button_line_break = new TextEditorButtons(Icons.EDITOR.INSERT_PHOTO, Commands.INSERT_IMAGE)
-        this.#addBlock(button_table, button_image, button_line_break)
+        this.#addBlock(button_table, button_link, button_unlink, button_image, button_line_break)
         //
         let button_COPY = new TextEditorButtons(Icons.CONTENT.CONTENT_COPY, Commands.COPY)
         let button_CUT = new TextEditorButtons(Icons.CONTENT.CONTENT_CUT, Commands.CUT)
-        this.#addBlock(button_COPY, button_CUT)
+        let button_PASTE = new TextEditorButtons(Icons.CONTENT.CONTENT_PASTE, Commands.PASTE)
+        this.#addBlock(button_COPY, button_CUT, button_PASTE)
     }
     #addBlock(...childs) {
         let elem = document.createElement("text_editor_block")
