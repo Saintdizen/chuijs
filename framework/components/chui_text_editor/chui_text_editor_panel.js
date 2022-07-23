@@ -1,5 +1,67 @@
-const { Animation } = require('../../modules/chui_animations');
-const { Icon, Icons } = require('../chui_icons');
+const {Icon, Icons} = require("../chui_icons");
+const {Animation} = require("../../modules/chui_animations");
+
+class Commands {
+    static COPY = "copy"
+    static CUT = "cut"
+    static DELETE = "delete"
+    static UNDO = "undo"
+    static REDO = "redo"
+    //
+    static BOLD = "bold"
+    static ITALIC = "italic"
+    static STRIKE_THROUGH = "strikeThrough"
+    static UNDERLINE = "underline"
+    //
+    static REMOVE_FORMAT = "removeFormat"
+    //
+    static SUPER_SCRIPT = "superscript"
+    static SUB_SCRIPT = "subscript"
+    //
+    static JUSTIFY_LEFT = "justifyLeft"
+    static JUSTIFY_RIGHT = "justifyRight"
+    static JUSTIFY_CENTER = "justifyCenter"
+    static JUSTIFY_FULL = "justifyFull"
+    //
+    static FORMAT_BLOCK = "formatBlock"
+    static NONE = "none"
+}
+
+class TextEditorButtons {
+    #button = undefined;
+    constructor(icon, command, value) {
+        require('../../modules/chui_functions').style_parse([
+            {
+                name: "chui_button_format",
+                style: {
+                    "height": "max-content",
+                    "width": "max-content",
+                    "border-radius": "var(--border_radius)",
+                    "padding": "9px",
+                    "font-size": "12pt",
+                    "font-weight": "500",
+                    "color": "var(--button_text_color)",
+                    "box-sizing": "border-box",
+                }
+            },
+            {
+                name: "chui_button_format:hover",
+                style: {
+                    "background": "var(--blue_prime_background_trans)",
+                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
+                }
+            }
+        ], 'TextEditorButtons');
+        this.#button = document.createElement('chui_button_format');
+        this.#button.innerHTML = new Icon(icon).getHTML();
+        this.#button.addEventListener("click", () => {
+            document.execCommand(command, false, value);
+        })
+    }
+    set() {
+        return this.#button;
+    }
+}
 
 class TextEditorSelects {
     #id = require("randomstring").generate();
@@ -147,7 +209,7 @@ class TextEditorSelects {
             if (event.target.parentNode === this.#Select_second) {
                 this.#input.focus()
                 new Animation(this.#dropdown).appearance();
-                setOptionDisplay(document.getElementById(this.#id));
+                TextEditorSelects.#setOptionDisplay(document.getElementById(this.#id));
             }
         });
         window.addEventListener('click', (event) => {
@@ -213,10 +275,98 @@ class TextEditorSelects {
     set() {
         return this.#Select_main;
     }
+    static #setOptionDisplay(element = new HTMLElement()) {
+        for (let option of element.childNodes) { option.style.display = 'block'; }
+    }
 }
 
-function setOptionDisplay(element = new HTMLElement()) {
-    for (let option of element.childNodes) { option.style.display = 'block'; }
+class TextEditorPanel {
+    #panel = document.createElement("text_editor_panel")
+    constructor() {
+        require('../../modules/chui_functions').style_parse([
+            {
+                name: "text_editor_panel",
+                style: {
+                    "height": "max-content",
+                    "width": "max-content",
+                    "display": "flex"
+                }
+            },
+            {
+                name: "text_editor_block",
+                style: {
+                    "height": "max-content",
+                    "width": "max-content",
+                    "display": "flex",
+                }
+            }
+        ], 'TextEditorPanel');
+        // Управление
+        let button_undo = new TextEditorButtons(Icons.CONTENT.UNDO, Commands.UNDO)
+        let button_redo = new TextEditorButtons(Icons.CONTENT.REDO, Commands.REDO)
+        this.#addBlock(button_undo, button_redo)
+        // formatBlock
+        let select_headers = new TextEditorSelects({ icon: new Icon(Icons.EDITOR.TITLE).getHTML() })
+        select_headers.addOptionsHeader(
+            { name: "H1",   value: "<h1>" },
+            { name: "H2",   value: "<h2>" },
+            { name: "H3",   value: "<h3>" },
+            { name: "H4",   value: "<h4>" },
+            { name: "H5",   value: "<h5>" },
+            { name: "H6",   value: "<h6>" }
+        )
+        select_headers.addValueChangeListener((e) => {
+            document.execCommand('formatBlock', false, e.target.value);
+        })
+        let select_font_size = new TextEditorSelects({ icon: new Icon(Icons.EDITOR.FORMAT_SIZE).getHTML() })
+        select_font_size.addOptionsFontSize(
+            { name: "xx_small",   value: "1" },
+            { name: "x_small",    value: "2" },
+            { name: "small",      value: "3" },
+            { name: "medium",     value: "4" },
+            { name: "large",      value: "5" },
+            { name: "x_large",    value: "6" },
+            { name: "xx_large",   value: "7" },
+        )
+        select_font_size.addValueChangeListener((e) => {
+            document.execCommand('fontSize', false, e.target.value);
+        })
+        let button_format_quote = new TextEditorButtons(Icons.EDITOR.FORMAT_QUOTE, Commands.FORMAT_BLOCK, "<BLOCKQUOTE>")
+        let button_removeFormat = new TextEditorButtons(Icons.EDITOR.FORMAT_CLEAR, Commands.REMOVE_FORMAT)
+        this.#addBlock(select_headers, select_font_size, button_format_quote, button_removeFormat)
+        // FORMAT
+        let button_bold_text = new TextEditorButtons(Icons.EDITOR.FORMAT_BOLD, Commands.BOLD)
+        let button_italic_text = new TextEditorButtons(Icons.EDITOR.FORMAT_ITALIC, Commands.ITALIC)
+        let button_strikeThrough = new TextEditorButtons(Icons.EDITOR.FORMAT_STRIKETHROUGH, Commands.STRIKE_THROUGH)
+        let button_underline = new TextEditorButtons(Icons.EDITOR.FORMAT_UNDERLINED, Commands.UNDERLINE)
+        this.#addBlock(button_bold_text, button_italic_text, button_strikeThrough, button_underline)
+        //
+        let button_superscript = new TextEditorButtons(Icons.EDITOR.SUPERSCRIPT, Commands.SUPER_SCRIPT)
+        let button_subscript = new TextEditorButtons(Icons.EDITOR.SUBSCRIPT, Commands.SUB_SCRIPT)
+        this.#addBlock(button_superscript, button_subscript)
+        //
+        let button_justifyLeft = new TextEditorButtons(Icons.EDITOR.FORMAT_ALIGN_LEFT, Commands.JUSTIFY_LEFT)
+        let button_justifyCenter = new TextEditorButtons(Icons.EDITOR.FORMAT_ALIGN_CENTER, Commands.JUSTIFY_CENTER)
+        let button_justifyRight = new TextEditorButtons(Icons.EDITOR.FORMAT_ALIGN_RIGHT, Commands.JUSTIFY_RIGHT)
+        let button_justifyFull = new TextEditorButtons(Icons.EDITOR.FORMAT_ALIGN_JUSTIFY, Commands.JUSTIFY_FULL)
+        this.#addBlock(button_justifyLeft, button_justifyCenter, button_justifyRight, button_justifyFull)
+        //
+        let button_table = new TextEditorButtons(Icons.EDITOR.TABLE_CHART, Commands.NONE)
+        this.#addBlock(button_table)
+        //
+        let button_COPY = new TextEditorButtons(Icons.CONTENT.CONTENT_COPY, Commands.COPY)
+        let button_CUT = new TextEditorButtons(Icons.CONTENT.CONTENT_CUT, Commands.CUT)
+        this.#addBlock(button_COPY, button_CUT)
+    }
+    #addBlock(...childs) {
+        let elem = document.createElement("text_editor_block")
+        for (let child of childs) elem.appendChild(child.set())
+        this.#panel.appendChild(elem)
+    }
+    set() {
+        return this.#panel;
+    }
 }
 
-exports.TextEditorSelects = TextEditorSelects
+exports.TextEditorPanel = TextEditorPanel;
+exports.Commands = Commands;
