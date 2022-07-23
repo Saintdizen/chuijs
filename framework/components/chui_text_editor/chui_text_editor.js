@@ -9,7 +9,7 @@ class TextEditor {
     // status
     #cater_position = new Label("0");
     //
-    constructor(height = Number(undefined)) {
+    constructor(height = String(undefined)) {
         require('../../modules/chui_functions').style_parse([
             {
                 name: "chui_text_editor",
@@ -21,8 +21,7 @@ class TextEditor {
                     "flex-direction": "column",
                     "background": "var(--input_background)",
                     "border": "2px solid var(--input_background)",
-                    //"height": `${height}px`,
-                    "height": "-webkit-fill-available",
+                    "height": `${height}`,
                     "width": "-webkit-fill-available",
                 }
             },
@@ -71,7 +70,7 @@ class TextEditor {
         this.#status_row.appendChild(this.#cater_position.set())
         this.#text_input.addEventListener("keyup", (e) => {
             if (e.keyCode === 13) {
-                document.execCommand(Commands.FORMAT_BLOCK, false, 'div');
+                //document.execCommand(Commands.FORMAT_BLOCK, false, 'div');
             }
             this.#cater_position.setText(this.#getCaretPosition().toString());
         })

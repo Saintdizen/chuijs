@@ -1,4 +1,4 @@
-const {Page, TextEditor} = require('../../index');
+const {Page, TextEditor, Styles} = require('../../index');
 
 class TextEditorPage extends Page {
     constructor() {
@@ -8,7 +8,7 @@ class TextEditorPage extends Page {
         this.setFullWidth()
         this.setFullHeight()
 
-        let textedit = new TextEditor(300)
+        let textedit = new TextEditor(Styles.WIDTH.WEBKIT_FILL)
         this.add(textedit)
     }
 }

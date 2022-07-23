@@ -25,6 +25,12 @@ class Commands {
     //
     static FORMAT_BLOCK = "formatBlock"
     static NONE = "none"
+    // ITEMS
+    static INSERT_IMAGE = "insertImage"
+    static INSERT_LINE_BREAK = "insertLineBreak"
+    // LIST
+    static INSERT_ORDERED_LIST = "insertOrderedList"
+    static INSERT_UNORDERED_LIST = "insertUnorderedList"
 }
 
 class TextEditorButtons {
@@ -313,7 +319,9 @@ class TextEditorPanel {
             { name: "H3",   value: "<h3>" },
             { name: "H4",   value: "<h4>" },
             { name: "H5",   value: "<h5>" },
-            { name: "H6",   value: "<h6>" }
+            { name: "H6",   value: "<h6>" },
+            { name: "Code",   value: "<PRE>" },
+            { name: "Paragraph",   value: "<P>" }
         )
         select_headers.addValueChangeListener((e) => {
             document.execCommand('formatBlock', false, e.target.value);
@@ -351,8 +359,14 @@ class TextEditorPanel {
         let button_justifyFull = new TextEditorButtons(Icons.EDITOR.FORMAT_ALIGN_JUSTIFY, Commands.JUSTIFY_FULL)
         this.#addBlock(button_justifyLeft, button_justifyCenter, button_justifyRight, button_justifyFull)
         //
+        let button_list_one = new TextEditorButtons(Icons.EDITOR.FORMAT_LIST_NUMBERED, Commands.INSERT_ORDERED_LIST)
+        let button_list_two = new TextEditorButtons(Icons.EDITOR.FORMAT_LIST_BULLETED, Commands.INSERT_UNORDERED_LIST)
+        this.#addBlock(button_list_one, button_list_two)
+        //
         let button_table = new TextEditorButtons(Icons.EDITOR.TABLE_CHART, Commands.NONE)
-        this.#addBlock(button_table)
+        let button_image = new TextEditorButtons(Icons.EDITOR.INSERT_PAGE_BREAK, Commands.INSERT_LINE_BREAK)
+        let button_line_break = new TextEditorButtons(Icons.EDITOR.INSERT_PHOTO, Commands.INSERT_IMAGE)
+        this.#addBlock(button_table, button_image, button_line_break)
         //
         let button_COPY = new TextEditorButtons(Icons.CONTENT.CONTENT_COPY, Commands.COPY)
         let button_CUT = new TextEditorButtons(Icons.CONTENT.CONTENT_CUT, Commands.CUT)
