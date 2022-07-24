@@ -19,4 +19,4 @@ class App extends AppLayout {
         this.setRoute(new OthersComponentsPage())
     }
 }
-render(() => new App()).then(r => console.log(r))
+render(() => new App()).then(r => console.log("Загружено!"))

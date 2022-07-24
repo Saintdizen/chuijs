@@ -107,6 +107,7 @@ class AppLayout extends Route {
                     //Цвета
                     //Глобальные цвета
                     "--text_color": "rgb(28, 28, 30)",
+                    "--text_color_disabled": "rgba(28, 28, 30, 0.75)",
                     "--header_background": "rgba(229, 229, 234, 0.3)",
                     "--center_background": "rgb(242, 242, 247)",
                     "--border_header": "rgba(209, 209, 214, 0.5)",
@@ -163,6 +164,7 @@ class AppLayout extends Route {
                 style: {
                     //Глобальные цвета
                     "--text_color": "rgb(242, 242, 247)",
+                    "--text_color_disabled": "rgba(242, 242, 247, 0.75)",
                     "--header_background": "rgba(44, 44, 46, 0.3)",
                     "--center_background": "rgb(28, 28, 30)",
                     "--border_header": "rgba(58, 58, 60, 0.5)",

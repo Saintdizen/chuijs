@@ -446,27 +446,34 @@ class TextEditorPanel {
             command: Commands.UNLINK
         })
         let content_link = new ContentBlock("column", "wrap", "center", "flex-end")
+        let content_link_header = new ContentBlock("row", "wrap", "center", "space-between")
+        content_link_header.setWidth("-webkit-fill-available")
         let dialog_link = new Dialog({ width: "max-content", height: "max-content", closeOutSideClick: true })
         let input_link_text = new TextInput({ title: "Наименование", placeholder: "Наименование", width: "500px", disableFocus: false })
         let input_link = new TextInput({ title: "Ссылка", placeholder: "https://", width: "500px", value: "https://example.ru", disableFocus: false })
-        dialog_link.addToHeader(new Label("Добавить ссылку"))
         content_link.add(input_link_text, input_link)
         dialog_link.addToBody(content_link)
-        let selection_link = undefined;
-        let range_link = undefined;
-        dialog_link.addToFooter(
+        content_link_header.add(
+            new Button("Закрыть", () => {
+                document.getElementById(text_editor_id).focus()
+                dialog_link.close()
+            }),
+            new Label("Добавить ссылку"),
             new Button("Сохранить", () => {
                 document.getElementById(text_editor_id).focus()
                 document.getSelection().removeAllRanges();
                 document.getSelection().addRange(range_link);
-                if (document.getSelection().focusOffset === 0) {
-                    document.execCommand('insertHTML', false, '<a href="' + input_link.getValue() + '" target="_blank">' + input_link_text.getValue() + '</a>');
+                if (selection_link.toString() === "") {
+                    document.execCommand('insertHTML', false, `<a href="${input_link.getValue()}">${input_link_text.getValue()}</a>`);
                 } else {
                     document.execCommand(Commands.CREATE_LINK, false, input_link.getValue())
                 }
                 dialog_link.close()
             })
         )
+        dialog_link.addToHeader(content_link_header)
+        let selection_link = undefined;
+        let range_link = undefined;
         let button_link = new TextEditorButtons({
             icon: Icons.CONTENT.LINK,
             disableFocus: true,
@@ -475,10 +482,10 @@ class TextEditorPanel {
                 selection_link = document.getSelection();
                 range_link = selection_link.getRangeAt(0)
                 input_link_text.setValue(selection_link.toString())
-                if (document.getSelection().focusOffset === 0) {
-                    input_link_text.setDisabled(true);
-                } else {
+                if (selection_link.toString() === "") {
                     input_link_text.setDisabled(false);
+                } else {
+                    input_link_text.setDisabled(true);
                 }
                 //
                 dialog_link.open()
