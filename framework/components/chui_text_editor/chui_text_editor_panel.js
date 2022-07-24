@@ -6,6 +6,7 @@ const {TextInput} = require("../chui_inputs/chui_text");
 const {Label} = require("../chui_label");
 const {ContentBlock} = require("../chui_content_block");
 const {Styles} = require("../../../index");
+const {NumberInput} = require("../chui_inputs/chui_number");
 
 class Commands {
     static COPY = "copy"
@@ -498,8 +499,12 @@ class TextEditorPanel {
                 dialog_table.close()
             })
         )
-        let content_table = new ContentBlock("column", "wrap", "center", "flex-end")
+        let content_table = new ContentBlock("row", "wrap", "center", "space-around")
         content_table.setWidth("-webkit-fill-available")
+        let table_rows = new NumberInput({ title:'Количество строк' });
+        let table_cols = new NumberInput({ title:'Количество столбцов' });
+        content_table.add(table_rows, new Label("X"), table_cols)
+
         let dialog_table = new Dialog({ width: "500px", height: "max-content", closeOutSideClick: true })
         dialog_table.addToHeader(content_table_header)
         dialog_table.addToBody(content_table)
