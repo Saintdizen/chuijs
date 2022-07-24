@@ -1,5 +1,9 @@
 const {Icon, Icons} = require("../chui_icons");
 const {Animation} = require("../../modules/chui_animations");
+const {Dialog} = require("../chui_modal");
+const {Button} = require("../chui_button");
+const {TextInput} = require("../chui_inputs/chui_text");
+const {Label} = require("../chui_label");
 
 class Commands {
     static COPY = "copy"
@@ -38,7 +42,12 @@ class Commands {
 
 class TextEditorButtons {
     #button = undefined;
-    constructor(icon, command, value) {
+    constructor(options = {
+        icon: undefined,
+        command: undefined,
+        value: undefined,
+        listener: () => {}
+    }) {
         require('../../modules/chui_functions').style_parse([
             {
                 name: "chui_button_format",
@@ -62,10 +71,18 @@ class TextEditorButtons {
             }
         ], 'TextEditorButtons');
         this.#button = document.createElement('chui_button_format');
-        this.#button.innerHTML = new Icon(icon).getHTML();
-        this.#button.addEventListener("click", () => {
-            document.execCommand(command, false, value);
-        })
+        this.#button.innerHTML = new Icon(options.icon).getHTML();
+        if (options.listener !== undefined) {
+            this.#button.addEventListener("click", options.listener)
+        } else {
+            this.#button.addEventListener("click", () => {
+                if (options.value !== undefined) {
+                    document.execCommand(options.command, false, options.value);
+                } else {
+                    document.execCommand(options.command, false);
+                }
+            })
+        }
     }
     set() {
         return this.#button;
@@ -311,8 +328,14 @@ class TextEditorPanel {
             }
         ], 'TextEditorPanel');
         // Управление
-        let button_undo = new TextEditorButtons(Icons.CONTENT.UNDO, Commands.UNDO)
-        let button_redo = new TextEditorButtons(Icons.CONTENT.REDO, Commands.REDO)
+        let button_undo = new TextEditorButtons({
+            icon: Icons.CONTENT.UNDO,
+            command: Commands.UNDO
+        })
+        let button_redo = new TextEditorButtons({
+            icon: Icons.CONTENT.REDO,
+            command: Commands.REDO
+        })
         this.#addBlock(button_undo, button_redo)
         // formatBlock
         let select_headers = new TextEditorSelects({ icon: new Icon(Icons.EDITOR.TITLE).getHTML() })
@@ -342,40 +365,125 @@ class TextEditorPanel {
         select_font_size.addValueChangeListener((e) => {
             document.execCommand('fontSize', false, e.target.value);
         })
-        let button_format_quote = new TextEditorButtons(Icons.EDITOR.FORMAT_QUOTE, Commands.FORMAT_BLOCK, "<BLOCKQUOTE>")
-        let button_removeFormat = new TextEditorButtons(Icons.EDITOR.FORMAT_CLEAR, Commands.REMOVE_FORMAT)
+        let button_format_quote = new TextEditorButtons({
+            icon: Icons.EDITOR.FORMAT_QUOTE,
+            command: Commands.FORMAT_BLOCK,
+            value: "<BLOCKQUOTE>"
+        })
+        let button_removeFormat = new TextEditorButtons({
+            icon: Icons.EDITOR.FORMAT_CLEAR,
+            command: Commands.REMOVE_FORMAT
+        })
         this.#addBlock(select_headers, select_font_size, button_format_quote, button_removeFormat)
         // FORMAT
-        let button_bold_text = new TextEditorButtons(Icons.EDITOR.FORMAT_BOLD, Commands.BOLD)
-        let button_italic_text = new TextEditorButtons(Icons.EDITOR.FORMAT_ITALIC, Commands.ITALIC)
-        let button_strikeThrough = new TextEditorButtons(Icons.EDITOR.FORMAT_STRIKETHROUGH, Commands.STRIKE_THROUGH)
-        let button_underline = new TextEditorButtons(Icons.EDITOR.FORMAT_UNDERLINED, Commands.UNDERLINE)
+        let button_bold_text = new TextEditorButtons({
+            icon: Icons.EDITOR.FORMAT_BOLD,
+            command: Commands.BOLD
+        })
+        let button_italic_text = new TextEditorButtons({
+            icon: Icons.EDITOR.FORMAT_ITALIC,
+            command: Commands.ITALIC
+        })
+        let button_strikeThrough = new TextEditorButtons({
+            icon: Icons.EDITOR.FORMAT_STRIKETHROUGH,
+            command: Commands.STRIKE_THROUGH
+        })
+        let button_underline = new TextEditorButtons({
+            icon: Icons.EDITOR.FORMAT_UNDERLINED,
+            command: Commands.UNDERLINE
+        })
         this.#addBlock(button_bold_text, button_italic_text, button_strikeThrough, button_underline)
         //
-        let button_superscript = new TextEditorButtons(Icons.EDITOR.SUPERSCRIPT, Commands.SUPER_SCRIPT)
-        let button_subscript = new TextEditorButtons(Icons.EDITOR.SUBSCRIPT, Commands.SUB_SCRIPT)
+        let button_superscript = new TextEditorButtons({
+            icon: Icons.EDITOR.SUPERSCRIPT,
+            command: Commands.SUPER_SCRIPT
+        })
+        let button_subscript = new TextEditorButtons({
+            icon: Icons.EDITOR.SUBSCRIPT,
+            command: Commands.SUB_SCRIPT
+        })
         this.#addBlock(button_superscript, button_subscript)
         //
-        let button_justifyLeft = new TextEditorButtons(Icons.EDITOR.FORMAT_ALIGN_LEFT, Commands.JUSTIFY_LEFT)
-        let button_justifyCenter = new TextEditorButtons(Icons.EDITOR.FORMAT_ALIGN_CENTER, Commands.JUSTIFY_CENTER)
-        let button_justifyRight = new TextEditorButtons(Icons.EDITOR.FORMAT_ALIGN_RIGHT, Commands.JUSTIFY_RIGHT)
-        let button_justifyFull = new TextEditorButtons(Icons.EDITOR.FORMAT_ALIGN_JUSTIFY, Commands.JUSTIFY_FULL)
+        let button_justifyLeft = new TextEditorButtons({
+            icon: Icons.EDITOR.FORMAT_ALIGN_LEFT,
+            command: Commands.JUSTIFY_LEFT
+        })
+        let button_justifyCenter = new TextEditorButtons({
+            icon: Icons.EDITOR.FORMAT_ALIGN_CENTER,
+            command: Commands.JUSTIFY_CENTER
+        })
+        let button_justifyRight = new TextEditorButtons({
+            icon: Icons.EDITOR.FORMAT_ALIGN_RIGHT,
+            command: Commands.JUSTIFY_RIGHT
+        })
+        let button_justifyFull = new TextEditorButtons({
+            icon: Icons.EDITOR.FORMAT_ALIGN_JUSTIFY,
+            command: Commands.JUSTIFY_FULL
+        })
         this.#addBlock(button_justifyLeft, button_justifyCenter, button_justifyRight, button_justifyFull)
         //
-        let button_list_one = new TextEditorButtons(Icons.EDITOR.FORMAT_LIST_NUMBERED, Commands.INSERT_ORDERED_LIST)
-        let button_list_two = new TextEditorButtons(Icons.EDITOR.FORMAT_LIST_BULLETED, Commands.INSERT_UNORDERED_LIST)
+        let button_list_one = new TextEditorButtons({
+            icon: Icons.EDITOR.FORMAT_LIST_NUMBERED,
+            command: Commands.INSERT_ORDERED_LIST
+        })
+        let button_list_two = new TextEditorButtons({
+            icon: Icons.EDITOR.FORMAT_LIST_BULLETED,
+            command: Commands.INSERT_UNORDERED_LIST
+        })
         this.#addBlock(button_list_one, button_list_two)
         //
-        let button_table = new TextEditorButtons(Icons.EDITOR.TABLE_CHART, Commands.NONE)
-        let button_link = new TextEditorButtons(Icons.CONTENT.LINK, Commands.CREATE_LINK, "https://chuijs.ru/")
-        let button_unlink = new TextEditorButtons(Icons.CONTENT.LINK_OFF, Commands.UNLINK)
-        let button_image = new TextEditorButtons(Icons.EDITOR.INSERT_PAGE_BREAK, Commands.INSERT_LINE_BREAK)
-        let button_line_break = new TextEditorButtons(Icons.EDITOR.INSERT_PHOTO, Commands.INSERT_IMAGE)
-        this.#addBlock(button_table, button_link, button_unlink, button_image, button_line_break)
+        let button_unlink = new TextEditorButtons({
+            icon: Icons.CONTENT.LINK_OFF,
+            command: Commands.UNLINK
+        })
+        let dialog_link = new Dialog({ width: "max-content", height: "max-content", closeOutSideClick: true })
+        let input_link_text = new TextInput({ title: "Наименование ссылки", placeholder: "Наименование ссылки", width: "500px" })
+        let input_link = new TextInput({ title: "Ссылка", placeholder: "https://", width: "500px", value: "https://example.ru" })
+        dialog_link.addToHeader(new Label("Добавить ссылку"))
+        dialog_link.addToBody(input_link_text, input_link)
+        dialog_link.addToFooter(
+            new Button("Сохранить", () => {
+                document.execCommand('insertHTML', false, '<a href="' + input_link.getValue() + '" target="_blank">' + input_link_text.getValue() + '</a>');
+                dialog_link.close()
+            }),
+            new Button("Закрыть", () => {
+                input_link.setValue("https://example.ru")
+                dialog_link.close()
+            })
+        )
+        let button_link = new TextEditorButtons({ icon: Icons.CONTENT.LINK, listener: () => dialog_link.open() })
+        let dialog_table = new Dialog({ width: "max-content", height: "max-content", closeOutSideClick: true })
+        let button_table = new TextEditorButtons({
+            icon: Icons.EDITOR.TABLE_CHART,
+            listener: () => {
+                dialog_table.open()
+            }
+        })
+        let dialog_image = new Dialog({ width: "max-content", height: "max-content", closeOutSideClick: true })
+        let button_image = new TextEditorButtons({
+            icon: Icons.EDITOR.INSERT_PHOTO,
+            listener: () => {
+                dialog_image.open()
+            }
+        })
+        let button_line_break = new TextEditorButtons({
+            icon: Icons.EDITOR.INSERT_PAGE_BREAK,
+            command: Commands.INSERT_LINE_BREAK
+        })
+        this.#addBlock(button_unlink, button_link, dialog_link, button_table, dialog_table, button_image, dialog_image, button_line_break)
         //
-        let button_COPY = new TextEditorButtons(Icons.CONTENT.CONTENT_COPY, Commands.COPY)
-        let button_CUT = new TextEditorButtons(Icons.CONTENT.CONTENT_CUT, Commands.CUT)
-        let button_PASTE = new TextEditorButtons(Icons.CONTENT.CONTENT_PASTE, Commands.PASTE)
+        let button_COPY = new TextEditorButtons({
+            icon: Icons.CONTENT.CONTENT_COPY,
+            command: Commands.COPY
+        })
+        let button_CUT = new TextEditorButtons({
+            icon: Icons.CONTENT.CONTENT_CUT,
+            command: Commands.CUT
+        })
+        let button_PASTE = new TextEditorButtons({
+            icon: Icons.CONTENT.CONTENT_PASTE,
+            command: Commands.PASTE
+        })
         this.#addBlock(button_COPY, button_CUT, button_PASTE)
     }
     #addBlock(...childs) {
