@@ -446,11 +446,12 @@ class TextEditorPanel {
             command: Commands.UNLINK
         })
         let content_link = new ContentBlock("column", "wrap", "center", "flex-end")
+        content_link.setWidth("-webkit-fill-available")
         let content_link_header = new ContentBlock("row", "wrap", "center", "space-between")
         content_link_header.setWidth("-webkit-fill-available")
-        let dialog_link = new Dialog({ width: "max-content", height: "max-content", closeOutSideClick: true })
-        let input_link_text = new TextInput({ title: "Наименование", placeholder: "Наименование", width: "500px", disableFocus: false })
-        let input_link = new TextInput({ title: "Ссылка", placeholder: "https://", width: "500px", value: "https://example.ru", disableFocus: false })
+        let dialog_link = new Dialog({ width: "500px", height: "max-content", closeOutSideClick: true })
+        let input_link_text = new TextInput({ title: "Наименование", placeholder: "Наименование", width: "-webkit-fill-available", disableFocus: false })
+        let input_link = new TextInput({ title: "Ссылка", placeholder: "https://", width: "-webkit-fill-available", value: "https://example.ru", disableFocus: false })
         content_link.add(input_link_text, input_link)
         dialog_link.addToBody(content_link)
         content_link_header.add(
@@ -463,11 +464,8 @@ class TextEditorPanel {
                 document.getElementById(text_editor_id).focus()
                 document.getSelection().removeAllRanges();
                 document.getSelection().addRange(range_link);
-                if (selection_link.toString() === "") {
-                    document.execCommand('insertHTML', false, `<a href="${input_link.getValue()}">${input_link_text.getValue()}</a>`);
-                } else {
-                    document.execCommand(Commands.CREATE_LINK, false, input_link.getValue())
-                }
+                if (selection_link.toString() === "") document.execCommand('insertHTML', false, `<a href="${input_link.getValue()}">${input_link_text.getValue()}</a>`);
+                else document.execCommand(Commands.CREATE_LINK, false, input_link.getValue())
                 dialog_link.close()
             })
         )
@@ -477,39 +475,72 @@ class TextEditorPanel {
         let button_link = new TextEditorButtons({
             icon: Icons.CONTENT.LINK,
             disableFocus: true,
-            listener: (e) => {
-                //
+            listener: () => {
+                document.getElementById(text_editor_id).focus()
                 selection_link = document.getSelection();
                 range_link = selection_link.getRangeAt(0)
                 input_link_text.setValue(selection_link.toString())
-                if (selection_link.toString() === "") {
-                    input_link_text.setDisabled(false);
-                } else {
-                    input_link_text.setDisabled(true);
-                }
-                //
+                if (selection_link.toString() === "") input_link_text.setDisabled(false);
+                else input_link_text.setDisabled(true);
                 dialog_link.open()
             }
         })
         // ================
-        let dialog_table = new Dialog({ width: "max-content", height: "max-content", closeOutSideClick: true })
+        // Создание таблицы
+        let content_table_header = new ContentBlock("row", "wrap", "center", "space-between")
+        content_table_header.setWidth("-webkit-fill-available")
+        content_table_header.add(
+            new Button("Закрыть", () => {
+                dialog_table.close()
+            }),
+            new Label("Добавить таблицу"),
+            new Button("Сохранить", () => {
+                dialog_table.close()
+            })
+        )
+        let content_table = new ContentBlock("column", "wrap", "center", "flex-end")
+        content_table.setWidth("-webkit-fill-available")
+        let dialog_table = new Dialog({ width: "500px", height: "max-content", closeOutSideClick: true })
+        dialog_table.addToHeader(content_table_header)
+        dialog_table.addToBody(content_table)
         let button_table = new TextEditorButtons({
             icon: Icons.EDITOR.TABLE_CHART,
             listener: () => {
+                document.getElementById(text_editor_id).focus()
                 dialog_table.open()
             }
         })
-        let dialog_image = new Dialog({ width: "max-content", height: "max-content", closeOutSideClick: true })
+        // ================
+        // Добавление изображения
+        let content_image_header = new ContentBlock("row", "wrap", "center", "space-between")
+        content_image_header.setWidth("-webkit-fill-available")
+        content_image_header.add(
+            new Button("Закрыть", () => {
+                dialog_image.close()
+            }),
+            new Label("Добавить изображение"),
+            new Button("Сохранить", () => {
+                dialog_image.close()
+            })
+        )
+        let content_image = new ContentBlock("column", "wrap", "center", "flex-end")
+        content_image.setWidth("-webkit-fill-available")
+        let dialog_image = new Dialog({ width: "500px", height: "max-content", closeOutSideClick: true })
+        dialog_image.addToHeader(content_image_header)
+        dialog_image.addToBody(content_image)
         let button_image = new TextEditorButtons({
             icon: Icons.EDITOR.INSERT_PHOTO,
             listener: () => {
+                document.getElementById(text_editor_id).focus()
                 dialog_image.open()
             }
         })
+        // ======================
         let button_line_break = new TextEditorButtons({
             icon: Icons.EDITOR.INSERT_PAGE_BREAK,
             command: Commands.INSERT_LINE_BREAK
         })
+
         this.#addBlock(button_unlink, button_link, dialog_link, button_table, dialog_table, button_image, dialog_image, button_line_break)
         //
         let button_COPY = new TextEditorButtons({
