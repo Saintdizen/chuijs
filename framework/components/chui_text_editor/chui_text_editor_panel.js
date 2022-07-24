@@ -4,6 +4,8 @@ const {Dialog} = require("../chui_modal");
 const {Button} = require("../chui_button");
 const {TextInput} = require("../chui_inputs/chui_text");
 const {Label} = require("../chui_label");
+const {ContentBlock} = require("../chui_content_block");
+const {Styles} = require("../../../index");
 
 class Commands {
     static COPY = "copy"
@@ -46,6 +48,7 @@ class TextEditorButtons {
         icon: undefined,
         command: undefined,
         value: undefined,
+        disableFocus: false,
         listener: () => {}
     }) {
         require('../../modules/chui_functions').style_parse([
@@ -72,6 +75,11 @@ class TextEditorButtons {
         ], 'TextEditorButtons');
         this.#button = document.createElement('chui_button_format');
         this.#button.innerHTML = new Icon(options.icon).getHTML();
+        if (options.disableFocus) {
+            this.#button.addEventListener("mousedown", () => {
+                return false
+            })
+        }
         if (options.listener !== undefined) {
             this.#button.addEventListener("click", options.listener)
         } else {
@@ -308,7 +316,7 @@ class TextEditorSelects {
 
 class TextEditorPanel {
     #panel = document.createElement("text_editor_panel")
-    constructor() {
+    constructor(text_editor_id = String(undefined)) {
         require('../../modules/chui_functions').style_parse([
             {
                 name: "text_editor_panel",
@@ -432,26 +440,51 @@ class TextEditorPanel {
         })
         this.#addBlock(button_list_one, button_list_two)
         //
+        // Сохдание ссылки
         let button_unlink = new TextEditorButtons({
             icon: Icons.CONTENT.LINK_OFF,
             command: Commands.UNLINK
         })
+        let content_link = new ContentBlock("column", "wrap", "center", "flex-end")
         let dialog_link = new Dialog({ width: "max-content", height: "max-content", closeOutSideClick: true })
-        let input_link_text = new TextInput({ title: "Наименование ссылки", placeholder: "Наименование ссылки", width: "500px" })
-        let input_link = new TextInput({ title: "Ссылка", placeholder: "https://", width: "500px", value: "https://example.ru" })
+        let input_link_text = new TextInput({ title: "Наименование", placeholder: "Наименование", width: "500px", disableFocus: false })
+        let input_link = new TextInput({ title: "Ссылка", placeholder: "https://", width: "500px", value: "https://example.ru", disableFocus: false })
         dialog_link.addToHeader(new Label("Добавить ссылку"))
-        dialog_link.addToBody(input_link_text, input_link)
+        content_link.add(input_link_text, input_link)
+        dialog_link.addToBody(content_link)
+        let selection_link = undefined;
+        let range_link = undefined;
         dialog_link.addToFooter(
             new Button("Сохранить", () => {
-                document.execCommand('insertHTML', false, '<a href="' + input_link.getValue() + '" target="_blank">' + input_link_text.getValue() + '</a>');
-                dialog_link.close()
-            }),
-            new Button("Закрыть", () => {
-                input_link.setValue("https://example.ru")
+                document.getElementById(text_editor_id).focus()
+                document.getSelection().removeAllRanges();
+                document.getSelection().addRange(range_link);
+                if (document.getSelection().focusOffset === 0) {
+                    document.execCommand('insertHTML', false, '<a href="' + input_link.getValue() + '" target="_blank">' + input_link_text.getValue() + '</a>');
+                } else {
+                    document.execCommand(Commands.CREATE_LINK, false, input_link.getValue())
+                }
                 dialog_link.close()
             })
         )
-        let button_link = new TextEditorButtons({ icon: Icons.CONTENT.LINK, listener: () => dialog_link.open() })
+        let button_link = new TextEditorButtons({
+            icon: Icons.CONTENT.LINK,
+            disableFocus: true,
+            listener: (e) => {
+                //
+                selection_link = document.getSelection();
+                range_link = selection_link.getRangeAt(0)
+                input_link_text.setValue(selection_link.toString())
+                if (document.getSelection().focusOffset === 0) {
+                    input_link_text.setDisabled(true);
+                } else {
+                    input_link_text.setDisabled(false);
+                }
+                //
+                dialog_link.open()
+            }
+        })
+        // ================
         let dialog_table = new Dialog({ width: "max-content", height: "max-content", closeOutSideClick: true })
         let button_table = new TextEditorButtons({
             icon: Icons.EDITOR.TABLE_CHART,

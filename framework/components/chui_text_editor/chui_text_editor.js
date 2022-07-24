@@ -6,6 +6,7 @@ class TextEditor {
     #editor_controls = document.createElement('chui_editor_controls');
     #text_input = document.createElement('chui_editor_text_input');
     #status_row = document.createElement('chui_editor_status_row');
+    #id = require("randomstring").generate();
     // status
     #cater_position = new Label("0");
     //
@@ -62,9 +63,10 @@ class TextEditor {
         ], 'TextEditor');
         // Панель управления
         document.execCommand('defaultParagraphSeparator', false, 'p');
-        this.#editor_controls.appendChild(new TextEditorPanel().set())
+        this.#editor_controls.appendChild(new TextEditorPanel(this.#id).set())
         //
         this.#text_input.contentEditable = 'true';
+        this.#text_input.id = this.#id
         this.#chui_text_editor.appendChild(this.#editor_controls);
         this.#chui_text_editor.appendChild(this.#text_input);
         this.#chui_text_editor.appendChild(this.#status_row);

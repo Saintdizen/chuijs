@@ -30,6 +30,9 @@ class Button {
         if (listener !== undefined) {
             this.#button.addEventListener('click', listener)
         }
+        this.#button.addEventListener("mousedown", () => {
+            return false
+        })
     }
     getText() {
         return this.#button.innerText;

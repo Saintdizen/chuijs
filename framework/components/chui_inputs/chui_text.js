@@ -13,6 +13,7 @@ class TextInput {
         width: String(undefined),
         required: Boolean(undefined),
         value: String(undefined),
+        disableFocus: Boolean(false),
         inputListener: () => undefined,
         focusListener: () => undefined,
         blurListener: () => undefined
@@ -82,6 +83,11 @@ class TextInput {
         if (options.blurListener !== undefined) { this.#input.addEventListener('blur', options.blurListener); }
         if (options.value !== undefined) { this.#input.value = options.value; }
         if (options.required !== undefined) { this.#input.required = options.required; }
+        if (options.disableFocus) {
+            this.#input.addEventListener("mousedown", () => {
+                return false
+            })
+        }
         if (options.title !== undefined) {
             this.#label.innerText = options.title;
             this.#label.className = 'input_label';
@@ -91,6 +97,9 @@ class TextInput {
         if (options.width !== undefined) { this.#chui_text_input.style.width = options.width; }
         if (options.placeholder !== undefined) { this.#input.placeholder = options.placeholder; }
         this.#input.addEventListener('focus', () => {
+            if (options.disableFocus) {
+                return false
+            }
             this.#chui_text_main.style.border = '2px solid var(--blue_prime_background)';
             this.#label.style.color = 'var(--blue_prime_background)';
         })
@@ -107,6 +116,9 @@ class TextInput {
     getTitle() { return this.#title; }
     getValue() { return this.#input.value; }
     setValue(text = String(undefined)) { this.#input.value = text; }
+    setDisabled(value = Boolean(undefined)) {
+        this.#input.disabled = value
+    }
     set() { return this.#chui_text_input; }
 }
 
