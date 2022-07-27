@@ -7,6 +7,7 @@ const {Label} = require("../chui_label");
 const {ContentBlock} = require("../chui_content_block");
 const {Styles} = require("../../../index");
 const {NumberInput} = require("../chui_inputs/chui_number");
+const {CheckBox} = require("../chui_inputs/chui_check_box");
 
 class Commands {
     static COPY = "copy"
@@ -38,6 +39,7 @@ class Commands {
     static UNLINK = "unlink"
     static INSERT_IMAGE = "insertImage"
     static INSERT_LINE_BREAK = "insertLineBreak"
+    static INSERT_HTML = "insertHTML"
     // LIST
     static INSERT_ORDERED_LIST = "insertOrderedList"
     static INSERT_UNORDERED_LIST = "insertUnorderedList"
@@ -334,6 +336,39 @@ class TextEditorPanel {
                     "width": "max-content",
                     "display": "flex",
                 }
+            },
+            {
+                name: ".text_editor_table",
+                style: {
+                    "display": "block",
+                    "border-radius": "0",
+                    "width": "max-content"
+                }
+            },
+            {
+                name: ".text_editor_table_body",
+                style: {
+                    "display": "flex",
+                    "border": "1px solid var(--blue_prime_background)",
+                    "width": "inherit"
+                }
+            },
+            {
+                name: ".text_editor_table_row",
+                style: {
+                    "display": "block",
+                    "width": "auto"
+                }
+            },
+            {
+                name: ".text_editor_table_cell",
+                style: {
+                    "height": "max-content",
+                    "width": "auto",
+                    "display": "block",
+                    "border": "1px solid var(--blue_prime_background)",
+                    "line-height": "1"
+                }
             }
         ], 'TextEditorPanel');
         // Управление
@@ -490,24 +525,77 @@ class TextEditorPanel {
         // Создание таблицы
         let content_table_header = new ContentBlock("row", "wrap", "center", "space-between")
         content_table_header.setWidth("-webkit-fill-available")
+        let content_table_2 = new ContentBlock("row", "wrap", "center", "space-around")
+        content_table_2.setWidth("-webkit-fill-available")
+        let content_table = new ContentBlock("row", "wrap", "center", "space-around")
+        content_table.setWidth("-webkit-fill-available")
+        let content_table_main = new ContentBlock("column", "wrap", "center", "space-around")
+        content_table_main.setWidth("-webkit-fill-available")
+        let checkBox_header = new CheckBox({
+            title: "Добавить THEAD"
+        })
+        let checkBox_footer = new CheckBox({
+            title: "Добавить TFOOT"
+        })
+        content_table_2.add(checkBox_header, checkBox_footer)
+        let table_rows = new NumberInput({ title:'Количество строк' });
+        let table_cols = new NumberInput({ title:'Количество столбцов' });
+        content_table.add(table_rows, new Label("X"), table_cols)
+
         content_table_header.add(
             new Button("Закрыть", () => {
                 dialog_table.close()
             }),
             new Label("Добавить таблицу"),
             new Button("Сохранить", () => {
+                let table = document.createElement("table")
+                table.classList.add("text_editor_table")
+                // шапка
+                if (checkBox_header.getValue()) {
+                    let head_table = table.createTHead()
+                    head_table.classList.add("text_editor_table_body")
+                    let head_row = head_table.insertRow(0)
+                    head_row.classList.add("text_editor_table_row")
+                    for (let j = 0; j < table_cols.getValue(); j++) {
+                        let cell = head_row.insertCell(j)
+                        cell.classList.add("text_editor_table_cell")
+                        cell.innerText = `TH`
+                    }
+                }
+                // тело таблицы
+                let body_table = table.createTBody()
+                body_table.classList.add("text_editor_table_body")
+                for (let i = 0; i < table_rows.getValue(); i++) {
+                    let row = body_table.insertRow(i)
+                    row.classList.add("text_editor_table_row")
+                    for (let j = 0; j < table_cols.getValue(); j++) {
+                        let cell = row.insertCell(j)
+                        cell.classList.add("text_editor_table_cell")
+                        cell.innerText = `TB`
+                    }
+                }
+                // подвал
+                if (checkBox_footer.getValue()) {
+                    let foot_table = table.createTFoot()
+                    foot_table.classList.add("text_editor_table_body")
+                    let foot_row = foot_table.insertRow(0)
+                    foot_row.classList.add("text_editor_table_row")
+                    for (let j = 0; j < table_cols.getValue(); j++) {
+                        let cell = foot_row.insertCell(j)
+                        cell.classList.add("text_editor_table_cell")
+                        cell.innerText = `TF`
+                    }
+                }
+                document.getElementById(text_editor_id).focus()
+                document.execCommand(Commands.INSERT_HTML, false, table.outerHTML)
                 dialog_table.close()
             })
         )
-        let content_table = new ContentBlock("row", "wrap", "center", "space-around")
-        content_table.setWidth("-webkit-fill-available")
-        let table_rows = new NumberInput({ title:'Количество строк' });
-        let table_cols = new NumberInput({ title:'Количество столбцов' });
-        content_table.add(table_rows, new Label("X"), table_cols)
 
         let dialog_table = new Dialog({ width: "500px", height: "max-content", closeOutSideClick: true })
         dialog_table.addToHeader(content_table_header)
-        dialog_table.addToBody(content_table)
+        content_table_main.add(content_table_2, content_table)
+        dialog_table.addToBody(content_table_main)
         let button_table = new TextEditorButtons({
             icon: Icons.EDITOR.TABLE_CHART,
             listener: () => {
