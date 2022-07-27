@@ -342,8 +342,9 @@ class TextEditorPanel {
                 style: {
                     "display": "table",
                     "border-radius": "0",
-                    "width": "max-content",
-                    "border-collapse": "collapse"
+                    "width": "-webkit-fill-available",
+                    "border-collapse": "collapse",
+                    "border": "1px solid var(--blue_prime_background)",
                 }
             },
             {
@@ -533,10 +534,7 @@ class TextEditorPanel {
         let checkBox_header = new CheckBox({
             title: "Добавить THEAD"
         })
-        let checkBox_footer = new CheckBox({
-            title: "Добавить TFOOT"
-        })
-        content_table_2.add(checkBox_header, checkBox_footer)
+        content_table_2.add(checkBox_header)
         let table_rows = new NumberInput({ title:'Количество строк' });
         let table_cols = new NumberInput({ title:'Количество столбцов' });
         content_table.add(table_rows, new Label("X"), table_cols)
@@ -571,18 +569,6 @@ class TextEditorPanel {
                         let cell = row.insertCell(j)
                         cell.classList.add("text_editor_table_cell")
                         cell.innerText = `TB`
-                    }
-                }
-                // подвал
-                if (checkBox_footer.getValue()) {
-                    let foot_table = table.createTFoot()
-                    foot_table.classList.add("text_editor_table_body")
-                    let foot_row = foot_table.insertRow(0)
-                    foot_row.classList.add("text_editor_table_row")
-                    for (let j = 0; j < table_cols.getValue(); j++) {
-                        let cell = foot_row.insertCell(j)
-                        cell.classList.add("text_editor_table_cell")
-                        cell.innerText = `TF`
                     }
                 }
                 document.getElementById(text_editor_id).focus()
