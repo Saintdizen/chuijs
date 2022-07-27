@@ -340,24 +340,24 @@ class TextEditorPanel {
             {
                 name: ".text_editor_table",
                 style: {
-                    "display": "block",
+                    "display": "table",
                     "border-radius": "0",
-                    "width": "max-content"
+                    "width": "max-content",
+                    "border-collapse": "collapse"
                 }
             },
             {
                 name: ".text_editor_table_body",
                 style: {
-                    "display": "flex",
                     "border": "1px solid var(--blue_prime_background)",
-                    "width": "inherit"
+                    "width": "auto"
                 }
             },
             {
                 name: ".text_editor_table_row",
                 style: {
-                    "display": "block",
-                    "width": "auto"
+                    "width": "auto",
+                    "display": "table-row"
                 }
             },
             {
@@ -365,9 +365,8 @@ class TextEditorPanel {
                 style: {
                     "height": "max-content",
                     "width": "auto",
-                    "display": "block",
-                    "border": "1px solid var(--blue_prime_background)",
-                    "line-height": "1"
+                    "display": "table-cell",
+                    "border": "1px solid var(--blue_prime_background)"
                 }
             }
         ], 'TextEditorPanel');
