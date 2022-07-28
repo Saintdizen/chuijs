@@ -319,7 +319,9 @@ class TextEditorSelects {
 
 class TextEditorPanel {
     #panel = document.createElement("text_editor_panel")
-    constructor(text_editor_id = String(undefined)) {
+    constructor(text_editor_id = String(undefined), controls = {
+        UNDO_REDO: Boolean(undefined),
+    }) {
         require('../../modules/chui_functions').style_parse([
             {
                 name: "text_editor_panel",
@@ -372,268 +374,321 @@ class TextEditorPanel {
             }
         ], 'TextEditorPanel');
         // Управление
-        let button_undo = new TextEditorButtons({
-            icon: Icons.CONTENT.UNDO,
-            command: Commands.UNDO
-        })
-        let button_redo = new TextEditorButtons({
-            icon: Icons.CONTENT.REDO,
-            command: Commands.REDO
-        })
-        this.#addBlock(button_undo, button_redo)
-        // formatBlock
-        let select_headers = new TextEditorSelects({ icon: new Icon(Icons.EDITOR.TITLE).getHTML() })
-        select_headers.addOptionsHeader(
-            { name: "H1",   value: "<h1>" },
-            { name: "H2",   value: "<h2>" },
-            { name: "H3",   value: "<h3>" },
-            { name: "H4",   value: "<h4>" },
-            { name: "H5",   value: "<h5>" },
-            { name: "H6",   value: "<h6>" },
-            { name: "Code",   value: "<PRE>" },
-            { name: "Paragraph",   value: "<P>" }
-        )
-        select_headers.addValueChangeListener((e) => {
-            document.execCommand('formatBlock', false, e.target.value);
-        })
-        let select_font_size = new TextEditorSelects({ icon: new Icon(Icons.EDITOR.FORMAT_SIZE).getHTML() })
-        select_font_size.addOptionsFontSize(
-            { name: "xx_small",   value: "1" },
-            { name: "x_small",    value: "2" },
-            { name: "small",      value: "3" },
-            { name: "medium",     value: "4" },
-            { name: "large",      value: "5" },
-            { name: "x_large",    value: "6" },
-            { name: "xx_large",   value: "7" },
-        )
-        select_font_size.addValueChangeListener((e) => {
-            document.execCommand('fontSize', false, e.target.value);
-        })
-        let button_format_quote = new TextEditorButtons({
-            icon: Icons.EDITOR.FORMAT_QUOTE,
-            command: Commands.FORMAT_BLOCK,
-            value: "<BLOCKQUOTE>"
-        })
-        let button_removeFormat = new TextEditorButtons({
-            icon: Icons.EDITOR.FORMAT_CLEAR,
-            command: Commands.REMOVE_FORMAT
-        })
-        this.#addBlock(select_headers, select_font_size, button_format_quote, button_removeFormat)
-        // FORMAT
-        let button_bold_text = new TextEditorButtons({
-            icon: Icons.EDITOR.FORMAT_BOLD,
-            command: Commands.BOLD
-        })
-        let button_italic_text = new TextEditorButtons({
-            icon: Icons.EDITOR.FORMAT_ITALIC,
-            command: Commands.ITALIC
-        })
-        let button_strikeThrough = new TextEditorButtons({
-            icon: Icons.EDITOR.FORMAT_STRIKETHROUGH,
-            command: Commands.STRIKE_THROUGH
-        })
-        let button_underline = new TextEditorButtons({
-            icon: Icons.EDITOR.FORMAT_UNDERLINED,
-            command: Commands.UNDERLINE
-        })
-        this.#addBlock(button_bold_text, button_italic_text, button_strikeThrough, button_underline)
-        //
-        let button_superscript = new TextEditorButtons({
-            icon: Icons.EDITOR.SUPERSCRIPT,
-            command: Commands.SUPER_SCRIPT
-        })
-        let button_subscript = new TextEditorButtons({
-            icon: Icons.EDITOR.SUBSCRIPT,
-            command: Commands.SUB_SCRIPT
-        })
-        this.#addBlock(button_superscript, button_subscript)
-        //
-        let button_justifyLeft = new TextEditorButtons({
-            icon: Icons.EDITOR.FORMAT_ALIGN_LEFT,
-            command: Commands.JUSTIFY_LEFT
-        })
-        let button_justifyCenter = new TextEditorButtons({
-            icon: Icons.EDITOR.FORMAT_ALIGN_CENTER,
-            command: Commands.JUSTIFY_CENTER
-        })
-        let button_justifyRight = new TextEditorButtons({
-            icon: Icons.EDITOR.FORMAT_ALIGN_RIGHT,
-            command: Commands.JUSTIFY_RIGHT
-        })
-        let button_justifyFull = new TextEditorButtons({
-            icon: Icons.EDITOR.FORMAT_ALIGN_JUSTIFY,
-            command: Commands.JUSTIFY_FULL
-        })
-        this.#addBlock(button_justifyLeft, button_justifyCenter, button_justifyRight, button_justifyFull)
-        //
-        let button_list_one = new TextEditorButtons({
-            icon: Icons.EDITOR.FORMAT_LIST_NUMBERED,
-            command: Commands.INSERT_ORDERED_LIST
-        })
-        let button_list_two = new TextEditorButtons({
-            icon: Icons.EDITOR.FORMAT_LIST_BULLETED,
-            command: Commands.INSERT_UNORDERED_LIST
-        })
-        this.#addBlock(button_list_one, button_list_two)
-        //
-        // Сохдание ссылки
-        let button_unlink = new TextEditorButtons({
-            icon: Icons.CONTENT.LINK_OFF,
-            command: Commands.UNLINK
-        })
-        let content_link = new ContentBlock("column", "wrap", "center", "flex-end")
-        content_link.setWidth("-webkit-fill-available")
-        let content_link_header = new ContentBlock("row", "wrap", "center", "space-between")
-        content_link_header.setWidth("-webkit-fill-available")
-        let dialog_link = new Dialog({ width: "500px", height: "max-content", closeOutSideClick: true })
-        let input_link_text = new TextInput({ title: "Наименование", placeholder: "Наименование", width: "-webkit-fill-available", disableFocus: false })
-        let input_link = new TextInput({ title: "Ссылка", placeholder: "https://", width: "-webkit-fill-available", value: "https://example.ru", disableFocus: false })
-        content_link.add(input_link_text, input_link)
-        dialog_link.addToBody(content_link)
-        content_link_header.add(
-            new Button("Закрыть", () => {
-                document.getElementById(text_editor_id).focus()
-                dialog_link.close()
-            }),
-            new Label("Добавить ссылку"),
-            new Button("Сохранить", () => {
-                document.getElementById(text_editor_id).focus()
-                document.getSelection().removeAllRanges();
-                document.getSelection().addRange(range_link);
-                if (selection_link.toString() === "") document.execCommand('insertHTML', false, `<a href="${input_link.getValue()}">${input_link_text.getValue()}</a>`);
-                else document.execCommand(Commands.CREATE_LINK, false, input_link.getValue())
-                dialog_link.close()
+        if (controls.UNDO_REDO) {
+            let button_undo = new TextEditorButtons({
+                icon: Icons.CONTENT.UNDO,
+                command: Commands.UNDO
             })
-        )
-        dialog_link.addToHeader(content_link_header)
-        let selection_link = undefined;
-        let range_link = undefined;
-        let button_link = new TextEditorButtons({
-            icon: Icons.CONTENT.LINK,
-            disableFocus: true,
-            listener: () => {
-                document.getElementById(text_editor_id).focus()
-                selection_link = document.getSelection();
-                range_link = selection_link.getRangeAt(0)
-                input_link_text.setValue(selection_link.toString())
-                if (selection_link.toString() === "") input_link_text.setDisabled(false);
-                else input_link_text.setDisabled(true);
-                dialog_link.open()
-            }
-        })
+            let button_redo = new TextEditorButtons({
+                icon: Icons.CONTENT.REDO,
+                command: Commands.REDO
+            })
+            this.#addBlock(button_undo, button_redo)
+        }
+        // formatBlock
+        if (controls.BLOCK_FORMAT) {
+            let select_headers = new TextEditorSelects({ icon: new Icon(Icons.EDITOR.TITLE).getHTML() })
+            select_headers.addOptionsHeader(
+                { name: "H1",   value: "<h1>" },
+                { name: "H2",   value: "<h2>" },
+                { name: "H3",   value: "<h3>" },
+                { name: "H4",   value: "<h4>" },
+                { name: "H5",   value: "<h5>" },
+                { name: "H6",   value: "<h6>" },
+                { name: "Code",   value: "<PRE>" },
+                { name: "Paragraph",   value: "<P>" }
+            )
+            select_headers.addValueChangeListener((e) => {
+                document.execCommand('formatBlock', false, e.target.value);
+            })
+            this.#addBlock(select_headers)
+            let button_format_quote = new TextEditorButtons({
+                icon: Icons.EDITOR.FORMAT_QUOTE,
+                command: Commands.FORMAT_BLOCK,
+                value: "<BLOCKQUOTE>"
+            })
+            this.#addBlock(button_format_quote)
+        }
+        if (controls.FONT_SIZE) {
+            let select_font_size = new TextEditorSelects({ icon: new Icon(Icons.EDITOR.FORMAT_SIZE).getHTML() })
+            select_font_size.addOptionsFontSize(
+                { name: "xx_small",   value: "1" },
+                { name: "x_small",    value: "2" },
+                { name: "small",      value: "3" },
+                { name: "medium",     value: "4" },
+                { name: "large",      value: "5" },
+                { name: "x_large",    value: "6" },
+                { name: "xx_large",   value: "7" },
+            )
+            select_font_size.addValueChangeListener((e) => {
+                document.execCommand('fontSize', false, e.target.value);
+            })
+            this.#addBlock(select_font_size)
+        }
+        if (controls.REMOVE_FORMAT) {
+            let button_removeFormat = new TextEditorButtons({
+                icon: Icons.EDITOR.FORMAT_CLEAR,
+                command: Commands.REMOVE_FORMAT
+            })
+            this.#addBlock(button_removeFormat)
+        }
+        // FORMAT
+        if (controls.BOLD) {
+            let button_bold_text = new TextEditorButtons({
+                icon: Icons.EDITOR.FORMAT_BOLD,
+                command: Commands.BOLD
+            })
+            this.#addBlock(button_bold_text)
+        }
+        if (controls.ITALIC) {
+            let button_italic_text = new TextEditorButtons({
+                icon: Icons.EDITOR.FORMAT_ITALIC,
+                command: Commands.ITALIC
+            })
+            this.#addBlock(button_italic_text)
+        }
+        if (controls.STRIKE_THROUGH) {
+            let button_strikeThrough = new TextEditorButtons({
+                icon: Icons.EDITOR.FORMAT_STRIKETHROUGH,
+                command: Commands.STRIKE_THROUGH
+            })
+            this.#addBlock(button_strikeThrough)
+        }
+        if (controls.UNDERLINE) {
+            let button_underline = new TextEditorButtons({
+                icon: Icons.EDITOR.FORMAT_UNDERLINED,
+                command: Commands.UNDERLINE
+            })
+            this.#addBlock(button_underline)
+        }
+        //
+        if (controls.SUPERSCRIPT) {
+            let button_superscript = new TextEditorButtons({
+                icon: Icons.EDITOR.SUPERSCRIPT,
+                command: Commands.SUPER_SCRIPT
+            })
+            this.#addBlock(button_superscript)
+        }
+        if (controls.SUBSCRIPT) {
+            let button_subscript = new TextEditorButtons({
+                icon: Icons.EDITOR.SUBSCRIPT,
+                command: Commands.SUB_SCRIPT
+            })
+            this.#addBlock(button_subscript)
+        }
+        //
+        if (controls.JUSTIFY_LEFT) {
+            let button_justifyLeft = new TextEditorButtons({
+                icon: Icons.EDITOR.FORMAT_ALIGN_LEFT,
+                command: Commands.JUSTIFY_LEFT
+            })
+            this.#addBlock(button_justifyLeft)
+        }
+        if (controls.JUSTIFY_CENTER) {
+            let button_justifyCenter = new TextEditorButtons({
+                icon: Icons.EDITOR.FORMAT_ALIGN_CENTER,
+                command: Commands.JUSTIFY_CENTER
+            })
+            this.#addBlock(button_justifyCenter)
+        }
+        if (controls.JUSTIFY_RIGHT) {
+            let button_justifyRight = new TextEditorButtons({
+                icon: Icons.EDITOR.FORMAT_ALIGN_RIGHT,
+                command: Commands.JUSTIFY_RIGHT
+            })
+            this.#addBlock(button_justifyRight)
+        }
+        if (controls.JUSTIFY_FULL) {
+            let button_justifyFull = new TextEditorButtons({
+                icon: Icons.EDITOR.FORMAT_ALIGN_JUSTIFY,
+                command: Commands.JUSTIFY_FULL
+            })
+            this.#addBlock(button_justifyFull)
+        }
+        //
+        if (controls.LISTS) {
+            let button_list_one = new TextEditorButtons({
+                icon: Icons.EDITOR.FORMAT_LIST_NUMBERED,
+                command: Commands.INSERT_ORDERED_LIST
+            })
+            let button_list_two = new TextEditorButtons({
+                icon: Icons.EDITOR.FORMAT_LIST_BULLETED,
+                command: Commands.INSERT_UNORDERED_LIST
+            })
+            this.#addBlock(button_list_one, button_list_two)
+
+        }
+        //
+        // Создание ссылки
+        if (controls.INSERT_LINK) {
+            let button_unlink = new TextEditorButtons({
+                icon: Icons.CONTENT.LINK_OFF,
+                command: Commands.UNLINK
+            })
+            let content_link = new ContentBlock("column", "wrap", "center", "flex-end")
+            content_link.setWidth("-webkit-fill-available")
+            let content_link_header = new ContentBlock("row", "wrap", "center", "space-between")
+            content_link_header.setWidth("-webkit-fill-available")
+            let dialog_link = new Dialog({ width: "500px", height: "max-content", closeOutSideClick: true })
+            let input_link_text = new TextInput({ title: "Наименование", placeholder: "Наименование", width: "-webkit-fill-available", disableFocus: false })
+            let input_link = new TextInput({ title: "Ссылка", placeholder: "https://", width: "-webkit-fill-available", value: "https://example.ru", disableFocus: false })
+            content_link.add(input_link_text, input_link)
+            dialog_link.addToBody(content_link)
+            content_link_header.add(
+                new Button("Закрыть", () => {
+                    document.getElementById(text_editor_id).focus()
+                    dialog_link.close()
+                }),
+                new Label("Добавить ссылку"),
+                new Button("Сохранить", () => {
+                    document.getElementById(text_editor_id).focus()
+                    document.getSelection().removeAllRanges();
+                    document.getSelection().addRange(range_link);
+                    if (selection_link.toString() === "") document.execCommand('insertHTML', false, `<a href="${input_link.getValue()}">${input_link_text.getValue()}</a>`);
+                    else document.execCommand(Commands.CREATE_LINK, false, input_link.getValue())
+                    dialog_link.close()
+                })
+            )
+            dialog_link.addToHeader(content_link_header)
+            let selection_link = undefined;
+            let range_link = undefined;
+            let button_link = new TextEditorButtons({
+                icon: Icons.CONTENT.LINK,
+                disableFocus: true,
+                listener: () => {
+                    document.getElementById(text_editor_id).focus()
+                    selection_link = document.getSelection();
+                    range_link = selection_link.getRangeAt(0)
+                    input_link_text.setValue(selection_link.toString())
+                    if (selection_link.toString() === "") input_link_text.setDisabled(false);
+                    else input_link_text.setDisabled(true);
+                    dialog_link.open()
+                }
+            })
+            this.#addBlock(button_unlink, button_link, dialog_link)
+        }
         // ================
         // Создание таблицы
-        let content_table_header = new ContentBlock("row", "wrap", "center", "space-between")
-        content_table_header.setWidth("-webkit-fill-available")
-        let content_table_2 = new ContentBlock("row", "wrap", "center", "space-around")
-        content_table_2.setWidth("-webkit-fill-available")
-        let content_table = new ContentBlock("row", "wrap", "center", "space-around")
-        content_table.setWidth("-webkit-fill-available")
-        let content_table_main = new ContentBlock("column", "wrap", "center", "space-around")
-        content_table_main.setWidth("-webkit-fill-available")
-        let checkBox_header = new CheckBox({
-            title: "Добавить THEAD"
-        })
-        content_table_2.add(checkBox_header)
-        let table_rows = new NumberInput({ title:'Количество строк' });
-        let table_cols = new NumberInput({ title:'Количество столбцов' });
-        content_table.add(table_rows, new Label("X"), table_cols)
-
-        content_table_header.add(
-            new Button("Закрыть", () => {
-                dialog_table.close()
-            }),
-            new Label("Добавить таблицу"),
-            new Button("Сохранить", () => {
-                let table = document.createElement("table")
-                table.classList.add("text_editor_table")
-                // шапка
-                if (checkBox_header.getValue()) {
-                    let head_table = table.createTHead()
-                    head_table.classList.add("text_editor_table_body")
-                    let head_row = head_table.insertRow(0)
-                    head_row.classList.add("text_editor_table_row")
-                    for (let j = 0; j < table_cols.getValue(); j++) {
-                        let cell = head_row.insertCell(j)
-                        cell.classList.add("text_editor_table_cell")
-                        cell.innerText = `TH`
-                    }
-                }
-                // тело таблицы
-                let body_table = table.createTBody()
-                body_table.classList.add("text_editor_table_body")
-                for (let i = 0; i < table_rows.getValue(); i++) {
-                    let row = body_table.insertRow(i)
-                    row.classList.add("text_editor_table_row")
-                    for (let j = 0; j < table_cols.getValue(); j++) {
-                        let cell = row.insertCell(j)
-                        cell.classList.add("text_editor_table_cell")
-                        cell.innerText = `TB`
-                    }
-                }
-                document.getElementById(text_editor_id).focus()
-                document.execCommand(Commands.INSERT_HTML, false, table.outerHTML)
-                dialog_table.close()
+        if (controls.INSERT_TABLE) {
+            let content_table_header = new ContentBlock("row", "wrap", "center", "space-between")
+            content_table_header.setWidth("-webkit-fill-available")
+            let content_table_2 = new ContentBlock("row", "wrap", "center", "space-around")
+            content_table_2.setWidth("-webkit-fill-available")
+            let content_table = new ContentBlock("row", "wrap", "center", "space-around")
+            content_table.setWidth("-webkit-fill-available")
+            let content_table_main = new ContentBlock("column", "wrap", "center", "space-around")
+            content_table_main.setWidth("-webkit-fill-available")
+            let checkBox_header = new CheckBox({
+                title: "Добавить THEAD"
             })
-        )
+            content_table_2.add(checkBox_header)
+            let table_rows = new NumberInput({ title:'Количество строк' });
+            let table_cols = new NumberInput({ title:'Количество столбцов' });
+            content_table.add(table_rows, new Label("X"), table_cols)
 
-        let dialog_table = new Dialog({ width: "500px", height: "max-content", closeOutSideClick: true })
-        dialog_table.addToHeader(content_table_header)
-        content_table_main.add(content_table_2, content_table)
-        dialog_table.addToBody(content_table_main)
-        let button_table = new TextEditorButtons({
-            icon: Icons.EDITOR.TABLE_CHART,
-            listener: () => {
-                document.getElementById(text_editor_id).focus()
-                dialog_table.open()
-            }
-        })
+            content_table_header.add(
+                new Button("Закрыть", () => {
+                    dialog_table.close()
+                }),
+                new Label("Добавить таблицу"),
+                new Button("Сохранить", () => {
+                    let table = document.createElement("table")
+                    table.classList.add("text_editor_table")
+                    // шапка
+                    if (checkBox_header.getValue()) {
+                        let head_table = table.createTHead()
+                        head_table.classList.add("text_editor_table_body")
+                        let head_row = head_table.insertRow(0)
+                        head_row.classList.add("text_editor_table_row")
+                        for (let j = 0; j < table_cols.getValue(); j++) {
+                            let cell = head_row.insertCell(j)
+                            cell.classList.add("text_editor_table_cell")
+                            cell.innerText = `TH`
+                        }
+                    }
+                    // тело таблицы
+                    let body_table = table.createTBody()
+                    body_table.classList.add("text_editor_table_body")
+                    for (let i = 0; i < table_rows.getValue(); i++) {
+                        let row = body_table.insertRow(i)
+                        row.classList.add("text_editor_table_row")
+                        for (let j = 0; j < table_cols.getValue(); j++) {
+                            let cell = row.insertCell(j)
+                            cell.classList.add("text_editor_table_cell")
+                            cell.innerText = `TB`
+                        }
+                    }
+                    document.getElementById(text_editor_id).focus()
+                    document.execCommand(Commands.INSERT_HTML, false, table.outerHTML)
+                    dialog_table.close()
+                })
+            )
+
+            let dialog_table = new Dialog({ width: "500px", height: "max-content", closeOutSideClick: true })
+            dialog_table.addToHeader(content_table_header)
+            content_table_main.add(content_table_2, content_table)
+            dialog_table.addToBody(content_table_main)
+            let button_table = new TextEditorButtons({
+                icon: Icons.EDITOR.TABLE_CHART,
+                listener: () => {
+                    document.getElementById(text_editor_id).focus()
+                    dialog_table.open()
+                }
+            })
+            this.#addBlock(button_table, dialog_table)
+        }
         // ================
         // Добавление изображения
-        let content_image_header = new ContentBlock("row", "wrap", "center", "space-between")
-        content_image_header.setWidth("-webkit-fill-available")
-        content_image_header.add(
-            new Button("Закрыть", () => {
-                dialog_image.close()
-            }),
-            new Label("Добавить изображение"),
-            new Button("Сохранить", () => {
-                dialog_image.close()
+        if (controls.INSERT_IMAGE) {
+            let content_image_header = new ContentBlock("row", "wrap", "center", "space-between")
+            content_image_header.setWidth("-webkit-fill-available")
+            content_image_header.add(
+                new Button("Закрыть", () => {
+                    dialog_image.close()
+                }),
+                new Label("Добавить изображение"),
+                new Button("Сохранить", () => {
+                    dialog_image.close()
+                })
+            )
+            let content_image = new ContentBlock("column", "wrap", "center", "flex-end")
+            content_image.setWidth("-webkit-fill-available")
+            let dialog_image = new Dialog({ width: "500px", height: "max-content", closeOutSideClick: true })
+            dialog_image.addToHeader(content_image_header)
+            dialog_image.addToBody(content_image)
+            let button_image = new TextEditorButtons({
+                icon: Icons.EDITOR.INSERT_PHOTO,
+                listener: () => {
+                    document.getElementById(text_editor_id).focus()
+                    dialog_image.open()
+                }
             })
-        )
-        let content_image = new ContentBlock("column", "wrap", "center", "flex-end")
-        content_image.setWidth("-webkit-fill-available")
-        let dialog_image = new Dialog({ width: "500px", height: "max-content", closeOutSideClick: true })
-        dialog_image.addToHeader(content_image_header)
-        dialog_image.addToBody(content_image)
-        let button_image = new TextEditorButtons({
-            icon: Icons.EDITOR.INSERT_PHOTO,
-            listener: () => {
-                document.getElementById(text_editor_id).focus()
-                dialog_image.open()
-            }
-        })
+            this.#addBlock(button_image, dialog_image)
+        }
         // ======================
-        let button_line_break = new TextEditorButtons({
-            icon: Icons.EDITOR.INSERT_PAGE_BREAK,
-            command: Commands.INSERT_LINE_BREAK
-        })
-
-        this.#addBlock(button_unlink, button_link, dialog_link, button_table, dialog_table, button_image, dialog_image, button_line_break)
+        if (controls.LINE_BREAK) {
+            let button_line_break = new TextEditorButtons({
+                icon: Icons.EDITOR.INSERT_PAGE_BREAK,
+                command: Commands.INSERT_LINE_BREAK
+            })
+            this.#addBlock(button_line_break)
+        }
         //
-        let button_COPY = new TextEditorButtons({
-            icon: Icons.CONTENT.CONTENT_COPY,
-            command: Commands.COPY
-        })
-        let button_CUT = new TextEditorButtons({
-            icon: Icons.CONTENT.CONTENT_CUT,
-            command: Commands.CUT
-        })
-        let button_PASTE = new TextEditorButtons({
-            icon: Icons.CONTENT.CONTENT_PASTE,
-            command: Commands.PASTE
-        })
-        this.#addBlock(button_COPY, button_CUT, button_PASTE)
+        if (controls.CONTENT_CONTROLS) {
+            let button_COPY = new TextEditorButtons({
+                icon: Icons.CONTENT.CONTENT_COPY,
+                command: Commands.COPY
+            })
+            let button_CUT = new TextEditorButtons({
+                icon: Icons.CONTENT.CONTENT_CUT,
+                command: Commands.CUT
+            })
+            let button_PASTE = new TextEditorButtons({
+                icon: Icons.CONTENT.CONTENT_PASTE,
+                command: Commands.PASTE
+            })
+            this.#addBlock(button_COPY, button_CUT, button_PASTE)
+        }
     }
     #addBlock(...childs) {
         let elem = document.createElement("text_editor_block")

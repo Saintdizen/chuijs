@@ -10,7 +10,7 @@ class TextEditor {
     // status
     #cater_position = new Label("0");
     //
-    constructor(height = String(undefined)) {
+    constructor(height = String(undefined), controls) {
         require('../../modules/chui_functions').style_parse([
             {
                 name: "chui_text_editor",
@@ -63,7 +63,7 @@ class TextEditor {
         ], 'TextEditor');
         // Панель управления
         document.execCommand('defaultParagraphSeparator', false, 'p');
-        this.#editor_controls.appendChild(new TextEditorPanel(this.#id).set())
+        this.#editor_controls.appendChild(new TextEditorPanel(this.#id, controls).set())
         //
         this.#text_input.contentEditable = 'true';
         this.#text_input.id = this.#id
