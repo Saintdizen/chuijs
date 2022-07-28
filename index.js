@@ -41,6 +41,7 @@ const { Table } = require('./framework/components/chui_table');
 const { Details } = require('./framework/components/chui_details');
 const { Accordion } = require('./framework/components/chui_accordion')
 const { Pre } = require('./framework/components/chui_pre')
+const { HtmlBlock } = require('./framework/components/chui_html_block')
 const { sleep, render, getDefaultIcon } = require('./framework/modules/chui_functions');
 
 //VARS
@@ -224,5 +225,6 @@ module.exports = {
     ComboBox: ComboBox,
     RadioGroup: RadioGroup,
     Accordion: Accordion,
-    Pre: Pre
+    Pre: Pre,
+    HtmlBlock: HtmlBlock
 }

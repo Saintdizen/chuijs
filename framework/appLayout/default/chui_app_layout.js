@@ -236,7 +236,7 @@ class AppLayout extends Route {
                 }
             },
             {
-                name: "center",
+                name: "main_center_block",
                 style: {
                     "width": "100%",
                     "height": "-webkit-fill-available",
@@ -420,7 +420,7 @@ class AppLayout extends Route {
         document.body.setAttribute('theme', 'light')
         document.getElementById('app').append(this.#applayout);
         header = document.createElement('header');
-        center = document.createElement('center');
+        center = document.createElement('main_center_block');
         this.#applayout.appendChild(center)
         this.#applayout.appendChild(header)
         document.body.appendChild(this.#notification_panel);

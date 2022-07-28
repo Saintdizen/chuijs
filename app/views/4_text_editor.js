@@ -1,4 +1,6 @@
 const {Page, TextEditor, Styles} = require('../../index');
+const {Button} = require("../../framework/components/chui_button");
+const {HtmlBlock} = require("../../framework/components/chui_html_block");
 
 class TextEditorPage extends Page {
     constructor() {
@@ -38,7 +40,11 @@ class TextEditorPage extends Page {
 <p><b>Время начала:</b></p>
 <p><b>Время окончания:</b></p>
 <p><b>Статус:</b></p>`)
-        console.log(textedit.getValueAsHTML().toString().replaceAll("<p>", "").replaceAll("</p>", ""))
+
+        let html = new HtmlBlock(Styles.WIDTH.MAX_CONTENT);
+        this.add(new Button("test", () => {
+            html.setHtml(textedit.getValueAsHTML())
+        }), html)
     }
 }
 
