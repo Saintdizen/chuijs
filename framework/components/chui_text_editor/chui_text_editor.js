@@ -88,6 +88,18 @@ class TextEditor {
             this.#chui_text_editor.removeAttribute("style");
         })
     }
+    setValueAsHTML(value) {
+        this.#text_input.innerHTML = value;
+    }
+    getValueAsHTML() {
+        return this.#text_input.innerHTML
+    }
+    setValueAsText(value) {
+        this.#text_input.innerText = value;
+    }
+    getValueAsText() {
+        return this.#text_input.innerText
+    }
     set() {
         return this.#chui_text_editor;
     }
