@@ -5,9 +5,10 @@ const {Button} = require("../chui_button");
 const {TextInput} = require("../chui_inputs/chui_text");
 const {Label} = require("../chui_label");
 const {ContentBlock} = require("../chui_content_block");
-const {Styles} = require("../../../index");
+const {Notification} = require("../../components/chui_notification");
 const {NumberInput} = require("../chui_inputs/chui_number");
 const {CheckBox} = require("../chui_inputs/chui_check_box");
+const {NotificationStyle} = require("../chui_notification");
 
 class Commands {
     static COPY = "copy"
@@ -592,35 +593,48 @@ class TextEditorPanel {
                 }),
                 new Label("Добавить таблицу"),
                 new Button("Сохранить", () => {
-                    let table = document.createElement("table")
-                    table.classList.add("text_editor_table")
-                    // шапка
-                    if (checkBox_header.getValue()) {
-                        let head_table = table.createTHead()
-                        head_table.classList.add("text_editor_table_body")
-                        let head_row = head_table.insertRow(0)
-                        head_row.classList.add("text_editor_table_row")
-                        for (let j = 0; j < table_cols.getValue(); j++) {
-                            let cell = head_row.insertCell(j)
-                            cell.classList.add("text_editor_table_cell")
-                            cell.innerText = `TH`
-                        }
+                    let error = false;
+                    if (Number(table_rows.getValue()) === 0 && Number(table_cols.getValue()) === 0) {
+                        new Notification(`Установите количество столбцов и строк`, NotificationStyle.ERROR).show();
+                        error = true;
+                    } else if (Number(table_cols.getValue()) === 0) {
+                        new Notification(`Установите количество столбцов`, NotificationStyle.ERROR).show();
+                        error = true;
+                    } else if (Number(table_rows.getValue()) === 0) {
+                        new Notification(`Установите количество строк`, NotificationStyle.ERROR).show();
+                        error = true;
                     }
-                    // тело таблицы
-                    let body_table = table.createTBody()
-                    body_table.classList.add("text_editor_table_body")
-                    for (let i = 0; i < table_rows.getValue(); i++) {
-                        let row = body_table.insertRow(i)
-                        row.classList.add("text_editor_table_row")
-                        for (let j = 0; j < table_cols.getValue(); j++) {
-                            let cell = row.insertCell(j)
-                            cell.classList.add("text_editor_table_cell")
-                            cell.innerText = `TB`
+                    if (!error) {
+                        let table = document.createElement("table")
+                        table.classList.add("text_editor_table")
+                        // шапка
+                        if (checkBox_header.getValue()) {
+                            let head_table = table.createTHead()
+                            head_table.classList.add("text_editor_table_body")
+                            let head_row = head_table.insertRow(0)
+                            head_row.classList.add("text_editor_table_row")
+                            for (let j = 0; j < table_cols.getValue(); j++) {
+                                let cell = head_row.insertCell(j)
+                                cell.classList.add("text_editor_table_cell")
+                                cell.innerText = `TH`
+                            }
                         }
+                        // тело таблицы
+                        let body_table = table.createTBody()
+                        body_table.classList.add("text_editor_table_body")
+                        for (let i = 0; i < table_rows.getValue(); i++) {
+                            let row = body_table.insertRow(i)
+                            row.classList.add("text_editor_table_row")
+                            for (let j = 0; j < table_cols.getValue(); j++) {
+                                let cell = row.insertCell(j)
+                                cell.classList.add("text_editor_table_cell")
+                                cell.innerText = `TB`
+                            }
+                        }
+                        document.getElementById(text_editor_id).focus()
+                        document.execCommand(Commands.INSERT_HTML, false, table.outerHTML)
+                        dialog_table.close()
                     }
-                    document.getElementById(text_editor_id).focus()
-                    document.execCommand(Commands.INSERT_HTML, false, table.outerHTML)
-                    dialog_table.close()
                 })
             )
 
@@ -648,6 +662,7 @@ class TextEditorPanel {
                 }),
                 new Label("Добавить изображение"),
                 new Button("Сохранить", () => {
+                    document.getElementById(text_editor_id).focus()
                     dialog_image.close()
                 })
             )

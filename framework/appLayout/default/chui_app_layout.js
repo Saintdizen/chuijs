@@ -256,7 +256,8 @@ class AppLayout extends Route {
                     "right": "10px",
                     "margin": "var(--margin)",
                     "align-items": "flex-end",
-                    "justify-content": "flex-end"
+                    "justify-content": "flex-end",
+                    "z-index": "9999"
                 }
             },
             {
