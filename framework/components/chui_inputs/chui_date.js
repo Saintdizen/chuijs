@@ -79,6 +79,7 @@ class DateInput {
                     "width": "20px",
                     "border-radius": "var(--border_radius)",
                     "padding": "8px",
+                    "text-align": "center"
                 }
             },
             {
