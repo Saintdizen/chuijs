@@ -1,53 +1,98 @@
 # chuijs
-- Данный фреймворк будет позволять описывать страницы приложения только в виде JavaScript кода
-
-# Компоненты
-|       Компонент        | Версия |
-|:----------------------:|:------:|
-|       AppLayout        | 1.0.0  |
-|       TextInput        | 1.0.0  |
-|       DateInput        | 1.0.0  |
-|      NumberInput       | 1.0.0  |
-|       EmailInput       | 1.0.0  |
-|     PasswordInput      | 1.0.0  |
-|        TextArea        | 1.0.0  |
-|         Button         | 1.0.0  |
-|        CheckBox        | 1.0.0  |
-|        ComboBox        | 1.0.0  |
-|       SelectBox        | 1.0.0  |
-|      ContentBlock      | 1.0.0  |
-|        Details         | 1.0.0  |
-| H1, H2, H3, H4, H5, H6 | 1.0.0  |
-|         Label          | 1.0.0  |
-|        Dialogs         | 1.0.0  |
-|       Paragraph        | 1.0.0  |
-|      RadioButton       | 1.0.0  |
-|         Table          | 1.0.0  |
-|      ProgressBar       | 1.0.0  |
-|         Toggle         | 1.0.0  |
-|          Tabs          | 1.0.0  |
-|      Notification      | 1.0.0  |
-|         Badge          | 1.0.0  |
-|         Image          | 1.0.0  |
-|   Graphs (Bar, Pie)    | 1.0.0  |
-|         Icons          | 1.0.0  |
-|        WebView         | 1.0.0  |
-|        Spinner         | 1.0.0  |
-|       GroupRadio       | 1.0.0  |
-|       Accordion        | 1.0.0  |
-|          Pre           | 1.0.0  |
-|       HtmlBlock        | 1.0.0  |
-
-## В разработке
-|  Компонент  | Версия |
-|:-----------:|:------:|
-| ContextMenu | 0.0.1  |
-| TextEditor  |   -    |
-# Модули
-|       Компонент       | Версия |
-|:---------------------:|:------:|
-| Themes (Dark \ Light) | 1.0.0  |
-|         Route         | 1.0.0  |
-|         Page          | 1.0.0  |
-|     ElectronTray      | 1.0.0  |
-|    ElectronMenuBar    | 1.0.0  |
+Данный фреймворк будет позволять описывать страницы приложения только в виде JavaScript кода
+### Структура
+#### exampleApp / app / views / main.js
+```javascript
+const { Page, Button, TextInput, Notification, NotificationStyle } = require('chuijs');
+class MainPage extends Page {
+    constructor() {
+        super();
+        this.setTitle('Сказать привет!');
+        this.setMain(true);
+        let input_name = new TextInput({
+            title: 'Введите ваше имя',
+            placeholder: 'Введите ваше имя',
+            required: false
+        });
+        let hello = new Button('Сказать привет!', () => {
+            new Notification(`Привет, ${input_name.getValue()}!`, NotificationStyle.SIMPLE).show();
+        });
+        this.add(input_name, hello);
+    }
+}
+exports.MainPage = MainPage
+```
+#### exampleApp / app / app.js
+```javascript
+/** RENDERER ПРОЦЕСС */
+/** ИМПОРТЫ */
+const { AppLayout, render, ipcRenderer } = require('chuijs');
+/** СТРАНИЦЫ */
+const { MainPage } = require('../app/views/main');
+class App extends AppLayout {
+    constructor() {
+        super();
+        //this.setDarkMode();
+        /** РОУТЫ */
+        this.setRoute(new MainPage());
+    }
+}
+render(() => new App()).catch(err => console.log(err))
+/** ipcRenderer */
+ipcRenderer.send('hi', 'Привет!')
+```
+#### exampleApp / main.js
+```javascript
+/** main.js */
+const { Main, ipcMain, MenuItem } = require('chuijs');
+const main = new Main({
+    name: "exampleApp",
+    width: 600,
+    height: 780,
+    render: `${__dirname}/app/app.js`,
+    devTools: false,
+    menuBarVisible: true,
+    /** Установка иконки */
+    /** icon: `${__dirname}/resources/icons/app/icon.png` */
+})
+/** Получение данных из render процесса */
+ipcMain.on('hi', (e, text) => {
+    console.log(text)
+})
+/** Запуск приложения */
+main.start({
+    hideOnClose: false,
+    tray: [
+        new MenuItem().button('Показать \\ Скрыть', () => { main.hideAndShow() }),
+        new MenuItem().separator(),
+        new MenuItem().toggleDevTools('Консоль разработчика'),
+        new MenuItem().separator(),
+        new MenuItem().quit('Выход')
+    ],
+    menuBar: [
+        new MenuItem().button('Показать \\ Скрыть', () => { main.hideAndShow() }),
+        new MenuItem().separator(),
+        new MenuItem().toggleDevTools('Консоль разработчика'),
+        new MenuItem().separator(),
+        new MenuItem().quit('Выход')
+    ]
+})
+```
+### Компоненты
+```javascript
+AppLayout, DateInput, NumberInput, EmailInput,
+PasswordInput, TextArea, Button, CheckBox, ComboBox,
+SelectBox, ContentBlock, Details, H1, H2, H3, H4, H5, H6,
+Label, Dialogs, Paragraph, RadioButton, Table,
+ProgressBar, Toggle, Tabs, Notification, Badge,
+Image, Graphs (Bar, Pie), Icons, WebView,
+Spinner, GroupRadio, Accordion, Pre, HtmlBlock
+ ```
+#### В разработке
+```javascript
+ContextMenu, TextEditor
+```
+### Модули
+```javascript
+Themes (Dark|Light), Route, Page, ElectronTray, ElectronMenuBar
+```
