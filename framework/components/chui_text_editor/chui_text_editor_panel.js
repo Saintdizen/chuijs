@@ -372,6 +372,13 @@ class TextEditorPanel {
                     "display": "table-cell",
                     "border": "1px solid var(--blue_prime_background)"
                 }
+            },
+            {
+                name: "pre",
+                style: {
+                    "font-family": "'chui_mono'",
+                    "font-weight": "400"
+                }
             }
         ], 'TextEditorPanel');
         // Управление
@@ -396,7 +403,7 @@ class TextEditorPanel {
                 { name: "H4",   value: "<h4>" },
                 { name: "H5",   value: "<h5>" },
                 { name: "H6",   value: "<h6>" },
-                { name: "Code",   value: "<PRE>" },
+                { name: "Code",   value: "<pre>" },
                 { name: "Paragraph",   value: "<P>" }
             )
             select_headers.addValueChangeListener((e) => {
