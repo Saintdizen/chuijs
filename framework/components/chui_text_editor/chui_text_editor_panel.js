@@ -9,6 +9,8 @@ const {Notification} = require("../../components/chui_notification");
 const {NumberInput} = require("../chui_inputs/chui_number");
 const {CheckBox} = require("../chui_inputs/chui_check_box");
 const {NotificationStyle} = require("../chui_notification");
+const {FileInput} = require("../chui_inputs/chui_file");
+const URL = require("url");
 
 class Commands {
     static COPY = "copy"
@@ -663,6 +665,10 @@ class TextEditorPanel {
         if (controls.INSERT_IMAGE) {
             let content_image_header = new ContentBlock("row", "wrap", "center", "space-between")
             content_image_header.setWidth("-webkit-fill-available")
+            let file = new FileInput({
+                title: "Test",
+                multiple: false
+            })
             content_image_header.add(
                 new Button("Закрыть", () => {
                     dialog_image.close()
@@ -670,14 +676,23 @@ class TextEditorPanel {
                 new Label("Добавить изображение"),
                 new Button("Сохранить", () => {
                     document.getElementById(text_editor_id).focus()
+                    let image = file.getFile(0)
+                    let reader  = new FileReader();
+                    reader.addEventListener("load", function () {
+                        document.execCommand('insertImage', false, reader.result);
+                    }, false);
+                    if (image) reader.readAsDataURL(image);
                     dialog_image.close()
                 })
             )
+
             let content_image = new ContentBlock("column", "wrap", "center", "flex-end")
             content_image.setWidth("-webkit-fill-available")
+            content_image.add(file)
             let dialog_image = new Dialog({ width: "500px", height: "max-content", closeOutSideClick: true })
             dialog_image.addToHeader(content_image_header)
             dialog_image.addToBody(content_image)
+
             let button_image = new TextEditorButtons({
                 icon: Icons.EDITOR.INSERT_PHOTO,
                 listener: () => {

@@ -55,8 +55,8 @@ class AppLayout extends Route {
             {
                 name: "*",
                 style: {
-                    "letter-spacing":"1px",
-                    "word-spacing":"1px",
+                    "letter-spacing": "0.33px",
+                    "word-spacing": "0.33px",
                     "font-family": "chui_Inter",
                     "-webkit-font-smoothing": "antialiased",
                     "direction": "ltr",
@@ -71,8 +71,8 @@ class AppLayout extends Route {
             {
                 name: "*:before",
                 style: {
-                    "letter-spacing": ".7px",
-                    "word-spacing": ".7px",
+                    "letter-spacing": "0.33px",
+                    "word-spacing": "0.33px",
                     "font-family": "chui_Inter",
                     "-webkit-font-smoothing": "antialiased",
                     "direction": "ltr",

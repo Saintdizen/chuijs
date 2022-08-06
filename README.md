@@ -80,13 +80,14 @@ main.start({
 ```
 ### Компоненты
 ```javascript
-AppLayout, DateInput, NumberInput, EmailInput,
-PasswordInput, TextArea, Button, CheckBox, ComboBox,
-SelectBox, ContentBlock, Details, H1, H2, H3, H4, H5, H6,
-Label, Dialogs, Paragraph, RadioButton, Table,
-ProgressBar, Toggle, Tabs, Notification, Badge,
-Image, Graphs (Bar, Pie), Icons, WebView,
-Spinner, GroupRadio, Accordion, Pre, HtmlBlock
+AppLayout, DateInput, NumberInput, EmailInput, 
+PasswordInput, TextArea, Button, CheckBox, ComboBox, 
+SelectBox, ContentBlock, Details, H1, H2, H3, H4, H5, H6, 
+Label, Dialogs, Paragraph, RadioButton, Table, 
+ProgressBar, Toggle, Tabs, Notification, Badge, 
+Image, Graphs (Bar, Pie), Icons, WebView, 
+Spinner, GroupRadio, Accordion, Pre, HtmlBlock, 
+FileInput
  ```
 #### В разработке
 ```javascript
