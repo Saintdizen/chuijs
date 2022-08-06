@@ -33,13 +33,6 @@ class TextEditorPage extends Page {
             CONTENT_CONTROLS: true
         })
         this.add(textedit)
-        textedit.setValueAsHTML(`<p><b>Описание инцидента:</b></p>
-<p>--- Данная строка будет автоматически изменена ---</p>
-<p><b>Отвественный:</b></p>
-<p><b><br></b></p>
-<p><b>Время начала:</b></p>
-<p><b>Время окончания:</b></p>
-<p><b>Статус:</b></p>`)
 
         let html = new HtmlBlock(Styles.WIDTH.MAX_CONTENT);
         this.add(new Button("test", () => {
