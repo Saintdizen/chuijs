@@ -1,7 +1,7 @@
 const {
     Page, TextInput, Select, ComboBox,
     DateInput, NumberInput, TextArea, PasswordInput,
-    EmailInput, CheckBox, RadioButton, Button, H
+    EmailInput, CheckBox, RadioButton, Button, H, FileInput
 } = require('../../index');
 
 class Inputs_Buttons_Page extends Page {
@@ -24,6 +24,17 @@ class Inputs_Buttons_Page extends Page {
         let checkBox = new CheckBox({title: "CheckBox"})
         let radio = new RadioButton("RadioButton")
         this.add(h1_inputs, combo, select, text, date, number, email, pass, textArea, checkBox, radio)
+
+        let file = new FileInput({
+            title: "FileInput",
+            multiple: false,
+        })
+        let file_multiple = new FileInput({
+            title: "FileInput_multiple",
+            multiple: true,
+        })
+
+        this.add(file, file_multiple)
 
         let h1_buttons = new H(1, "Кнопки")
         let button = new Button("Обычная кнопка");

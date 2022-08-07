@@ -10,7 +10,7 @@ class TextEditorPage extends Page {
         this.setFullWidth()
         this.setFullHeight()
 
-        let textedit = new TextEditor(Styles.WIDTH.WEBKIT_FILL, {
+        let textEditor = new TextEditor(Styles.WIDTH.WEBKIT_FILL, {
             UNDO_REDO: true,
             BLOCK_FORMAT: true,
             FONT_SIZE: true,
@@ -32,11 +32,11 @@ class TextEditorPage extends Page {
             LINE_BREAK: true,
             CONTENT_CONTROLS: true
         })
-        this.add(textedit)
+        this.add(textEditor)
 
         let html = new HtmlBlock(Styles.WIDTH.MAX_CONTENT);
         this.add(new Button("test", () => {
-            html.setHtml(textedit.getValueAsHTML())
+            html.setHtml(textEditor.getValueAsHTML())
         }), html)
     }
 }
