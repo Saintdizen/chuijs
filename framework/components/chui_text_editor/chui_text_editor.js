@@ -82,6 +82,12 @@ class TextEditor {
                     "line-height":"1",
                     "color": "var(--text_color)"
                 }
+            },
+            {
+                name: "chui_editor_text_input p",
+                style: {
+                    "margin": "5px"
+                }
             }
         ], 'TextEditor');
         if (options.title !== undefined) {
@@ -91,7 +97,6 @@ class TextEditor {
             this.#chui_text_editor_test.appendChild(this.#label);
         }
         // Панель управления
-        document.execCommand('defaultParagraphSeparator', false, 'p');
         this.#editor_controls.appendChild(new TextEditorPanel(this.#id, options.controls).set())
         //
         this.#text_input.contentEditable = 'true';
@@ -109,8 +114,12 @@ class TextEditor {
         this.#text_input.addEventListener("mouseup", () => {
             this.#cater_position.setText(this.#getCaretPosition().toString());
         })
+        this.#text_input.appendChild(document.createElement("div"))
 
-        this.#text_input.addEventListener('focus', () => {
+        document.execCommand('defaultParagraphSeparator', false, 'div');
+        document.execCommand('insertParagraph',false)
+
+        this.#text_input.addEventListener('focus', (e) => {
             this.#chui_text_editor.style.border = '2px solid var(--blue_prime_background)';
             this.#label.style.color = 'var(--blue_prime_background)';
         })
