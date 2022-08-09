@@ -25,7 +25,7 @@ class Accordion {
                     "display": "flex",
                     "flex-direction": "column",
                     "height": "max-content",
-                    "width": "max-content",
+                    "width": "-webkit-fill-available",
                     "font-size": "12pt",
                     "font-weight":"500",
                     "line-height":"1",
@@ -45,7 +45,7 @@ class Accordion {
                 style: {
                     "background": "var(--button_background)",
                     "cursor": "pointer",
-                    "padding": "10px 15px",
+                    "padding": "7px 12px",
                     "width": "-webkit-fill-available",
                     "text-align": "left",
                     "outline": "none",
@@ -60,7 +60,7 @@ class Accordion {
                 name: "accordion_panel",
                 style: {
                     "background": "var(--button_background)",
-                    "padding": "0px 15px",
+                    "padding": "0px 12px",
                     "display": "block",
                     "overflow": "hidden",
                     "width": "-webkit-fill-available",
@@ -75,7 +75,7 @@ class Accordion {
             {
                 name: "accordion_panel_html",
                 style: {
-                    "padding": "10px 0px",
+                    "padding": "7px 0px",
                     "width": "-webkit-fill-available",
                     "display": "flex",
                     "border": "none"

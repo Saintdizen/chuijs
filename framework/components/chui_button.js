@@ -15,7 +15,7 @@ class Button {
                     "background": "var(--button_background)",
                     "color": "var(--button_text_color)",
                     "box-sizing": "border-box",
-                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 0x 2px 0px"
+                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 0px 2px 0px"
                 }
             },
             {

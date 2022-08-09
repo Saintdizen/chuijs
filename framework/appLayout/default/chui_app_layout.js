@@ -294,7 +294,7 @@ class AppLayout extends Route {
                 name: "app_menu_button:hover",
                 style: {
                     "background": "var(--blue_prime_background)",
-                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
+                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
                 }
             },
             {
@@ -334,7 +334,7 @@ class AppLayout extends Route {
                     "border-radius": "var(--border_radius)",
                     "padding": "6px",
                     "margin": "var(--margin)",
-                    "font-size": "14pt",
+                    "font-size": "12pt",
                     "font-weight": "600",
                     "background": "transparent",
                     "color": "var(--text_color)",
@@ -362,7 +362,7 @@ class AppLayout extends Route {
                 style: {
                     "padding": "7px 12px",
                     "background": "var(--blue_prime_background)",
-                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
+                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
                 }
             },
             {
@@ -384,7 +384,7 @@ class AppLayout extends Route {
                     "padding": "7px 12px",
                     "background": "var(--blue_prime_background)",
                     "color": "var(--text_color_hover)",
-                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
+                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
                 }
             },
             {
