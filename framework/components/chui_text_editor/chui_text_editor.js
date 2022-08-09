@@ -3,8 +3,6 @@ const {TextEditorPanel} = require("./chui_text_editor_panel");
 const {Dialog} = require("../chui_modal");
 const {ContentBlock} = require("../chui_content_block");
 const {Button} = require("../chui_button");
-const {NumberInput} = require("../chui_inputs/chui_number");
-const {RadioGroup} = require("../chui_radio_group");
 const {TextInput} = require("../chui_inputs/chui_text");
 
 class TextEditor {

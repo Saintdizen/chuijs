@@ -10,7 +10,6 @@ const {NumberInput} = require("../chui_inputs/chui_number");
 const {CheckBox} = require("../chui_inputs/chui_check_box");
 const {NotificationStyle} = require("../chui_notification");
 const {FileInput, AcceptTypes} = require("../chui_inputs/chui_file");
-const URL = require("url");
 
 class Commands {
     static COPY = "copy"
