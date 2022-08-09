@@ -1,5 +1,10 @@
 const {Label} = require("../chui_label");
 const {TextEditorPanel, Commands} = require("./chui_text_editor_panel");
+const {Dialog} = require("../chui_modal");
+const {ContentBlock} = require("../chui_content_block");
+const {TextInput} = require("../chui_inputs/chui_text");
+const {Button} = require("../chui_button");
+const {NumberInput} = require("../chui_inputs/chui_number");
 
 class TextEditor {
     #chui_text_editor_test = document.createElement("chui_text_editor_test");
@@ -19,8 +24,8 @@ class TextEditor {
                 style: {
                     "display": "flex",
                     "flex-direction": "column",
-                    "width": "max-content",
-                    "height": `${height}`,
+                    "width": "-webkit-fill-available",
+                    "height": `max-content`,
                     "margin": "var(--margin)"
                 }
             },
@@ -33,7 +38,7 @@ class TextEditor {
                     "flex-direction": "column",
                     "background": "var(--input_background)",
                     "border": "2px solid var(--input_background)",
-                    "height": `-webkit-fill-available`,
+                    "height": `${height}`,
                     "width": "-webkit-fill-available",
                 }
             },
@@ -118,6 +123,15 @@ class TextEditor {
         this.#text_input.addEventListener("mouseup", () => {
             this.#cater_position.setText(this.#getCaretPosition().toString());
         })
+        let editImage = new DialogEdit("Редактирование изображения")
+        this.#text_input.addEventListener("mousedown", (e) => {
+            console.log(e.target.tagName)
+            if (e.target.tagName === "IMG") {
+                editImage.setTarget(e.target)
+                editImage.openDialog()
+            }
+        })
+        this.#editor_controls.appendChild(editImage.set())
         this.#text_input.addEventListener('focus', (e) => {
             this.#chui_text_editor.style.border = '2px solid var(--blue_prime_background)';
             this.#label.style.color = 'var(--blue_prime_background)';
@@ -157,6 +171,43 @@ class TextEditor {
 }
 
 exports.TextEditor = TextEditor;
+
+class DialogEdit {
+    #target = undefined;
+    #dialog_link = new Dialog({ width: "max-content", height: "max-content", closeOutSideClick: true })
+    #img_width = new NumberInput({ title: "Ширина %", width: "-webkit-fill-available" })
+    #img_height = new NumberInput({ title: "Высота %", width: "-webkit-fill-available" })
+    constructor(label) {
+        let content_body = new ContentBlock("row", "wrap", "center", "center")
+        content_body.setWidth("-webkit-fill-available")
+        let content_header = new ContentBlock("row", "wrap", "center", "space-between")
+        content_header.setWidth("-webkit-fill-available")
+        content_body.add(this.#img_width, new Label("X"), this.#img_height)
+        this.#dialog_link.addToBody(content_body)
+        content_header.add(
+            new Button("Закрыть", () => {
+                this.#dialog_link.close()
+            }),
+            new Label(label),
+            new Button("Сохранить", () => {
+                console.log(this.#target)
+                this.#target.style.width = `${String(this.#img_width.getValue())}%`
+                this.#target.style.height = `${String(this.#img_height.getValue())}%`
+                this.#dialog_link.close()
+            })
+        )
+        this.#dialog_link.addToHeader(content_header)
+    }
+    setTarget(target) {
+        this.#target = target;
+    }
+    openDialog() {
+        this.#dialog_link.open()
+    }
+    set() {
+        return this.#dialog_link.set();
+    }
+}
 
 function initFirstLine() {
     let first_line = document.createElement("p")

@@ -13,7 +13,7 @@ class TextEditorPage extends Page {
         let text = new TextInput({title: "TextInput"})
         this.add(text)
 
-        let textEditor = new TextEditor(Styles.WIDTH.WEBKIT_FILL, {
+        let textEditor = new TextEditor("500px", {
             title: "TextEditor",
             controls: {
                 UNDO_REDO: true,
