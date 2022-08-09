@@ -8,7 +8,7 @@ class Badge {
                 style: {
                     "height": "max-content",
                     "width": "max-content",
-                    "padding": "7px 12px",
+                    "padding": "5px 10px",
                     "margin": "var(--margin)",
                     "border-radius": "var(--border_radius)",
                     "font-size": "var(--font_default_size)",
@@ -19,7 +19,8 @@ class Badge {
                 name: ".badge_error",
                 style: {
                     "background": "var(--badge_error_back)",
-                    "color": "var(--badge_error_text)"
+                    "color": "var(--badge_error_text)",
+                    "border": "2px solid var(--badge_error_back)",
                 }
             },
             {
@@ -34,14 +35,16 @@ class Badge {
                 name: ".badge_warning",
                 style: {
                     "background": "var(--badge_warning_back)",
-                    "color": "var(--badge_warning_text)"
+                    "color": "var(--badge_warning_text)",
+                    "border": "2px solid var(--badge_warning_back)",
                 }
             },
             {
                 name: ".badge_cancel",
                 style: {
                     "background": "var(--badge_cancel_back)",
-                    "color": "var(--badge_cancel_text)"
+                    "color": "var(--badge_cancel_text)",
+                    "border": "2px solid var(--badge_cancel_back)",
                 }
             }
         ], 'Badge');
