@@ -40,7 +40,7 @@ class TextArea {
                     "height": "inherit",
                     "width": "-webkit-fill-available",
                     "border-radius": "var(--border_radius)",
-                    "padding": "8px 13px",
+                    "padding": "7px 12px",
                     "font-size": "12pt",
                     "background": "var(--input_background)",
                     "color": "var(--text_color)",

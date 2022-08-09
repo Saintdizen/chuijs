@@ -50,7 +50,7 @@ class Select {
                     "display": "block",
                     "outline": "none",
                     "margin": "0px",
-                    "padding": "8px 0px 8px 13px",
+                    "padding": "7px 0px 7px 12px",
                     "background": "transparent",
                     "box-shadow": "none",
                     "color": "var(--text_color)",
@@ -72,7 +72,7 @@ class Select {
                     "width": "-webkit-fill-available",
                     "border-radius": "var(--border_radius)",
                     "margin-top": "0px",
-                    "padding": "8px",
+                    "padding": "7px",
                     "font-size": "var(--font_default_size)",
                     "border": "2px solid var(--input_background)",
                     "flex-direction": "column",
@@ -84,14 +84,14 @@ class Select {
                 name: "select_button_open",
                 style: {
                     "outline": "none",
-                    "padding": "8px 13px",
+                    "padding": "7px 12px",
                 }
             },
             {
                 name: "selectbox_option",
                 style: {
                     "text-align": "start",
-                    "padding": "8px 13px",
+                    "padding": "7px 12px",
                     "border-radius": "var(--border_radius)"
                 }
             },

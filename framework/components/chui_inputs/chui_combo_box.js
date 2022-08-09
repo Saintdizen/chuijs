@@ -46,7 +46,7 @@ class ComboBox {
                 style: {
                     "width": "100%",
                     "margin": "0px",
-                    "padding": "8px 0px 8px 13px",
+                    "padding": "7px 0px 7px 12px",
                     "background": "transparent",
                     "color": "var(--text_color)",
                     "border": "0",
@@ -62,7 +62,7 @@ class ComboBox {
                     "height": "max-content",
                     "border-radius": "var(--border_radius)",
                     "margin-top": "40px",
-                    "padding": "8px",
+                    "padding": "7px",
                     "font-size": "12pt",
                     "border": "2px solid var(--input_background)",
                     "flex-direction": "column",
@@ -86,7 +86,7 @@ class ComboBox {
             {
                 name: "combo_button_open",
                 style: {
-                    "padding": "8px 13px",
+                    "padding": "7px 12px",
                     "color": "var(--blue_prime_background)"
                 }
             },
@@ -94,7 +94,7 @@ class ComboBox {
                 name: "combobox_option",
                 style: {
                     "text-align": "start",
-                    "padding": "8px 13px",
+                    "padding": "7px 12px",
                     "border-radius": "var(--border_radius)",
                     "color": "var(--text_color)"
                 }

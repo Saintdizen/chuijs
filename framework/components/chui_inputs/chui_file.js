@@ -140,6 +140,7 @@ class FileInput {
                     "font-family": "chui_Inter",
                     "letter-spacing": "0.33px",
                     "word-spacing": "0.33px",
+                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 0x 2px 0px"
                 }
             },
             {
@@ -147,7 +148,7 @@ class FileInput {
                 style: {
                     "background": "var(--blue_prime_background)",
                     "color": "var(--text_color_hover)",
-                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
+                    "box-shadow": "var(--button_text_color) 0px 0px 2px 0px",
                 }
             }
         ], 'chui_fileInput');

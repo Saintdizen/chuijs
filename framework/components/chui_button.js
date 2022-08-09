@@ -15,6 +15,7 @@ class Button {
                     "background": "var(--button_background)",
                     "color": "var(--button_text_color)",
                     "box-sizing": "border-box",
+                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 0x 2px 0px"
                 }
             },
             {
@@ -22,7 +23,7 @@ class Button {
                 style: {
                     "background": "var(--blue_prime_background)",
                     "color": "var(--text_color_hover)",
-                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
+                    "box-shadow": "var(--button_text_color) 0px 0px 2px 0px",
                 }
             }
         ], 'chui_Button');

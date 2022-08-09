@@ -55,7 +55,7 @@ class DateInput {
                     "display": "none",
                     "flex-direction": "column",
                     "color": "var(--text_color)",
-                    "padding": "8px",
+                    "padding": "7px",
                     "background": "var(--dropdown_background)",
                     "border": "none",
                     "border-radius": "var(--border_radius)",
@@ -78,7 +78,7 @@ class DateInput {
                     "display": "block",
                     "width": "20px",
                     "border-radius": "var(--border_radius)",
-                    "padding": "8px",
+                    "padding": "7px",
                     "text-align": "center"
                 }
             },
@@ -93,8 +93,8 @@ class DateInput {
             {
                 name: "date_dropdown_open",
                 style: {
-                    "padding": "8px 13px 8px 0px",
-                    "height": "-webkit-fill-available",
+                    "padding": "7px 12px 7px 0px",
+                    "height": "auto",
                     "margin": "0px",
                     "display": "inline-flex",
                     "justify-content": "center",
@@ -123,7 +123,7 @@ class DateInput {
                     "display": "block",
                     "text-align": "center",
                     "margin": "0px",
-                    "padding": "8px 0px",
+                    "padding": "6px 0px",
                     "background": "transparent",
                     "box-shadow": "none",
                     "color": "var(--text_color)",

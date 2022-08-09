@@ -8,8 +8,25 @@ class H {
                     "height": "max-content",
                     "width": "max-content",
                     "color": "var(--text_color)",
-                    "padding": "13px 8px",
                     "margin": "var(--margin)"
+                }
+            },
+            {
+                name: "h1, h2",
+                style: {
+                    "padding": "12px 7px",
+                }
+            },
+            {
+                name: "h3, h4",
+                style: {
+                    "padding": "10px 7px",
+                }
+            },
+            {
+                name: "h5, h6",
+                style: {
+                    "padding": "8px 7px",
                 }
             }
         ], 'HX');

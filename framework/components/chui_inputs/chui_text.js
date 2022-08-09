@@ -42,7 +42,7 @@ class TextInput {
                     "border": "2px solid var(--input_background)",
                     "align-items": "center",
                     "position": "relative",
-                    "padding": "8px 13px",
+                    "padding": "7px 12px",
                 }
             },
             {

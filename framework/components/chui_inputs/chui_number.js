@@ -16,7 +16,7 @@ class NumberInput {
                 style: {
                     "display": "flex",
                     "flex-direction": "column",
-                    "width": "200px",
+                    "width": "140px",
                     "height": "max-content",
                     "margin": "var(--margin)",
                 }
@@ -33,7 +33,7 @@ class NumberInput {
                     "border": "2px solid var(--input_background)",
                     "align-items": "center",
                     "position": "relative",
-                    "padding": "8px 43px"
+                    "padding": "7px 43px"
                 }
             },
             {

@@ -308,7 +308,7 @@ class AppLayout extends Route {
                 style: {
                     "display": "flex",
                     "flex-direction":"column",
-                    "padding":"8px",
+                    "padding":"7px",
                     "width":"-webkit-fill-available",
                     "height":"-webkit-fill-available",
                     "overflow": "auto"
@@ -318,7 +318,7 @@ class AppLayout extends Route {
                 name: "dark_mode",
                 style: {
                     "display": "flex",
-                    "padding":"8px",
+                    "padding":"7px",
                     "width":"-webkit-fill-available",
                     "height":"max-content",
                     "justify-content":"center"
@@ -350,7 +350,7 @@ class AppLayout extends Route {
                     "width": "-webkit-fill-available",
                     "border": "none",
                     "border-radius": "var(--border_radius)",
-                    "padding": "8px",
+                    "padding": "7px",
                     "margin": "var(--margin)",
                     "font-size": "12pt",
                     "font-weight": "600",
@@ -360,7 +360,7 @@ class AppLayout extends Route {
             {
                 name: "route:hover",
                 style: {
-                    "padding": "8px 13px",
+                    "padding": "7px 12px",
                     "background": "var(--blue_prime_background)",
                     "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
                 }
@@ -381,7 +381,7 @@ class AppLayout extends Route {
             {
                 name: ".route_active",
                 style: {
-                    "padding": "8px 13px",
+                    "padding": "7px 12px",
                     "background": "var(--blue_prime_background)",
                     "color": "var(--text_color_hover)",
                     "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",

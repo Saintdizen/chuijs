@@ -7,6 +7,7 @@ const {OthersComponentsPage} = require('./views/0_others');
 const {Notifications_Badges_Page} = require('./views/2_notifications_badges');
 const {TablesPage} = require('./views/3_tables');
 const {TextEditorPage} = require('./views/4_text_editor');
+const {TitlesPage} = require('./views/5_titles');
 
 class App extends AppLayout {
     constructor() {
@@ -17,6 +18,7 @@ class App extends AppLayout {
         this.setRoute(new TablesPage())
         this.setRoute(new TextEditorPage())
         this.setRoute(new OthersComponentsPage())
+        this.setRoute(new TitlesPage())
     }
 }
 render(() => new App()).then(r => console.log("Загружено!"))
