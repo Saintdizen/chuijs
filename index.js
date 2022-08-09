@@ -43,7 +43,7 @@ const { Accordion } = require('./framework/components/chui_accordion')
 const { Pre } = require('./framework/components/chui_pre')
 const { HtmlBlock } = require('./framework/components/chui_html_block')
 const { sleep, render, getDefaultIcon } = require('./framework/modules/chui_functions');
-const { FileInput } = require("./framework/components/chui_inputs/chui_file");
+const { FileInput, AcceptTypes } = require("./framework/components/chui_inputs/chui_file");
 
 //VARS
 let isQuiting = false;
@@ -228,5 +228,6 @@ module.exports = {
     Accordion: Accordion,
     Pre: Pre,
     HtmlBlock: HtmlBlock,
-    FileInput: FileInput
+    FileInput: FileInput,
+    AcceptTypes: AcceptTypes
 }

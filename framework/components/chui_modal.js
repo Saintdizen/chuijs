@@ -37,7 +37,7 @@ class Dialog {
                     "height": "max-content",
                     "display": "flex",
                     "flex-direction": "column",
-                    "padding": "12px",
+                    "padding": "7px",
                     "border-radius": "var(--border_radius)",
                     "box-shadow": "var(--shadow_one) 0px 19px 38px, var(--shadow_two) 0px 15px 12px",
                     "border": "2px solid var(--modal_border)",

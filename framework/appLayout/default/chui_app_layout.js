@@ -63,7 +63,7 @@ class AppLayout extends Route {
                     "line-height": "normal",
                     "user-select": "none",
                     "outline": "none",
-                    "transition": "all .2s cubic-bezier(0.28, 0.11, 0.32, 1)",
+                    "transition": "all .2s",
                     "animation-duration": ".2s",
                     "position": "relative",
                 }

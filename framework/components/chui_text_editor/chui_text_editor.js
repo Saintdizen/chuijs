@@ -1,10 +1,10 @@
 const {Label} = require("../chui_label");
-const {TextEditorPanel, Commands} = require("./chui_text_editor_panel");
+const {TextEditorPanel} = require("./chui_text_editor_panel");
 const {Dialog} = require("../chui_modal");
 const {ContentBlock} = require("../chui_content_block");
-const {TextInput} = require("../chui_inputs/chui_text");
 const {Button} = require("../chui_button");
 const {NumberInput} = require("../chui_inputs/chui_number");
+const {RadioGroup} = require("../chui_radio_group");
 
 class TextEditor {
     #chui_text_editor_test = document.createElement("chui_text_editor_test");
@@ -93,6 +93,18 @@ class TextEditor {
                 style: {
                     "margin": "5px 0px"
                 }
+            },
+            {
+                name: "p img",
+                style: {
+                    "transition": "all .2s",
+                    "margin": "0px",
+                    "padding": "0px",
+                    "width": "auto",
+                    "height": "auto",
+                    "border":  "2px solid transparent",
+                    "border-radius": "var(--border_radius)"
+                }
             }
         ], 'TextEditor');
         if (options.title !== undefined) {
@@ -124,8 +136,8 @@ class TextEditor {
             this.#cater_position.setText(this.#getCaretPosition().toString());
         })
         let editImage = new DialogEdit("Редактирование изображения")
-        this.#text_input.addEventListener("mousedown", (e) => {
-            console.log(e.target.tagName)
+        document.getElementsByTagName("img")
+        this.#text_input.addEventListener("dblclick", (e) => {
             if (e.target.tagName === "IMG") {
                 editImage.setTarget(e.target)
                 editImage.openDialog()
@@ -175,14 +187,24 @@ exports.TextEditor = TextEditor;
 class DialogEdit {
     #target = undefined;
     #dialog_link = new Dialog({ width: "max-content", height: "max-content", closeOutSideClick: true })
-    #img_width = new NumberInput({ title: "Ширина %", width: "-webkit-fill-available" })
-    #img_height = new NumberInput({ title: "Высота %", width: "-webkit-fill-available" })
+    #img_width = new NumberInput({ title: "Ширина", width: "-webkit-fill-available" })
+    #img_height = new NumberInput({ title: "Высота", width: "-webkit-fill-available" })
+    #img_width_param = new RadioGroup({
+        styles: {
+            direction: "row", wrap: "wrap",
+            align: "center", justify: "center",
+            width: "-webkit-fill-available"
+        }
+    });
     constructor(label) {
+        //
+        this.#img_width_param.addOptions(["px", "%"])
+        //
         let content_body = new ContentBlock("row", "wrap", "center", "center")
         content_body.setWidth("-webkit-fill-available")
         let content_header = new ContentBlock("row", "wrap", "center", "space-between")
         content_header.setWidth("-webkit-fill-available")
-        content_body.add(this.#img_width, new Label("X"), this.#img_height)
+        content_body.add(this.#img_width_param, this.#img_width, this.#img_height)
         this.#dialog_link.addToBody(content_body)
         content_header.add(
             new Button("Закрыть", () => {
@@ -191,8 +213,8 @@ class DialogEdit {
             new Label(label),
             new Button("Сохранить", () => {
                 console.log(this.#target)
-                this.#target.style.width = `${String(this.#img_width.getValue())}%`
-                this.#target.style.height = `${String(this.#img_height.getValue())}%`
+                this.#target.style.width = `${String(this.#img_width.getValue())}${this.#img_width_param.getValue()}`
+                this.#target.style.height = `${String(this.#img_height.getValue())}${this.#img_width_param.getValue()}`
                 this.#dialog_link.close()
             })
         )

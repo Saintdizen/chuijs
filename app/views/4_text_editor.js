@@ -1,4 +1,4 @@
-const {Page, TextEditor, Styles, TextInput} = require('../../index');
+const {Page, TextEditor, Styles} = require('../../index');
 const {Button} = require("../../framework/components/chui_button");
 const {HtmlBlock} = require("../../framework/components/chui_html_block");
 
@@ -9,9 +9,6 @@ class TextEditorPage extends Page {
         this.setMain(true)
         this.setFullWidth()
         this.setFullHeight()
-
-        let text = new TextInput({title: "TextInput"})
-        this.add(text)
 
         let textEditor = new TextEditor("500px", {
             title: "TextEditor",

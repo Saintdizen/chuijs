@@ -1,5 +1,22 @@
 //version: 1.0.0
 
+class AcceptTypes {
+    //Изображения
+    static ALL_IMAGE = "image/*"
+    static PNG = "image/png"
+    static GIF = "image/gif"
+    static JPEG = "image/jpeg"
+    //===========
+    //Аудио
+    static ALL_AUDIO = "audio/*"
+    //===========
+    //Видео
+    static ALL_VIDEO = "video/*"
+    //===========
+}
+
+exports.AcceptTypes = AcceptTypes
+
 class FileInput {
     #chui_file_main = document.createElement('chui_file_main');
     #chui_file_input = document.createElement('chui_file_input');
@@ -9,6 +26,7 @@ class FileInput {
     #label = document.createElement('label');
     constructor(options = {
         title: String(undefined),
+        accept: new Array(undefined),
         required: Boolean(undefined),
         disableFocus: Boolean(false),
         multiple: Boolean(false),
@@ -141,12 +159,9 @@ class FileInput {
         if (options.focusListener !== undefined) { this.#input.addEventListener('focus', options.focusListener); }
         if (options.blurListener !== undefined) { this.#input.addEventListener('blur', options.blurListener); }
         if (options.required !== undefined) { this.#input.required = options.required; }
-        if (options.disableFocus !== undefined) {
-            this.#input.addEventListener("mousedown", () => { return false })
-        }
-        if (options.multiple) {
-            this.#input.multiple = options.multiple;
-        }
+        if (options.disableFocus !== undefined) { this.#input.addEventListener("mousedown", () => { return false }) }
+        if (options.accept) { this.#input.accept = options.accept.join(", "); }
+        if (options.multiple) { this.#input.multiple = options.multiple; }
         if (options.title !== undefined) {
             this.#label.innerText = options.title;
             this.#label.className = 'input_label';

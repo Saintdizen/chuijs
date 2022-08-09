@@ -9,7 +9,7 @@ const {Notification} = require("../../components/chui_notification");
 const {NumberInput} = require("../chui_inputs/chui_number");
 const {CheckBox} = require("../chui_inputs/chui_check_box");
 const {NotificationStyle} = require("../chui_notification");
-const {FileInput} = require("../chui_inputs/chui_file");
+const {FileInput, AcceptTypes} = require("../chui_inputs/chui_file");
 const URL = require("url");
 
 class Commands {
@@ -588,9 +588,7 @@ class TextEditorPanel {
             content_table.setWidth("-webkit-fill-available")
             let content_table_main = new ContentBlock("column", "wrap", "center", "space-around")
             content_table_main.setWidth("-webkit-fill-available")
-            let checkBox_header = new CheckBox({
-                title: "Добавить THEAD"
-            })
+            let checkBox_header = new CheckBox({ title: "Добавить THEAD" })
             content_table_2.add(checkBox_header)
             let table_rows = new NumberInput({ title:'Количество строк' });
             let table_cols = new NumberInput({ title:'Количество столбцов' });
@@ -666,8 +664,11 @@ class TextEditorPanel {
             let content_image_header = new ContentBlock("row", "wrap", "center", "space-between")
             content_image_header.setWidth("-webkit-fill-available")
             let file = new FileInput({
-                title: "Test",
-                multiple: false
+                title: "Выберите изображение",
+                multiple: false,
+                accept: [
+                    AcceptTypes.ALL_IMAGE
+                ]
             })
             content_image_header.add(
                 new Button("Закрыть", () => {
