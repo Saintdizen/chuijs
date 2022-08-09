@@ -8,7 +8,7 @@ class Button {
                     "height": "max-content",
                     "width": "max-content",
                     "border-radius": "var(--border_radius)",
-                    "padding": "9px 14px",
+                    "padding": "7px 12px",
                     "font-size": "12pt",
                     "font-weight": "500",
                     "margin": "var(--margin)",

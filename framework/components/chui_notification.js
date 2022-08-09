@@ -14,7 +14,7 @@ class Notification {
                     "border-radius": "var(--border_radius)",
                     "margin": "var(--margin)",
                     "font-size": "12pt",
-                    "padding": "8px 13px",
+                    "padding": "7px 12px",
                     "background": "var(--badge_cancel_back)",
                     "color": "var(--badge_cancel_text)",
                     "animation-duration": ".5s",

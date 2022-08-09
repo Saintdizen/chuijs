@@ -8,7 +8,7 @@ class Badge {
                 style: {
                     "height": "max-content",
                     "width": "max-content",
-                    "padding":"8px 13px",
+                    "padding": "7px 12px",
                     "margin": "var(--margin)",
                     "border-radius": "var(--border_radius)",
                     "font-size": "var(--font_default_size)",
@@ -26,7 +26,8 @@ class Badge {
                 name: ".badge_success",
                 style: {
                     "background": "var(--badge_success_back)",
-                    "color": "var(--badge_success_text)"
+                    "color": "var(--badge_success_text)",
+                    "border": "2px solid var(--badge_success_back)",
                 }
             },
             {
