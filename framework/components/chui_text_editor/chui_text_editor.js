@@ -5,6 +5,7 @@ const {ContentBlock} = require("../chui_content_block");
 const {Button} = require("../chui_button");
 const {NumberInput} = require("../chui_inputs/chui_number");
 const {RadioGroup} = require("../chui_radio_group");
+const {TextInput} = require("../chui_inputs/chui_text");
 
 class TextEditor {
     #chui_text_editor_test = document.createElement("chui_text_editor_test");
@@ -187,24 +188,15 @@ exports.TextEditor = TextEditor;
 class DialogEdit {
     #target = undefined;
     #dialog_link = new Dialog({ width: "max-content", height: "max-content", closeOutSideClick: true })
-    #img_width = new NumberInput({ title: "Ширина", width: "-webkit-fill-available" })
-    #img_height = new NumberInput({ title: "Высота", width: "-webkit-fill-available" })
-    #img_width_param = new RadioGroup({
-        styles: {
-            direction: "row", wrap: "wrap",
-            align: "center", justify: "center",
-            width: "-webkit-fill-available"
-        }
-    });
+    #img_width = new TextInput({ title: "Ширина", width: "150px" })
+    #img_height = new TextInput({ title: "Высота", width: "150px" })
     constructor(label) {
-        //
-        this.#img_width_param.addOptions(["px", "%"])
         //
         let content_body = new ContentBlock("row", "wrap", "center", "center")
         content_body.setWidth("-webkit-fill-available")
         let content_header = new ContentBlock("row", "wrap", "center", "space-between")
         content_header.setWidth("-webkit-fill-available")
-        content_body.add(this.#img_width_param, this.#img_width, this.#img_height)
+        content_body.add(this.#img_width, this.#img_height)
         this.#dialog_link.addToBody(content_body)
         content_header.add(
             new Button("Закрыть", () => {
@@ -212,9 +204,8 @@ class DialogEdit {
             }),
             new Label(label),
             new Button("Сохранить", () => {
-                console.log(this.#target)
-                this.#target.style.width = `${String(this.#img_width.getValue())}${this.#img_width_param.getValue()}`
-                this.#target.style.height = `${String(this.#img_height.getValue())}${this.#img_width_param.getValue()}`
+                this.#target.style.width = `${this.#img_width.getValue()}`
+                this.#target.style.height = `${this.#img_height.getValue()}`
                 this.#dialog_link.close()
             })
         )
@@ -222,6 +213,9 @@ class DialogEdit {
     }
     setTarget(target) {
         this.#target = target;
+        let style = getComputedStyle(this.#target);
+        this.#img_width.setValue(style.width)
+        this.#img_height.setValue(style.height)
     }
     openDialog() {
         this.#dialog_link.open()
