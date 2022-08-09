@@ -68,7 +68,7 @@ class TextEditor {
                 style: {
                     "width": "-webkit-fill-available",
                     "display": "flex",
-                    "padding": "10px"
+                    "padding": "7px"
                 }
             },
             {
@@ -86,7 +86,7 @@ class TextEditor {
             {
                 name: "chui_editor_text_input p",
                 style: {
-                    "margin": "5px"
+                    "margin": "5px 0px"
                 }
             }
         ], 'TextEditor');
@@ -105,20 +105,19 @@ class TextEditor {
         this.#chui_text_editor.appendChild(this.#text_input);
         this.#chui_text_editor.appendChild(this.#status_row);
         this.#status_row.appendChild(this.#cater_position.set())
+        //
+        document.execCommand('defaultParagraphSeparator', false, 'p');
+        this.#text_input.appendChild(initFirstLine())
+        //
         this.#text_input.addEventListener("keyup", (e) => {
-            if (e.keyCode === 13) {
-                //document.execCommand(Commands.FORMAT_BLOCK, false, 'div');
+            if (e.keyCode === 8 && this.#text_input.children.length === 0) {
+                this.#text_input.appendChild(initFirstLine())
             }
             this.#cater_position.setText(this.#getCaretPosition().toString());
         })
         this.#text_input.addEventListener("mouseup", () => {
             this.#cater_position.setText(this.#getCaretPosition().toString());
         })
-        this.#text_input.appendChild(document.createElement("div"))
-
-        document.execCommand('defaultParagraphSeparator', false, 'div');
-        document.execCommand('insertParagraph',false)
-
         this.#text_input.addEventListener('focus', (e) => {
             this.#chui_text_editor.style.border = '2px solid var(--blue_prime_background)';
             this.#label.style.color = 'var(--blue_prime_background)';
@@ -158,3 +157,10 @@ class TextEditor {
 }
 
 exports.TextEditor = TextEditor;
+
+function initFirstLine() {
+    let first_line = document.createElement("p")
+    let br = document.createElement("br")
+    first_line.appendChild(br)
+    return first_line
+}
