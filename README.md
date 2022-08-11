@@ -91,7 +91,7 @@ FileInput
  ```
 #### В разработке
 ```javascript
-ContextMenu, TextEditor, TreeView
+ContextMenu, TextEditor, TreeView, Forms
 ```
 ### Модули
 ```javascript

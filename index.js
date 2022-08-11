@@ -45,6 +45,7 @@ const { HtmlBlock } = require('./framework/components/chui_html_block')
 const { sleep, render, getDefaultIcon } = require('./framework/modules/chui_functions');
 const { FileInput, AcceptTypes } = require("./framework/components/chui_inputs/chui_file");
 const { TreeView } = require("./framework/components/chui_tree_view");
+const { Form } = require("./framework/components/chui_form");
 
 //VARS
 let isQuiting = false;
@@ -231,5 +232,6 @@ module.exports = {
     HtmlBlock: HtmlBlock,
     FileInput: FileInput,
     AcceptTypes: AcceptTypes,
-    TreeView: TreeView
+    TreeView: TreeView,
+    Form: Form
 }
