@@ -1,4 +1,4 @@
-const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details} = require('../../index');
+const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView} = require('../../index');
 
 class OthersComponentsPage extends Page {
     constructor() {
@@ -41,6 +41,9 @@ class OthersComponentsPage extends Page {
         });
         details.add(new H(1, 'Заголовок'))
         this.add(h1_others, accordion, details)
+
+        let treeView = new TreeView();
+        this.add(treeView)
     }
 }
 
