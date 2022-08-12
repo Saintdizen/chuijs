@@ -123,16 +123,16 @@ class Main {
     }) {
         app.whenReady().then(() => {
             //START
-            this.#window.loadURL('data:text/html;charset=UTF-8,<!DOCTYPE html>\
+            this.#window.loadURL(`data:text/html;charset=UTF-8,<!DOCTYPE html>\
             <html>\
                 <head>\
                     <meta charset="UTF-8">\
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+                    <title>${this.#appName}</title>\
                 </head>\
                 <body>\
                     <div id="app"></div>\
                 </body>\
-            </html>').then(() => {
+            </html>`).then(() => {
                 app.on('before-quit', () => {
                     isQuiting = true;
                 });

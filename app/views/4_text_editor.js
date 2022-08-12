@@ -6,7 +6,7 @@ class TextEditorPage extends Page {
     constructor() {
         super();
         this.setTitle('Редактор текста');
-        this.setMain(true)
+        this.setMain(false)
         this.setFullWidth()
         this.setFullHeight()
 

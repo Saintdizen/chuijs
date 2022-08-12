@@ -1,4 +1,4 @@
-const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView} = require('../../index');
+const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView, Form, TextInput} = require('../../index');
 
 class OthersComponentsPage extends Page {
     constructor() {
