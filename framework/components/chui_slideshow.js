@@ -1,5 +1,9 @@
+let slideIndex = 1;
+
 class Slideshow {
     #chui_slides_main = document.createElement('chui_slides_main');
+    #chui_next_slide = document.createElement('chui_next_slide');
+    #chui_prev_slide = document.createElement('chui_prev_slide');
     constructor(options = {
         slides: []
     }) {
@@ -93,6 +97,20 @@ class Slideshow {
 
         for (let slide of options.slides) {
             this.#chui_slides_main.appendChild(slide.set())
+        }
+        this.#chui_next_slide.addEventListener("click", (e) => {
+            this.#plusSlides(-1);
+        })
+        this.#chui_prev_slide.addEventListener("click", (e) => {
+            this.#plusSlides(1)
+        })
+        this.#chui_slides_main.appendChild(this.#chui_next_slide)
+        this.#chui_slides_main.appendChild(this.#chui_prev_slide)
+    }
+    #plusSlides(n = Number(undefined)) {
+        let slides = document.getElementsByTagName("chui_slide");
+        for (let slide of slides) {
+            console.log(slide)
         }
     }
     set() {
