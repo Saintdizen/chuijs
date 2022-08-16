@@ -1,6 +1,7 @@
 let slideIndex = 1;
 
 class Slideshow {
+    #default_slide = 0;
     #chui_slides_main = document.createElement('chui_slides_main');
     #chui_next_slide = document.createElement('chui_next_slide');
     #chui_prev_slide = document.createElement('chui_prev_slide');
@@ -13,7 +14,9 @@ class Slideshow {
                 style: {
                     "max-width": "1000px",
                     "position": "relative",
-                    "margin": "auto"
+                    "margin": "auto",
+                    "width": "400px",
+                    "height": "400px"
                 }
             },
             {
@@ -31,7 +34,7 @@ class Slideshow {
                     "width": "auto",
                     "margin-top": "-22px",
                     "padding": "16px",
-                    "color": "white",
+                    "color": "var(--button_text_color)",
                     "font-weight": "bold",
                     "font-size": "18px",
                     "transition": "0.6s ease",
@@ -96,22 +99,33 @@ class Slideshow {
         ], 'chui_Slideshow');
 
         for (let slide of options.slides) {
+            if (options.slides.indexOf(slide) === 0) {
+                slide.set().style.display = 'block';
+            }
             this.#chui_slides_main.appendChild(slide.set())
         }
         this.#chui_next_slide.addEventListener("click", (e) => {
-            this.#plusSlides(-1);
+            this.#changeSlide(1);
         })
         this.#chui_prev_slide.addEventListener("click", (e) => {
-            this.#plusSlides(1)
+            this.#changeSlide(-1)
         })
+        this.#chui_next_slide.textContent = "NEXT";
+        this.#chui_prev_slide.textContent = "PREV";
         this.#chui_slides_main.appendChild(this.#chui_next_slide)
         this.#chui_slides_main.appendChild(this.#chui_prev_slide)
     }
-    #plusSlides(n = Number(undefined)) {
+    #changeSlide(n = Number(undefined)) {
         let slides = document.getElementsByTagName("chui_slide");
-        for (let slide of slides) {
-            console.log(slide)
+        console.log(this.#default_slide)
+        if (slides[this.#default_slide] !== undefined) {
+            slides[this.#default_slide].removeAttribute("style")
         }
+        let sum_slides = slides.length;
+        this.#default_slide = this.#default_slide + n;
+        if (this.#default_slide > sum_slides) this.#default_slide = 1;
+        if (this.#default_slide < 1) this.#default_slide = sum_slides;
+        slides[this.#default_slide].style.display = 'block';
     }
     set() {
         return this.#chui_slides_main;
@@ -121,8 +135,8 @@ exports.Slideshow = Slideshow
 
 class Slide {
     #chui_slide = document.createElement('chui_slide');
-    constructor() {
-        this.#chui_slide.innerText = "test"
+    constructor(text = String(undefined)) {
+        this.#chui_slide.innerText = text;
     }
     set() {
         return this.#chui_slide;

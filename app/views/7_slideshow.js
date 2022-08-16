@@ -10,8 +10,8 @@ class SlidesPage extends Page {
 
         let slideshow = new Slideshow({
                 slides: [
-                    new Slide(),
-                    new Slide()
+                    new Slide("slide 1"),
+                    new Slide("slide 2")
                 ]
             }
         );
