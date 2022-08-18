@@ -90,6 +90,7 @@ class CheckBox {
             {
                 name: ".labelz",
                 style: {
+                    "cursor": "pointer",
                     "font-size": "var(--font_default_size)"
                 }
             }

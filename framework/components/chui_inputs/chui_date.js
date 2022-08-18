@@ -75,6 +75,7 @@ class DateInput {
             {
                 name: "date_day",
                 style: {
+                    "cursor": "pointer",
                     "display": "block",
                     "width": "20px",
                     "border-radius": "var(--border_radius)",
@@ -93,6 +94,7 @@ class DateInput {
             {
                 name: "date_dropdown_open",
                 style: {
+                    "cursor": "pointer",
                     "padding": "7px 12px 7px 0px",
                     "height": "auto",
                     "margin": "0px",

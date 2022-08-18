@@ -25,6 +25,7 @@ class Toggle {
             {
                 name: ".slider",
                 style: {
+                    "cursor": "pointer",
                     "position": "absolute",
                     "top": "0",
                     "left": "0",

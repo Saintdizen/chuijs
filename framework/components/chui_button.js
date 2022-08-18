@@ -5,6 +5,7 @@ class Button {
             {
                 name: "chui_button",
                 style: {
+                    "cursor": "pointer",
                     "height": "max-content",
                     "width": "max-content",
                     "border-radius": "var(--border_radius)",

@@ -46,6 +46,7 @@ class Select {
             {
                 name: ".selectbox_input",
                 style: {
+                    "cursor": "pointer",
                     "width":"100%",
                     "display": "block",
                     "outline": "none",
@@ -83,6 +84,7 @@ class Select {
             {
                 name: "select_button_open",
                 style: {
+                    "cursor": "pointer",
                     "outline": "none",
                     "padding": "7px 12px",
                 }
@@ -90,6 +92,7 @@ class Select {
             {
                 name: "selectbox_option",
                 style: {
+                    "cursor": "pointer",
                     "text-align": "start",
                     "padding": "7px 12px",
                     "border-radius": "var(--border_radius)"

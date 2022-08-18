@@ -39,6 +39,7 @@ class NumberInput {
             {
                 name: ".number_buttons",
                 style: {
+                    "cursor": "pointer",
                     "height": "-webkit-fill-available",
                     "width": "43px",
                     "margin": "0px",

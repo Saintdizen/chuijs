@@ -278,6 +278,7 @@ class AppLayout extends Route {
             {
                 name: "app_menu_button",
                 style: {
+                    "cursor": "pointer",
                     "outline": "none",
                     "height": "max-content",
                     "width": "max-content",
@@ -343,6 +344,7 @@ class AppLayout extends Route {
             {
                 name: "route",
                 style: {
+                    "cursor": "pointer",
                     "display":"flex",
                     "align-items": "center",
                     "outline": "none",

@@ -56,6 +56,7 @@ class PasswordInput {
             {
                 name: "see_pass_button",
                 style: {
+                    "cursor": "pointer",
                     "position": "absolute",
                     "color": "var(--badge_cancel_text)",
                     "right": "0",

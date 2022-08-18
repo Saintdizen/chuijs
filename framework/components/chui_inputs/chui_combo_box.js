@@ -86,6 +86,7 @@ class ComboBox {
             {
                 name: "combo_button_open",
                 style: {
+                    "cursor": "pointer",
                     "padding": "7px 12px",
                     "color": "var(--blue_prime_background)"
                 }
@@ -93,6 +94,7 @@ class ComboBox {
             {
                 name: "combobox_option",
                 style: {
+                    "cursor": "pointer",
                     "text-align": "start",
                     "padding": "7px 12px",
                     "border-radius": "var(--border_radius)",

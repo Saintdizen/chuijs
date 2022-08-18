@@ -84,6 +84,7 @@ class RadioButton {
             {
                 name: ".labelr",
                 style: {
+                    "cursor": "pointer",
                     "font-size": "var(--font_default_size)"
                 }
             }
