@@ -30,19 +30,19 @@ class Animation {
             this.#element = element;
         }
     }
-    async appearance() {
-        if (window.getComputedStyle(this.#element, null).display === 'none') {
+    appearance() {
+        if (window.getComputedStyle(this.#element, null).display === 'none' || window.getComputedStyle(this.#element, null).display === '') {
             this.#element.style.display = 'flex';
         }
         this.#element.style.animationName = 'appearance';
     }
-    async disappearance() {
+    disappearance() {
         if (this.#element.style.animationName) {
             this.#element.style.animationName = 'disappearance';
             this.#element.addEventListener('animationend', removeEvents);
         }
     }
-    async disappearance_and_remove() {
+    disappearance_and_remove() {
         if (this.#element.style.animationName) {
             this.#element.style.animationName = 'disappearance';
             this.#element.addEventListener('animationend', removeEvents2);

@@ -4,8 +4,11 @@ const {Animation} = require("../modules/chui_animations");
 class Slideshow {
     #default_slide = 0;
     #chui_slides_main = document.createElement('chui_slides_main');
+    //
+    #chui_slides_list = document.createElement("chui_slides_list")
     #chui_next_slide = document.createElement('chui_next_slide');
     #chui_prev_slide = document.createElement('chui_prev_slide');
+    #slides_list = undefined;
     constructor(options = {
         width: String(undefined),
         height: String(undefined),
@@ -14,6 +17,13 @@ class Slideshow {
         slides: []
     }) {
         require('../modules/chui_functions').style_parse([
+            {
+                name: "chui_slides_list",
+                style: {
+                    "width": `-webkit-fill-available`,
+                    "height": `-webkit-fill-available`
+                }
+            },
             {
                 name: "chui_slides_main",
                 style: {
@@ -32,13 +42,7 @@ class Slideshow {
                     "align-items": "center",
                     "justify-content": "center",
                     "color": "var(--text_color)",
-                    "border-radius": "var(--border_radius)"
-                }
-            },
-            {
-                name: ".active_slide",
-                style: {
-                    "display": "flex"
+                    "border-radius": "var(--border_radius)",
                 }
             },
             {
@@ -114,44 +118,40 @@ class Slideshow {
                 }
             }
         ], 'chui_Slideshow');
-
-        for (let slide of options.slides) {
-            if (options.slides.indexOf(slide) === 0) {
-                slide.set().classList.add("active_slide")
-            }
-            this.#chui_slides_main.appendChild(slide.set())
-        }
+        this.#slides_list = options.slides;
         this.#chui_next_slide.addEventListener("click", (e) => {
             this.#changeSlide(1);
         })
         this.#chui_prev_slide.addEventListener("click", (e) => {
             this.#changeSlide(-1)
         })
-        this.#chui_next_slide.appendChild(new Icon(Icons.CONTENT.REDO, "14pt", "var(--button_text_color)").set())
-        this.#chui_prev_slide.appendChild(new Icon(Icons.CONTENT.UNDO, "14pt", "var(--button_text_color)").set())
-        this.#chui_slides_main.appendChild(this.#chui_next_slide)
-        this.#chui_slides_main.appendChild(this.#chui_prev_slide)
-
+        this.#chui_slides_main.appendChild(this.#chui_slides_list);
+        this.#chui_next_slide.appendChild(new Icon(Icons.CONTENT.REDO, "14pt", "var(--button_text_color)").set());
+        this.#chui_prev_slide.appendChild(new Icon(Icons.CONTENT.UNDO, "14pt", "var(--button_text_color)").set());
+        this.#chui_slides_main.appendChild(this.#chui_next_slide);
+        this.#chui_slides_main.appendChild(this.#chui_prev_slide);
         if (options.autoplay) {
             setInterval(() => this.#changeSlide(1), options.interval * 1000);
         }
+
+        //
+        for (let slide of options.slides) {
+            if (options.slides.indexOf(slide) === 0) {
+                this.#chui_slides_list.appendChild(slide.set())
+                new Animation(slide.set()).appearance()
+            }
+        }
+        //
     }
     #changeSlide(n = Number(undefined)) {
-        let animation  = new Animation();
-        let slides = document.getElementsByTagName("chui_slide");
-        let sum_slides = slides.length;
-        animation.setElement(slides[this.#default_slide])
-        //animation.disappearance()
-        slides[this.#default_slide].classList.remove("active_slide");
+        let sum_slides = this.#slides_list.length;
         this.#default_slide = this.#default_slide + n;
         if (this.#default_slide > (sum_slides - 1)) this.#default_slide = 0;
         if (this.#default_slide < 0) this.#default_slide = sum_slides - 1;
-        animation.setElement(slides[this.#default_slide]);
-        animation.appearance().then(() => {
-            animation.removeStyles()
-            slides[this.#default_slide].classList.add("active_slide");
-        })
-
+        for (let child of this.#chui_slides_list.childNodes) { this.#chui_slides_list.removeChild(child); }
+        let slide = this.#slides_list[this.#default_slide].set();
+        this.#chui_slides_list.appendChild(slide)
+        new Animation(slide).appearance()
     }
     set() {
         return this.#chui_slides_main;
