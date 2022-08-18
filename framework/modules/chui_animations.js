@@ -26,7 +26,9 @@ class Animation {
                 }
             }
         ], 'Animations');
-        this.#element = element;
+        if (element !== undefined) {
+            this.#element = element;
+        }
     }
     appearance() {
         if (window.getComputedStyle(this.#element, null).display === 'none') {
@@ -45,6 +47,15 @@ class Animation {
             this.#element.style.animationName = 'disappearance';
             this.#element.addEventListener('animationend', removeEvents2);
         }
+    }
+    getElement() {
+        return this.#element;
+    }
+    setElement(element) {
+        this.#element = element;
+    }
+    addAnimationEndEvent(listener = () => {}) {
+        this.#element.addEventListener('animationend', listener);
     }
 }
 

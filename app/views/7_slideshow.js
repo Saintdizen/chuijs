@@ -11,6 +11,8 @@ class SlidesPage extends Page {
         let slideshow = new Slideshow({
             width: Styles.WIDTH.WEBKIT_FILL,
             height: Styles.WIDTH.WEBKIT_FILL,
+            autoplay: true,
+            interval: 5,
             slides: [
                 new Slide(new H(1, "Слайд номер 1")),
                 new Slide(new H(2, "Слайд номер 2")),

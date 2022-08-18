@@ -1,5 +1,5 @@
 const {Icon, Icons} = require("./chui_icons");
-let slideIndex = 1;
+const {Animation} = require("../modules/chui_animations");
 
 class Slideshow {
     #default_slide = 0;
@@ -9,6 +9,8 @@ class Slideshow {
     constructor(options = {
         width: String(undefined),
         height: String(undefined),
+        autoplay: Boolean(false),
+        interval: Number(10),
         slides: []
     }) {
         require('../modules/chui_functions').style_parse([
@@ -129,15 +131,27 @@ class Slideshow {
         this.#chui_prev_slide.appendChild(new Icon(Icons.CONTENT.UNDO, "14pt", "var(--button_text_color)").set())
         this.#chui_slides_main.appendChild(this.#chui_next_slide)
         this.#chui_slides_main.appendChild(this.#chui_prev_slide)
+
+        if (options.autoplay) {
+            setInterval(() => this.#changeSlide(1), options.interval * 1000);
+        }
     }
     #changeSlide(n = Number(undefined)) {
+        let animation  = new Animation();
         let slides = document.getElementsByTagName("chui_slide");
         let sum_slides = slides.length;
-        slides[this.#default_slide].classList.remove("active_slide")
-        this.#default_slide = this.#default_slide + n;
-        if (this.#default_slide > (sum_slides - 1)) this.#default_slide = 0;
-        if (this.#default_slide < 0) this.#default_slide = sum_slides - 1;
-        slides[this.#default_slide].classList.add("active_slide")
+        animation.setElement(slides[this.#default_slide])
+        animation.disappearance()
+        animation.getElement().addEventListener('animationend', () => {
+            animation.getElement().classList.remove("active_slide");
+            this.#default_slide = this.#default_slide + n;
+            if (this.#default_slide > (sum_slides - 1)) this.#default_slide = 0;
+            if (this.#default_slide < 0) this.#default_slide = sum_slides - 1;
+            animation.setElement(slides[this.#default_slide]);
+            animation.getElement().addEventListener('animationend', () => {
+                animation.getElement().classList.add("active_slide");
+            });
+        });
     }
     set() {
         return this.#chui_slides_main;
