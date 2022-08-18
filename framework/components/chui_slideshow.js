@@ -141,17 +141,17 @@ class Slideshow {
         let slides = document.getElementsByTagName("chui_slide");
         let sum_slides = slides.length;
         animation.setElement(slides[this.#default_slide])
-        animation.disappearance()
-        animation.getElement().addEventListener('animationend', () => {
-            animation.getElement().classList.remove("active_slide");
-            this.#default_slide = this.#default_slide + n;
-            if (this.#default_slide > (sum_slides - 1)) this.#default_slide = 0;
-            if (this.#default_slide < 0) this.#default_slide = sum_slides - 1;
-            animation.setElement(slides[this.#default_slide]);
-            animation.getElement().addEventListener('animationend', () => {
-                animation.getElement().classList.add("active_slide");
-            });
-        });
+        //animation.disappearance()
+        slides[this.#default_slide].classList.remove("active_slide");
+        this.#default_slide = this.#default_slide + n;
+        if (this.#default_slide > (sum_slides - 1)) this.#default_slide = 0;
+        if (this.#default_slide < 0) this.#default_slide = sum_slides - 1;
+        animation.setElement(slides[this.#default_slide]);
+        animation.appearance().then(() => {
+            animation.removeStyles()
+            slides[this.#default_slide].classList.add("active_slide");
+        })
+
     }
     set() {
         return this.#chui_slides_main;
