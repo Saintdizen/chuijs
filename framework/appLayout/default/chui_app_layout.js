@@ -270,7 +270,7 @@ class AppLayout extends Route {
                     "justify-content":"flex-start",
                     "align-items":"flex-start",
                     "height": "-webkit-fill-available",
-                    "z-index": "1",
+                    "z-index": "1000",
                     "backdrop-filter": "blur(10px)",
                     "border-right": "1px solid var(--border_header)"
                 }
@@ -309,7 +309,7 @@ class AppLayout extends Route {
                 style: {
                     "display": "flex",
                     "flex-direction":"column",
-                    "padding":"7px",
+                    "padding": "6px",
                     "width":"-webkit-fill-available",
                     "height":"-webkit-fill-available",
                     "overflow": "auto"
@@ -319,7 +319,7 @@ class AppLayout extends Route {
                 name: "dark_mode",
                 style: {
                     "display": "flex",
-                    "padding":"7px",
+                    "padding":"6px",
                     "width":"-webkit-fill-available",
                     "height":"max-content",
                     "justify-content":"center"
@@ -352,7 +352,7 @@ class AppLayout extends Route {
                     "width": "-webkit-fill-available",
                     "border": "none",
                     "border-radius": "var(--border_radius)",
-                    "padding": "7px",
+                    "padding": "6px",
                     "margin": "var(--margin)",
                     "font-size": "12pt",
                     "font-weight": "600",
@@ -362,7 +362,7 @@ class AppLayout extends Route {
             {
                 name: "route:hover",
                 style: {
-                    "padding": "7px 12px",
+                    "padding": "6px 10px",
                     "background": "var(--blue_prime_background)",
                     "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
                 }
@@ -383,7 +383,7 @@ class AppLayout extends Route {
             {
                 name: ".route_active",
                 style: {
-                    "padding": "7px 12px",
+                    "padding": "6px 10px",
                     "background": "var(--blue_prime_background)",
                     "color": "var(--text_color_hover)",
                     "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",

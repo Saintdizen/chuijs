@@ -35,7 +35,7 @@ class EmailInput {
                     "border": "2px solid var(--input_background)",
                     "align-items": "center",
                     "position": "relative",
-                    "padding": "7px 12px"
+                    "padding": "6px 10px"
                 }
             },
             {

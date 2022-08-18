@@ -329,8 +329,11 @@ class TextEditorPanel {
                 name: "text_editor_panel",
                 style: {
                     "height": "max-content",
-                    "width": "max-content",
-                    "display": "flex"
+                    "width": "-webkit-fill-available",
+                    "display": "flex",
+                    "flex-wrap": "wrap",
+                    "justify-content": "center",
+                    "align-items": "center"
                 }
             },
             {

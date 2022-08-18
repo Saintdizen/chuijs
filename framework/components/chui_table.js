@@ -67,7 +67,7 @@ class Table {
                     "white-space": "break-spaces",
                     "word-break": "break-all",
                     "align-items": "center",
-                    "padding": "8px 11px"
+                    "padding": "6px 10px"
                 }
             }
         ], 'chui_Table');

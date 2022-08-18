@@ -73,23 +73,23 @@ class Spinner {
         ], 'chui_Spinner');
         this.#spiner.style.margin = margin;
         // element_one
-        this.#element_one.className = 'element_one'
+        this.#element_one.className = 'element_one';
         this.#element_one.style.width = `${size.SIZE}px`;
         this.#element_one.style.height = `${size.SIZE}px`;
-        this.#element_one.style.borderTop = `${size.BORDER}px solid var(--blue_prime_background)`
-        this.#element_one.style.borderBottom = `${size.BORDER}px solid var(--blue_prime_background)`
+        this.#element_one.style.borderTop = `${size.BORDER}px solid var(--blue_prime_background)`;
+        this.#element_one.style.borderBottom = `${size.BORDER}px solid var(--blue_prime_background)`;
         // element_two
         this.#element_two.className = 'element_two'
         this.#element_two.style.width = `calc(${size.SIZE}px / 1.4)`;
         this.#element_two.style.height = `calc(${size.SIZE}px / 1.4)`;
-        this.#element_two.style.borderTop = `calc(${size.BORDER}px / 1.2) solid var(--blue_prime_background)`
-        this.#element_two.style.borderBottom = `calc(${size.BORDER}px / 1.2) solid var(--blue_prime_background)`
+        this.#element_two.style.borderTop = `calc(${size.BORDER}px / 1.2) solid var(--blue_prime_background)`;
+        this.#element_two.style.borderBottom = `calc(${size.BORDER}px / 1.2) solid var(--blue_prime_background)`;
         // element_three
         this.#element_three.className = 'element_three'
         this.#element_three.style.width = `calc(${size.SIZE}px / 2.4)`;
         this.#element_three.style.height = `calc(${size.SIZE}px / 2.4)`;
-        this.#element_three.style.borderTop = `calc(${size.BORDER}px / 2.2) solid var(--blue_prime_background)`
-        this.#element_three.style.borderBottom = `calc(${size.BORDER}px / 2.2) solid var(--blue_prime_background)`
+        this.#element_three.style.borderTop = `calc(${size.BORDER}px / 2.2) solid var(--blue_prime_background)`;
+        this.#element_three.style.borderBottom = `calc(${size.BORDER}px / 2.2) solid var(--blue_prime_background)`;
         //ADDS
         this.#element_two.appendChild(this.#element_three)
         this.#element_one.appendChild(this.#element_two)
@@ -106,11 +106,11 @@ class Spinner {
 exports.Spinner = Spinner
 
 class SpinnerSize {
-    static VERY_SMALL = { SIZE:  40, BORDER:  2 }
-    static SMALL = { SIZE:  60, BORDER:  3 }
-    static STANDART = { SIZE:  80, BORDER:  4 }
-    static BIG = { SIZE: 100, BORDER: 5 }
-    static VERY_BIG = { SIZE: 120, BORDER: 6 }
+    static VERY_SMALL = { SIZE:  40, BORDER:  2 };
+    static SMALL = { SIZE:  60, BORDER:  3 };
+    static STANDART = { SIZE:  80, BORDER:  4 };
+    static BIG = { SIZE: 100, BORDER: 5 };
+    static VERY_BIG = { SIZE: 120, BORDER: 6 };
 }
 
 exports.SpinnerSize = SpinnerSize

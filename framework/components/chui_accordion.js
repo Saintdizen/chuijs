@@ -45,7 +45,7 @@ class Accordion {
                 style: {
                     "background": "var(--button_background)",
                     "cursor": "pointer",
-                    "padding": "7px 12px",
+                    "padding": "6px 10px",
                     "width": "-webkit-fill-available",
                     "text-align": "left",
                     "outline": "none",
@@ -60,7 +60,7 @@ class Accordion {
                 name: "accordion_panel",
                 style: {
                     "background": "var(--button_background)",
-                    "padding": "0px 12px",
+                    "padding": "0px 10px",
                     "display": "block",
                     "overflow": "hidden",
                     "width": "-webkit-fill-available",
@@ -75,7 +75,7 @@ class Accordion {
             {
                 name: "accordion_panel_html",
                 style: {
-                    "padding": "7px 0px",
+                    "padding": "6px 0px",
                     "width": "-webkit-fill-available",
                     "display": "flex",
                     "border": "none"

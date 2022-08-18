@@ -31,8 +31,10 @@ class Animation {
         }
     }
     appearance() {
-        if (window.getComputedStyle(this.#element, null).display === 'none' || window.getComputedStyle(this.#element, null).display === '') {
-            this.#element.style.display = 'flex';
+        if (window.getComputedStyle(this.#element, null).display === 'none') {
+            if (this.#element.tagName !== "TABLE") {
+                this.#element.style.display = 'flex';
+            }
         }
         this.#element.style.animationName = 'appearance';
     }

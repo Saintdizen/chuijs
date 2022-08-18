@@ -51,7 +51,7 @@ class Select {
                     "display": "block",
                     "outline": "none",
                     "margin": "0px",
-                    "padding": "7px 0px 7px 12px",
+                    "padding": "6px 0px 6px 10px",
                     "background": "transparent",
                     "box-shadow": "none",
                     "color": "var(--text_color)",
@@ -73,7 +73,7 @@ class Select {
                     "width": "-webkit-fill-available",
                     "border-radius": "var(--border_radius)",
                     "margin-top": "0px",
-                    "padding": "7px",
+                    "padding": "6px",
                     "font-size": "var(--font_default_size)",
                     "border": "2px solid var(--input_background)",
                     "flex-direction": "column",
@@ -86,7 +86,7 @@ class Select {
                 style: {
                     "cursor": "pointer",
                     "outline": "none",
-                    "padding": "7px 12px",
+                    "padding": "6px 10px",
                 }
             },
             {
@@ -94,13 +94,14 @@ class Select {
                 style: {
                     "cursor": "pointer",
                     "text-align": "start",
-                    "padding": "7px 12px",
+                    "padding": "6px",
                     "border-radius": "var(--border_radius)"
                 }
             },
             {
                 name: "selectbox_option:hover",
                 style: {
+                    "padding": "6px 10px",
                     "background": "var(--blue_prime_background)",
                     "color": "var(--text_color_hover)",
                     "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",

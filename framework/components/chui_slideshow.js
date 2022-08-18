@@ -133,14 +133,11 @@ class Slideshow {
         if (options.autoplay) {
             setInterval(() => this.#changeSlide(1), options.interval * 1000);
         }
-
         //
-        for (let slide of options.slides) {
-            if (options.slides.indexOf(slide) === 0) {
-                this.#chui_slides_list.appendChild(slide.set())
-                new Animation(slide.set()).appearance()
-            }
-        }
+        setTimeout(() => {
+            this.#chui_slides_list.appendChild(this.#slides_list[0].set())
+            new Animation(this.#slides_list[0].set()).appearance()
+        }, 1);
         //
     }
     #changeSlide(n = Number(undefined)) {
