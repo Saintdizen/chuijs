@@ -46,7 +46,7 @@ class TextEditor {
                 style: {
                     "width": "-webkit-fill-available",
                     "display": "flex",
-                    "padding": "7px"
+                    "padding": "6px"
                 }
             },
             {
@@ -54,7 +54,7 @@ class TextEditor {
                 style: {
                     "width": "-webkit-fill-available",
                     "font-size": "17px",
-                    "padding": "0px 19px 19px 19px",
+                    "padding": "0px 12px 6px 12px",
                     "height": "calc(100% - 40px)",
                     "overflow": "overlay",
                     "text-align": "start",
@@ -72,7 +72,7 @@ class TextEditor {
                 style: {
                     "width": "-webkit-fill-available",
                     "display": "flex",
-                    "padding": "7px"
+                    "padding": "6px"
                 }
             },
             {
