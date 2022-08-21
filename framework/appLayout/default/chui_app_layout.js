@@ -47,6 +47,7 @@ class AppLayout extends Route {
     #dark_mode = document.createElement('dark_mode');
     #dark_mode_togle = new Toggle();
     #menu_button = document.createElement('app_menu_button');
+    #auto_close = false;
     constructor() {
         super();
         require('../../modules/chui_fonts').install();
@@ -78,7 +79,7 @@ class AppLayout extends Route {
                     "direction": "ltr",
                     "user-select": "none",
                     "outline": "none",
-                    "transition": ".2s",
+                    "transition": "all .2s",
                     "position": "relative",
                 }
             },
@@ -156,7 +157,8 @@ class AppLayout extends Route {
                     //Закругление элементов
                     "--border_radius": "12px",
                     //Отступы
-                    "--margin": "6px"
+                    "--margin": "6px",
+                    "--scroll_bar_background": "rgb(209, 209, 214)",
                 }
             },
             {
@@ -203,6 +205,38 @@ class AppLayout extends Route {
                     "--shadow_two": "rgba(0, 0, 0, 0.22)",
                     //Остальное
                     "--disable_color": "#e9ecef",
+                    "--scroll_bar_background": "rgb(58, 58, 60)",
+                }
+            },
+            {
+                name: "::-webkit-scrollbar",
+                style: {
+                    "width": "6px",
+                }
+            },
+            {
+                name: "main_center_block::-webkit-scrollbar-track",
+                style: {
+                    "margin-top": "47px",
+                }
+            },
+            {
+                name: "::-webkit-scrollbar-track",
+                style: {
+                    "background-color": "transparent",
+                }
+            },
+            {
+                name: "::-webkit-scrollbar-thumb",
+                style: {
+                    "border-radius": "var(--border_radius)",
+                    "background": "var(--scroll_bar_background)",
+                }
+            },
+            {
+                name: "::-webkit-scrollbar-thumb:hover",
+                style: {
+                    "background": "var(--blue_prime_background)"
                 }
             },
             {
@@ -231,7 +265,7 @@ class AppLayout extends Route {
                     "align-items": "center",
                     "box-shadow": "none",
                     "background": "transparent",
-                    "backdrop-filter": "blur(10px) opacity(0)",
+                    "backdrop-filter": "blur(8px) opacity(0)",
                     "transition": "opacity .1s, background .1s, backdrop-filter .1s",
                 }
             },
@@ -257,7 +291,7 @@ class AppLayout extends Route {
                     "margin": "var(--margin)",
                     "align-items": "flex-end",
                     "justify-content": "flex-end",
-                    "z-index": "9999"
+                    "z-index": "1000"
                 }
             },
             {
@@ -271,8 +305,8 @@ class AppLayout extends Route {
                     "align-items":"flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    "backdrop-filter": "blur(10px)",
-                    "border-right": "1px solid var(--border_header)"
+                    "border-right": "1px solid var(--border_header)",
+                    "backdrop-filter": "blur(8px)"
                 }
             },
             {
@@ -477,7 +511,7 @@ class AppLayout extends Route {
             if (center.scrollTop > 25) {
                 //header.style.height = '50px';
                 //center.style.paddingTop = '50px'
-                header.style.setProperty("backdrop-filter", "blur(10px) opacity(1)")
+                header.style.setProperty("backdrop-filter", "blur(8px) opacity(1)")
                 header.style.background = 'var(--header_background)'
                 header.style.borderBottom = '1px solid var(--border_header)'
               } else {
@@ -520,6 +554,9 @@ class AppLayout extends Route {
         header.style.height = height;
         center.style.paddingTop = height;
     }
+    setAutoCloseRouteMenu(boolean = Boolean(undefined)) {
+        this.#auto_close = boolean;
+    }
     setRoute(page) {
         let button_route = document.createElement('route');
         let title_menu = document.createElement('route_title');
@@ -536,6 +573,12 @@ class AppLayout extends Route {
                 }
                 this.go(page);
                 button_route.classList.add("route_active");
+                if (this.#auto_close) {
+                    if (this.#menu_block.style.transform === `translateX(${this.#def_menu_block_width}px)`) {
+                        this.#menu_block.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
+                        this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
+                    }
+                }
             }
         });
         button_route.appendChild(title_menu)

@@ -72,7 +72,7 @@ class Main {
         if (this.#app_icon === undefined) {
             this.#app_icon = getDefaultIcon();
         }
-        app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
+        //app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
         // Options
         this.#appName = options.name;
         this.#height = options.height;

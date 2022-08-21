@@ -14,15 +14,16 @@ const {SlidesPage} = require('./views/7_slideshow');
 class App extends AppLayout {
     constructor() {
         super();
-        //this.setDarkMode();
-        this.setRoute(new Inputs_Buttons_Page())
-        this.setRoute(new Notifications_Badges_Page())
-        this.setRoute(new TablesPage())
-        this.setRoute(new TextEditorPage())
-        this.setRoute(new OthersComponentsPage())
-        this.setRoute(new TitlesPage())
-        this.setRoute(new FormsPage())
-        this.setRoute(new SlidesPage())
+        this.setAutoCloseRouteMenu(true);
+        // РОУТЫ
+        this.setRoute(new Inputs_Buttons_Page());
+        this.setRoute(new Notifications_Badges_Page());
+        this.setRoute(new TablesPage());
+        this.setRoute(new TextEditorPage());
+        this.setRoute(new OthersComponentsPage());
+        this.setRoute(new TitlesPage());
+        this.setRoute(new FormsPage());
+        this.setRoute(new SlidesPage());
     }
 }
-render(() => new App()).then(r => console.log("Загружено!"))
+render(() => new App()).then(r => console.log("Загружено!"));
