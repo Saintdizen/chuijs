@@ -66,6 +66,24 @@ class WebView {
     execJS(script) {
         this.#WebView.executeJavaScript(script).then(r => console.log(r))
     }
+    customScrollBar(options = {
+        enable: Boolean(false),
+        width: String("6px"),
+        trackBackgroundColor: String("inherit"),
+        thumbRadius: String("6px"),
+        thumbColor: String("inherit")
+    }) {
+        this.#WebView.addEventListener('did-start-loading', () => {
+            if (options.enable) {
+                let webview = document.getElementById(this.#id);
+                webview.addEventListener('dom-ready', function () {
+                    webview.insertCSS(`*::-webkit-scrollbar { width: ${options.width}; }
+                    *::-webkit-scrollbar-track { background-color: ${options.trackBackgroundColor}; }
+                    *::-webkit-scrollbar-thumb { border-radius: ${options.thumbRadius}; background: ${options.thumbColor}; }`);
+                });
+            }
+        })
+    }
     set() {
         return this.#main_block
     }
