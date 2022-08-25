@@ -11,7 +11,7 @@ class Notifications_Badges_Page extends Page {
             new Notification({
                 title: "Заголовок",
                 text: "Текст",
-                showTime: 300000
+                showTime: 4000
             }).show()
         })
         let WARNING = new Button("Уведомление - Предупреждение", () => {
@@ -19,7 +19,7 @@ class Notifications_Badges_Page extends Page {
                 title: "Заголовок",
                 text: "Текст",
                 style: NotificationStyle.WARNING,
-                showTime: 2000
+                showTime: 4000
             }).show()
         })
         let SUCCESS = new Button("Уведомление - Успех", () => {
@@ -27,7 +27,7 @@ class Notifications_Badges_Page extends Page {
                 title: "Заголовок",
                 text: "Текст",
                 style: NotificationStyle.SUCCESS,
-                showTime: 3000
+                showTime: 4000
             }).show()
         })
         let ERROR = new Button('Уведомление - Ошибка', () => {

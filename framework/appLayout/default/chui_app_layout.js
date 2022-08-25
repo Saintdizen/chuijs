@@ -40,11 +40,13 @@ class Route {
 
 class AppLayout extends Route {
     #applayout = document.createElement('applayout');
+    #header_left_box = document.createElement("header_left_box");
     #header_right_box = document.createElement("header_right_box");
     #notification_panel = document.createElement('notification_panel');
     #notification_box = document.createElement('notification_box');
+    #notification_box_width = 420;
     #notification_button = document.createElement('notification_button');
-    #menu_block = document.createElement('app_menu');
+    #app_menu = document.createElement('app_menu');
     #def_menu_block_width = 410;
     #route_views = document.createElement('route_views');
     #dark_mode = document.createElement('dark_mode');
@@ -270,6 +272,7 @@ class AppLayout extends Route {
                     "background": "transparent",
                     "backdrop-filter": "blur(8px) opacity(0)",
                     "transition": "opacity .1s, background .1s, backdrop-filter .1s",
+                    "justify-content": "space-between"
                 }
             },
             {
@@ -310,6 +313,50 @@ class AppLayout extends Route {
                     "z-index": "1000",
                     "border-right": "1px solid var(--border_header)",
                     "backdrop-filter": "blur(8px)"
+                }
+            },
+            {
+                name: "notification_box",
+                style: {
+                    "display": "flex",
+                    "flex-direction": "column",
+                    "position": "fixed",
+                    "background": "var(--app_menu_background)",
+                    "justify-content":"flex-start",
+                    "align-items":"flex-start",
+                    "height": "-webkit-fill-available",
+                    "z-index": "1000",
+                    "border-left": "1px solid var(--border_header)",
+                    "backdrop-filter": "blur(8px)"
+                }
+            },
+            {
+                name: "notification_button",
+                style: {
+                    "cursor": "pointer",
+                    "outline": "none",
+                    "height": "max-content",
+                    "width": "max-content",
+                    "border": "none",
+                    "border-radius": "var(--border_radius)",
+                    "padding": "6px",
+                    "margin": "var(--margin)",
+                    "font-size": "22pt",
+                    "background": "transparent",
+                    "color": "var(--text_color)"
+                }
+            },
+            {
+                name: "notification_button:hover",
+                style: {
+                    "background": "var(--blue_prime_background)",
+                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
+                }
+            },
+            {
+                name: "notification_button:hover chui_icon",
+                style: {
+                    "color": "var(--text_color_hover)"
                 }
             },
             {
@@ -445,6 +492,12 @@ class AppLayout extends Route {
                 }
             },
             {
+                name: "header_left_box",
+                style: {
+                    "display": "flex",
+                }
+            },
+            {
                 name: "header_right_box",
                 style: {
                     "display": "flex",
@@ -471,11 +524,17 @@ class AppLayout extends Route {
         this.#applayout.appendChild(header)
         document.body.appendChild(this.#notification_panel);
 
-        this.#menu_block.style.top = `calc(${header.style.height})`;
-        this.#menu_block.style.width = `${this.#def_menu_block_width}px`;
-        this.#menu_block.style.left = `calc(-${this.#def_menu_block_width}px)`;
-        this.#menu_block.style.height = `calc(100% - ${header.style.height})`;
+        this.#app_menu.style.top = `calc(${header.style.height})`;
+        this.#app_menu.style.width = `${this.#def_menu_block_width}px`;
+        this.#app_menu.style.left = `calc(-${this.#def_menu_block_width}px)`;
+        this.#app_menu.style.height = `calc(100% - ${header.style.height})`;
         this.#dark_mode_togle.setId("dark_mode");
+
+        // Меню уведомлений
+        this.#notification_box.style.top = `calc(${header.style.height})`;
+        this.#notification_box.style.width = `${this.#notification_box_width}px`;
+        this.#notification_box.style.right = `calc(-${this.#notification_box_width}px)`;
+        this.#notification_box.style.height = `calc(100% - ${header.style.height})`;
 
         // Установка темы
         const dataTheme = store.get("dark");
@@ -500,18 +559,33 @@ class AppLayout extends Route {
 
         this.#dark_mode.appendChild(this.#dark_mode_togle.set())
         this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
+
+        this.#menu_button.addEventListener("click", () => {
+            this.#app_menu.style.transform = `translateX(${this.#def_menu_block_width}px)`;
+        })
+
+        this.#notification_button.addEventListener("click", () => {
+            this.#notification_box.style.transform = `translateX(-${this.#notification_box_width}px)`;
+        })
+
         header.addEventListener('click', (e) => {
-            if (e.target === this.#menu_button) {
-                this.#menu_block.style.transform = `translateX(${this.#def_menu_block_width}px)`;
-            } else {
-                this.#menu_block.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
+            if (e.target !== this.#menu_button) {
+                this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
+            }
+            if (e.target !== this.#notification_button) {
+                this.#notification_box.style.transform = `translateX(${this.#notification_box_width}px)`;
             }
         })
         center.addEventListener('click', (e) => {
-            if (!this.#menu_block.contains(e.target)) {
-                if (this.#menu_block.style.transform === `translateX(${this.#def_menu_block_width}px)`) {
-                    this.#menu_block.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
+            if (!this.#app_menu.contains(e.target)) {
+                if (this.#app_menu.style.transform === `translateX(${this.#def_menu_block_width}px)`) {
+                    this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
                     this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
+                }
+            }
+            if (!this.#notification_box.contains(e.target)) {
+                if (this.#notification_box.style.transform === `translateX(-${this.#notification_box_width}px)`) {
+                    this.#notification_box.style.transform = `translateX(${this.#notification_box_width}px)`;
                 }
             }
         })
@@ -553,11 +627,18 @@ class AppLayout extends Route {
                 }
             }
         })
-        this.#applayout.appendChild(this.#menu_block)
-        this.#menu_block.appendChild(this.#route_views)
-        this.#menu_block.appendChild(this.#dark_mode)
-        header.appendChild(this.#menu_button);
-        header.appendChild(page_name)
+        this.#applayout.appendChild(this.#app_menu)
+        this.#app_menu.appendChild(this.#route_views)
+        this.#app_menu.appendChild(this.#dark_mode)
+        // Шапка левый блок
+        this.#header_left_box.appendChild(this.#menu_button);
+        this.#header_left_box.appendChild(page_name)
+        // Шапка правый блок
+        this.#applayout.appendChild(this.#notification_box)
+        this.#notification_button.innerHTML = new Icon(Icons.SOCIAL.NOTIFICATIONS).getHTML();
+        this.#header_right_box.appendChild(this.#notification_button)
+        //
+        header.appendChild(this.#header_left_box)
         header.appendChild(this.#header_right_box)
     }
     setCustomHeaderHeight(height) {
@@ -584,8 +665,8 @@ class AppLayout extends Route {
                 this.go(page);
                 button_route.classList.add("route_active");
                 if (this.#auto_close) {
-                    if (this.#menu_block.style.transform === `translateX(${this.#def_menu_block_width}px)`) {
-                        this.#menu_block.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
+                    if (this.#app_menu.style.transform === `translateX(${this.#def_menu_block_width}px)`) {
+                        this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
                         this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
                     }
                 }
