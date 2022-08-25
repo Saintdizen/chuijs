@@ -7,33 +7,33 @@ class Notifications_Badges_Page extends Page {
         this.setMain(true)
 
         let h1_notifications = new H(1, "Уведомления")
-        let DEFAULT = new Button("Обычное уведомление", () => {
+        let DEFAULT = new Button("Уведомление - Обычное", () => {
             new Notification({
-                title: "Заголовок уведомления 1",
-                text: "Текст уведомления 1",
-                showTime: 30000
+                title: "Заголовок",
+                text: "Текст",
+                showTime: 300000
             }).show()
         })
-        let WARNING = new Button("Предупреждение", () => {
+        let WARNING = new Button("Уведомление - Предупреждение", () => {
             new Notification({
-                title: "Заголовок уведомления 2",
-                text: "Текст уведомления 2",
+                title: "Заголовок",
+                text: "Текст",
                 style: NotificationStyle.WARNING,
                 showTime: 2000
             }).show()
         })
-        let SUCCESS = new Button("Успешное выполнение задания", () => {
+        let SUCCESS = new Button("Уведомление - Успех", () => {
             new Notification({
-                title: "Заголовок уведомления 3",
-                text: "Текст уведомления 3",
+                title: "Заголовок",
+                text: "Текст",
                 style: NotificationStyle.SUCCESS,
                 showTime: 3000
             }).show()
         })
-        let ERROR = new Button('Уведомление: "Ошибка"', () => {
+        let ERROR = new Button('Уведомление - Ошибка', () => {
             new Notification({
-                title: "Заголовок уведомления 4",
-                text: "Текст уведомления 4",
+                title: "Заголовок",
+                text: "Текст",
                 style: NotificationStyle.ERROR,
                 showTime: 4000
             }).show()

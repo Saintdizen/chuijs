@@ -41,6 +41,8 @@ class Route {
 class AppLayout extends Route {
     #applayout = document.createElement('applayout');
     #notification_panel = document.createElement('notification_panel');
+    #notification_box = document.createElement('notification_box');
+    #notification_button = document.createElement('notification_button');
     #menu_block = document.createElement('app_menu');
     #def_menu_block_width = 410;
     #route_views = document.createElement('route_views');
@@ -291,7 +293,7 @@ class AppLayout extends Route {
                     "margin": "var(--margin)",
                     "align-items": "flex-end",
                     "justify-content": "flex-end",
-                    "z-index": "1000"
+                    "z-index": "999"
                 }
             },
             {
