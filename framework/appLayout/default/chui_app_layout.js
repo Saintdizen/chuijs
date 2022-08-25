@@ -40,6 +40,7 @@ class Route {
 
 class AppLayout extends Route {
     #applayout = document.createElement('applayout');
+    #header_right_box = document.createElement("header_right_box");
     #notification_panel = document.createElement('notification_panel');
     #notification_box = document.createElement('notification_box');
     #notification_button = document.createElement('notification_button');
@@ -442,6 +443,12 @@ class AppLayout extends Route {
                     "border-radius": "var(--border_radius)",
                     "display": "flex",
                 }
+            },
+            {
+                name: "header_right_box",
+                style: {
+                    "display": "flex",
+                }
             }
             /*,
             {
@@ -551,6 +558,7 @@ class AppLayout extends Route {
         this.#menu_block.appendChild(this.#dark_mode)
         header.appendChild(this.#menu_button);
         header.appendChild(page_name)
+        header.appendChild(this.#header_right_box)
     }
     setCustomHeaderHeight(height) {
         header.style.height = height;
