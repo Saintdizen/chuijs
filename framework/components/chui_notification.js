@@ -32,29 +32,29 @@ class Notification {
                     "animation-duration": ".5s",
                     "animation-fill-mode": "forwards",
                     "backdrop-filter": "blur(10px)",
-                    "border": "2px solid var(--badge_cancel_back)",
-                    "box-shadow": "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
+                    //"border": "4px solid var(--badge_cancel_back)",
+                    //"box-shadow": "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
                 }
             },
             {
                 name: ".notification_warning",
                 style: {
                     "background": "var(--badge_warning_back)",
-                    "border": "2px solid var(--badge_warning_back)",
+                    //"border": "2px solid var(--badge_warning_back)",
                 }
             },
             {
                 name: ".notification_error",
                 style: {
                     "background": "var(--badge_error_back)",
-                    "border": "2px solid var(--badge_error_back)",
+                    //"border": "2px solid var(--badge_error_back)",
                 }
             },
             {
                 name: ".notification_success",
                 style: {
                     "background": "var(--badge_success_back)",
-                    "border": "2px solid var(--badge_success_back)",
+                    //"border": "2px solid var(--badge_success_back)",
                 }
             },
             {
@@ -104,9 +104,9 @@ class Notification {
                 style: {
                     "font-size": "10pt",
                     "font-weight": "500",
-                    "margin": "3px",
+                    "margin": "3px 0px 6px 4px",
                     "color": "var(--text_color)",
-                    "word-break": "break-all"
+                    "word-break": "break-word"
                 }
             }
         ], 'chui_Notification');
@@ -136,10 +136,19 @@ class Notification {
     show() {
         document.getElementsByTagName('notification_panel')[0].appendChild(this.#notification);
         let notification = document.getElementById(this.#id);
+
         new Animation(notification).appearance();
         notification.addEventListener('animationend', (event) => {
-            setTimeout(()=> {
+            setTimeout(() => {
                 new Animation(event.target).disappearance_and_remove();
+                event.target.addEventListener("animationend", (event) => {
+                    let elem = event.target;
+                    elem.removeAttribute("style");
+                    elem.style.display = 'flex';
+                    elem.style.width = '-webkit-fill-available';
+                    let box = document.getElementById("chui_notification_box");
+                    box.appendChild(elem)
+                })
             }, this.#time);
         });
     }

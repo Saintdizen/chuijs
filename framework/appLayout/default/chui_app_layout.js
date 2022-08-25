@@ -2,6 +2,8 @@ const {Animation} = require('../../modules/chui_animations');
 const {Toggle} = require('../../components/chui_toggle');
 const {Icon, Icons} = require('../../components/chui_icons');
 const Store = require('electron-store');
+const {Button} = require("../../components/chui_button");
+const {Label} = require("../../components/chui_label");
 const store = new Store();
 
 //VARS
@@ -44,6 +46,8 @@ class AppLayout extends Route {
     #header_right_box = document.createElement("header_right_box");
     #notification_panel = document.createElement('notification_panel');
     #notification_box = document.createElement('notification_box');
+    #notification_box_main = document.createElement("notification_box_main");
+    #notification_box_controls = document.createElement("notification_box_controls");
     #notification_box_width = 420;
     #notification_button = document.createElement('notification_button');
     #app_menu = document.createElement('app_menu');
@@ -331,6 +335,27 @@ class AppLayout extends Route {
                 }
             },
             {
+                name: "notification_box_controls",
+                style: {
+                    "display": "flex",
+                    "flex-direction": "row",
+                    "justify-content":"space-between",
+                    "padding": "0px 0px 0px 10px",
+                    "align-items":"center",
+                    "height": "max-content",
+                    "width": "-webkit-fill-available"
+                }
+            },
+            {
+                name: "notification_box_main",
+                style: {
+                    "display": "block",
+                    "overflow": "auto",
+                    "height": "-webkit-fill-available",
+                    "width": "-webkit-fill-available",
+                }
+            },
+            {
                 name: "notification_button",
                 style: {
                     "cursor": "pointer",
@@ -531,6 +556,15 @@ class AppLayout extends Route {
         this.#dark_mode_togle.setId("dark_mode");
 
         // Меню уведомлений
+        this.#notification_box_controls.appendChild(new Label("Уведомления").set())
+        this.#notification_box_controls.appendChild(new Button("Очистить", (e) => {
+            document.getElementById("chui_notification_box").innerHTML = "";
+        }).set())
+        this.#notification_box.appendChild(this.#notification_box_controls)
+        this.#notification_box.appendChild(this.#notification_box_main)
+
+
+        this.#notification_box_main.id = 'chui_notification_box';
         this.#notification_box.style.top = `calc(${header.style.height})`;
         this.#notification_box.style.width = `${this.#notification_box_width}px`;
         this.#notification_box.style.right = `calc(-${this.#notification_box_width}px)`;

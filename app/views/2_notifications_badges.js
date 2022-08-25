@@ -33,7 +33,7 @@ class Notifications_Badges_Page extends Page {
         let ERROR = new Button('Уведомление - Ошибка', () => {
             new Notification({
                 title: "Заголовок",
-                text: "Текст",
+                text: "Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст ",
                 style: NotificationStyle.ERROR,
                 showTime: 4000
             }).show()
