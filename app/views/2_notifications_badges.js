@@ -4,23 +4,41 @@ class Notifications_Badges_Page extends Page {
     constructor() {
         super();
         this.setTitle('Уведомления и Бейджи');
-        this.setMain(false)
+        this.setMain(true)
 
         let h1_notifications = new H(1, "Уведомления")
         let DEFAULT = new Button("Обычное уведомление", () => {
-            new Notification("Обычное уведомление").show()
+            new Notification({
+                title: "Заголовок уведомления 1",
+                text: "Текст уведомления 1",
+                showTime: 30000
+            }).show()
         })
         let WARNING = new Button("Предупреждение", () => {
-            new Notification("Предупреждение", NotificationStyle.WARNING).show()
+            new Notification({
+                title: "Заголовок уведомления 2",
+                text: "Текст уведомления 2",
+                style: NotificationStyle.WARNING,
+                showTime: 2000
+            }).show()
         })
         let SUCCESS = new Button("Успешное выполнение задания", () => {
-            new Notification("Успешное выполнение задания", NotificationStyle.SUCCESS).show()
+            new Notification({
+                title: "Заголовок уведомления 3",
+                text: "Текст уведомления 3",
+                style: NotificationStyle.SUCCESS,
+                showTime: 3000
+            }).show()
         })
-        let text_error = 'Уведомление: "Ошибка"';
-        let ERROR = new Button(text_error, () => {
-            new Notification(text_error, NotificationStyle.ERROR).show()
+        let ERROR = new Button('Уведомление: "Ошибка"', () => {
+            new Notification({
+                title: "Заголовок уведомления 4",
+                text: "Текст уведомления 4",
+                style: NotificationStyle.ERROR,
+                showTime: 4000
+            }).show()
         })
-        this.add(h1_notifications, WARNING, SUCCESS, ERROR, DEFAULT)
+        this.add(h1_notifications, DEFAULT, WARNING, SUCCESS, ERROR)
 
         let h1_badges = new H(1, "Бейджи")
 

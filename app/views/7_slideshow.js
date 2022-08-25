@@ -4,7 +4,7 @@ class SlidesPage extends Page {
     constructor() {
         super();
         this.setTitle('Слайдшоу');
-        this.setMain(true)
+        this.setMain(false)
         this.setFullWidth()
         this.setFullHeight()
 
