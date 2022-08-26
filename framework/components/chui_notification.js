@@ -82,7 +82,6 @@ class Notification {
                     "margin": "3px",
                     "color": "var(--text_color)",
                     "word-break": "break-all",
-                    "text-shadow": "0 0 0 var(--text_color)"
                 }
             },
             {
@@ -93,8 +92,7 @@ class Notification {
                     "margin": "3px 0px 0px 10px",
                     "color": "var(--text_color)",
                     "white-space": "pre",
-                    "text-align": "end",
-                    "text-shadow": "0 0 0 var(--text_color)"
+                    "text-align": "end"
                 }
             },
             {
@@ -104,8 +102,7 @@ class Notification {
                     "font-weight": "500",
                     "margin": "3px 0px 6px 4px",
                     "color": "var(--text_color)",
-                    "word-break": "break-word",
-                    "text-shadow": "0 0 0 var(--text_color)"
+                    "word-break": "break-word"
                 }
             }
         ], 'chui_Notification');
