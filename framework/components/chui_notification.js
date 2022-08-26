@@ -81,7 +81,8 @@ class Notification {
                     "font-weight": "600",
                     "margin": "3px",
                     "color": "var(--text_color)",
-                    "word-break": "break-all"
+                    "word-break": "break-all",
+                    "text-shadow": "0 0 0 var(--text_color)"
                 }
             },
             {
@@ -92,7 +93,8 @@ class Notification {
                     "margin": "3px 0px 0px 10px",
                     "color": "var(--text_color)",
                     "white-space": "pre",
-                    "text-align": "end"
+                    "text-align": "end",
+                    "text-shadow": "0 0 0 var(--text_color)"
                 }
             },
             {
@@ -102,7 +104,8 @@ class Notification {
                     "font-weight": "500",
                     "margin": "3px 0px 6px 4px",
                     "color": "var(--text_color)",
-                    "word-break": "break-word"
+                    "word-break": "break-word",
+                    "text-shadow": "0 0 0 var(--text_color)"
                 }
             }
         ], 'chui_Notification');
@@ -151,18 +154,16 @@ class Notification {
     static #getDate() {
         let date = new Date();
         // День
-        let day = date.getDate();
+        let day = ('0' + Number(date.getDate()).toString()).slice(-2);
         // Месяц
-        let month = date.getMonth() + 1;
+        let month = ('0' + Number(date.getMonth() + 1).toString()).slice(-2);
         // Год
         let year = date.getFullYear();
-
         // Часы
-        let hours = date.getHours();
+        let hours = ('0' + Number(date.getHours()).toString()).slice(-2);
         // Минуты
-        let minutes = date.getMinutes();
-
-
+        let minutes = ('0' + Number(date.getMinutes()).toString()).slice(-2);
+        // Возвращаем дату
         return `${day}.${month}.${year}\n${hours}:${minutes}`;
     }
 }
