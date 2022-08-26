@@ -1,6 +1,8 @@
 const { Animation } = require('../modules/chui_animations')
 const { Spinner, SpinnerSize } = require('../components/chui_spinner')
 
+
+// https://www.electronjs.org/ru/docs/latest/api/webview-tag
 class WebView {
     #id = require("randomstring").generate()
     #main_block = document.createElement('chui_webview')
@@ -53,18 +55,27 @@ class WebView {
         this.#main_block.appendChild(this.#WebView)
         this.#main_block.appendChild(this.#chui_load)
         let spinner = new Spinner(SpinnerSize.BIG);
-        const loadstart = () => {
-          this.#chui_load.appendChild(spinner.set())
+        const loadStart = () => {
+            this.#chui_load.appendChild(spinner.set());
         }
-        const loadstop = () => {
-            new Animation(this.#WebView).appearance()
-            spinner.remove()
+        const loadStop = () => {
+            spinner.remove();
+            new Animation(this.#WebView).appearance();
         }
-        this.#WebView.addEventListener('did-start-loading', loadstart)
-        this.#WebView.addEventListener('did-stop-loading', loadstop)
+        this.#WebView.addEventListener('did-start-loading', loadStart)
+        this.#WebView.addEventListener('did-stop-loading', loadStop)
     }
     execJS(script) {
         this.#WebView.executeJavaScript(script).then(r => console.log(r))
+    }
+    addStartLoadEvent(listener = () => {}) {
+        this.#WebView.addEventListener('did-start-loading', listener)
+    }
+    addStopLoadEvent(listener = () => {}) {
+        this.#WebView.addEventListener('did-stop-loading', listener)
+    }
+    addFinishLoadEvent(listener = () => {}) {
+        this.#WebView.addEventListener('did-finish-load', listener)
     }
     customScrollBar(options = {
         enable: Boolean(false),

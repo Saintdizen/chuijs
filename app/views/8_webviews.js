@@ -1,4 +1,4 @@
-const {Page, WebView} = require('../../index');
+const {Page, WebView, Notification, NotificationStyle} = require('../../index');
 
 class WebViewsPage extends Page {
     constructor() {
@@ -16,6 +16,13 @@ class WebViewsPage extends Page {
             trackBackgroundColor: "inherit",
             thumbRadius: "6px",
             thumbColor: "#fcca00"
+        })
+        web.addFinishLoadEvent(() => {
+            new Notification({
+                title: this.getTitle(),
+                text: "Загружено",
+                showTime: 2000
+            }).show()
         })
 
         this.add(web)
