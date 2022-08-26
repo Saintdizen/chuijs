@@ -31,30 +31,26 @@ class Notification {
                     "background": "var(--badge_cancel_back)",
                     "animation-duration": ".5s",
                     "animation-fill-mode": "forwards",
-                    "backdrop-filter": "blur(10px)",
-                    //"border": "4px solid var(--badge_cancel_back)",
-                    //"box-shadow": "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
+                    "backdrop-filter": "blur(8px)",
+                    "box-shadow": "rgba(0, 0, 0, 0.15) 0px 2px 4px, rgba(0, 0, 0, 0.25) 0px 2px 4px",
                 }
             },
             {
                 name: ".notification_warning",
                 style: {
                     "background": "var(--badge_warning_back)",
-                    //"border": "2px solid var(--badge_warning_back)",
                 }
             },
             {
                 name: ".notification_error",
                 style: {
                     "background": "var(--badge_error_back)",
-                    //"border": "2px solid var(--badge_error_back)",
                 }
             },
             {
                 name: ".notification_success",
                 style: {
                     "background": "var(--badge_success_back)",
-                    //"border": "2px solid var(--badge_success_back)",
                 }
             },
             {

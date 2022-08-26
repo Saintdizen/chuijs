@@ -20,7 +20,6 @@ class Badge {
                 style: {
                     "background": "var(--badge_error_back)",
                     "color": "var(--badge_error_text)",
-                    "border": "2px solid var(--badge_error_back)",
                 }
             },
             {
@@ -28,7 +27,6 @@ class Badge {
                 style: {
                     "background": "var(--badge_success_back)",
                     "color": "var(--badge_success_text)",
-                    "border": "2px solid var(--badge_success_back)",
                 }
             },
             {
@@ -36,7 +34,6 @@ class Badge {
                 style: {
                     "background": "var(--badge_warning_back)",
                     "color": "var(--badge_warning_text)",
-                    "border": "2px solid var(--badge_warning_back)",
                 }
             },
             {
@@ -44,7 +41,6 @@ class Badge {
                 style: {
                     "background": "var(--badge_cancel_back)",
                     "color": "var(--badge_cancel_text)",
-                    "border": "2px solid var(--badge_cancel_back)",
                 }
             }
         ], 'Badge');
