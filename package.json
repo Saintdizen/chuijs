@@ -2,7 +2,7 @@
   "name": "chuijs",
   "productName": "chuijs",
   "description": "chuijs",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "private": false,
   "main": "index.js",
   "author": {
@@ -27,7 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "electron": "https://github.com/castlabs/electron-releases#v13.6.2-wvvmp",
-    "electron-store": "^8.0.1",
-    "randomstring": "^1.2.2"
+    "electron-store": "~8.1.0",
+    "randomstring": "~1.2.2"
   }
 }
