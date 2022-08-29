@@ -8,13 +8,16 @@ class Tab {
                 name: "list",
                 style: {
                     "display": "flex",
+                    "justify-content": "center",
+                    "align-items": "center",
+                    "width": "-webkit-fill-available"
                 }
             },
             {
                 name: "tab",
                 style: {
                     "margin": "var(--margin) 0px",
-                    "padding": "0px 10px",
+                    "padding": "0px 6px",
                     "font-size": "var(--font_default_size)",
                     "display": "flex",
                     "flex-direction": "column",
