@@ -3,13 +3,54 @@ class Tab {
     #active = document.createElement('active');
     #tab_content = [];
     constructor(title) {
+        this.#tab.innerText = title;
+        this.#active.className = 'tab_active';
+        this.#tab.appendChild(this.#active)
+    }
+    addContent(...contents) {
+        for (let content of contents) {
+            this.#tab_content.push(content);
+        }
+    }
+    getTab() {
+        return this.#tab;
+    }
+    getActive() {
+        return this.#active;
+    }
+    getContent() {
+        return this.#tab_content;
+    }
+    set() {
+        return this.#tab;
+    }
+}
+let {Animation} = require('../modules/chui_animations');
+const buffer = require("buffer");
+
+class Tabs {
+    #tabzz = undefined;
+    #id_contents = require("randomstring").generate();
+    #tabs = document.createElement('tabs');
+    #id_list = require("randomstring").generate();
+    #list = document.createElement('list');
+    #content = document.createElement('content');
+    constructor(options = {
+        tabsJustify: String(undefined),
+        width: String(undefined),
+        default: Number(undefined),
+        tabs: []
+    }) {
+        if (options.tabsJustify === undefined) {
+            options.tabsJustify = 'flex-start'
+        }
         require('../modules/chui_functions').style_parse([
             {
                 name: "list",
                 style: {
                     "display": "flex",
-                    "justify-content": "center",
-                    "align-items": "center",
+                    "justify-content": `${options.tabsJustify}`,
+                    "align-items": 'center',
                     "width": "-webkit-fill-available"
                 }
             },
@@ -60,42 +101,10 @@ class Tab {
                 }
             }
         ], 'Tabs');
-        this.#tab.innerText = title;
-        this.#active.className = 'tab_active';
-        this.#tab.appendChild(this.#active)
-    }
-    addContent(...contents) {
-        for (let content of contents) {
-            this.#tab_content.push(content);
-        }
-    }
-    getTab() {
-        return this.#tab;
-    }
-    getActive() {
-        return this.#active;
-    }
-    getContent() {
-        return this.#tab_content;
-    }
-    set() {
-        return this.#tab;
-    }
-}
-let {Animation} = require('../modules/chui_animations');
-
-class Tabs {
-    #tabzz = undefined;
-    #id_contents = require("randomstring").generate();
-    #tabs = document.createElement('tabs');
-    #id_list = require("randomstring").generate();
-    #list = document.createElement('list');
-    #content = document.createElement('content');
-    constructor(...tabz) {  
-        this.#tabzz = tabz;      
+        this.#tabzz = options.tabs;
         this.#list.id = this.#id_list;
         this.#content.id = this.#id_contents;
-        for (let item of tabz) {
+        for (let item of options.tabs) {
             item.getTab().addEventListener('click', (event) => {
                 if (event.target.childNodes.item(1).style.background !== 'var(--blue_prime_background)') {
                     document.getElementById(this.#id_list).childNodes.forEach(child => {
@@ -120,11 +129,17 @@ class Tabs {
         }    
         this.#tabs.appendChild(this.#list);
         this.#tabs.appendChild(this.#content);
+
+        if (options.default !== undefined) {
+            this.#setDefault(options.default)
+        } else {
+            this.#setDefault(0)
+        }
+        if (options.width !== undefined) {
+            this.#tabs.style.width = options.width;
+        }
     }
-    setWidth(width) {
-        this.#tabs.style.width = width;
-    }
-    setDefault(num) {
+    #setDefault(num) {
         for (let con of this.#tabzz[num].getContent()) {
             this.#content.appendChild(con.set())
             new Animation(this.#content).appearance();

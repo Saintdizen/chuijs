@@ -11,6 +11,7 @@ const {TitlesPage} = require('./views/5_titles');
 const {FormsPage} = require('./views/6_forms');
 const {SlidesPage} = require('./views/7_slideshow');
 const {WebViewsPage} = require('./views/8_webviews');
+const {TabsPage} = require('./views/9_tabs');
 
 class App extends AppLayout {
     constructor() {
@@ -26,6 +27,7 @@ class App extends AppLayout {
         this.setRoute(new FormsPage());
         this.setRoute(new SlidesPage());
         this.setRoute(new WebViewsPage());
+        this.setRoute(new TabsPage());
     }
 }
 render(() => new App()).then(r => console.log("Загружено!"));
