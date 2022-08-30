@@ -7,14 +7,14 @@ class TablesPage extends Page {
         this.setMain(false)
 
         let table  = new Table({
-                data: [
-                    new Test('col 1', 'col 2'),
-                    new Test('col 3', 'col 4'),
-                ],
-                userSelect: true,
-                columnsWidth: ["50%", "50%"]
-            }
-        )
+            data: [
+                new Test('col 1', 'col 2'),
+                new Test('col 3', 'col 4'),
+            ],
+            userSelect: true,
+            customName: ["Столбец 1", "Столбец 2"],
+            columnsWidth: ["50%", "50%"]
+        })
         let filter1 = new Button("Фильтр 1", () => {
             table.setFilterByProperty("name1", "col 1")
         })
