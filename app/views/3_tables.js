@@ -1,4 +1,4 @@
-const {Page, Table} = require('../../index');
+const {Page, Table, Button} = require('../../index');
 
 class TablesPage extends Page {
     constructor() {
@@ -9,13 +9,20 @@ class TablesPage extends Page {
         let table  = new Table({
                 data: [
                     new Test('col 1', 'col 2'),
-                    new Test('col 1', 'col 2'),
+                    new Test('col 3', 'col 4'),
                 ],
-                contentEditable: true,
+                userSelect: true,
                 columnsWidth: ["50%", "50%"]
             }
         )
-        this.add(table)
+        let filter1 = new Button("Фильтр 1", () => {
+            table.setFilterByProperty("name1", "col 1")
+        })
+        let filter2 = new Button("Фильтр 2", () => {
+            table.setFilterByProperty("name2", "col 4")
+        })
+
+        this.add(table, filter1, filter2)
     }
 }
 

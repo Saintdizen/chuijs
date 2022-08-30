@@ -101,6 +101,9 @@ class Table {
     setFilterByProperty(property = String(undefined), filterValue = new Object(undefined)) {
         this.#data.filter(data_1 => data_1[property] === filterValue).forEach(data_2 => { this.#filtered_data.push(data_2); })
         this.#setTable(this.#filtered_data)
+        if (this.#userSelect !== undefined) {
+            this.#setUserSelect()
+        }
     }
     removeFilterByProperty(property= String(undefined), filterValue = new Object(undefined)) {
         this.#data.filter(data_1 => data_1[property] === filterValue).forEach(data_2 => {
@@ -110,6 +113,9 @@ class Table {
             this.#setTable(this.#filtered_data)
         } else {
             this.#setTable(this.#data)
+        }
+        if (this.#userSelect !== undefined) {
+            this.#setUserSelect()
         }
     }
     //Функции отрисовки таблицы
