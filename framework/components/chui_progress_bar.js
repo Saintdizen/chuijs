@@ -56,19 +56,11 @@ class ProgressBar {
         this.#main.appendChild(this.#ProgressBar)
         this.#main.appendChild(this.#progress_text)
     }
-    setWidth(width = String(undefined)) {
-        this.#main.style.width = width;
-    }
-    setValue(value = Number(undefined)) {
-        this.#ProgressBar.value = value;
-        this.#progress_count.innerText = `${value}%`;
-    }
-    setProgressText(text = String(undefined)) {
-        this.#progress_text.innerText = text;
-    }
-    set() {
-        return this.#main;
-    }
+    setWidth(width = String(undefined)) { this.#main.style.width = width; }
+    setProgressCountText(text = String(undefined)) { this.#progress_count.innerText = text; }
+    setValue(value = Number(undefined)) { this.#ProgressBar.value = value; }
+    setProgressText(text = String(undefined)) { this.#progress_text.innerText = text; }
+    set() { return this.#main; }
 }
 
 exports.ProgressBar = ProgressBar

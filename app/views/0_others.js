@@ -24,6 +24,8 @@ class OthersComponentsPage extends Page {
         let progress = new ProgressBar(100)
         progress.setValue(50)
         progress.setWidth(Styles.WIDTH.WEBKIT_FILL)
+        progress.setProgressCountText("setProgressCountText")
+        progress.setProgressText("setProgressText")
         this.add(h1_progress, progress)
 
         let h1_others = new H(1, "Остальные компоненты")

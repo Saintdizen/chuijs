@@ -9,14 +9,14 @@ class Button {
                     "height": "max-content",
                     "width": "max-content",
                     "border-radius": "var(--border_radius)",
-                    "padding": "6px 10px",
+                    "padding": "8px 12px",
                     "font-size": "12pt",
                     "font-weight": "500",
                     "margin": "var(--margin)",
                     "background": "var(--button_background)",
                     "color": "var(--button_text_color)",
                     "box-sizing": "border-box",
-                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 0px 2px 0px"
+                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 0px 2px 0px",
                 }
             },
             {
