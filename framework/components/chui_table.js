@@ -172,7 +172,7 @@ class Table {
         }
         let sort_data = [];
         arr.sort().forEach(data => {
-            sort_data.push(new this.#data[0].__proto__.constructor(data[0], data[1]))
+            sort_data.push(new this.#data[0].__proto__.constructor(...data))
         })
         this.#setTable(sort_data)
     }
