@@ -163,9 +163,12 @@ class Table {
         }
     }
     sortTable() {
-        let cols = Object.getOwnPropertyNames(this.#data[0]);
+        this.#sort(this.#data)
+    }
+    #sort(dataArray = []) {
+        let cols = Object.getOwnPropertyNames(dataArray);
         let arr = [];
-        for (let data of this.#data) {
+        for (let data of dataArray) {
             let sub_arr = [];
             for (let i = 0; i < cols.length; i++) sub_arr.push(data[cols[i]]);
             arr.push(sub_arr)
