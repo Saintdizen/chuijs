@@ -12,11 +12,11 @@ class Accordion {
                     "flex-direction": "column",
                     "height": "max-content",
                     "width": "max-content",
-                    "margin": "var(--margin)",
                     "font-size": "12pt",
                     "font-weight":"500",
                     "line-height":"1",
                     "border": "none",
+                    "margin": "var(--margin)",
                 }
             },
             {
@@ -29,7 +29,6 @@ class Accordion {
                     "font-size": "12pt",
                     "font-weight":"500",
                     "line-height":"1",
-                    "margin": "var(--margin)",
                     "border-radius": "var(--border_radius)",
                     "border": "none",
                 }
@@ -45,7 +44,7 @@ class Accordion {
                 style: {
                     "background": "var(--button_background)",
                     "cursor": "pointer",
-                    "padding": "6px 10px",
+                    "padding": "8px 12px",
                     "width": "-webkit-fill-available",
                     "text-align": "left",
                     "outline": "none",
@@ -60,7 +59,7 @@ class Accordion {
                 name: "accordion_panel",
                 style: {
                     "background": "var(--button_background)",
-                    "padding": "0px 10px",
+                    "padding": "0px 12px",
                     "display": "block",
                     "overflow": "hidden",
                     "width": "-webkit-fill-available",
@@ -75,7 +74,7 @@ class Accordion {
             {
                 name: "accordion_panel_html",
                 style: {
-                    "padding": "6px 0px",
+                    "padding": "8px 0px",
                     "width": "-webkit-fill-available",
                     "display": "flex",
                     "border": "none"
@@ -115,12 +114,12 @@ class Accordion {
             }
         ], 'chui_Accordion');
 
-        options.forEach(elem => {
+        options.forEach(element => {
             let main_test = document.createElement(`chui_accordion_main_test`);
             let ab = document.createElement('accordion_button')
             ab.setAttribute('name', this.#name)
             let bt = document.createElement('accordion_button_text')
-            bt.innerHTML = elem.b_text
+            bt.innerHTML = element.b_text
             let barrow = document.createElement('accordion_button_arrow')
             barrow.style.marginLeft = 'auto'
             barrow.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN).getHTML();
@@ -131,11 +130,15 @@ class Accordion {
                 ap.style.marginBottom = 'var(--margin)'
             }*/
             let html = document.createElement('accordion_panel_html')
-            html.innerHTML = elem.p_text
+            html.innerHTML = element.p_text
             ap.appendChild(html)
             main_test.appendChild(ab)
             main_test.appendChild(ap)
             this.#chui_accordion.appendChild(main_test)
+
+            if (options.indexOf(element) > 0) {
+                main_test.style.marginTop = "8px"
+            }
 
             //ФУНКЦИИ
             let test = main_test.children;

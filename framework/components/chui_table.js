@@ -67,7 +67,7 @@ class Table {
                     "white-space": "break-spaces",
                     "word-break": "break-all",
                     "align-items": "center",
-                    "padding": "6px 10px"
+                    "padding": "8px 12px"
                 }
             }
         ], 'chui_Table');
@@ -98,8 +98,14 @@ class Table {
     set() { return this.#table; }
 
     //Функции фильтров
-    setFilterByProperty(property = String(undefined), filterValue = new Object(undefined)) {
-        this.#data.filter(data_1 => data_1[property] === filterValue).forEach(data_2 => { this.#filtered_data.push(data_2); })
+    setFilterByProperty(type = String(undefined), property = String(undefined), filterValue = new Object(undefined)) {
+        this.#filtered_data = [];
+        if (type.includes(Table.FILTER_TYPE.CLEAR_MATCH)) {
+            this.#data.filter(data_1 => data_1[property] === filterValue).forEach(data_2 => { this.#filtered_data.push(data_2); })
+        }
+        if (type.includes(Table.FILTER_TYPE.PARTIAL_MATCH)) {
+            this.#data.filter(data_1 => data_1[property].includes(filterValue)).forEach(data_2 => { this.#filtered_data.push(data_2); })
+        }
         this.#setTable(this.#filtered_data)
         if (this.#userSelect !== undefined) {
             this.#setUserSelect()
@@ -156,6 +162,21 @@ class Table {
             }
         }
     }
+    sortTable() {
+        let cols = Object.getOwnPropertyNames(this.#data[0]);
+        let arr = [];
+        for (let data of this.#data) {
+            let sub_arr = [];
+            for (let i = 0; i < cols.length; i++) sub_arr.push(data[cols[i]]);
+            arr.push(sub_arr)
+        }
+        let sort_data = [];
+        arr.sort().forEach(data => {
+            sort_data.push(new this.#data[0].__proto__.constructor(data[0], data[1]))
+        })
+        this.#setTable(sort_data)
+    }
+    static FILTER_TYPE = { CLEAR_MATCH: "CLEAR_MATCH", PARTIAL_MATCH: "PARTIAL_MATCH" }
 }
 
 exports.Table = Table

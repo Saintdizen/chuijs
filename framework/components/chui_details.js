@@ -55,7 +55,7 @@ class Details {
                 style: {
                     "background": "var(--button_background)",
                     "cursor": "pointer",
-                    "padding": "6px 10px",
+                    "padding": "8px 12px",
                     "font-size": "12pt",
                     "width": "-webkit-fill-available",
                     "text-align": "left",
@@ -71,7 +71,7 @@ class Details {
                 name: "details_panel",
                 style: {
                     "background": "var(--button_background)",
-                    "padding": "0px 10px",
+                    "padding": "0px 12px",
                     "display": "block",
                     "overflow": "hidden",
                     "width": "-webkit-fill-available",
@@ -86,7 +86,7 @@ class Details {
             {
                 name: "details_panel_html",
                 style: {
-                    "padding": "6px 0px",
+                    "padding": "8px 0px",
                     "width": "-webkit-fill-available",
                     "display": "flex"
                 }
