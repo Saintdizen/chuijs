@@ -12,13 +12,17 @@ class Table {
     #data = [];
     #customNames = [];
     #userSelect = Boolean(false);
+    #columnsWidth = undefined;
+    #sorted = undefined;
     constructor(options = {
         data: undefined,
         customName: undefined,
         userSelect: Boolean(undefined),
-        sorted: false,
-        columnsWidth: []
+        sorted: Boolean(undefined),
+        columnsWidth: undefined
     }) {
+        this.#sorted = options.sorted;
+        this.#columnsWidth = options.columnsWidth;
         this.#data = options.data;
         this.#customNames = options.customName;
         this.#userSelect = options.userSelect;
@@ -56,7 +60,6 @@ class Table {
                 name: "tr",
                 style: {
                     "display": "grid",
-                    "grid-template-columns": `${options.columnsWidth.join(' ')}`,
                     "height": "max-content",
                     "width": "100%",
                     "margin": "0",
@@ -129,44 +132,54 @@ class Table {
         }
     }
     //Функции отрисовки таблицы
+    #setWidthColumns(row) {
+        if (this.#columnsWidth === undefined) {
+            let arr = [];
+            for (let test of this.#columns) arr.push(`calc(100% / ${this.#columns.length})`);
+            row.style.gridTemplateColumns = arr.join(" ");
+        } else {
+            row.style.gridTemplateColumns = this.#columnsWidth.join(" ");
+        }
+    }
     #setHeaders() {
         let cols = this.#columns;
         if (this.#customNames !== undefined) { cols = this.#customNames }
-        const row = this.#tHead.insertRow()
+        const row = this.#tHead.insertRow();
+        this.#setWidthColumns(row);
         //row.style.borderBottom = '2px solid var(--input_background)'
         for (let head of cols) {
             const cell = row.insertCell()
-            let flag = 1;
-
             let cell_title = document.createElement("cell_title")
             cell_title.innerText = head;
-
-            let sort_button = document.createElement("sort_button");
-            sort_button.style.marginLeft = "10px";
-            sort_button.innerText = '';
-
             cell.appendChild(cell_title)
-            cell.appendChild(sort_button)
 
-            cell.addEventListener("click", () => {
-                if (flag === 1) {
-                    this.#sortTable(Table.#SORT_METHOD.ASC, cell.cellIndex)
-                    sort_button.innerHTML = new Icon(Icons.NAVIGATION.EXPAND_MORE, "20px", "var(--button_text_color)").getHTML();
-                    flag = 2;
-                } else if (flag === 2) {
-                    sort_button.innerHTML = new Icon(Icons.NAVIGATION.EXPAND_LESS, "20px", "var(--button_text_color)").getHTML();
-                    this.#sortTable(Table.#SORT_METHOD.DESC, cell.cellIndex)
-                    flag = 3;
-                } else if (flag === 3) {
-                    sort_button.innerText = "";
-                    if (this.#filtered_data.length !== 0) {
-                        this.#setTable(this.#filtered_data);
-                    } else {
-                        this.#setTable(this.#data);
+            if (this.#sorted !== undefined) {
+                let flag = 1;
+                let sort_button = document.createElement("sort_button");
+                sort_button.style.marginLeft = "10px";
+                sort_button.innerText = '';
+                cell.appendChild(sort_button)
+                cell.addEventListener("click", () => {
+                    if (flag === 1) {
+                        this.#sortTable(Table.#SORT_METHOD.ASC, cell.cellIndex)
+                        sort_button.innerHTML = new Icon(Icons.NAVIGATION.EXPAND_MORE, "20px", "var(--button_text_color)").getHTML();
+                        flag = 2;
+                    } else if (flag === 2) {
+                        sort_button.innerHTML = new Icon(Icons.NAVIGATION.EXPAND_LESS, "20px", "var(--button_text_color)").getHTML();
+                        this.#sortTable(Table.#SORT_METHOD.DESC, cell.cellIndex)
+                        flag = 3;
+                    } else if (flag === 3) {
+                        sort_button.innerText = "";
+                        if (this.#filtered_data.length !== 0) {
+                            this.#setTable(this.#filtered_data);
+                        } else {
+                            this.#setTable(this.#data);
+                        }
+                        flag = 1;
                     }
-                    flag = 1;
-                }
-            })
+                })
+            }
+
             cell.style.color = 'var(--button_text_color)';
             cell.style.display = "flex";
             cell.style.flexDirection = "row";
@@ -182,6 +195,7 @@ class Table {
         this.#tBody.innerHTML = '';
         for (let dat of data) {
             let row = this.#tBody.insertRow()
+            this.#setWidthColumns(row);
             if (row.rowIndex !== data.length) {
                 row.style.borderBottom = '2px solid var(--input_background)'
             }

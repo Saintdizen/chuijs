@@ -12,9 +12,10 @@ class TablesPage extends Page {
                 new Test("Я", 5, false),
                 new Test("Г", 1, true),
             ],
+            sorted: true,
             userSelect: true,
             customName: ["Наименование", "Цена", "Наличие на складе"],
-            columnsWidth: ["calc(100% /3)", "calc(100% /3)", "calc(100% /3)"]
+            //columnsWidth: ["20%", "40%", "40%"]
         })
 
         let filter_by_text = new TextInput({ title: "ФИЛЬТРЬ" })
