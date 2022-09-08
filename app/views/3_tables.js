@@ -1,10 +1,10 @@
-const {Page, Table, Button, TextInput} = require('../../index');
+const {Page, Table, TextInput} = require('../../index');
 
 class TablesPage extends Page {
     constructor() {
         super();
         this.setTitle('Таблицы');
-        this.setMain(true)
+        this.setMain(false)
 
         let table  = new Table({
             data: [
@@ -23,7 +23,7 @@ class TablesPage extends Page {
             ],
             sorted: true,
             userSelect: true,
-            customName: ["Наименование", "Цена", "Наличие на складе"],
+            customName: ["Месяц", "Номер", "Активный месяц"],
             //columnsWidth: ["20%", "40%", "40%"]
         })
 
@@ -41,10 +41,10 @@ class TablesPage extends Page {
 }
 
 class Test {
-    constructor(name, price, status) {
-        this.name = name
-        this.price = price
-        this.status = status
+    constructor(month, number, active) {
+        this.month = month
+        this.number = number
+        this.active = active
     }
 }
 

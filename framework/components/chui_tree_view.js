@@ -1,96 +1,188 @@
-//https://www.w3schools.com/howto/howto_js_treeview.asp
+const {Icon, Icons} = require("./chui_icons");
 
 class TreeView {
-    #id = require("randomstring").generate();
-    #chui_tree_view_main = document.createElement("ul")
-    constructor() {
+    #name = require("randomstring").generate();
+    #chui_tree_view = document.createElement(`chui_tree_view`);
+    constructor(options = []) {
         require('../modules/chui_functions').style_parse([
             {
-                name: `#${this.#id}`,
+                name: "chui_tree_view",
                 style: {
-                    "color": "var(--text_color)"
+                    "display": "flex",
+                    "flex-direction": "column",
+                    "height": "max-content",
+                    "width": "max-content",
+                    "font-size": "12pt",
+                    "font-weight":"500",
+                    "line-height":"1",
+                    "border": "none",
+                    "margin": "var(--margin)",
+                    //"background": "var(--button_background)",
+                    //"padding": "8px",
+                    "border-radius": "var(--border_radius)",
                 }
             },
             {
-                name: `ul, #${this.#id}`,
+                name: "chui_tree_view_main_test",
                 style: {
-                    "list-style-type": "none"
+                    "display": "flex",
+                    "flex-direction": "column",
+                    "height": "max-content",
+                    "width": "-webkit-fill-available",
+                    "font-size": "12pt",
+                    "font-weight":"500",
+                    "line-height":"1",
+                    "border-radius": "var(--border_radius)",
+                    "border": "none",
                 }
             },
             {
-                name: ".nested",
-                style: {
-                    "display": "none"
-                }
-            },
-            {
-                name: ".active",
-                style: {
-                    "display": "block"
-                }
-            },
-            {
-                name: ".caret",
+                name: "tree_view_button",
                 style: {
                     "cursor": "pointer",
-                    "ser-select": "none"
+                    "padding": "8px 12px",
+                    "width": "-webkit-fill-available",
+                    "text-align": "left",
+                    "outline": "none",
+                    "display": "flex",
+                    "align-items": "center",
+                    //"justify-content": "space-between",
+                    "flex-direction": "row",
+                    "border-radius": "var(--border_radius)",
+                    "color": "var(--text_color)",
+                    "border": "none",
                 }
             },
             {
-                name: ".caret::before",
+                name: "tree_view_panel",
                 style: {
-                    "content": "'\\25B6'",
-                    "color": "black",
-                    "display": "inline-block",
-                    "margin-right": "6px"
+                    "padding": "0px 0px 0px 12px",
+                    "display": "block",
+                    "overflow": "hidden",
+                    "width": "-webkit-fill-available",
+                    "max-height": "0",
+                    "transition": "background .2s, max-height .1s ease-out",
+                    "border-bottom-right-radius": "var(--border_radius)",
+                    "border-bottom-left-radius": "var(--border_radius)",
+                    "color": "var(--text_color)",
+                    "border": "none",
+                }
+            },
+            {
+                name: "tree_view_html",
+                style: {
+                    //"padding": "8px 0px 0px 0px",
+                    "padding": "0px",
+                    "width": "-webkit-fill-available",
+                    "display": "flex",
+                    "border": "none",
+                    "flex-direction": "column"
+                }
+            },
+            {
+                name: "tree_view_button:hover",
+                style: {
+                    "color": "var(--blue_prime_background)",
+                }
+            },
+            {
+                name: "tree_view_button:hover tree_view_button_text",
+                style: {
+                    "color": "var(--blue_prime_background)"
+                }
+            },
+            {
+                name: "tree_view_button:hover chui_icon",
+                style: {
+                    "color": "var(--blue_prime_background)"
+                }
+            },
+            {
+                name: ".tree_view_button_active",
+                style: {
+                    "color": "var(--blue_prime_background)"
+                }
+            },
+            {
+                name: ".tree_view_button_active chui_icon",
+                style: {
+                    "background": "var(--button_background)",
+                    "color": "var(--blue_prime_background)",
+                    "border-radius": "50%"
                 }
             }
         ], 'chui_TreeView');
-        this.#chui_tree_view_main.id = this.#id;
-
-        let li = document.createElement("li");
-        let span = document.createElement("span");
-        span.className = 'caret';
-        span.textContent = 'caret'
-        li.appendChild(span)
-        this.#chui_tree_view_main.appendChild(li)
-
-        let ul = document.createElement("ul");
-        ul.className = "nested";
-        li.appendChild(ul);
-
-        let li2 = document.createElement("li");
-        li2.textContent = 'test'
-        ul.appendChild(li2)
-
-        //
-        let carets = document.getElementsByClassName("caret");
-
-        for (let test of this.#chui_tree_view_main.children) {
-            for (let test2 of test.children) {
-                if (test2.className === 'nested') {
-                    test2.addEventListener("click", (e) => {
-                        test2.classList.toggle("active")
-                    })
-                    console.log(test2)
-                }
+        let main_test = document.createElement(`chui_tree_view_main_test`);
+        options.forEach(buttons => {
+            main_test.appendChild(buttons.button)
+            if (buttons.panel !== undefined) {
+                main_test.appendChild(buttons.panel)
             }
-        }
-
-        for (let i = 0; i < carets.length; i++) {
-            carets[i].addEventListener("click", (e) => {
-                console.log(e)
-                e.target.classList.toggle("active")
-            });
-        }
-    }
-    add(...components) {
-        for (let component of components) {
-            this.#chui_tree_view_main.appendChild(component.set());
-        }
+        })
+        this.#chui_tree_view.appendChild(main_test)
     }
     set() {
-        return this.#chui_tree_view_main
+        return this.#chui_tree_view;
+    }
+    static Button(options = {
+        title: String(undefined),
+        listener: () => {}
+    }) {
+        let button = document.createElement('tree_view_button');
+        button.addEventListener("click", options.listener);
+        let button_text = document.createElement('tree_view_button_text');
+        button_text.innerHTML = options.title;
+        button.appendChild(button_text)
+        return {
+            title: options.title,
+            button: button
+        };
+    }
+    static ExpandButton(options = {
+        title: String(undefined),
+        subButtons: []
+    }) {
+        let button = document.createElement('tree_view_button');
+        let panel = document.createElement('tree_view_panel')
+        button.addEventListener('click', (e) => {
+            button.classList.toggle('tree_view_button_active')
+            let panel = button.nextElementSibling;
+            console.log(panel)
+            if (panel.style.maxHeight) {
+                button.children[1].children[0].style.transform = 'rotate(0deg)'
+                panel.style.maxHeight = null;
+                button.style.borderBottomLeftRadius = 'var(--border_radius)'
+                button.style.borderBottomRightRadius = 'var(--border_radius)'
+            } else {
+                button.children[1].children[0].style.transform = 'rotate(180deg)'
+                button.style.borderBottomLeftRadius = '0px'
+                button.style.borderBottomRightRadius = '0px'
+                panel.style.maxHeight = "max-content"  //panel.scrollHeight + "px";
+            }
+        })
+        let button_text = document.createElement('tree_view_button_text');
+        button_text.innerHTML = options.title;
+        button.appendChild(button_text)
+        let barrow = document.createElement('tree_view_button_arrow')
+        barrow.style.marginLeft = '10px'
+        barrow.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN).getHTML();
+        button.appendChild(barrow)
+        console.log(options.subButtons)
+        let html = document.createElement('tree_view_html')
+        options.subButtons.forEach(sub => {
+            html.appendChild(sub.button)
+            if (sub.panel !== undefined) {
+                html.appendChild(sub.panel)
+            }
+        })
+        panel.appendChild(html)
+
+
+        return {
+            title: options.title,
+            button: button,
+            panel: panel
+        };
     }
 }
 

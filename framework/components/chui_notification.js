@@ -100,7 +100,7 @@ class Notification {
                 style: {
                     "font-size": "10pt",
                     "font-weight": "500",
-                    "margin": "3px 0px 6px 4px",
+                    "margin": "3px 4px 6px 4px",
                     "color": "var(--text_color)",
                     "word-break": "break-word"
                 }

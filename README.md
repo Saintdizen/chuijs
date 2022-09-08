@@ -1,5 +1,5 @@
 # chuijs
-Данный фреймворк будет позволять описывать страницы приложения только в виде JavaScript кода
+**Данный фреймворк будет позволять описывать страницы приложения только в виде JavaScript кода**
 ### Структура
 #### exampleApp / app / views / main.js
 ```javascript
@@ -78,22 +78,15 @@ main.start({
     ]
 })
 ```
-### Компоненты
-```javascript
-AppLayout, DateInput, NumberInput, EmailInput, 
-PasswordInput, TextArea, Button, CheckBox, ComboBox, 
-SelectBox, ContentBlock, Details, H1, H2, H3, H4, H5, H6, 
-Label, Dialogs, Paragraph, RadioButton, Table, 
-ProgressBar, Toggle, Tabs, Notification, Badge, 
-Image, Graphs (Bar, Pie), Icons, WebView, 
-Spinner, GroupRadio, Accordion, Pre, HtmlBlock, 
-FileInput
- ```
-#### В разработке
-```javascript
-ContextMenu, TextEditor, TreeView, Forms, Slideshow
-```
 ### Модули
-```javascript
-Themes (Dark|Light), Route, Page, ElectronTray, ElectronMenuBar
-```
+**Themes (Dark|Light), Route, Page, ElectronTray, ElectronMenuBar**
+### Компоненты
+**AppLayout, DateInput, NumberInput, EmailInput, TextArea,
+PasswordInput, FileInput, H1, H2, H3, H4, H5, H6, Label, 
+Paragraph, Button, CheckBox, ComboBox, SelectBox, 
+ContentBlock, Details, Dialogs, RadioButton, Table, 
+ProgressBar, Toggle, Tabs, Notification, Badge, 
+Image, Graphs (Bar, Pie), Icons, WebView, Spinner,
+GroupRadio, Accordion, Pre, HtmlBlock, TreeView**
+### В разработке
+**ContextMenu, TextEditor, Forms, Slideshow**
