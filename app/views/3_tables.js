@@ -8,9 +8,18 @@ class TablesPage extends Page {
 
         let table  = new Table({
             data: [
-                new Test("А", 3, true),
-                new Test("Я", 5, false),
-                new Test("Г", 1, true),
+                new Test("Январь", 1, false),
+                new Test("Февраль", 2, false),
+                new Test("Март", 3, false),
+                new Test("Апрель", 4, false),
+                new Test("Май", 5, false),
+                new Test("Июнь", 6, false),
+                new Test("Июль", 7, false),
+                new Test("Август", 8, false),
+                new Test("Сентябрь", 9, true),
+                new Test("Октябрь", 10, false),
+                new Test("Ноябрь", 11, false),
+                new Test("Декабрь", 12, false),
             ],
             sorted: true,
             userSelect: true,

@@ -236,10 +236,18 @@ class Table {
 
         //
         function asc(a, b) {
-            return a[colIndex].toString().localeCompare(b[colIndex].toString())
+            if (typeof a[colIndex] === "number") {
+                if (a[colIndex] === b[colIndex]) { return 0; } else { return (a[colIndex] < b[colIndex]) ? -1 : 1; }
+            } else {
+                return a[colIndex].toString().localeCompare(b[colIndex].toString());
+            }
         }
         function desc(a, b) {
-            return b[colIndex].toString().localeCompare(a[colIndex].toString())
+            if (typeof a[colIndex] === "number") {
+                if (b[colIndex] === a[colIndex]) { return 0; } else { return (b[colIndex] < a[colIndex]) ? -1 : 1; }
+            } else {
+                return b[colIndex].toString().localeCompare(a[colIndex].toString());
+            }
         }
         //
 
