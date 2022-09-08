@@ -8,13 +8,13 @@ class TablesPage extends Page {
 
         let table  = new Table({
             data: [
-                new Test("ЯД", 3, true),
-                new Test("АНАНАС", 5, false),
-                new Test("ВОДА", 1, true),
+                new Test("А", 3, true),
+                new Test("Я", 5, false),
+                new Test("Г", 1, true),
             ],
             userSelect: true,
             customName: ["Наименование", "Цена", "Наличие на складе"],
-            columnsWidth: ["50%", "25%", "25%"]
+            columnsWidth: ["calc(100% /3)", "calc(100% /3)", "calc(100% /3)"]
         })
 
         let filter_by_text = new TextInput({ title: "ФИЛЬТРЬ" })

@@ -1,3 +1,5 @@
+const {Icon, Icons} = require("./chui_icons");
+
 class Table {
     #filtered_data = [];
     #sorted_data = [];
@@ -135,14 +137,28 @@ class Table {
         for (let head of cols) {
             const cell = row.insertCell()
             let flag = 1;
+
+            let cell_title = document.createElement("cell_title")
+            cell_title.innerText = head;
+
+            let sort_button = document.createElement("sort_button");
+            sort_button.style.marginLeft = "10px";
+            sort_button.innerText = '';
+
+            cell.appendChild(cell_title)
+            cell.appendChild(sort_button)
+
             cell.addEventListener("click", () => {
                 if (flag === 1) {
-                    this.#sortTable(Table.SORT_METHOD.ASC, cell.cellIndex)
+                    this.#sortTable(Table.#SORT_METHOD.ASC, cell.cellIndex)
+                    sort_button.innerHTML = new Icon(Icons.NAVIGATION.EXPAND_MORE, "20px", "var(--button_text_color)").getHTML();
                     flag = 2;
                 } else if (flag === 2) {
-                    this.#sortTable(Table.SORT_METHOD.DESC, cell.cellIndex)
+                    sort_button.innerHTML = new Icon(Icons.NAVIGATION.EXPAND_LESS, "20px", "var(--button_text_color)").getHTML();
+                    this.#sortTable(Table.#SORT_METHOD.DESC, cell.cellIndex)
                     flag = 3;
                 } else if (flag === 3) {
+                    sort_button.innerText = "";
                     if (this.#filtered_data.length !== 0) {
                         this.#setTable(this.#filtered_data);
                     } else {
@@ -151,11 +167,15 @@ class Table {
                     flag = 1;
                 }
             })
-            cell.style.color = 'var(--button_text_color)'
+            cell.style.color = 'var(--button_text_color)';
+            cell.style.display = "flex";
+            cell.style.flexDirection = "row";
+            cell.style.justifyContent = "space-between";
+            cell.style.alignItems = "center";
+
             if (cell.cellIndex !== 0) {
                 cell.style.borderLeft = '2px solid transparent'
             }
-            cell.innerText = head;
         }
     }
     #setTable(data = []) {
@@ -200,39 +220,28 @@ class Table {
         }
         let sort_data = [];
 
-        if (sortMethod.includes(Table.SORT_METHOD.ASC)) {
-            arr.sort((a,b) => {
-                if (typeof a[colIndex] === "string") {
-                    return a[colIndex].localeCompare(b[colIndex])
-                } else if (typeof a[colIndex] === "number") {
-                    if (a[colIndex] === b[colIndex]) {
-                        return 0
-                    } else {
-                        return (a[colIndex] < b[colIndex]) ? -1 : 1;
-                    }
-                }
-            }).forEach(data => {
+        //
+        function asc(a, b) {
+            return a[colIndex].toString().localeCompare(b[colIndex].toString())
+        }
+        function desc(a, b) {
+            return b[colIndex].toString().localeCompare(a[colIndex].toString())
+        }
+        //
+
+        if (sortMethod.includes(Table.#SORT_METHOD.ASC)) {
+            arr.sort(asc).forEach(data => {
                 sort_data.push(new this.#data[0].__proto__.constructor(...data))
             })
-        } else if (sortMethod.includes(Table.SORT_METHOD.DESC)) {
-            arr.sort((a,b) => {
-                if (typeof a[colIndex] === "string") {
-                    return b[colIndex].localeCompare(a[colIndex])
-                } else if (typeof a[colIndex] === "number") {
-                    if (b[colIndex] === a[colIndex]) {
-                        return 0
-                    } else {
-                        return (b[colIndex] < a[colIndex]) ? -1 : 1;
-                    }
-                }
-            }).forEach(data => {
+        } else if (sortMethod.includes(Table.#SORT_METHOD.DESC)) {
+            arr.sort(desc).forEach(data => {
                 sort_data.push(new this.#data[0].__proto__.constructor(...data))
             })
         }
 
         this.#setTable(sort_data)
     }
-    static SORT_METHOD = { ASC: "ASC", DESC: "DESC" }
+    static #SORT_METHOD = { ASC: "ASC", DESC: "DESC" }
     static FILTER_TYPE = { CLEAR_MATCH: "CLEAR_MATCH", PARTIAL_MATCH: "PARTIAL_MATCH" }
 }
 
