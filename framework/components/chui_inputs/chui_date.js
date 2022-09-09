@@ -14,6 +14,7 @@ class DateInput {
     #dropdown_id = require("randomstring").generate();
     #date_now = new Date();
     constructor(options = {
+        name: String(undefined),
         title: String(undefined),
         required: Boolean(undefined)
     }) {
@@ -150,9 +151,8 @@ class DateInput {
         this.#input.type = 'date';
         this.#input.className = "date_input";
         this.#input.id = this.#id;
-        if (options.required !== undefined) {
-            this.#input.required = options.required;
-        }
+        if (options.name !== undefined) this.#input.name = options.name;
+        if (options.required !== undefined) this.#input.required = options.required;
         this.#date_dropdown_open.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN, undefined, "var(--blue_prime_background)").getHTML();
         if (options.title !== undefined) {
             this.#label.classList.add('date_input_label')
@@ -268,7 +268,8 @@ class DateInput {
         this.#date_main_block.appendChild(this.#dropdown);
         this.#chui_date_input.appendChild(this.#date_main_block);
     }
-    getTitle() { return this.title; }
+    getName() { return this.#input.name; }
+    getTitle() { return this.#label.innerText; }
     getValue() { return this.#input.value; }
     setValue(date = String(undefined)) { this.#input.value = date; }
     set() { return this.#chui_date_input; }

@@ -11,9 +11,11 @@ class ComboBox {
     #button_open = document.createElement('combo_button_open');
     #dropdown = document.createElement('combobox_dropdown');
     constructor(options = {
+        name: String(undefined),
         title: String(undefined),
         placeholder: String(undefined),
-        width: String(undefined)
+        width: String(undefined),
+        required: Boolean(undefined),
     }) {
         require('../../modules/chui_functions').style_parse([
             {
@@ -111,18 +113,16 @@ class ComboBox {
                 }
             }
         ], 'ComboBox');
-        if (options.placeholder !== undefined) {
-            this.#input.placeholder = options.placeholder;
-        }
-        if (options.width !== undefined) {
-            this.#ComboBox_main.style.width = options.width;
-        }
+        if (options.placeholder !== undefined) this.#input.placeholder = options.placeholder;
+        if (options.width !== undefined) this.#ComboBox_main.style.width = options.width;
         if (options.title !== undefined) {
             this.#label.classList.add('combobox_label')
             this.#label.innerText = options.title;
             this.#label.setAttribute('for', this.#id_cb);
             this.#ComboBox_main.appendChild(this.#label);
         }
+        if (options.name !== undefined) this.#input.name = options.name;
+        if (options.required !== undefined) this.#input.required = options.required;
         this.#input.setAttribute('id', this.#id_cb);
         this.#input.style.boxShadow = 'none';
         this.#input.classList.add('combobox_input');
@@ -184,12 +184,9 @@ class ComboBox {
             this.#dropdown.appendChild(option);
         }
     }
-    getValue() {
-        return this.#input.value;
-    }
-    set() {
-        return this.#ComboBox_main;
-    }
+    getName() { return this.#input.name; }
+    getValue() { return this.#input.value; }
+    set() { return this.#ComboBox_main; }
 }
 
 function setOptionDisplay(element) {

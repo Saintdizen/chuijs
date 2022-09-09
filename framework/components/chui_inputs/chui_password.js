@@ -7,6 +7,7 @@ class PasswordInput {
     #input = document.createElement('input');
     #title = undefined;
     constructor(options = {
+        name: String(undefined),
         title: String(undefined),
         placeholder: String(undefined),
         width: String(undefined),
@@ -86,10 +87,9 @@ class PasswordInput {
         let password_main = document.createElement('password_main');
         this.#input.type = 'password';
         this.#input.id = this.#id;
+        if (options.name !== undefined) this.#input.name = options.name;
         this.#input.className = 'password_input';
-        if (options.required !== undefined) {
-            this.#input.required = options.required;
-        }
+        if (options.required !== undefined) this.#input.required = options.required;
         let see_pass_button = document.createElement('see_pass_button');
         see_pass_button.innerHTML = new Icon(Icons.ACTIONS.VISIBILITY, undefined, "var(--blue_prime_background)").getHTML();
         if (options.title !== undefined) {
@@ -98,12 +98,8 @@ class PasswordInput {
             this.#label.setAttribute('for', this.#id);
             this.#chui_password_input.appendChild(this.#label);
         }
-        if (options.placeholder !== undefined) {
-            this.#input.placeholder = options.placeholder;
-        }
-        if (options.width !== undefined) {
-            this.#chui_password_input.style.width = options.width;
-        }
+        if (options.placeholder !== undefined) this.#input.placeholder = options.placeholder;
+        if (options.width !== undefined) this.#chui_password_input.style.width = options.width;
         this.#input.addEventListener('focus', () => {
             password_main.style.border = '2px solid var(--blue_prime_background)';
             this.#label.style.color = 'var(--blue_prime_background)';
@@ -132,6 +128,7 @@ class PasswordInput {
         });
         this.#chui_password_input.appendChild(password_main);
     }
+    getName() { return this.#input.name; }
     getTitle() { return this.#title; }
     getValue() { return this.#input.value; }
     setValue(text = String(undefined)) { this.#input.value = text; }

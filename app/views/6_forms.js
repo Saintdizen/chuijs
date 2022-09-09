@@ -4,31 +4,42 @@ class FormsPage extends Page {
     constructor() {
         super();
         this.setTitle('Формы');
-        this.setMain(false)
+        this.setMain(true)
         this.setFullWidth()
         this.setFullHeight()
 
         let textInput = new TextInput({
-            // Опции
-            title: "TextInput",
-            placeholder: "TextInput",
-            width: "100px",
+            name: "login",
+            title: "Имя пользователя",
+            placeholder: "Имя пользователя",
+            width: "400px",
             required: true,
         });
 
         let passwordInput = new PasswordInput({
-            // Опции
-            title: 'PasswordInput',
-            placeholder: 'PasswordInput',
-            width: '100px',
+            name: "password",
+            title: 'Пароль',
+            placeholder: 'Пароль',
+            width: '400px',
             required: true
         });
 
+        let submit = Form.SubmitButton("Отправить \\ Сохранить");
+
         let form = new Form({
             action: "#",
-            method: "POST"
+            method: "POST",
+            components: [ textInput, passwordInput, submit ],
+            submitEvent: (e) => {
+                e.preventDefault();
+                console.log(e)
+            }
         });
-        form.add(textInput, passwordInput)
+
+        /*form.addSubmitEvent((e) => {
+            e.preventDefault();
+            console.log(e)
+        })*/
 
         this.add(form)
     }

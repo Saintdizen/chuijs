@@ -3,7 +3,12 @@ class RadioButton {
     #radioButton = document.createElement('radiobutton');
     #input = document.createElement('input');
     #label = document.createElement('label');
-    constructor(title = String(undefined)) {
+    constructor(options = {
+        name: String(undefined),
+        title: String(undefined),
+        value: Boolean(undefined),
+        required: Boolean(undefined)
+    }) {
         require('../../modules/chui_functions').style_parse([
             {
                 name: "radiobutton",
@@ -94,23 +99,18 @@ class RadioButton {
         this.#input.type = 'radio';
         this.#input.classList.add('radiobutton_input');
         this.#input.id = this.#id;
-        this.#input.value = title;
-        this.#label.innerText = title;
+        this.#input.value = options.title;
+        this.#label.innerText = options.title;
         this.#label.setAttribute('for', this.#id);
         this.#label.classList.add('labelr')
+        if (options.name !== undefined) this.#input.name = options.name;
+        if (options.value !== undefined) this.#input.checked = options.value;
+        if (options.required !== undefined) this.#input.required = options.required;
     }
-    setName(name = String(undefined)) {
-        this.#input.name = name;
-    }
-    getValue() {
-        return this.#input.checked;
-    }
-    setValue(value = Boolean(undefined)) {
-        this.#input.checked = value;
-    }
-    addChangeListener(listener) {
-        this.#input.addEventListener('change', listener);
-    }
+    getName() { return this.#input.name; }
+    getValue() { return this.#input.checked; }
+    setValue(value = Boolean(undefined)) { this.#input.checked = value; }
+    addChangeListener(listener) { this.#input.addEventListener('change', listener); }
     set() {
         this.#radioButton.appendChild(this.#input);
         this.#radioButton.appendChild(this.#label);

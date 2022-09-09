@@ -8,6 +8,7 @@ class TextInput {
     #input = document.createElement('input');
     #label = document.createElement('label');
     constructor(options = {
+        name: String(undefined),
         title: String(undefined),
         placeholder: String(undefined),
         width: String(undefined),
@@ -112,23 +113,23 @@ class TextInput {
         this.#input.type = 'text';
         this.#input.className = 'text_input';
         this.#input.id = this.#id;
+
         //Options
-        if (options.inputListener !== undefined) { this.#input.addEventListener('input', options.inputListener); }
-        if (options.focusListener !== undefined) { this.#input.addEventListener('focus', options.focusListener); }
-        if (options.blurListener !== undefined) { this.#input.addEventListener('blur', options.blurListener); }
-        if (options.value !== undefined) { this.#input.value = options.value; }
-        if (options.required !== undefined) { this.#input.required = options.required; }
-        if (options.disableFocus !== undefined) {
-            this.#input.addEventListener("mousedown", () => { return false })
-        }
+        if (options.inputListener !== undefined) this.#input.addEventListener('input', options.inputListener);
+        if (options.focusListener !== undefined) this.#input.addEventListener('focus', options.focusListener);
+        if (options.blurListener !== undefined) this.#input.addEventListener('blur', options.blurListener);
+        if (options.name !== undefined) this.#input.name = options.name;
+        if (options.value !== undefined) this.#input.value = options.value;
+        if (options.required !== undefined) this.#input.required = options.required;
+        if (options.disableFocus !== undefined) this.#input.addEventListener("mousedown", () => { return false });
         if (options.title !== undefined) {
             this.#label.innerText = options.title;
             this.#label.className = 'input_label';
             this.#label.setAttribute('for', this.#id);
             this.#chui_text_input.appendChild(this.#label);
         }
-        if (options.width !== undefined) { this.#chui_text_input.style.width = options.width; }
-        if (options.placeholder !== undefined) { this.#input.placeholder = options.placeholder; }
+        if (options.width !== undefined) this.#chui_text_input.style.width = options.width;
+        if (options.placeholder !== undefined) this.#input.placeholder = options.placeholder;
         this.#input.addEventListener('focus', () => {
             if (options.disableFocus) return false
             this.#chui_text_main.style.border = '2px solid var(--blue_prime_background)';
@@ -144,6 +145,7 @@ class TextInput {
     addInputListener(listener = () => {}) { this.#input.addEventListener('input', listener); }
     addFocusListener(listener = () => {}) { this.#input.addEventListener('focus', listener); }
     addBlurListener(listener = () => {}) { this.#input.addEventListener('blur', listener); }
+    getName() { return this.#input.name; }
     getTitle() { return this.#title; }
     getValue() { return this.#input.value; }
     setValue(text = String(undefined)) { this.#input.value = text; }

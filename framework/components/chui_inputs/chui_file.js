@@ -25,6 +25,7 @@ class FileInput {
     #input = document.createElement('input');
     #label = document.createElement('label');
     constructor(options = {
+        name: String(undefined),
         title: String(undefined),
         accept: new Array(undefined),
         required: Boolean(undefined),
@@ -156,14 +157,16 @@ class FileInput {
         this.#input.type = 'file';
         this.#input.className = 'file_input';
         this.#input.id = this.#id;
+
         //Options
-        if (options.changeListener !== undefined) { this.#input.addEventListener('change', options.changeListener); }
-        if (options.focusListener !== undefined) { this.#input.addEventListener('focus', options.focusListener); }
-        if (options.blurListener !== undefined) { this.#input.addEventListener('blur', options.blurListener); }
-        if (options.required !== undefined) { this.#input.required = options.required; }
-        if (options.disableFocus !== undefined) { this.#input.addEventListener("mousedown", () => { return false }) }
-        if (options.accept) { this.#input.accept = options.accept.join(", "); }
-        if (options.multiple) { this.#input.multiple = options.multiple; }
+        if (options.name !== undefined) this.#input.name = options.name;
+        if (options.changeListener !== undefined) this.#input.addEventListener('change', options.changeListener);
+        if (options.focusListener !== undefined) this.#input.addEventListener('focus', options.focusListener);
+        if (options.blurListener !== undefined) this.#input.addEventListener('blur', options.blurListener);
+        if (options.required !== undefined) this.#input.required = options.required;
+        if (options.disableFocus !== undefined) this.#input.addEventListener("mousedown", () => { return false });
+        if (options.accept) this.#input.accept = options.accept.join(", ");
+        if (options.multiple) this.#input.multiple = options.multiple;
         if (options.title !== undefined) {
             this.#label.innerText = options.title;
             this.#label.className = 'input_label';
@@ -176,6 +179,7 @@ class FileInput {
     addChangeListener(listener = () => {}) { this.#input.addEventListener('change', listener); }
     addFocusListener(listener = () => {}) { this.#input.addEventListener('focus', listener); }
     addBlurListener(listener = () => {}) { this.#input.addEventListener('blur', listener); }
+    getName() { return this.#input.name; }
     getTitle() { return this.#title; }
     getFile(index = Number(0)) { return this.#input.files[index]; }
     getFiles() { return this.#input.files; }

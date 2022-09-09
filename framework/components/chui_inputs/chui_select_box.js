@@ -11,9 +11,11 @@ class Select {
     #button_open = document.createElement('select_button_open');
     #dropdown = document.createElement('selectbox_dropdown');
     constructor(options = {
+        name: String(undefined),
         title: String(undefined),
         placeholder: String(undefined),
-        width: String(undefined)
+        width: String(undefined),
+        required: Boolean(undefined)
     }) {
         require('../../modules/chui_functions').style_parse([
             {
@@ -120,21 +122,19 @@ class Select {
                 }
             },
         ], 'Select');
-        if (options.width !== undefined) {
-            this.#Select_main.style.width = options.width;
-        }
-        if (options.placeholder !== undefined) {
-            this.#input.placeholder = options.placeholder;
-        }
+        if (options.width !== undefined) this.#Select_main.style.width = options.width;
+        if (options.placeholder !== undefined) this.#input.placeholder = options.placeholder;
         if (options.title !== undefined) {
             this.#label.classList.add('select_label')
             this.#label.innerText = options.title;
             this.#label.setAttribute('for', this.#id_sb);
             this.#Select_main.appendChild(this.#label);
         }
+        if (options.required !== undefined) this.#input.required = options.required;
         this.#input.setAttribute('id', this.#id_sb);
         this.#input.classList.add('selectbox_input');
         this.#input.type = 'text';
+        if (options.name !== undefined) this.#input.name = options.name;
         this.#input.disabled = true
         this.#button_open.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN, undefined, "var(--blue_prime_background)").getHTML();
         this.#dropdown.setAttribute('id', this.#id);
@@ -217,12 +217,9 @@ class Select {
             attributeFilter: ['value']
         });
     }
-    getValue() {
-        return this.#input.value;
-    }
-    set() {
-        return this.#Select_main;
-    }
+    getName() { return this.#input.name; }
+    getValue() { return this.#input.value; }
+    set() { return this.#Select_main; }
 }
 
 function setOptionDisplay(element = new HTMLElement()) {

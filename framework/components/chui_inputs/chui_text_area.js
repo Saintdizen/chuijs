@@ -5,6 +5,7 @@ class TextArea {
     #label = document.createElement('label');
     #title = undefined;
     constructor(options = {
+        name: String(undefined),
         title: String(undefined),
         placeholder: String(undefined),
         width: String(undefined),
@@ -63,9 +64,8 @@ class TextArea {
         ], 'chui_TextArea');
         this.#text_area.classList.add('area_input', 'resize_off');
         this.#text_area.id = this.#id;
-        if (options.required !== undefined) {
-            this.#text_area.required = options.required;
-        }
+        if (options.name !== undefined) this.#text_area.name = options.name;
+        if (options.required !== undefined) this.#text_area.required = options.required;
         if (options.title !== undefined) {
             this.#title = options.title;
             this.#label.innerText = options.title;
@@ -73,15 +73,9 @@ class TextArea {
             this.#label.setAttribute('for', this.#id);
             this.#chui_text_input.appendChild(this.#label);
         }
-        if (options.placeholder !== undefined) {
-            this.#text_area.placeholder = options.placeholder;
-        }
-        if (options.width !== undefined) {
-            this.#chui_text_input.style.width = options.width;
-        }
-        if (options.height !== undefined) {
-            this.#chui_text_input.style.height = options.height;
-        }
+        if (options.placeholder !== undefined) this.#text_area.placeholder = options.placeholder;
+        if (options.width !== undefined) this.#chui_text_input.style.width = options.width;
+        if (options.height !== undefined) this.#chui_text_input.style.height = options.height;
         this.#text_area.addEventListener('focus', () => {
             this.#text_area.style.border = '2px solid var(--blue_prime_background)';
             if (options.title !== undefined) {
@@ -96,6 +90,7 @@ class TextArea {
         })
         this.#chui_text_input.appendChild(this.#text_area);
     }
+    getName() { return this.#text_area.name; }
     getTitle() { return this.#title; }
     getValue() { return this.#text_area.value; }
     setValue(text = String(undefined)) { this.#text_area.value = text; }

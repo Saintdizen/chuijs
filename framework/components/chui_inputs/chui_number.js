@@ -7,6 +7,7 @@ class NumberInput {
     #input = document.createElement('input');
     #label = document.createElement('label');
     constructor(options = {
+        name: String(undefined),
         title: String(undefined),
         required: Boolean(undefined)
     }) {
@@ -84,12 +85,12 @@ class NumberInput {
             }
         ], 'chui_NumberInput');
         this.#title = options.title;
-        var number_main = document.createElement("number_main");
-        var number_button_plus = document.createElement("number_button_plus");
+        let number_main = document.createElement("number_main");
+        let number_button_plus = document.createElement("number_button_plus");
         number_button_plus.style.right = '0';
         number_button_plus.className = 'number_buttons';
         number_button_plus.innerHTML = new Icon(Icons.CONTENT.ADD, undefined, "var(--blue_prime_background)").getHTML();
-        var number_button_minus = document.createElement("number_button_minus");
+        let number_button_minus = document.createElement("number_button_minus");
         number_button_minus.style.left = '0';
         number_button_minus.className = 'number_buttons';
         number_button_minus.innerHTML = new Icon(Icons.CONTENT.REMOVE, undefined, "var(--blue_prime_background)").getHTML();
@@ -97,9 +98,8 @@ class NumberInput {
         this.#input.className = 'number_input';
         this.#input.value = '0';
         this.#input.id = this.#id;
-        if (options.required !== undefined) {
-            this.#input.required = options.required;
-        }
+        if (options.name !== undefined) this.#input.name = options.name;
+        if (options.required !== undefined) this.#input.required = options.required;
         if (options.title !== undefined) {
             this.#label.innerText = options.title;
             this.#label.classList.add('number_label')
@@ -138,6 +138,7 @@ class NumberInput {
             this.#input.value--;
         });
     }
+    getName() { return this.#input.name; }
     getTitle() { return this.#title; }
     getValue() { return this.#input.value; }
     setValue(num = Number(undefined)) { this.#input.value = num; }
