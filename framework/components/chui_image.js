@@ -1,7 +1,8 @@
 class Image {
     #chui_image = document.createElement('chui_image');
     constructor(options = {
-        src: String(undefined),
+        path: String(undefined),
+        base64: String(undefined),
         width: String(undefined),
         height: String(undefined)
     }) {
@@ -27,7 +28,8 @@ class Image {
         let image = document.createElement('img');
         image.style.width = '-webkit-fill-available';
         image.style.height = '-webkit-fill-available';
-        image.setAttribute('src', `data:image/png;base64,${require('fs').readFileSync(options.src).toString("base64")}`);
+        if (options.path !== undefined) image.setAttribute('src', `data:image/png;base64,${require('fs').readFileSync(options.path).toString("base64")}`)
+        if (options.base64 !== undefined) image.setAttribute('src', options.base64);
         if (options.width !== undefined) this.#chui_image.style.width = options.width;
         if (options.height !== undefined) this.#chui_image.style.height = options.height;
         this.#chui_image.appendChild(image);
