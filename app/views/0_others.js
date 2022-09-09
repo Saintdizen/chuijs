@@ -47,31 +47,34 @@ class OthersComponentsPage extends Page {
         details.add(new H(1, 'Заголовок'))
         this.add(h1_others, accordion, details)
 
-        let treeView = new TreeView([
-            TreeView.Button({
-                title: "Главная",
-                listener: () => { new Notification({ title: "Главная", text: "Открыта главная страница", style: NotificationStyle.SUCCESS, showTime: 50000 }).show() }
-            }),
-            TreeView.ExpandButton({
-                title: "Страницы",
-                subButtons: [
-                    TreeView.Button({
-                        title: "Страница 1",
-                        listener: () => { new Notification({ title: "Страница 1", text: "Открыта Страница 1", style: NotificationStyle.SUCCESS, showTime: 5000 }).show() }
-                    }),
-                    TreeView.Button({
-                        title: "Страница 2",
-                        listener: () => { new Notification({ title: "Страница 2", text: "Открыта Страница 2", style: NotificationStyle.SUCCESS, showTime: 5000 }).show() }
-                    }),
-                ]
-            }),
-            TreeView.ExpandButton({
-                title: "Страницы",
-                components: [
-                    new Button("sdasdas")
-                ]
-            }),
-        ]);
+        let treeView = new TreeView({
+            width: "-webkit-fill-available",
+            components: [
+                TreeView.Button({
+                    title: "Главная",
+                    listener: () => { new Notification({ title: "Главная", text: "Открыта главная страница", style: NotificationStyle.SUCCESS, showTime: 50000 }).show() }
+                }),
+                TreeView.ExpandButton({
+                    title: "Страницы",
+                    subButtons: [
+                        TreeView.Button({
+                            title: "Страница 1",
+                            listener: () => { new Notification({ title: "Страница 1", text: "Открыта Страница 1", style: NotificationStyle.SUCCESS, showTime: 5000 }).show() }
+                        }),
+                        TreeView.Button({
+                            title: "Страница 2",
+                            listener: () => { new Notification({ title: "Страница 2", text: "Открыта Страница 2", style: NotificationStyle.SUCCESS, showTime: 5000 }).show() }
+                        }),
+                    ]
+                }),
+                TreeView.ExpandButton({
+                    title: "Страницы",
+                    components: [
+                        new Button("sdasdas")
+                    ]
+                }),
+            ]
+        });
         this.add(treeView)
     }
 }

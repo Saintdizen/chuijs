@@ -2,7 +2,10 @@ const {Icon, Icons} = require("./chui_icons");
 
 class TreeView {
     #chui_tree_view = document.createElement(`chui_tree_view`);
-    constructor(options = []) {
+    constructor(options = {
+        width: String(undefined),
+        components: []
+    }) {
         require('../modules/chui_functions').style_parse([
             {
                 name: "chui_tree_view",
@@ -10,7 +13,6 @@ class TreeView {
                     "display": "flex",
                     "flex-direction": "column",
                     "height": "max-content",
-                    "width": "max-content",
                     "font-size": "12pt",
                     "font-weight":"500",
                     "line-height":"1",
@@ -108,7 +110,12 @@ class TreeView {
             }
         ], 'chui_TreeView');
         let main_test = document.createElement(`chui_tree_view_main_test`);
-        options.forEach(buttons => {
+        if (options.width !== undefined) {
+            this.#chui_tree_view.style.width = options.width;
+        } else {
+            this.#chui_tree_view.style.width = 'max-content'
+        }
+        options.components.forEach(buttons => {
             main_test.appendChild(buttons.button)
             if (buttons.panel !== undefined) {
                 main_test.appendChild(buttons.panel)
