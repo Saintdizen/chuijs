@@ -58,6 +58,8 @@ class Form {
     addSubmitEvent(listener = () => {}) { this.#form.addEventListener("submit", listener); }
     set() { return this.#chui_form_main }
     static SubmitButton(title = String(undefined)) { return new SubmitButton(title); }
+
+    static METHOD = { GET: "GET", POST: "POST" }
 }
 
 class SubmitButton {

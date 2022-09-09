@@ -8,7 +8,7 @@ class FormsPage extends Page {
         this.setFullWidth()
         this.setFullHeight()
 
-        let textInput = new TextInput({
+        let login = new TextInput({
             name: "login",
             title: "Имя пользователя",
             placeholder: "Имя пользователя",
@@ -16,7 +16,7 @@ class FormsPage extends Page {
             required: true,
         });
 
-        let passwordInput = new PasswordInput({
+        let password = new PasswordInput({
             name: "password",
             title: 'Пароль',
             placeholder: 'Пароль',
@@ -28,11 +28,13 @@ class FormsPage extends Page {
 
         let form = new Form({
             action: "#",
-            method: "POST",
-            components: [ textInput, passwordInput, submit ],
+            method: Form.METHOD.GET,
+            components: [ login, password, submit ],
             submitEvent: (e) => {
                 e.preventDefault();
-                console.log(e)
+                let formData = new FormData(e.target);
+                console.log(formData.get(login.getName()))
+                console.log(formData.get(password.getName()))
             }
         });
 
