@@ -1,4 +1,4 @@
-const {Page, Slideshow, Slide, H, Styles} = require('../../index');
+const {Page, SlideShow, Slide, H, Styles} = require('../../index');
 
 class SlidesPage extends Page {
     constructor() {
@@ -8,7 +8,7 @@ class SlidesPage extends Page {
         this.setFullWidth()
         this.setFullHeight()
 
-        let slideshow = new Slideshow({
+        let slideshow = new SlideShow({
             width: Styles.WIDTH.WEBKIT_FILL,
             height: Styles.WIDTH.WEBKIT_FILL,
             autoplay: false,
