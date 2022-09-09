@@ -25,8 +25,8 @@ class Image {
             }
         ], 'chUi_Image');
         let image = document.createElement('img');
-        image.style.width = 'inherit';
-        image.style.height = 'inherit';
+        image.style.width = '-webkit-fill-available';
+        image.style.height = '-webkit-fill-available';
         image.setAttribute('src', `data:image/png;base64,${require('fs').readFileSync(options.src).toString("base64")}`);
         if (options.width !== undefined) this.#chui_image.style.width = options.width;
         if (options.height !== undefined) this.#chui_image.style.height = options.height;
