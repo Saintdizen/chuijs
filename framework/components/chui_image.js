@@ -25,9 +25,11 @@ class Image {
             }
         ], 'chUi_Image');
         let image = document.createElement('img');
+        image.style.width = 'inherit';
+        image.style.height = 'inherit';
         image.setAttribute('src', `data:image/png;base64,${require('fs').readFileSync(options.src).toString("base64")}`);
-        if (options.width !== undefined) { image.setAttribute('width', options.width); } else { image.setAttribute('width', 'auto'); }
-        if (options.height !== undefined) { image.setAttribute('height', options.height); } else { image.setAttribute('height', 'auto'); }
+        if (options.width !== undefined) this.#chui_image.style.width = options.width;
+        if (options.height !== undefined) this.#chui_image.style.height = options.height;
         this.#chui_image.appendChild(image);
     }
     set() { return this.#chui_image; }
