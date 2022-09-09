@@ -55,10 +55,9 @@ class Form {
         if (options.submitEvent !== undefined) this.#form.addEventListener("submit", options.submitEvent);
         // ===
     }
-    addSubmitEvent(listener = () => {}) { this.#form.addEventListener("submit", listener); }
+    //addSubmitEvent(listener = () => {}) { this.#form.addEventListener("submit", listener); }
     set() { return this.#chui_form_main }
     static SubmitButton(title = String(undefined)) { return new SubmitButton(title); }
-
     static METHOD = { GET: "GET", POST: "POST" }
 }
 

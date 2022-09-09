@@ -33,15 +33,8 @@ class FormsPage extends Page {
             submitEvent: (e) => {
                 e.preventDefault();
                 let formData = new FormData(e.target);
-                console.log(formData.get(login.getName()))
-                console.log(formData.get(password.getName()))
             }
         });
-
-        /*form.addSubmitEvent((e) => {
-            e.preventDefault();
-            console.log(e)
-        })*/
 
         this.add(form)
     }
