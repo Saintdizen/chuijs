@@ -31,17 +31,7 @@ class SlideShow {
                     "margin": "var(--margin)",
                     "width": `${options.width}`,
                     "height": `${options.height}`,
-                    "border": "2px solid var(--input_background)",
-                    "border-radius": "var(--border_radius)",
-                }
-            },
-            {
-                name: "chui_slide",
-                style: {
-                    "display": "none",
-                    "align-items": "center",
-                    "justify-content": "center",
-                    "color": "var(--text_color)",
+                    //"border": "2px solid var(--input_background)",
                     "border-radius": "var(--border_radius)",
                 }
             },
@@ -117,7 +107,7 @@ class SlideShow {
                     "background-color": "#717171",
                 }
             }
-        ], 'chui_Slideshow');
+        ], 'chui_SlideShow');
         this.#slides_list = options.slides;
         this.#chui_next_slide.addEventListener("click", (e) => {
             this.#changeSlide(1);
@@ -159,13 +149,26 @@ exports.SlideShow = SlideShow
 
 class Slide {
     #chui_slide = document.createElement('chui_slide');
-    constructor(...components) {
-        for (let child of components) {
-            this.#chui_slide.appendChild(child.set())
-        }
+    constructor(options = {
+        width: String(undefined),
+        height: String(undefined)
+    }) {
+        require('../modules/chui_functions').style_parse([
+            {
+                name: "chui_slide",
+                style: {
+                    "display": "none",
+                    "align-items": "center",
+                    "justify-content": "center",
+                    "color": "var(--text_color)",
+                    "border-radius": "var(--border_radius)",
+                    "width": `${options.width}`,
+                    "height": `${options.height}`
+                }
+            }
+        ], 'chui_Slides');
     }
-    set() {
-        return this.#chui_slide;
-    }
+    add(...components) { for (let child of components) this.#chui_slide.appendChild(child.set()) }
+    set() { return this.#chui_slide }
 }
 exports.Slide = Slide
