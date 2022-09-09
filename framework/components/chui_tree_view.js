@@ -135,7 +135,8 @@ class TreeView {
     }
     static ExpandButton(options = {
         title: String(undefined),
-        subButtons: []
+        subButtons: [],
+        components: []
     }) {
         let button = document.createElement('tree_view_button');
         let panel = document.createElement('tree_view_panel')
@@ -162,12 +163,20 @@ class TreeView {
         barrow.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN).getHTML();
         button.appendChild(barrow)
         let html = document.createElement('tree_view_html')
-        options.subButtons.forEach(sub => {
-            html.appendChild(sub.button)
-            if (sub.panel !== undefined) {
-                html.appendChild(sub.panel)
-            }
-        })
+        if (options.subButtons !== undefined) {
+            options.subButtons.forEach(sub => {
+                html.appendChild(sub.button)
+                if (sub.panel !== undefined) {
+                    html.appendChild(sub.panel)
+                }
+            })
+        }
+        if (options.components !== undefined) {
+            options.components.forEach(sub => {
+                html.appendChild(sub.set())
+            })
+        }
+
         panel.appendChild(html)
 
 

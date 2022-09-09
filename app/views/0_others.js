@@ -65,6 +65,12 @@ class OthersComponentsPage extends Page {
                     }),
                 ]
             }),
+            TreeView.ExpandButton({
+                title: "Страницы",
+                components: [
+                    new Button("sdasdas")
+                ]
+            }),
         ]);
         this.add(treeView)
     }
