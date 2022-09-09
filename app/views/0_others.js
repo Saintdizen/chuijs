@@ -1,6 +1,6 @@
 const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView, Form, TextInput,
     Notification,
-    NotificationStyle
+    NotificationStyle, Image
 } = require('../../index');
 
 class OthersComponentsPage extends Page {
