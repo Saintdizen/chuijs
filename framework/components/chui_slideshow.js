@@ -1,7 +1,7 @@
 const {Icon, Icons} = require("./chui_icons");
 const {Animation} = require("../modules/chui_animations");
 
-class Slideshow {
+class SlideShow {
     #default_slide = 0;
     #chui_slides_main = document.createElement('chui_slides_main');
     //
@@ -134,10 +134,10 @@ class Slideshow {
             setInterval(() => this.#changeSlide(1), options.interval * 1000);
         }
         //
-        setTimeout(() => {
-            this.#chui_slides_list.appendChild(this.#slides_list[0].set())
-            new Animation(this.#slides_list[0].set()).appearance()
-        }, 1);
+        let slide = this.#slides_list[0].set();
+        slide.style.display = 'flex';
+        this.#chui_slides_list.appendChild(slide)
+        new Animation(slide).appearance()
         //
     }
     #changeSlide(n = Number(undefined)) {
@@ -148,13 +148,14 @@ class Slideshow {
         for (let child of this.#chui_slides_list.childNodes) { this.#chui_slides_list.removeChild(child); }
         let slide = this.#slides_list[this.#default_slide].set();
         this.#chui_slides_list.appendChild(slide)
+        slide.style.display = 'none';
         new Animation(slide).appearance()
     }
     set() {
         return this.#chui_slides_main;
     }
 }
-exports.Slideshow = Slideshow
+exports.SlideShow = SlideShow
 
 class Slide {
     #chui_slide = document.createElement('chui_slide');

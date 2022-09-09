@@ -1,7 +1,6 @@
 const {Icon, Icons} = require("./chui_icons");
 
 class TreeView {
-    #name = require("randomstring").generate();
     #chui_tree_view = document.createElement(`chui_tree_view`);
     constructor(options = []) {
         require('../modules/chui_functions').style_parse([
@@ -17,8 +16,6 @@ class TreeView {
                     "line-height":"1",
                     "border": "none",
                     "margin": "var(--margin)",
-                    //"background": "var(--button_background)",
-                    //"padding": "8px",
                     "border-radius": "var(--border_radius)",
                 }
             },
@@ -46,7 +43,6 @@ class TreeView {
                     "outline": "none",
                     "display": "flex",
                     "align-items": "center",
-                    //"justify-content": "space-between",
                     "flex-direction": "row",
                     "border-radius": "var(--border_radius)",
                     "color": "var(--text_color)",
@@ -71,7 +67,6 @@ class TreeView {
             {
                 name: "tree_view_html",
                 style: {
-                    //"padding": "8px 0px 0px 0px",
                     "padding": "0px",
                     "width": "-webkit-fill-available",
                     "display": "flex",
@@ -147,7 +142,6 @@ class TreeView {
         button.addEventListener('click', (e) => {
             button.classList.toggle('tree_view_button_active')
             let panel = button.nextElementSibling;
-            console.log(panel)
             if (panel.style.maxHeight) {
                 button.children[1].children[0].style.transform = 'rotate(0deg)'
                 panel.style.maxHeight = null;
@@ -167,7 +161,6 @@ class TreeView {
         barrow.style.marginLeft = '10px'
         barrow.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN).getHTML();
         button.appendChild(barrow)
-        console.log(options.subButtons)
         let html = document.createElement('tree_view_html')
         options.subButtons.forEach(sub => {
             html.appendChild(sub.button)

@@ -87,6 +87,6 @@ Paragraph, Button, CheckBox, ComboBox, SelectBox,
 ContentBlock, Details, Dialogs, RadioButton, Table, 
 ProgressBar, Toggle, Tabs, Notification, Badge, 
 Image, Graphs (Bar, Pie), Icons, WebView, Spinner,
-GroupRadio, Accordion, Pre, HtmlBlock, TreeView**
+GroupRadio, Accordion, Pre, HtmlBlock, TreeView, SlideShow, TextEditor**
 ### В разработке
-**ContextMenu, TextEditor, Forms, Slideshow**
+**ContextMenu, Forms**
