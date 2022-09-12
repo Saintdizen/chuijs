@@ -19,13 +19,16 @@ class ContentBlock {
         if (options.align !== undefined) this.#body.style.alignItems = options.align;
         if (options.justify !== undefined) this.#body.style.justifyContent = options.justify;
     }
+    // FUNCTIONS
     disableMarginChild() { for (let child of this.#body.children) child.style.margin = '0px'; }
     add(...childs) { for (let child of childs) this.#body.appendChild(child.set()); }
     clear() { this.#body.innerHTML = ''; }
+    // SETS
     setAutoOverflow(boolean = Boolean(false)) { if (boolean) this.#body.style.overflow = 'auto'; }
     setContentEditable(boolean= Boolean(false)) { this.#body.setAttribute('contenteditable', boolean); }
     setWidth(width = String(undefined)) { this.#body.style.width = width; }
     setHeight(height = String(undefined)) { this.#body.style.height = height; }
+    setPadding(value = String(undefined)) { this.#body.style.padding = value; }
     set() { return this.#body; }
 }
 
