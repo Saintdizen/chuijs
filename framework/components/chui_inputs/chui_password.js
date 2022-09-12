@@ -82,7 +82,7 @@ class PasswordInput {
                     "color": "var(--text_color)"
                 }
             }
-        ], 'chui_PasswordInput');
+        ], 'chUiJS_PasswordInput');
         this.#title = options.title;
         let password_main = document.createElement('password_main');
         this.#input.type = 'password';

@@ -153,7 +153,7 @@ class FileInput {
                     "box-shadow": "var(--button_text_color) 0px 0px 2px 0px",
                 }
             }
-        ], 'chui_fileInput');
+        ], 'chUiJS_fileInput');
         this.#input.type = 'file';
         this.#input.className = 'file_input';
         this.#input.id = this.#id;

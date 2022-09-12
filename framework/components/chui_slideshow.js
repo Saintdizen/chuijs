@@ -107,7 +107,7 @@ class SlideShow {
                     "background-color": "#717171",
                 }
             }
-        ], 'chui_SlideShow');
+        ], 'chUiJS_SlideShow');
         this.#slides_list = options.slides;
         this.#chui_next_slide.addEventListener("click", (e) => {
             this.#changeSlide(1);
@@ -166,7 +166,7 @@ class Slide {
                     "height": `${options.height}`
                 }
             }
-        ], 'chui_Slides');
+        ], 'chUiJS_Slides');
     }
     add(...components) { for (let child of components) this.#chui_slide.appendChild(child.set()) }
     set() { return this.#chui_slide }

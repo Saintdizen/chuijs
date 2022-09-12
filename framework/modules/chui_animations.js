@@ -25,7 +25,7 @@ class Animation {
                     }
                 }
             }
-        ], 'Animations');
+        ], 'chUiJS_Animations');
         if (element !== undefined) {
             this.#element = element;
         }

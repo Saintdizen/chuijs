@@ -13,7 +13,7 @@ class HtmlBlock {
                     "width": `${width}`,
                 }
             }
-        ], 'chui_HtmlBlock');
+        ], 'chUiJS_HtmlBlock');
         this.#html_block.setAttribute('id', this.#id)
     }
     setHtml(html) {

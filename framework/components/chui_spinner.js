@@ -70,7 +70,7 @@ class Spinner {
               "box-shadow": "var(--blue_prime_background_2) 0px 0px 10px 0px",
             }
           }
-        ], 'chui_Spinner');
+        ], 'chUiJS_Spinner');
         this.#spiner.style.margin = margin;
         // element_one
         this.#element_one.className = 'element_one';

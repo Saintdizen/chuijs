@@ -83,7 +83,7 @@ class NumberInput {
                     "color": "var(--text_color)"
                 }
             }
-        ], 'chui_NumberInput');
+        ], 'chUiJS_NumberInput');
         this.#title = options.title;
         let number_main = document.createElement("number_main");
         let number_button_plus = document.createElement("number_button_plus");

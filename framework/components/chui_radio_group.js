@@ -28,7 +28,7 @@ class RadioGroup {
                     "width": "inherit"
                 }
             }
-        ], 'chui_RadioGroup');
+        ], 'chUiJS_RadioGroup');
         this.#groupForm.classList.add('radioGroupForm')
         this.#direction = options.styles.direction;
         this.#wrap = options.styles.wrap;

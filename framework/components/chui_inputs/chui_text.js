@@ -109,7 +109,7 @@ class TextInput {
                     "color": "var(--text_color)"
                 }
             }
-        ], 'chui_TextInput');
+        ], 'chUiJS_TextInput');
         this.#input.type = 'text';
         this.#input.className = 'text_input';
         this.#input.id = this.#id;

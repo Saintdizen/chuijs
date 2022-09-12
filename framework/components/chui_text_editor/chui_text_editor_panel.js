@@ -77,7 +77,7 @@ class TextEditorButtons {
                     "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
                 }
             }
-        ], 'TextEditorButtons');
+        ], 'chUiJS_TextEditorButtons');
         this.#button = document.createElement('chui_button_format');
         this.#button.innerHTML = new Icon(options.icon).getHTML();
         if (options.disableFocus) {
@@ -228,7 +228,7 @@ class TextEditorSelects {
                     "color": "var(--text_color_hover)"
                 }
             }
-        ], 'TextEditorSelects');
+        ], 'chUiJS_TextEditorSelects');
         if (options.icon !== undefined) {
             this.#div_value.innerHTML = options.icon;
         }
@@ -384,7 +384,7 @@ class TextEditorPanel {
                     "font-weight": "400"
                 }
             }
-        ], 'TextEditorPanel');
+        ], 'chUiJS_TextEditorPanel');
         // Управление
         if (controls.UNDO_REDO) {
             let button_undo = new TextEditorButtons({

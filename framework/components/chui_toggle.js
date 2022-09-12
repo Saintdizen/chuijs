@@ -70,7 +70,7 @@ class Toggle {
                     "border-radius": "50px"
                 }
             }
-        ], 'Toggle');
+        ], 'chUiJS_Toggle');
         this.#Toggle.className = 'switch';
         this.#toggle_input.type = 'checkbox';
         this.#toggle_span.className = 'slider round';

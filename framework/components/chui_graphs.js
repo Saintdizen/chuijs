@@ -51,7 +51,7 @@ class BarGraph {
                     "margin": "var(--margin)"
                 }
             }
-        ], 'Canvas');
+        ], 'chUiJS_Canvas');
         this.#options = options;
         let colors = options.colors;
         let data_lenght = 0;

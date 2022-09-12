@@ -71,7 +71,7 @@ class Dialog {
                     //"border-top" : "1px solid var(--shadow_three)"
                 }
             }
-        ], 'chui_Dialogs');
+        ], 'chUiJS_Dialogs');
         this.#dialog.id = this.#id
         this.#content.style.width = options.width;
         this.#content.style.height = options.height;

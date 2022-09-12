@@ -121,7 +121,7 @@ class Select {
                     "color": "var(--text_color)"
                 }
             },
-        ], 'Select');
+        ], 'chUiJS_Select');
         if (options.width !== undefined) this.#Select_main.style.width = options.width;
         if (options.placeholder !== undefined) this.#input.placeholder = options.placeholder;
         if (options.title !== undefined) {

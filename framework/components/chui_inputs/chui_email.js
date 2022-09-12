@@ -71,7 +71,7 @@ class EmailInput {
                     "color": "var(--text_color)"
                 }
             }
-        ], 'chui_EmailInput');
+        ], 'chUiJS_EmailInput');
         this.#title = options.title;
         this.#input.type = 'email';
         this.#input.className = 'email_input'

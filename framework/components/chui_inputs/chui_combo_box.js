@@ -112,7 +112,7 @@ class ComboBox {
                     "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
                 }
             }
-        ], 'ComboBox');
+        ], 'chUiJS_ComboBox');
         if (options.placeholder !== undefined) this.#input.placeholder = options.placeholder;
         if (options.width !== undefined) this.#ComboBox_main.style.width = options.width;
         if (options.title !== undefined) {

@@ -93,7 +93,7 @@ class RadioButton {
                     "font-size": "var(--font_default_size)"
                 }
             }
-        ], 'chui_RadioButton');
+        ], 'chUiJS_RadioButton');
         this.#radioButton.style.getPropertyValue('display')
         this.#input.classList.add('radiobutton');
         this.#input.type = 'radio';

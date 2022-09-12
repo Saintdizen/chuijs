@@ -1,13 +1,14 @@
 class Label {
-    #Label = document.createElement(`label`);
+    #Label = document.createElement(`chui_label`);
     constructor(text = String(undefined), options = {
         textAlign: String(undefined),
         wordBreak: String(undefined),
-        width: String(undefined)
+        width: String(undefined),
     }) {
-        require('../modules/chui_functions').style_parse([
+        const {style_parse, markDownToHtml} = require('../modules/chui_functions');
+        style_parse([
             {
-                name: ".chui_label",
+                name: "chui_label",
                 style: {
                     "height": "max-content",
                     "width": "max-content",
@@ -17,26 +18,21 @@ class Label {
                     "line-height":"1",
                     "color": "var(--text_color)"
                 }
+            },
+            {
+                name: "chui_label p",
+                style: {
+                    "margin": "0px",
+                }
             }
-        ], 'chui_Label');
-        this.#Label.innerText = text;
-        this.#Label.classList.add("chui_label")
-        if (options.textAlign !== undefined) {
-            this.#Label.style.textAlign = options.textAlign
-        }
-        if (options.wordBreak !== undefined) {
-            this.#Label.style.wordBreak = options.wordBreak
-        }
-        if (options.width !== undefined) {
-            this.#Label.style.width = options.width
-        }
+        ], 'chUiJS_Label');
+        this.#Label.innerHTML = markDownToHtml(text);
+        if (options.textAlign !== undefined) this.#Label.style.textAlign = options.textAlign;
+        if (options.wordBreak !== undefined) this.#Label.style.wordBreak = options.wordBreak;
+        if (options.width !== undefined) this.#Label.style.width = options.width;
     }
-    setText(text = String(undefined)) {
-        this.#Label.innerText = text;
-    }
-    set() {
-        return this.#Label;
-    }
+    setText(text = String(undefined)) { this.#Label.innerText = text; }
+    set() { return this.#Label; }
 }
 
 exports.Label = Label

@@ -1,4 +1,4 @@
-const {Page, Button, Notification, NotificationStyle, H, Badge, BadgeStyle} = require('../../index');
+const {Page, Button, Notification, H, Badge} = require('../../index');
 
 class Notifications_Badges_Page extends Page {
     constructor() {
@@ -9,16 +9,16 @@ class Notifications_Badges_Page extends Page {
         let h1_notifications = new H(1, "Уведомления")
         let DEFAULT = new Button("Уведомление - Обычное", () => {
             new Notification({
-                title: "Пожелание!",
-                text: "Хорошего дня, Иван!\nНе удивляйтесь, если увидите оформленый на вас кредит!\nВы уволены!",
-                showTime: 1000
+                title: "Пожелание! *Пожелание!* **Пожелание!**",
+                text: "Хорошего дня, Иван!\nНе удивляйтесь, если увидите оформленый на вас кредит!\n**Вы уволены!**",
+                showTime: 5000
             }).show()
         })
         let WARNING = new Button("Уведомление - Предупреждение", () => {
             new Notification({
                 title: "Заголовок",
                 text: "Текст",
-                style: NotificationStyle.WARNING,
+                style: Notification.STYLE.WARNING,
                 showTime: 1000
             }).show()
         })
@@ -26,7 +26,7 @@ class Notifications_Badges_Page extends Page {
             new Notification({
                 title: "Заголовок",
                 text: "Текст",
-                style: NotificationStyle.SUCCESS,
+                style: Notification.STYLE.SUCCESS,
                 showTime: 1000
             }).show()
         })
@@ -34,7 +34,7 @@ class Notifications_Badges_Page extends Page {
             new Notification({
                 title: "Заголовок",
                 text: "Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст ",
-                style: NotificationStyle.ERROR,
+                style: Notification.STYLE.ERROR,
                 showTime: 1000
             }).show()
         })
@@ -42,10 +42,10 @@ class Notifications_Badges_Page extends Page {
 
         let h1_badges = new H(1, "Бейджи")
 
-        let badge_ERROR = new Badge("Текст ошибки", BadgeStyle.ERROR)
-        let badge_SUCCESS = new Badge("Текст успешного выполнения", BadgeStyle.SUCCESS)
-        let badge_WARNING = new Badge("Текст предупреждения", BadgeStyle.WARNING)
-        let badge_CANCEL = new Badge("Обычный текст", BadgeStyle.CANCEL)
+        let badge_ERROR = new Badge("Текст **Ошибки**", Badge.STYLE.ERROR)
+        let badge_SUCCESS = new Badge("Текст успешного выполнения", Badge.STYLE.SUCCESS)
+        let badge_WARNING = new Badge("Текст предупреждения", Badge.STYLE.WARNING)
+        let badge_CANCEL = new Badge("Обычный текст", Badge.STYLE.CANCEL)
 
         this.add(h1_badges, badge_ERROR, badge_SUCCESS, badge_WARNING, badge_CANCEL)
     }

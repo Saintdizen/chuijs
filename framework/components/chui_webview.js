@@ -47,7 +47,7 @@ class WebView {
                 "visibility": "hidden"
             }
           }
-        ], 'chui_WebView');
+        ], 'chUiJS_WebView');
         this.#WebView.setAttribute('id', this.#id)
         this.#WebView.setAttribute('useragent', getFirefoxUserAgent())
         this.#WebView.setAttribute('allowpopups', 'true')

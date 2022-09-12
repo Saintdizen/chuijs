@@ -19,7 +19,7 @@ class Pre {
                     "white-space": "pre-wrap"
                 }
             }
-        ], 'chui_Pre');
+        ], 'chUiJS_Pre');
         this.#pre.innerHTML = text;
         this.#pre.classList.add("chui_pre")
         if (options.textAlign !== undefined) {

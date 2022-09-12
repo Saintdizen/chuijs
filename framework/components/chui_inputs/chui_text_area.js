@@ -61,7 +61,7 @@ class TextArea {
                     "color": "var(--text_color)"
                 }
             }
-        ], 'chui_TextArea');
+        ], 'chUiJS_TextArea');
         this.#text_area.classList.add('area_input', 'resize_off');
         this.#text_area.id = this.#id;
         if (options.name !== undefined) this.#text_area.name = options.name;

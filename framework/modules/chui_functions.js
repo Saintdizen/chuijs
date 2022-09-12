@@ -1,3 +1,5 @@
+const showdown = require("showdown");
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -50,7 +52,14 @@ function getDefaultIcon() {
     return require('path').join(__dirname, 'chui_icon.png');
 }
 
+function markDownToHtml(text = String(undefined)) {
+    let showdown = require('showdown');
+    let converter = new showdown.Converter();
+    return converter.makeHtml(text);
+}
+
 exports.sleep = sleep
 exports.style_parse = style_parse
 exports.render = render
+exports.markDownToHtml = markDownToHtml
 exports.getDefaultIcon = getDefaultIcon

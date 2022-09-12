@@ -1,7 +1,8 @@
 class Button {
     #button = document.createElement('chui_button');
     constructor(title = String(undefined), listener = () => {}) {
-        require('../modules/chui_functions').style_parse([
+        const {style_parse} = require('../modules/chui_functions');
+        style_parse([
             {
                 name: "chui_button",
                 style: {
@@ -27,27 +28,17 @@ class Button {
                     "box-shadow": "var(--button_text_color) 0px 0px 2px 0px",
                 }
             }
-        ], 'chui_Button');
+        ], 'chUiJS_Button');
         this.#button.innerText = title;
-        if (listener !== undefined) {
-            this.#button.addEventListener('click', listener)
-        }
+        if (listener !== undefined) this.#button.addEventListener('click', listener);
         this.#button.addEventListener("mousedown", () => {
             return false
         })
     }
-    getText() {
-        return this.#button.innerText;
-    }
-    setText(text = String(undefined)) {
-        this.#button.innerText = text;
-    }
-    addClickListener(listener = () => {}) {
-        this.#button.addEventListener('click', listener);
-    }
-    set() {
-        return this.#button;
-    }
+    getText() { return this.#button.innerText; }
+    setText(text = String(undefined)) { this.#button.innerText = text; }
+    addClickListener(listener = () => {}) { this.#button.addEventListener('click', listener); }
+    set() { return this.#button; }
 }
 
 exports.Button = Button

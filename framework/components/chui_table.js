@@ -77,7 +77,7 @@ class Table {
                     "padding": "8px 12px"
                 }
             }
-        ], 'chui_Table');
+        ], 'chUiJS_Table');
         //======================
         //Установка заголовков
         this.#columns = Object.getOwnPropertyNames(this.#data[0]);

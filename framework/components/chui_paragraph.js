@@ -12,7 +12,7 @@ class Paragraph {
                     "font-size": "12pt"
                 }
             }
-        ], 'Paragraph');
+        ], 'chUiJS_Paragraph');
         this.#Paragraph.innerText = text;
     }
     setText(text = String(undefined)) {

@@ -1,4 +1,4 @@
-const {Page, H} = require('../../index');
+const {Page, H, Label, Styles} = require('../../index');
 
 class TitlesPage extends Page {
     constructor() {
@@ -14,9 +14,10 @@ class TitlesPage extends Page {
         let h4 = new H(4, "Заголовок 4")
         let h5 = new H(5, "Заголовок 5")
         let h6 = new H(6, "Заголовок 6")
-
         this.add(h1, h2, h3, h4, h5, h6)
 
+        let label = new Label("NORMAL **BOLD**", { wordBreak: Styles.WORD_BREAK.BREAK_ALL })
+        this.add(label)
     }
 }
 

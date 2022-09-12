@@ -41,7 +41,7 @@ class Form {
                     "box-shadow": "var(--button_text_color) 0px 0px 2px 0px",
                 }
             }
-        ], 'chui_Forms');
+        ], 'chUiJS_Forms');
         this.#chui_form_main.id = this.#id;
         this.#chui_form_main.appendChild(this.#form);
 

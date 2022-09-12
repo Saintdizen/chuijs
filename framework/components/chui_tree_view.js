@@ -108,7 +108,7 @@ class TreeView {
                     "border-radius": "50%"
                 }
             }
-        ], 'chui_TreeView');
+        ], 'chUiJS_TreeView');
         let main_test = document.createElement(`chui_tree_view_main_test`);
         if (options.width !== undefined) {
             this.#chui_tree_view.style.width = options.width;

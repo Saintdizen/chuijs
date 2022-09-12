@@ -37,7 +37,9 @@ class Inputs_Buttons_Page extends Page {
         this.add(file, file_multiple)
 
         let h1_buttons = new H(1, "Кнопки")
-        let button = new Button("Обычная кнопка");
+        let button = new Button("Обычная кнопка", () => {
+            button.setText("Обычная кнопка жи НУ...!!!!")
+        });
         this.add(h1_buttons, button);
     }
 }

@@ -22,7 +22,7 @@ class Icon {
                     "pointer-events": "none"
                 }
             }
-        ], 'chui_Icons');
+        ], 'chUiJS_Icons');
         this.#chui_icon = document.createElement('chui_icon');
         this.#chui_icon.innerHTML = name;
         this.#chui_icon.style.fontSize = size;

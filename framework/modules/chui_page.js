@@ -17,7 +17,7 @@ class Page {
                     "animation-duration": ".2s",
                 }
             }
-        ], 'Page');
+        ], 'chUiJS_Page');
     }
     add(...components) {
         for (let component of components) {

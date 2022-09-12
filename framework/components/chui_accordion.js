@@ -112,7 +112,7 @@ class Accordion {
                     "color": "var(--text_color_hover)"
                 }
             }
-        ], 'chui_Accordion');
+        ], 'chUiJS_Accordion');
 
         options.forEach(element => {
             let main_test = document.createElement(`chui_accordion_main_test`);

@@ -105,7 +105,7 @@ class TextEditor {
                     "border-radius": "var(--border_radius)"
                 }
             }
-        ], 'TextEditor');
+        ], 'chUiJS_TextEditor');
         if (options.title !== undefined) {
             this.#label.innerText = options.title;
             this.#label.className = 'text_editor_label';

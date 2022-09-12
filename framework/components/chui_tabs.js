@@ -100,7 +100,7 @@ class Tabs {
                     "width": "-webkit-fill-available"
                 }
             }
-        ], 'Tabs');
+        ], 'chUiJS_Tabs');
         this.#tabzz = options.tabs;
         this.#list.id = this.#id_list;
         this.#content.id = this.#id_contents;

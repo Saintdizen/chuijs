@@ -29,7 +29,7 @@ class H {
                     "padding": "8px 7px",
                 }
             }
-        ], 'HX');
+        ], 'chUiJS_HX');
         this.#h = document.createElement(`h${num}`)
         this.#h.innerText = text;
     }

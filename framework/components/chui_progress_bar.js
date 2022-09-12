@@ -43,7 +43,7 @@ class ProgressBar {
                     "border-radius": "50px",
                 }
             }
-        ], 'ProgressBar');
+        ], 'chUiJS_ProgressBar');
         this.#ProgressBar.max = max;
         this.#ProgressBar.id = this.#id;
         this.#progress_count.setAttribute('for', this.#id);

@@ -3,7 +3,6 @@ const {Toggle} = require('../../components/chui_toggle');
 const {Icon, Icons} = require('../../components/chui_icons');
 const Store = require('electron-store');
 const {Button} = require("../../components/chui_button");
-const {Label} = require("../../components/chui_label");
 const store = new Store();
 
 //VARS
@@ -557,7 +556,7 @@ class AppLayout extends Route {
                     "vertical-align": "-0.4em"
                 }
             },*/
-        ], 'AppLayout');
+        ], 'chUiJS_AppLayout');
         document.body.setAttribute('theme', 'light')
         document.getElementById('app').append(this.#applayout);
         header = document.createElement('header');

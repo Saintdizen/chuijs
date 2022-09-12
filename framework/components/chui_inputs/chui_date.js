@@ -146,7 +146,7 @@ class DateInput {
                     "color": "var(--text_color)"
                 }
             }
-        ], 'chui_DateInput');
+        ], 'chUiJS_DateInput');
         this.#date_main_block.style.display = 'flex';
         this.#input.type = 'date';
         this.#input.className = "date_input";

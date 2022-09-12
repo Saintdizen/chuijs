@@ -24,9 +24,9 @@ const { Button } = require('./framework/components/chui_button');
 const { Spinner, SpinnerSize } = require('./framework/components/chui_spinner');
 const { Icon, Icons } = require('./framework/components/chui_icons');
 const { TextEditor } = require('./framework/components/chui_text_editor/chui_text_editor');
-const { Badge, BadgeStyle } = require('./framework/components/chui_badge');
+const { Badge } = require('./framework/components/chui_badge');
 const { Calendar } = require('./framework/components/chui_calendar');
-const { Notification, NotificationStyle } = require('./framework/components/chui_notification');
+const { Notification } = require('./framework/components/chui_notification');
 const { Tabs, Tab } = require('./framework/components/chui_tabs');
 const { BarGraph, PieGraph } = require('./framework/components/chui_graphs');
 const { Image } = require('./framework/components/chui_image');
@@ -161,22 +161,18 @@ class Main {
     }
 }
 
-class CSS {
-    static BORDER_RADIUS = "border-radius";
-}
-
 class Styles {
-    static WORD_BREAK = { BREAK_ALL: "break-all", BREAK_WORD: "break-word" }
+    static WORD_BREAK = { NORMAL: "normal", BREAK_ALL: "break-all", KEEP_ALL: "keep-all", BREAK_WORD: "break-word" }
     static TEXT_ALIGN = { CENTER: 'center', END: 'end', START: 'start' };
     static ALIGN = { CENTER: 'center', END: 'flex-end', START: 'flex-start', BASELINE: 'baseline', STRETCH: 'stretch' };
     static JUSTIFY = { CENTER: 'center', END: 'flex-end', START: 'flex-start', SPACE_AROUND: 'space-around', SPACE_BEETWEEN: 'space-between', SPACE_EVENLY: 'space-evenly' };
     static DIRECTION = { ROW: 'row', COLUMN: 'column' };
     static WRAP = { NOWRAP: 'nowrap', WRAP: 'wrap' };
     static WIDTH = { AUTO: 'auto', FIT_CONTENT: 'fit-content' , MAX_CONTENT: 'max-content' , MIN_CONTENT: 'min-content' , WEBKIT_FILL: '-webkit-fill-available' , INHERIT: 'inherit' };
+    static HEIGHT = { AUTO: 'auto', FIT_CONTENT: 'fit-content' , MAX_CONTENT: 'max-content' , MIN_CONTENT: 'min-content' , WEBKIT_FILL: '-webkit-fill-available' , INHERIT: 'inherit' };
 }
 
 module.exports = {
-    CSS: CSS,
     app: app,
     BrowserWindow: BrowserWindow,
     ipcMain: ipcMain,
@@ -203,7 +199,6 @@ module.exports = {
     Select: Select,
     Calendar: Calendar,
     Badge: Badge,
-    BadgeStyle: BadgeStyle,
     TextEditor: TextEditor,
     Icon: Icon,
     Icons: Icons,
@@ -225,7 +220,6 @@ module.exports = {
     Tabs: Tabs,
     Tab: Tab,
     Notification: Notification,
-    NotificationStyle: NotificationStyle,
     ComboBox: ComboBox,
     RadioGroup: RadioGroup,
     Accordion: Accordion,

@@ -29,7 +29,8 @@ class Details {
         this.#align = options.align;
         this.#justify = options.justify;
         this.#width = options.width;
-        require('../modules/chui_functions').style_parse([
+        const {style_parse} = require('../modules/chui_functions');
+        style_parse([
             {
                 name: "chui_details",
                 style: {
@@ -123,21 +124,13 @@ class Details {
                     "color": "var(--text_color_hover)"
                 }
             }
-        ], 'chui_Details');
+        ], 'chUiJS_Details');
         this.#html.setAttribute('contenteditable', options.contenteditable);
 
-        if (this.#direction !== undefined) {
-            this.#html.style.flexDirection = this.#direction;
-        }
-        if (this.#wrap !== undefined) {
-            this.#html.style.flexWrap = this.#wrap;
-        }
-        if (this.#align !== undefined) {
-            this.#html.style.alignItems = this.#align;
-        }
-        if (this.#justify !== undefined) {
-            this.#html.style.justifyContent = this.#justify;
-        }
+        if (this.#direction !== undefined) this.#html.style.flexDirection = this.#direction;
+        if (this.#wrap !== undefined) this.#html.style.flexWrap = this.#wrap;
+        if (this.#align !== undefined) this.#html.style.alignItems = this.#align;
+        if (this.#justify !== undefined) this.#html.style.justifyContent = this.#justify;
         if (this.#width !== undefined) {
             this.#chui_details.style.width = this.#width;
             this.#ab.style.width = this.#width;
@@ -146,7 +139,7 @@ class Details {
         }
 
         this.#ab.setAttribute('name', this.#name)
-        this.#bt.innerHTML = options.title;
+        this.#bt.innerText = options.title;
         this.#barrow.style.marginLeft = 'auto'
         this.#barrow.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN).getHTML();
         this.#ab.appendChild(this.#bt)
@@ -161,7 +154,7 @@ class Details {
         for (i = 0; i < test.length; i++) {
             let elem = test[i];
             if (elem.tagName === 'DETAILS_BUTTON') {
-                elem.addEventListener('click', (e) => {
+                elem.addEventListener('click', () => {
                     elem.classList.toggle('details_active')
                     let panel = elem.nextElementSibling;
                     if (panel.style.maxHeight) {

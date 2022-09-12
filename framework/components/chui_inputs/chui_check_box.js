@@ -96,7 +96,7 @@ class CheckBox {
                     "font-size": "var(--font_default_size)"
                 }
             }
-        ], 'Checkbox');       
+        ], 'chUiJS_Checkbox');
         this.#input.classList.add('checkbox');
         this.#input.type = 'checkbox';
         this.#input.classList.add('checkbox_input');

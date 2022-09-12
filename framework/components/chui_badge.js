@@ -1,8 +1,9 @@
 class Badge {
     #Badge = document.createElement(`chui_badge`);
     #badgeStyle = undefined;
-    constructor(text = String(undefined), badgeStyle = BadgeStyle) {
-        require('../modules/chui_functions').style_parse([
+    constructor(text = String(undefined), badgeStyle = undefined) {
+        const {style_parse, markDownToHtml} = require('../modules/chui_functions');
+        style_parse([
             {
                 name: "chui_badge",
                 style: {
@@ -13,6 +14,12 @@ class Badge {
                     "border-radius": "var(--border_radius)",
                     "font-size": "var(--font_default_size)",
                     "font-weight": "500"
+                }
+            },
+            {
+                name: "chui_badge p",
+                style: {
+                    "margin": "0px",
                 }
             },
             {
@@ -43,9 +50,9 @@ class Badge {
                     "color": "var(--badge_cancel_text)",
                 }
             }
-        ], 'Badge');
+        ], 'chUiJS_Badge');
         this.#badgeStyle = badgeStyle;
-        this.#Badge.innerText = text;
+        this.#Badge.innerHTML = markDownToHtml(text);
         this.#Badge.classList.add(badgeStyle);
     }
     getText() {
@@ -70,15 +77,12 @@ class Badge {
             return null;
         }
     }
+    static STYLE = {
+        ERROR: 'badge_error',
+        SUCCESS: 'badge_success',
+        CANCEL: 'badge_cancel',
+        WARNING: 'badge_warning'
+    }
 }
 
 exports.Badge = Badge
-
-class BadgeStyle {
-    static ERROR = 'badge_error'
-    static SUCCESS = 'badge_success'
-    static CANCEL = 'badge_cancel'
-    static WARNING = 'badge_warning'
-}
-
-exports.BadgeStyle = BadgeStyle

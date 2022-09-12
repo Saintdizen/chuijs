@@ -24,7 +24,7 @@ class Image {
                     "border-radius": "var(--border_radius)"
                 }
             }
-        ], 'chUi_Image');
+        ], 'chUiJS_Image');
         let image = document.createElement('img');
         image.style.width = '-webkit-fill-available';
         image.style.height = '-webkit-fill-available';

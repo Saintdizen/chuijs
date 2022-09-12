@@ -1,5 +1,4 @@
 const {Animation} = require('../modules/chui_animations');
-const {Label} = require("./chui_label");
 
 class Notification {
     #id = require("randomstring").generate();
@@ -16,7 +15,8 @@ class Notification {
         style: undefined,
         showTime: Number(undefined)
     }) {
-        require('../modules/chui_functions').style_parse([
+        const {style_parse, markDownToHtml} = require('../modules/chui_functions');
+        style_parse([
             {
                 name: "notification",
                 style: {
@@ -85,6 +85,12 @@ class Notification {
                 }
             },
             {
+                name: "notification_title p",
+                style: {
+                    "margin": "0px"
+                }
+            },
+            {
                 name: "notification_date",
                 style: {
                     "font-size": "8pt",
@@ -104,20 +110,22 @@ class Notification {
                     "color": "var(--text_color)",
                     "word-break": "break-word"
                 }
+            },
+            {
+                name: "notification_text p",
+                style: {
+                    "margin": "0px"
+                }
             }
-        ], 'chui_Notification');
-        if (options.showTime !== undefined) {
-            this.#time = options.showTime;
-        }
+        ], 'chUiJS_Notification');
+        if (options.showTime !== undefined) this.#time = options.showTime;
         this.#notification.id = this.#id;
         //
-        this.#notification_title.innerText = options.title
-        this.#notification_date.innerText = Notification.#getDate()
-        this.#notification_text.innerText = options.text
+        this.#notification_title.innerHTML = markDownToHtml(options.title);
+        this.#notification_date.innerHTML = Notification.#getDate();
+        this.#notification_text.innerHTML = markDownToHtml(options.text);
         //
-        if (options.style !== undefined) {
-            this.#notification.classList.add(options.style)
-        }
+        if (options.style !== undefined) this.#notification.classList.add(options.style);
         //
         this.#notification_header.appendChild(this.#notification_title)
         this.#notification_header.appendChild(this.#notification_date)
@@ -125,9 +133,6 @@ class Notification {
         this.#notification_content.appendChild(this.#notification_header)
         this.#notification_content.appendChild(this.#notification_text)
         this.#notification.appendChild(this.#notification_content)
-    }
-    setText(text = String(undefined)) {
-        this.#notification.innerText = text;
     }
     show() {
         document.getElementsByTagName('notification_panel')[0].appendChild(this.#notification);
@@ -163,14 +168,7 @@ class Notification {
         // Возвращаем дату
         return `${day}.${month}.${year}\n${hours}:${minutes}`;
     }
+    static STYLE = { ERROR: 'notification_error', SUCCESS: 'notification_success', WARNING: 'notification_warning' }
 }
 
 exports.Notification = Notification
-
-class NotificationStyle {
-    static ERROR = 'notification_error'
-    static SUCCESS = 'notification_success'
-    static WARNING = 'notification_warning'
-}
-
-exports.NotificationStyle = NotificationStyle
