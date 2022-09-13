@@ -1,6 +1,6 @@
 // GLOBAL VARS
 globalThis.ctxs = [];
-const { app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer } = require('electron');
+const { app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell } = require('electron');
 //ПОЛЯ ВВОДА
 const { TextInput } = require('./framework/components/chui_inputs/chui_text');
 const { DateInput } = require('./framework/components/chui_inputs/chui_date');
@@ -177,6 +177,7 @@ module.exports = {
     BrowserWindow: BrowserWindow,
     ipcMain: ipcMain,
     ipcRenderer: ipcRenderer,
+    shell: shell,
     Main: Main,
     sleep: sleep,
     render: render,
