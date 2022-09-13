@@ -1,3 +1,5 @@
+const {Animation} = require("../modules/chui_animations");
+
 class ContentBlock {
     #body = document.createElement(`contentblock`);
     constructor(options = {
@@ -19,9 +21,19 @@ class ContentBlock {
         if (options.align !== undefined) this.#body.style.alignItems = options.align;
         if (options.justify !== undefined) this.#body.style.justifyContent = options.justify;
     }
+    remove(...components) {
+        for (let component of components) {
+            new Animation(component.set()).disappearance_and_remove()
+        }
+    }
     // FUNCTIONS
     disableMarginChild() { for (let child of this.#body.children) child.style.margin = '0px'; }
-    add(...childs) { for (let child of childs) this.#body.appendChild(child.set()); }
+    add(...components) {
+        for (let component of components) {
+            new Animation(component.set()).appearance()
+            this.#body.appendChild(component.set());
+        }
+    }
     clear() { this.#body.innerHTML = ''; }
     // SETS
     setAutoOverflow(boolean = Boolean(false)) { if (boolean) this.#body.style.overflow = 'auto'; }
