@@ -52,14 +52,19 @@ function getDefaultIcon() {
     return require('path').join(__dirname, 'chui_icon.png');
 }
 
-function markDownToHtml(text = String(undefined)) {
+function markdownToHtml(text = String(undefined)) {
     let showdown = require('showdown');
-    let converter = new showdown.Converter();
-    return converter.makeHtml(text);
+    return new showdown.Converter().makeHtml(text);
+}
+
+function htmlToMarkdown(text = String(undefined)) {
+    let showdown = require('showdown');
+    return new showdown.Converter().makeMarkdown(text);
 }
 
 exports.sleep = sleep
 exports.style_parse = style_parse
 exports.render = render
-exports.markDownToHtml = markDownToHtml
+exports.markdownToHtml = markdownToHtml
+exports.htmlToMarkdown = htmlToMarkdown
 exports.getDefaultIcon = getDefaultIcon

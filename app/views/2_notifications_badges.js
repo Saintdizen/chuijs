@@ -9,8 +9,10 @@ class Notifications_Badges_Page extends Page {
         let h1_notifications = new H(1, "Уведомления")
         let DEFAULT = new Button("Уведомление - Обычное", () => {
             new Notification({
-                title: "Пожелание! *Пожелание!* **Пожелание!**",
-                text: "Хорошего дня, Иван!\nНе удивляйтесь, если увидите оформленый на вас кредит!\n**Вы уволены!**",
+                markdownTitle: "**Пожелание!**",
+                markdownText: `Хорошего дня, Иван!  
+                Не удивляйтесь, если увидите оформленый на вас кредит!  
+                **Вы уволены!**`,
                 showTime: 5000
             }).show()
         })
@@ -42,10 +44,21 @@ class Notifications_Badges_Page extends Page {
 
         let h1_badges = new H(1, "Бейджи")
 
-        let badge_ERROR = new Badge("Текст **Ошибки**", Badge.STYLE.ERROR)
-        let badge_SUCCESS = new Badge("Текст успешного выполнения", Badge.STYLE.SUCCESS)
-        let badge_WARNING = new Badge("Текст предупреждения", Badge.STYLE.WARNING)
-        let badge_CANCEL = new Badge("Обычный текст", Badge.STYLE.CANCEL)
+        let badge_ERROR = new Badge({
+            markdownText: "Текст **Ошибки**",
+            style: Badge.STYLE.ERROR
+        })
+        let badge_SUCCESS = new Badge({
+            text: "Текст успешного выполнения",
+            style: Badge.STYLE.SUCCESS
+        })
+        let badge_WARNING = new Badge({
+            text: "Текст предупреждения",
+            style: Badge.STYLE.WARNING
+        })
+        let badge_CANCEL = new Badge({
+            text: "Обычный текст",
+        })
 
         this.add(h1_badges, badge_ERROR, badge_SUCCESS, badge_WARNING, badge_CANCEL)
     }

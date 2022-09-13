@@ -1,11 +1,15 @@
+const {style_parse, htmlToMarkdown, markdownToHtml} = require('../modules/chui_functions');
+
 class Label {
-    #Label = document.createElement(`chui_label`);
-    constructor(text = String(undefined), options = {
+    #chui_label = document.createElement(`chui_label`);
+    constructor(options = {
+        id: String(undefined),
+        text: String(undefined),
+        markdownText: String(undefined),
         textAlign: String(undefined),
         wordBreak: String(undefined),
         width: String(undefined),
     }) {
-        const {style_parse, markDownToHtml} = require('../modules/chui_functions');
         style_parse([
             {
                 name: "chui_label",
@@ -26,13 +30,43 @@ class Label {
                 }
             }
         ], 'chUiJS_Label');
-        this.#Label.innerHTML = markDownToHtml(text);
-        if (options.textAlign !== undefined) this.#Label.style.textAlign = options.textAlign;
-        if (options.wordBreak !== undefined) this.#Label.style.wordBreak = options.wordBreak;
-        if (options.width !== undefined) this.#Label.style.width = options.width;
+        // Стили текста лейбла
+        if (options.text !== undefined && options.markdownText !== undefined) {
+            throw new Error("Должна быть установлена одна опция text или markdownText");
+        } else {
+            if (options.text !== undefined) this.#chui_label.innerText = options.text;
+            if (options.markdownText !== undefined) this.#chui_label.innerHTML = markdownToHtml(options.markdownText);
+        }
+        //
+        if (options.id !== undefined) this.#chui_label.id = options.id;
+        if (options.textAlign !== undefined) this.#chui_label.style.textAlign = options.textAlign;
+        if (options.wordBreak !== undefined) this.#chui_label.style.wordBreak = options.wordBreak;
+        if (options.width !== undefined) this.#chui_label.style.width = options.width;
     }
-    setText(text = String(undefined)) { this.#Label.innerText = text; }
-    set() { return this.#Label; }
+    // GET
+    getId() {
+        return this.#chui_label.id;
+    }
+    getText() {
+        return this.#chui_label.innerText;
+    }
+    getMarkdownText() {
+        return htmlToMarkdown(this.#chui_label.innerHTML);
+    }
+    // SET
+    setId(id = String(undefined)) {
+        this.#chui_label.id = id;
+    }
+    setText(text = String(undefined)) {
+        this.#chui_label.innerText = text;
+    }
+    setMarkdownText(text = String(undefined)) {
+        this.#chui_label.innerHTML = markdownToHtml(text);
+    }
+    // RENDER
+    set() {
+        return this.#chui_label;
+    }
 }
 
 exports.Label = Label

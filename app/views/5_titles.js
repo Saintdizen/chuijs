@@ -16,7 +16,10 @@ class TitlesPage extends Page {
         let h6 = new H(6, "Заголовок 6")
         this.add(h1, h2, h3, h4, h5, h6)
 
-        let label = new Label("NORMAL **BOLD**", { wordBreak: Styles.WORD_BREAK.BREAK_ALL })
+        let label = new Label({
+            markdownText: "NORMAL **BOLD**",
+            wordBreak: Styles.WORD_BREAK.BREAK_ALL
+        })
         this.add(label)
     }
 }

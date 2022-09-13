@@ -1,8 +1,13 @@
+const {style_parse, markdownToHtml, htmlToMarkdown} = require('../modules/chui_functions');
+
 class Badge {
-    #Badge = document.createElement(`chui_badge`);
-    #badgeStyle = undefined;
-    constructor(text = String(undefined), badgeStyle = undefined) {
-        const {style_parse, markDownToHtml} = require('../modules/chui_functions');
+    #chui_badge = document.createElement(`chui_badge`);
+    constructor(options = {
+        id: String(undefined),
+        text: String(undefined),
+        markdownText: String(undefined),
+        style: undefined
+    }) {
         style_parse([
             {
                 name: "chui_badge",
@@ -13,7 +18,9 @@ class Badge {
                     "margin": "var(--margin)",
                     "border-radius": "var(--border_radius)",
                     "font-size": "var(--font_default_size)",
-                    "font-weight": "500"
+                    "font-weight": "500",
+                    "background": "var(--badge_cancel_back)",
+                    "color": "var(--badge_cancel_text)",
                 }
             },
             {
@@ -42,45 +49,48 @@ class Badge {
                     "background": "var(--badge_warning_back)",
                     "color": "var(--badge_warning_text)",
                 }
-            },
-            {
-                name: ".badge_cancel",
-                style: {
-                    "background": "var(--badge_cancel_back)",
-                    "color": "var(--badge_cancel_text)",
-                }
             }
         ], 'chUiJS_Badge');
-        this.#badgeStyle = badgeStyle;
-        this.#Badge.innerHTML = markDownToHtml(text);
-        this.#Badge.classList.add(badgeStyle);
+        if (options.id !== undefined) this.#chui_badge.id = options.id;
+        if (options.style !== undefined) this.#chui_badge.classList.add(options.style);
+        // Стили текста баджей
+        if (options.text !== undefined && options.markdownText !== undefined) {
+            throw new Error("Должна быть установлена одна опция text или markdownText");
+        } else {
+            if (options.text !== undefined) this.#chui_badge.innerText = options.text;
+            if (options.markdownText !== undefined) this.#chui_badge.innerHTML = markdownToHtml(options.markdownText);
+        }
+    }
+    // GET
+    getId() {
+        return this.#chui_badge.id;
     }
     getText() {
-        return this.#Badge.innerText;
+        return this.#chui_badge.innerText;
     }
+    getMarkdownText() {
+        return htmlToMarkdown(this.#chui_badge.innerHTML);
+    }
+    // SET
     setText(text = String(undefined)) {
-        this.#Badge.innerText = text;
+        this.#chui_badge.innerText = text;
     }
-    getId() {
-        return this.#Badge.id;
+    setMarkdownText(text = String(undefined)) {
+        this.#chui_badge.innerHTML = markdownToHtml(text);
     }
     setId(id = String(undefined)) {
-        this.#Badge.id = id;
+        this.#chui_badge.id = id;
     }
-    setVariant(badgeStyle = String(undefined)) {
-        this.#Badge.classList.add(badgeStyle);
+    setStyle(style = String(undefined)) {
+        this.#chui_badge.classList.add(style);
     }
+    // RENDER
     set() {
-        if (this.#badgeStyle !== undefined) {
-            return this.#Badge;
-        } else {
-            return null;
-        }
+        return this.#chui_badge;
     }
     static STYLE = {
         ERROR: 'badge_error',
         SUCCESS: 'badge_success',
-        CANCEL: 'badge_cancel',
         WARNING: 'badge_warning'
     }
 }

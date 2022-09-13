@@ -1,4 +1,5 @@
 const {Animation} = require('../modules/chui_animations');
+const {style_parse, markdownToHtml} = require('../modules/chui_functions');
 
 class Notification {
     #id = require("randomstring").generate();
@@ -11,11 +12,12 @@ class Notification {
     #notification_text = document.createElement("notification_text")
     constructor(options = {
         title: String(undefined),
+        markdownTitle: String(undefined),
         text: String(undefined),
+        markdownText: String(undefined),
         style: undefined,
         showTime: Number(undefined)
     }) {
-        const {style_parse, markDownToHtml} = require('../modules/chui_functions');
         style_parse([
             {
                 name: "notification",
@@ -120,10 +122,21 @@ class Notification {
         ], 'chUiJS_Notification');
         if (options.showTime !== undefined) this.#time = options.showTime;
         this.#notification.id = this.#id;
-        //
-        this.#notification_title.innerHTML = markDownToHtml(options.title);
+        // Стили заголовка уведомления
+        if (options.title !== undefined && options.markdownTitle !== undefined) {
+            throw new Error("Должна быть установлена одна опция title или markdownTitle");
+        } else {
+            if (options.title !== undefined) this.#notification_title.innerText = options.title;
+            if (options.markdownTitle !== undefined) this.#notification_title.innerHTML = markdownToHtml(options.markdownTitle);
+        }
+        // Стили текста уведомления
+        if (options.text !== undefined && options.markdownText !== undefined) {
+            throw new Error("Должна быть установлена одна опция text или markdownText");
+        } else {
+            if (options.text !== undefined) this.#notification_text.innerText = options.text;
+            if (options.markdownText !== undefined) this.#notification_text.innerHTML = markdownToHtml(options.markdownText);
+        }
         this.#notification_date.innerHTML = Notification.#getDate();
-        this.#notification_text.innerHTML = markDownToHtml(options.text);
         //
         if (options.style !== undefined) this.#notification.classList.add(options.style);
         //
