@@ -40,6 +40,7 @@ class Route {
 }
 
 class AppLayout extends Route {
+    #route_list = [];
     #applayout = document.createElement('applayout');
     #header_left_box = document.createElement("header_left_box");
     #header_right_box = document.createElement("header_right_box");
@@ -701,31 +702,37 @@ class AppLayout extends Route {
         this.#auto_close = boolean;
     }
     setRoute(page) {
-        let button_route = document.createElement('route');
-        let title_menu = document.createElement('route_title');
-        title_menu.innerHTML = page.getTitle();
+        this.#route_list.push(page);
+        let test = this.#route_list.filter(route => route.getTitle().includes(page.getTitle()));
+        if (test.length === 1) {
+            let button_route = document.createElement('route');
+            let title_menu = document.createElement('route_title');
+            title_menu.innerHTML = page.getTitle();
 
-        if (page.getMain()) {
-            this.go(page);
-            button_route.classList.add("route_active");
-        }        
-        button_route.addEventListener('click', () => {
-            if (!button_route.classList.contains('route_active')) {
-                for (let act of document.getElementsByTagName('route')) {
-                    act.classList.remove('route_active');
-                }
+            if (page.getMain()) {
                 this.go(page);
                 button_route.classList.add("route_active");
-                if (this.#auto_close) {
-                    if (this.#app_menu.style.transform === `translateX(${this.#def_menu_block_width}px)`) {
-                        this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
-                        this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
+            }
+            button_route.addEventListener('click', () => {
+                if (!button_route.classList.contains('route_active')) {
+                    for (let act of document.getElementsByTagName('route')) {
+                        act.classList.remove('route_active');
+                    }
+                    this.go(page);
+                    button_route.classList.add("route_active");
+                    if (this.#auto_close) {
+                        if (this.#app_menu.style.transform === `translateX(${this.#def_menu_block_width}px)`) {
+                            this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
+                            this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
+                        }
                     }
                 }
-            }
-        });
-        button_route.appendChild(title_menu)
-        this.#route_views.appendChild(button_route)
+            });
+            button_route.appendChild(title_menu)
+            this.#route_views.appendChild(button_route)
+        } else {
+            console.error(`Страница "${page.getTitle()}" уже добавлена в меню`)
+        }
     }
 }
 
