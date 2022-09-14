@@ -8,20 +8,24 @@ class SlideShow {
     #chui_slides_list = document.createElement("chui_slides_list")
     #chui_next_slide = document.createElement('chui_next_slide');
     #chui_prev_slide = document.createElement('chui_prev_slide');
+    //
     #slides_list = undefined;
     constructor(options = {
         width: String(undefined),
         height: String(undefined),
-        autoplay: Boolean(false),
-        interval: Number(10),
+        autoplay: {
+            status: Boolean(false),
+            interval: Number(10),
+        },
         slides: []
     }) {
         require('../modules/chui_functions').style_parse([
             {
                 name: "chui_slides_list",
                 style: {
-                    "width": `-webkit-fill-available`,
-                    "height": `-webkit-fill-available`
+                    "width": `100%`,
+                    "height": `100%`,
+                    "display": "flex"
                 }
             },
             {
@@ -31,7 +35,6 @@ class SlideShow {
                     "margin": "var(--margin)",
                     "width": `${options.width}`,
                     "height": `${options.height}`,
-                    //"border": "2px solid var(--input_background)",
                     "border-radius": "var(--border_radius)",
                 }
             },
@@ -109,20 +112,14 @@ class SlideShow {
             }
         ], 'chUiJS_SlideShow');
         this.#slides_list = options.slides;
-        this.#chui_next_slide.addEventListener("click", (e) => {
-            this.#changeSlide(1);
-        })
-        this.#chui_prev_slide.addEventListener("click", (e) => {
-            this.#changeSlide(-1)
-        })
+        this.#chui_next_slide.addEventListener("click", () => this.#changeSlide(1))
+        this.#chui_prev_slide.addEventListener("click", () => this.#changeSlide(-1))
         this.#chui_slides_main.appendChild(this.#chui_slides_list);
         this.#chui_next_slide.appendChild(new Icon(Icons.CONTENT.REDO, "14pt", "var(--button_text_color)").set());
         this.#chui_prev_slide.appendChild(new Icon(Icons.CONTENT.UNDO, "14pt", "var(--button_text_color)").set());
         this.#chui_slides_main.appendChild(this.#chui_next_slide);
         this.#chui_slides_main.appendChild(this.#chui_prev_slide);
-        if (options.autoplay) {
-            setInterval(() => this.#changeSlide(1), options.interval * 1000);
-        }
+        if (options.autoplay.status) setInterval(() => this.#changeSlide(1), options.autoplay.interval * 1000);
         //
         let slide = this.#slides_list[0].set();
         slide.style.display = 'flex';
@@ -144,31 +141,59 @@ class SlideShow {
     set() {
         return this.#chui_slides_main;
     }
+    static SLIDE(options = { width: String(undefined), height: String(undefined), components: [] }) {
+        return new Slide(options)
+    }
 }
 exports.SlideShow = SlideShow
 
 class Slide {
     #chui_slide = document.createElement('chui_slide');
+    #chui_slide_content = document.createElement('chui_slide_content');
     constructor(options = {
-        width: String(undefined),
-        height: String(undefined)
+        size: {
+            width: String(undefined),
+            height: String(undefined),
+        },
+        style: {
+            direction: String(undefined),
+            wrap: String(undefined),
+            align: String(undefined),
+            justify: String(undefined),
+        },
+        components: []
     }) {
         require('../modules/chui_functions').style_parse([
             {
                 name: "chui_slide",
                 style: {
                     "display": "none",
-                    "align-items": "center",
-                    "justify-content": "center",
                     "color": "var(--text_color)",
                     "border-radius": "var(--border_radius)",
-                    "width": `${options.width}`,
-                    "height": `${options.height}`
+                    "width": "100%",
+                    "height": "-webkit-fill-available"
+                }
+            },
+            {
+                name: "chui_slide_content",
+                style: {
+                    "display": "flex",
+                    "color": "var(--text_color)",
+                    "border-radius": "var(--border_radius)",
+                    "width": "-webkit-fill-available",
+                    "height": "-webkit-fill-available",
+                    "overflow": "auto"
                 }
             }
         ], 'chUiJS_Slides');
+        if (options.size.width !== undefined) this.#chui_slide_content.style.width = options.size.width;
+        if (options.size.height !== undefined) this.#chui_slide_content.style.height = options.size.height;
+        if (options.style.direction !== undefined) this.#chui_slide_content.style.flexDirection = options.style.direction;
+        if (options.style.wrap !== undefined) this.#chui_slide_content.style.flexWrap = options.style.wrap;
+        if (options.style.align !== undefined) this.#chui_slide_content.style.alignItems = options.style.align;
+        if (options.style.justify !== undefined) this.#chui_slide_content.style.justifyContent = options.style.justify;
+        for (let child of options.components) this.#chui_slide_content.appendChild(child.set())
+        this.#chui_slide.appendChild(this.#chui_slide_content)
     }
-    add(...components) { for (let child of components) this.#chui_slide.appendChild(child.set()) }
     set() { return this.#chui_slide }
 }
-exports.Slide = Slide
