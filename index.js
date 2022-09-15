@@ -115,7 +115,13 @@ class Main {
     stop() {
         if(process.platform !== 'darwin') {
             app.quit();
+        } else {
+            app.exit(0)
         }
+    }
+    restart() {
+        app.relaunch();
+        app.exit(0)
     }
     start(options = {
         hideOnClose: Boolean(undefined),
