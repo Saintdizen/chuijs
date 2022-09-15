@@ -3,7 +3,7 @@ const {Toggle} = require('../../components/chui_toggle');
 const {Icon, Icons} = require('../../components/chui_icons');
 const Store = require('electron-store');
 const {Button} = require("../../components/chui_button");
-const {style_parse} = require("../../modules/chui_functions");
+const {Notification} = require("../../components/chui_notification");
 const store = new Store();
 
 //VARS
@@ -738,16 +738,118 @@ class AppLayout extends Route {
             this.#header_right_box.appendChild(this.#notification_button)
         }
     }
-    static BUTTON(text, listener) {
-        return new HeaderButton(text, listener);
+    static BUTTON(text, listener) { return new HeaderButton(text, listener); }
+    static USER_PROFILE(username, width, items) { return new UserProfile(username, width, items); }
+    static USER_DROPDOWN_ITEM(title, clickEvent) { return new UserDropDownItem(title, clickEvent) }
+}
+
+class UserProfile {
+    #user_main = document.createElement("user_main");
+    #user_button = document.createElement("user_button");
+    #user_dropdown = document.createElement("user_dropdown");
+    constructor(username = String(undefined), width = String(undefined), items = []) {
+        require('../../modules/chui_functions').style_parse([
+            {
+                name: "user_main",
+                style: {
+                    "position": "relative",
+                    "display": "flex",
+                }
+            },
+            {
+                name: "user_main:hover user_dropdown",
+                style: {
+                    "display": "block"
+                }
+            },
+            {
+                name: "user_main:hover user_button",
+                style: {
+                    "background": "var(--blue_prime_background)",
+                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
+                    "color": "var(--text_color_hover)",
+                }
+            },
+            {
+                name: "user_button",
+                style: {
+                    "cursor": "pointer",
+                    "outline": "none",
+                    "height": "max-content",
+                    "width": "max-content",
+                    "color": "var(--text_color)",
+                    "border-radius": "var(--border_radius)",
+                    "padding": "6px 10px",
+                    "margin": "var(--margin)",
+                    "font-weight": "500"
+                }
+            },
+            {
+                name: "user_dropdown",
+                style: {
+                    "margin-top": "44px",
+                    "display": "none",
+                    "position": "absolute",
+                    "background": "var(--dropdown_background)",
+                    "color": "var(--text_color)",
+                    "box-shadow": "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
+                    "border": "2px solid var(--input_background)",
+                    "border-radius": "var(--border_radius)",
+                    "padding": "6px",
+                    "z-index": "1",
+                    "right": "0",
+                    "min-width": "150px"
+                }
+            },
+            {
+                name: "user_dropdown user_item",
+                style: {
+                    "color": "var(--text_color)",
+                    "display": "block",
+                    "font-weight": "500",
+                    "cursor": "pointer",
+                    "text-align": "start",
+                    "padding": "6px",
+                    "border-radius": "var(--border_radius)"
+                }
+            },
+            {
+                name: "user_dropdown user_item:hover",
+                style: {
+                    "background-color": "#ddd",
+                    "padding": "6px 10px",
+                    "background": "var(--blue_prime_background)",
+                    "color": "var(--text_color_hover)",
+                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
+                }
+            }
+        ], 'chUiJS_UserProfile');
+        this.#user_button.innerText = username;
+        this.#user_dropdown.style.width = width;
+        this.#user_main.appendChild(this.#user_button)
+        this.#user_main.appendChild(this.#user_dropdown)
+        for (let item of items) this.#user_dropdown.appendChild(item.set())
+    }
+    set() {
+        return this.#user_main;
+    }
+}
+
+class UserDropDownItem {
+    #user_item = document.createElement("user_item");
+    constructor(title = String(undefined), clickEvent = () => {}) {
+        this.#user_item.innerText = title;
+        this.#user_item.addEventListener("click", clickEvent)
+    }
+    set() {
+        return this.#user_item;
     }
 }
 
 class HeaderButton {
     #header_button = document.createElement("header_button");
     constructor(text = String(undefined), listener = () => {}) {
-        const {style_parse} = require('../../modules/chui_functions');
-        style_parse([
+        require('../../modules/chui_functions').style_parse([
             {
                 name: "header_button",
                 style: {
@@ -783,7 +885,7 @@ class HeaderButton {
 }
 
 const removeEvents = (event) => {
-    event.target.remove()
+    event.target.remove();
     event.target.removeEventListener('animationend', removeEvents);
 }
 

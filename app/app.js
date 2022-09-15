@@ -30,11 +30,14 @@ class App extends AppLayout {
         this.setRoute(new TabsPage());
 
         let dialog = new Dialog({ width: "500px", height: "500px", closeOutSideClick: true })
-        let profile = new Dialog({ width: "500px", height: "500px", closeOutSideClick: true })
         this.addComponentToAppLayout({
-            center: [ dialog, profile ],
+            center: [ dialog ],
             headerRight: [
-                AppLayout.BUTTON("Доступно обновление!", () => dialog.open())
+                AppLayout.BUTTON("Доступно обновление!", () => dialog.open()),
+                AppLayout.USER_PROFILE("Чувахин Иван", "200px",[
+                    AppLayout.USER_DROPDOWN_ITEM("Профиль", () => console.log("Профиль")),
+                    AppLayout.USER_DROPDOWN_ITEM("Выход", () => console.log("Выход")),
+                ])
             ]
         })
     }
