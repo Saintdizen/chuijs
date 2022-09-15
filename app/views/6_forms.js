@@ -32,7 +32,7 @@ class FormsPage extends Page {
             components: [ login, password, submit ],
             submitEvent: (e) => {
                 e.preventDefault();
-                let formData = new FormData(e.target);
+                //let formData = new FormData(e.target);
             }
         });
 

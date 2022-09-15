@@ -20,7 +20,7 @@ class TabsPage extends Page {
         let tabs = new Tabs({
             tabsJustify: Styles.JUSTIFY.START,
             default: 0,
-            width: Styles.WIDTH.WEBKIT_FILL,
+            width: Styles.SIZE.WEBKIT_FILL,
             tabs: [ tab_one, tab_two ]
         });
 

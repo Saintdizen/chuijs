@@ -168,8 +168,7 @@ class Styles {
     static JUSTIFY = { CENTER: 'center', END: 'flex-end', START: 'flex-start', SPACE_AROUND: 'space-around', SPACE_BEETWEEN: 'space-between', SPACE_EVENLY: 'space-evenly' };
     static DIRECTION = { ROW: 'row', COLUMN: 'column' };
     static WRAP = { NOWRAP: 'nowrap', WRAP: 'wrap' };
-    static WIDTH = { AUTO: 'auto', FIT_CONTENT: 'fit-content' , MAX_CONTENT: 'max-content' , MIN_CONTENT: 'min-content' , WEBKIT_FILL: '-webkit-fill-available' , INHERIT: 'inherit' };
-    static HEIGHT = { AUTO: 'auto', FIT_CONTENT: 'fit-content' , MAX_CONTENT: 'max-content' , MIN_CONTENT: 'min-content' , WEBKIT_FILL: '-webkit-fill-available' , INHERIT: 'inherit' };
+    static SIZE = { AUTO: 'auto', FIT_CONTENT: 'fit-content' , MAX_CONTENT: 'max-content' , MIN_CONTENT: 'min-content' , WEBKIT_FILL: '-webkit-fill-available' , INHERIT: 'inherit' };
 }
 
 module.exports = {

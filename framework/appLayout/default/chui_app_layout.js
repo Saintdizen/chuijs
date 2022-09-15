@@ -3,6 +3,7 @@ const {Toggle} = require('../../components/chui_toggle');
 const {Icon, Icons} = require('../../components/chui_icons');
 const Store = require('electron-store');
 const {Button} = require("../../components/chui_button");
+const {style_parse} = require("../../modules/chui_functions");
 const store = new Store();
 
 //VARS
@@ -545,18 +546,6 @@ class AppLayout extends Route {
                     "display": "flex",
                 }
             }
-            /*,
-            {
-                name: "blockquote:before",
-                style: {
-                    "color": "var(--blue_prime_background)",
-                    "content": "open-quote",
-                    "font-size": "4em",
-                    "line-height": "0.1em",
-                    "margin-right": "0.25em",
-                    "vertical-align": "-0.4em"
-                }
-            },*/
         ], 'chUiJS_AppLayout');
         document.body.setAttribute('theme', 'light')
         document.getElementById('app').append(this.#applayout);
@@ -591,9 +580,7 @@ class AppLayout extends Route {
 
         // Установка темы
         const dataTheme = store.get("dark");
-        if (dataTheme === undefined) {
-            store.set("dark", false)
-        }
+        if (dataTheme === undefined) store.set("dark", false)
         this.#dark_mode_togle.setValue(store.get("dark"))
 
         if (this.#dark_mode_togle.getValue()) {
@@ -733,6 +720,65 @@ class AppLayout extends Route {
         } else {
             console.error(`Страница "${page.getTitle()}" уже добавлена в меню`)
         }
+    }
+    addComponentToAppLayout(options = {
+        center: [],
+        headerRight: []
+    }) {
+        if (options.center !== undefined) {
+            for (let component of options.center) {
+                center.appendChild(component.set())
+            }
+        }
+        if (options.headerRight !== undefined) {
+            this.#header_right_box.innerHTML = '';
+            for (let component of options.headerRight) {
+                this.#header_right_box.appendChild(component.set())
+            }
+            this.#header_right_box.appendChild(this.#notification_button)
+        }
+    }
+    static BUTTON(text, listener) {
+        return new HeaderButton(text, listener);
+    }
+}
+
+class HeaderButton {
+    #header_button = document.createElement("header_button");
+    constructor(text = String(undefined), listener = () => {}) {
+        const {style_parse} = require('../../modules/chui_functions');
+        style_parse([
+            {
+                name: "header_button",
+                style: {
+                    "cursor": "pointer",
+                    "outline": "none",
+                    "height": "max-content",
+                    "width": "max-content",
+                    "border": "none",
+                    "border-radius": "var(--border_radius)",
+                    "padding": "6px 10px",
+                    "margin": "var(--margin)",
+                    "font-size": "12pt",
+                    "background": "transparent",
+                    "color": "var(--text_color)",
+                    "font-weight": "500"
+                }
+            },
+            {
+                name: "header_button:hover",
+                style: {
+                    "background": "var(--blue_prime_background)",
+                    "color": "var(--text_color_hover)",
+                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
+                }
+            },
+        ], 'chUiJS_HeaderButton');
+        this.#header_button.innerText = text;
+        this.#header_button.addEventListener("click", listener);
+    }
+    set() {
+        return this.#header_button;
     }
 }
 

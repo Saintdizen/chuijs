@@ -1,7 +1,4 @@
-const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView, Form, TextInput,
-    Notification,
-    NotificationStyle, Image
-} = require('../../index');
+const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView, Notification} = require('../../index');
 
 class OthersComponentsPage extends Page {
     constructor() {
@@ -26,7 +23,7 @@ class OthersComponentsPage extends Page {
         let h1_progress = new H(1, "Прогресс бары")
         let progress = new ProgressBar(100)
         progress.setValue(50)
-        progress.setWidth(Styles.WIDTH.WEBKIT_FILL)
+        progress.setWidth(Styles.SIZE.WEBKIT_FILL)
         progress.setProgressCountText("setProgressCountText")
         progress.setProgressText("setProgressText")
         this.add(h1_progress, progress)
@@ -42,7 +39,7 @@ class OthersComponentsPage extends Page {
             justify: Styles.JUSTIFY.START,
             align: Styles.ALIGN.START,
             direction: Styles.DIRECTION.ROW,
-            width: Styles.WIDTH.WEBKIT_FILL
+            width: Styles.SIZE.WEBKIT_FILL
         });
         details.add(new H(1, 'Заголовок'))
         this.add(h1_others, accordion, details)
@@ -52,18 +49,18 @@ class OthersComponentsPage extends Page {
             components: [
                 TreeView.Button({
                     title: "Главная",
-                    listener: () => { new Notification({ title: "Главная", text: "Открыта главная страница", style: NotificationStyle.SUCCESS, showTime: 50000 }).show() }
+                    listener: () => { new Notification({ title: "Главная", text: "Открыта главная страница", style: Notification.STYLE.SUCCESS, showTime: 50000 }).show() }
                 }),
                 TreeView.ExpandButton({
                     title: "Страницы",
                     subButtons: [
                         TreeView.Button({
                             title: "Страница 1",
-                            listener: () => { new Notification({ title: "Страница 1", text: "Открыта Страница 1", style: NotificationStyle.SUCCESS, showTime: 5000 }).show() }
+                            listener: () => { new Notification({ title: "Страница 1", text: "Открыта Страница 1", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show() }
                         }),
                         TreeView.Button({
                             title: "Страница 2",
-                            listener: () => { new Notification({ title: "Страница 2", text: "Открыта Страница 2", style: NotificationStyle.SUCCESS, showTime: 5000 }).show() }
+                            listener: () => { new Notification({ title: "Страница 2", text: "Открыта Страница 2", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show() }
                         }),
                     ]
                 }),

@@ -1,6 +1,6 @@
 /** RENDERER PROCESS */
 /** IMPORTS */
-const {AppLayout, render} = require('../index');
+const {AppLayout, render, Dialog} = require('../index');
 
 const {Inputs_Buttons_Page} = require('./views/1_inputs_buttons');
 const {OthersComponentsPage} = require('./views/0_others');
@@ -28,6 +28,15 @@ class App extends AppLayout {
         this.setRoute(new SlidesPage());
         this.setRoute(new WebViewsPage());
         this.setRoute(new TabsPage());
+
+        let dialog = new Dialog({ width: "500px", height: "500px", closeOutSideClick: true })
+        let profile = new Dialog({ width: "500px", height: "500px", closeOutSideClick: true })
+        this.addComponentToAppLayout({
+            center: [ dialog, profile ],
+            headerRight: [
+                AppLayout.BUTTON("Доступно обновление!", () => dialog.open())
+            ]
+        })
     }
 }
-render(() => new App()).then(r => console.log("Загружено!"));
+render(() => new App()).catch(e => console.log(e));

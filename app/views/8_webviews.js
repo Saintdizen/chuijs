@@ -1,4 +1,4 @@
-const {Page, WebView, Notification, NotificationStyle} = require('../../index');
+const {Page, WebView, Notification} = require('../../index');
 
 class WebViewsPage extends Page {
     constructor() {

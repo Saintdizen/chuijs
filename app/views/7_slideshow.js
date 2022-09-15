@@ -9,14 +9,14 @@ class SlidesPage extends Page {
         this.setFullHeight()
 
         let slideshow = new SlideShow({
-            width: Styles.WIDTH.WEBKIT_FILL,
-            height: Styles.WIDTH.WEBKIT_FILL,
+            width: Styles.SIZE.WEBKIT_FILL,
+            height: Styles.SIZE.WEBKIT_FILL,
             autoplay: { status: false, interval: 5 },
             slides: [
                 SlideShow.SLIDE({
                     size: {
-                        width: Styles.WIDTH.WEBKIT_FILL,
-                        height: Styles.HEIGHT.WEBKIT_FILL
+                        width: Styles.SIZE.WEBKIT_FILL,
+                        height: Styles.SIZE.WEBKIT_FILL
                     },
                     style: {
                         direction: Styles.DIRECTION.ROW, wrap: Styles.WRAP.WRAP,
@@ -31,8 +31,8 @@ class SlidesPage extends Page {
                 }),
                 SlideShow.SLIDE({
                     size: {
-                        width: Styles.WIDTH.WEBKIT_FILL,
-                        height: Styles.HEIGHT.WEBKIT_FILL
+                        width: Styles.SIZE.WEBKIT_FILL,
+                        height: Styles.SIZE.WEBKIT_FILL
                     },
                     style: {
                         direction: Styles.DIRECTION.ROW, wrap: Styles.WRAP.WRAP,
