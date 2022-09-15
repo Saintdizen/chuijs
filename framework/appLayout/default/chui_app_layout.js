@@ -3,7 +3,6 @@ const {Toggle} = require('../../components/chui_toggle');
 const {Icon, Icons} = require('../../components/chui_icons');
 const Store = require('electron-store');
 const {Button} = require("../../components/chui_button");
-const {Notification} = require("../../components/chui_notification");
 const store = new Store();
 
 //VARS
@@ -823,18 +822,6 @@ class UserProfile {
                     "color": "var(--text_color_hover)",
                     "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
                 }
-            },
-            {
-                name: "user_dd_image",
-                style: {
-                    "width": "159px",
-                    "height": "159px",
-                    "display": "block",
-                    "padding": "6px",
-                    "margin-bottom": "6px",
-                    "background": "black",
-                    "border-radius": "50%"
-                }
             }
         ], 'chUiJS_UserProfile');
         this.#user_button.innerText = username;
@@ -859,13 +846,48 @@ class UserDDItem {
 }
 
 class UserDDImage {
+    #user_dd_image_main = document.createElement("user_dd_image_main");
     #user_dd_image = document.createElement("user_dd_image");
-    constructor() {
-        //this.#user_dd_image.style.width = "";
-        //this.#user_dd_image.style.height = "";
+    constructor(username = String(undefined)) {
+        require('../../modules/chui_functions').style_parse([
+            {
+                name: "user_dd_image_main",
+                style: {
+                    "width": "-webkit-fill-available",
+                    "height": "-webkit-fill-available",
+                    "display": "flex",
+                    "flex-direction": "column",
+                    "align-items":"center",
+                    "justify-content":"center",
+                    "flex-wrap":"nowrap",
+                    "margin-bottom": "6px"
+                }
+            },
+            {
+                name: "user_dd_image",
+                style: {
+                    "width": "80px",
+                    "height": "80px",
+                    "display": "flex",
+                    "padding": "6px",
+                    "border": "2px solid var(--input_background)",
+                    "border-radius": "50%",
+                    "align-items":"center",
+                    "justify-content":"center",
+                    "font-size": "20pt",
+                }
+            }
+        ], 'chUiJS_UserDDImage');
+        window.addEventListener('load', (e) => {
+            let name = document.getElementsByTagName("user_button")[0].textContent;
+            let new_name = ""
+            for (let item of name.split(" ")) new_name += item.charAt(0);
+            this.#user_dd_image.innerText = new_name;
+            this.#user_dd_image_main.appendChild(this.#user_dd_image)
+        })
     }
     set() {
-        return this.#user_dd_image;
+        return this.#user_dd_image_main;
     }
 }
 
