@@ -739,15 +739,15 @@ class AppLayout extends Route {
         }
     }
     static BUTTON(text, listener) { return new HeaderButton(text, listener); }
-    static USER_PROFILE(username, width, items) { return new UserProfile(username, width, items); }
-    static USER_DROPDOWN_ITEM(title, clickEvent) { return new UserDropDownItem(title, clickEvent) }
+    static USER_PROFILE(username, items) { return new UserProfile(username, items); }
+    static USER_DD_ITEM(title, clickEvent) { return new UserDDItem(title, clickEvent); }
 }
 
 class UserProfile {
     #user_main = document.createElement("user_main");
     #user_button = document.createElement("user_button");
     #user_dropdown = document.createElement("user_dropdown");
-    constructor(username = String(undefined), width = String(undefined), items = []) {
+    constructor(username = String(undefined), items = []) {
         require('../../modules/chui_functions').style_parse([
             {
                 name: "user_main",
@@ -798,7 +798,7 @@ class UserProfile {
                     "padding": "6px",
                     "z-index": "1",
                     "right": "0",
-                    "min-width": "150px"
+                    "min-width": "165px"
                 }
             },
             {
@@ -825,7 +825,6 @@ class UserProfile {
             }
         ], 'chUiJS_UserProfile');
         this.#user_button.innerText = username;
-        this.#user_dropdown.style.width = width;
         this.#user_main.appendChild(this.#user_button)
         this.#user_main.appendChild(this.#user_dropdown)
         for (let item of items) this.#user_dropdown.appendChild(item.set())
@@ -835,7 +834,7 @@ class UserProfile {
     }
 }
 
-class UserDropDownItem {
+class UserDDItem {
     #user_item = document.createElement("user_item");
     constructor(title = String(undefined), clickEvent = () => {}) {
         this.#user_item.innerText = title;
@@ -843,6 +842,17 @@ class UserDropDownItem {
     }
     set() {
         return this.#user_item;
+    }
+}
+
+class UserDDImage {
+    #user_dd_image = document.createElement("user_dd_image");
+    constructor(title = String(undefined), clickEvent = () => {}) {
+        this.#user_dd_image.innerText = title;
+        this.#user_dd_image.addEventListener("click", clickEvent)
+    }
+    set() {
+        return this.#user_dd_image;
     }
 }
 
