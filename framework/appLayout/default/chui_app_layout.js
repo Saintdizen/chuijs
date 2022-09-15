@@ -741,6 +741,7 @@ class AppLayout extends Route {
     static BUTTON(text, listener) { return new HeaderButton(text, listener); }
     static USER_PROFILE(username, items) { return new UserProfile(username, items); }
     static USER_DD_ITEM(title, clickEvent) { return new UserDDItem(title, clickEvent); }
+    static USER_DD_IMAGE() { return new UserDDImage(); }
 }
 
 class UserProfile {
@@ -822,6 +823,18 @@ class UserProfile {
                     "color": "var(--text_color_hover)",
                     "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
                 }
+            },
+            {
+                name: "user_dd_image",
+                style: {
+                    "width": "159px",
+                    "height": "159px",
+                    "display": "block",
+                    "padding": "6px",
+                    "margin-bottom": "6px",
+                    "background": "black",
+                    "border-radius": "50%"
+                }
             }
         ], 'chUiJS_UserProfile');
         this.#user_button.innerText = username;
@@ -847,9 +860,9 @@ class UserDDItem {
 
 class UserDDImage {
     #user_dd_image = document.createElement("user_dd_image");
-    constructor(title = String(undefined), clickEvent = () => {}) {
-        this.#user_dd_image.innerText = title;
-        this.#user_dd_image.addEventListener("click", clickEvent)
+    constructor() {
+        //this.#user_dd_image.style.width = "";
+        //this.#user_dd_image.style.height = "";
     }
     set() {
         return this.#user_dd_image;

@@ -36,6 +36,7 @@ class App extends AppLayout {
             headerRight: [
                 AppLayout.BUTTON("Доступно обновление!", () => dialog.open()),
                 AppLayout.USER_PROFILE("Чувахин Иван",[
+                    AppLayout.USER_DD_IMAGE(),
                     AppLayout.USER_DD_ITEM("Профиль", () => profile.open()),
                     AppLayout.USER_DD_ITEM("Выход", () => console.log("Выход")),
                 ])
