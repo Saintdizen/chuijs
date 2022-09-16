@@ -129,6 +129,7 @@ class Main {
         tray: []
     }) {
         app.whenReady().then(() => {
+            process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
             //START
             this.#window.loadURL(`data:text/html;charset=UTF-8,<!DOCTYPE html>\
             <html>\

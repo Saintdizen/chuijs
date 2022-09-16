@@ -460,7 +460,7 @@ class AppLayout extends Route {
                     "border": "none",
                     "border-radius": "var(--border_radius)",
                     "padding": "6px",
-                    "margin": "var(--margin)",
+                    "margin": "var(--margin) var(--margin) var(--margin) 0px",
                     "font-size": "12pt",
                     "font-weight": "600",
                     "background": "transparent",
@@ -701,9 +701,7 @@ class AppLayout extends Route {
             }
             button_route.addEventListener('click', () => {
                 if (!button_route.classList.contains('route_active')) {
-                    for (let act of document.getElementsByTagName('route')) {
-                        act.classList.remove('route_active');
-                    }
+                    for (let act of document.getElementsByTagName('route')) act.classList.remove('route_active');
                     this.go(page);
                     button_route.classList.add("route_active");
                     if (this.#auto_close) {
@@ -724,30 +722,66 @@ class AppLayout extends Route {
         center: [],
         headerRight: []
     }) {
-        if (options.center !== undefined) {
-            for (let component of options.center) {
-                center.appendChild(component.set())
-            }
-        }
+        if (options.center !== undefined) for (let component of options.center) this.#applayout.appendChild(component.set());
         if (options.headerRight !== undefined) {
             this.#header_right_box.innerHTML = '';
-            for (let component of options.headerRight) {
-                this.#header_right_box.appendChild(component.set())
-            }
+            for (let component of options.headerRight) this.#header_right_box.appendChild(component.set());
             this.#header_right_box.appendChild(this.#notification_button)
         }
     }
-    static BUTTON(text, listener) { return new HeaderButton(text, listener); }
-    static USER_PROFILE(username, items) { return new UserProfile(username, items); }
-    static USER_DD_ITEM(title, clickEvent) { return new UserDDItem(title, clickEvent); }
-    static USER_DD_IMAGE() { return new UserDDImage(); }
+    static BUTTON(options= {
+        title: String(undefined),
+        icon: undefined,
+        reverse: Boolean(undefined),
+        clickEvent: () => {}
+    }) {
+        return new HeaderButton({
+            title: options.title,
+            icon: options.icon,
+            reverse: options.reverse,
+            clickEvent: options.clickEvent
+        });
+    }
+    static USER_PROFILE(options = {
+        username: String(undefined),
+        imageLink: String(undefined),
+        imageBase64: String(undefined),
+        items: []
+    }) {
+        return new UserProfile({
+            username: options.username,
+            imageLink: options.imageLink,
+            imageBase64: options.imageBase64,
+            items: options.items
+        });
+    }
+    static USER_DD_ITEM(options= {
+        title: String(undefined),
+        icon: undefined,
+        clickEvent: () => {}
+    }) {
+        return new UserDDItem({
+            title: options.title,
+            icon: undefined,
+            clickEvent: options.clickEvent
+        });
+    }
 }
 
 class UserProfile {
     #user_main = document.createElement("user_main");
     #user_button = document.createElement("user_button");
     #user_dropdown = document.createElement("user_dropdown");
-    constructor(username = String(undefined), items = []) {
+    //
+    #user_dd_image_main = document.createElement("user_dd_image_main");
+    #user_dd_image = document.createElement("user_dd_image");
+    //
+    constructor(options = {
+        username: String(undefined),
+        imageLink: String(undefined),
+        imageBase64: String(undefined),
+        items: []
+    }) {
         require('../../modules/chui_functions').style_parse([
             {
                 name: "user_main",
@@ -757,13 +791,15 @@ class UserProfile {
                 }
             },
             {
-                name: "user_main:hover user_dropdown",
+                name: "user_button:hover",
                 style: {
-                    "display": "block"
+                    "background": "var(--blue_prime_background)",
+                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
+                    "color": "var(--text_color_hover)",
                 }
             },
             {
-                name: "user_main:hover user_button",
+                name: ".user_button",
                 style: {
                     "background": "var(--blue_prime_background)",
                     "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
@@ -780,7 +816,7 @@ class UserProfile {
                     "color": "var(--text_color)",
                     "border-radius": "var(--border_radius)",
                     "padding": "6px 10px",
-                    "margin": "var(--margin)",
+                    "margin": "var(--margin) 0px var(--margin) var(--margin)",
                     "font-weight": "500"
                 }
             },
@@ -798,7 +834,8 @@ class UserProfile {
                     "padding": "6px",
                     "z-index": "1",
                     "right": "0",
-                    "min-width": "165px"
+                    "min-width": "165px",
+                    "flex-direction": "column"
                 }
             },
             {
@@ -822,34 +859,8 @@ class UserProfile {
                     "color": "var(--text_color_hover)",
                     "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
                 }
-            }
-        ], 'chUiJS_UserProfile');
-        this.#user_button.innerText = username;
-        this.#user_main.appendChild(this.#user_button)
-        this.#user_main.appendChild(this.#user_dropdown)
-        for (let item of items) this.#user_dropdown.appendChild(item.set())
-    }
-    set() {
-        return this.#user_main;
-    }
-}
-
-class UserDDItem {
-    #user_item = document.createElement("user_item");
-    constructor(title = String(undefined), clickEvent = () => {}) {
-        this.#user_item.innerText = title;
-        this.#user_item.addEventListener("click", clickEvent)
-    }
-    set() {
-        return this.#user_item;
-    }
-}
-
-class UserDDImage {
-    #user_dd_image_main = document.createElement("user_dd_image_main");
-    #user_dd_image = document.createElement("user_dd_image");
-    constructor(username = String(undefined)) {
-        require('../../modules/chui_functions').style_parse([
+            },
+            //
             {
                 name: "user_dd_image_main",
                 style: {
@@ -877,23 +888,70 @@ class UserDDImage {
                     "font-size": "20pt",
                 }
             }
-        ], 'chUiJS_UserDDImage');
-        window.addEventListener('load', (e) => {
-            let name = document.getElementsByTagName("user_button")[0].textContent;
-            let new_name = ""
-            for (let item of name.split(" ")) new_name += item.charAt(0);
-            this.#user_dd_image.innerText = new_name;
-            this.#user_dd_image_main.appendChild(this.#user_dd_image)
+        ], 'chUiJS_UserProfile');
+        this.#user_button.innerText = options.username;
+        this.#user_main.appendChild(this.#user_button)
+        this.#user_main.appendChild(this.#user_dropdown)
+        this.#user_button.addEventListener("click", (e) => {
+            if (this.#user_dropdown.style.display === "flex") {
+                this.#user_button.classList.remove("user_button");
+                new Animation(this.#user_dropdown).disappearance();
+            } else {
+                this.#user_button.classList.add("user_button");
+                new Animation(this.#user_dropdown).appearance();
+            }
         })
+        window.addEventListener('click', (event) => {
+            if (event.target.parentNode !== this.#user_main) {
+                this.#user_button.classList.remove("user_button");
+                new Animation(this.#user_dropdown).disappearance();
+            }
+        });
+        //
+        if (options.imageLink === undefined) {
+            let new_name = ""
+            for (let item of options.username.split(" ")) new_name += item.charAt(0);
+            this.#user_dd_image.innerText = new_name;
+            this.#user_dd_image_main.appendChild(this.#user_dd_image);
+            this.#user_dropdown.appendChild(this.#user_dd_image_main);
+        }
+        //
+        for (let item of options.items) this.#user_dropdown.appendChild(item.set());
     }
     set() {
-        return this.#user_dd_image_main;
+        return this.#user_main;
+    }
+}
+
+class UserDDItem {
+    #user_item = document.createElement("user_item");
+    constructor(options= {
+        title: String(undefined),
+        icon: undefined,
+        clickEvent: () => {}
+    }) {
+        if (options.title !== undefined && options.icon !== undefined) {
+            this.#user_item.innerHTML = options.title + options.icon;
+        }
+        if (options.title !== undefined) this.#user_item.innerText = options.title;
+        if (options.icon !== undefined) this.#user_item.innerHTML = options.icon;
+        this.#user_item.addEventListener("click", options.clickEvent)
+    }
+    set() {
+        return this.#user_item;
     }
 }
 
 class HeaderButton {
     #header_button = document.createElement("header_button");
-    constructor(text = String(undefined), listener = () => {}) {
+    #header_button_title = document.createElement("header_button_title");
+    #header_button_icon = document.createElement("header_button_icon");
+    constructor(options = {
+        title: String(undefined),
+        icon: undefined,
+        reverse: Boolean(undefined),
+        clickEvent: () => {}
+    }) {
         require('../../modules/chui_functions').style_parse([
             {
                 name: "header_button",
@@ -905,24 +963,57 @@ class HeaderButton {
                     "border": "none",
                     "border-radius": "var(--border_radius)",
                     "padding": "6px 10px",
-                    "margin": "var(--margin)",
+                    "margin": "var(--margin) 0px var(--margin) var(--margin)",
                     "font-size": "12pt",
                     "background": "transparent",
                     "color": "var(--text_color)",
-                    "font-weight": "500"
+                    "font-weight": "500",
+                    "display": "flex",
+                    "flex-direction": "row"
                 }
             },
             {
                 name: "header_button:hover",
                 style: {
                     "background": "var(--blue_prime_background)",
-                    "color": "var(--text_color_hover)",
                     "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
                 }
             },
+            {
+                name: "header_button:hover header_button_title",
+                style: {
+                    "color": "var(--text_color_hover)",
+                }
+            },
+            {
+                name: "header_button:hover chui_icon",
+                style: {
+                    "color": "var(--text_color_hover)",
+                }
+            },
         ], 'chUiJS_HeaderButton');
-        this.#header_button.innerText = text;
-        this.#header_button.addEventListener("click", listener);
+        if (options.title !== undefined && options.icon !== undefined) {
+            if (options.reverse) {
+                this.#header_button_title.innerText = options.title;
+                this.#header_button_icon.innerHTML = options.icon.getHTML();
+                this.#header_button_icon.style.marginRight = "6px";
+                this.#header_button.appendChild(this.#header_button_icon)
+                this.#header_button.appendChild(this.#header_button_title)
+            } else {
+                this.#header_button_title.innerText = options.title;
+                this.#header_button_icon.innerHTML = options.icon.getHTML();
+                this.#header_button_icon.style.marginLeft = "6px";
+                this.#header_button.appendChild(this.#header_button_title)
+                this.#header_button.appendChild(this.#header_button_icon)
+            }
+        } else if (options.title !== undefined && options.icon === undefined) {
+            this.#header_button_title.innerText = options.title;
+            this.#header_button.appendChild(this.#header_button_title)
+        } else if (options.title === undefined && options.icon !== undefined) {
+            this.#header_button_icon.innerHTML = options.icon.getHTML();
+            this.#header_button.appendChild(this.#header_button_icon)
+        }
+        this.#header_button.addEventListener("click", options.clickEvent);
     }
     set() {
         return this.#header_button;

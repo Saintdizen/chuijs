@@ -1,6 +1,6 @@
 /** RENDERER PROCESS */
 /** IMPORTS */
-const {AppLayout, render, Dialog} = require('../index');
+const {AppLayout, render, Dialog, Icon, Icons} = require('../index');
 
 const {Inputs_Buttons_Page} = require('./views/1_inputs_buttons');
 const {OthersComponentsPage} = require('./views/0_others');
@@ -34,12 +34,25 @@ class App extends AppLayout {
         this.addComponentToAppLayout({
             center: [ dialog, profile ],
             headerRight: [
-                AppLayout.BUTTON("Доступно обновление!", () => dialog.open()),
-                AppLayout.USER_PROFILE("Чувахин Иван",[
-                    AppLayout.USER_DD_IMAGE(),
-                    AppLayout.USER_DD_ITEM("Профиль", () => profile.open()),
-                    AppLayout.USER_DD_ITEM("Выход", () => console.log("Выход")),
-                ])
+                AppLayout.BUTTON({
+                    title: "Доступно обновление!",
+                    icon: new Icon(Icons.ACTIONS.SYSTEM_UPDATE_ALT, "20px"),
+                    reverse: false,
+                    clickEvent: () => { dialog.open() }
+                }),
+                AppLayout.USER_PROFILE({
+                    username: "Чувахин Иван",
+                    items: [
+                        AppLayout.USER_DD_ITEM({
+                            title: "Профиль",
+                            clickEvent: () => { profile.open() }
+                        }),
+                        AppLayout.USER_DD_ITEM({
+                            title: "Выход",
+                            clickEvent: () => { console.log("Выход") }
+                        })
+                    ]
+                })
             ]
         })
     }
