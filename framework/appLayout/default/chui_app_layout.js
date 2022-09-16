@@ -744,14 +744,20 @@ class AppLayout extends Route {
     }
     static USER_PROFILE(options = {
         username: String(undefined),
-        imageLink: String(undefined),
-        imageBase64: String(undefined),
+        image: {
+            noImage: Boolean(undefined),
+            imageLink: String(undefined),
+            imageBase64: String(undefined),
+        },
         items: []
     }) {
         return new UserProfile({
             username: options.username,
-            imageLink: options.imageLink,
-            imageBase64: options.imageBase64,
+            image: {
+                noImage: options.image.noImage,
+                imageLink: options.image.imageLink,
+                imageBase64: options.image.imageBase64,
+            },
             items: options.items
         });
     }
@@ -778,8 +784,11 @@ class UserProfile {
     //
     constructor(options = {
         username: String(undefined),
-        imageLink: String(undefined),
-        imageBase64: String(undefined),
+        image: {
+            noImage: Boolean(undefined),
+            imageLink: String(undefined),
+            imageBase64: String(undefined),
+        },
         items: []
     }) {
         require('../../modules/chui_functions').style_parse([
@@ -908,12 +917,14 @@ class UserProfile {
             }
         });
         //
-        if (options.imageLink === undefined) {
-            let new_name = ""
-            for (let item of options.username.split(" ")) new_name += item.charAt(0);
-            this.#user_dd_image.innerText = new_name;
-            this.#user_dd_image_main.appendChild(this.#user_dd_image);
-            this.#user_dropdown.appendChild(this.#user_dd_image_main);
+        if (options.image !== undefined) {
+            if (!options.image.noImage) {
+                let new_name = ""
+                for (let item of options.username.split(" ")) new_name += item.charAt(0);
+                this.#user_dd_image.innerText = new_name;
+                this.#user_dd_image_main.appendChild(this.#user_dd_image);
+                this.#user_dropdown.appendChild(this.#user_dd_image_main);
+            }
         }
         //
         for (let item of options.items) this.#user_dropdown.appendChild(item.set());

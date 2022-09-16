@@ -42,6 +42,9 @@ class App extends AppLayout {
                 }),
                 AppLayout.USER_PROFILE({
                     username: "Чувахин Иван",
+                    image: {
+                        noImage: true
+                    },
                     items: [
                         AppLayout.USER_DD_ITEM({
                             title: "Профиль",
