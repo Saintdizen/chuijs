@@ -44,7 +44,7 @@ class ProgressBar {
                 }
             }
         ], 'chUiJS_ProgressBar');
-        this.#ProgressBar.max = max;
+        if (max !== undefined) this.#ProgressBar.max = max;
         this.#ProgressBar.id = this.#id;
         this.#progress_count.setAttribute('for', this.#id);
         this.#progress_text.setAttribute('for', this.#id);
