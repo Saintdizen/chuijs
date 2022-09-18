@@ -4,7 +4,9 @@ class ProgressBar {
     #main = document.createElement("progress_block");
     #progress_count = document.createElement('progress_count');
     #progress_text = document.createElement('progress_text');
-    constructor(max = Number(undefined)) {
+    constructor(options = {
+        max: Number(undefined)
+    }) {
         require('../modules/chui_functions').style_parse([
             {
                 name: "progress_block",
@@ -44,7 +46,7 @@ class ProgressBar {
                 }
             }
         ], 'chUiJS_ProgressBar');
-        if (max !== undefined) this.#ProgressBar.max = max;
+        if (options.max !== undefined) this.#ProgressBar.max = options.max;
         this.#ProgressBar.id = this.#id;
         this.#progress_count.setAttribute('for', this.#id);
         this.#progress_text.setAttribute('for', this.#id);
