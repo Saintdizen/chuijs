@@ -56,6 +56,7 @@ class ProgressBar {
         this.#main.appendChild(this.#ProgressBar)
         this.#main.appendChild(this.#progress_text)
     }
+    setMax(max = Number(undefined)) { this.#ProgressBar.max = max; }
     setWidth(width = String(undefined)) { this.#main.style.width = width; }
     setProgressCountText(text = String(undefined)) { this.#progress_count.innerText = text; }
     setValue(value = Number(undefined)) { this.#ProgressBar.value = value; }
