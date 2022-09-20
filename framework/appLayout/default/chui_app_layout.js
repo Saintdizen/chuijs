@@ -4,6 +4,8 @@ const {Icon, Icons} = require('../../components/chui_icons');
 const {Button} = require("../../components/chui_button");
 // НАСТРОЙКИ
 const Store = require('electron-store');
+const ipcRenderer = require('electron').ipcRenderer;
+const remote = require('electron').remote;
 const store = new Store();
 //
 
@@ -36,6 +38,11 @@ class AppLayout extends Route {
     #notification_box_controls = document.createElement("notification_box_controls");
     #notification_box_width = 420;
     #notification_button = document.createElement('notification_button');
+    //
+    #window_control_box = document.createElement("header_window_control_box");
+    #window_close_button = document.createElement("window_close_button");
+    #window_minimize_button = document.createElement("window_minimize_button");
+    //
     #app_menu = document.createElement('app_menu');
     #def_menu_block_width = 410;
     #route_views = document.createElement('route_views');
@@ -84,7 +91,7 @@ class AppLayout extends Route {
                     "width": "100%",
                     "height": "100%",
                     "margin": "0",
-                    "padding": "0"
+                    "padding": "0",
                 }
             },
             {
@@ -144,8 +151,8 @@ class AppLayout extends Route {
                     //Остальное
                     "--text_color_hover": "rgb(242, 242, 247)",
                     "--disable_color": "#e9ecef",
-
-                    //
+                    // Управление окнами
+                    "--window_close_button_hover":"rgba(255, 59, 48, 1)",
                     //Шрифты
                     "--font_default_size": "12pt",
                     "--font_labels_size": "10pt",
@@ -201,6 +208,8 @@ class AppLayout extends Route {
                     //Остальное
                     "--disable_color": "#e9ecef",
                     "--scroll_bar_background": "rgb(58, 58, 60)",
+                    // Управление окнами
+                    "--window_close_button_hover":"rgba(255, 69, 58, 1)",
                 }
             },
             {
@@ -262,7 +271,8 @@ class AppLayout extends Route {
                     "background": "transparent",
                     "backdrop-filter": "blur(8px) opacity(0)",
                     "transition": "opacity .1s, background .1s, backdrop-filter .1s",
-                    "justify-content": "space-between"
+                    "justify-content": "space-between",
+                    "-webkit-app-region": "drag"
                 }
             },
             {
@@ -317,7 +327,8 @@ class AppLayout extends Route {
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
                     "border-left": "1px solid var(--border_header)",
-                    "backdrop-filter": "blur(8px)"
+                    "backdrop-filter": "blur(8px)",
+                    "-webkit-app-region": "no-drag"
                 }
             },
             {
@@ -371,7 +382,8 @@ class AppLayout extends Route {
                     "margin": "var(--margin)",
                     "font-size": "22pt",
                     "background": "transparent",
-                    "color": "var(--text_color)"
+                    "color": "var(--text_color)",
+                    "-webkit-app-region": "no-drag"
                 }
             },
             {
@@ -400,7 +412,8 @@ class AppLayout extends Route {
                     "margin": "var(--margin)",
                     "font-size": "22pt",
                     "background": "transparent",
-                    "color": "var(--text_color)"
+                    "color": "var(--text_color)",
+                    "-webkit-app-region": "no-drag"
                 }
             },
             {
@@ -424,7 +437,8 @@ class AppLayout extends Route {
                     "padding": "6px",
                     "width":"-webkit-fill-available",
                     "height":"-webkit-fill-available",
-                    "overflow": "auto"
+                    "overflow": "auto",
+                    "-webkit-app-region": "no-drag"
                 }
             },
             {
@@ -523,6 +537,7 @@ class AppLayout extends Route {
                 name: "header_left_box",
                 style: {
                     "display": "flex",
+                    "width": "-webkit-fill-available",
                 }
             },
             {
@@ -530,7 +545,75 @@ class AppLayout extends Route {
                 style: {
                     "display": "flex",
                 }
-            }
+            },
+            ///
+            {
+                name: "header_window_control_box",
+                style: {
+                    "display": "flex",
+                }
+            },
+            {
+                name: "window_minimize_button",
+                style: {
+                    "cursor": "pointer",
+                    "outline": "none",
+                    "height": "max-content",
+                    "width": "max-content",
+                    "border": "none",
+                    "border-radius": "var(--border_radius)",
+                    "padding": "6px",
+                    "margin": "var(--margin)",
+                    "font-size": "22pt",
+                    "background": "transparent",
+                    "color": "var(--text_color)",
+                    "-webkit-app-region": "no-drag"
+                }
+            },
+            {
+                name: "window_minimize_button:hover",
+                style: {
+                    "background": "var(--blue_prime_background)",
+                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
+                }
+            },
+            {
+                name: "window_minimize_button:hover chui_icon",
+                style: {
+                    "color": "var(--text_color_hover)"
+                }
+            },
+            {
+                name: "window_close_button",
+                style: {
+                    "cursor": "pointer",
+                    "outline": "none",
+                    "height": "max-content",
+                    "width": "max-content",
+                    "border": "none",
+                    "border-radius": "var(--border_radius)",
+                    "padding": "6px",
+                    "margin": "var(--margin)",
+                    "font-size": "22pt",
+                    "background": "transparent",
+                    "color": "var(--text_color)",
+                    "-webkit-app-region": "no-drag"
+                }
+            },
+            {
+                name: "window_close_button:hover",
+                style: {
+                    "background": "var(--window_close_button_hover)",
+                    "box-shadow": "var(--window_close_button_hover) 0px 0px 2px 0px",
+                }
+            },
+            {
+                name: "window_close_button:hover chui_icon",
+                style: {
+                    "color": "var(--text_color_hover)"
+                }
+            },
+            ///
         ], 'chUiJS_AppLayout');
         document.body.setAttribute('theme', 'light')
         document.getElementById('app').append(this.#applayout);
@@ -665,6 +748,20 @@ class AppLayout extends Route {
         //
         header.appendChild(this.#header_left_box)
         header.appendChild(this.#header_right_box)
+
+        //
+        this.#window_minimize_button.innerHTML = new Icon(Icons.ACTIONS.MINIMIZE).getHTML();
+        this.#window_minimize_button.addEventListener("click", () => {
+            remote.getCurrentWindow().minimize();
+        })
+        this.#window_close_button.innerHTML = new Icon(Icons.NAVIGATION.CLOSE).getHTML();
+        this.#window_close_button.addEventListener("click", () => {
+            ipcRenderer.send("app_close_event");
+        })
+        this.#window_control_box.appendChild(this.#window_minimize_button)
+        this.#window_control_box.appendChild(this.#window_close_button)
+        header.appendChild(this.#window_control_box)
+        //
     }
     setCustomHeaderHeight(height) {
         header.style.height = height;
@@ -783,6 +880,7 @@ class UserProfile {
                 style: {
                     "position": "relative",
                     "display": "flex",
+                    "-webkit-app-region": "no-drag"
                 }
             },
             {
@@ -966,7 +1064,8 @@ class HeaderButton {
                     "color": "var(--text_color)",
                     "font-weight": "500",
                     "display": "flex",
-                    "flex-direction": "row"
+                    "flex-direction": "row",
+                    "-webkit-app-region": "no-drag"
                 }
             },
             {

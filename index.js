@@ -47,6 +47,7 @@ const { FileInput, AcceptTypes } = require("./framework/components/chui_inputs/c
 const { TreeView } = require("./framework/components/chui_tree_view");
 const { Form } = require("./framework/components/chui_form");
 const { SlideShow, Slide } = require("./framework/components/chui_slideshow");
+const os = require("os");
 
 //VARS
 let isQuiting = false;
@@ -73,12 +74,18 @@ class Main {
             this.#app_icon = getDefaultIcon();
         }
         //app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
+        if (os.platform() === "linux") {
+            app.commandLine.hasSwitch("enable-transparent-visuals");
+            app.commandLine.hasSwitch("disable-gpu");
+        }
+
         // Options
         this.#appName = options.name;
         this.#height = options.height;
         this.#width = options.width;
         this.#renderer = options.render;
         // ===
+
         app.whenReady().then(() => {
             this.#window = new BrowserWindow({
                 minWidth: this.#width,
@@ -95,7 +102,9 @@ class Main {
                     spellcheck: false,
                     webviewTag: true,
                     enableRemoteModule: true
-                }
+                },
+                frame: false,
+                transparent: true
             });
             if (options.devTools) { this.#window.webContents.openDevTools() }
             if (!options.menuBarVisible) {
@@ -130,6 +139,13 @@ class Main {
     }) {
         app.whenReady().then(() => {
             process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+            ipcMain.on("app_close_event", () => {
+                if(process.platform !== 'darwin') {
+                    app.quit();
+                } else {
+                    app.exit(0)
+                }
+            })
             //START
             this.#window.loadURL(`data:text/html;charset=UTF-8,<!DOCTYPE html>\
             <html>\
