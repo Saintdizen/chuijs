@@ -1,14 +1,17 @@
 const {Animation} = require('../../modules/chui_animations');
 const {Toggle} = require('../../components/chui_toggle');
 const {Icon, Icons} = require('../../components/chui_icons');
-const Store = require('electron-store');
 const {Button} = require("../../components/chui_button");
+// НАСТРОЙКИ
+const Store = require('electron-store');
 const store = new Store();
+//
 
 //VARS
 let header = null;
 let center = null;
 let page_name = null;
+let route_list = [];
 
 class Route {
     go(page) {
@@ -21,26 +24,9 @@ class Route {
             center.removeAttribute('style');
         });
     }
-    setRoute(page) {
-        let button_route = document.createElement('route');
-        let title_menu = document.createElement('route_title');
-        title_menu.innerHTML = page.getTitle();
-        button_route.addEventListener('click', () => {
-            if (!button_route.classList.contains('route_active')) {
-                for (let act of document.getElementsByTagName('route')) {
-                    act.classList.remove('route_active');
-                }
-                this.go(page);
-                button_route.classList.add("route_active");
-            }
-        });
-        button_route.appendChild(title_menu)
-        document.getElementsByTagName('route_views')[0].appendChild(button_route)
-    }
 }
 
 class AppLayout extends Route {
-    #route_list = [];
     #applayout = document.createElement('applayout');
     #header_left_box = document.createElement("header_left_box");
     #header_right_box = document.createElement("header_right_box");
@@ -688,8 +674,8 @@ class AppLayout extends Route {
         this.#auto_close = boolean;
     }
     setRoute(page) {
-        this.#route_list.push(page);
-        let test = this.#route_list.filter(route => route.getTitle().includes(page.getTitle()));
+        route_list.push(page);
+        let test = route_list.filter(route => route.getTitle().includes(page.getTitle()));
         if (test.length === 1) {
             let button_route = document.createElement('route');
             let title_menu = document.createElement('route_title');
