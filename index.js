@@ -47,7 +47,6 @@ const { FileInput, AcceptTypes } = require("./framework/components/chui_inputs/c
 const { TreeView } = require("./framework/components/chui_tree_view");
 const { Form } = require("./framework/components/chui_form");
 const { SlideShow, Slide } = require("./framework/components/chui_slideshow");
-const os = require("os");
 
 //VARS
 let isQuiting = false;
@@ -74,10 +73,6 @@ class Main {
             this.#app_icon = getDefaultIcon();
         }
         //app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
-        if (os.platform() === "linux") {
-            app.commandLine.hasSwitch("enable-transparent-visuals");
-            app.commandLine.hasSwitch("disable-gpu");
-        }
 
         // Options
         this.#appName = options.name;
@@ -104,7 +99,7 @@ class Main {
                     enableRemoteModule: true
                 },
                 frame: false,
-                transparent: true
+                transparent: true,
             });
             if (options.devTools) { this.#window.webContents.openDevTools() }
             if (!options.menuBarVisible) {
@@ -137,6 +132,12 @@ class Main {
         menuBar: [],
         tray: []
     }) {
+        if (process.platform === "linux") {
+            //app.commandLine.hasSwitch("enable-transparent-visuals");
+            //app.commandLine.hasSwitch("disable-gpu");
+            app.commandLine.appendSwitch('enable-transparent-visuals');
+            app.disableHardwareAcceleration();
+        }
         app.whenReady().then(() => {
             process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
             ipcMain.on("app_close_event", () => {
@@ -180,6 +181,9 @@ class Main {
             this.#window.on('ready-to-show', () => {
                 this.#window.show()
             })
+
+            app.on('ready', () => setTimeout(() => {}, 500));
+
         })
     }
 }

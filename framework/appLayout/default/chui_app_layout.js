@@ -90,25 +90,6 @@ class AppLayout extends Route {
                 }
             },
             {
-                name: "html",
-                style: {
-                    "width": "100%",
-                    "height": "100%",
-                    "margin": "0",
-                    "padding": "0",
-                }
-            },
-            {
-                name: "body",
-                style: {
-                    "width": "100%",
-                    "height": "100%",
-                    "margin": "0",
-                    "padding": "0",
-                    "background": "var(--center_background)"
-                }
-            },
-            {
                 name: ":root",
                 style: {
                     //Цвета
@@ -165,6 +146,7 @@ class AppLayout extends Route {
                     //Отступы
                     "--margin": "6px",
                     "--scroll_bar_background": "rgb(209, 209, 214)",
+                    "--test": "#000"
                 }
             },
             {
@@ -214,6 +196,27 @@ class AppLayout extends Route {
                     "--scroll_bar_background": "rgb(58, 58, 60)",
                     // Управление окнами
                     "--window_close_button_hover":"rgba(255, 69, 58, 1)",
+                    "--test": "#fff"
+                }
+            },
+            {
+                name: "html",
+                style: {
+                    "width": "-webkit-fill-available",
+                    "height": "-webkit-fill-available",
+                    "margin": "0",
+                    "padding": "0",
+                }
+            },
+            {
+                name: "body",
+                style: {
+                    "width": "-webkit-fill-available",
+                    "height": "-webkit-fill-available",
+                    "margin": "0",
+                    "padding": "0",
+                    "border": "3px solid var(--modal_border)",
+                    //"background": "var(--center_background)",
                 }
             },
             {
@@ -250,8 +253,8 @@ class AppLayout extends Route {
             {
                 name: "applayout",
                 style: {
-                    "width": "100%",
-                    "height": "100%",
+                    "width": "-webkit-fill-available",
+                    "height": "-webkit-fill-available",
                     "display": "flex",
                     "flex-direction": "column"
                 }
@@ -259,14 +262,14 @@ class AppLayout extends Route {
             {
                 name: "#app",
                 style: {
-                    "width": "100%",
-                    "height": "100%"
+                    "width": "-webkit-fill-available",
+                    "height": "-webkit-fill-available"
                 }
             },
             {
                 name: "header",
                 style: {
-                    "width": "100%",
+                    "width": "-webkit-fill-available",
                     "position": "absolute",
                     "top": "0",
                     "display": "flex",
@@ -282,7 +285,7 @@ class AppLayout extends Route {
             {
                 name: "main_center_block",
                 style: {
-                    "width": "100%",
+                    "width": "-webkit-fill-available",
                     "height": "-webkit-fill-available",
                     "background": "var(--center_background)",
                     "padding-top": "47px",
