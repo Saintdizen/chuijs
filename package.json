@@ -2,7 +2,7 @@
   "name": "chuijs",
   "productName": "chuijs",
   "description": "chuijs",
-  "version": "0.6.0",
+  "version": "0.6.2",
   "private": false,
   "main": "index.js",
   "author": {
