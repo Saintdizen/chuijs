@@ -98,7 +98,7 @@ class Main {
                     webviewTag: true,
                     enableRemoteModule: true
                 },
-                frame: true,
+                frame: false,
                 transparent: false,
             });
             if (options.devTools) { this.#window.webContents.openDevTools() }
