@@ -888,8 +888,9 @@ class AppLayout extends Route {
     }) {
         if (options.center !== undefined) for (let component of options.center) this.#applayout.appendChild(component.set());
         if (options.headerRight !== undefined) {
-            this.#header_right_box.innerHTML = '';
-            for (let component of options.headerRight) this.#header_right_box.appendChild(component.set());
+            let nodes = [];
+            for (let component of options.headerRight) nodes.push(component.set());
+            this.#header_right_box.append(...nodes);
             this.#header_right_box.appendChild(this.#notification_button)
         }
     }
