@@ -36,7 +36,8 @@ class AppLayout extends Route {
     #notification_box = document.createElement('notification_box');
     #notification_box_main = document.createElement("notification_box_main");
     #notification_box_controls = document.createElement("notification_box_controls");
-    #notification_box_width = 420;
+    #notification_box_width = 400;
+    #notification_box_width_test = 425;
     #notification_button = document.createElement('notification_button');
     //
     #window_control_box = document.createElement("header_window_control_box");
@@ -45,7 +46,8 @@ class AppLayout extends Route {
     #window_maximize_button = document.createElement("window_maximize_button");
     //
     #app_menu = document.createElement('app_menu');
-    #def_menu_block_width = 410;
+    #def_menu_block_width = 400;
+    #def_menu_block_width_test = 425;
     #route_views = document.createElement('route_views');
     #dark_mode = document.createElement('dark_mode');
     #dark_mode_togle = new Toggle();
@@ -304,7 +306,8 @@ class AppLayout extends Route {
                     "margin": "var(--margin)",
                     "align-items": "flex-end",
                     "justify-content": "flex-end",
-                    "z-index": "999"
+                    "z-index": "999",
+                    "-webkit-app-region": "no-drag"
                 }
             },
             {
@@ -318,8 +321,11 @@ class AppLayout extends Route {
                     "align-items":"flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    "border-right": "1px solid var(--border_header)",
-                    "backdrop-filter": "blur(8px)"
+                    "border": "1px solid var(--border_header)",
+                    "backdrop-filter": "blur(8px)",
+                    "-webkit-app-region": "no-drag",
+                    "margin": "64px 20px 20px 20px",
+                    "border-radius": "var(--border_radius)",
                 }
             },
             {
@@ -333,9 +339,11 @@ class AppLayout extends Route {
                     "align-items":"flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    "border-left": "1px solid var(--border_header)",
+                    "border": "1px solid var(--border_header)",
                     "backdrop-filter": "blur(8px)",
-                    "-webkit-app-region": "no-drag"
+                    "-webkit-app-region": "no-drag",
+                    "margin": "64px 20px 20px 20px",
+                    "border-radius": "var(--border_radius)",
                 }
             },
             {
@@ -347,6 +355,7 @@ class AppLayout extends Route {
                     "align-items":"center",
                     "height": "max-content",
                     "width": "-webkit-fill-available",
+                    "-webkit-app-region": "no-drag"
                 }
             },
             {
@@ -363,6 +372,7 @@ class AppLayout extends Route {
                     "font-weight": "600",
                     "background": "transparent",
                     "color": "var(--text_color)",
+                    "-webkit-app-region": "no-drag"
                 }
             },
             {
@@ -373,7 +383,8 @@ class AppLayout extends Route {
                     "overflow": "auto",
                     "height": "-webkit-fill-available",
                     "width": "-webkit-fill-available",
-                    "padding": "0px 6px 6px 6px"
+                    "padding": "0px 6px 6px 6px",
+                    "-webkit-app-region": "no-drag"
                 }
             },
             {
@@ -661,7 +672,7 @@ class AppLayout extends Route {
 
         this.#app_menu.style.top = `calc(${header.style.height})`;
         this.#app_menu.style.width = `${this.#def_menu_block_width}px`;
-        this.#app_menu.style.left = `calc(-${this.#def_menu_block_width}px)`;
+        this.#app_menu.style.left = `calc(-${this.#def_menu_block_width_test}px)`;
         this.#app_menu.style.height = `calc(100% - ${header.style.height})`;
         this.#dark_mode_togle.setId("dark_mode");
 
@@ -679,7 +690,7 @@ class AppLayout extends Route {
         this.#notification_box_main.id = 'chui_notification_box';
         this.#notification_box.style.top = `calc(${header.style.height})`;
         this.#notification_box.style.width = `${this.#notification_box_width}px`;
-        this.#notification_box.style.right = `calc(-${this.#notification_box_width}px)`;
+        this.#notification_box.style.right = `calc(-${this.#notification_box_width_test}px)`;
         this.#notification_box.style.height = `calc(100% - ${header.style.height})`;
 
         // Установка темы
@@ -705,11 +716,11 @@ class AppLayout extends Route {
         this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
 
         this.#menu_button.addEventListener("click", () => {
-            this.#app_menu.style.transform = `translateX(${this.#def_menu_block_width}px)`;
+            this.#app_menu.style.transform = `translateX(${this.#def_menu_block_width_test}px)`;
         })
 
         this.#notification_button.addEventListener("click", () => {
-            this.#notification_box.style.transform = `translateX(-${this.#notification_box_width}px)`;
+            this.#notification_box.style.transform = `translateX(-${this.#notification_box_width_test}px)`;
         })
 
         header.addEventListener('click', (e) => {
@@ -722,14 +733,14 @@ class AppLayout extends Route {
         })
         center.addEventListener('click', (e) => {
             if (!this.#app_menu.contains(e.target)) {
-                if (this.#app_menu.style.transform === `translateX(${this.#def_menu_block_width}px)`) {
-                    this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
+                if (this.#app_menu.style.transform === `translateX(${this.#def_menu_block_width_test}px)`) {
+                    this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width_test}px)`;
                     this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
                 }
             }
             if (!this.#notification_box.contains(e.target)) {
-                if (this.#notification_box.style.transform === `translateX(-${this.#notification_box_width}px)`) {
-                    this.#notification_box.style.transform = `translateX(${this.#notification_box_width}px)`;
+                if (this.#notification_box.style.transform === `translateX(-${this.#notification_box_width_test}px)`) {
+                    this.#notification_box.style.transform = `translateX(${this.#notification_box_width_test}px)`;
                 }
             }
         })
@@ -858,8 +869,8 @@ class AppLayout extends Route {
                     this.go(page);
                     button_route.classList.add("route_active");
                     if (this.#auto_close) {
-                        if (this.#app_menu.style.transform === `translateX(${this.#def_menu_block_width}px)`) {
-                            this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
+                        if (this.#app_menu.style.transform === `translateX(${this.#def_menu_block_width + 25}px)`) {
+                            this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width + 25}px)`;
                             this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
                         }
                     }

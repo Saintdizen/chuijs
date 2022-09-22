@@ -2,7 +2,7 @@
   "name": "chuijs",
   "productName": "chuijs",
   "description": "chuijs",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "private": false,
   "main": "index.js",
   "author": {
@@ -22,7 +22,7 @@
     "JavaScript"
   ],
   "scripts": {
-    "start": "electron --enable-transparent-visuals main.js"
+    "start": "electron main.js"
   },
   "license": "MIT",
   "dependencies": {

@@ -99,7 +99,7 @@ class Main {
                     enableRemoteModule: true
                 },
                 frame: false,
-                transparent: true,
+                transparent: false,
             });
             if (options.devTools) { this.#window.webContents.openDevTools() }
             if (!options.menuBarVisible) {
