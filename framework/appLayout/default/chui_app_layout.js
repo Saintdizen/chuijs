@@ -887,12 +887,7 @@ class AppLayout extends Route {
         headerRight: []
     }) {
         if (options.center !== undefined) for (let component of options.center) this.#applayout.appendChild(component.set());
-        if (options.headerRight !== undefined) {
-            let nodes = [];
-            for (let component of options.headerRight) nodes.push(component.set());
-            this.#header_right_box.append(...nodes);
-            this.#header_right_box.appendChild(this.#notification_button)
-        }
+        if (options.headerRight !== undefined) this.#header_right_box.firstChild.before(...options.headerRight);
     }
     static BUTTON(options= {
         title: String(undefined),
@@ -905,7 +900,7 @@ class AppLayout extends Route {
             icon: options.icon,
             reverse: options.reverse,
             clickEvent: options.clickEvent
-        });
+        }).set();
     }
     static USER_PROFILE(options = {
         username: String(undefined),
@@ -924,7 +919,7 @@ class AppLayout extends Route {
                 imageBase64: options.image.imageBase64,
             },
             items: options.items
-        });
+        }).set();
     }
     static USER_DD_ITEM(options= {
         title: String(undefined),
@@ -935,7 +930,7 @@ class AppLayout extends Route {
             title: options.title,
             icon: undefined,
             clickEvent: options.clickEvent
-        });
+        }).set();
     }
 }
 
@@ -1093,7 +1088,7 @@ class UserProfile {
             }
         }
         //
-        for (let item of options.items) this.#user_dropdown.appendChild(item.set());
+        for (let item of options.items) this.#user_dropdown.appendChild(item);
     }
     set() {
         return this.#user_main;

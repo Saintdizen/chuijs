@@ -35,14 +35,8 @@ class App extends AppLayout {
         let dialog = new Dialog({ width: "500px", height: "500px", closeOutSideClick: true })
         let profile = new Dialog({ width: "500px", height: "500px", closeOutSideClick: true })
         this.addComponentToAppLayout({
-            center: [ dialog, profile ],
+            center: [ profile ],
             headerRight: [
-                AppLayout.BUTTON({
-                    title: "Доступно обновление!",
-                    icon: new Icon(Icons.ACTIONS.SYSTEM_UPDATE_ALT, "20px"),
-                    reverse: false,
-                    clickEvent: () => { dialog.open() }
-                }),
                 AppLayout.USER_PROFILE({
                     username: "Чувахин Иван",
                     image: {
@@ -59,6 +53,17 @@ class App extends AppLayout {
                         })
                     ]
                 })
+            ]
+        })
+        this.addComponentToAppLayout({
+            center: [ dialog ],
+            headerRight: [
+                AppLayout.BUTTON({
+                    title: "Доступно обновление!",
+                    icon: new Icon(Icons.ACTIONS.SYSTEM_UPDATE_ALT, "20px"),
+                    reverse: false,
+                    clickEvent: () => { dialog.open() }
+                }),
             ]
         })
     }
