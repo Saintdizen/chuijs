@@ -16,6 +16,9 @@ const {TabsPage} = require('./views/9_tabs');
 class App extends AppLayout {
     constructor() {
         super();
+        //
+        this.setWindowControlsPositionLeft(true)
+        //
         this.setAutoCloseRouteMenu(true);
         // РОУТЫ
         this.setRoute(new Inputs_Buttons_Page());

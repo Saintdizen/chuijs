@@ -42,6 +42,7 @@ class AppLayout extends Route {
     #window_control_box = document.createElement("header_window_control_box");
     #window_close_button = document.createElement("window_close_button");
     #window_minimize_button = document.createElement("window_minimize_button");
+    #window_maximize_button = document.createElement("window_maximize_button");
     //
     #app_menu = document.createElement('app_menu');
     #def_menu_block_width = 410;
@@ -50,6 +51,9 @@ class AppLayout extends Route {
     #dark_mode_togle = new Toggle();
     #menu_button = document.createElement('app_menu_button');
     #auto_close = false;
+    //
+    #windowControlsPositionLeft = undefined;
+    //
     constructor() {
         super();
         require('../../modules/chui_fonts').install();
@@ -551,6 +555,8 @@ class AppLayout extends Route {
                 name: "header_window_control_box",
                 style: {
                     "display": "flex",
+                    "background": "var(--button_background)",
+                    "border-radius": "var(--border_radius)"
                 }
             },
             {
@@ -562,9 +568,8 @@ class AppLayout extends Route {
                     "width": "max-content",
                     "border": "none",
                     "border-radius": "var(--border_radius)",
-                    "padding": "6px",
-                    "margin": "var(--margin)",
-                    "font-size": "22pt",
+                    "padding": "5px",
+                    "font-size": "16pt",
                     "background": "transparent",
                     "color": "var(--text_color)",
                     "-webkit-app-region": "no-drag"
@@ -592,9 +597,8 @@ class AppLayout extends Route {
                     "width": "max-content",
                     "border": "none",
                     "border-radius": "var(--border_radius)",
-                    "padding": "6px",
-                    "margin": "var(--margin)",
-                    "font-size": "22pt",
+                    "padding": "5px",
+                    "font-size": "16pt",
                     "background": "transparent",
                     "color": "var(--text_color)",
                     "-webkit-app-region": "no-drag"
@@ -609,6 +613,35 @@ class AppLayout extends Route {
             },
             {
                 name: "window_close_button:hover chui_icon",
+                style: {
+                    "color": "var(--text_color_hover)"
+                }
+            },
+            {
+                name: "window_maximize_button",
+                style: {
+                    "cursor": "pointer",
+                    "outline": "none",
+                    "height": "max-content",
+                    "width": "max-content",
+                    "border": "none",
+                    "border-radius": "var(--border_radius)",
+                    "padding": "5px",
+                    "font-size": "16pt",
+                    "background": "transparent",
+                    "color": "var(--text_color)",
+                    "-webkit-app-region": "no-drag"
+                }
+            },
+            {
+                name: "window_maximize_button:hover",
+                style: {
+                    "background": "var(--blue_prime_background)",
+                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
+                }
+            },
+            {
+                name: "window_maximize_button:hover chui_icon",
                 style: {
                     "color": "var(--text_color_hover)"
                 }
@@ -749,19 +782,53 @@ class AppLayout extends Route {
         header.appendChild(this.#header_left_box)
         header.appendChild(this.#header_right_box)
 
-        //
-        this.#window_minimize_button.innerHTML = new Icon(Icons.ACTIONS.MINIMIZE).getHTML();
+        // Свернуть
+        this.#window_minimize_button.innerHTML = new Icon(Icons.ACTIONS.MINIMIZE, "12pt").getHTML();
         this.#window_minimize_button.addEventListener("click", () => {
             remote.getCurrentWindow().minimize();
         })
-        this.#window_close_button.innerHTML = new Icon(Icons.NAVIGATION.CLOSE).getHTML();
+
+        // Развернуть на весь экран
+        this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "12pt").getHTML();
+        this.#window_maximize_button.addEventListener("click", () => {
+            if (remote.getCurrentWindow().isMaximized()) {
+                this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "12pt").getHTML();
+                remote.getCurrentWindow().restore();
+            } else {
+                this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN_EXIT, "12pt").getHTML();
+                remote.getCurrentWindow().maximize();
+            }
+        })
+
+        // Закрыть
+        this.#window_close_button.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "12pt").getHTML();
         this.#window_close_button.addEventListener("click", () => {
             ipcRenderer.send("app_close_event");
         })
-        this.#window_control_box.appendChild(this.#window_minimize_button)
-        this.#window_control_box.appendChild(this.#window_close_button)
-        header.appendChild(this.#window_control_box)
-        //
+
+        if (this.#windowControlsPositionLeft === undefined) {
+            this.#window_control_box.style.marginRight = '6px';
+            this.#window_control_box.appendChild(this.#window_minimize_button)
+            this.#window_control_box.appendChild(this.#window_maximize_button)
+            this.#window_control_box.appendChild(this.#window_close_button)
+            header.appendChild(this.#window_control_box)
+        }
+    }
+    setWindowControlsPositionLeft(position = Boolean(undefined)) {
+        this.#windowControlsPositionLeft = position;
+        if (this.#windowControlsPositionLeft) {
+            this.#window_control_box.style.marginLeft = '6px';
+            this.#window_control_box.appendChild(this.#window_close_button)
+            this.#window_control_box.appendChild(this.#window_maximize_button)
+            this.#window_control_box.appendChild(this.#window_minimize_button)
+            header.insertBefore(this.#window_control_box, header.firstChild)
+        } else {
+            this.#window_control_box.style.marginRight = '6px';
+            this.#window_control_box.appendChild(this.#window_minimize_button)
+            this.#window_control_box.appendChild(this.#window_maximize_button)
+            this.#window_control_box.appendChild(this.#window_close_button)
+            header.appendChild(this.#window_control_box)
+        }
     }
     setCustomHeaderHeight(height) {
         header.style.height = height;
