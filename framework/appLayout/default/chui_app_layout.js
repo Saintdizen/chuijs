@@ -109,7 +109,7 @@ class AppLayout extends Route {
                     "--button_box_shadow_normal": "0px 0px 1px 2px var(--input_background)",
                     "--button_box_shadow_focus": "0px 0px 1px 2px var(--blue_prime_background)",
                     //Боковое меню
-                    "--app_menu_background": "rgba(229, 229, 234, 0.3)",
+                    "--app_menu_background": "rgba(229, 229, 234, 0.55)",
                     //Диалоговое окно
                     "--modal_overlay": "rgba(0, 0, 0, 0.5)",
                     "--modal_background": "rgb(242, 242, 247)",
@@ -131,7 +131,7 @@ class AppLayout extends Route {
                     // Полоса состояния
                     "--progress_bar_back": "rgba(209, 209, 214, 0.5)",
                     // Уведомления
-                    "--notification_background": "rgba(229, 229, 234, 0.5)",
+                    "--notification_background": "rgba(229, 229, 234, 0.55)",
                     // Тени
                     "--shadow_one": "rgba(0, 0, 0, 0.3)",
                     "--shadow_two": "rgba(0, 0, 0, 0.22)",
@@ -168,7 +168,7 @@ class AppLayout extends Route {
                     "--button_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
                     "--button_box_shadow_focus": "0px 0px 1px 2px var(--blue_prime_background)",
                     //Боковое меню
-                    "--app_menu_background": "rgba(44, 44, 46, 0.3)",
+                    "--app_menu_background": "rgba(44, 44, 46, 0.55)",
                     //Диалоговое окно
                     "--modal_overlay": "rgba(0, 0, 0, 0.5)",
                     "--modal_background": "rgb(28, 28, 30)",
@@ -190,7 +190,7 @@ class AppLayout extends Route {
                     // Полоса состояния
                     "--progress_bar_back": "rgba(58, 58, 60, 0.5)",
                     // Уведомления
-                    "--notification_background": "rgba(44, 44, 46, 0.5)",
+                    "--notification_background": "rgba(44, 44, 46, 0.55)",
                     // Тени
                     "--shadow_one": "rgba(0, 0, 0, 0.3)",
                     "--shadow_two": "rgba(0, 0, 0, 0.22)",
@@ -324,7 +324,7 @@ class AppLayout extends Route {
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
                     "border": "1px solid var(--border_header)",
-                    "backdrop-filter": "blur(8px)",
+                    "backdrop-filter": "blur(10px)",
                     "-webkit-app-region": "no-drag",
                     "margin": "64px 20px 20px 20px",
                     "border-radius": "var(--border_radius)",
