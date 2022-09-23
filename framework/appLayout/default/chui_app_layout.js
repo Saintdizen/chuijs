@@ -139,7 +139,8 @@ class AppLayout extends Route {
                     "--text_color_hover": "rgb(242, 242, 247)",
                     "--disable_color": "#e9ecef",
                     // Управление окнами
-                    "--window_close_button_hover":"rgba(255, 59, 48, 1)",
+                    "--window_close_button_hover":"rgba(255, 59, 48, 0.75)",
+                    "--window_maximize_button_hover":"rgba(52, 199, 89, 0.75)",
                     //Шрифты
                     "--font_default_size": "12pt",
                     "--font_labels_size": "10pt",
@@ -197,7 +198,8 @@ class AppLayout extends Route {
                     "--disable_color": "#e9ecef",
                     "--scroll_bar_background": "rgb(58, 58, 60)",
                     // Управление окнами
-                    "--window_close_button_hover":"rgba(255, 69, 58, 1)",
+                    "--window_close_button_hover":"rgba(255, 69, 58, 0.75)",
+                    "--window_maximize_button_hover":"rgba(48, 209, 88, 0.75)",
                     "--test": "#fff"
                 }
             },
@@ -664,8 +666,8 @@ class AppLayout extends Route {
             {
                 name: "window_maximize_button:hover",
                 style: {
-                    "background": "var(--blue_prime_background)",
-                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
+                    "background": "var(--window_maximize_button_hover)",
+                    "box-shadow": "var(--window_maximize_button_hover) 0px 0px 2px 0px",
                 }
             },
             {
