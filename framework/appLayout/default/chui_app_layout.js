@@ -218,7 +218,7 @@ class AppLayout extends Route {
                     "margin": "0",
                     "padding": "0",
                     "border": "3px solid var(--modal_border)",
-                    //"background": "var(--center_background)",
+                    "background": "var(--center_background)",
                 }
             },
             {
@@ -412,6 +412,13 @@ class AppLayout extends Route {
                 }
             },
             {
+                name: ".notification_button_active",
+                style: {
+                    "background": "var(--blue_prime_background)",
+                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
+                }
+            },
+            {
                 name: "notification_button:hover chui_icon",
                 style: {
                     "color": "var(--text_color_hover)"
@@ -436,6 +443,13 @@ class AppLayout extends Route {
             },
             {
                 name: "app_menu_button:hover",
+                style: {
+                    "background": "var(--blue_prime_background)",
+                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
+                }
+            },
+            {
+                name: ".app_menu_button_active",
                 style: {
                     "background": "var(--blue_prime_background)",
                     "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
@@ -482,7 +496,7 @@ class AppLayout extends Route {
                     "font-size": "12pt",
                     "font-weight": "600",
                     "background": "transparent",
-                    "color": "var(--text_color)",
+                    "color": "var(--text_color)"
                 }
             },
             {
@@ -716,31 +730,45 @@ class AppLayout extends Route {
         this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
 
         this.#menu_button.addEventListener("click", () => {
-            this.#app_menu.style.transform = `translateX(${this.#def_menu_block_width_test}px)`;
+            if (this.#menu_button.classList.contains("app_menu_button_active")) {
+                this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
+            } else {
+                this.#app_menu.style.transform = `translateX(${this.#def_menu_block_width_test}px)`;
+            }
+            this.#menu_button.classList.toggle("app_menu_button_active")
         })
 
         this.#notification_button.addEventListener("click", () => {
-            this.#notification_box.style.transform = `translateX(-${this.#notification_box_width_test}px)`;
+            if (this.#notification_button.classList.contains("notification_button_active")) {
+                this.#notification_box.style.transform = `translateX(${this.#notification_box_width}px)`;
+            } else {
+                this.#notification_box.style.transform = `translateX(-${this.#notification_box_width_test}px)`;
+            }
+            this.#notification_button.classList.toggle("notification_button_active")
         })
 
         header.addEventListener('click', (e) => {
             if (e.target !== this.#menu_button) {
                 this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
+                this.#menu_button.classList.remove("app_menu_button_active")
             }
             if (e.target !== this.#notification_button) {
                 this.#notification_box.style.transform = `translateX(${this.#notification_box_width}px)`;
+                this.#notification_button.classList.remove("notification_button_active")
             }
         })
         center.addEventListener('click', (e) => {
             if (!this.#app_menu.contains(e.target)) {
                 if (this.#app_menu.style.transform === `translateX(${this.#def_menu_block_width_test}px)`) {
                     this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width_test}px)`;
-                    this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
+                    this.#menu_button.classList.toggle("app_menu_button_active")
+                    //this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
                 }
             }
             if (!this.#notification_box.contains(e.target)) {
                 if (this.#notification_box.style.transform === `translateX(-${this.#notification_box_width_test}px)`) {
                     this.#notification_box.style.transform = `translateX(${this.#notification_box_width_test}px)`;
+                    this.#notification_button.classList.toggle("notification_button_active")
                 }
             }
         })
@@ -871,7 +899,7 @@ class AppLayout extends Route {
                     if (this.#auto_close) {
                         if (this.#app_menu.style.transform === `translateX(${this.#def_menu_block_width + 25}px)`) {
                             this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width + 25}px)`;
-                            this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
+                            this.#menu_button.classList.toggle("app_menu_button_active");
                         }
                     }
                 }
@@ -1102,9 +1130,7 @@ class UserDDItem {
         icon: undefined,
         clickEvent: () => {}
     }) {
-        if (options.title !== undefined && options.icon !== undefined) {
-            this.#user_item.innerHTML = options.title + options.icon;
-        }
+        if (options.title !== undefined && options.icon !== undefined) this.#user_item.innerHTML = options.title + options.icon;
         if (options.title !== undefined) this.#user_item.innerText = options.title;
         if (options.icon !== undefined) this.#user_item.innerHTML = options.icon;
         this.#user_item.addEventListener("click", options.clickEvent)
