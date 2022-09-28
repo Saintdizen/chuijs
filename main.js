@@ -4,16 +4,9 @@ const main = new Main({
     width: 1366,
     height: 768,
     render: `${__dirname}/app/app.js`,
-    devTools: false,
-    menuBarVisible: false
+    devTools: false
 });
-
 main.start({
-    hideOnClose: false,
-    menuBar: [
-        new MenuItem().forceReload("Перезагрузить"),
-        new MenuItem().toggleDevTools("Консоль")
-    ],
     tray: [
         new MenuItem().button('Показать \ Скрыть', () => main.hideAndShow()),
         new MenuItem().separator(),

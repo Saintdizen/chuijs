@@ -65,8 +65,7 @@ class Main {
         width: Number(undefined),
         height: Number(undefined),
         render: String(undefined),
-        devTools: Boolean(undefined),
-        menuBarVisible: Boolean(undefined)
+        devTools: Boolean(undefined)
     }) {
         this.#app_icon = options.icon;
         if (this.#app_icon === undefined) {
@@ -102,9 +101,6 @@ class Main {
                 transparent: false,
             });
             if (options.devTools) { this.#window.webContents.openDevTools() }
-            if (!options.menuBarVisible) {
-                Menu.setApplicationMenu(null)
-            }
         })
     }
     hideAndShow() {
@@ -128,8 +124,6 @@ class Main {
         app.exit(0)
     }
     start(options = {
-        hideOnClose: Boolean(undefined),
-        menuBar: [],
         tray: []
     }) {
         if (process.platform === "linux") {
@@ -140,50 +134,18 @@ class Main {
         }
         app.whenReady().then(() => {
             process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
-            ipcMain.on("app_close_event", () => {
-                if(process.platform !== 'darwin') {
-                    app.quit();
-                } else {
-                    app.exit(0)
-                }
-            })
             //START
-            this.#window.loadURL(`data:text/html;charset=UTF-8,<!DOCTYPE html>\
-            <html>\
-                <head>\
-                    <meta charset="UTF-8">\
-                    <title>${this.#appName}</title>\
-                </head>\
-                <body>\
-                    <div id="app"></div>\
-                </body>\
-            </html>`).then(() => {
+            this.#window.loadURL(`data:text/html;charset=UTF-8,<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${this.#appName}</title></head><body><div id="app"></div></body></html>`).then(() => {
                 app.on('before-quit', () => {
                     isQuiting = true;
                 });
             })
-            if (options.hideOnClose) {
-                this.#window.on('close', function (e) {
-                    if (!isQuiting) {
-                        e.preventDefault();
-                        e.sender.hide()
-                        e.returnValue = true;
-                    }
-                });
-            }
-            if (options.menuBar) {
-                Menu.setApplicationMenu(Menu.buildFromTemplate(options.menuBar))
-            }
             if (options.tray) {
                 tray = new Tray(this.#app_icon)
                 tray.setContextMenu(Menu.buildFromTemplate(options.tray))
             }
-            this.#window.on('ready-to-show', () => {
-                this.#window.show()
-            })
-
-            app.on('ready', () => setTimeout(() => {}, 500));
-
+            this.#window.on('ready-to-show', () => this.#window.show());
+            app.on('ready', () => setTimeout(() => {}, 1000));
         })
     }
 }

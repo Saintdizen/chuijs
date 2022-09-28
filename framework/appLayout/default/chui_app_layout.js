@@ -4,7 +4,6 @@ const {Icon, Icons} = require('../../components/chui_icons');
 const {Button} = require("../../components/chui_button");
 // НАСТРОЙКИ
 const Store = require('electron-store');
-const ipcRenderer = require('electron').ipcRenderer;
 const remote = require('electron').remote;
 const store = new Store();
 //
@@ -55,6 +54,7 @@ class AppLayout extends Route {
     #auto_close = false;
     //
     #windowControlsPositionLeft = undefined;
+    #windowHideOnClose = false;
     //
     constructor() {
         super();
@@ -586,7 +586,8 @@ class AppLayout extends Route {
                 style: {
                     "display": "flex",
                     "background": "var(--button_background)",
-                    "border-radius": "var(--border_radius)"
+                    "border-radius": "var(--border_radius)",
+                    "border": "2px solid var(--modal_border)",
                 }
             },
             {
@@ -847,9 +848,12 @@ class AppLayout extends Route {
         // Закрыть
         this.#window_close_button.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "12pt").getHTML();
         this.#window_close_button.addEventListener("click", () => {
-            ipcRenderer.send("app_close_event");
+            if (this.#windowHideOnClose) {
+                remote.getCurrentWindow().hide();
+            } else {
+                remote.getCurrentWindow().close();
+            }
         })
-
         if (this.#windowControlsPositionLeft === undefined) {
             this.#window_control_box.style.marginRight = '6px';
             this.#window_control_box.appendChild(this.#window_minimize_button)
@@ -857,6 +861,9 @@ class AppLayout extends Route {
             this.#window_control_box.appendChild(this.#window_close_button)
             header.appendChild(this.#window_control_box)
         }
+    }
+    setHideOnClose(boolean = Boolean(undefined)) {
+        this.#windowHideOnClose = boolean;
     }
     setWindowControlsPositionLeft(position = Boolean(undefined)) {
         this.#windowControlsPositionLeft = position;
