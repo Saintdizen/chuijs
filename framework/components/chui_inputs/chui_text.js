@@ -47,6 +47,35 @@ class TextInput {
                 }
             },
             {
+                name: ".text_input",
+                style: {
+                    "width": "-webkit-fill-available",
+                    "margin": "0px",
+                    "padding": "0px",
+                    "background": "transparent",
+                    "box-shadow": "none",
+                    "transition": "color 0.2s",
+                    "color": "var(--text_color)",
+                    "text-align": "start",
+                    "border": "0",
+                    "font-size": "12pt",
+                    "line-height":"1",
+                }
+            },
+            {
+                name: ".input_label",
+                style: {
+                    "height": "max-content",
+                    "width": "max-content",
+                    "margin": "var(--margin)",
+                    "font-size": "10pt",
+                    "font-weight":"500",
+                    "line-height":"1",
+                    "color": "var(--text_color)"
+                }
+            },
+            // DISABLED STYLES
+            {
                 name: ".chui_text_main_disabled",
                 style: {
                     "background": "transparent",
@@ -79,34 +108,6 @@ class TextInput {
                     "font-weight":"500",
                     "line-height":"1",
                     "color": "var(--text_color_disabled)"
-                }
-            },
-            {
-                name: ".text_input",
-                style: {
-                    "width": "-webkit-fill-available",
-                    "margin": "0px",
-                    "padding": "0px",
-                    "background": "transparent",
-                    "box-shadow": "none",
-                    "transition": "color 0.2s",
-                    "color": "var(--text_color)",
-                    "text-align": "start",
-                    "border": "0",
-                    "font-size": "12pt",
-                    "line-height":"1",
-                }
-            },
-            {
-                name: ".input_label",
-                style: {
-                    "height": "max-content",
-                    "width": "max-content",
-                    "margin": "var(--margin)",
-                    "font-size": "10pt",
-                    "font-weight":"500",
-                    "line-height":"1",
-                    "color": "var(--text_color)"
                 }
             }
         ], 'chUiJS_TextInput');
@@ -149,9 +150,9 @@ class TextInput {
     getTitle() { return this.#title; }
     getValue() { return this.#input.value; }
     setValue(text = String(undefined)) { this.#input.value = text; }
-    setDisabled(value = Boolean(undefined)) {
-        this.#input.disabled = value
-        if (value) {
+    setDisabled(boolean = Boolean(undefined)) {
+        this.#input.disabled = boolean
+        if (boolean) {
             this.#chui_text_main.classList.add("chui_text_main_disabled")
             this.#input.className = "text_input_disabled"
             this.#label.className = "input_label_disabled"

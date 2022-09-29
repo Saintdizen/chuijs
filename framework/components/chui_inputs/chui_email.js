@@ -51,6 +51,7 @@ class EmailInput {
                     "text-align": "start",
                     "border": "0",
                     "font-size": "12pt",
+                    "line-height":"1",
                 }
             },
             {
@@ -69,6 +70,42 @@ class EmailInput {
                     "font-weight":"500",
                     "line-height":"1",
                     "color": "var(--text_color)"
+                }
+            },
+            // DISABLED STYLES
+            {
+                name: ".email_input_disabled",
+                style: {
+                    "width": "-webkit-fill-available",
+                    "margin": "0px",
+                    "padding": "0px",
+                    "background": "transparent",
+                    "box-shadow": "none",
+                    "transition": "color 0.2s",
+                    "color": "var(--text_color_disabled)",
+                    "text-align": "start",
+                    "border": "0",
+                    "font-size": "12pt",
+                    "line-height":"1",
+                }
+            },
+            {
+                name: ".email_label_disabled",
+                style: {
+                    "height": "max-content",
+                    "width": "max-content",
+                    "margin": "var(--margin)",
+                    "font-size": "10pt",
+                    "font-weight":"500",
+                    "line-height":"1",
+                    "color": "var(--text_color_disabled)"
+                }
+            },
+            {
+                name: ".chui_email_main_disabled",
+                style: {
+                    "background": "transparent",
+                    "border": "2px dashed var(--input_background)"
                 }
             }
         ], 'chUiJS_EmailInput');
@@ -102,6 +139,18 @@ class EmailInput {
     getTitle() { return this.#title; }
     getValue() { return this.#input.value; }
     setValue(text = String(undefined)) { this.#input.value = text; }
+    setDisabled(boolean = Boolean(undefined)) {
+        this.#input.disabled = boolean
+        if (boolean) {
+            this.#chui_email_main.classList.add("chui_email_main_disabled")
+            this.#input.className = "email_input_disabled"
+            this.#label.className = "email_label_disabled"
+        } else {
+            this.#chui_email_main.classList.remove("chui_email_main_disabled")
+            this.#input.className = "email_input"
+            this.#label.className = "email_label"
+        }
+    }
     set() { return this.#chui_email_input; }
 }
 

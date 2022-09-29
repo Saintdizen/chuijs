@@ -1,4 +1,4 @@
-const {Page, Button, Notification, TextInput} = require('../../index');
+const {Page, Button, Notification, TextInput, FieldSet, Styles} = require('../../index');
 
 class MainPage extends Page {
     constructor() {
@@ -24,7 +24,19 @@ class MainPage extends Page {
                 }).show();
             }
         })
-        this.add(name, hello)
+        //this.add(name, hello)
+
+        let fieldset = new FieldSet({
+            title: "Блок: Сказать привет!",
+            style: {
+                direction: Styles.DIRECTION.COLUMN,
+                wrap: Styles.WRAP.NOWRAP,
+                align: Styles.ALIGN.START,
+                justify: Styles.JUSTIFY.CENTER,
+            },
+            components: [ name, hello ]
+        })
+        this.add(fieldset)
     }
 }
 exports.MainPage = MainPage

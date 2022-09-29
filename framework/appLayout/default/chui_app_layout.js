@@ -21,7 +21,7 @@ let route_list = [];
 class Route {
     go(page) {
         page_name.innerHTML = page.getTitle();
-        for (let child of center.childNodes) { center.removeChild(child); }
+        center.innerHTML = '';
         center.appendChild(page.render());
         const _page = document.getElementsByTagName('page')[0];
         new Animation(_page).appearance();

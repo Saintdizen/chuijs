@@ -2,6 +2,9 @@ const { Icon, Icons } = require('../chui_icons');
 
 class NumberInput {
     #chui_number_input = document.createElement('chui_number_input');
+    #number_main = document.createElement("number_main");
+    #number_button_minus = document.createElement("number_button_minus");
+    #number_button_plus = document.createElement("number_button_plus");
     #title = undefined;
     #id = require("randomstring").generate();
     #input = document.createElement('input');
@@ -82,18 +85,51 @@ class NumberInput {
                     "line-height":"1",
                     "color": "var(--text_color)"
                 }
+            },
+            // DISABLED STYLES
+            {
+                name: ".number_main_disabled",
+                style: {
+                    "background": "transparent",
+                    "border": "2px dashed var(--input_background)"
+                }
+            },
+            {
+                name: ".number_label_disabled",
+                style: {
+                    "height": "max-content",
+                    "width": "max-content",
+                    "margin": "var(--margin)",
+                    "font-size": "10pt",
+                    "font-weight":"500",
+                    "line-height":"1",
+                    "color": "var(--text_color_disabled)"
+                }
+            },
+            {
+                name: ".number_input_disabled",
+                style: {
+                    "width": "-webkit-fill-available",
+                    "margin": "0px",
+                    "padding": "0px",
+                    "background": "transparent",
+                    "box-shadow": "none",
+                    "color": "var(--text_color_disabled)",
+                    "text-align": "start",
+                    "border": "0",
+                    "font-size": "12pt"
+                }
             }
         ], 'chUiJS_NumberInput');
         this.#title = options.title;
-        let number_main = document.createElement("number_main");
-        let number_button_plus = document.createElement("number_button_plus");
-        number_button_plus.style.right = '0';
-        number_button_plus.className = 'number_buttons';
-        number_button_plus.innerHTML = new Icon(Icons.CONTENT.ADD, undefined, "var(--blue_prime_background)").getHTML();
-        let number_button_minus = document.createElement("number_button_minus");
-        number_button_minus.style.left = '0';
-        number_button_minus.className = 'number_buttons';
-        number_button_minus.innerHTML = new Icon(Icons.CONTENT.REMOVE, undefined, "var(--blue_prime_background)").getHTML();
+
+
+        this.#number_button_plus.style.right = '0';
+        this.#number_button_plus.className = 'number_buttons';
+        this.#number_button_plus.innerHTML = new Icon(Icons.CONTENT.ADD, undefined, "var(--blue_prime_background)").getHTML();
+        this.#number_button_minus.style.left = '0';
+        this.#number_button_minus.className = 'number_buttons';
+        this.#number_button_minus.innerHTML = new Icon(Icons.CONTENT.REMOVE, undefined, "var(--blue_prime_background)").getHTML();
         this.#input.type = 'number';
         this.#input.className = 'number_input';
         this.#input.value = '0';
@@ -107,33 +143,33 @@ class NumberInput {
             this.#chui_number_input.appendChild(this.#label);
         }
         this.#input.addEventListener('focus', () => {
-            number_main.style.border = '2px solid var(--blue_prime_background)';
+            this.#number_main.style.border = '2px solid var(--blue_prime_background)';
             this.#label.style.color = 'var(--blue_prime_background)';
         })
         this.#input.addEventListener('blur', () => {
-            number_main.removeAttribute("style");
+            this.#number_main.removeAttribute("style");
             this.#label.removeAttribute("style");
         })
 
-        number_main.appendChild(number_button_minus);
-        number_main.appendChild(this.#input);
-        number_main.appendChild(number_button_plus);
-        this.#chui_number_input.appendChild(number_main);
+        this.#number_main.appendChild(this.#number_button_minus);
+        this.#number_main.appendChild(this.#input);
+        this.#number_main.appendChild(this.#number_button_plus);
+        this.#chui_number_input.appendChild(this.#number_main);
 
-        number_button_plus.addEventListener('mousedown', (event) => {
+        this.#number_button_plus.addEventListener('mousedown', (event) => {
             event.preventDefault();
             return false;
         });
-        number_button_minus.addEventListener('mousedown', (event) => {
+        this.#number_button_minus.addEventListener('mousedown', (event) => {
             event.preventDefault();
             return false;
         });
 
-        number_button_plus.addEventListener('click', () => {
+        this.#number_button_plus.addEventListener('click', () => {
             this.#input.focus();
             this.#input.value++
         });
-        number_button_minus.addEventListener('click', () => {
+        this.#number_button_minus.addEventListener('click', () => {
             this.#input.focus();
             this.#input.value--;
         });
@@ -142,6 +178,22 @@ class NumberInput {
     getTitle() { return this.#title; }
     getValue() { return this.#input.value; }
     setValue(num = Number(undefined)) { this.#input.value = num; }
+    setDisabled(boolean = Boolean(undefined)) {
+        this.#input.disabled = boolean
+        if (boolean) {
+            this.#number_main.classList.add("number_main_disabled")
+            this.#input.className = "number_input_disabled"
+            this.#label.className = "number_label_disabled"
+            this.#number_button_minus.remove()
+            this.#number_button_plus.remove()
+        } else {
+            this.#number_main.classList.remove("number_main_disabled")
+            this.#input.className = "number_input"
+            this.#label.className = "number_label"
+            this.#number_main.appendChild(this.#number_button_minus);
+            this.#number_main.appendChild(this.#number_button_plus);
+        }
+    }
     set() { return this.#chui_number_input; }
 }
 

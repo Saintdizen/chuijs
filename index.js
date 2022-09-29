@@ -46,7 +46,8 @@ const { sleep, render, getDefaultIcon } = require('./framework/modules/chui_func
 const { FileInput, AcceptTypes } = require("./framework/components/chui_inputs/chui_file");
 const { TreeView } = require("./framework/components/chui_tree_view");
 const { Form } = require("./framework/components/chui_form");
-const { SlideShow, Slide } = require("./framework/components/chui_slideshow");
+const { SlideShow } = require("./framework/components/chui_slideshow");
+const { FieldSet } = require("./framework/components/chui_fieldset");
 
 //VARS
 let isQuiting = false;
@@ -219,5 +220,5 @@ module.exports = {
     TreeView: TreeView,
     Form: Form,
     SlideShow: SlideShow,
-    Slide: Slide
+    FieldSet: FieldSet
 }
