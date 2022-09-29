@@ -1,5 +1,4 @@
 # chuijs
-**Данный фреймворк будет позволять описывать страницы приложения только в виде JavaScript кода**
 ### Структура
 #### exampleApp / app / views / main.js
 ```javascript
@@ -8,16 +7,27 @@ class MainPage extends Page {
     constructor() {
         super();
         this.setTitle('Сказать привет!');
-        this.setMain(true);
-        let input_name = new TextInput({
+        this.setMain(false)
+
+        let name = new TextInput({
             title: 'Введите ваше имя',
             placeholder: 'Введите ваше имя',
             required: false
         });
-        let hello = new Button('Сказать привет!', () => {
-            new Notification(`Привет, ${input_name.getValue()}!`, NotificationStyle.SIMPLE).show();
-        });
-        this.add(input_name, hello);
+        let hello = new Button("Сказать привет!", () => {
+            if (name.getValue() !== "") {
+                new Notification({
+                    title: `Привет, ${name.getValue()}!`, text: `Привет, ${name.getValue()}!`,
+                    style: Notification.STYLE.SUCCESS, showTime: 5000
+                }).show();
+            } else {
+                new Notification({
+                    title: `Привет мир!`, text: `Привет мир!`,
+                    style: Notification.STYLE.SUCCESS, showTime: 5000
+                }).show();
+            }
+        })
+        this.add(name, hello)
     }
 }
 exports.MainPage = MainPage
@@ -26,20 +36,17 @@ exports.MainPage = MainPage
 ```javascript
 /** RENDERER ПРОЦЕСС */
 /** ИМПОРТЫ */
-const { AppLayout, render, ipcRenderer } = require('chuijs');
+const { AppLayout, render } = require('chuijs');
 /** СТРАНИЦЫ */
 const { MainPage } = require('../app/views/main');
 class App extends AppLayout {
     constructor() {
         super();
-        //this.setDarkMode();
         /** РОУТЫ */
         this.setRoute(new MainPage());
     }
 }
 render(() => new App()).catch(err => console.log(err))
-/** ipcRenderer */
-ipcRenderer.send('hi', 'Привет!')
 ```
 #### exampleApp / main.js
 ```javascript
@@ -64,14 +71,14 @@ main.start({
 })
 ```
 ### Модули
-**Themes (Dark|Light), Route, Page, ElectronTray, ElectronMenuBar**
+Themes (Dark|Light), Route, Page, ElectronTray
 ### Компоненты
-**AppLayout, DateInput, NumberInput, EmailInput, TextArea,
+AppLayout, DateInput, NumberInput, EmailInput, TextArea,
 PasswordInput, FileInput, H1, H2, H3, H4, H5, H6, Label, 
 Paragraph, Button, CheckBox, ComboBox, SelectBox, 
 ContentBlock, Details, Dialogs, RadioButton, Table, 
 ProgressBar, Toggle, Tabs, Notification, Badge, 
 Image, Graphs (Bar, Pie), Icons, WebView, Spinner,
-GroupRadio, Accordion, Pre, HtmlBlock, TreeView, SlideShow, TextEditor**
+GroupRadio, Accordion, Pre, HtmlBlock, TreeView, SlideShow, TextEditor
 ### В разработке
-**ContextMenu, Forms**
+ContextMenu, Forms

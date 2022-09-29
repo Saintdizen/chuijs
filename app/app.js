@@ -2,6 +2,7 @@
 /** IMPORTS */
 const {AppLayout, render, Dialog, Icon, Icons} = require('../index');
 
+const {MainPage} = require('./views/_main');
 const {Inputs_Buttons_Page} = require('./views/1_inputs_buttons');
 const {OthersComponentsPage} = require('./views/0_others');
 const {Notifications_Badges_Page} = require('./views/2_notifications_badges');
@@ -22,6 +23,7 @@ class App extends AppLayout {
 
         // Настройка роутов
         this.setAutoCloseRouteMenu(true);
+        this.setRoute(new MainPage());
         this.setRoute(new Inputs_Buttons_Page());
         this.setRoute(new Notifications_Badges_Page());
         this.setRoute(new TablesPage());
