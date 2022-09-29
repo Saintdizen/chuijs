@@ -4,6 +4,10 @@ const {Icon, Icons} = require('../../components/chui_icons');
 const {Button} = require("../../components/chui_button");
 // НАСТРОЙКИ
 const Store = require('electron-store');
+const {Dialog} = require("../../components/chui_modal");
+const {Label} = require("../../components/chui_label");
+const {ContentBlock} = require("../../components/chui_content_block");
+const {Styles} = require("../../../index");
 const remote = require('electron').remote;
 const store = new Store();
 //
@@ -920,10 +924,10 @@ class AppLayout extends Route {
         }
     }
     addComponentToAppLayout(options = {
-        center: [],
+        //center: [],
         headerRight: []
     }) {
-        if (options.center !== undefined) for (let component of options.center) this.#applayout.appendChild(component.set());
+        //if (options.center !== undefined) for (let component of options.center) this.#applayout.appendChild(component.set());
         if (options.headerRight !== undefined) this.#header_right_box.firstChild.before(...options.headerRight);
     }
     static BUTTON(options= {
@@ -931,14 +935,8 @@ class AppLayout extends Route {
         icon: undefined,
         reverse: Boolean(undefined),
         clickEvent: () => {}
-    }) {
-        return new HeaderButton({
-            title: options.title,
-            icon: options.icon,
-            reverse: options.reverse,
-            clickEvent: options.clickEvent
-        }).set();
-    }
+    }) { return new HeaderButton(options).set(); }
+
     static USER_PROFILE(options = {
         username: String(undefined),
         image: {
@@ -947,28 +945,37 @@ class AppLayout extends Route {
             imageBase64: String(undefined),
         },
         items: []
-    }) {
-        return new UserProfile({
-            username: options.username,
-            image: {
-                noImage: options.image.noImage,
-                imageLink: options.image.imageLink,
-                imageBase64: options.image.imageBase64,
-            },
-            items: options.items
-        }).set();
-    }
-    static USER_DD_ITEM(options= {
+    }) { return new UserProfile(options).set(); }
+
+    static USER_PROFILE_ITEM(options= {
         title: String(undefined),
         icon: undefined,
         clickEvent: () => {}
-    }) {
-        return new UserDDItem({
-            title: options.title,
-            icon: undefined,
-            clickEvent: options.clickEvent
-        }).set();
-    }
+    }) { return new UserDDItem(options).set(); }
+
+    static DIALOG(options= {
+        title: String(undefined),
+        icon: undefined,
+        reverse: Boolean(undefined),
+        dialogOptions: {
+            title: String(undefined),
+            closeButtonTitle: String(undefined),
+            width: String(undefined),
+            height: String(undefined),
+            closeOutSideClick: Boolean(undefined),
+            header: {
+                title: String(undefined),
+                closeButtonTitle: String(undefined),
+            },
+            body: {
+                direction: String(undefined),
+                wrap: String(undefined),
+                align: String(undefined),
+                justify: String(undefined),
+                components: []
+            }
+        }
+    }) { return new HeaderDialog(options).set(); }
 }
 
 class UserProfile {
@@ -1146,6 +1153,129 @@ class UserDDItem {
     }
     set() {
         return this.#user_item;
+    }
+}
+
+class HeaderDialog {
+    #header_button = document.createElement("header_button");
+    #header_button_title = document.createElement("header_button_title");
+    #header_button_icon = document.createElement("header_button_icon");
+    constructor(options = {
+        title: String(undefined),
+        icon: undefined,
+        reverse: Boolean(undefined),
+        dialogOptions: {
+            width: String(undefined),
+            height: String(undefined),
+            closeOutSideClick: Boolean(undefined),
+            header: {
+                title: String(undefined),
+                closeButtonTitle: String(undefined),
+            },
+            body: {
+                direction: String(undefined),
+                wrap: String(undefined),
+                align: String(undefined),
+                justify: String(undefined),
+                components: []
+            }
+        }
+    }) {
+        require('../../modules/chui_functions').style_parse([
+            {
+                name: "header_button",
+                style: {
+                    "cursor": "pointer",
+                    "outline": "none",
+                    "height": "max-content",
+                    "width": "max-content",
+                    "border": "none",
+                    "border-radius": "var(--border_radius)",
+                    "padding": "6px 10px",
+                    "margin": "var(--margin) 0px var(--margin) var(--margin)",
+                    "font-size": "12pt",
+                    "background": "transparent",
+                    "color": "var(--text_color)",
+                    "font-weight": "500",
+                    "display": "flex",
+                    "flex-direction": "row",
+                    "-webkit-app-region": "no-drag"
+                }
+            },
+            {
+                name: "header_button:hover",
+                style: {
+                    "background": "var(--blue_prime_background)",
+                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
+                }
+            },
+            {
+                name: "header_button:hover header_button_title",
+                style: {
+                    "color": "var(--text_color_hover)",
+                }
+            },
+            {
+                name: "header_button:hover chui_icon",
+                style: {
+                    "color": "var(--text_color_hover)",
+                }
+            },
+        ], 'chUiJS_HeaderButton');
+        let dialog = new Dialog({
+            width: options.dialogOptions.width,
+            height: options.dialogOptions.height,
+            closeOutSideClick: options.dialogOptions.closeOutSideClick
+        })
+        // HEADER
+        let header_dialog = new ContentBlock({ direction: "row", wrap: "nowrap", align: "center", justify: "space-between" });
+        header_dialog.setWidth("-webkit-fill-available");
+        header_dialog.disableMarginChild();
+        header_dialog.setPadding("0px 0px 0px 10px");
+        let title = new Label({ markdownText: `**${options.dialogOptions.header.title}**`, textAlign: "center", wordBreak: "normal", width: "max-content" })
+        let close_button = new Button("X", () => dialog.close());
+        if (options.dialogOptions.header.closeButtonTitle !== undefined) close_button.setText(options.dialogOptions.header.closeButtonTitle);
+        header_dialog.add(title, close_button);
+        dialog.addToHeader(header_dialog);
+        // BODY
+        let body_dialog = new ContentBlock({
+            direction: options.dialogOptions.body.direction,
+            wrap: options.dialogOptions.body.wrap,
+            align: options.dialogOptions.body.align,
+            justify: options.dialogOptions.body.justify
+        });
+        body_dialog.setWidth("-webkit-fill-available");
+        body_dialog.add(...options.dialogOptions.body.components)
+        dialog.addToBody(body_dialog);
+        // FOOTER
+
+        //
+        center.appendChild(dialog.set());
+        if (options.title !== undefined && options.icon !== undefined) {
+            if (options.reverse) {
+                this.#header_button_title.innerText = options.title;
+                this.#header_button_icon.innerHTML = options.icon.getHTML();
+                this.#header_button_icon.style.marginRight = "6px";
+                this.#header_button.appendChild(this.#header_button_icon)
+                this.#header_button.appendChild(this.#header_button_title)
+            } else {
+                this.#header_button_title.innerText = options.title;
+                this.#header_button_icon.innerHTML = options.icon.getHTML();
+                this.#header_button_icon.style.marginLeft = "6px";
+                this.#header_button.appendChild(this.#header_button_title)
+                this.#header_button.appendChild(this.#header_button_icon)
+            }
+        } else if (options.title !== undefined && options.icon === undefined) {
+            this.#header_button_title.innerText = options.title;
+            this.#header_button.appendChild(this.#header_button_title)
+        } else if (options.title === undefined && options.icon !== undefined) {
+            this.#header_button_icon.innerHTML = options.icon.getHTML();
+            this.#header_button.appendChild(this.#header_button_icon)
+        }
+        this.#header_button.addEventListener("click", () => dialog.open());
+    }
+    set() {
+        return this.#header_button;
     }
 }
 

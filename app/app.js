@@ -1,6 +1,6 @@
 /** RENDERER PROCESS */
 /** IMPORTS */
-const {AppLayout, render, Dialog, Icon, Icons} = require('../index');
+const {AppLayout, render, Dialog, Icon, Icons, Notification, Tab, TextInput, Tabs, Styles} = require('../index');
 
 const {MainPage} = require('./views/_main');
 const {Inputs_Buttons_Page} = require('./views/1_inputs_buttons');
@@ -13,6 +13,7 @@ const {FormsPage} = require('./views/6_forms');
 const {SlidesPage} = require('./views/7_slideshow');
 const {WebViewsPage} = require('./views/8_webviews');
 const {TabsPage} = require('./views/9_tabs');
+const {Button} = require("../framework/components/chui_button");
 
 class App extends AppLayout {
     constructor() {
@@ -35,10 +36,7 @@ class App extends AppLayout {
         this.setRoute(new WebViewsPage());
         this.setRoute(new TabsPage());
 
-        let dialog = new Dialog({ width: "500px", height: "500px", closeOutSideClick: true })
-        let profile = new Dialog({ width: "500px", height: "500px", closeOutSideClick: true })
         this.addComponentToAppLayout({
-            center: [ profile ],
             headerRight: [
                 AppLayout.USER_PROFILE({
                     username: "Чувахин Иван",
@@ -46,26 +44,51 @@ class App extends AppLayout {
                         noImage: true
                     },
                     items: [
-                        AppLayout.USER_DD_ITEM({
+                        AppLayout.USER_PROFILE_ITEM({
                             title: "Профиль",
-                            clickEvent: () => { profile.open() }
+                            clickEvent: () => {
+                                new Notification({
+                                    title: "Профиль", text: "Профиль", showTime: 1000
+                                }).show()
+                            }
                         }),
-                        AppLayout.USER_DD_ITEM({
+                        AppLayout.USER_PROFILE_ITEM({
                             title: "Выход",
-                            clickEvent: () => { console.log("Выход") }
+                            clickEvent: () => {
+                                new Notification({
+                                    title: "Выход", text: "Выход", showTime: 1000
+                                }).show()
+                            }
                         })
                     ]
                 })
             ]
         })
+
         this.addComponentToAppLayout({
-            center: [ dialog ],
             headerRight: [
-                AppLayout.BUTTON({
-                    title: "Доступно обновление!",
+                AppLayout.DIALOG({
+                    title: "Диалоговое окно!",
                     icon: new Icon(Icons.ACTIONS.SYSTEM_UPDATE_ALT, "20px"),
                     reverse: false,
-                    clickEvent: () => { dialog.open() }
+                    dialogOptions: {
+                        width: "800px",
+                        height: "500px",
+                        closeOutSideClick: true,
+                        header: {
+                            title: "Заголовок диалогового окна",
+                            closeButtonTitle: "Закрыть",
+                        },
+                        body: {
+                            direction: Styles.DIRECTION.COLUMN,
+                            wrap: Styles.WRAP.NOWRAP,
+                            align: Styles.ALIGN.CENTER,
+                            justify: Styles.JUSTIFY.CENTER,
+                            components: [
+                                new Button("ПОДОПЫТНЫЙ", () => {})
+                            ]
+                        }
+                    }
                 }),
             ]
         })
