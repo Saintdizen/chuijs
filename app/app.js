@@ -94,4 +94,5 @@ class App extends AppLayout {
         })
     }
 }
+
 render(() => new App()).catch(e => console.log(e));
