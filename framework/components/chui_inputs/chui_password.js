@@ -4,6 +4,7 @@ class PasswordInput {
     #id = require("randomstring").generate();
     #password_main = document.createElement('password_main');
     #see_pass_button = document.createElement('see_pass_button');
+    #see_pass_button_disabled = document.createElement('see_pass_button');
     #chui_password_input = document.createElement('chui_password_input');
     #label = document.createElement('label');
     #input = document.createElement('input');
@@ -88,6 +89,7 @@ class PasswordInput {
             {
                 name: ".password_main_disabled",
                 style: {
+                    "cursor": "not-allowed",
                     "background": "transparent",
                     "border": "2px dashed var(--input_background)"
                 }
@@ -95,6 +97,7 @@ class PasswordInput {
             {
                 name: ".password_label_disabled",
                 style: {
+                    "cursor": "not-allowed",
                     "height": "max-content",
                     "width": "max-content",
                     "margin": "var(--margin)",
@@ -107,6 +110,7 @@ class PasswordInput {
             {
                 name: ".password_input_disabled",
                 style: {
+                    "cursor": "not-allowed",
                     "width": "-webkit-fill-available",
                     "margin": "0px",
                     "padding": "0px",
@@ -126,6 +130,8 @@ class PasswordInput {
         this.#input.className = 'password_input';
         if (options.required !== undefined) this.#input.required = options.required;
         this.#see_pass_button.innerHTML = new Icon(Icons.ACTIONS.VISIBILITY, undefined, "var(--blue_prime_background)").getHTML();
+        this.#see_pass_button_disabled.innerHTML = new Icon(Icons.ACTIONS.VISIBILITY, undefined, "var(--text_color_disabled)").getHTML();
+        this.#see_pass_button_disabled.style.cursor = "not-allowed";
         if (options.title !== undefined) {
             this.#label.innerText = options.title;
             this.#label.classList.add('password_label')
@@ -150,16 +156,7 @@ class PasswordInput {
 
         this.#password_main.appendChild(this.#input);
         this.#password_main.appendChild(this.#see_pass_button);
-        this.#see_pass_button.addEventListener('click', () => {
-            this.#input.focus();
-            if (this.#input.type === "password") {
-                this.#see_pass_button.innerHTML = new Icon(Icons.ACTIONS.VISIBILITY_OFF, undefined, "var(--blue_prime_background)").getHTML();
-                this.#input.type = "text";
-            } else {
-                this.#see_pass_button.innerHTML = new Icon(Icons.ACTIONS.VISIBILITY, undefined, "var(--blue_prime_background)").getHTML();
-                this.#input.type = "password";
-            }
-        });
+        this.#see_pass_button.addEventListener('click', () => this.#showPassword());
         this.#chui_password_input.appendChild(this.#password_main);
     }
     getName() { return this.#input.name; }
@@ -172,15 +169,27 @@ class PasswordInput {
             this.#password_main.classList.add("password_main_disabled")
             this.#input.className = "password_input_disabled"
             this.#label.className = "password_label_disabled"
-            this.#see_pass_button.remove()
+            this.#see_pass_button.remove();
+            this.#password_main.appendChild(this.#see_pass_button_disabled);
         } else {
             this.#password_main.classList.remove("password_main_disabled")
             this.#input.className = "password_input"
             this.#label.className = "password_label"
+            this.#see_pass_button_disabled.remove();
             this.#password_main.appendChild(this.#see_pass_button);
         }
     }
     set() { return this.#chui_password_input; }
+    #showPassword() {
+        this.#input.focus();
+        if (this.#input.type === "password") {
+            this.#see_pass_button.innerHTML = new Icon(Icons.ACTIONS.VISIBILITY_OFF, undefined, "var(--blue_prime_background)").getHTML();
+            this.#input.type = "text";
+        } else {
+            this.#see_pass_button.innerHTML = new Icon(Icons.ACTIONS.VISIBILITY, undefined, "var(--blue_prime_background)").getHTML();
+            this.#input.type = "password";
+        }
+    }
 }
 
 exports.PasswordInput = PasswordInput

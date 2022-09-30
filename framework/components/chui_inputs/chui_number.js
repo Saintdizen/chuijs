@@ -5,6 +5,8 @@ class NumberInput {
     #number_main = document.createElement("number_main");
     #number_button_minus = document.createElement("number_button_minus");
     #number_button_plus = document.createElement("number_button_plus");
+    #number_button_minus_disabled = document.createElement("number_button_minus");
+    #number_button_plus_disabled = document.createElement("number_button_plus");
     #title = undefined;
     #id = require("randomstring").generate();
     #input = document.createElement('input');
@@ -90,6 +92,7 @@ class NumberInput {
             {
                 name: ".number_main_disabled",
                 style: {
+                    "cursor": "not-allowed",
                     "background": "transparent",
                     "border": "2px dashed var(--input_background)"
                 }
@@ -97,6 +100,7 @@ class NumberInput {
             {
                 name: ".number_label_disabled",
                 style: {
+                    "cursor": "not-allowed",
                     "height": "max-content",
                     "width": "max-content",
                     "margin": "var(--margin)",
@@ -109,13 +113,14 @@ class NumberInput {
             {
                 name: ".number_input_disabled",
                 style: {
+                    "cursor": "not-allowed",
                     "width": "-webkit-fill-available",
                     "margin": "0px",
                     "padding": "0px",
                     "background": "transparent",
                     "box-shadow": "none",
                     "color": "var(--text_color_disabled)",
-                    "text-align": "start",
+                    "text-align": "center",
                     "border": "0",
                     "font-size": "12pt"
                 }
@@ -130,6 +135,18 @@ class NumberInput {
         this.#number_button_minus.style.left = '0';
         this.#number_button_minus.className = 'number_buttons';
         this.#number_button_minus.innerHTML = new Icon(Icons.CONTENT.REMOVE, undefined, "var(--blue_prime_background)").getHTML();
+
+        // Выключенные кнопки
+        this.#number_button_plus_disabled.style.right = '0';
+        this.#number_button_plus_disabled.className = 'number_buttons';
+        this.#number_button_plus_disabled.innerHTML = new Icon(Icons.CONTENT.ADD, undefined, "var(--text_color_disabled)").getHTML();
+        this.#number_button_plus_disabled.style.cursor = "not-allowed";
+        this.#number_button_minus_disabled.style.left = '0';
+        this.#number_button_minus_disabled.className = 'number_buttons';
+        this.#number_button_minus_disabled.innerHTML = new Icon(Icons.CONTENT.REMOVE, undefined, "var(--text_color_disabled)").getHTML();
+        this.#number_button_minus_disabled.style.cursor = "not-allowed";
+        //
+
         this.#input.type = 'number';
         this.#input.className = 'number_input';
         this.#input.value = '0';
@@ -184,12 +201,16 @@ class NumberInput {
             this.#number_main.classList.add("number_main_disabled")
             this.#input.className = "number_input_disabled"
             this.#label.className = "number_label_disabled"
-            this.#number_button_minus.remove()
-            this.#number_button_plus.remove()
+            this.#number_button_minus.remove();
+            this.#number_button_plus.remove();
+            this.#number_main.appendChild(this.#number_button_minus_disabled);
+            this.#number_main.appendChild(this.#number_button_plus_disabled);
         } else {
             this.#number_main.classList.remove("number_main_disabled")
             this.#input.className = "number_input"
             this.#label.className = "number_label"
+            this.#number_button_minus_disabled.remove();
+            this.#number_button_plus_disabled.remove();
             this.#number_main.appendChild(this.#number_button_minus);
             this.#number_main.appendChild(this.#number_button_plus);
         }

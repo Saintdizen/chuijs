@@ -9,6 +9,8 @@ class Select {
     #label = document.createElement('label');
     #input = document.createElement('input');
     #button_open = document.createElement('select_button_open');
+    #button_open_disabled = document.createElement('select_button_open');
+    #disabled_trigger = false;
     #dropdown = document.createElement('selectbox_dropdown');
     constructor(options = {
         name: String(undefined),
@@ -121,6 +123,47 @@ class Select {
                     "color": "var(--text_color)"
                 }
             },
+            // DISABLED STYLES
+            {
+                name: ".selectbox_disabled",
+                style: {
+                    "cursor": "not-allowed",
+                    "background": "transparent",
+                    "border": "2px dashed var(--input_background)"
+                }
+            },
+            {
+                name: ".selectbox_input_disabled",
+                style: {
+                    "cursor": "not-allowed",
+                    "width":"100%",
+                    "margin": "0px",
+                    "padding": "6px 0px 6px 10px",
+                    "background": "transparent",
+                    "box-shadow": "none",
+                    "transition": "color 0.2s",
+                    "color": "var(--text_color_disabled)",
+                    "text-align": "start",
+                    "border": "none",
+                    "font-size": "var(--font_default_size)",
+                    "line-height":"1",
+                    "display": "block",
+                    "outline": "none",
+                }
+            },
+            {
+                name: ".select_label_disabled",
+                style: {
+                    "cursor": "not-allowed",
+                    "height": "max-content",
+                    "width": "max-content",
+                    "margin": "var(--margin)",
+                    "font-size": "10pt",
+                    "font-weight":"500",
+                    "line-height":"1",
+                    "color": "var(--text_color_disabled)"
+                }
+            }
         ], 'chUiJS_Select');
         if (options.width !== undefined) this.#Select_main.style.width = options.width;
         if (options.placeholder !== undefined) this.#input.placeholder = options.placeholder;
@@ -137,6 +180,8 @@ class Select {
         if (options.name !== undefined) this.#input.name = options.name;
         this.#input.disabled = true
         this.#button_open.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN, undefined, "var(--blue_prime_background)").getHTML();
+        this.#button_open_disabled.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN, undefined, "var(--text_color_disabled)").getHTML();
+        this.#button_open_disabled.style.cursor = "not-allowed";
         this.#dropdown.setAttribute('id', this.#id);
         this.#Select_second.appendChild(this.#input)
         this.#Select_second.appendChild(this.#button_open)
@@ -151,10 +196,12 @@ class Select {
             this.#Select_second.removeAttribute('style')
         })
         this.#Select_second.addEventListener('click', (event) => {
-            if (event.target.parentNode === this.#Select_second) {
-                this.#input.focus()
-                new Animation(this.#dropdown).appearance();
-                setOptionDisplay(document.getElementById(this.#id));
+            if (!this.#disabled_trigger) {
+                if (event.target.parentNode === this.#Select_second) {
+                    this.#input.focus()
+                    new Animation(this.#dropdown).appearance();
+                    setOptionDisplay(document.getElementById(this.#id));
+                }
             }
         });
         window.addEventListener('click', (event) => {
@@ -219,6 +266,22 @@ class Select {
     }
     getName() { return this.#input.name; }
     getValue() { return this.#input.value; }
+    setDisabled(boolean = Boolean(undefined)) {
+        this.#disabled_trigger = boolean
+        if (boolean) {
+            this.#Select_second.classList.add("selectbox_disabled")
+            this.#input.className = "selectbox_input_disabled"
+            this.#label.className = "select_label_disabled"
+            this.#button_open.remove();
+            this.#Select_second.appendChild(this.#button_open_disabled);
+        } else {
+            this.#Select_second.classList.remove("selectbox_disabled")
+            this.#input.className = "selectbox_input"
+            this.#label.className = "select_label"
+            this.#button_open_disabled.remove();
+            this.#Select_second.appendChild(this.#button_open);
+        }
+    }
     set() { return this.#Select_main; }
 }
 

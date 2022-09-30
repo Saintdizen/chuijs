@@ -78,6 +78,7 @@ class TextInput {
             {
                 name: ".chui_text_main_disabled",
                 style: {
+                    "cursor": "not-allowed",
                     "background": "transparent",
                     "border": "2px dashed var(--input_background)"
                 }
@@ -85,6 +86,7 @@ class TextInput {
             {
                 name: ".text_input_disabled",
                 style: {
+                    "cursor": "not-allowed",
                     "width": "-webkit-fill-available",
                     "margin": "0px",
                     "padding": "0px",
@@ -101,6 +103,7 @@ class TextInput {
             {
                 name: ".input_label_disabled",
                 style: {
+                    "cursor": "not-allowed",
                     "height": "max-content",
                     "width": "max-content",
                     "margin": "var(--margin)",

@@ -10,6 +10,7 @@ class DateInput {
     #input = document.createElement('input');
     #label = document.createElement('label');
     #date_dropdown_open = document.createElement('date_dropdown_open');
+    #date_dropdown_open_disabled = document.createElement('date_dropdown_open');
     #dropdown = document.createElement('date_select_dropdown');
     #dropdown_id = require("randomstring").generate();
     #date_now = new Date();
@@ -145,6 +146,44 @@ class DateInput {
                     "line-height":"1",
                     "color": "var(--text_color)"
                 }
+            },
+            // DISABLED STYLES
+            {
+                name: ".date_main_block_disabled",
+                style: {
+                    "cursor": "not-allowed",
+                    "background": "transparent",
+                    "border": "2px dashed var(--input_background)"
+                }
+            },
+            {
+                name: ".date_input_label_disabled",
+                style: {
+                    "cursor": "not-allowed",
+                    "color": "var(--text_color_disabled)",
+                    "height": "max-content",
+                    "width": "max-content",
+                    "margin": "var(--margin)",
+                    "font-size": "10pt",
+                    "font-weight":"500",
+                    "line-height":"1",
+                }
+            },
+            {
+                name: ".date_input_disabled",
+                style: {
+                    "cursor": "not-allowed",
+                    "color": "var(--text_color_disabled)",
+                    "width":"100%",
+                    "display": "block",
+                    "text-align": "center",
+                    "margin": "0px",
+                    "padding": "5px 0px",
+                    "background": "transparent",
+                    "box-shadow": "none",
+                    "border": "0",
+                    "font-size": "12pt",
+                }
             }
         ], 'chUiJS_DateInput');
         this.#date_main_block.style.display = 'flex';
@@ -154,6 +193,8 @@ class DateInput {
         if (options.name !== undefined) this.#input.name = options.name;
         if (options.required !== undefined) this.#input.required = options.required;
         this.#date_dropdown_open.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN, undefined, "var(--blue_prime_background)").getHTML();
+        this.#date_dropdown_open_disabled.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN, undefined, "var(--text_color_disabled)").getHTML();
+        this.#date_dropdown_open_disabled.style.cursor = "not-allowed";
         if (options.title !== undefined) {
             this.#label.classList.add('date_input_label')
             this.#label.innerText = options.title;
@@ -253,9 +294,11 @@ class DateInput {
         select_year.setDefaultOption(this.#date_now.getFullYear());
         //LISTENERS
         this.#chui_date_input.addEventListener('click', (event) => {
-            if (event.target.parentNode === this.#date_main_block) {
-                this.#input.focus()
-                new Animation(this.#dropdown).appearance();
+            if (!this.#input.disabled) {
+                if (event.target.parentNode === this.#date_main_block) {
+                    this.#input.focus()
+                    new Animation(this.#dropdown).appearance();
+                }
             }
         });
         window.addEventListener('click', (event) => {
@@ -272,6 +315,22 @@ class DateInput {
     getTitle() { return this.#label.innerText; }
     getValue() { return this.#input.value; }
     setValue(date = String(undefined)) { this.#input.value = date; }
+    setDisabled(boolean = Boolean(undefined)) {
+        this.#input.disabled = boolean
+        if (boolean) {
+            this.#date_main_block.classList.add("date_main_block_disabled")
+            this.#input.className = "date_input_disabled"
+            this.#label.className = "date_input_label_disabled"
+            this.#date_dropdown_open.remove();
+            this.#date_main_block.appendChild(this.#date_dropdown_open_disabled);
+        } else {
+            this.#date_main_block.classList.remove("date_main_block_disabled")
+            this.#input.className = "date_input"
+            this.#label.className = "date_input_label"
+            this.#date_dropdown_open_disabled.remove();
+            this.#date_main_block.appendChild(this.#date_dropdown_open);
+        }
+    }
     set() { return this.#chui_date_input; }
 }
 

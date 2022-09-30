@@ -57,10 +57,6 @@ class RadioButton {
                 }
             },
             {
-                name: ".radiobutton_light:not(:disabled):not(:checked)+label:hover::before",
-                style: {}
-            },
-            {
                 name: ".radiobutton:not(:disabled):active+label::before",
                 style: {
                     "border": "2px solid var(--blue_prime_background)",
@@ -81,18 +77,35 @@ class RadioButton {
                 }
             },
             {
-                name: ".radiobutton:disabled+label::before",
-                style: {
-                    "background-color": "var(--disable_color)"
-                }
-            },
-            {
                 name: ".labelr",
                 style: {
                     "cursor": "pointer",
                     "font-size": "var(--font_default_size)"
                 }
-            }
+            },
+            {
+                name: ".radiobutton:disabled+label",
+                style: {
+                    "cursor": "not-allowed",
+                    "color": "var(--text_color_disabled)",
+                }
+            },
+            {
+                name: ".radiobutton:disabled:not(:checked)+label::before",
+                style: {
+                    "cursor": "not-allowed",
+                    "background": "transparent",
+                    "border": "2px dashed var(--input_background)",
+                }
+            },
+            {
+                name: ".radiobutton:disabled:checked+label::before",
+                style: {
+                    "cursor": "not-allowed",
+                    "background": "radial-gradient(circle, var(--text_color_disabled) 30%, rgba(242,242,247,0) 42%)",
+                    "border": "2px dashed var(--input_background)"
+                }
+            },
         ], 'chUiJS_RadioButton');
         this.#radioButton.style.getPropertyValue('display')
         this.#input.classList.add('radiobutton');
@@ -111,6 +124,7 @@ class RadioButton {
     getValue() { return this.#input.checked; }
     setValue(value = Boolean(undefined)) { this.#input.checked = value; }
     addChangeListener(listener) { this.#input.addEventListener('change', listener); }
+    setDisabled(boolean = Boolean(undefined)) { this.#input.disabled = boolean; }
     set() {
         this.#radioButton.appendChild(this.#input);
         this.#radioButton.appendChild(this.#label);

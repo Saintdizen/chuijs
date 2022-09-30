@@ -60,6 +60,35 @@ class TextArea {
                     "line-height":"1",
                     "color": "var(--text_color)"
                 }
+            },
+            // DISABLED STYLES
+            {
+                name: ".area_input_disabled",
+                style: {
+                    "cursor": "not-allowed",
+                    "height": "inherit",
+                    "width": "-webkit-fill-available",
+                    "border-radius": "var(--border_radius)",
+                    "padding": "6px 10px",
+                    "font-size": "12pt",
+                    "background": "transparent",
+                    "color": "var(--text_color_disabled)",
+                    "border": "2px dashed var(--input_background)",
+                    "box-sizing": "border-box",
+                }
+            },
+            {
+                name: ".textarea_label_disabled",
+                style: {
+                    "cursor": "not-allowed",
+                    "height": "max-content",
+                    "width": "max-content",
+                    "margin": "var(--margin)",
+                    "font-size": "10pt",
+                    "font-weight":"500",
+                    "line-height":"1",
+                    "color": "var(--text_color_disabled)"
+                }
             }
         ], 'chUiJS_TextArea');
         this.#text_area.classList.add('area_input', 'resize_off');
@@ -94,6 +123,20 @@ class TextArea {
     getTitle() { return this.#title; }
     getValue() { return this.#text_area.value; }
     setValue(text = String(undefined)) { this.#text_area.value = text; }
+    setDisabled(boolean = Boolean(undefined)) {
+        this.#text_area.disabled = boolean
+        if (boolean) {
+            this.#text_area.classList.remove("area_input")
+            this.#text_area.classList.add("area_input_disabled")
+            this.#label.classList.remove("textarea_label")
+            this.#label.classList.add("textarea_label_disabled")
+        } else {
+            this.#text_area.classList.add("area_input")
+            this.#text_area.classList.remove("area_input_disabled")
+            this.#label.classList.add("textarea_label")
+            this.#label.classList.remove("textarea_label_disabled")
+        }
+    }
     set() { return this.#chui_text_input; }
 }
 

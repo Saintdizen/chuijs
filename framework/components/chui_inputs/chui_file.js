@@ -64,13 +64,14 @@ class FileInput {
             {
                 name: ".chui_file_main_disabled",
                 style: {
+                    "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "2px dashed var(--input_background)"
                 }
             },
             {
                 name: ".file_input_disabled",
                 style: {
+                    "cursor": "not-allowed",
                     "width": "-webkit-fill-available",
                     "margin": "0px",
                     "padding": "0px",
@@ -87,6 +88,7 @@ class FileInput {
             {
                 name: ".input_label_disabled",
                 style: {
+                    "cursor": "not-allowed",
                     "height": "max-content",
                     "width": "max-content",
                     "margin": "var(--margin)",
@@ -152,7 +154,25 @@ class FileInput {
                     "color": "var(--text_color_hover)",
                     "box-shadow": "var(--button_text_color) 0px 0px 2px 0px",
                 }
-            }
+            },
+            {
+                name: "input[type=file]:disabled::file-selector-button",
+                style: {
+                    "cursor": "not-allowed",
+                    "background": "var(--button_background_disabled)",
+                    "color": "var(--text_color_disabled)",
+                    "border": "2px dashed var(--input_background)",
+                }
+            },
+            {
+                name: "input[type=file]:disabled::file-selector-button:hover",
+                style: {
+                    "box-shadow": "none",
+                    "background": "var(--button_background_disabled)",
+                    "color": "var(--text_color_disabled)",
+                    "border": "2px dashed var(--input_background)"
+                }
+            },
         ], 'chUiJS_fileInput');
         this.#input.type = 'file';
         this.#input.className = 'file_input';

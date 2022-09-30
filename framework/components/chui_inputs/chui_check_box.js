@@ -60,8 +60,25 @@ class CheckBox {
                 }
             },
             {
-                name: ".checkbox:not(:disabled):not(:checked)+label:hover::before",
+                name: ".checkbox:not(:disabled):not(:checked):hover::before",
                 style: {}
+            },
+            {
+                name: ".checkbox:disabled:not(:checked)+label::before",
+                style: {
+                    "cursor": "not-allowed",
+                    "background": "transparent",
+                    "border": "2px dashed var(--input_background)",
+                }
+            },
+            {
+                name: ".checkbox:disabled:checked+label::before",
+                style: {
+                    "cursor": "not-allowed",
+                    "background": "transparent",
+                    "border": "2px dashed var(--input_background)",
+                    "color": "var(--text_color_disabled)",
+                }
             },
             {
                 name: ".checkbox:not(:disabled):active+label::before",
@@ -84,16 +101,17 @@ class CheckBox {
                 }
             },
             {
-                name: ".checkbox:disabled+label::before",
-                style: {
-                    "background-color": "var(--disable_color)"
-                }
-            },
-            {
                 name: ".labelz",
                 style: {
                     "cursor": "pointer",
                     "font-size": "var(--font_default_size)"
+                }
+            },
+            {
+                name: ".checkbox:disabled+label",
+                style: {
+                    "cursor": "not-allowed",
+                    "color": "var(--text_color_disabled)",
                 }
             }
         ], 'chUiJS_Checkbox');
@@ -115,6 +133,7 @@ class CheckBox {
     getTitle() { return this.#label.innerText; }
     setValue(value = Boolean(undefined)) { this.#input.checked = value; }
     addChangeListener(listener = () => {}) { this.#input.addEventListener('change', listener); }
+    setDisabled(boolean = Boolean(undefined)) { this.#input.disabled = boolean; }
     set() {
         this.#checkBox.appendChild(this.#input);
         this.#checkBox.appendChild(this.#label);

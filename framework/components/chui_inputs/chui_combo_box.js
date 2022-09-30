@@ -9,6 +9,7 @@ class ComboBox {
     #label = document.createElement('label');
     #input = document.createElement('input');
     #button_open = document.createElement('combo_button_open');
+    #button_open_disabled = document.createElement('combo_button_open');
     #dropdown = document.createElement('combobox_dropdown');
     constructor(options = {
         name: String(undefined),
@@ -111,6 +112,45 @@ class ComboBox {
                     "color": "var(--text_color_hover)",
                     "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
                 }
+            },
+            // DISABLED STYLES
+            {
+                name: ".combobox_disabled",
+                style: {
+                    "cursor": "not-allowed",
+                    "background": "transparent",
+                    "border": "2px dashed var(--input_background)"
+                }
+            },
+            {
+                name: ".combobox_input_disabled",
+                style: {
+                    "cursor": "not-allowed",
+                    "background": "transparent",
+                    "box-shadow": "none",
+                    "transition": "color 0.2s",
+                    "color": "var(--text_color_disabled)",
+                    "text-align": "start",
+                    "line-height":"1",
+                    "width": "100%",
+                    "margin": "0px",
+                    "padding": "6px 0px 6px 10px",
+                    "border": "0",
+                    "font-size": "12pt",
+                }
+            },
+            {
+                name: ".combobox_label_disabled",
+                style: {
+                    "cursor": "not-allowed",
+                    "height": "max-content",
+                    "width": "max-content",
+                    "margin": "var(--margin)",
+                    "font-size": "10pt",
+                    "font-weight":"500",
+                    "line-height":"1",
+                    "color": "var(--text_color_disabled)"
+                }
             }
         ], 'chUiJS_ComboBox');
         if (options.placeholder !== undefined) this.#input.placeholder = options.placeholder;
@@ -136,6 +176,8 @@ class ComboBox {
             this.#label.removeAttribute("style");
         })
         this.#button_open.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN, undefined, "var(--blue_prime_background)").getHTML();
+        this.#button_open_disabled.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN, undefined, "var(--text_color_disabled)").getHTML();
+        this.#button_open_disabled.style.cursor = "not-allowed";
         this.#dropdown.setAttribute('id', this.#id);
         this.#ComboBox_second.appendChild(this.#input)
         this.#ComboBox_second.appendChild(this.#button_open)
@@ -150,10 +192,12 @@ class ComboBox {
             this.#ComboBox_second.removeAttribute('style')
         })
         this.#ComboBox_second.addEventListener('click', (event) => {
-            if (event.target.parentNode === this.#ComboBox_second) {
-                this.#input.focus()
-                new Animation(this.#dropdown).appearance();
-                setOptionDisplay(document.getElementById(this.#id));
+            if (!this.#input.disabled) {
+                if (event.target.parentNode === this.#ComboBox_second) {
+                    this.#input.focus()
+                    new Animation(this.#dropdown).appearance();
+                    setOptionDisplay(document.getElementById(this.#id));
+                }
             }
         });
         window.addEventListener('click', (event) => {
@@ -186,6 +230,22 @@ class ComboBox {
     }
     getName() { return this.#input.name; }
     getValue() { return this.#input.value; }
+    setDisabled(boolean = Boolean(undefined)) {
+        this.#input.disabled = boolean
+        if (boolean) {
+            this.#ComboBox_second.classList.add("combobox_disabled")
+            this.#input.className = "combobox_input_disabled"
+            this.#label.className = "combobox_label_disabled"
+            this.#button_open.remove();
+            this.#ComboBox_second.appendChild(this.#button_open_disabled);
+        } else {
+            this.#ComboBox_second.classList.remove("combobox_disabled")
+            this.#input.className = "combobox_input"
+            this.#label.className = "combobox_label"
+            this.#button_open_disabled.remove();
+            this.#ComboBox_second.appendChild(this.#button_open);
+        }
+    }
     set() { return this.#ComboBox_main; }
 }
 

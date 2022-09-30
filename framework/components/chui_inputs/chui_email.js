@@ -76,6 +76,7 @@ class EmailInput {
             {
                 name: ".email_input_disabled",
                 style: {
+                    "cursor": "not-allowed",
                     "width": "-webkit-fill-available",
                     "margin": "0px",
                     "padding": "0px",
@@ -92,6 +93,7 @@ class EmailInput {
             {
                 name: ".email_label_disabled",
                 style: {
+                    "cursor": "not-allowed",
                     "height": "max-content",
                     "width": "max-content",
                     "margin": "var(--margin)",
@@ -104,6 +106,7 @@ class EmailInput {
             {
                 name: ".chui_email_main_disabled",
                 style: {
+                    "cursor": "not-allowed",
                     "background": "transparent",
                     "border": "2px dashed var(--input_background)"
                 }
