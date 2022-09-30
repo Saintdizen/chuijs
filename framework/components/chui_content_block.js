@@ -29,7 +29,7 @@ class ContentBlock {
     // FUNCTIONS
     disableMarginChild() {
         for (let child of this.#body.childNodes) {
-            child.set().style.margin = '0px';
+            child.style.margin = '0px';
         }
     }
     add(...components) {
