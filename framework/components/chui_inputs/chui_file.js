@@ -132,19 +132,18 @@ class FileInput {
                     "height": "max-content",
                     "width": "max-content",
                     "border-radius": "var(--border_radius)",
-                    "padding": "8px 12px",
+                    "padding": "6px 10px",
                     "font-size": "12pt",
                     "font-weight": "500",
                     "margin": "0px var(--margin) 0px 0px",
                     "background": "var(--button_background)",
                     "color": "var(--button_text_color)",
                     "box-sizing": "border-box",
-                    "border": "none",
                     "transition": "all .2s cubic-bezier(0.28, 0.11, 0.32, 1)",
                     "font-family": "chui_Inter",
                     "letter-spacing": "0.33px",
                     "word-spacing": "0.33px",
-                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 0x 2px 0px"
+                    "border": "2px dashed rgba(0, 0, 0, 0)",
                 }
             },
             {
@@ -152,7 +151,6 @@ class FileInput {
                 style: {
                     "background": "var(--blue_prime_background)",
                     "color": "var(--text_color_hover)",
-                    "box-shadow": "var(--button_text_color) 0px 0px 2px 0px",
                 }
             },
             {
@@ -167,7 +165,6 @@ class FileInput {
             {
                 name: "input[type=file]:disabled::file-selector-button:hover",
                 style: {
-                    "box-shadow": "none",
                     "background": "var(--button_background_disabled)",
                     "color": "var(--text_color_disabled)",
                     "border": "2px dashed var(--input_background)"

@@ -11,7 +11,7 @@ class Inputs_Buttons_Page extends Page {
         this.setMain(true)
 
         let h1_inputs = new H(1, "Поля ввода")
-        let off = new Button("Выключить", () => {
+        let inputs_off = new Button("Выключить", () => {
             text.setDisabled(true);
             email.setDisabled(true);
             pass.setDisabled(true);
@@ -25,7 +25,7 @@ class Inputs_Buttons_Page extends Page {
             checkBox.setDisabled(true);
             radio.setDisabled(true);
         });
-        let on = new Button("Включить", () => {
+        let inputs_on = new Button("Включить", () => {
             text.setDisabled(false);
             email.setDisabled(false);
             pass.setDisabled(false);
@@ -84,12 +84,19 @@ class Inputs_Buttons_Page extends Page {
         let radio = new RadioButton({ title: "RadioButton" })
         radio.setDisabled(true);
         //
-        this.add(h1_inputs, off, on, text, email, pass, number, textArea, combo, select, date, file, file_multiple, checkBox, radio)
+        this.add(h1_inputs, inputs_off, inputs_on, text, email, pass, number, textArea, combo, select, date, file, file_multiple, checkBox, radio)
 
         // Кнопки
-        let h1_buttons = new H(1, "Кнопки")
-        let button = new Button("Выключить", () => {});
-        this.add(h1_buttons, button);
+        let h1_buttons = new H(1, "Кнопки");
+        let buttons_off = new Button("Выключить", () => {
+            button.setDisabled(true)
+        });
+        let buttons_on = new Button("Включить", () => {
+            button.setDisabled(false)
+        });
+        let button = new Button("Обычная кнопка", (e) => console.log(e));
+        button.setDisabled(true)
+        this.add(h1_buttons, buttons_off, buttons_on, button);
     }
 }
 

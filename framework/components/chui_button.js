@@ -1,5 +1,6 @@
 class Button {
-    #button = document.createElement('chui_button');
+    #chui_button = document.createElement('chui_button');
+    #button = document.createElement('button');
     constructor(title = String(undefined), listener = () => {}) {
         const {style_parse} = require('../modules/chui_functions');
         style_parse([
@@ -9,23 +10,49 @@ class Button {
                     "cursor": "pointer",
                     "height": "max-content",
                     "width": "max-content",
+                    "border-radius": "var(--border_radius)"
+                }
+            },
+            {
+                name: "button",
+                style: {
+                    "cursor": "pointer",
+                    "height": "max-content",
+                    "width": "max-content",
                     "border-radius": "var(--border_radius)",
-                    "padding": "8px 12px",
+                    "padding": "6px 10px",
                     "font-size": "12pt",
                     "font-weight": "500",
                     "margin": "var(--margin)",
                     "background": "var(--button_background)",
                     "color": "var(--button_text_color)",
                     "box-sizing": "border-box",
-                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 0px 2px 0px",
+                    "border": "2px dashed rgba(0, 0, 0, 0)",
                 }
             },
             {
-                name: "chui_button:hover",
+                name: "button:hover",
                 style: {
                     "background": "var(--blue_prime_background)",
                     "color": "var(--text_color_hover)",
-                    "box-shadow": "var(--button_text_color) 0px 0px 2px 0px",
+                }
+            },
+            {
+                name: "button:disabled",
+                style: {
+                    "cursor": "not-allowed",
+                    "background": "var(--button_background_disabled)",
+                    "color": "var(--text_color_disabled)",
+                    "border": "2px dashed var(--input_background)",
+                }
+            },
+            {
+                name: "button:disabled:hover",
+                style: {
+                    "box-shadow": "none",
+                    "background": "var(--button_background_disabled)",
+                    "color": "var(--text_color_disabled)",
+                    "border": "2px dashed var(--input_background)"
                 }
             }
         ], 'chUiJS_Button');
@@ -34,11 +61,13 @@ class Button {
         this.#button.addEventListener("mousedown", () => {
             return false
         })
+        this.#chui_button.appendChild(this.#button)
     }
     getText() { return this.#button.innerText; }
     setText(text = String(undefined)) { this.#button.innerText = text; }
     addClickListener(listener = () => {}) { this.#button.addEventListener('click', listener); }
-    set() { return this.#button; }
+    setDisabled(boolean = Boolean(undefined)) { this.#button.disabled = boolean }
+    set() { return this.#chui_button; }
 }
 
 exports.Button = Button
