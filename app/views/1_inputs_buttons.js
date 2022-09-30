@@ -15,7 +15,6 @@ class Inputs_Buttons_Page extends Page {
         let h1_inputs = new H(1, "Поля ввода");
         let disabler_1 = new CheckBox({ title: "Выключить поля ввода" })
         disabler_1.addChangeListener((e) => {
-            button.setDisabled(e.target.checked);
             text.setDisabled(e.target.checked);
             email.setDisabled(e.target.checked);
             pass.setDisabled(e.target.checked);
