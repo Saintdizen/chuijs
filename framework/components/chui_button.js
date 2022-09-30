@@ -34,7 +34,6 @@ class Button {
                     "font-weight": "500",
                     "margin": "var(--margin)",
                     "background": "var(--button_background)",
-                    "color": "var(--button_text_color)",
                     "box-sizing": "border-box",
                     "border": "2px dashed rgba(0, 0, 0, 0)",
                     "display": "flex",
@@ -44,15 +43,15 @@ class Button {
                 }
             },
             {
-                name: "button button_icon chui_icon",
-                style: {
-                    "color": "var(--button_text_color)",
-                }
-            },
-            {
                 name: "button:hover",
                 style: {
                     "background": "var(--blue_prime_background)",
+                }
+            },
+            {
+                name: "button_text",
+                style: {
+                    "color": "var(--button_text_color)",
                 }
             },
             {
@@ -62,11 +61,18 @@ class Button {
                 }
             },
             {
+                name: "button button_icon chui_icon",
+                style: {
+                    "color": "var(--button_text_color)",
+                }
+            },
+            {
                 name: "button:hover button_icon chui_icon",
                 style: {
                     "color": "var(--text_color_hover)",
                 }
             },
+            // DISABLED STYLES
             {
                 name: "button:disabled",
                 style: {
@@ -84,11 +90,35 @@ class Button {
                     "color": "var(--text_color_disabled)",
                     "border": "2px dashed var(--input_background)"
                 }
-            }
+            },
+            {
+                name: "button:disabled button_text",
+                style: {
+                    "color": "var(--text_color_disabled)",
+                }
+            },
+            {
+                name: "button:disabled:hover button_text",
+                style: {
+                    "color": "var(--text_color_disabled)",
+                }
+            },
+            {
+                name: "button:disabled button_icon chui_icon",
+                style: {
+                    "color": "var(--text_color_disabled)",
+                }
+            },
+            {
+                name: "button:disabled:hover button_icon chui_icon",
+                style: {
+                    "color": "var(--text_color_disabled)",
+                }
+            },
         ], 'chUiJS_Button');
 
         if (options.title !== undefined) this.#button_text.innerText = options.title;
-        if (options.icon !== undefined) this.#button_icon.innerHTML = new Icon(options.icon).getHTML();
+        if (options.icon !== undefined) this.#button_icon.innerHTML = new Icon(options.icon, "20px").getHTML();
 
         if (options.title !== undefined && options.icon === undefined) {
             this.#button.appendChild(this.#button_text);
@@ -116,7 +146,9 @@ class Button {
     getText() { return this.#button.innerText; }
     setText(text = String(undefined)) { this.#button.innerText = text; }
     addClickListener(listener = () => {}) { this.#button.addEventListener('click', listener); }
-    setDisabled(boolean = Boolean(undefined)) { this.#button.disabled = boolean }
+    setDisabled(boolean = Boolean(undefined)) {
+        this.#button.disabled = boolean
+    }
     set() { return this.#chui_button; }
 }
 

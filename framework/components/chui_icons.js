@@ -19,7 +19,8 @@ class Icon {
                     "-webkit-font-smoothing": "antialiased",
                     "text-rendering": "text-rendering",
                     "color": "var(--text_color)",
-                    "pointer-events": "none"
+                    "pointer-events": "none",
+                    "transition": "all .2s",
                 }
             }
         ], 'chUiJS_Icons');

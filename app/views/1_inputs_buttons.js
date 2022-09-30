@@ -58,6 +58,7 @@ class Inputs_Buttons_Page extends Page {
             button_text.setDisabled(e.target.checked)
             button_icon.setDisabled(e.target.checked)
             button_text_icon.setDisabled(e.target.checked)
+            button_text_icon_reverse.setDisabled(e.target.checked)
         })
         let button_text = new Button({
             title: "Кнопка с текстом",
@@ -70,10 +71,15 @@ class Inputs_Buttons_Page extends Page {
         let button_text_icon = new Button({
             title: "Кнопка с текстом и иконкой",
             icon: Icons.MAPS.MAP,
+            clickEvent: (e) => console.log(e)
+        });
+        let button_text_icon_reverse = new Button({
+            title: "Кнопка с текстом и иконкой",
+            icon: Icons.MAPS.MAP,
             reverse: true,
             clickEvent: (e) => console.log(e)
         });
-        this.add(h1_buttons, disabler_2, button_text, button_icon, button_text_icon);
+        this.add(h1_buttons, disabler_2, button_text, button_icon, button_text_icon, button_text_icon_reverse);
     }
 }
 
