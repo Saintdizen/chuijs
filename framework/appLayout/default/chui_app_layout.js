@@ -704,9 +704,11 @@ class AppLayout extends Route {
         let panel_name = document.createElement("notification_box_controls_name")
         panel_name.innerText = "Панель уведомлений";
         this.#notification_box_controls.appendChild(panel_name)
-        this.#notification_box_controls.appendChild(new Button("Очистить", (e) => {
-            document.getElementById("chui_notification_box").innerHTML = "";
+        this.#notification_box_controls.appendChild(new Button({
+            icon: Icons.ACTIONS.DELETE,
+            clickEvent: () => document.getElementById("chui_notification_box").innerHTML = ""
         }).set())
+
         this.#notification_box.appendChild(this.#notification_box_controls)
         this.#notification_box.appendChild(this.#notification_box_main)
 
