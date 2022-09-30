@@ -3,6 +3,7 @@ const {
     DateInput, NumberInput, TextArea, PasswordInput,
     EmailInput, CheckBox, RadioButton, Button, H, FileInput
 } = require('../../index');
+const {Icons} = require("../../framework/components/chui_icons");
 
 class Inputs_Buttons_Page extends Page {
     constructor() {
@@ -53,9 +54,26 @@ class Inputs_Buttons_Page extends Page {
         // Кнопки
         let h1_buttons = new H(1, "Кнопки");
         let disabler_2 = new CheckBox({ title: "Выключить кнопки" })
-        disabler_2.addChangeListener((e) => button.setDisabled(e.target.checked))
-        let button = new Button("Обычная кнопка", (e) => console.log(e));
-        this.add(h1_buttons, disabler_2, button);
+        disabler_2.addChangeListener((e) => {
+            button_text.setDisabled(e.target.checked)
+            button_icon.setDisabled(e.target.checked)
+            button_text_icon.setDisabled(e.target.checked)
+        })
+        let button_text = new Button({
+            title: "Кнопка с текстом",
+            clickEvent: (e) => console.log(e)
+        });
+        let button_icon = new Button({
+            icon: Icons.NAVIGATION.CLOSE,
+            clickEvent: (e) => console.log(e)
+        });
+        let button_text_icon = new Button({
+            title: "Кнопка с текстом и иконкой",
+            icon: Icons.MAPS.MAP,
+            reverse: true,
+            clickEvent: (e) => console.log(e)
+        });
+        this.add(h1_buttons, disabler_2, button_text, button_icon, button_text_icon);
     }
 }
 

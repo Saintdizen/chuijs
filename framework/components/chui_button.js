@@ -1,7 +1,16 @@
+const {Icon} = require("./chui_icons");
+
 class Button {
     #chui_button = document.createElement('chui_button');
     #button = document.createElement('button');
-    constructor(title = String(undefined), listener = () => {}) {
+    #button_text = document.createElement('button_text');
+    #button_icon = document.createElement('button_icon');
+    constructor(options = {
+        title: String(undefined),
+        icon: undefined,
+        reverse: Boolean(undefined),
+        clickEvent: () => {}
+    }) {
         const {style_parse} = require('../modules/chui_functions');
         style_parse([
             {
@@ -28,12 +37,33 @@ class Button {
                     "color": "var(--button_text_color)",
                     "box-sizing": "border-box",
                     "border": "2px dashed rgba(0, 0, 0, 0)",
+                    "display": "flex",
+                    "flex-direction": "row",
+                    "align-items": "center",
+                    "justify-content": "center"
+                }
+            },
+            {
+                name: "button button_icon chui_icon",
+                style: {
+                    "color": "var(--button_text_color)",
                 }
             },
             {
                 name: "button:hover",
                 style: {
                     "background": "var(--blue_prime_background)",
+                }
+            },
+            {
+                name: "button:hover button_text",
+                style: {
+                    "color": "var(--text_color_hover)",
+                }
+            },
+            {
+                name: "button:hover button_icon chui_icon",
+                style: {
                     "color": "var(--text_color_hover)",
                 }
             },
@@ -56,8 +86,28 @@ class Button {
                 }
             }
         ], 'chUiJS_Button');
-        this.#button.innerText = title;
-        if (listener !== undefined) this.#button.addEventListener('click', listener);
+
+        if (options.title !== undefined) this.#button_text.innerText = options.title;
+        if (options.icon !== undefined) this.#button_icon.innerHTML = new Icon(options.icon).getHTML();
+
+        if (options.title !== undefined && options.icon === undefined) {
+            this.#button.appendChild(this.#button_text);
+        } else if (options.title === undefined && options.icon !== undefined) {
+            this.#button.style.padding = "6px"
+            this.#button.appendChild(this.#button_icon);
+        } else {
+            if (options.reverse) {
+                this.#button.appendChild(this.#button_icon);
+                this.#button_text.style.marginLeft = "6px";
+                this.#button.appendChild(this.#button_text);
+            } else {
+                this.#button.appendChild(this.#button_text);
+                this.#button_icon.style.marginLeft = "6px";
+                this.#button.appendChild(this.#button_icon);
+            }
+        }
+
+        if (options.clickEvent !== undefined) this.#button.addEventListener('click', options.clickEvent);
         this.#button.addEventListener("mousedown", () => {
             return false
         })
