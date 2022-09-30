@@ -27,7 +27,11 @@ class ContentBlock {
         }
     }
     // FUNCTIONS
-    disableMarginChild() { for (let child of this.#body.children) child.style.margin = '0px'; }
+    disableMarginChild() {
+        for (let child of this.#body.childNodes) {
+            child.set().style.margin = '0px';
+        }
+    }
     add(...components) {
         for (let component of components) {
             new Animation(component.set()).appearance()

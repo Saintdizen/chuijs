@@ -59,6 +59,7 @@ class AppLayout extends Route {
     //
     #windowControlsPositionLeft = undefined;
     #windowHideOnClose = false;
+
     //
     constructor() {
         super();
@@ -123,16 +124,16 @@ class AppLayout extends Route {
                     "--input_background": "rgba(209, 209, 214, 0.5)",
                     "--input_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
                     "--input_box_shadow_focus": "0px 0px 1px 2px var(--blue_prime_background)",
-                    "--dropdown_background":"rgb(229, 229, 234)",
+                    "--dropdown_background": "rgb(229, 229, 234)",
                     //BADGE
-                    "--badge_error_back":"rgba(255, 59, 48, 0.34)",
-                    "--badge_error_text":"rgba(194, 6, 24, 1)",
-                    "--badge_success_back":"rgba(52, 199, 89, 0.34)",
-                    "--badge_success_text":"rgba(0, 112, 24, 1)",
-                    "--badge_cancel_back":"rgba(142, 142, 147, 0.34)",
-                    "--badge_cancel_text":"rgba(97, 97, 101, 1)",
-                    "--badge_warning_back":"rgba(255, 204, 0, 0.34)",
-                    "--badge_warning_text":"rgba(146, 81, 0, 1)",
+                    "--badge_error_back": "rgba(255, 59, 48, 0.34)",
+                    "--badge_error_text": "rgba(194, 6, 24, 1)",
+                    "--badge_success_back": "rgba(52, 199, 89, 0.34)",
+                    "--badge_success_text": "rgba(0, 112, 24, 1)",
+                    "--badge_cancel_back": "rgba(142, 142, 147, 0.34)",
+                    "--badge_cancel_text": "rgba(97, 97, 101, 1)",
+                    "--badge_warning_back": "rgba(255, 204, 0, 0.34)",
+                    "--badge_warning_text": "rgba(146, 81, 0, 1)",
                     // Полоса состояния
                     "--progress_bar_back": "rgba(209, 209, 214, 0.5)",
                     // Уведомления
@@ -144,8 +145,8 @@ class AppLayout extends Route {
                     "--text_color_hover": "rgb(242, 242, 247)",
                     "--disable_color": "#e9ecef",
                     // Управление окнами
-                    "--window_close_button_hover":"rgba(255, 59, 48, 0.75)",
-                    "--window_maximize_button_hover":"rgba(52, 199, 89, 0.75)",
+                    "--window_close_button_hover": "rgba(255, 59, 48, 0.75)",
+                    "--window_maximize_button_hover": "rgba(52, 199, 89, 0.75)",
                     //Шрифты
                     "--font_default_size": "12pt",
                     "--font_labels_size": "10pt",
@@ -183,16 +184,16 @@ class AppLayout extends Route {
                     "--input_background": "rgba(58, 58, 60, 0.5)",
                     "--input_box_shadow_normal": "0px 0px 1px 2px var(--input_background)",
                     "--input_box_shadow_focus": "0px 0px 1px 2px var(--blue_prime_background)",
-                    "--dropdown_background":"rgb(44, 44, 46)",
+                    "--dropdown_background": "rgb(44, 44, 46)",
                     //BADGE
-                    "--badge_error_back":"rgba(255, 69, 58, 0.34)",
-                    "--badge_error_text":"rgba(255, 65, 54, 1)",
-                    "--badge_success_back":"rgba(48, 209, 88, 0.34)",
-                    "--badge_success_text":"rgba(49, 222, 75, 1)",
-                    "--badge_cancel_back":"rgba(142, 142, 147, 0.34)",
-                    "--badge_cancel_text":"rgba(152, 152, 157, 1)",
-                    "--badge_warning_back":"rgba(255, 214, 10, 0.34)",
-                    "--badge_warning_text":"rgba(255, 212, 38, 1)",
+                    "--badge_error_back": "rgba(255, 69, 58, 0.34)",
+                    "--badge_error_text": "rgba(255, 65, 54, 1)",
+                    "--badge_success_back": "rgba(48, 209, 88, 0.34)",
+                    "--badge_success_text": "rgba(49, 222, 75, 1)",
+                    "--badge_cancel_back": "rgba(142, 142, 147, 0.34)",
+                    "--badge_cancel_text": "rgba(152, 152, 157, 1)",
+                    "--badge_warning_back": "rgba(255, 214, 10, 0.34)",
+                    "--badge_warning_text": "rgba(255, 212, 38, 1)",
                     // Полоса состояния
                     "--progress_bar_back": "rgba(58, 58, 60, 0.5)",
                     // Уведомления
@@ -204,8 +205,8 @@ class AppLayout extends Route {
                     "--disable_color": "#e9ecef",
                     "--scroll_bar_background": "rgb(58, 58, 60)",
                     // Управление окнами
-                    "--window_close_button_hover":"rgba(255, 69, 58, 0.75)",
-                    "--window_maximize_button_hover":"rgba(48, 209, 88, 0.75)",
+                    "--window_close_button_hover": "rgba(255, 69, 58, 0.75)",
+                    "--window_maximize_button_hover": "rgba(48, 209, 88, 0.75)",
                     "--test": "#fff"
                 }
             },
@@ -325,8 +326,8 @@ class AppLayout extends Route {
                     "flex-direction": "column",
                     "position": "fixed",
                     "background": "var(--app_menu_background)",
-                    "justify-content":"flex-start",
-                    "align-items":"flex-start",
+                    "justify-content": "flex-start",
+                    "align-items": "flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
                     "border": "1px solid var(--border_header)",
@@ -343,8 +344,8 @@ class AppLayout extends Route {
                     "flex-direction": "column",
                     "position": "fixed",
                     "background": "var(--app_menu_background)",
-                    "justify-content":"flex-start",
-                    "align-items":"flex-start",
+                    "justify-content": "flex-start",
+                    "align-items": "flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
                     "border": "1px solid var(--border_header)",
@@ -359,8 +360,8 @@ class AppLayout extends Route {
                 style: {
                     "display": "flex",
                     "flex-direction": "row",
-                    "justify-content":"space-between",
-                    "align-items":"center",
+                    "justify-content": "space-between",
+                    "align-items": "center",
                     "height": "max-content",
                     "width": "-webkit-fill-available",
                     "-webkit-app-region": "no-drag"
@@ -473,10 +474,10 @@ class AppLayout extends Route {
                 name: "route_views",
                 style: {
                     "display": "flex",
-                    "flex-direction":"column",
+                    "flex-direction": "column",
                     "padding": "6px",
-                    "width":"-webkit-fill-available",
-                    "height":"-webkit-fill-available",
+                    "width": "-webkit-fill-available",
+                    "height": "-webkit-fill-available",
                     "overflow": "auto",
                     "-webkit-app-region": "no-drag"
                 }
@@ -485,10 +486,10 @@ class AppLayout extends Route {
                 name: "dark_mode",
                 style: {
                     "display": "flex",
-                    "padding":"6px",
-                    "width":"-webkit-fill-available",
-                    "height":"max-content",
-                    "justify-content":"center"
+                    "padding": "6px",
+                    "width": "-webkit-fill-available",
+                    "height": "max-content",
+                    "justify-content": "center"
                 }
             },
             {
@@ -511,7 +512,7 @@ class AppLayout extends Route {
                 name: "route",
                 style: {
                     "cursor": "pointer",
-                    "display":"flex",
+                    "display": "flex",
                     "align-items": "center",
                     "outline": "none",
                     "height": "max-content",
@@ -726,7 +727,7 @@ class AppLayout extends Route {
         } else {
             document.body.setAttribute('theme', "light");
         }
-        this.#dark_mode_togle.addChangeListener((e)=> {
+        this.#dark_mode_togle.addChangeListener((e) => {
             if (e.target.checked) {
                 document.body.setAttribute('theme', "dark");
             } else {
@@ -782,16 +783,16 @@ class AppLayout extends Route {
             }
         })
 
-        center.onscroll = function() {
+        center.onscroll = function () {
             if (center.scrollTop > 25) {
                 //header.style.height = '50px';
                 //center.style.paddingTop = '50px'
                 header.style.setProperty("backdrop-filter", "blur(8px) opacity(1)")
                 header.style.background = 'var(--header_background)'
                 header.style.borderBottom = '1px solid var(--border_header)'
-              } else {
+            } else {
                 header.removeAttribute('style')
-              }
+            }
         };
 
         this.#applayout.addEventListener('contextmenu', (e) => {
@@ -868,9 +869,11 @@ class AppLayout extends Route {
             header.appendChild(this.#window_control_box)
         }
     }
+
     setHideOnClose(boolean = Boolean(undefined)) {
         this.#windowHideOnClose = boolean;
     }
+
     setWindowControlsPositionLeft(position = Boolean(undefined)) {
         this.#windowControlsPositionLeft = position;
         if (this.#windowControlsPositionLeft) {
@@ -887,13 +890,16 @@ class AppLayout extends Route {
             header.appendChild(this.#window_control_box)
         }
     }
+
     setCustomHeaderHeight(height) {
         header.style.height = height;
         center.style.paddingTop = height;
     }
+
     setAutoCloseRouteMenu(boolean = Boolean(undefined)) {
         this.#auto_close = boolean;
     }
+
     setRoute(page) {
         route_list.push(page);
         let test = route_list.filter(route => route.getTitle().includes(page.getTitle()));
@@ -925,6 +931,7 @@ class AppLayout extends Route {
             console.error(`Страница "${page.getTitle()}" уже добавлена в меню`)
         }
     }
+
     addComponentToAppLayout(options = {
         //center: [],
         headerRight: []
@@ -932,12 +939,16 @@ class AppLayout extends Route {
         //if (options.center !== undefined) for (let component of options.center) this.#applayout.appendChild(component.set());
         if (options.headerRight !== undefined) this.#header_right_box.firstChild.before(...options.headerRight);
     }
-    static BUTTON(options= {
+
+    static BUTTON(options = {
         title: String(undefined),
         icon: undefined,
         reverse: Boolean(undefined),
-        clickEvent: () => {}
-    }) { return new HeaderButton(options).set(); }
+        clickEvent: () => {
+        }
+    }) {
+        return new HeaderButton(options).set();
+    }
 
     static USER_PROFILE(options = {
         username: String(undefined),
@@ -947,37 +958,39 @@ class AppLayout extends Route {
             imageBase64: String(undefined),
         },
         items: []
-    }) { return new UserProfile(options).set(); }
+    }) {
+        return new UserProfile(options).set();
+    }
 
-    static USER_PROFILE_ITEM(options= {
+    static USER_PROFILE_ITEM(options = {
         title: String(undefined),
         icon: undefined,
-        clickEvent: () => {}
-    }) { return new UserDDItem(options).set(); }
+        clickEvent: () => {
+        }
+    }) {
+        return new UserDDItem(options).set();
+    }
 
-    static DIALOG(options= {
+    static DIALOG(options = {
         title: String(undefined),
         icon: undefined,
         reverse: Boolean(undefined),
         dialogOptions: {
             title: String(undefined),
-            closeButtonTitle: String(undefined),
-            width: String(undefined),
-            height: String(undefined),
             closeOutSideClick: Boolean(undefined),
-            header: {
-                title: String(undefined),
-                closeButtonTitle: String(undefined),
-            },
-            body: {
+            style: {
+                width: String(undefined),
+                height: String(undefined),
                 direction: String(undefined),
                 wrap: String(undefined),
                 align: String(undefined),
                 justify: String(undefined),
-                components: []
-            }
+            },
+            components: []
         }
-    }) { return new HeaderDialog(options).set(); }
+    }) {
+        return new HeaderDialog(options).set();
+    }
 }
 
 class UserProfile {
@@ -987,6 +1000,7 @@ class UserProfile {
     //
     #user_dd_image_main = document.createElement("user_dd_image_main");
     #user_dd_image = document.createElement("user_dd_image");
+
     //
     constructor(options = {
         username: String(undefined),
@@ -1084,9 +1098,9 @@ class UserProfile {
                     "height": "-webkit-fill-available",
                     "display": "flex",
                     "flex-direction": "column",
-                    "align-items":"center",
-                    "justify-content":"center",
-                    "flex-wrap":"nowrap",
+                    "align-items": "center",
+                    "justify-content": "center",
+                    "flex-wrap": "nowrap",
                     "margin-bottom": "6px"
                 }
             },
@@ -1099,8 +1113,8 @@ class UserProfile {
                     "padding": "6px",
                     "border": "2px solid var(--input_background)",
                     "border-radius": "50%",
-                    "align-items":"center",
-                    "justify-content":"center",
+                    "align-items": "center",
+                    "justify-content": "center",
                     "font-size": "20pt",
                 }
             }
@@ -1136,6 +1150,7 @@ class UserProfile {
         //
         for (let item of options.items) this.#user_dropdown.appendChild(item);
     }
+
     set() {
         return this.#user_main;
     }
@@ -1143,7 +1158,8 @@ class UserProfile {
 
 class UserDDItem {
     #user_item = document.createElement("user_item");
-    constructor(options= {
+
+    constructor(options = {
         title: String(undefined),
         icon: undefined,
         clickEvent: () => {}
@@ -1153,6 +1169,7 @@ class UserDDItem {
         if (options.icon !== undefined) this.#user_item.innerHTML = options.icon;
         this.#user_item.addEventListener("click", options.clickEvent)
     }
+
     set() {
         return this.#user_item;
     }
@@ -1162,25 +1179,23 @@ class HeaderDialog {
     #header_button = document.createElement("header_button");
     #header_button_title = document.createElement("header_button_title");
     #header_button_icon = document.createElement("header_button_icon");
+
     constructor(options = {
         title: String(undefined),
         icon: undefined,
         reverse: Boolean(undefined),
         dialogOptions: {
-            width: String(undefined),
-            height: String(undefined),
+            title: String(undefined),
             closeOutSideClick: Boolean(undefined),
-            header: {
-                title: String(undefined),
-                closeButtonTitle: String(undefined),
-            },
-            body: {
+            style: {
+                width: String(undefined),
+                height: String(undefined),
                 direction: String(undefined),
                 wrap: String(undefined),
                 align: String(undefined),
                 justify: String(undefined),
-                components: []
-            }
+            },
+            components: []
         }
     }) {
         require('../../modules/chui_functions').style_parse([
@@ -1225,29 +1240,43 @@ class HeaderDialog {
             },
         ], 'chUiJS_HeaderButton');
         let dialog = new Dialog({
-            width: options.dialogOptions.width,
-            height: options.dialogOptions.height,
+            width: options.dialogOptions.style.width,
+            height: options.dialogOptions.style.height,
             closeOutSideClick: options.dialogOptions.closeOutSideClick
         })
         // HEADER
-        let header_dialog = new ContentBlock({ direction: "row", wrap: "nowrap", align: "center", justify: "space-between" });
+        let header_dialog = new ContentBlock({
+            direction: "row",
+            wrap: "nowrap",
+            align: "center",
+            justify: "space-between"
+        });
         header_dialog.setWidth("-webkit-fill-available");
         header_dialog.disableMarginChild();
         header_dialog.setPadding("0px 0px 0px 10px");
-        let title = new Label({ markdownText: `**${options.dialogOptions.header.title}**`, textAlign: "center", wordBreak: "normal", width: "max-content" })
-        let close_button = new Button("X", () => dialog.close());
-        if (options.dialogOptions.header.closeButtonTitle !== undefined) close_button.setText(options.dialogOptions.header.closeButtonTitle);
+        let title = new Label({
+            markdownText: `**${options.dialogOptions.title}**`,
+            textAlign: "center",
+            wordBreak: "normal",
+            width: "max-content",
+            fontSize: "14pt"
+        })
+        let close_button = new Button({
+            icon: Icons.NAVIGATION.CLOSE,
+            reverse: true,
+            clickEvent: () => dialog.close()
+        });
         header_dialog.add(title, close_button);
         dialog.addToHeader(header_dialog);
         // BODY
         let body_dialog = new ContentBlock({
-            direction: options.dialogOptions.body.direction,
-            wrap: options.dialogOptions.body.wrap,
-            align: options.dialogOptions.body.align,
-            justify: options.dialogOptions.body.justify
+            direction: options.dialogOptions.style.direction,
+            wrap: options.dialogOptions.style.wrap,
+            align: options.dialogOptions.style.align,
+            justify: options.dialogOptions.style.justify
         });
         body_dialog.setWidth("-webkit-fill-available");
-        body_dialog.add(...options.dialogOptions.body.components)
+        body_dialog.add(...options.dialogOptions.components)
         dialog.addToBody(body_dialog);
         // FOOTER
 
@@ -1256,13 +1285,13 @@ class HeaderDialog {
         if (options.title !== undefined && options.icon !== undefined) {
             if (options.reverse) {
                 this.#header_button_title.innerText = options.title;
-                this.#header_button_icon.innerHTML = options.icon.getHTML();
+                this.#header_button_icon.innerHTML = new Icon(options.icon, "20px").getHTML();
                 this.#header_button_icon.style.marginRight = "6px";
                 this.#header_button.appendChild(this.#header_button_icon)
                 this.#header_button.appendChild(this.#header_button_title)
             } else {
                 this.#header_button_title.innerText = options.title;
-                this.#header_button_icon.innerHTML = options.icon.getHTML();
+                this.#header_button_icon.innerHTML = new Icon(options.icon, "20px").getHTML();
                 this.#header_button_icon.style.marginLeft = "6px";
                 this.#header_button.appendChild(this.#header_button_title)
                 this.#header_button.appendChild(this.#header_button_icon)
@@ -1271,11 +1300,12 @@ class HeaderDialog {
             this.#header_button_title.innerText = options.title;
             this.#header_button.appendChild(this.#header_button_title)
         } else if (options.title === undefined && options.icon !== undefined) {
-            this.#header_button_icon.innerHTML = options.icon.getHTML();
+            this.#header_button_icon.innerHTML = new Icon(options.icon, "20px").getHTML();
             this.#header_button.appendChild(this.#header_button_icon)
         }
         this.#header_button.addEventListener("click", () => dialog.open());
     }
+
     set() {
         return this.#header_button;
     }
@@ -1285,11 +1315,13 @@ class HeaderButton {
     #header_button = document.createElement("header_button");
     #header_button_title = document.createElement("header_button_title");
     #header_button_icon = document.createElement("header_button_icon");
+
     constructor(options = {
         title: String(undefined),
         icon: undefined,
         reverse: Boolean(undefined),
-        clickEvent: () => {}
+        clickEvent: () => {
+        }
     }) {
         require('../../modules/chui_functions').style_parse([
             {
@@ -1355,6 +1387,7 @@ class HeaderButton {
         }
         this.#header_button.addEventListener("click", options.clickEvent);
     }
+
     set() {
         return this.#header_button;
     }

@@ -9,6 +9,7 @@ class Label {
         textAlign: String(undefined),
         wordBreak: String(undefined),
         width: String(undefined),
+        fontSize: String(undefined),
     }) {
         style_parse([
             {
@@ -42,6 +43,7 @@ class Label {
         if (options.textAlign !== undefined) this.#chui_label.style.textAlign = options.textAlign;
         if (options.wordBreak !== undefined) this.#chui_label.style.wordBreak = options.wordBreak;
         if (options.width !== undefined) this.#chui_label.style.width = options.width;
+        if (options.fontSize !== undefined) this.#chui_label.style.fontSize = options.fontSize;
     }
     // GET
     getId() {

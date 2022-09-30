@@ -1,6 +1,6 @@
 /** RENDERER PROCESS */
 /** IMPORTS */
-const {AppLayout, render, Dialog, Icon, Icons, Notification, Tab, TextInput, Tabs, Styles} = require('../index');
+const {AppLayout, render, Icons, Notification, Styles} = require('../index');
 
 const {MainPage} = require('./views/_main');
 const {Inputs_Buttons_Page} = require('./views/1_inputs_buttons');
@@ -69,25 +69,25 @@ class App extends AppLayout {
             headerRight: [
                 AppLayout.DIALOG({
                     title: "Диалоговое окно!",
-                    icon: new Icon(Icons.ACTIONS.SYSTEM_UPDATE_ALT, "20px"),
+                    icon: Icons.ACTIONS.SYSTEM_UPDATE_ALT,
                     reverse: false,
                     dialogOptions: {
-                        width: "800px",
-                        height: "500px",
+                        title: "Заголовок диалогового окна",
                         closeOutSideClick: true,
-                        header: {
-                            title: "Заголовок диалогового окна",
-                            closeButtonTitle: "Закрыть",
-                        },
-                        body: {
+                        style: {
+                            width: "800px",
+                            height: "500px",
                             direction: Styles.DIRECTION.COLUMN,
                             wrap: Styles.WRAP.NOWRAP,
                             align: Styles.ALIGN.CENTER,
                             justify: Styles.JUSTIFY.CENTER,
-                            components: [
-                                new Button("ПОДОПЫТНЫЙ", () => {})
-                            ]
-                        }
+                        },
+                        components: [
+                            new Button({
+                                title: "КНОПКА",
+                                icon: Icons.MAPS.MAP
+                            })
+                        ]
                     }
                 }),
             ]

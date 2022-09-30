@@ -19,7 +19,8 @@ class Button {
                     "cursor": "pointer",
                     "height": "max-content",
                     "width": "max-content",
-                    "border-radius": "var(--border_radius)"
+                    "border-radius": "var(--border_radius)",
+                    "margin": "var(--margin)",
                 }
             },
             {
@@ -32,7 +33,6 @@ class Button {
                     "padding": "6px 10px",
                     "font-size": "12pt",
                     "font-weight": "500",
-                    "margin": "var(--margin)",
                     "background": "var(--button_background)",
                     "box-sizing": "border-box",
                     "border": "2px dashed rgba(0, 0, 0, 0)",
