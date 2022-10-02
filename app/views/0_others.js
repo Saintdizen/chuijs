@@ -53,15 +53,19 @@ class OthersComponentsPage extends Page {
         let button_4 = new Button({
             title: "prompt",
             clickEvent: async () => {
-                let password = await popup.prompt({
+                let prompt_res = await popup.prompt({
                     title: 'Авторизация в приложении',
                     message: 'Введите пароль от учетной записи "hello@world.ru"',
                     okText: 'Войти',
                     cancelText: 'Отмена',
-                    placeholder: 'Пароль',
-                    inputType: Popup.PROMPT_INPUT.PASSWORD
+                    inputs: {
+                        password: true,
+                        passwordPlaceholder: "Пароль",
+                        text: true,
+                        textPlaceholder: "Имя пользователя"
+                    }
                 });
-                console.log(password)
+                console.log(prompt_res)
             }
         })
         this.add(button_2, button_3, button_4)

@@ -166,7 +166,10 @@ class Popup {
 
     async prompt(options = {
         title: String(undefined), message: String(undefined),
-        placeholder: String(undefined), inputType: String(undefined),
+        inputs: {
+            text: Boolean(undefined), textPlaceholder: String(undefined),
+            password: Boolean(undefined), passwordPlaceholder: String(undefined),
+        },
         okText: String(undefined), cancelText: String(undefined)
     }) {
         try {
@@ -175,7 +178,6 @@ class Popup {
             return err;
         }
     }
-    static PROMPT_INPUT = { PASSWORD: "password", TEXT: "text" }
 }
 
 exports.Popup = Popup
@@ -271,11 +273,15 @@ class PopupPrompt {
     #popup_title = document.createElement("popup_title")
     #popup_message = document.createElement("popup_message")
 
-    #input = undefined;
+    #input_text = undefined;
+    #input_pass = undefined;
 
     constructor(options = {
         title: String(undefined), message: String(undefined),
-        placeholder: String(undefined), inputType: String(undefined),
+        inputs: {
+            text: Boolean(undefined), textPlaceholder: String(undefined),
+            password: Boolean(undefined), passwordPlaceholder: String(undefined),
+        },
         okText: String(undefined), cancelText: String(undefined)
     }) {
         this.#chui_popup.id = this.#id
@@ -290,19 +296,21 @@ class PopupPrompt {
         this.#popup_body.appendChild(this.#popup_title);
         this.#popup_body.appendChild(this.#popup_message);
 
-        if (options.inputType.includes(Popup.PROMPT_INPUT.PASSWORD)) {
-            this.#input = new PasswordInput({
-                placeholder: options.placeholder,
+        if (options.inputs.text) {
+            this.#input_text = new TextInput({
+                placeholder: options.inputs.textPlaceholder,
                 width: "-webkit-fill-available",
             })
-        } else if (options.inputType.includes(Popup.PROMPT_INPUT.TEXT)) {
-            this.#input = new TextInput({
-                placeholder: options.placeholder,
-                width: "-webkit-fill-available",
-            })
+            this.#popup_body.appendChild(this.#input_text.set());
         }
 
-        this.#popup_body.appendChild(this.#input.set());
+        if (options.inputs.password) {
+            this.#input_pass = new PasswordInput({
+                placeholder: options.inputs.passwordPlaceholder,
+                width: "-webkit-fill-available",
+            })
+            this.#popup_body.appendChild(this.#input_pass.set());
+        }
 
         this.#button_cancel.innerText = options.cancelText;
         this.#button_accept.innerText = options.okText;
@@ -317,7 +325,9 @@ class PopupPrompt {
             })
 
             this.#button_accept.addEventListener("click", () => {
-                resolve(this.#input.getValue())
+                if (this.#input_text && this.#input_pass === undefined) resolve({ text: this.#input_text.getValue() })
+                if (this.#input_text === undefined && this.#input_pass) resolve({ password: this.#input_pass.getValue() })
+                if (this.#input_text && this.#input_pass) resolve({ text: this.#input_text.getValue(), password: this.#input_pass.getValue() })
                 new Animation(document.getElementById(this.#id)).disappearance_and_remove();
             })
 
