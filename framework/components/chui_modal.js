@@ -32,7 +32,7 @@ class Dialog {
             {
                 name: "dialog_content",
                 style: {
-                    "margin": "auto",
+                    "margin": "59px auto",
                     "width": "max-content",
                     "height": "max-content",
                     "display": "flex",

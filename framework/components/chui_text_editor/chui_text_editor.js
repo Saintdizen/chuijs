@@ -14,7 +14,7 @@ class TextEditor {
     #id = require("randomstring").generate();
     #label = document.createElement("label");
     // status
-    #cater_position = new Label("0");
+    #cater_position = new Label({text: "0"});
     //
     constructor(height = String(undefined), options) {
         require('../../modules/chui_functions').style_parse([

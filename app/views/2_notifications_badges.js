@@ -7,38 +7,44 @@ class Notifications_Badges_Page extends Page {
         this.setMain(false);
 
         let h1_notifications = new H(1, "Уведомления")
-        let DEFAULT = new Button("Уведомление - Обычное", () => {
-            new Notification({
-                markdownTitle: "**Пожелание!**",
-                markdownText: `Хорошего дня, Иван!  
+        let DEFAULT = new Button({
+            title: "Уведомление - Обычное",
+            clickEvent: () => {
+                new Notification({
+                    markdownTitle: "**Пожелание!**", markdownText: `Хорошего дня, Иван!  
                 Не удивляйтесь, если увидите оформленый на вас кредит!  
-                **Вы уволены!**`,
-                showTime: 5000
-            }).show()
+                **Вы уволены!**`, showTime: 5000
+                }).show()
+            }
         })
-        let WARNING = new Button("Уведомление - Предупреждение", () => {
-            new Notification({
-                title: "Заголовок",
-                text: "Текст",
-                style: Notification.STYLE.WARNING,
-                showTime: 1000
-            }).show()
+        let WARNING = new Button({
+            title: "Уведомление - Предупреждение",
+            clickEvent: () => {
+                new Notification({
+                    title: "Заголовок", text: "Текст",
+                    style: Notification.STYLE.WARNING, showTime: 1000
+                }).show()
+            }
         })
-        let SUCCESS = new Button("Уведомление - Успех", () => {
-            new Notification({
-                title: "Заголовок",
-                text: "Текст",
-                style: Notification.STYLE.SUCCESS,
-                showTime: 1000
-            }).show()
+        let SUCCESS = new Button({
+            title: "Уведомление - Успех",
+            clickEvent: () => {
+                new Notification({
+                    title: "Заголовок", text: "Текст",
+                    style: Notification.STYLE.SUCCESS, showTime: 1000
+                }).show()
+            }
         })
-        let ERROR = new Button('Уведомление - Ошибка', () => {
-            new Notification({
-                title: "Заголовок",
-                text: "Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст ",
-                style: Notification.STYLE.ERROR,
-                showTime: 1000
-            }).show()
+        let ERROR = new Button({
+            title: 'Уведомление - Ошибка',
+            clickEvent: () => {
+                new Notification({
+                    title: "Заголовок",
+                    text: "Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст ",
+                    style: Notification.STYLE.ERROR,
+                    showTime: 1000
+                }).show()
+            }
         })
         this.add(h1_notifications, DEFAULT, WARNING, SUCCESS, ERROR)
 

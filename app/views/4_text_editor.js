@@ -38,8 +38,9 @@ class TextEditorPage extends Page {
         this.add(textEditor)
 
         let html = new HtmlBlock(Styles.SIZE.MAX_CONTENT);
-        this.add(new Button("test", () => {
-            html.setHtml(textEditor.getValueAsHTML())
+        this.add(new Button({
+            title: "test",
+            clickEvent: () => html.setHtml(textEditor.getValueAsHTML())
         }), html)
     }
 }

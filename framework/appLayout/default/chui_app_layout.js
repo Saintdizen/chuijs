@@ -428,6 +428,12 @@ class AppLayout extends Route {
                 }
             },
             {
+                name: ".notification_button_active chui_icon",
+                style: {
+                    "color": "var(--text_color_hover)"
+                }
+            },
+            {
                 name: "notification_button:hover chui_icon",
                 style: {
                     "color": "var(--text_color_hover)"
@@ -462,6 +468,12 @@ class AppLayout extends Route {
                 style: {
                     "background": "var(--blue_prime_background)",
                     "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
+                }
+            },
+            {
+                name: ".app_menu_button_active chui_icon",
+                style: {
+                    "color": "var(--text_color_hover)"
                 }
             },
             {
@@ -1214,11 +1226,16 @@ class HeaderDialog {
                     "margin": "var(--margin) 0px var(--margin) var(--margin)",
                     "font-size": "12pt",
                     "background": "transparent",
-                    "color": "var(--text_color)",
                     "font-weight": "500",
                     "display": "flex",
                     "flex-direction": "row",
                     "-webkit-app-region": "no-drag"
+                }
+            },
+            {
+                name: "header_button header_button_title",
+                style: {
+                    "color": "var(--text_color)",
                 }
             },
             {
@@ -1283,7 +1300,8 @@ class HeaderDialog {
         // FOOTER
 
         //
-        center.appendChild(dialog.set());
+        document.getElementById("app").appendChild(dialog.set());
+        //center.appendChild(dialog.set());
         if (options.title !== undefined && options.icon !== undefined) {
             if (options.reverse) {
                 this.#header_button_title.innerText = options.title;

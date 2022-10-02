@@ -12,12 +12,8 @@ class OthersComponentsPage extends Page {
             height: "500px",
             closeOutSideClick: true
         })
-        dialog.addToHeader(new Button("Button", () => {
-            dialog.close()
-        }))
-        let button = new Button("Кнопка", () => {
-            dialog.open();
-        })
+        dialog.addToHeader(new Button({ title: "Закрыть диалоговое окно", clickEvent: () => dialog.close() }))
+        let button = new Button({ title: "Открыть диалоговое окно", clickEvent: () => dialog.open() })
         this.add(h1_modals, button, dialog)
 
         let h1_progress = new H(1, "Прогресс бары")
