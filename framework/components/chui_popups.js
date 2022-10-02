@@ -1,0 +1,328 @@
+const {Animation} = require('../modules/chui_animations');
+const {PasswordInput} = require("./chui_inputs/chui_password");
+const {TextInput} = require("./chui_inputs/chui_text");
+
+class Popup {
+    constructor() {
+        require('../modules/chui_functions').style_parse([
+            {
+                name: "chui_popup",
+                style: {
+                    "display": "none",
+                    "position": "fixed",
+                    "z-index": "2",
+                    "left": "0",
+                    "top": "0",
+                    "width": "100%",
+                    "height": "100%",
+                    "overflow": "auto",
+                    "background-color": "var(--modal_overlay)",
+                    "padding": "0px",
+                    "border": "none"
+                }
+            },
+            {
+                name: "popup_content",
+                style: {
+                    "margin": "60px auto",
+                    "width": "325px",
+                    "height": "max-content",
+                    "display": "flex",
+                    "flex-direction": "column",
+                    "border-radius": "var(--border_radius)",
+                    "box-shadow": "var(--shadow_one) 0px 19px 38px, var(--shadow_two) 0px 15px 12px",
+                    "border": "2px solid var(--modal_border)",
+                    "color": "var(--text_color)",
+                    "background": "var(--modal_background)"
+                }
+            },
+            {
+                name: "popup_body",
+                style: {
+                    "padding": "10px",
+                    "display": "flex",
+                    "height": "-webkit-fill-available",
+                    "width": "-webkit-fill-available",
+                    "overflow": "auto",
+                    "flex-direction": "column",
+                    "justify-content": "center",
+                    "align-items": "center"
+                }
+            },
+            {
+                name: "popup_buttons",
+                style: {
+                    "display": "flex",
+                    "padding-top": "6px",
+                    "border-top": "1px solid var(--shadow_three)",
+                    "flex-direction": "row",
+                    "justify-content": "center",
+                    "align-items": "center"
+                }
+            },
+            {
+                name: "popup_title",
+                style: {
+                    "display": "block",
+                    "text-align": "center",
+                    "font-size": "14pt",
+                    "font-weight": "600",
+                    "padding": "6px"
+                }
+            },
+            {
+                name: "popup_message",
+                style: {
+                    "display": "block",
+                    "text-align": "center",
+                    "font-size": "11pt",
+                    "font-weight": "400",
+                    "padding": "6px"
+                }
+            },
+            //ALERT
+            {
+                name: "popup_button_ok",
+                style: {
+                    "display": "flex",
+                    "border-top": "1px solid var(--shadow_three)",
+                    "flex-direction": "row",
+                    "justify-content": "center",
+                    "align-items": "center",
+                    "width": "-webkit-fill-available",
+                    "padding": "10px",
+                    "border-radius": "var(--border_radius)",
+                    "color": "var(--button_text_color)",
+                    "font-weight": "500",
+                    "font-size": "12pt",
+                }
+            },
+            {
+                name: "popup_button_ok:hover",
+                style: {
+                    "color": "var(--text_color_hover)",
+                    "background": "var(--blue_prime_background)",
+                }
+            },
+            //CONFIRM
+            {
+                name: "popup_button_accept",
+                style: {
+                    "display": "flex",
+                    "border-top": "1px solid var(--shadow_three)",
+                    "flex-direction": "row",
+                    "justify-content": "center",
+                    "align-items": "center",
+                    "width": "-webkit-fill-available",
+                    "padding": "10px",
+                    "border-radius": "var(--border_radius)",
+                    "color": "var(--button_text_color)",
+                    "font-weight": "500",
+                    "font-size": "12pt",
+                }
+            },
+            {
+                name: "popup_button_accept:hover",
+                style: {
+                    "color": "var(--text_color_hover)",
+                    "background": "var(--blue_prime_background)",
+                }
+            },
+            {
+                name: "popup_button_cancel",
+                style: {
+                    "display": "flex",
+                    "border-top": "1px solid var(--shadow_three)",
+                    "flex-direction": "row",
+                    "justify-content": "center",
+                    "align-items": "center",
+                    "width": "-webkit-fill-available",
+                    "padding": "10px",
+                    "border-radius": "var(--border_radius)",
+                    "color": "var(--badge_error_text)",
+                    "font-weight": "500",
+                    "font-size": "12pt",
+                }
+            },
+            {
+                name: "popup_button_cancel:hover",
+                style: {
+                    "color": "var(--text_color_hover)",
+                    "background": "var(--red_prime_background)",
+                }
+            },
+        ], 'chUiJS_Popups');
+    }
+
+    alert(options = {title: String(undefined), message: String(undefined)}) {
+        new PopupAlert(options);
+    }
+
+    confirm(options = {
+        title: String(undefined), message: String(undefined),
+        okText: String(undefined), cancelText: String(undefined),
+        acceptEvent: () => {}, cancelEvent: () => {}
+    }) { new PopupConfirm(options); }
+
+    async prompt(options = {
+        title: String(undefined), message: String(undefined),
+        placeholder: String(undefined), inputType: String(undefined),
+        okText: String(undefined), cancelText: String(undefined)
+    }) {
+        try {
+            return await new PopupPrompt(options);
+        } catch (err) {
+            return err;
+        }
+    }
+    static PROMPT_INPUT = { PASSWORD: "password", TEXT: "text" }
+}
+
+exports.Popup = Popup
+
+class PopupAlert {
+    #id = require("randomstring").generate();
+    #chui_popup = document.createElement(`chui_popup`);
+    #popup_content = document.createElement('popup_content');
+    #popup_body = document.createElement("popup_body")
+    #popup_buttons = document.createElement('popup_buttons');
+    #button_OK = document.createElement("popup_button_ok");
+
+    #popup_title = document.createElement("popup_title")
+    #popup_message = document.createElement("popup_message")
+
+    constructor(options = {title: String(undefined), message: String(undefined)}) {
+        this.#chui_popup.id = this.#id
+        //ADDS
+        this.#popup_content.appendChild(this.#popup_body)
+        this.#popup_content.appendChild(this.#popup_buttons)
+        this.#chui_popup.appendChild(this.#popup_content)
+
+        this.#popup_title.innerText = options.title;
+        this.#popup_message.innerText = options.message;
+
+        this.#popup_body.appendChild(this.#popup_title);
+        this.#popup_body.appendChild(this.#popup_message);
+
+        // СОБЫТИЯ
+        this.#button_OK.innerText = "OK";
+        this.#button_OK.addEventListener("click", () => new Animation(document.getElementById(this.#id)).disappearance_and_remove())
+        this.#popup_buttons.appendChild(this.#button_OK);
+
+        //
+        document.getElementById("app").appendChild(this.#chui_popup)
+        new Animation(document.getElementById(this.#id)).appearance();
+    }
+}
+
+class PopupConfirm {
+    #id = require("randomstring").generate();
+    #chui_popup = document.createElement(`chui_popup`);
+    #popup_content = document.createElement('popup_content');
+    #popup_body = document.createElement("popup_body")
+    #popup_buttons = document.createElement('popup_buttons');
+    #button_accept = document.createElement("popup_button_accept")
+    #button_cancel = document.createElement("popup_button_cancel")
+
+    #popup_title = document.createElement("popup_title")
+    #popup_message = document.createElement("popup_message")
+
+    constructor(options = {
+        title: String(undefined), message: String(undefined),
+        okText: String(undefined), cancelText: String(undefined),
+        acceptEvent: () => {}, cancelEvent: () => {}
+    }) {
+        this.#chui_popup.id = this.#id
+        //ADDS
+        this.#popup_content.appendChild(this.#popup_body)
+        this.#popup_content.appendChild(this.#popup_buttons)
+        this.#chui_popup.appendChild(this.#popup_content)
+
+        this.#popup_title.innerText = options.title;
+        this.#popup_message.innerText = options.message;
+
+        this.#popup_body.appendChild(this.#popup_title);
+        this.#popup_body.appendChild(this.#popup_message);
+
+        this.#button_cancel.innerText = options.cancelText;
+        this.#button_cancel.addEventListener("click", () => new Animation(document.getElementById(this.#id)).disappearance_and_remove())
+        this.#button_cancel.addEventListener("click", options.cancelEvent)
+        this.#popup_buttons.appendChild(this.#button_cancel);
+
+        this.#button_accept.innerText = options.okText;
+        this.#button_accept.addEventListener("click", () => new Animation(document.getElementById(this.#id)).disappearance_and_remove())
+        this.#button_accept.addEventListener("click", options.acceptEvent)
+        this.#popup_buttons.appendChild(this.#button_accept);
+
+        document.getElementById("app").appendChild(this.#chui_popup)
+        new Animation(document.getElementById(this.#id)).appearance();
+    }
+}
+
+class PopupPrompt {
+    #id = require("randomstring").generate();
+    #chui_popup = document.createElement(`chui_popup`);
+    #popup_content = document.createElement('popup_content');
+    #popup_body = document.createElement("popup_body")
+    #popup_buttons = document.createElement('popup_buttons');
+    #button_accept = document.createElement("popup_button_accept")
+    #button_cancel = document.createElement("popup_button_cancel")
+
+    #popup_title = document.createElement("popup_title")
+    #popup_message = document.createElement("popup_message")
+
+    #input = undefined;
+
+    constructor(options = {
+        title: String(undefined), message: String(undefined),
+        placeholder: String(undefined), inputType: String(undefined),
+        okText: String(undefined), cancelText: String(undefined)
+    }) {
+        this.#chui_popup.id = this.#id
+        //ADDS
+        this.#popup_content.appendChild(this.#popup_body)
+        this.#popup_content.appendChild(this.#popup_buttons)
+        this.#chui_popup.appendChild(this.#popup_content)
+
+        this.#popup_title.innerText = options.title;
+        this.#popup_message.innerText = options.message;
+
+        this.#popup_body.appendChild(this.#popup_title);
+        this.#popup_body.appendChild(this.#popup_message);
+
+        if (options.inputType.includes(Popup.PROMPT_INPUT.PASSWORD)) {
+            this.#input = new PasswordInput({
+                placeholder: options.placeholder,
+                width: "-webkit-fill-available",
+            })
+        } else if (options.inputType.includes(Popup.PROMPT_INPUT.TEXT)) {
+            this.#input = new TextInput({
+                placeholder: options.placeholder,
+                width: "-webkit-fill-available",
+            })
+        }
+
+        this.#popup_body.appendChild(this.#input.set());
+
+        this.#button_cancel.innerText = options.cancelText;
+        this.#button_accept.innerText = options.okText;
+
+        this.#popup_buttons.appendChild(this.#button_cancel);
+        this.#popup_buttons.appendChild(this.#button_accept);
+
+        return new Promise((resolve, reject) => {
+            this.#button_cancel.addEventListener("click", () => {
+                reject("Отмена действия");
+                new Animation(document.getElementById(this.#id)).disappearance_and_remove();
+            })
+
+            this.#button_accept.addEventListener("click", () => {
+                resolve(this.#input.getValue())
+                new Animation(document.getElementById(this.#id)).disappearance_and_remove();
+            })
+
+            document.getElementById("app").appendChild(this.#chui_popup);
+            new Animation(document.getElementById(this.#id)).appearance();
+        })
+    }
+}

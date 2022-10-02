@@ -1,10 +1,11 @@
 const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView, Notification} = require('../../index');
+const {Popup} = require("../../framework/components/chui_popups");
 
 class OthersComponentsPage extends Page {
     constructor() {
         super();
         this.setTitle('Остальные компоненты');
-        this.setMain(false)
+        this.setMain(true)
 
         let h1_modals = new H(1, "Диалоговые окна")
         let dialog = new Dialog({
@@ -15,6 +16,56 @@ class OthersComponentsPage extends Page {
         dialog.addToHeader(new Button({ title: "Закрыть диалоговое окно", clickEvent: () => dialog.close() }))
         let button = new Button({ title: "Открыть диалоговое окно", clickEvent: () => dialog.open() })
         this.add(h1_modals, button, dialog)
+
+        let popup = new Popup();
+        let button_2 = new Button({
+            title: "alert",
+            clickEvent: () => {
+                popup.alert({
+                    title: 'Информация о файле "Что-то там.deb"',
+                    message: 'Ну уж очень важный файл!'
+                })
+            }
+        })
+        let button_3 = new Button({
+            title: "confirm",
+            clickEvent: () => {
+                popup.confirm({
+                    title: 'Удлить файл "Что-то там.deb"?',
+                    message: 'Если удалите файл "Что-то там.deb" начнется полная катастрофа! Земля остановится!',
+                    okText: 'Удалить',
+                    cancelText: 'Отмена',
+                    acceptEvent: () => {
+                        new Notification({
+                            title: "Сударь, Вы дурак!", text: "Ой, дурачек!",
+                            style: Notification.STYLE.ERROR, showTime: 5000
+                        }).show()
+                    },
+                    cancelEvent: () => {
+                        new Notification({
+                            title: "Сударь, ай молодец!", text: "Правильное решение!",
+                            style: Notification.STYLE.SUCCESS, showTime: 5000
+                        }).show()
+                    }
+                })
+            }
+        })
+        let button_4 = new Button({
+            title: "prompt",
+            clickEvent: async () => {
+                let password = await popup.prompt({
+                    title: 'Авторизация в приложении',
+                    message: 'Введите пароль от учетной записи "hello@world.ru"',
+                    okText: 'Войти',
+                    cancelText: 'Отмена',
+                    placeholder: 'Пароль',
+                    inputType: Popup.PROMPT_INPUT.PASSWORD
+                });
+                console.log(password)
+            }
+        })
+        this.add(button_2, button_3, button_4)
+
 
         let h1_progress = new H(1, "Прогресс бары")
         let progress = new ProgressBar(100)

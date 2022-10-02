@@ -106,7 +106,8 @@ class AppLayout extends Route {
                     "--header_background": "rgba(229, 229, 234, 0.3)",
                     "--center_background": "rgb(242, 242, 247)",
                     "--border_header": "rgba(209, 209, 214, 0.5)",
-                    "--blue_prime_background": "rgb(0, 112, 245)",
+                    "--blue_prime_background": "rgba(0, 112, 245, 0.85)",
+                    "--red_prime_background": "rgba(255, 59, 48, 0.85)",
                     "--blue_prime_background_trans": "rgba(0, 112, 245, 0.4)",
                     //Кнопка
                     "--button_background": "rgba(209, 209, 214, 0.5)",
@@ -167,7 +168,8 @@ class AppLayout extends Route {
                     "--header_background": "rgba(44, 44, 46, 0.3)",
                     "--center_background": "rgb(28, 28, 30)",
                     "--border_header": "rgba(58, 58, 60, 0.5)",
-                    "--blue_prime_background": "rgb(20, 142, 255)",
+                    "--blue_prime_background": "rgba(20, 142, 255, 0.85)",
+                    "--red_prime_background": "rgba(255, 69, 58, 0.85)",
                     //Кнопка
                     "--button_background": "rgba(58, 58, 60, 0.5)",
                     "--button_background_disabled": "rgba(58, 58, 60, 0.15)",
