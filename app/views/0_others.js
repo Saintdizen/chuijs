@@ -54,14 +54,14 @@ class OthersComponentsPage extends Page {
             title: "prompt",
             clickEvent: async () => {
                 let prompt_res = await popup.prompt({
-                    title: 'Авторизация в приложении',
-                    message: 'Введите пароль от учетной записи "hello@world.ru"',
+                    title: 'Подтвердите удаление файла "Что-то там.deb"?',
+                    message: 'Если подтвердите удаление файла "Что-то там.deb" начнется полная катастрофа! Земля остановится!',
                     okText: 'Войти',
                     cancelText: 'Отмена',
                     inputs: {
                         password: true,
                         passwordPlaceholder: "Пароль",
-                        text: true,
+                        //text: true,
                         textPlaceholder: "Имя пользователя"
                     }
                 });

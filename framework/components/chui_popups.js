@@ -318,16 +318,20 @@ class PopupPrompt {
         this.#popup_buttons.appendChild(this.#button_cancel);
         this.#popup_buttons.appendChild(this.#button_accept);
 
+
+
+
+
         return new Promise((resolve, reject) => {
             this.#button_cancel.addEventListener("click", () => {
-                reject("Отмена действия");
+                reject({ cancel: "Отмена действия" })
                 new Animation(document.getElementById(this.#id)).disappearance_and_remove();
             })
 
             this.#button_accept.addEventListener("click", () => {
-                if (this.#input_text && this.#input_pass === undefined) resolve({ text: this.#input_text.getValue() })
-                if (this.#input_text === undefined && this.#input_pass) resolve({ password: this.#input_pass.getValue() })
-                if (this.#input_text && this.#input_pass) resolve({ text: this.#input_text.getValue(), password: this.#input_pass.getValue() })
+                if (this.#input_text && this.#input_pass === undefined) resolve(this.#input_text.getValue());
+                if (this.#input_text === undefined && this.#input_pass) resolve(this.#input_pass.getValue());
+                if (this.#input_text && this.#input_pass) resolve({ text: this.#input_text.getValue(), password: this.#input_pass.getValue() });
                 new Animation(document.getElementById(this.#id)).disappearance_and_remove();
             })
 
