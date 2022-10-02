@@ -80,6 +80,6 @@ ContentBlock, Details, Dialogs, RadioButton, Table,
 ProgressBar, Toggle, Tabs, Notification, Badge, 
 Image, Graphs (Bar, Pie), Icons, WebView, Spinner,
 GroupRadio, Accordion, Pre, HtmlBlock, TreeView, SlideShow,
-TextEditor, FieldSet
+TextEditor, FieldSet, Popups (Alert, Confirm, Prompt)
 ### В разработке
 ContextMenu, Forms
