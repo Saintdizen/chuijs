@@ -158,11 +158,17 @@ class Popup {
         new PopupAlert(options);
     }
 
-    confirm(options = {
+    async confirm(options = {
         title: String(undefined), message: String(undefined),
         okText: String(undefined), cancelText: String(undefined),
         acceptEvent: () => {}, cancelEvent: () => {}
-    }) { new PopupConfirm(options); }
+    }) {
+        try {
+            return await new PopupConfirm(options);
+        } catch (err) {
+            return err;
+        }
+    }
 
     async prompt(options = {
         title: String(undefined), message: String(undefined),
@@ -232,7 +238,6 @@ class PopupConfirm {
     constructor(options = {
         title: String(undefined), message: String(undefined),
         okText: String(undefined), cancelText: String(undefined),
-        acceptEvent: () => {}, cancelEvent: () => {}
     }) {
         this.#chui_popup.id = this.#id
         //ADDS
@@ -247,17 +252,25 @@ class PopupConfirm {
         this.#popup_body.appendChild(this.#popup_message);
 
         this.#button_cancel.innerText = options.cancelText;
-        this.#button_cancel.addEventListener("click", () => new Animation(document.getElementById(this.#id)).disappearance_and_remove())
-        this.#button_cancel.addEventListener("click", options.cancelEvent)
-        this.#popup_buttons.appendChild(this.#button_cancel);
-
         this.#button_accept.innerText = options.okText;
-        this.#button_accept.addEventListener("click", () => new Animation(document.getElementById(this.#id)).disappearance_and_remove())
-        this.#button_accept.addEventListener("click", options.acceptEvent)
+
+        this.#popup_buttons.appendChild(this.#button_cancel);
         this.#popup_buttons.appendChild(this.#button_accept);
 
-        document.getElementById("app").appendChild(this.#chui_popup)
-        new Animation(document.getElementById(this.#id)).appearance();
+        return new Promise((resolve, reject) => {
+            this.#button_cancel.addEventListener("click", () => {
+                new Animation(document.getElementById(this.#id)).disappearance_and_remove()
+                reject(false);
+            })
+
+            this.#button_accept.addEventListener("click", () => {
+                new Animation(document.getElementById(this.#id)).disappearance_and_remove()
+                resolve(true);
+            });
+
+            document.getElementById("app").appendChild(this.#chui_popup)
+            new Animation(document.getElementById(this.#id)).appearance();
+        })
     }
 }
 
@@ -317,10 +330,6 @@ class PopupPrompt {
 
         this.#popup_buttons.appendChild(this.#button_cancel);
         this.#popup_buttons.appendChild(this.#button_accept);
-
-
-
-
 
         return new Promise((resolve, reject) => {
             this.#button_cancel.addEventListener("click", () => {

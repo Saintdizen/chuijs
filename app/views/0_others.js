@@ -29,25 +29,26 @@ class OthersComponentsPage extends Page {
         })
         let button_3 = new Button({
             title: "confirm",
-            clickEvent: () => {
-                popup.confirm({
+            clickEvent: async () => {
+                let res = await popup.confirm({
                     title: 'Удлить файл "Что-то там.deb"?',
                     message: 'Если удалите файл "Что-то там.deb" начнется полная катастрофа! Земля остановится!',
                     okText: 'Удалить',
                     cancelText: 'Отмена',
-                    acceptEvent: () => {
-                        new Notification({
-                            title: "Сударь, Вы дурак!", text: "Ой, дурачек!",
-                            style: Notification.STYLE.ERROR, showTime: 5000
-                        }).show()
-                    },
-                    cancelEvent: () => {
-                        new Notification({
-                            title: "Сударь, ай молодец!", text: "Правильное решение!",
-                            style: Notification.STYLE.SUCCESS, showTime: 5000
-                        }).show()
-                    }
                 })
+
+                if (res) {
+                    new Notification({
+                        title: "Сударь, Вы дурак!", text: "Ой, дурачек!",
+                        style: Notification.STYLE.ERROR, showTime: 5000
+                    }).show()
+                } else {
+                    new Notification({
+                        title: "Сударь, ай молодец!", text: "Правильное решение!",
+                        style: Notification.STYLE.SUCCESS, showTime: 5000
+                    }).show()
+                }
+                console.log(res)
             }
         })
         let button_4 = new Button({
