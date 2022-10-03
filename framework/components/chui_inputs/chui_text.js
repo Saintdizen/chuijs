@@ -1,4 +1,5 @@
 //version: 1.0.0
+const {Animation} = require('../../modules/chui_animations');
 
 class TextInput {
     #chui_text_main = document.createElement('chui_text_main');
@@ -7,6 +8,7 @@ class TextInput {
     #title = String(undefined);
     #input = document.createElement('input');
     #label = document.createElement('label');
+    #error_message_text = document.createElement("error_message_text");
     constructor(options = {
         name: String(undefined),
         title: String(undefined),
@@ -72,6 +74,25 @@ class TextInput {
                     "font-weight":"500",
                     "line-height":"1",
                     "color": "var(--text_color)"
+                }
+            },
+            {
+                name: "error_message_text",
+                style: {
+                    "display": "none",
+                    "height": "max-content",
+                    "width": "max-content",
+                    "margin": "var(--margin) var(--margin) 0px var(--margin)",
+                    "font-size": "10pt",
+                    "font-weight":"500",
+                    "line-height":"1",
+                    "color": "var(--red_prime_background)"
+                }
+            },
+            {
+                name: ".error_border",
+                style: {
+                    "border": "2px solid var(--red_prime_background)",
                 }
             },
             // DISABLED STYLES
@@ -145,6 +166,12 @@ class TextInput {
         })
         this.#chui_text_main.appendChild(this.#input);
         this.#chui_text_input.appendChild(this.#chui_text_main);
+
+        //
+        this.#input.addEventListener("input", () => {
+            this.#chui_text_main.classList.remove("error_border");
+            new Animation(this.#error_message_text).disappearance();
+        })
     }
     addInputListener(listener = () => {}) { this.#input.addEventListener('input', listener); }
     addFocusListener(listener = () => {}) { this.#input.addEventListener('focus', listener); }
@@ -164,6 +191,12 @@ class TextInput {
             this.#input.className = "text_input"
             this.#label.className = "input_label"
         }
+    }
+    setErrorMessage(message = String(undefined)) {
+        this.#chui_text_main.classList.add("error_border");
+        this.#error_message_text.innerText = message;
+        this.#chui_text_input.appendChild(this.#error_message_text);
+        new Animation(this.#error_message_text).appearance();
     }
     set() { return this.#chui_text_input; }
 }

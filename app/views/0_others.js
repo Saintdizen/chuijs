@@ -31,7 +31,7 @@ class OthersComponentsPage extends Page {
             title: "confirm",
             clickEvent: async () => {
                 let res = await popup.confirm({
-                    title: 'Удлить файл "Что-то там.deb"?',
+                    title: 'Создаать чат',
                     message: 'Если удалите файл "Что-то там.deb" начнется полная катастрофа! Земля остановится!',
                     okText: 'Удалить',
                     cancelText: 'Отмена',
@@ -60,10 +60,14 @@ class OthersComponentsPage extends Page {
                     okText: 'Войти',
                     cancelText: 'Отмена',
                     inputs: {
-                        password: true,
-                        passwordPlaceholder: "Пароль",
-                        //text: true,
-                        textPlaceholder: "Имя пользователя"
+                        /*text: {
+                            placeholder: "Имя пользователя",
+                            errorMessage: "Заполните поле"
+                        },
+                        password: {
+                            placeholder: "Пароль",
+                            errorMessage: "Заполните поле"
+                        }*/
                     }
                 });
                 console.log(prompt_res)

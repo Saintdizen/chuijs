@@ -1,4 +1,5 @@
 const { Icon, Icons } = require('../chui_icons');
+const {Animation} = require("../../modules/chui_animations");
 
 class PasswordInput {
     #id = require("randomstring").generate();
@@ -9,6 +10,7 @@ class PasswordInput {
     #label = document.createElement('label');
     #input = document.createElement('input');
     #title = undefined;
+    #error_message_password = document.createElement("error_message_password");
     constructor(options = {
         name: String(undefined),
         title: String(undefined),
@@ -85,6 +87,25 @@ class PasswordInput {
                     "color": "var(--text_color)"
                 }
             },
+            {
+                name: ".error_border",
+                style: {
+                    "border": "2px solid var(--red_prime_background)",
+                }
+            },
+            {
+                name: "error_message_password",
+                style: {
+                    "display": "none",
+                    "height": "max-content",
+                    "width": "max-content",
+                    "margin": "var(--margin) var(--margin) 0px var(--margin)",
+                    "font-size": "10pt",
+                    "font-weight":"500",
+                    "line-height":"1",
+                    "color": "var(--red_prime_background)"
+                }
+            },
             // DISABLED STYLES
             {
                 name: ".password_main_disabled",
@@ -158,6 +179,12 @@ class PasswordInput {
         this.#password_main.appendChild(this.#see_pass_button);
         this.#see_pass_button.addEventListener('click', () => this.#showPassword());
         this.#chui_password_input.appendChild(this.#password_main);
+
+        //
+        this.#input.addEventListener("input", () => {
+            this.#password_main.classList.remove("error_border");
+            new Animation(this.#error_message_password).disappearance();
+        })
     }
     getName() { return this.#input.name; }
     getTitle() { return this.#title; }
@@ -178,6 +205,12 @@ class PasswordInput {
             this.#see_pass_button_disabled.remove();
             this.#password_main.appendChild(this.#see_pass_button);
         }
+    }
+    setErrorMessage(message = String(undefined)) {
+        this.#password_main.classList.add("error_border");
+        this.#error_message_password.innerText = message;
+        this.#chui_password_input.appendChild(this.#error_message_password);
+        new Animation(this.#error_message_password).appearance();
     }
     set() { return this.#chui_password_input; }
     #showPassword() {

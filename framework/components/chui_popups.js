@@ -161,7 +161,6 @@ class Popup {
     async confirm(options = {
         title: String(undefined), message: String(undefined),
         okText: String(undefined), cancelText: String(undefined),
-        acceptEvent: () => {}, cancelEvent: () => {}
     }) {
         try {
             return await new PopupConfirm(options);
@@ -173,15 +172,21 @@ class Popup {
     async prompt(options = {
         title: String(undefined), message: String(undefined),
         inputs: {
-            text: Boolean(undefined), textPlaceholder: String(undefined),
-            password: Boolean(undefined), passwordPlaceholder: String(undefined),
+            text: {
+                placeholder: String(undefined),
+                errorMessage: String(undefined)
+            },
+            password: {
+                placeholder: String(undefined),
+                errorMessage: String(undefined)
+            },
         },
         okText: String(undefined), cancelText: String(undefined)
     }) {
         try {
             return await new PopupPrompt(options);
         } catch (err) {
-            return err;
+            throw new Error(err)
         }
     }
 }
@@ -257,10 +262,10 @@ class PopupConfirm {
         this.#popup_buttons.appendChild(this.#button_cancel);
         this.#popup_buttons.appendChild(this.#button_accept);
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             this.#button_cancel.addEventListener("click", () => {
                 new Animation(document.getElementById(this.#id)).disappearance_and_remove()
-                reject(false);
+                resolve(false);
             })
 
             this.#button_accept.addEventListener("click", () => {
@@ -292,8 +297,14 @@ class PopupPrompt {
     constructor(options = {
         title: String(undefined), message: String(undefined),
         inputs: {
-            text: Boolean(undefined), textPlaceholder: String(undefined),
-            password: Boolean(undefined), passwordPlaceholder: String(undefined),
+            text: {
+                placeholder: String(undefined),
+                errorMessage: String(undefined)
+            },
+            password: {
+                placeholder: String(undefined),
+                errorMessage: String(undefined)
+            },
         },
         okText: String(undefined), cancelText: String(undefined)
     }) {
@@ -309,21 +320,17 @@ class PopupPrompt {
         this.#popup_body.appendChild(this.#popup_title);
         this.#popup_body.appendChild(this.#popup_message);
 
-        if (options.inputs.text) {
-            this.#input_text = new TextInput({
-                placeholder: options.inputs.textPlaceholder,
-                width: "-webkit-fill-available",
-            })
-            this.#popup_body.appendChild(this.#input_text.set());
-        }
+        let errorMessage = "render: Установите одно из полей ввода text или password"
 
-        if (options.inputs.password) {
-            this.#input_pass = new PasswordInput({
-                placeholder: options.inputs.passwordPlaceholder,
-                width: "-webkit-fill-available",
-            })
+        if (options.inputs.text !== undefined) {
+            this.#input_text = new TextInput({ placeholder: options.inputs.text.placeholder, width: "-webkit-fill-available" })
+            this.#popup_body.appendChild(this.#input_text.set());
+        } else throw new Error(errorMessage);
+
+        if (options.inputs.password !== undefined) {
+            this.#input_pass = new PasswordInput({ placeholder: options.inputs.password.placeholder, width: "-webkit-fill-available" })
             this.#popup_body.appendChild(this.#input_pass.set());
-        }
+        } else throw new Error(errorMessage);
 
         this.#button_cancel.innerText = options.cancelText;
         this.#button_accept.innerText = options.okText;
@@ -331,17 +338,42 @@ class PopupPrompt {
         this.#popup_buttons.appendChild(this.#button_cancel);
         this.#popup_buttons.appendChild(this.#button_accept);
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             this.#button_cancel.addEventListener("click", () => {
-                reject({ cancel: "Отмена действия" })
                 new Animation(document.getElementById(this.#id)).disappearance_and_remove();
             })
 
             this.#button_accept.addEventListener("click", () => {
-                if (this.#input_text && this.#input_pass === undefined) resolve(this.#input_text.getValue());
-                if (this.#input_text === undefined && this.#input_pass) resolve(this.#input_pass.getValue());
-                if (this.#input_text && this.#input_pass) resolve({ text: this.#input_text.getValue(), password: this.#input_pass.getValue() });
-                new Animation(document.getElementById(this.#id)).disappearance_and_remove();
+                let close = false;
+                if (this.#input_text && this.#input_pass === undefined) {
+                    if (this.#input_text.getValue() !== "") {
+                        close = true;
+                        resolve(this.#input_text.getValue());
+                    } else {
+                        this.#input_text.setErrorMessage(options.inputs.text.errorMessage);
+                    }
+                }
+                if (this.#input_text === undefined && this.#input_pass) {
+                    if (this.#input_pass.getValue() !== "") {
+                        close = true;
+                        resolve(this.#input_pass.getValue());
+                    } else {
+                        this.#input_pass.setErrorMessage(options.inputs.password.errorMessage);
+                    }
+                }
+                if (this.#input_text && this.#input_pass) {
+                    let text = this.#input_text.getValue();
+                    let password = this.#input_pass.getValue();
+                    if (text !== "" && password !== "") {
+                        close = true;
+                        resolve({ text, password });
+                    }
+                    if (text === "") this.#input_text.setErrorMessage(options.inputs.text.errorMessage);
+                    if (password === "") this.#input_pass.setErrorMessage(options.inputs.password.errorMessage);
+                }
+                if (close) {
+                    new Animation(document.getElementById(this.#id)).disappearance_and_remove();
+                }
             })
 
             document.getElementById("app").appendChild(this.#chui_popup);
