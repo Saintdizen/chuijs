@@ -124,6 +124,9 @@ class Main {
         app.relaunch();
         app.exit(0)
     }
+    getWindow() {
+        return this.#window;
+    }
     start(options = {
         tray: []
     }) {
