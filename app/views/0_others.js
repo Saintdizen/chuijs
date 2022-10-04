@@ -63,11 +63,11 @@ class OthersComponentsPage extends Page {
                         /*text: {
                             placeholder: "Имя пользователя",
                             errorMessage: "Заполните поле"
-                        },
+                        },*/
                         password: {
                             placeholder: "Пароль",
                             errorMessage: "Заполните поле"
-                        }*/
+                        }
                     }
                 });
                 console.log(prompt_res)
@@ -123,7 +123,7 @@ class OthersComponentsPage extends Page {
                 TreeView.ExpandButton({
                     title: "Страницы",
                     components: [
-                        new Button("sdasdas")
+                        new Button({ title: "Кнопочка!" })
                     ]
                 }),
             ]

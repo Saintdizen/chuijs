@@ -76,7 +76,7 @@ class App extends AppLayout {
                         closeOutSideClick: true,
                         style: {
                             width: "800px",
-                            height: "500px",
+                            height: "200px",
                             direction: Styles.DIRECTION.COLUMN,
                             wrap: Styles.WRAP.NOWRAP,
                             align: Styles.ALIGN.CENTER,

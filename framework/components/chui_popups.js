@@ -320,17 +320,19 @@ class PopupPrompt {
         this.#popup_body.appendChild(this.#popup_title);
         this.#popup_body.appendChild(this.#popup_message);
 
-        let errorMessage = "render: Установите одно из полей ввода text или password"
+        if (options.inputs.text === undefined && options.inputs.password === undefined) {
+            throw new Error("render: Установите одно из полей ввода text или password");
+        }
 
         if (options.inputs.text !== undefined) {
             this.#input_text = new TextInput({ placeholder: options.inputs.text.placeholder, width: "-webkit-fill-available" })
             this.#popup_body.appendChild(this.#input_text.set());
-        } else throw new Error(errorMessage);
+        }
 
         if (options.inputs.password !== undefined) {
             this.#input_pass = new PasswordInput({ placeholder: options.inputs.password.placeholder, width: "-webkit-fill-available" })
             this.#popup_body.appendChild(this.#input_pass.set());
-        } else throw new Error(errorMessage);
+        }
 
         this.#button_cancel.innerText = options.cancelText;
         this.#button_accept.innerText = options.okText;
@@ -348,7 +350,7 @@ class PopupPrompt {
                 if (this.#input_text && this.#input_pass === undefined) {
                     if (this.#input_text.getValue() !== "") {
                         close = true;
-                        resolve(this.#input_text.getValue());
+                        resolve({ text: this.#input_text.getValue() });
                     } else {
                         this.#input_text.setErrorMessage(options.inputs.text.errorMessage);
                     }
@@ -356,7 +358,7 @@ class PopupPrompt {
                 if (this.#input_text === undefined && this.#input_pass) {
                     if (this.#input_pass.getValue() !== "") {
                         close = true;
-                        resolve(this.#input_pass.getValue());
+                        resolve({ password: this.#input_pass.getValue() });
                     } else {
                         this.#input_pass.setErrorMessage(options.inputs.password.errorMessage);
                     }
