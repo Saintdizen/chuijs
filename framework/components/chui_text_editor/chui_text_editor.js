@@ -189,21 +189,29 @@ class DialogEdit {
     #img_height = new TextInput({ title: "Высота", width: "150px" })
     constructor(label) {
         //
-        let content_body = new ContentBlock("row", "wrap", "center", "center")
+        let content_body = new ContentBlock({
+            direction: "row", wrap: "wrap", align: "center", justify: "center"
+        })
         content_body.setWidth("-webkit-fill-available")
-        let content_header = new ContentBlock("row", "wrap", "center", "space-between")
+        let content_header = new ContentBlock({
+            direction: "row", wrap: "wrap", align: "center", justify: "space-between", disableMarginChild: true
+        })
         content_header.setWidth("-webkit-fill-available")
         content_body.add(this.#img_width, this.#img_height)
         this.#dialog_link.addToBody(content_body)
         content_header.add(
-            new Button("Закрыть", () => {
-                this.#dialog_link.close()
+            new Button({
+                title: "Закрыть",
+                clickEvent: () => this.#dialog_link.close()
             }),
             new Label(label),
-            new Button("Сохранить", () => {
-                this.#target.style.width = `${this.#img_width.getValue()}`
-                this.#target.style.height = `${this.#img_height.getValue()}`
-                this.#dialog_link.close()
+            new Button({
+                title: "Сохранить",
+                clickEvent: () => {
+                    this.#target.style.width = `${this.#img_width.getValue()}`
+                    this.#target.style.height = `${this.#img_height.getValue()}`
+                    this.#dialog_link.close()
+                }
             })
         )
         this.#dialog_link.addToHeader(content_header)

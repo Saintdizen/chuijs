@@ -537,9 +537,13 @@ class TextEditorPanel {
                 icon: Icons.CONTENT.LINK_OFF,
                 command: Commands.UNLINK
             })
-            let content_link = new ContentBlock("column", "wrap", "center", "flex-end")
+            let content_link = new ContentBlock({
+                direction: "column", wrap: "wrap", align: "center", justify: "flex-end"
+            })
             content_link.setWidth("-webkit-fill-available")
-            let content_link_header = new ContentBlock("row", "wrap", "center", "space-between")
+            let content_link_header = new ContentBlock({
+                direction: "row", wrap: "wrap", align: "center", justify: "space-between", disableMarginChild: true
+            })
             content_link_header.setWidth("-webkit-fill-available")
             let dialog_link = new Dialog({ width: "500px", height: "max-content", closeOutSideClick: true })
             let input_link_text = new TextInput({ title: "Наименование", placeholder: "Наименование", width: "-webkit-fill-available", disableFocus: false })
@@ -547,19 +551,25 @@ class TextEditorPanel {
             content_link.add(input_link_text, input_link)
             dialog_link.addToBody(content_link)
             content_link_header.add(
-                new Button("Закрыть", () => {
-                    document.getElementById(text_editor_id).focus()
-                    dialog_link.close()
+                new Button({
+                    icon: Icons.NAVIGATION.CLOSE,
+                    clickEvent: () => {
+                        document.getElementById(text_editor_id).focus()
+                        dialog_link.close()
+                    }
                 }),
-                new Label("Добавить ссылку"),
-                new Button("Сохранить", () => {
-                    document.getElementById(text_editor_id).focus()
-                    document.getSelection().removeAllRanges();
-                    document.getSelection().addRange(range_link);
-                    if (selection_link.toString() === "") document.execCommand('insertHTML', false, `<a href="${input_link.getValue()}">${input_link_text.getValue()}</a>`);
-                    else document.execCommand(Commands.CREATE_LINK, false, input_link.getValue())
-                    dialog_link.close()
-                })
+                new Label({ text: "Добавить ссылку" }),
+                new Button({
+                    icon: Icons.CONTENT.ADD,
+                    clickEvent: () => {
+                        document.getElementById(text_editor_id).focus()
+                        document.getSelection().removeAllRanges();
+                        document.getSelection().addRange(range_link);
+                        if (selection_link.toString() === "") document.execCommand('insertHTML', false, `<a href="${input_link.getValue()}">${input_link_text.getValue()}</a>`);
+                        else document.execCommand(Commands.CREATE_LINK, false, input_link.getValue())
+                        dialog_link.close()
+                    }
+                }),
             )
             dialog_link.addToHeader(content_link_header)
             let selection_link = undefined;
@@ -582,13 +592,21 @@ class TextEditorPanel {
         // ================
         // Создание таблицы
         if (controls.INSERT_TABLE) {
-            let content_table_header = new ContentBlock("row", "wrap", "center", "space-between")
+            let content_table_header = new ContentBlock({
+                direction: "row", wrap: "wrap", align: "center", justify: "space-between", disableMarginChild: true
+            })
             content_table_header.setWidth("-webkit-fill-available")
-            let content_table_2 = new ContentBlock("row", "wrap", "center", "space-around")
+            let content_table_2 = new ContentBlock({
+                direction: "row", wrap: "wrap", align: "center", justify: "space-around"
+            })
             content_table_2.setWidth("-webkit-fill-available")
-            let content_table = new ContentBlock("row", "wrap", "center", "space-around")
+            let content_table = new ContentBlock({
+                direction: "row", wrap: "wrap", align: "center", justify: "space-around"
+            })
             content_table.setWidth("-webkit-fill-available")
-            let content_table_main = new ContentBlock("column", "wrap", "center", "space-around")
+            let content_table_main = new ContentBlock({
+                direction: "column", wrap: "wrap", align: "center", justify: "space-around"
+            })
             content_table_main.setWidth("-webkit-fill-available")
             let checkBox_header = new CheckBox({ title: "Добавить THEAD" })
             content_table_2.add(checkBox_header)
@@ -597,52 +615,58 @@ class TextEditorPanel {
             content_table.add(table_rows, new Label("X"), table_cols)
 
             content_table_header.add(
-                new Button("Закрыть", () => {
-                    dialog_table.close()
-                }),
-                new Label("Добавить таблицу"),
-                new Button("Сохранить", () => {
-                    let error = false;
-                    if (Number(table_rows.getValue()) === 0 && Number(table_cols.getValue()) === 0) {
-                        new Notification(`Установите количество столбцов и строк`, NotificationStyle.ERROR).show();
-                        error = true;
-                    } else if (Number(table_cols.getValue()) === 0) {
-                        new Notification(`Установите количество столбцов`, NotificationStyle.ERROR).show();
-                        error = true;
-                    } else if (Number(table_rows.getValue()) === 0) {
-                        new Notification(`Установите количество строк`, NotificationStyle.ERROR).show();
-                        error = true;
-                    }
-                    if (!error) {
-                        let table = document.createElement("table")
-                        table.classList.add("text_editor_table")
-                        // шапка
-                        if (checkBox_header.getValue()) {
-                            let head_table = table.createTHead()
-                            head_table.classList.add("text_editor_table_body")
-                            let head_row = head_table.insertRow(0)
-                            head_row.classList.add("text_editor_table_row")
-                            for (let j = 0; j < table_cols.getValue(); j++) {
-                                let cell = head_row.insertCell(j)
-                                cell.classList.add("text_editor_table_cell")
-                                cell.innerText = `TH`
-                            }
-                        }
-                        // тело таблицы
-                        let body_table = table.createTBody()
-                        body_table.classList.add("text_editor_table_body")
-                        for (let i = 0; i < table_rows.getValue(); i++) {
-                            let row = body_table.insertRow(i)
-                            row.classList.add("text_editor_table_row")
-                            for (let j = 0; j < table_cols.getValue(); j++) {
-                                let cell = row.insertCell(j)
-                                cell.classList.add("text_editor_table_cell")
-                                cell.innerText = `TB`
-                            }
-                        }
-                        document.getElementById(text_editor_id).focus()
-                        document.execCommand(Commands.INSERT_HTML, false, table.outerHTML)
+                new Button({
+                    icon: Icons.NAVIGATION.CLOSE,
+                    clickEvent: () => {
                         dialog_table.close()
+                    }
+                }),
+                new Label({ text: "Добавить таблицу" }),
+                new Button({
+                    icon: Icons.CONTENT.ADD,
+                    clickEvent: () => {
+                        let error = false;
+                        if (Number(table_rows.getValue()) === 0 && Number(table_cols.getValue()) === 0) {
+                            new Notification(`Установите количество столбцов и строк`, NotificationStyle.ERROR).show();
+                            error = true;
+                        } else if (Number(table_cols.getValue()) === 0) {
+                            new Notification(`Установите количество столбцов`, NotificationStyle.ERROR).show();
+                            error = true;
+                        } else if (Number(table_rows.getValue()) === 0) {
+                            new Notification(`Установите количество строк`, NotificationStyle.ERROR).show();
+                            error = true;
+                        }
+                        if (!error) {
+                            let table = document.createElement("table")
+                            table.classList.add("text_editor_table")
+                            // шапка
+                            if (checkBox_header.getValue()) {
+                                let head_table = table.createTHead()
+                                head_table.classList.add("text_editor_table_body")
+                                let head_row = head_table.insertRow(0)
+                                head_row.classList.add("text_editor_table_row")
+                                for (let j = 0; j < table_cols.getValue(); j++) {
+                                    let cell = head_row.insertCell(j)
+                                    cell.classList.add("text_editor_table_cell")
+                                    cell.innerText = `TH`
+                                }
+                            }
+                            // тело таблицы
+                            let body_table = table.createTBody()
+                            body_table.classList.add("text_editor_table_body")
+                            for (let i = 0; i < table_rows.getValue(); i++) {
+                                let row = body_table.insertRow(i)
+                                row.classList.add("text_editor_table_row")
+                                for (let j = 0; j < table_cols.getValue(); j++) {
+                                    let cell = row.insertCell(j)
+                                    cell.classList.add("text_editor_table_cell")
+                                    cell.innerText = `TB`
+                                }
+                            }
+                            document.getElementById(text_editor_id).focus()
+                            document.execCommand(Commands.INSERT_HTML, false, table.outerHTML)
+                            dialog_table.close()
+                        }
                     }
                 })
             )
@@ -663,7 +687,9 @@ class TextEditorPanel {
         // ================
         // Добавление изображения
         if (controls.INSERT_IMAGE) {
-            let content_image_header = new ContentBlock("row", "wrap", "center", "space-between")
+            let content_image_header = new ContentBlock({
+                direction: "row", wrap: "wrap", align: "center", justify: "space-between", disableMarginChild: true
+            })
             content_image_header.setWidth("-webkit-fill-available")
             let file = new FileInput({
                 title: "Выберите изображение",
@@ -673,23 +699,29 @@ class TextEditorPanel {
                 ]
             })
             content_image_header.add(
-                new Button("Закрыть", () => {
-                    dialog_image.close()
+                new Button({
+                    icon: Icons.NAVIGATION.CLOSE,
+                    clickEvent: () => dialog_image.close()
                 }),
-                new Label("Добавить изображение"),
-                new Button("Сохранить", () => {
-                    document.getElementById(text_editor_id).focus()
-                    let image = file.getFile(0)
-                    let reader  = new FileReader();
-                    reader.addEventListener("load", function () {
-                        document.execCommand('insertImage', false, reader.result);
-                    }, false);
-                    if (image) reader.readAsDataURL(image);
-                    dialog_image.close()
+                new Label({ text: "Добавить изображение" }),
+                new Button({
+                    icon: Icons.CONTENT.ADD,
+                    clickEvent: () => {
+                        document.getElementById(text_editor_id).focus()
+                        let image = file.getFile(0)
+                        let reader  = new FileReader();
+                        reader.addEventListener("load", function () {
+                            document.execCommand('insertImage', false, reader.result);
+                        }, false);
+                        if (image) reader.readAsDataURL(image);
+                        dialog_image.close()
+                    }
                 })
             )
 
-            let content_image = new ContentBlock("column", "wrap", "center", "flex-end")
+            let content_image = new ContentBlock({
+                    direction: "column", wrap: "wrap", align: "center", justify: "flex-end"
+            })
             content_image.setWidth("-webkit-fill-available")
             content_image.add(file)
             let dialog_image = new Dialog({ width: "500px", height: "max-content", closeOutSideClick: true })

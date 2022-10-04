@@ -14,17 +14,20 @@ class MainPage extends Page {
             placeholder: 'Введите ваше имя',
             required: false
         });
-        let hello = new Button("Сказать привет!", () => {
-            if (name.getValue() !== "") {
-                new Notification({
-                    title: `Привет, ${name.getValue()}!`, text: `Привет, ${name.getValue()}!`,
-                    style: Notification.STYLE.SUCCESS, showTime: 5000
-                }).show();
-            } else {
-                new Notification({
-                    title: `Привет мир!`, text: `Привет мир!`,
-                    style: Notification.STYLE.SUCCESS, showTime: 5000
-                }).show();
+        let hello = new Button({
+            title: "Сказать привет!",
+            clickEvent: () => {
+                if (name.getValue() !== "") {
+                    new Notification({
+                        title: `Привет, ${name.getValue()}!`, text: `Привет, ${name.getValue()}!`,
+                        style: Notification.STYLE.SUCCESS, showTime: 5000
+                    }).show();
+                } else {
+                    new Notification({
+                        title: `Привет мир!`, text: `Привет мир!`,
+                        style: Notification.STYLE.SUCCESS, showTime: 5000
+                    }).show();
+                }
             }
         })
         this.add(name, hello)

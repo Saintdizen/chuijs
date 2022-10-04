@@ -5,7 +5,7 @@ class OthersComponentsPage extends Page {
     constructor() {
         super();
         this.setTitle('Остальные компоненты');
-        this.setMain(true)
+        this.setMain(false)
 
         let h1_modals = new H(1, "Диалоговые окна")
         let dialog = new Dialog({
