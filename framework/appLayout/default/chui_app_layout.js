@@ -1270,10 +1270,10 @@ class HeaderDialog {
             direction: "row",
             wrap: "nowrap",
             align: "center",
-            justify: "space-between"
+            justify: "space-between",
+            disableMarginChild: true
         });
         header_dialog.setWidth("-webkit-fill-available");
-        header_dialog.disableMarginChild();
         header_dialog.setPadding("0px 0px 0px 10px");
         let title = new Label({
             markdownText: `**${options.dialogOptions.title}**`,

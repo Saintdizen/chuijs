@@ -19,7 +19,7 @@ class OthersComponentsPage extends Page {
 
         let popup = new Popup();
         let button_2 = new Button({
-            title: "alert",
+            title: "Оповещение",
             clickEvent: () => {
                 popup.alert({
                     title: 'Информация о файле "Что-то там.deb"',
@@ -28,31 +28,19 @@ class OthersComponentsPage extends Page {
             }
         })
         let button_3 = new Button({
-            title: "confirm",
+            title: "Подтверждение",
             clickEvent: async () => {
-                let res = await popup.confirm({
-                    title: 'Создаать чат',
-                    message: 'Если удалите файл "Что-то там.deb" начнется полная катастрофа! Земля остановится!',
-                    okText: 'Удалить',
-                    cancelText: 'Отмена',
+                let confirm_res = await popup.confirm({
+                    title: 'Удалить РГ в СМ',
+                    message: 'Удалить? Точно? Вы, уверены? А может не надо?!',
+                    okText: 'Я ЕСТЬ ДИМА',
+                    cancelText: 'Я ЕСТЬ ДИМА',
                 })
-
-                if (res) {
-                    new Notification({
-                        title: "Сударь, Вы дурак!", text: "Ой, дурачек!",
-                        style: Notification.STYLE.ERROR, showTime: 5000
-                    }).show()
-                } else {
-                    new Notification({
-                        title: "Сударь, ай молодец!", text: "Правильное решение!",
-                        style: Notification.STYLE.SUCCESS, showTime: 5000
-                    }).show()
-                }
-                console.log(res)
+                console.log(confirm_res)
             }
         })
         let button_4 = new Button({
-            title: "prompt",
+            title: "Подтверждение с данными",
             clickEvent: async () => {
                 let prompt_res = await popup.prompt({
                     title: 'Подтвердите удаление файла "Что-то там.deb"?',
