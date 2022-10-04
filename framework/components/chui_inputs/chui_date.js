@@ -269,7 +269,7 @@ class DateInput {
                                 today.setFullYear(cal.getYear())
                                 today.setMonth(cal.getMonth())
                                 this.#input.value = today.toISOString().substr(0, 10);
-                                new Animation(this.#dropdown).disappearance();
+                                new Animation(this.#dropdown).fadeOut();
                             })
                         } else {
                             index++;
@@ -297,13 +297,13 @@ class DateInput {
             if (!this.#input.disabled) {
                 if (event.target.parentNode === this.#date_main_block) {
                     this.#input.focus()
-                    new Animation(this.#dropdown).appearance();
+                    new Animation(this.#dropdown).fadeIn();
                 }
             }
         });
         window.addEventListener('click', (event) => {
             if (!event.target in getElementsWithDepth(this.#date_main_block)) {
-                new Animation(this.#dropdown).disappearance();
+                new Animation(this.#dropdown).fadeOut();
             }
         });
         this.#date_main_block.appendChild(this.#input);

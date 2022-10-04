@@ -21,13 +21,13 @@ class Page {
     }
     add(...components) {
         for (let component of components) {
-            new Animation(component.set()).appearance()
+            new Animation(component.set()).fadeIn()
             this.#page.appendChild(component.set());
         }
     }
     remove(...components) {
         for (let component of components) {
-            new Animation(component.set()).disappearance_and_remove()
+            new Animation(component.set()).fadeOutAndRemove()
         }
     }
     setFullHeight() {

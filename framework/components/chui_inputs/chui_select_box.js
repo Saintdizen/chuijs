@@ -198,14 +198,14 @@ class Select {
             if (!this.#disabled_trigger) {
                 if (event.target.parentNode === this.#Select_second) {
                     this.#input.focus()
-                    new Animation(this.#dropdown).appearance();
+                    new Animation(this.#dropdown).fadeIn();
                     setOptionDisplay(document.getElementById(this.#id));
                 }
             }
         });
         window.addEventListener('click', (event) => {
             if (event.target.parentNode !== this.#Select_second) {
-                new Animation(this.#dropdown).disappearance();
+                new Animation(this.#dropdown).fadeOut();
             }
         });
         this.#input.addEventListener('input', (event) => {

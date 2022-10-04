@@ -31,8 +31,6 @@ class Notification {
                     "font-size": "12pt",
                     "padding": "6px 10px",
                     "background": "var(--badge_cancel_back)",
-                    "animation-duration": ".3s",
-                    "animation-fill-mode": "forwards",
                     "backdrop-filter": "blur(8px)",
                     "box-shadow": "rgba(0, 0, 0, 0.15) 0px 2px 4px, rgba(0, 0, 0, 0.25) 0px 2px 4px",
                 }
@@ -151,10 +149,10 @@ class Notification {
         document.getElementsByTagName('notification_panel')[0].appendChild(this.#notification);
         let notification = document.getElementById(this.#id);
 
-        new Animation(notification).appearance();
+        new Animation(notification).scaleIn();
         notification.addEventListener('animationend', (event) => {
             setTimeout(() => {
-                new Animation(event.target).disappearance_and_remove();
+                new Animation(event.target).scaleOutAndRemove();
                 event.target.addEventListener("animationend", (event) => {
                     let elem = event.target;
                     elem.removeAttribute("style");

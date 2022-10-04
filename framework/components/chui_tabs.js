@@ -119,7 +119,7 @@ class Tabs {
                     for (let con of item.getContent()) {
                         this.#content.appendChild(con.set())
                     }
-                    new Animation(this.#content).appearance();
+                    new Animation(this.#content).fadeIn();
                     this.#content.addEventListener('animationend', () => {
                         this.#content.removeAttribute('style');
                     });
@@ -142,7 +142,7 @@ class Tabs {
     #setDefault(num) {
         for (let con of this.#tabzz[num].getContent()) {
             this.#content.appendChild(con.set())
-            new Animation(this.#content).appearance();
+            new Animation(this.#content).fadeIn();
             this.#content.addEventListener('animationend', () => {
                 this.#content.removeAttribute('style');
             });

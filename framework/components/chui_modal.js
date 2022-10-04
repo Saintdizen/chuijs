@@ -79,7 +79,7 @@ class Dialog {
             window.addEventListener('click', (event) => {
                 let elem = document.getElementById(this.#id);
                 if (event.target === elem) {
-                    new Animation(elem).disappearance();
+                    new Animation(elem).fadeOut();
                 }
             })
         }        
@@ -90,44 +90,32 @@ class Dialog {
         this.#dialog.appendChild(this.#content)
     }
     addToHeader(...components) {
-        for (let component of components) {
-            this.#header.appendChild(component.set());
-        }
+        for (let component of components) this.#header.appendChild(component.set());
     }
     addToBody(...components) {
-        for (let component of components) {
-            this.#body.appendChild(component.set());
-        }
+        for (let component of components) this.#body.appendChild(component.set());
     }
     addToFooter(...components) {
-        for (let component of components) {
-            this.#footer.appendChild(component.set());
-        }
+        for (let component of components) this.#footer.appendChild(component.set());
     }
     removeFromHeader(...components) {
-        for (let component of components) {
-            new Animation(component.set()).disappearance_and_remove()
-        }
+        for (let component of components) new Animation(component.set()).fadeOutAndRemove();
     }
     removeFromBody(...components) {
-        for (let component of components) {
-            new Animation(component.set()).disappearance_and_remove()
-        }
+        for (let component of components) new Animation(component.set()).fadeOutAndRemove();
     }
     removeFromFooter(...components) {
-        for (let component of components) {
-            new Animation(component.set()).disappearance_and_remove()
-        }
+        for (let component of components) new Animation(component.set()).fadeOutAndRemove();
     }
     open() {
         let dialog = document.getElementById(this.#id);
-        new Animation(dialog).appearance();
+        new Animation(dialog).fadeIn();
         new Animation(dialog.firstChild).scaleIn();
     }
     close() {
         let dialog = document.getElementById(this.#id);
         new Animation(dialog.firstChild).scaleOut();
-        new Animation(dialog).disappearance();
+        new Animation(dialog).fadeOut();
     }
     set() {
         return this.#dialog;

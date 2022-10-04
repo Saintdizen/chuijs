@@ -60,7 +60,7 @@ class WebView {
         }
         const loadStop = () => {
             spinner.remove();
-            new Animation(this.#WebView).appearance();
+            new Animation(this.#WebView).fadeIn();
         }
         this.#WebView.addEventListener('did-start-loading', loadStart)
         this.#WebView.addEventListener('did-stop-loading', loadStop)

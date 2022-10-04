@@ -65,7 +65,7 @@ class Popup {
                 style: {
                     "display": "block",
                     "text-align": "center",
-                    "font-size": "14pt",
+                    "font-size": "12.75pt",
                     "font-weight": "600",
                     "padding": "6px"
                 }
@@ -75,8 +75,8 @@ class Popup {
                 style: {
                     "display": "block",
                     "text-align": "center",
-                    "font-size": "11pt",
-                    "font-weight": "400",
+                    "font-size": "10.75pt",
+                    "font-weight": "500",
                     "padding": "6px"
                 }
             },
@@ -93,7 +93,7 @@ class Popup {
                     "padding": "10px",
                     "border-radius": "var(--border_radius)",
                     "color": "var(--button_text_color)",
-                    "font-weight": "500",
+                    "font-weight": "600",
                     "font-size": "12pt",
                 }
             },
@@ -117,7 +117,7 @@ class Popup {
                     "padding": "10px",
                     "border-radius": "var(--border_radius)",
                     "color": "var(--button_text_color)",
-                    "font-weight": "500",
+                    "font-weight": "600",
                     "font-size": "12pt",
                 }
             },
@@ -140,7 +140,7 @@ class Popup {
                     "padding": "10px",
                     "border-radius": "var(--border_radius)",
                     "color": "var(--badge_error_text)",
-                    "font-weight": "500",
+                    "font-weight": "600",
                     "font-size": "12pt",
                 }
             },
@@ -222,14 +222,14 @@ class PopupAlert {
         this.#button_OK.addEventListener("click", () => {
             let popup = document.getElementById(this.#id);
             new Animation(popup.firstChild).scaleOut();
-            new Animation(popup).disappearance_and_remove();
+            new Animation(popup).fadeOutAndRemove();
         })
         this.#popup_buttons.appendChild(this.#button_OK);
 
         //
         document.getElementById("app").appendChild(this.#chui_popup)
         let popup = document.getElementById(this.#id);
-        new Animation(popup).appearance();
+        new Animation(popup).fadeIn();
         new Animation(popup.firstChild).scaleIn();
     }
 }
@@ -272,20 +272,20 @@ class PopupConfirm {
             this.#button_cancel.addEventListener("click", () => {
                 let popup = document.getElementById(this.#id);
                 new Animation(popup.firstChild).scaleOut();
-                new Animation(popup).disappearance_and_remove();
+                new Animation(popup).fadeOutAndRemove();
                 resolve(false);
             })
 
             this.#button_accept.addEventListener("click", () => {
                 let popup = document.getElementById(this.#id);
                 new Animation(popup.firstChild).scaleOut();
-                new Animation(popup).disappearance_and_remove();
+                new Animation(popup).fadeOutAndRemove();
                 resolve(true);
             });
 
             document.getElementById("app").appendChild(this.#chui_popup)
             let popup = document.getElementById(this.#id);
-            new Animation(popup).appearance();
+            new Animation(popup).fadeIn();
             new Animation(popup.firstChild).scaleIn();
         })
     }
@@ -358,7 +358,7 @@ class PopupPrompt {
             this.#button_cancel.addEventListener("click", () => {
                 let popup = document.getElementById(this.#id);
                 new Animation(popup.firstChild).scaleOut();
-                new Animation(popup).disappearance_and_remove();
+                new Animation(popup).fadeOutAndRemove();
             })
 
             this.#button_accept.addEventListener("click", () => {
@@ -392,14 +392,14 @@ class PopupPrompt {
                 if (close) {
                     let popup = document.getElementById(this.#id);
                     new Animation(popup.firstChild).scaleOut();
-                    new Animation(popup).disappearance_and_remove();
+                    new Animation(popup).fadeOutAndRemove();
                 }
             })
 
             document.getElementById("app").appendChild(this.#chui_popup);
 
             let popup = document.getElementById(this.#id);
-            new Animation(popup).appearance();
+            new Animation(popup).fadeIn();
             new Animation(popup.firstChild).scaleIn();
         })
     }

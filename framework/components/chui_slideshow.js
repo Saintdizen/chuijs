@@ -123,7 +123,7 @@ class SlideShow {
         let slide = this.#slides_list[0].set();
         slide.style.display = 'flex';
         this.#chui_slides_list.appendChild(slide)
-        new Animation(slide).appearance()
+        new Animation(slide).fadeIn()
         //
     }
     #changeSlide(n = Number(undefined)) {
@@ -135,7 +135,7 @@ class SlideShow {
         let slide = this.#slides_list[this.#default_slide].set();
         this.#chui_slides_list.appendChild(slide)
         slide.style.display = 'none';
-        new Animation(slide).appearance()
+        new Animation(slide).fadeIn()
     }
     set() {
         return this.#chui_slides_main;

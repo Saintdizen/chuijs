@@ -24,7 +24,7 @@ class Route {
         center.innerHTML = '';
         center.appendChild(page.render());
         const _page = document.getElementsByTagName('page')[0];
-        new Animation(_page).appearance();
+        new Animation(_page).fadeIn();
         _page.addEventListener('animationend', () => {
             center.removeAttribute('style');
         });
@@ -79,7 +79,7 @@ class AppLayout extends Route {
                     "outline": "none",
                     "transition": "all .3s",
                     "animation-duration": ".3s",
-                    "position": "relative",
+                    "position": "relative"
                 }
             },
             {
@@ -93,6 +93,7 @@ class AppLayout extends Route {
                     "user-select": "none",
                     "outline": "none",
                     "transition": "all .3s",
+                    "animation-duration": ".3s",
                     "position": "relative",
                 }
             },
@@ -823,16 +824,14 @@ class AppLayout extends Route {
                     document.body.appendChild(item.ctx.set())
                     document.getElementById(item.ctx.id).style.top = `${e.clientY}px`;
                     document.getElementById(item.ctx.id).style.left = `${e.clientX}px`;
-                    new Animation(document.getElementById(item.ctx.id)).appearance()
+                    new Animation(document.getElementById(item.ctx.id)).fadeIn()
                 }
             }
         })
         this.#applayout.addEventListener('click', () => {
             for (let item of globalThis.ctxs) {
                 let ctxz = document.getElementById(item.ctx.id);
-                if (ctxz) {
-                    new Animation(ctxz).disappearance_and_remove()
-                }
+                if (ctxz) new Animation(ctxz).fadeOutAndRemove();
             }
         })
         this.#applayout.appendChild(this.#app_menu)
@@ -1140,16 +1139,16 @@ class UserProfile {
         this.#user_button.addEventListener("click", (e) => {
             if (this.#user_dropdown.style.display === "flex") {
                 this.#user_button.classList.remove("user_button");
-                new Animation(this.#user_dropdown).disappearance();
+                new Animation(this.#user_dropdown).fadeOut();
             } else {
                 this.#user_button.classList.add("user_button");
-                new Animation(this.#user_dropdown).appearance();
+                new Animation(this.#user_dropdown).fadeIn();
             }
         })
         window.addEventListener('click', (event) => {
             if (event.target.parentNode !== this.#user_main) {
                 this.#user_button.classList.remove("user_button");
-                new Animation(this.#user_dropdown).disappearance();
+                new Animation(this.#user_dropdown).fadeOut();
             }
         });
         //

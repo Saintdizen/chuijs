@@ -247,13 +247,13 @@ class TextEditorSelects {
         this.#Select_second.addEventListener('click', (event) => {
             if (event.target.parentNode === this.#Select_second) {
                 this.#input.focus()
-                new Animation(this.#dropdown).appearance();
+                new Animation(this.#dropdown).fadeIn();
                 TextEditorSelects.#setOptionDisplay(document.getElementById(this.#id));
             }
         });
         window.addEventListener('click', (event) => {
             if (event.target.parentNode !== this.#Select_second) {
-                new Animation(this.#dropdown).disappearance();
+                new Animation(this.#dropdown).fadeOut();
             }
         });
         this.#input.addEventListener('input', (event) => {

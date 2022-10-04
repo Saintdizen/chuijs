@@ -168,7 +168,7 @@ class TextInput {
         //
         this.#input.addEventListener("input", () => {
             this.#chui_text_main.classList.remove("error_border");
-            new Animation(this.#error_message_text).disappearance();
+            new Animation(this.#error_message_text).fadeOut();
         })
     }
     addInputListener(listener = () => {}) { this.#input.addEventListener('input', listener); }
@@ -194,7 +194,7 @@ class TextInput {
         this.#chui_text_main.classList.add("error_border");
         this.#error_message_text.innerText = message;
         this.#chui_text_input.appendChild(this.#error_message_text);
-        new Animation(this.#error_message_text).appearance();
+        new Animation(this.#error_message_text).fadeIn();
     }
     set() { return this.#chui_text_input; }
 }

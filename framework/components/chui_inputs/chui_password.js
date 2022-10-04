@@ -183,7 +183,7 @@ class PasswordInput {
         //
         this.#input.addEventListener("input", () => {
             this.#password_main.classList.remove("error_border");
-            new Animation(this.#error_message_password).disappearance();
+            new Animation(this.#error_message_password).fadeOut();
         })
     }
     getName() { return this.#input.name; }
@@ -210,7 +210,7 @@ class PasswordInput {
         this.#password_main.classList.add("error_border");
         this.#error_message_password.innerText = message;
         this.#chui_password_input.appendChild(this.#error_message_password);
-        new Animation(this.#error_message_password).appearance();
+        new Animation(this.#error_message_password).fadeIn();
     }
     set() { return this.#chui_password_input; }
     #showPassword() {

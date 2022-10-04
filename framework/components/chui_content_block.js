@@ -25,9 +25,7 @@ class ContentBlock {
         this.#disableMarginChild = options.disableMarginChild;
     }
     remove(...components) {
-        for (let component of components) {
-            new Animation(component.set()).disappearance_and_remove()
-        }
+        for (let component of components) new Animation(component.set()).fadeOutAndRemove();
     }
     // FUNCTIONS
     disableMarginChild() {
@@ -38,10 +36,10 @@ class ContentBlock {
             if (this.#disableMarginChild) {
                 let child = component.set();
                 child.style.margin = "0px";
-                new Animation(child).appearance()
+                new Animation(child).fadeIn()
                 this.#body.appendChild(child);
             } else {
-                new Animation(component.set()).appearance()
+                new Animation(component.set()).fadeIn()
                 this.#body.appendChild(component.set());
             }
         }

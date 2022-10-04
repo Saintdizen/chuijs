@@ -96,7 +96,7 @@ class Spinner {
         this.#spiner.appendChild(this.#element_one)
     }
     remove() {
-        new Animation(this.#spiner).disappearance_and_remove()
+        new Animation(this.#spiner).fadeOutAndRemove();
     }
     set() {
         return this.#spiner;

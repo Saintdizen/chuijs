@@ -3,7 +3,7 @@ class Animation {
     constructor(element) {
         require('./chui_functions').style_parse([
             {
-                name: "@keyframes appearance",
+                name: "@keyframes fade-in",
                 anim: {
                     from: {
                         "display": "flex",
@@ -15,7 +15,7 @@ class Animation {
                 }
             },
             {
-                name: "@keyframes disappearance",
+                name: "@keyframes fade-out",
                 anim: {
                     from: {
                         "opacity": "1"
@@ -30,7 +30,7 @@ class Animation {
                 anim: {
                     from: {
                         "opacity": "0",
-                        "transform": "scale(0.5)"
+                        "transform": "scale(0.63)"
                     },
                     to: {
                         "opacity": "1",
@@ -47,22 +47,22 @@ class Animation {
                     },
                     to: {
                         "opacity": "0",
-                        "transform": "scale(0.5)"
+                        "transform": "scale(0.63)"
                     }
                 }
             }
         ], 'chUiJS_Animations');
         if (element !== undefined) this.#element = element;
     }
-    appearance() {
+    fadeIn() {
         if (window.getComputedStyle(this.#element, null).display === 'none') {
             if (this.#element.tagName !== "TABLE") this.#element.style.display = 'flex';
         }
-        this.#element.style.animationName = 'appearance';
+        this.#element.style.animationName = 'fade-in';
     }
-    disappearance() {
+    fadeOut() {
         if (this.#element.style.animationName) {
-            this.#element.style.animationName = 'disappearance';
+            this.#element.style.animationName = 'fade-out';
             this.#element.addEventListener('animationend', removeEvents);
         }
     }
@@ -80,15 +80,15 @@ class Animation {
         }
     }
     // REMOVE
-    scale_and_remove() {
+    scaleOutAndRemove() {
         if (this.#element.style.animationName) {
             this.#element.style.animationName = 'scale-out';
             this.#element.addEventListener('animationend', removeEvents2);
         }
     }
-    disappearance_and_remove() {
+    fadeOutAndRemove() {
         if (this.#element.style.animationName) {
-            this.#element.style.animationName = 'disappearance';
+            this.#element.style.animationName = 'fade-out';
             this.#element.addEventListener('animationend', removeEvents2);
         }
     }
