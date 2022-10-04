@@ -150,16 +150,21 @@ class Notification {
         let notification = document.getElementById(this.#id);
 
         new Animation(notification).scaleIn();
-        notification.addEventListener('animationend', (event) => {
+        notification.addEventListener('animationend', () => {
             setTimeout(() => {
-                new Animation(event.target).scaleOutAndRemove();
-                event.target.addEventListener("animationend", (event) => {
-                    let elem = event.target;
-                    elem.removeAttribute("style");
-                    elem.style.display = 'flex';
-                    elem.style.width = '-webkit-fill-available';
+                new Animation(notification).scaleOutAndRemove();
+                notification.addEventListener("animationend", () => {
+                    notification.removeAttribute("style");
+                    notification.style.display = 'flex';
+                    notification.style.width = '-webkit-fill-available';
+                    notification.style.opacity = "0"
+                    notification.style.transform = "scale(0)"
                     let box = document.getElementById("chui_notification_box");
-                    box.appendChild(elem)
+                    box.appendChild(notification)
+                    setTimeout(() => {
+                        notification.style.opacity = "1"
+                        notification.style.transform = "scale(1)"
+                    }, 300)
                 })
             }, this.#time);
         });

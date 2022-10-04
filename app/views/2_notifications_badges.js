@@ -4,7 +4,7 @@ class Notifications_Badges_Page extends Page {
     constructor() {
         super();
         this.setTitle('Уведомления и Бейджи');
-        this.setMain(false);
+        this.setMain(true);
 
         let h1_notifications = new H(1, "Уведомления")
         let DEFAULT = new Button({
