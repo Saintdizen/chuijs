@@ -219,12 +219,18 @@ class PopupAlert {
 
         // СОБЫТИЯ
         this.#button_OK.innerText = "OK";
-        this.#button_OK.addEventListener("click", () => new Animation(document.getElementById(this.#id)).disappearance_and_remove())
+        this.#button_OK.addEventListener("click", () => {
+            let popup = document.getElementById(this.#id);
+            new Animation(popup.firstChild).scaleOut();
+            new Animation(popup).disappearance_and_remove();
+        })
         this.#popup_buttons.appendChild(this.#button_OK);
 
         //
         document.getElementById("app").appendChild(this.#chui_popup)
-        new Animation(document.getElementById(this.#id)).appearance();
+        let popup = document.getElementById(this.#id);
+        new Animation(popup).appearance();
+        new Animation(popup.firstChild).scaleIn();
     }
 }
 
@@ -264,17 +270,23 @@ class PopupConfirm {
 
         return new Promise((resolve) => {
             this.#button_cancel.addEventListener("click", () => {
-                new Animation(document.getElementById(this.#id)).disappearance_and_remove()
+                let popup = document.getElementById(this.#id);
+                new Animation(popup.firstChild).scaleOut();
+                new Animation(popup).disappearance_and_remove();
                 resolve(false);
             })
 
             this.#button_accept.addEventListener("click", () => {
-                new Animation(document.getElementById(this.#id)).disappearance_and_remove()
+                let popup = document.getElementById(this.#id);
+                new Animation(popup.firstChild).scaleOut();
+                new Animation(popup).disappearance_and_remove();
                 resolve(true);
             });
 
             document.getElementById("app").appendChild(this.#chui_popup)
-            new Animation(document.getElementById(this.#id)).appearance();
+            let popup = document.getElementById(this.#id);
+            new Animation(popup).appearance();
+            new Animation(popup.firstChild).scaleIn();
         })
     }
 }
@@ -341,8 +353,12 @@ class PopupPrompt {
         this.#popup_buttons.appendChild(this.#button_accept);
 
         return new Promise((resolve) => {
+
+
             this.#button_cancel.addEventListener("click", () => {
-                new Animation(document.getElementById(this.#id)).disappearance_and_remove();
+                let popup = document.getElementById(this.#id);
+                new Animation(popup.firstChild).scaleOut();
+                new Animation(popup).disappearance_and_remove();
             })
 
             this.#button_accept.addEventListener("click", () => {
@@ -374,12 +390,17 @@ class PopupPrompt {
                     if (password === "") this.#input_pass.setErrorMessage(options.inputs.password.errorMessage);
                 }
                 if (close) {
-                    new Animation(document.getElementById(this.#id)).disappearance_and_remove();
+                    let popup = document.getElementById(this.#id);
+                    new Animation(popup.firstChild).scaleOut();
+                    new Animation(popup).disappearance_and_remove();
                 }
             })
 
             document.getElementById("app").appendChild(this.#chui_popup);
-            new Animation(document.getElementById(this.#id)).appearance();
+
+            let popup = document.getElementById(this.#id);
+            new Animation(popup).appearance();
+            new Animation(popup.firstChild).scaleIn();
         })
     }
 }

@@ -100,8 +100,7 @@ class SlideShow {
                     "margin": "0 2px",
                     "background-color": "#bbb",
                     "border-radius": "50%",
-                    "display": "inline-block",
-                    "transition": "background-color 0.6s ease"
+                    "display": "inline-block"
                 }
             },
             {

@@ -141,7 +141,6 @@ class Select {
                     "padding": "6px 0px 6px 10px",
                     "background": "transparent",
                     "box-shadow": "none",
-                    "transition": "color 0.2s",
                     "color": "var(--text_color_disabled)",
                     "text-align": "start",
                     "border": "none",

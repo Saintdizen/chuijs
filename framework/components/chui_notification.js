@@ -31,7 +31,7 @@ class Notification {
                     "font-size": "12pt",
                     "padding": "6px 10px",
                     "background": "var(--badge_cancel_back)",
-                    "animation-duration": ".5s",
+                    "animation-duration": ".3s",
                     "animation-fill-mode": "forwards",
                     "backdrop-filter": "blur(8px)",
                     "box-shadow": "rgba(0, 0, 0, 0.15) 0px 2px 4px, rgba(0, 0, 0, 0.25) 0px 2px 4px",

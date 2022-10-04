@@ -82,7 +82,6 @@ class EmailInput {
                     "padding": "0px",
                     "background": "transparent",
                     "box-shadow": "none",
-                    "transition": "color 0.2s",
                     "color": "var(--text_color_disabled)",
                     "text-align": "start",
                     "border": "0",

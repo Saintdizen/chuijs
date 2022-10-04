@@ -96,7 +96,6 @@ class TextEditor {
             {
                 name: "p img",
                 style: {
-                    "transition": "all .2s",
                     "margin": "0px",
                     "padding": "0px",
                     "width": "auto",

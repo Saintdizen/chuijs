@@ -14,7 +14,7 @@ class Page {
                     "flex-direction": "column",
                     "width": "-webkit-fill-available",
                     "align-items": "baseline",
-                    "animation-duration": ".2s",
+                    "animation-duration": ".3s",
                 }
             }
         ], 'chUiJS_Page');

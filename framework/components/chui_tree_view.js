@@ -59,7 +59,6 @@ class TreeView {
                     "overflow": "hidden",
                     "width": "-webkit-fill-available",
                     "max-height": "0",
-                    "transition": "background .2s, max-height .1s ease-out",
                     "border-bottom-right-radius": "var(--border_radius)",
                     "border-bottom-left-radius": "var(--border_radius)",
                     "color": "var(--text_color)",

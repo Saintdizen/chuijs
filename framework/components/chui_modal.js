@@ -120,10 +120,14 @@ class Dialog {
         }
     }
     open() {
-        new Animation(document.getElementById(this.#id)).appearance();
+        let dialog = document.getElementById(this.#id);
+        new Animation(dialog).appearance();
+        new Animation(dialog.firstChild).scaleIn();
     }
     close() {
-        new Animation(document.getElementById(this.#id)).disappearance();
+        let dialog = document.getElementById(this.#id);
+        new Animation(dialog.firstChild).scaleOut();
+        new Animation(dialog).disappearance();
     }
     set() {
         return this.#dialog;

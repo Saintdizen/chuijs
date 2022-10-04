@@ -77,8 +77,8 @@ class AppLayout extends Route {
                     "line-height": "normal",
                     "user-select": "none",
                     "outline": "none",
-                    "transition": "all .2s",
-                    "animation-duration": ".2s",
+                    "transition": "all .3s",
+                    "animation-duration": ".3s",
                     "position": "relative",
                 }
             },
@@ -92,7 +92,7 @@ class AppLayout extends Route {
                     "direction": "ltr",
                     "user-select": "none",
                     "outline": "none",
-                    "transition": "all .2s",
+                    "transition": "all .3s",
                     "position": "relative",
                 }
             },
@@ -290,7 +290,6 @@ class AppLayout extends Route {
                     "box-shadow": "none",
                     "background": "transparent",
                     "backdrop-filter": "blur(8px) opacity(0)",
-                    "transition": "opacity .1s, background .1s, backdrop-filter .1s",
                     "justify-content": "space-between",
                     "-webkit-app-region": "drag"
                 }

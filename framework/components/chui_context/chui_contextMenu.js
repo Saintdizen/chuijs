@@ -10,7 +10,6 @@ class ContextMenu {
                     "flex-direction": "column",
                     "position": "fixed",
                     "z-index": "1",
-                    "transition": "0s",
                     "height": "max-content",
                     "width": "max-content",
                     "border-radius": "5px",
@@ -20,7 +19,7 @@ class ContextMenu {
                     "box-shadow": "var(--shadow_one) 0px 0px 2px 0px",
                     "background": "var(--notification_background)",
                     "color": "var(--text_color)",
-                    "animation-duration": ".25s",
+                    "animation-duration": ".3s",
                     "animation-fill-mode": "forwards"
                 }
             },

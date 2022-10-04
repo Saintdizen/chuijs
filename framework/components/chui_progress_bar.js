@@ -32,7 +32,6 @@ class ProgressBar {
             {
                 name: "progress::-webkit-progress-bar",
                 style: {
-                    "transition": "background .2s",
                     "background": "var(--input_background)",
                     "border-radius": "50px",
                     "border": "none",

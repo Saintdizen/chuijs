@@ -128,7 +128,6 @@ class ComboBox {
                     "cursor": "not-allowed",
                     "background": "transparent",
                     "box-shadow": "none",
-                    "transition": "color 0.2s",
                     "color": "var(--text_color_disabled)",
                     "text-align": "start",
                     "line-height":"1",
