@@ -15,21 +15,18 @@ class Table {
     #userSelect = Boolean(false);
     #columnsWidth = undefined;
     #sorted = undefined;
-    #filterInputs = undefined;
     constructor(options = {
         data: undefined,
         customName: undefined,
         userSelect: Boolean(undefined),
         sorted: Boolean(undefined),
         columnsWidth: undefined,
-        filterInputs: undefined
     }) {
         this.#sorted = options.sorted;
         this.#columnsWidth = options.columnsWidth;
         this.#data = options.data;
         this.#customNames = options.customName;
         this.#userSelect = options.userSelect;
-        this.#filterInputs = options.filterInputs;
         require('../modules/chui_functions').style_parse([
             {
                 name: "table",
@@ -190,24 +187,6 @@ class Table {
             cell.style.alignItems = "center";
 
             if (cell.cellIndex !== 0) cell.style.borderLeft = '2px solid transparent';
-        }
-
-        if (this.#filterInputs !== undefined) {
-            const filter_row = this.#tHead.insertRow();
-            this.#setWidthColumns(filter_row);
-            for (let head of cols) {
-                const cell = row.insertCell()
-                let input = this.#filterInputs[cols.indexOf(head)].set();
-                input.style.margin = '0px';
-                cell.appendChild(input)
-                cell.style.color = 'var(--button_text_color)';
-                cell.style.display = "flex";
-                cell.style.flexDirection = "row";
-                cell.style.justifyContent = "center";
-                cell.style.alignItems = "center";
-                cell.style.padding = "8px";
-                if (cell.cellIndex !== 0) cell.style.borderLeft = '2px solid transparent';
-            }
         }
     }
     #setTable(data = []) {

@@ -74,7 +74,7 @@ class Select {
                     "position":"absolute",
                     "display":"none",
                     "height": "max-content",
-                    //"width": "-webkit-fill-available",
+                    "width": "-webkit-fill-available",
                     "border-radius": "var(--border_radius)",
                     "margin-top": "-2px",
                     "margin-left": "-2px",
@@ -198,7 +198,7 @@ class Select {
             if (!this.#disabled_trigger) {
                 if (event.target.parentNode === this.#Select_second) {
                     this.#input.focus()
-                    this.#setWidthDropDown()
+                    //this.#setWidthDropDown()
                     new Animation(this.#dropdown).fadeIn();
                     setOptionDisplay(document.getElementById(this.#id));
                 }

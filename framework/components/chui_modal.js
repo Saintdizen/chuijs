@@ -18,7 +18,7 @@ class Dialog {
                 style: {
                     "display": "none",
                     "position": "fixed",
-                    "z-index": "2",
+                    "z-index": "1000",
                     "left": "0",
                     "top": "0",
                     "width": "-webkit-fill-available",

@@ -1,4 +1,4 @@
-const {Page, Table, TextInput, Styles, Select} = require('../../index');
+const {Page, Table, TextInput, Styles, Select, ContentBlock} = require('../../index');
 
 class TablesPage extends Page {
     constructor() {
@@ -6,21 +6,17 @@ class TablesPage extends Page {
         this.setTitle('Таблицы');
         this.setMain(true)
 
-        let filter_by_month = new TextInput({ placeholder: "Месяц", width: Styles.SIZE.WEBKIT_FILL })
+        let filter_by_month = new TextInput({ title: "Месяц" })
         filter_by_month.addInputListener((e) => {
             table.setFilterByProperty(Table.FILTER_TYPE.PARTIAL_MATCH, "month", e.target.value);
         })
 
-        let filter_by_number = new TextInput({ placeholder: "Номер", width: Styles.SIZE.WEBKIT_FILL })
+        let filter_by_number = new TextInput({ title: "Номер" })
         filter_by_number.addInputListener((e) => {
             table.setFilterByProperty(Table.FILTER_TYPE.PARTIAL_MATCH, "number", e.target.value);
         })
 
-        let filter_by_active = new Select({
-            placeholder: 'Активный месяц',
-            width: Styles.SIZE.WEBKIT_FILL,
-            required: false,
-        });
+        let filter_by_active = new Select({ title: 'Активный месяц' });
         filter_by_active.addOptions("true", "false")
         filter_by_active.addValueChangeListener((e) => {
             table.setFilterByProperty(Table.FILTER_TYPE.PARTIAL_MATCH, "active", e.target.value);
@@ -44,11 +40,18 @@ class TablesPage extends Page {
             sorted: true,
             userSelect: true,
             customName: ["Месяц", "Номер", "Активный месяц"],
-            filterInputs: [ filter_by_month, filter_by_number, filter_by_active ],
             //columnsWidth: ["20%", "40%", "40%"]
         })
 
-        this.add(table);
+        let filters = new ContentBlock({
+            direction: Styles.DIRECTION.ROW, wrap: Styles.WRAP.WRAP,
+            align: Styles.ALIGN.CENTER, justify: Styles.JUSTIFY.CENTER,
+        })
+
+        filters.add(filter_by_month, filter_by_number, filter_by_active)
+
+
+        this.add(filters, table);
     }
 }
 
