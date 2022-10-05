@@ -71,7 +71,7 @@ class Select {
                     "background": "var(--dropdown_background)",
                     "color": "var(--text_color)",
                     "outline": "none",
-                    "position":"fixed",
+                    "position":"absolute",
                     "display":"none",
                     "height": "max-content",
                     //"width": "-webkit-fill-available",
@@ -83,7 +83,7 @@ class Select {
                     "border": "2px solid var(--input_background)",
                     "flex-direction": "column",
                     "z-index": "1",
-                    "box-shadow": "var(--shadow_one) 0px 5px 15px, var(--shadow_two) 0px 10px 20px",
+                    "box-shadow": "var(--shadow_one) 0px 2.5px 7.5px, var(--shadow_two) 0px 5px 10px"
                 }
             },
             {

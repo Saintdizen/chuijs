@@ -32,7 +32,6 @@ class TextEditor {
                 name: "chui_text_editor",
                 style: {
                     "border-radius": "var(--border_radius)",
-                    "box-shadow": "var(--shadow_one) 0px 0px 2px 0px",
                     "display": "flex",
                     "flex-direction": "column",
                     "background": "var(--input_background)",

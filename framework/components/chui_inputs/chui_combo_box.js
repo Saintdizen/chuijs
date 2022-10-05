@@ -71,7 +71,7 @@ class ComboBox {
                     "flex-direction": "column",
                     "z-index": "1",
                     "width": "-webkit-fill-available",
-                    "box-shadow": "var(--shadow_one) 0px 5px 15px, var(--shadow_two) 0px 10px 20px",
+                    "box-shadow": "var(--shadow_one) 0px 2.5px 7.5px, var(--shadow_two) 0px 5px 10px"
                 }
             },
             {

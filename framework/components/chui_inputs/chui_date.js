@@ -65,7 +65,7 @@ class DateInput {
                     "top": "-2px",
                     "left": "-2px",
                     "z-index": "1",
-                    "box-shadow": "var(--shadow_one) 0px 5px 15px, var(--shadow_two) 0px 10px 20px",
+                    "box-shadow": "var(--shadow_one) 0px 2.5px 7.5px, var(--shadow_two) 0px 5px 10px"
                 }
             },
             {
