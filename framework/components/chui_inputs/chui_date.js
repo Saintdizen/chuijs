@@ -65,7 +65,7 @@ class DateInput {
                     "top": "-2px",
                     "left": "-2px",
                     "z-index": "1",
-                    "box-shadow": "var(--shadow_one) 0px 19px 38px, var(--shadow_two) 0px 15px 12px",
+                    "box-shadow": "var(--shadow_one) 0px 5px 15px, var(--shadow_two) 0px 10px 20px",
                 }
             },
             {
@@ -89,8 +89,7 @@ class DateInput {
                 name: ".date_day:hover",
                 style: {
                     "background": "var(--blue_prime_background)",
-                    "color": "var(--text_color_hover)",
-                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
+                    "color": "var(--text_color_hover)"
                 }
             },
             {

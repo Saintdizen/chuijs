@@ -153,7 +153,7 @@ class AppLayout extends Route {
                     "--font_default_size": "12pt",
                     "--font_labels_size": "10pt",
                     //Закругление элементов
-                    "--border_radius": "12px",
+                    "--border_radius": "8px",
                     //Отступы
                     "--margin": "6px",
                     "--scroll_bar_background": "rgb(209, 209, 214)",
@@ -337,6 +337,7 @@ class AppLayout extends Route {
                     "-webkit-app-region": "no-drag",
                     "margin": "64px 20px 20px 20px",
                     "border-radius": "var(--border_radius)",
+                    "box-shadow": "var(--shadow_one) 0px 5px 15px, var(--shadow_two) 0px 10px 20px",
                 }
             },
             {
@@ -355,6 +356,7 @@ class AppLayout extends Route {
                     "-webkit-app-region": "no-drag",
                     "margin": "64px 20px 20px 20px",
                     "border-radius": "var(--border_radius)",
+                    "box-shadow": "var(--shadow_one) 0px 5px 15px, var(--shadow_two) 0px 10px 20px",
                 }
             },
             {
@@ -419,14 +421,12 @@ class AppLayout extends Route {
                 name: "notification_button:hover",
                 style: {
                     "background": "var(--blue_prime_background)",
-                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
                 }
             },
             {
                 name: ".notification_button_active",
                 style: {
                     "background": "var(--blue_prime_background)",
-                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
                 }
             },
             {
@@ -462,14 +462,12 @@ class AppLayout extends Route {
                 name: "app_menu_button:hover",
                 style: {
                     "background": "var(--blue_prime_background)",
-                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
                 }
             },
             {
                 name: ".app_menu_button_active",
                 style: {
                     "background": "var(--blue_prime_background)",
-                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
                 }
             },
             {
@@ -545,7 +543,6 @@ class AppLayout extends Route {
                 style: {
                     "padding": "6px 10px",
                     "background": "var(--blue_prime_background)",
-                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
                 }
             },
             {
@@ -567,7 +564,6 @@ class AppLayout extends Route {
                     "padding": "6px 10px",
                     "background": "var(--blue_prime_background)",
                     "color": "var(--text_color_hover)",
-                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
                 }
             },
             {
@@ -631,7 +627,6 @@ class AppLayout extends Route {
                 name: "window_minimize_button:hover",
                 style: {
                     "background": "var(--blue_prime_background)",
-                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
                 }
             },
             {
@@ -660,7 +655,6 @@ class AppLayout extends Route {
                 name: "window_close_button:hover",
                 style: {
                     "background": "var(--window_close_button_hover)",
-                    "box-shadow": "var(--window_close_button_hover) 0px 0px 2px 0px",
                 }
             },
             {
@@ -689,7 +683,6 @@ class AppLayout extends Route {
                 name: "window_maximize_button:hover",
                 style: {
                     "background": "var(--window_maximize_button_hover)",
-                    "box-shadow": "var(--window_maximize_button_hover) 0px 0px 2px 0px",
                 }
             },
             {
@@ -1050,7 +1043,6 @@ class UserProfile {
                 name: "user_button:hover",
                 style: {
                     "background": "var(--blue_prime_background)",
-                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
                     "color": "var(--text_color_hover)",
                 }
             },
@@ -1058,7 +1050,6 @@ class UserProfile {
                 name: ".user_button",
                 style: {
                     "background": "var(--blue_prime_background)",
-                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
                     "color": "var(--text_color_hover)",
                 }
             },
@@ -1084,7 +1075,7 @@ class UserProfile {
                     "position": "absolute",
                     "background": "var(--dropdown_background)",
                     "color": "var(--text_color)",
-                    "box-shadow": "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
+                    "box-shadow": "var(--shadow_one) 0px 5px 15px, var(--shadow_two) 0px 10px 20px",
                     "border": "2px solid var(--input_background)",
                     "border-radius": "var(--border_radius)",
                     "padding": "6px",
@@ -1113,7 +1104,6 @@ class UserProfile {
                     "padding": "6px 10px",
                     "background": "var(--blue_prime_background)",
                     "color": "var(--text_color_hover)",
-                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
                 }
             },
             //
@@ -1254,7 +1244,6 @@ class HeaderDialog {
                 name: "header_button:hover",
                 style: {
                     "background": "var(--blue_prime_background)",
-                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
                 }
             },
             {
@@ -1380,7 +1369,6 @@ class HeaderButton {
                 name: "header_button:hover",
                 style: {
                     "background": "var(--blue_prime_background)",
-                    "box-shadow": "var(--blue_prime_background) 0px 0px 2px 0px",
                 }
             },
             {

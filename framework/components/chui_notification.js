@@ -32,7 +32,7 @@ class Notification {
                     "padding": "6px 10px",
                     "background": "var(--badge_cancel_back)",
                     "backdrop-filter": "blur(8px)",
-                    "box-shadow": "rgba(0, 0, 0, 0.15) 0px 2px 4px, rgba(0, 0, 0, 0.25) 0px 2px 4px",
+                    "box-shadow": "var(--shadow_one) 0px 2.5px 7.5px, var(--shadow_two) 0px 5px 10px"
                 }
             },
             {

@@ -71,18 +71,19 @@ class Select {
                     "background": "var(--dropdown_background)",
                     "color": "var(--text_color)",
                     "outline": "none",
-                    "position":"absolute",
+                    "position":"fixed",
                     "display":"none",
                     "height": "max-content",
-                    "width": "-webkit-fill-available",
+                    //"width": "-webkit-fill-available",
                     "border-radius": "var(--border_radius)",
-                    "margin-top": "0px",
+                    "margin-top": "-2px",
+                    "margin-left": "-2px",
                     "padding": "6px",
                     "font-size": "var(--font_default_size)",
                     "border": "2px solid var(--input_background)",
                     "flex-direction": "column",
                     "z-index": "1",
-                    "box-shadow": "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
+                    "box-shadow": "var(--shadow_one) 0px 5px 15px, var(--shadow_two) 0px 10px 20px",
                 }
             },
             {
@@ -107,8 +108,7 @@ class Select {
                 style: {
                     "padding": "6px 10px",
                     "background": "var(--blue_prime_background)",
-                    "color": "var(--text_color_hover)",
-                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
+                    "color": "var(--text_color_hover)"
                 }
             },
             {
@@ -198,6 +198,7 @@ class Select {
             if (!this.#disabled_trigger) {
                 if (event.target.parentNode === this.#Select_second) {
                     this.#input.focus()
+                    this.#setWidthDropDown()
                     new Animation(this.#dropdown).fadeIn();
                     setOptionDisplay(document.getElementById(this.#id));
                 }
@@ -282,6 +283,14 @@ class Select {
         }
     }
     set() { return this.#Select_main; }
+    #setWidthDropDown() {
+        let dropdown_styles = window.getComputedStyle(this.#dropdown, null);
+        let select_main_styles = window.getComputedStyle(this.#Select_main, null);
+        let drop_padding = parseInt(dropdown_styles.padding) * 2;
+        let drop_border = parseInt(dropdown_styles.border) * 2;
+        let select_width = parseInt(select_main_styles.width);
+        this.#dropdown.style.width = `${select_width - drop_border - drop_padding}px`;
+    }
 }
 
 function setOptionDisplay(element = new HTMLElement()) {

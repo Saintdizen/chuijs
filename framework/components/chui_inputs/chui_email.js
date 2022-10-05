@@ -57,7 +57,7 @@ class EmailInput {
             {
                 name: "email_input .email_input:valid",
                 style: {
-                    "box-shadow": "var(--badge_success_text) 0px 0px 2px 1px",
+
                 }
             },
             {

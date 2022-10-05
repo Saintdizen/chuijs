@@ -1,4 +1,4 @@
-const {Page, Table, TextInput, Styles} = require('../../index');
+const {Page, Table, TextInput, Styles, Select} = require('../../index');
 
 class TablesPage extends Page {
     constructor() {
@@ -16,8 +16,13 @@ class TablesPage extends Page {
             table.setFilterByProperty(Table.FILTER_TYPE.PARTIAL_MATCH, "number", e.target.value);
         })
 
-        let filter_by_active = new TextInput({ placeholder: "Активный месяц", width: Styles.SIZE.WEBKIT_FILL })
-        filter_by_active.addInputListener((e) => {
+        let filter_by_active = new Select({
+            placeholder: 'Активный месяц',
+            width: Styles.SIZE.WEBKIT_FILL,
+            required: false,
+        });
+        filter_by_active.addOptions("true", "false")
+        filter_by_active.addValueChangeListener((e) => {
             table.setFilterByProperty(Table.FILTER_TYPE.PARTIAL_MATCH, "active", e.target.value);
         })
 

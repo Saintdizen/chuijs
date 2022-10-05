@@ -29,16 +29,14 @@ class Form {
                     "margin": "var(--margin)",
                     "background": "var(--button_background)",
                     "color": "var(--button_text_color)",
-                    "box-sizing": "border-box",
-                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 0px 2px 0px",
+                    "box-sizing": "border-box"
                 }
             },
             {
                 name: ".chui_form_submit_button:hover",
                 style: {
                     "background": "var(--blue_prime_background)",
-                    "color": "var(--text_color_hover)",
-                    "box-shadow": "var(--button_text_color) 0px 0px 2px 0px",
+                    "color": "var(--text_color_hover)"
                 }
             }
         ], 'chUiJS_Forms');

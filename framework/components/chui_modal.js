@@ -39,7 +39,7 @@ class Dialog {
                     "flex-direction": "column",
                     "padding": "7px",
                     "border-radius": "var(--border_radius)",
-                    "box-shadow": "var(--shadow_one) 0px 19px 38px, var(--shadow_two) 0px 15px 12px",
+                    "box-shadow": "var(--shadow_one) 0px 5px 15px, var(--shadow_two) 0px 10px 20px",
                     "border": "2px solid var(--modal_border)",
                     "color": "var(--text_color)",
                     "background": "var(--modal_background)"

@@ -14,7 +14,6 @@ class Image {
                     "width": "max-content",
                     "border-radius": "var(--border_radius)",
                     "margin": "var(--margin)",
-                    "box-shadow": "var(--shadow_one) 0px 0px 2px 0px",
                     "display": "flex"
                 }
             },

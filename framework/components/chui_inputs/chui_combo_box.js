@@ -71,7 +71,7 @@ class ComboBox {
                     "flex-direction": "column",
                     "z-index": "1",
                     "width": "-webkit-fill-available",
-                    "box-shadow": "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
+                    "box-shadow": "var(--shadow_one) 0px 5px 15px, var(--shadow_two) 0px 10px 20px",
                 }
             },
             {
@@ -109,8 +109,7 @@ class ComboBox {
                 style: {
                     "padding": "6px 10px",
                     "background": "var(--blue_prime_background)",
-                    "color": "var(--text_color_hover)",
-                    "box-shadow": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
+                    "color": "var(--text_color_hover)"
                 }
             },
             // DISABLED STYLES
