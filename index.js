@@ -48,6 +48,7 @@ const { TreeView } = require("./framework/components/chui_tree_view");
 const { Form } = require("./framework/components/chui_form");
 const { SlideShow } = require("./framework/components/chui_slideshow");
 const { FieldSet } = require("./framework/components/chui_fieldset");
+const { Popup } = require("./framework/components/chui_popups");
 
 //VARS
 let isQuiting = false;
@@ -223,5 +224,6 @@ module.exports = {
     TreeView: TreeView,
     Form: Form,
     SlideShow: SlideShow,
-    FieldSet: FieldSet
+    FieldSet: FieldSet,
+    Popup: Popup
 }
