@@ -1,4 +1,5 @@
 const {Icon, Icons} = require("./chui_icons");
+const Console = require("console");
 
 class Table {
     #filtered_data = [];
@@ -14,18 +15,21 @@ class Table {
     #userSelect = Boolean(false);
     #columnsWidth = undefined;
     #sorted = undefined;
+    #filterInputs = undefined;
     constructor(options = {
         data: undefined,
         customName: undefined,
         userSelect: Boolean(undefined),
         sorted: Boolean(undefined),
-        columnsWidth: undefined
+        columnsWidth: undefined,
+        filterInputs: undefined
     }) {
         this.#sorted = options.sorted;
         this.#columnsWidth = options.columnsWidth;
         this.#data = options.data;
         this.#customNames = options.customName;
         this.#userSelect = options.userSelect;
+        this.#filterInputs = options.filterInputs;
         require('../modules/chui_functions').style_parse([
             {
                 name: "table",
@@ -105,21 +109,21 @@ class Table {
     set() { return this.#table; }
 
     //Функции фильтров
-    setFilterByProperty(type = String(undefined), property = String(undefined), filterValue = new Object(undefined)) {
-        this.#filtered_data = [];
+    setFilterByProperty(type = String(), property = String(), filterValue = String()) {
+        if (this.#filtered_data.length !== 0) {
+            this.#filtered_data = [];
+        }
         if (type.includes(Table.FILTER_TYPE.CLEAR_MATCH)) {
-            this.#data.filter(data_1 => data_1[property].toLowerCase() === filterValue.toLowerCase()).forEach(data_2 => { this.#filtered_data.push(data_2); })
+            this.#data.filter(data_1 => String(data_1[property]).toLowerCase() === String(filterValue).toLowerCase()).forEach(data_2 => { this.#filtered_data.push(data_2); })
         }
         if (type.includes(Table.FILTER_TYPE.PARTIAL_MATCH)) {
-            this.#data.filter(data_1 => data_1[property].toLowerCase().includes(filterValue.toLowerCase())).forEach(data_2 => { this.#filtered_data.push(data_2); })
+            this.#data.filter(data_1 => String(data_1[property]).toLowerCase().includes(String(filterValue).toLowerCase())).forEach(data_2 => { this.#filtered_data.push(data_2); })
         }
-        this.#setTable(this.#filtered_data)
-        if (this.#userSelect !== undefined) {
-            this.#setUserSelect()
-        }
+        this.#setTable(this.#filtered_data);
+        if (this.#userSelect !== undefined) this.#setUserSelect();
     }
-    removeFilterByProperty(property= String(undefined), filterValue = new Object(undefined)) {
-        this.#data.filter(data_1 => data_1[property].toLowerCase() === filterValue.toLowerCase()).forEach(data_2 => {
+    removeFilterByProperty(property= String(), filterValue = String()) {
+        this.#data.filter(data_1 => String(data_1[property]).toLowerCase() === String(filterValue).toLowerCase()).forEach(data_2 => {
             this.#filtered_data.splice(this.#filtered_data.indexOf(data_2), 1)
         })
         if (this.#filtered_data.length !== 0) {
@@ -127,9 +131,7 @@ class Table {
         } else {
             this.#setTable(this.#data)
         }
-        if (this.#userSelect !== undefined) {
-            this.#setUserSelect()
-        }
+        if (this.#userSelect !== undefined) this.#setUserSelect()
     }
     //Функции отрисовки таблицы
     #setWidthColumns(row) {
@@ -149,6 +151,7 @@ class Table {
         //row.style.borderBottom = '2px solid var(--input_background)'
         for (let head of cols) {
             const cell = row.insertCell()
+
             let cell_title = document.createElement("cell_title")
             cell_title.innerText = head;
             cell.appendChild(cell_title)
@@ -186,8 +189,24 @@ class Table {
             cell.style.justifyContent = "space-between";
             cell.style.alignItems = "center";
 
-            if (cell.cellIndex !== 0) {
-                cell.style.borderLeft = '2px solid transparent'
+            if (cell.cellIndex !== 0) cell.style.borderLeft = '2px solid transparent';
+        }
+
+        if (this.#filterInputs !== undefined) {
+            const filter_row = this.#tHead.insertRow();
+            this.#setWidthColumns(filter_row);
+            for (let head of cols) {
+                const cell = row.insertCell()
+                let input = this.#filterInputs[cols.indexOf(head)].set();
+                input.style.margin = '0px';
+                cell.appendChild(input)
+                cell.style.color = 'var(--button_text_color)';
+                cell.style.display = "flex";
+                cell.style.flexDirection = "row";
+                cell.style.justifyContent = "center";
+                cell.style.alignItems = "center";
+                cell.style.padding = "8px";
+                if (cell.cellIndex !== 0) cell.style.borderLeft = '2px solid transparent';
             }
         }
     }
@@ -196,9 +215,7 @@ class Table {
         for (let dat of data) {
             let row = this.#tBody.insertRow()
             this.#setWidthColumns(row);
-            if (row.rowIndex !== data.length) {
-                row.style.borderBottom = '2px solid var(--input_background)'
-            }
+            if (data.indexOf(dat) !== data.length - 1) row.style.borderBottom = '2px solid var(--input_background)'
             for (let col of this.#columns) {
                 let cell = row.insertCell();
                 if (cell.cellIndex !== 0) {

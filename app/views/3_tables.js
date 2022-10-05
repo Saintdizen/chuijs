@@ -1,10 +1,25 @@
-const {Page, Table, TextInput} = require('../../index');
+const {Page, Table, TextInput, Styles} = require('../../index');
 
 class TablesPage extends Page {
     constructor() {
         super();
         this.setTitle('Таблицы');
-        this.setMain(false)
+        this.setMain(true)
+
+        let filter_by_month = new TextInput({ placeholder: "Месяц", width: Styles.SIZE.WEBKIT_FILL })
+        filter_by_month.addInputListener((e) => {
+            table.setFilterByProperty(Table.FILTER_TYPE.PARTIAL_MATCH, "month", e.target.value);
+        })
+
+        let filter_by_number = new TextInput({ placeholder: "Номер", width: Styles.SIZE.WEBKIT_FILL })
+        filter_by_number.addInputListener((e) => {
+            table.setFilterByProperty(Table.FILTER_TYPE.PARTIAL_MATCH, "number", e.target.value);
+        })
+
+        let filter_by_active = new TextInput({ placeholder: "Активный месяц", width: Styles.SIZE.WEBKIT_FILL })
+        filter_by_active.addInputListener((e) => {
+            table.setFilterByProperty(Table.FILTER_TYPE.PARTIAL_MATCH, "active", e.target.value);
+        })
 
         let table  = new Table({
             data: [
@@ -24,19 +39,11 @@ class TablesPage extends Page {
             sorted: true,
             userSelect: true,
             customName: ["Месяц", "Номер", "Активный месяц"],
+            filterInputs: [ filter_by_month, filter_by_number, filter_by_active ],
             //columnsWidth: ["20%", "40%", "40%"]
         })
 
-        let filter_by_text = new TextInput({ title: "ФИЛЬТРЬ" })
-
-        filter_by_text.addInputListener((e) => {
-            table.setFilterByProperty(Table.FILTER_TYPE.PARTIAL_MATCH, "name", e.target.value.toString())
-            if (e.target.value === "") {
-                table.removeFilterByProperty("name", e.target.value.toString())
-            }
-        })
-
-        this.add(filter_by_text, table);
+        this.add(table);
     }
 }
 
