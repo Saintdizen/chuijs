@@ -1,4 +1,4 @@
-const {Page, Table, TextInput, Styles, Select, ContentBlock} = require('../../index');
+const {Page, Table, TextInput, Styles, ContentBlock} = require('../../index');
 
 class TablesPage extends Page {
     constructor() {
@@ -6,20 +6,14 @@ class TablesPage extends Page {
         this.setTitle('Таблицы');
         this.setMain(true)
 
-        let filter_by_month = new TextInput({ title: "Месяц" })
-        filter_by_month.addInputListener((e) => {
-            table.setFilterByProperty(Table.FILTER_TYPE.PARTIAL_MATCH, "month", e.target.value);
+        let filters = new ContentBlock({
+            direction: Styles.DIRECTION.ROW, wrap: Styles.WRAP.WRAP,
+            align: Styles.ALIGN.CENTER, justify: Styles.JUSTIFY.CENTER,
         })
 
-        let filter_by_number = new TextInput({ title: "Номер" })
-        filter_by_number.addInputListener((e) => {
-            table.setFilterByProperty(Table.FILTER_TYPE.PARTIAL_MATCH, "number", e.target.value);
-        })
-
-        let filter_by_active = new Select({ title: 'Активный месяц' });
-        filter_by_active.addOptions("true", "false")
-        filter_by_active.addValueChangeListener((e) => {
-            table.setFilterByProperty(Table.FILTER_TYPE.PARTIAL_MATCH, "active", e.target.value);
+        let filter = new TextInput({ title: "Месяц" })
+        filter.addInputListener((e) => {
+            table.setFilterByMultiProperty(Table.FILTER_TYPE.PARTIAL_MATCH, ["month", "number", "active"], e.target.value);
         })
 
         let table  = new Table({
@@ -43,14 +37,8 @@ class TablesPage extends Page {
             //columnsWidth: ["20%", "40%", "40%"]
         })
 
-        let filters = new ContentBlock({
-            direction: Styles.DIRECTION.ROW, wrap: Styles.WRAP.WRAP,
-            align: Styles.ALIGN.CENTER, justify: Styles.JUSTIFY.CENTER,
-        })
-
-        filters.add(filter_by_month, filter_by_number, filter_by_active)
-
-
+        //
+        filters.add(filter)
         this.add(filters, table);
     }
 }

@@ -125,6 +125,25 @@ class Table {
         this.#setTable(this.#filtered_data)
         if (this.#userSelect !== undefined) this.#setUserSelect();
     }
+    setFilterByMultiProperty(type = String(), properties = [], filterValue = String()) {
+        this.#filtered_data = [];
+        if (type.includes(Table.FILTER_TYPE.CLEAR_MATCH)) {
+            let dump = []
+            for (let property of properties) {
+                dump = this.#data.filter(data_1 => String(data_1[property]).toLowerCase() === String(filterValue).toLowerCase())
+                dump.forEach(dump => this.#filtered_data.push(dump))
+            }
+        }
+        if (type.includes(Table.FILTER_TYPE.PARTIAL_MATCH)) {
+            let dump = []
+            for (let property of properties) {
+                dump = this.#data.filter(data_1 => String(data_1[property]).toLowerCase().includes(String(filterValue).toLowerCase()))
+                dump.forEach(dump => this.#filtered_data.push(dump))
+            }
+        }
+        this.#setTable(this.#filtered_data)
+        if (this.#userSelect !== undefined) this.#setUserSelect();
+    }
     removeFilterByProperty(property= String(), filterValue = String()) {
         this.#data.filter(data_1 => String(data_1[property]).toLowerCase() === String(filterValue).toLowerCase()).forEach(data_2 => {
             this.#filtered_data.splice(this.#filtered_data.indexOf(data_2), 1)
