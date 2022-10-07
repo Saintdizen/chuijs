@@ -6,7 +6,7 @@ class TgTestPage extends Page {
         this.setTitle('Телеграм-бот тест');
         this.setMain(true)
         // Инициализация бота
-        let bot = new TelegramBot("5622691142:AAHv5uQWwaePKHvbZbWjl5zMjH4yEGONl7o")
+        let bot = new TelegramBot("")
         // ===
 
         // Отправка сообщения
