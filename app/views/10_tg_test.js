@@ -17,7 +17,7 @@ class TgTestPage extends Page {
             title: "Отправить",
             clickEvent: async () => {
                 bot.setToken(bot_token.getValue());
-                let res = await bot.sendMessage("-542820126", message.getValue());
+                let res = await bot.sendMessage("-1001898771759", message.getValue());
                 console.log(res)
             }
         })
@@ -38,7 +38,7 @@ class TgTestPage extends Page {
             title: "Отправить",
             clickEvent: async () => {
                 bot.setToken(bot_token.getValue());
-                let res = await bot.sendDocument("-542820126", file.getFile(0));
+                let res = await bot.sendPhoto("-1001898771759", file.getFile(0));
                 console.log(res)
             }
         })
@@ -55,13 +55,16 @@ class TgTestPage extends Page {
 
         // Получить обновления
         let get_up = new Button({
-            title: "Получить",
+            title: "getChat",
             clickEvent: async () => {
                 bot.setToken(bot_token.getValue());
-                let updates = await bot.getUpdates();
-                console.log(updates)
-                let me = await bot.getChat("@TEST");
-                console.log(me)
+                let chat = await bot.getChat("-1001898771759");
+                console.log(chat)
+                let count = await bot.getChatMemberCount("-1001898771759");
+                console.log(count)
+                let adm = await bot.getUserProfilePhotos(723042809);
+                let photo = await bot.getFile(adm.result.photos[0][0].file_id)
+                console.log(photo)
             }
         })
         let field_get_up = new FieldSet({
