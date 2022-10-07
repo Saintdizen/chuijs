@@ -23,6 +23,7 @@ class FieldSet {
                     "height": "max-content",
                     "width": "max-content",
                     "border-radius": "var(--border_radius)",
+                    "margin": "var(--margin)",
                 }
             },
             {
@@ -56,7 +57,7 @@ class FieldSet {
         if (options.style !== undefined) {
             // Размер
             if (options.style.width !== undefined) this.#chui_fieldset.style.width = options.style.width;
-            if (options.style.height !== undefined) this.#chui_fieldset.style.height = options.style.height;
+            if (options.style.height !== undefined) this.#fieldset.style.height = options.style.height;
             // Расположение
             if (options.style.direction !== undefined) this.#fieldset.style.flexDirection = options.style.direction;
             if (options.style.wrap !== undefined) this.#fieldset.style.flexWrap = options.style.wrap;
