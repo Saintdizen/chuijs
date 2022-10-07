@@ -4,7 +4,7 @@ class FormsPage extends Page {
     constructor() {
         super();
         this.setTitle('Формы');
-        this.setMain(true)
+        this.setMain(false)
         this.setFullWidth()
         this.setFullHeight()
 

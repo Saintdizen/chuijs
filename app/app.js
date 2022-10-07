@@ -1,6 +1,6 @@
 /** RENDERER PROCESS */
 /** IMPORTS */
-const {AppLayout, render, Icons, Notification, Styles} = require('../index');
+const {AppLayout, render, Icons, Notification, Styles, Button} = require('../index');
 
 const {MainPage} = require('./views/_main');
 const {Inputs_Buttons_Page} = require('./views/1_inputs_buttons');
@@ -13,7 +13,7 @@ const {FormsPage} = require('./views/6_forms');
 const {SlidesPage} = require('./views/7_slideshow');
 const {WebViewsPage} = require('./views/8_webviews');
 const {TabsPage} = require('./views/9_tabs');
-const {Button} = require("../framework/components/chui_button");
+const {TgTestPage} = require("./views/10_tg_test");
 
 class App extends AppLayout {
     constructor() {
@@ -35,6 +35,7 @@ class App extends AppLayout {
         this.setRoute(new SlidesPage());
         this.setRoute(new WebViewsPage());
         this.setRoute(new TabsPage());
+        this.setRoute(new TgTestPage());
 
         this.addComponentToAppLayout({
             headerRight: [
