@@ -107,16 +107,22 @@ class Table {
 
     //Функции фильтров
     setFilterByProperty(type = String(), property = String(), filterValue = String()) {
-        if (this.#filtered_data.length !== 0) {
-            this.#filtered_data = [];
-        }
+        this.#filtered_data = [];
         if (type.includes(Table.FILTER_TYPE.CLEAR_MATCH)) {
-            this.#data.filter(data_1 => String(data_1[property]).toLowerCase() === String(filterValue).toLowerCase()).forEach(data_2 => { this.#filtered_data.push(data_2); })
+            if (this.#filtered_data.length !== 0) {
+                this.#filtered_data = this.#filtered_data.filter(data_1 => String(data_1[property]).toLowerCase() === String(filterValue).toLowerCase())
+            } else {
+                this.#filtered_data = this.#data.filter(data_1 => String(data_1[property]).toLowerCase() === String(filterValue).toLowerCase())
+            }
         }
         if (type.includes(Table.FILTER_TYPE.PARTIAL_MATCH)) {
-            this.#data.filter(data_1 => String(data_1[property]).toLowerCase().includes(String(filterValue).toLowerCase())).forEach(data_2 => { this.#filtered_data.push(data_2); })
+            if (this.#filtered_data.length !== 0) {
+                this.#filtered_data = this.#filtered_data.filter(data_1 => String(data_1[property]).toLowerCase().includes(String(filterValue).toLowerCase()))
+            } else {
+                this.#filtered_data = this.#data.filter(data_1 => String(data_1[property]).toLowerCase().includes(String(filterValue).toLowerCase()))
+            }
         }
-        this.#setTable(this.#filtered_data);
+        this.#setTable(this.#filtered_data)
         if (this.#userSelect !== undefined) this.#setUserSelect();
     }
     removeFilterByProperty(property= String(), filterValue = String()) {
