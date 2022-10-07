@@ -49,6 +49,7 @@ const { Form } = require("./framework/components/chui_form");
 const { SlideShow } = require("./framework/components/chui_slideshow");
 const { FieldSet } = require("./framework/components/chui_fieldset");
 const { Popup } = require("./framework/components/chui_popups");
+const {TelegramBot} = require("./framework/components/telegram_bot/chui_telegram_bot");
 
 //VARS
 let isQuiting = false;
@@ -225,5 +226,6 @@ module.exports = {
     Form: Form,
     SlideShow: SlideShow,
     FieldSet: FieldSet,
-    Popup: Popup
+    Popup: Popup,
+    TelegramBot: TelegramBot
 }

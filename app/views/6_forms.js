@@ -1,38 +1,46 @@
-const {Page, TextInput, Form, PasswordInput} = require('../../index');
+const {Page, TextInput, Form, TextArea} = require('../../index');
 
 class FormsPage extends Page {
     constructor() {
         super();
         this.setTitle('Формы');
-        this.setMain(false)
+        this.setMain(true)
         this.setFullWidth()
         this.setFullHeight()
 
-        let login = new TextInput({
-            name: "login",
-            title: "Имя пользователя",
-            placeholder: "Имя пользователя",
+        let bot_token = new TextInput({
+            title: "Ключ бота",
+            placeholder: "Ключ бота",
             width: "400px",
-            required: true,
+            required: false
         });
 
-        let password = new PasswordInput({
-            name: "password",
-            title: 'Пароль',
-            placeholder: 'Пароль',
+
+        let chat_id = new TextInput({
+            name: "chat_id",
+            title: "Номер чата",
+            placeholder: "Номер чата",
+            width: "400px",
+            required: true
+        });
+
+        let message = new TextArea({
+            name: "text",
+            title: 'Сообщение',
+            placeholder: 'Сообщение',
             width: '400px',
             required: true
         });
 
-        let submit = Form.SubmitButton("Отправить \\ Сохранить");
-
         let form = new Form({
             action: "#",
             method: Form.METHOD.GET,
-            components: [ login, password, submit ],
+            components: [ bot_token, chat_id, message, Form.SubmitButton("Отправить") ],
             submitEvent: (e) => {
                 e.preventDefault();
-                //let formData = new FormData(e.target);
+                const request = new XMLHttpRequest();
+                request.open("POST", `https://api.telegram.org/bot${bot_token.getValue()}/sendMessage`);
+                request.send(new FormData(e.target));
             }
         });
 

@@ -4,7 +4,7 @@ class TablesPage extends Page {
     constructor() {
         super();
         this.setTitle('Таблицы');
-        this.setMain(true)
+        this.setMain(false)
 
         let filters = new ContentBlock({
             direction: Styles.DIRECTION.ROW, wrap: Styles.WRAP.WRAP,
