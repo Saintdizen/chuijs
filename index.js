@@ -1,6 +1,7 @@
 // GLOBAL VARS
 globalThis.ctxs = [];
-const { app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell } = require('electron');
+const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell} = require('electron');
+
 //ПОЛЯ ВВОДА
 const { TextInput } = require('./framework/components/chui_inputs/chui_text');
 const { DateInput } = require('./framework/components/chui_inputs/chui_date');
@@ -135,8 +136,8 @@ class Main {
         if (process.platform === "linux") {
             //app.commandLine.hasSwitch("enable-transparent-visuals");
             //app.commandLine.hasSwitch("disable-gpu");
-            app.commandLine.appendSwitch('enable-transparent-visuals');
-            app.disableHardwareAcceleration();
+            //app.commandLine.appendSwitch('enable-transparent-visuals');
+            //app.disableHardwareAcceleration();
         }
         app.whenReady().then(() => {
             process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
