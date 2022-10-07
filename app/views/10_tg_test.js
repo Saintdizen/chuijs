@@ -32,18 +32,22 @@ class TgTestPage extends Page {
         this.add(field_send_message)
         // ===
 
-        // Отправка файла
-        let file = new FileInput({ title: "Файл", width: Styles.SIZE.WEBKIT_FILL })
-        let send_f = new Button({
+        // Отправка файлов
+        // Документ
+        let document = new FileInput({ title: "Документ", width: Styles.SIZE.WEBKIT_FILL })
+        let photo = new FileInput({ title: "Фото", width: Styles.SIZE.WEBKIT_FILL })
+        //
+        let send = new Button({
             title: "Отправить",
             clickEvent: async () => {
                 bot.setToken(bot_token.getValue());
-                let res = await bot.sendPhoto("-1001898771759", file.getFile(0));
-                console.log(res)
+                await bot.sendDocument("-1001898771759", document.getFile(0));
+                await bot.sendPhoto("-1001898771759", photo.getFile(0));
             }
         })
+        //
         let field_send_file = new FieldSet({
-            title: "Отправка файла", components: [file, send_f],
+            title: "Отправка файлов", components: [document, photo, send],
             style: {
                 width: Styles.SIZE.WEBKIT_FILL,
                 direction: Styles.DIRECTION.COLUMN, wrap: Styles.WRAP.NOWRAP,
@@ -55,16 +59,11 @@ class TgTestPage extends Page {
 
         // Получить обновления
         let get_up = new Button({
-            title: "getChat",
+            title: "Получить обновления",
             clickEvent: async () => {
                 bot.setToken(bot_token.getValue());
-                let chat = await bot.getChat("-1001898771759");
-                console.log(chat)
-                let count = await bot.getChatMemberCount("-1001898771759");
-                console.log(count)
-                let adm = await bot.getUserProfilePhotos(723042809);
-                let photo = await bot.getFile(adm.result.photos[0][0].file_id)
-                console.log(photo)
+                let getUpdates = await bot.getUpdates();
+                console.log(getUpdates)
             }
         })
         let field_get_up = new FieldSet({
