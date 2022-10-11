@@ -81,7 +81,10 @@ bot.setToken("token");
 
 // Функции
 async function run() {
-    await bot.getMe()
+    await bot.getMe();
+    await bot.getUpdates();
+    await bot.getChat("id");
+    /* ... */
 }
 ```
 ### Модули
