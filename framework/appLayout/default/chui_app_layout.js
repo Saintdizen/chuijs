@@ -105,6 +105,7 @@ class AppLayout extends Route {
                     "--text_color": "rgb(28, 28, 30)",
                     "--text_color_disabled": "rgba(28, 28, 30, 0.75)",
                     "--header_background": "rgba(229, 229, 234, 0.45)",
+                    "--header_background_dropdown": "rgb(229, 229, 234)",
                     "--center_background": "rgb(242, 242, 247)",
                     "--border_header": "rgba(209, 209, 214, 0.5)",
                     "--blue_prime_background": "rgba(0, 112, 245, 0.85)",
@@ -167,6 +168,7 @@ class AppLayout extends Route {
                     "--text_color": "rgb(242, 242, 247)",
                     "--text_color_disabled": "rgba(242, 242, 247, 0.75)",
                     "--header_background": "rgba(44, 44, 46, 0.45)",
+                    "--header_background_dropdown": "rgb(44, 44, 46)",
                     "--center_background": "rgb(28, 28, 30)",
                     "--border_header": "rgba(58, 58, 60, 0.5)",
                     "--blue_prime_background": "rgba(20, 142, 255, 0.85)",
@@ -289,11 +291,12 @@ class AppLayout extends Route {
                     "display": "flex",
                     "align-items": "center",
                     "box-shadow": "none",
-                    "background": "var(--header_background)",
-                    "backdrop-filter": "saturate(150%) blur(15px)",
+                    "background": "transparent",
+                    //"backdrop-filter": "saturate(150%) blur(15px)",
                     "justify-content": "space-between",
                     "-webkit-app-region": "drag",
                     "z-index": "1000",
+                    "border": "2px solid transparent"
                 }
             },
             {
@@ -302,7 +305,7 @@ class AppLayout extends Route {
                     "width": "-webkit-fill-available",
                     "height": "-webkit-fill-available",
                     "background": "var(--center_background)",
-                    "padding-top": "47px",
+                    "padding-top": "48px",
                     "margin": "0",
                     "overflow": "overlay",
                 }
@@ -333,12 +336,12 @@ class AppLayout extends Route {
                     "align-items": "flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    "border": "1px solid var(--border_header)",
+                    "border": "2px solid var(--border_header)",
                     "backdrop-filter": "saturate(150%) blur(15px)",
                     "-webkit-app-region": "no-drag",
                     "margin": "64px 20px 20px 20px",
                     "border-radius": "var(--border_radius)",
-                    "box-shadow": "var(--shadow_one) 0px 2.5px 7.5px, var(--shadow_two) 0px 5px 10px",
+                    //"box-shadow": "var(--shadow_one) 0px 2.5px 7.5px, var(--shadow_two) 0px 5px 10px",
                 }
             },
             {
@@ -352,12 +355,12 @@ class AppLayout extends Route {
                     "align-items": "flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    "border": "1px solid var(--border_header)",
+                    "border": "2px solid var(--border_header)",
                     "backdrop-filter": "saturate(150%) blur(15px)",
                     "-webkit-app-region": "no-drag",
                     "margin": "64px 20px 20px 20px",
                     "border-radius": "var(--border_radius)",
-                    "box-shadow": "var(--shadow_one) 0px 2.5px 7.5px, var(--shadow_two) 0px 5px 10px",
+                    //"box-shadow": "var(--shadow_one) 0px 2.5px 7.5px, var(--shadow_two) 0px 5px 10px",
                 }
             },
             {
@@ -808,6 +811,8 @@ class AppLayout extends Route {
         center.onscroll = function () {
             if (center.scrollTop > 25) {
                 header.style.background = 'var(--header_background)'
+                header.style.backdropFilter = 'saturate(150%) blur(15px)'
+                header.style.borderBottom = "2px solid var(--border_header)"
             } else {
                 header.removeAttribute('style')
             }
@@ -1070,10 +1075,10 @@ class UserProfile {
                     "margin-top": "44px",
                     "display": "none",
                     "position": "absolute",
-                    "background": "var(--dropdown_background)",
+                    "background": "var(--header_background_dropdown)",
                     "color": "var(--text_color)",
-                    "box-shadow": "var(--shadow_one) 0px 2.5px 7.5px, var(--shadow_two) 0px 5px 10px",
-                    "border": "2px solid var(--input_background)",
+                    //"box-shadow": "var(--shadow_one) 0px 2.5px 7.5px, var(--shadow_two) 0px 5px 10px",
+                    "border": "2px solid var(--border_header)",
                     "border-radius": "var(--border_radius)",
                     "padding": "6px",
                     "z-index": "1",
