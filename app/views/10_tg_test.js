@@ -37,6 +37,13 @@ class TgTestPage extends Page {
             ]
         })
         this.add(field_get_up)
+
+        let field_set_chat_photo = TgTestPage.#fieldSet({
+            title: "Настройки чата", components: [
+                this.#chat_settings()
+            ]
+        })
+        this.add(field_set_chat_photo)
     }
     #send_m() {
         let message = new TextArea({ title: "Сообщение", width: Styles.SIZE.WEBKIT_FILL })
@@ -49,6 +56,49 @@ class TgTestPage extends Page {
             }
         })
         return [message, send_m]
+    }
+    #chat_settings() {
+        let title = new TextInput({ title: "Заголовок", width: Styles.SIZE.WEBKIT_FILL })
+        let button_1 = new Button({
+            title: "Установить заголовок",
+            clickEvent: async () => {
+                this.#bot.setToken(this.#bot_token.getValue());
+                await this.#bot.setChatTitle(this.#chat_id.getValue(), title.getValue());
+            }
+        })
+        let description = new TextInput({ title: "Описание", width: Styles.SIZE.WEBKIT_FILL })
+        let button_2 = new Button({
+            title: "Установить описание",
+            clickEvent: async () => {
+                this.#bot.setToken(this.#bot_token.getValue());
+                await this.#bot.setChatDescription(this.#chat_id.getValue(), description.getValue());
+            }
+        })
+        let fileInput = new FileInput({ title: "Фото", width: Styles.SIZE.WEBKIT_FILL })
+        let button_3 = new Button({
+            title: "Установить фото",
+            clickEvent: async () => {
+                this.#bot.setToken(this.#bot_token.getValue());
+                await this.#bot.setChatPhoto(this.#chat_id.getValue(), fileInput.getFile(0));
+            }
+        })
+        let button_4 = new Button({
+            title: "Удалить фото",
+            clickEvent: async () => {
+                this.#bot.setToken(this.#bot_token.getValue());
+                await this.#bot.deleteChatPhoto(this.#chat_id.getValue());
+            }
+        })
+        let contentBlock = new ContentBlock({
+            direction: Styles.DIRECTION.COLUMN, wrap: Styles.WRAP.NOWRAP,
+            align: Styles.ALIGN.CENTER, justify: Styles.JUSTIFY.CENTER
+        })
+        contentBlock.add(
+            title, button_1,
+            description, button_2,
+            fileInput, button_3, button_4
+        )
+        return contentBlock;
     }
     #gets(name) {
         return new Button({

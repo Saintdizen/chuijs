@@ -57,6 +57,17 @@ class TelegramBot {
             "description": description
         })
     }
+    async setChatPhoto(chat_id = String(), path = String()) {
+        return await this.#sendRequestFormData("POST", "setChatPhoto", {
+            "chat_id": chat_id,
+            "photo": path
+        })
+    }
+    async deleteChatPhoto(chat_id = String()) {
+        return await this.#sendRequestFormData("POST", "deleteChatPhoto", {
+            "chat_id": chat_id
+        })
+    }
     // FUNC
     async forwardMessage(chat_id = String(), from_chat_id = String(), message_id = Number()) {
         return await this.#sendRequestFormData("POST", "forwardMessage", {

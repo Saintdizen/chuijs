@@ -73,8 +73,19 @@ main.start({
     ]
 })
 ```
+#### TelegramBot API
+```javascript
+const { TelegramBot } = require('chuijs');
+let bot = new TelegramBot("token");
+bot.setToken("token");
+
+// Функции
+async function run() {
+    await bot.getMe()
+}
+```
 ### Модули
-Themes (Dark|Light), Route, Page, ElectronTray
+Themes (Dark|Light), Route, Page, ElectronTray, TelegramBot API
 ### Компоненты
 AppLayout, DateInput, NumberInput, EmailInput, TextArea,
 PasswordInput, FileInput, H1, H2, H3, H4, H5, H6, Label, 
