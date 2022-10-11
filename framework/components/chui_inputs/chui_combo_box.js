@@ -40,7 +40,7 @@ class ComboBox {
                     "border-radius": "var(--border_radius)",
                     "padding": "0px",
                     "font-size": "var(--font_default_size)",
-                    "border": "2px solid var(--input_background)",
+                    "border": "2px solid var(--border_main)",
                     "background": "var(--input_background)",
                 }
             },
@@ -67,11 +67,10 @@ class ComboBox {
                     "margin-top": "36px",
                     "padding": "6px",
                     "font-size": "12pt",
-                    "border": "2px solid var(--input_background)",
+                    "border": "2px solid var(--border_main)",
                     "flex-direction": "column",
                     "z-index": "1",
                     "width": "-webkit-fill-available",
-                    "box-shadow": "var(--shadow_one) 0px 2.5px 7.5px, var(--shadow_two) 0px 5px 10px"
                 }
             },
             {
@@ -118,7 +117,7 @@ class ComboBox {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "2px dashed var(--input_background)"
+                    "border": "2px dashed var(--border_main)"
                 }
             },
             {
@@ -126,7 +125,6 @@ class ComboBox {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "box-shadow": "none",
                     "color": "var(--text_color_disabled)",
                     "text-align": "start",
                     "line-height":"1",

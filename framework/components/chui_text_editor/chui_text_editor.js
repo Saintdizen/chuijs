@@ -35,7 +35,7 @@ class TextEditor {
                     "display": "flex",
                     "flex-direction": "column",
                     "background": "var(--input_background)",
-                    "border": "2px solid var(--input_background)",
+                    "border": "2px solid var(--border_main)",
                     "height": `${height}`,
                     "width": "-webkit-fill-available",
                 }

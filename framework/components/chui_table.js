@@ -31,7 +31,7 @@ class Table {
             {
                 name: "table",
                 style: {
-                    "border": "2px solid var(--input_background)",
+                    "border": "2px solid var(--border_main)",
                     "border-radius": "var(--border_radius)",
                     "margin": "var(--margin)",
                     "display": "grid",

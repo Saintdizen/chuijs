@@ -64,8 +64,7 @@ class DateInput {
                     "position":"absolute",
                     "top": "-2px",
                     "left": "-2px",
-                    "z-index": "1",
-                    "box-shadow": "var(--shadow_one) 0px 2.5px 7.5px, var(--shadow_two) 0px 5px 10px"
+                    "z-index": "1"
                 }
             },
             {
@@ -114,7 +113,7 @@ class DateInput {
                     "font-size": "12pt",
                     "background": "var(--input_background)",
                     "color": "var(--text_color)",
-                    "border": "2px solid var(--input_background)",
+                    "border": "2px solid var(--border_main)",
                     "position": "relative",
                     "display": "flex",
                 }
@@ -128,7 +127,6 @@ class DateInput {
                     "margin": "0px",
                     "padding": "5px 0px",
                     "background": "transparent",
-                    "box-shadow": "none",
                     "color": "var(--text_color)",
                     "border": "0",
                     "font-size": "12pt",
@@ -152,7 +150,7 @@ class DateInput {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "2px dashed var(--input_background)"
+                    "border": "2px dashed var(--border_main)"
                 }
             },
             {
@@ -179,7 +177,6 @@ class DateInput {
                     "margin": "0px",
                     "padding": "5px 0px",
                     "background": "transparent",
-                    "box-shadow": "none",
                     "border": "0",
                     "font-size": "12pt",
                 }

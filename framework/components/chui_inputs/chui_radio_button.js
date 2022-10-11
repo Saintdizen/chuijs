@@ -53,7 +53,7 @@ class RadioButton {
                     "justify-content":"center",
                     "color":"transparent",
                     "background-color": "var(--input_background)",
-                    "border": "2px solid var(--input_background)",
+                    "border": "2px solid var(--border_main)",
                 }
             },
             {
@@ -95,7 +95,7 @@ class RadioButton {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "2px dashed var(--input_background)",
+                    "border": "2px dashed var(--border_main)",
                 }
             },
             {
@@ -103,7 +103,7 @@ class RadioButton {
                 style: {
                     "cursor": "not-allowed",
                     "background": "radial-gradient(circle, var(--text_color_disabled) 30%, rgba(242,242,247,0) 42%)",
-                    "border": "2px dashed var(--input_background)"
+                    "border": "2px dashed var(--border_main)"
                 }
             },
         ], 'chUiJS_RadioButton');

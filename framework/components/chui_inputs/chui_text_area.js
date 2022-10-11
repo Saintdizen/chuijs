@@ -45,7 +45,7 @@ class TextArea {
                     "font-size": "12pt",
                     "background": "var(--input_background)",
                     "color": "var(--text_color)",
-                    "border": "2px solid var(--input_background)",
+                    "border": "2px solid var(--border_main)",
                     "box-sizing": "border-box",
                 }
             },
@@ -73,7 +73,7 @@ class TextArea {
                     "font-size": "12pt",
                     "background": "transparent",
                     "color": "var(--text_color_disabled)",
-                    "border": "2px dashed var(--input_background)",
+                    "border": "2px dashed var(--border_main)",
                     "box-sizing": "border-box",
                 }
             },

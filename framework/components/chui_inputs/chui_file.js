@@ -76,7 +76,6 @@ class FileInput {
                     "margin": "0px",
                     "padding": "0px",
                     "background": "transparent",
-                    "box-shadow": "none",
                     "color": "var(--text_color_disabled)",
                     "text-align": "start",
                     "border": "0",
@@ -104,7 +103,6 @@ class FileInput {
                     "margin": "0px",
                     "padding": "0px",
                     "background": "transparent",
-                    "box-shadow": "none",
                     "color": "var(--text_color)",
                     "border": "0",
                     "font-size": "12pt",
@@ -157,7 +155,7 @@ class FileInput {
                     "cursor": "not-allowed",
                     "background": "var(--button_background_disabled)",
                     "color": "var(--text_color_disabled)",
-                    "border": "2px dashed var(--input_background)",
+                    "border": "2px dashed var(--border_main)",
                 }
             },
             {
@@ -165,7 +163,7 @@ class FileInput {
                 style: {
                     "background": "var(--button_background_disabled)",
                     "color": "var(--text_color_disabled)",
-                    "border": "2px dashed var(--input_background)"
+                    "border": "2px dashed var(--border_main)"
                 }
             },
         ], 'chUiJS_fileInput');

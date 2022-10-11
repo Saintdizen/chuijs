@@ -16,7 +16,6 @@ class ContextMenu {
                     "margin": "5px",
                     "font-size": "12px",
                     "padding": "5px",
-                    "box-shadow": "var(--shadow_one) 0px 0px 2px 0px",
                     "background": "var(--notification_background)",
                     "color": "var(--text_color)",
                     "animation-duration": ".3s",

@@ -36,7 +36,7 @@ class NumberInput {
                     "margin": "0px",
                     "border-radius": "var(--border_radius)",
                     "background": "var(--input_background)",
-                    "border": "2px solid var(--input_background)",
+                    "border": "2px solid var(--border_main)",
                     "align-items": "center",
                     "position": "relative",
                     "padding": "6px 43px"
@@ -69,7 +69,6 @@ class NumberInput {
                     "margin": "0px",
                     "padding": "0px",
                     "background": "transparent",
-                    "box-shadow": "none",
                     "color": "var(--text_color)",
                     "text-align": "center",
                     "border": "0",
@@ -94,7 +93,7 @@ class NumberInput {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "2px dashed var(--input_background)"
+                    "border": "2px dashed var(--border_main)"
                 }
             },
             {
@@ -118,7 +117,6 @@ class NumberInput {
                     "margin": "0px",
                     "padding": "0px",
                     "background": "transparent",
-                    "box-shadow": "none",
                     "color": "var(--text_color_disabled)",
                     "text-align": "center",
                     "border": "0",

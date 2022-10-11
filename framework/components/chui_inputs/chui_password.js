@@ -40,7 +40,7 @@ class PasswordInput {
                     "font-size": "12pt",
                     "background": "var(--input_background)",
                     "color": "var(--text_color)",
-                    "border": "2px solid var(--input_background)",
+                    "border": "2px solid var(--border_main)",
                     "position": "relative",
                     "padding": "6px 43px 6px 10px",
                 }
@@ -52,7 +52,6 @@ class PasswordInput {
                     "margin": "0px",
                     "padding": "0px",
                     "background": "transparent",
-                    "box-shadow": "none",
                     "color": "var(--text_color)",
                     "text-align": "start",
                     "border": "0",
@@ -112,7 +111,7 @@ class PasswordInput {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "2px dashed var(--input_background)"
+                    "border": "2px dashed var(--border_main)"
                 }
             },
             {
@@ -136,7 +135,6 @@ class PasswordInput {
                     "margin": "0px",
                     "padding": "0px",
                     "background": "transparent",
-                    "box-shadow": "none",
                     "color": "var(--text_color_disabled)",
                     "text-align": "start",
                     "border": "0",

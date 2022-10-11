@@ -31,7 +31,7 @@ class FieldSet {
                 style: {
                     "height": "-webkit-fill-available",
                     "width": "-webkit-fill-available",
-                    "border": "2px dashed var(--input_background)",
+                    "border": "2px dashed var(--border_main)",
                     "border-radius": "var(--border_radius)",
                     "padding": "0px 8px 8px 8px",
                     "display": "flex",
@@ -46,7 +46,7 @@ class FieldSet {
                     "font-size": "10pt",
                     "font-weight":"500",
                     "line-height":"1",
-                    "border": "2px dashed var(--input_background)",
+                    "border": "2px dashed var(--border_main)",
                     "border-radius": "var(--border_radius)",
                 }
             }

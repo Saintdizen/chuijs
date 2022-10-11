@@ -155,7 +155,6 @@ class TextEditorSelects {
                     "margin": "0px",
                     "padding": "9px 0px 9px 9px",
                     "background": "transparent",
-                    "box-shadow": "none",
                     "color": "var(--text_color)",
                     "text-align": "start",
                     "border": "none",
@@ -171,7 +170,6 @@ class TextEditorSelects {
                     "margin": "0px",
                     "padding": "9px 0px 9px 9px",
                     "background": "transparent",
-                    "box-shadow": "none",
                     "color": "var(--text_color)",
                     "text-align": "start",
                     "border": "none",
@@ -195,7 +193,6 @@ class TextEditorSelects {
                     "font-size": "var(--font_default_size)",
                     "flex-direction": "column",
                     "z-index": "1",
-                    "box-shadow": "var(--shadow_one) 0px 2.5px 7.5px, var(--shadow_two) 0px 5px 10px"
                 }
             },
             {

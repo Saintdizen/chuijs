@@ -54,9 +54,9 @@ class CheckBox {
                     "align-items":"center",
                     "justify-content":"center",
                     "color":"transparent",
-                    "background-color": "var(--input_background)",
+                    "background": "var(--input_background)",
                     "font-family": "chui_Inter",
-                    "border": "2px solid var(--input_background)",
+                    "border": "2px solid var(--border_main)",
                 }
             },
             {
@@ -68,7 +68,7 @@ class CheckBox {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "2px dashed var(--input_background)",
+                    "border": "2px dashed var(--border_main)",
                 }
             },
             {
@@ -76,7 +76,7 @@ class CheckBox {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "2px dashed var(--input_background)",
+                    "border": "2px dashed var(--border_main)",
                     "color": "var(--text_color_disabled)",
                 }
             },

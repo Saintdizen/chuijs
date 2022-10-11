@@ -42,7 +42,7 @@ class TextInput {
                     "border-radius": "var(--border_radius)",
                     "background": "var(--input_background)",
                     "color": "var(--text_color)",
-                    "border": "2px solid var(--input_background)",
+                    "border": "2px solid var(--border_main)",
                     "align-items": "center",
                     "position": "relative",
                     "padding": "6px 10px",
@@ -55,7 +55,6 @@ class TextInput {
                     "margin": "0px",
                     "padding": "0px",
                     "background": "transparent",
-                    "box-shadow": "none",
                     "color": "var(--text_color)",
                     "text-align": "start",
                     "border": "0",
@@ -100,7 +99,7 @@ class TextInput {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "2px dashed var(--input_background)"
+                    "border": "2px dashed var(--border_main)"
                 }
             },
             {
@@ -111,7 +110,6 @@ class TextInput {
                     "margin": "0px",
                     "padding": "0px",
                     "background": "transparent",
-                    "box-shadow": "none",
                     "color": "var(--text_color_disabled)",
                     "text-align": "start",
                     "border": "0",

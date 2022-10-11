@@ -79,16 +79,15 @@ class Button {
                     "cursor": "not-allowed",
                     "background": "var(--button_background_disabled)",
                     "color": "var(--text_color_disabled)",
-                    "border": "2px dashed var(--input_background)",
+                    "border": "2px dashed var(--border_main)",
                 }
             },
             {
                 name: "button:disabled:hover",
                 style: {
-                    "box-shadow": "none",
                     "background": "var(--button_background_disabled)",
                     "color": "var(--text_color_disabled)",
-                    "border": "2px dashed var(--input_background)"
+                    "border": "2px dashed var(--border_main)"
                 }
             },
             {

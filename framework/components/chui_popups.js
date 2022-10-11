@@ -30,8 +30,7 @@ class Popup {
                     "display": "flex",
                     "flex-direction": "column",
                     "border-radius": "var(--border_radius)",
-                    "box-shadow": "var(--shadow_one) 0px 2.5px 7.5px, var(--shadow_two) 0px 5px 10px",
-                    "border": "2px solid var(--modal_border)",
+                    "border": "2px solid var(--border_main)",
                     "color": "var(--text_color)",
                     "background": "var(--modal_background)"
                 }

@@ -44,7 +44,7 @@ class Select {
                     "font-size": "var(--font_default_size)",
                     "background": "var(--input_background)",
                     "color": "var(--text_color)",
-                    "border": "2px solid var(--input_background)",
+                    "border": "2px solid var(--border_main)",
                 }
             },
             {
@@ -57,7 +57,6 @@ class Select {
                     "margin": "0px",
                     "padding": "6px 0px 6px 10px",
                     "background": "transparent",
-                    "box-shadow": "none",
                     "color": "var(--text_color)",
                     "text-align": "start",
                     "border": "none",
@@ -76,14 +75,13 @@ class Select {
                     "height": "max-content",
                     "width": "-webkit-fill-available",
                     "border-radius": "var(--border_radius)",
-                    "margin-top": "-2px",
-                    "margin-left": "-2px",
+                    "margin-top": "0px",
+                    "margin-left": "0px",
                     "padding": "6px",
                     "font-size": "var(--font_default_size)",
-                    "border": "2px solid var(--input_background)",
+                    "border": "2px solid var(--border_main)",
                     "flex-direction": "column",
                     "z-index": "1",
-                    "box-shadow": "var(--shadow_one) 0px 2.5px 7.5px, var(--shadow_two) 0px 5px 10px"
                 }
             },
             {
@@ -129,7 +127,7 @@ class Select {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "2px dashed var(--input_background)"
+                    "border": "2px dashed var(--border_main)"
                 }
             },
             {
@@ -140,7 +138,6 @@ class Select {
                     "margin": "0px",
                     "padding": "6px 0px 6px 10px",
                     "background": "transparent",
-                    "box-shadow": "none",
                     "color": "var(--text_color_disabled)",
                     "text-align": "start",
                     "border": "none",
