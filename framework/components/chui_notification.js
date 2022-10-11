@@ -31,7 +31,7 @@ class Notification {
                     "font-size": "12pt",
                     "padding": "6px 10px",
                     "background": "var(--badge_cancel_back)",
-                    "backdrop-filter": "blur(8px)",
+                    "backdrop-filter": "saturate(150%) blur(15px)",
                     "box-shadow": "var(--shadow_one) 0px 2.5px 7.5px, var(--shadow_two) 0px 5px 10px"
                 }
             },

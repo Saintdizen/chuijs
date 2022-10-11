@@ -104,7 +104,7 @@ class AppLayout extends Route {
                     //Глобальные цвета
                     "--text_color": "rgb(28, 28, 30)",
                     "--text_color_disabled": "rgba(28, 28, 30, 0.75)",
-                    "--header_background": "rgba(229, 229, 234, 0.58)",
+                    "--header_background": "rgba(229, 229, 234, 0.45)",
                     "--center_background": "rgb(242, 242, 247)",
                     "--border_header": "rgba(209, 209, 214, 0.5)",
                     "--blue_prime_background": "rgba(0, 112, 245, 0.85)",
@@ -117,7 +117,7 @@ class AppLayout extends Route {
                     "--button_box_shadow_normal": "0px 0px 1px 2px var(--input_background)",
                     "--button_box_shadow_focus": "0px 0px 1px 2px var(--blue_prime_background)",
                     //Боковое меню
-                    "--app_menu_background": "rgba(229, 229, 234, 0.58)",
+                    "--app_menu_background": "rgba(229, 229, 234, 0.45)",
                     //Диалоговое окно
                     "--modal_overlay": "rgba(0, 0, 0, 0.5)",
                     "--modal_background": "rgb(242, 242, 247)",
@@ -166,7 +166,7 @@ class AppLayout extends Route {
                     //Глобальные цвета
                     "--text_color": "rgb(242, 242, 247)",
                     "--text_color_disabled": "rgba(242, 242, 247, 0.75)",
-                    "--header_background": "rgba(44, 44, 46, 0.58)",
+                    "--header_background": "rgba(44, 44, 46, 0.45)",
                     "--center_background": "rgb(28, 28, 30)",
                     "--border_header": "rgba(58, 58, 60, 0.5)",
                     "--blue_prime_background": "rgba(20, 142, 255, 0.85)",
@@ -178,7 +178,7 @@ class AppLayout extends Route {
                     "--button_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
                     "--button_box_shadow_focus": "0px 0px 1px 2px var(--blue_prime_background)",
                     //Боковое меню
-                    "--app_menu_background": "rgba(44, 44, 46, 0.58)",
+                    "--app_menu_background": "rgba(44, 44, 46, 0.45)",
                     //Диалоговое окно
                     "--modal_overlay": "rgba(0, 0, 0, 0.5)",
                     "--modal_background": "rgb(28, 28, 30)",
@@ -289,8 +289,8 @@ class AppLayout extends Route {
                     "display": "flex",
                     "align-items": "center",
                     "box-shadow": "none",
-                    "background": "transparent",
-                    "backdrop-filter": "blur(10px)",
+                    "background": "var(--header_background)",
+                    "backdrop-filter": "saturate(150%) blur(15px)",
                     "justify-content": "space-between",
                     "-webkit-app-region": "drag",
                     "z-index": "1000",
@@ -334,7 +334,7 @@ class AppLayout extends Route {
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
                     "border": "1px solid var(--border_header)",
-                    "backdrop-filter": "blur(10px)",
+                    "backdrop-filter": "saturate(150%) blur(15px)",
                     "-webkit-app-region": "no-drag",
                     "margin": "64px 20px 20px 20px",
                     "border-radius": "var(--border_radius)",
@@ -353,7 +353,7 @@ class AppLayout extends Route {
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
                     "border": "1px solid var(--border_header)",
-                    "backdrop-filter": "blur(10px)",
+                    "backdrop-filter": "saturate(150%) blur(15px)",
                     "-webkit-app-region": "no-drag",
                     "margin": "64px 20px 20px 20px",
                     "border-radius": "var(--border_radius)",
