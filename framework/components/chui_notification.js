@@ -33,6 +33,7 @@ class Notification {
                     "background": "var(--badge_cancel_back)",
                     "backdrop-filter": "saturate(150%) blur(15px)",
                     "border": "2px solid var(--badge_cancel_back)",
+                    "z-index": "1002"
                 }
             },
             {

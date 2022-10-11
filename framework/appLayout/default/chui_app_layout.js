@@ -107,7 +107,7 @@ class AppLayout extends Route {
                     "--header_background": "rgba(229, 229, 234, 0.45)",
                     "--header_background_dropdown": "rgb(229, 229, 234)",
                     "--center_background": "rgb(242, 242, 247)",
-                    "--border_main": "rgba(209, 209, 214)",
+                    "--border_main": "rgba(209, 209, 214, 0.85)",
                     "--blue_prime_background": "rgba(0, 112, 245, 0.85)",
                     "--red_prime_background": "rgba(255, 59, 48, 0.85)",
                     "--blue_prime_background_trans": "rgba(0, 112, 245, 0.4)",
@@ -169,7 +169,7 @@ class AppLayout extends Route {
                     "--header_background": "rgba(44, 44, 46, 0.45)",
                     "--header_background_dropdown": "rgb(44, 44, 46)",
                     "--center_background": "rgb(28, 28, 30)",
-                    "--border_main": "rgba(58, 58, 60)",
+                    "--border_main": "rgba(58, 58, 60, 0.85)",
                     "--blue_prime_background": "rgba(20, 142, 255, 0.85)",
                     "--red_prime_background": "rgba(255, 69, 58, 0.85)",
                     //Кнопка
@@ -318,7 +318,7 @@ class AppLayout extends Route {
                     "margin": "var(--margin)",
                     "align-items": "flex-end",
                     "justify-content": "flex-end",
-                    "z-index": "999",
+                    "z-index": "1001",
                     "-webkit-app-region": "no-drag"
                 }
             },
@@ -807,7 +807,7 @@ class AppLayout extends Route {
             if (center.scrollTop > 25) {
                 header.style.background = 'var(--header_background)'
                 header.style.backdropFilter = 'saturate(150%) blur(15px)'
-                header.style.borderBottom = "2px solid var(--border_header)"
+                header.style.borderBottom = "2px solid var(--border_main)"
             } else {
                 header.removeAttribute('style')
             }

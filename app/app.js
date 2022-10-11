@@ -86,7 +86,13 @@ class App extends AppLayout {
                         components: [
                             new Button({
                                 title: "КНОПКА",
-                                icon: Icons.MAPS.MAP
+                                icon: Icons.MAPS.MAP,
+                                clickEvent: () => {
+                                    new Notification({
+                                        title: "Заголовок", text: "Текст",
+                                        style: Notification.STYLE.WARNING, showTime: 1000
+                                    }).show()
+                                }
                             })
                         ]
                     }

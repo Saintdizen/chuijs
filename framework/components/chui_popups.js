@@ -18,7 +18,8 @@ class Popup {
                     "overflow": "auto",
                     "background-color": "var(--modal_overlay)",
                     "padding": "0px",
-                    "border": "none"
+                    "border": "none",
+                    "backdrop-filter": "saturate(150%) blur(15px)"
                 }
             },
             {
