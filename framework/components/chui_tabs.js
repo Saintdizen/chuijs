@@ -8,9 +8,7 @@ class Tab {
         this.#tab.appendChild(this.#active)
     }
     addContent(...contents) {
-        for (let content of contents) {
-            this.#tab_content.push(content);
-        }
+        for (let content of contents) this.#tab_content.push(content);
     }
     getTab() {
         return this.#tab;
@@ -26,7 +24,6 @@ class Tab {
     }
 }
 let {Animation} = require('../modules/chui_animations');
-const buffer = require("buffer");
 
 class Tabs {
     #tabzz = undefined;
@@ -41,9 +38,7 @@ class Tabs {
         default: Number(undefined),
         tabs: []
     }) {
-        if (options.tabsJustify === undefined) {
-            options.tabsJustify = 'flex-start'
-        }
+        if (options.tabsJustify === undefined) options.tabsJustify = 'flex-start';
         require('../modules/chui_functions').style_parse([
             {
                 name: "list",
@@ -116,36 +111,27 @@ class Tabs {
                     event.target.style.color = 'var(--blue_prime_background)';
                     let contentz = document.getElementById(this.#id_contents);
                     contentz.innerHTML = '';
-                    for (let con of item.getContent()) {
-                        this.#content.appendChild(con.set())
-                    }
+                    for (let con of item.getContent()) this.#content.appendChild(con.set());
                     new Animation(this.#content).fadeIn();
-                    this.#content.addEventListener('animationend', () => {
-                        this.#content.removeAttribute('style');
-                    });
+                    this.#content.addEventListener('animationend', () => this.#content.removeAttribute('style'));
                 }
             })
             this.#list.appendChild(item.set());
         }    
         this.#tabs.appendChild(this.#list);
         this.#tabs.appendChild(this.#content);
-
         if (options.default !== undefined) {
             this.#setDefault(options.default)
         } else {
             this.#setDefault(0)
         }
-        if (options.width !== undefined) {
-            this.#tabs.style.width = options.width;
-        }
+        if (options.width !== undefined) this.#tabs.style.width = options.width;
     }
     #setDefault(num) {
         for (let con of this.#tabzz[num].getContent()) {
             this.#content.appendChild(con.set())
             new Animation(this.#content).fadeIn();
-            this.#content.addEventListener('animationend', () => {
-                this.#content.removeAttribute('style');
-            });
+            this.#content.addEventListener('animationend', () => this.#content.removeAttribute('style'));
         }
         this.#tabzz[num].getActive().style.background = 'var(--blue_prime_background)';
         this.#tabzz[num].getTab().style.color = 'var(--blue_prime_background)';
