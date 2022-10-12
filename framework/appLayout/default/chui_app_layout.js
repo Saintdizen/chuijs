@@ -500,7 +500,8 @@ class AppLayout extends Route {
                     "padding": "6px",
                     "width": "-webkit-fill-available",
                     "height": "max-content",
-                    "justify-content": "center"
+                    "justify-content": "center",
+                    "align-items": "center"
                 }
             },
             {
@@ -755,15 +756,24 @@ class AppLayout extends Route {
             }
             store.set("dark", e.target.checked)
         })
+        let icon_light = new Icon(Icons.DEVICE.LIGHT_MODE, "20px", "").set();
+        icon_light.style.marginRight = "6px";
+        let icon_dark = new Icon(Icons.DEVICE.DARK_MODE, "20px", "").set();
+        icon_dark.style.marginLeft = "6px";
 
+
+        this.#dark_mode.appendChild(icon_light)
         this.#dark_mode.appendChild(this.#dark_mode_togle.set())
+        this.#dark_mode.appendChild(icon_dark)
         this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
 
         this.#menu_button.addEventListener("click", () => {
             if (this.#menu_button.classList.contains("app_menu_button_active")) {
                 this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
+                this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
             } else {
                 this.#app_menu.style.transform = `translateX(${this.#def_menu_block_width_test}px)`;
+                this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU_OPEN).getHTML();
             }
             this.#menu_button.classList.toggle("app_menu_button_active")
         })
@@ -781,6 +791,7 @@ class AppLayout extends Route {
             if (e.target !== this.#menu_button) {
                 this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
                 this.#menu_button.classList.remove("app_menu_button_active")
+                this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
             }
             if (e.target !== this.#notification_button) {
                 this.#notification_box.style.transform = `translateX(${this.#notification_box_width}px)`;
@@ -792,7 +803,7 @@ class AppLayout extends Route {
                 if (this.#app_menu.style.transform === `translateX(${this.#def_menu_block_width_test}px)`) {
                     this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width_test}px)`;
                     this.#menu_button.classList.toggle("app_menu_button_active")
-                    //this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
+                    this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
                 }
             }
             if (!this.#notification_box.contains(e.target)) {
