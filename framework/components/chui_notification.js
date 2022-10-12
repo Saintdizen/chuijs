@@ -153,21 +153,21 @@ class Notification {
         document.getElementsByTagName('notification_panel')[0].appendChild(this.#notification);
         let notification = document.getElementById(this.#id);
 
-        new Animation(notification).scaleIn();
+        new Animation(notification).slideRightIn();
         notification.addEventListener('animationend', () => {
             setTimeout(() => {
-                new Animation(notification).scaleOutAndRemove();
+                new Animation(notification).slideRightOutAndRemove();
                 notification.addEventListener("animationend", () => {
                     notification.removeAttribute("style");
                     notification.style.display = 'flex';
                     notification.style.width = '-webkit-fill-available';
                     notification.style.opacity = "0"
-                    notification.style.transform = "scale(0)"
+                    notification.style.transform = "translateX(100%)"
                     let box = document.getElementById("chui_notification_box");
                     box.appendChild(notification)
                     setTimeout(() => {
                         notification.style.opacity = "1"
-                        notification.style.transform = "scale(1)"
+                        notification.style.transform = "translateX(0)"
                     }, 300)
                 })
             }, this.#time);

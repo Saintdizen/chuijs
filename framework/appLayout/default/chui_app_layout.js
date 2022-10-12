@@ -7,7 +7,6 @@ const Store = require('electron-store');
 const {Dialog} = require("../../components/chui_modal");
 const {Label} = require("../../components/chui_label");
 const {ContentBlock} = require("../../components/chui_content_block");
-const {Styles} = require("../../../index");
 const remote = require('electron').remote;
 const store = new Store();
 //
@@ -298,7 +297,7 @@ class AppLayout extends Route {
                     "background": "var(--center_background)",
                     "padding-top": "48px",
                     "margin": "0",
-                    "overflow": "overlay",
+                    "overflow": "auto",
                 }
             },
             {
@@ -386,7 +385,7 @@ class AppLayout extends Route {
                 style: {
                     "display": "flex",
                     "flex-direction": "column",
-                    "overflow": "auto",
+                    "overflow": "hidden auto",
                     "height": "-webkit-fill-available",
                     "width": "-webkit-fill-available",
                     "padding": "0px 6px 6px 6px",
@@ -711,7 +710,7 @@ class AppLayout extends Route {
             clickEvent: async () => {
                 let box = document.getElementById("chui_notification_box");
                 for (let child of box.children) {
-                    child.style.transform = "scale(0)"
+                    child.style.transform = "translateX(100%)"
                     child.style.opacity = "0"
                     setTimeout(async () => {
                         await child.remove()
