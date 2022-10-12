@@ -110,9 +110,9 @@ class AppLayout extends Route {
                     "--border_main": "rgba(209, 209, 214, 0.85)",
                     "--blue_prime_background": "rgba(0, 112, 245, 0.85)",
                     "--red_prime_background": "rgba(255, 59, 48, 0.85)",
-                    "--blue_prime_background_trans": "rgba(0, 112, 245, 0.4)",
+                    "--blue_prime_background_trans": "rgba(0, 112, 245, 0.45)",
                     //Кнопка
-                    "--button_background": "rgba(209, 209, 214, 0.5)",
+                    "--button_background": "rgba(209, 209, 214, 0.45)",
                     "--button_background_disabled": "rgba(209, 209, 214, 0.15)",
                     "--button_text_color": "rgb(0, 112, 245)",
                     "--button_box_shadow_normal": "0px 0px 1px 2px var(--input_background)",
@@ -120,10 +120,10 @@ class AppLayout extends Route {
                     //Боковое меню
                     "--app_menu_background": "rgba(229, 229, 234, 0.45)",
                     //Диалоговое окно
-                    "--modal_overlay": "rgba(0, 0, 0, 0.5)",
+                    "--modal_overlay": "rgba(0, 0, 0, 0.45)",
                     "--modal_background": "rgb(242, 242, 247)",
                     //Поля ввода
-                    "--input_background": "rgba(209, 209, 214, 0.5)",
+                    "--input_background": "rgba(209, 209, 214, 0.45)",
                     "--input_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
                     "--input_box_shadow_focus": "0px 0px 1px 2px var(--blue_prime_background)",
                     "--dropdown_background": "rgb(229, 229, 234)",
@@ -137,12 +137,9 @@ class AppLayout extends Route {
                     "--badge_warning_back": "rgba(255, 204, 0, 0.45)",
                     "--badge_warning_text": "rgba(146, 81, 0, 1)",
                     // Полоса состояния
-                    "--progress_bar_back": "rgba(209, 209, 214, 0.5)",
+                    "--progress_bar_back": "rgba(209, 209, 214, 0.45)",
                     // Уведомления
-                    "--notification_background": "rgba(229, 229, 234, 0.55)",
-                    // Тени
-                    "--shadow_one": "rgba(0, 0, 0, 0.3)",
-                    "--shadow_two": "rgba(0, 0, 0, 0.22)",
+                    "--notification_background": "rgba(229, 229, 234, 0.45)",
                     //Остальное
                     "--text_color_hover": "rgb(242, 242, 247)",
                     "--disable_color": "#e9ecef",
@@ -173,7 +170,7 @@ class AppLayout extends Route {
                     "--blue_prime_background": "rgba(20, 142, 255, 0.85)",
                     "--red_prime_background": "rgba(255, 69, 58, 0.85)",
                     //Кнопка
-                    "--button_background": "rgba(58, 58, 60, 0.5)",
+                    "--button_background": "rgba(58, 58, 60, 0.45)",
                     "--button_background_disabled": "rgba(58, 58, 60, 0.15)",
                     "--button_text_color": "rgb(20, 142, 255)",
                     "--button_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
@@ -181,10 +178,10 @@ class AppLayout extends Route {
                     //Боковое меню
                     "--app_menu_background": "rgba(44, 44, 46, 0.45)",
                     //Диалоговое окно
-                    "--modal_overlay": "rgba(0, 0, 0, 0.5)",
+                    "--modal_overlay": "rgba(0, 0, 0, 0.45)",
                     "--modal_background": "rgb(28, 28, 30)",
                     //Поля ввода
-                    "--input_background": "rgba(58, 58, 60, 0.5)",
+                    "--input_background": "rgba(58, 58, 60, 0.45)",
                     "--input_box_shadow_normal": "0px 0px 1px 2px var(--input_background)",
                     "--input_box_shadow_focus": "0px 0px 1px 2px var(--blue_prime_background)",
                     "--dropdown_background": "rgb(44, 44, 46)",
@@ -198,12 +195,9 @@ class AppLayout extends Route {
                     "--badge_warning_back": "rgba(255, 214, 10, 0.45)",
                     "--badge_warning_text": "rgba(255, 212, 38, 1)",
                     // Полоса состояния
-                    "--progress_bar_back": "rgba(58, 58, 60, 0.5)",
+                    "--progress_bar_back": "rgba(58, 58, 60, 0.45)",
                     // Уведомления
-                    "--notification_background": "rgba(44, 44, 46, 0.55)",
-                    // Тени
-                    "--shadow_one": "rgba(0, 0, 0, 0.3)",
-                    "--shadow_two": "rgba(0, 0, 0, 0.22)",
+                    "--notification_background": "rgba(44, 44, 46, 0.45)",
                     //Остальное
                     "--disable_color": "#e9ecef",
                     "--scroll_bar_background": "rgb(58, 58, 60)",
