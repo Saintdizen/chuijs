@@ -2,9 +2,10 @@ let {Animation} = require('../modules/chui_animations');
 
 class Spinner {
     #spiner = document.createElement('chui_spiner')
-    #element_one = document.createElement('spinner_one')
-    #element_two = document.createElement('spinner_two')
-    #element_three = document.createElement('spinner_three')
+    #element_1 = document.createElement('spinner')
+    #element_2 = document.createElement('spinner')
+    #element_3 = document.createElement('spinner')
+    #element_4 = document.createElement('spinner')
     constructor(size = new SpinnerSize(), margin = String(undefined)) {
         require('../modules/chui_functions').style_parse([
             {
@@ -16,7 +17,7 @@ class Spinner {
                 }
             },
             {
-                name: "@keyframes spinner_1",
+                name: "@keyframes spinner",
                 anim: {
                   from: {
                       "transform": "rotate(0deg)"
@@ -27,55 +28,52 @@ class Spinner {
                 }
             },
             {
-                name: "@keyframes spinner_2",
-                anim: {
-                  from: {
-                      "transform": "rotate(360deg)",
-                  },
-                  to: {
-                      "transform": "rotate(0deg)",
-                  }
-                }
-            },
-            {
-                name: ".element_one",
+                name: "spinner",
                 style: {
                   "border-radius": "50%",
-                  "animation": `spinner_1 1.4s linear infinite`,
+                  "animation": `spinner 2.5s linear infinite`,
                   "display": "flex",
                   "justify-content": "center",
                   "align-items": "center"
                 }
-            },
-            {
-                name: ".element_two",
-                style: {
-                    "border-radius": "50%",
-                    "animation": `spinner_2 .7s linear infinite`,
-                    "display": "flex",
-                    "justify-content": "center",
-                    "align-items": "center"
-                }
             }
         ], 'chUiJS_Spinner');
         this.#spiner.style.margin = margin;
-        // element_one
-        this.#element_one.className = 'element_one';
-        this.#element_one.style.width = `${size.SIZE_F_1}px`;
-        this.#element_one.style.height = `${size.SIZE_F_1}px`;
-        this.#element_one.style.border = `${size.BORDER}px solid transparent`;
-        this.#element_one.style.borderTop = `${size.BORDER}px solid var(--blue_prime_background)`;
-        this.#element_one.style.borderLeft = `${size.BORDER}px solid var(--blue_prime_background)`;
-        // element_two
-        this.#element_two.className = 'element_two'
-        this.#element_two.style.width = `${size.SIZE_F_2}px`;
-        this.#element_two.style.height = `${size.SIZE_F_2}px`;
-        this.#element_two.style.border = `${size.BORDER}px solid transparent`;
-        this.#element_two.style.borderTop = `${size.BORDER}px solid var(--blue_prime_background)`;
-        this.#element_two.style.borderLeft = `${size.BORDER}px solid var(--blue_prime_background)`;
+        //
+        let elem_1_size = size.SIZE
+        let elem_2_size = elem_1_size - size.TEST
+        let elem_3_size = elem_2_size - size.TEST
+        let elem_4_size = elem_3_size - size.TEST
+        //
+        // element_1
+        this.#element_1.style.width = `${elem_1_size}px`;
+        this.#element_1.style.height = `${elem_1_size}px`;
+        this.#element_1.style.border = `${size.BORDER}px solid transparent`;
+        this.#element_1.style.borderBottom = `${size.BORDER}px solid var(--blue_prime_background)`;
+        this.#element_1.style.borderRight = `${size.BORDER}px solid var(--blue_prime_background)`;
+        // element_2
+        this.#element_2.style.width = `${elem_2_size}px`;
+        this.#element_2.style.height = `${elem_2_size}px`;
+        this.#element_2.style.border = `${size.BORDER}px solid transparent`;
+        this.#element_2.style.borderBottom = `${size.BORDER}px solid var(--blue_prime_background)`;
+        this.#element_2.style.borderRight = `${size.BORDER}px solid var(--blue_prime_background)`;
+        // element_3
+        this.#element_3.style.width = `${elem_3_size}px`;
+        this.#element_3.style.height = `${elem_3_size}px`;
+        this.#element_3.style.border = `${size.BORDER}px solid transparent`;
+        this.#element_3.style.borderBottom = `${size.BORDER}px solid var(--blue_prime_background)`;
+        this.#element_3.style.borderRight = `${size.BORDER}px solid var(--blue_prime_background)`;
+        // element_4
+        this.#element_4.style.width = `${elem_4_size}px`;
+        this.#element_4.style.height = `${elem_4_size}px`;
+        this.#element_4.style.border = `${size.BORDER}px solid transparent`;
+        this.#element_4.style.borderBottom = `${size.BORDER}px solid var(--blue_prime_background)`;
+        this.#element_4.style.borderRight = `${size.BORDER}px solid var(--blue_prime_background)`;
         //ADDS
-        this.#element_one.appendChild(this.#element_two)
-        this.#spiner.appendChild(this.#element_one)
+        this.#element_3.appendChild(this.#element_4);
+        this.#element_2.appendChild(this.#element_3);
+        this.#element_1.appendChild(this.#element_2);
+        this.#spiner.appendChild(this.#element_1);
     }
     remove() {
         new Animation(this.#spiner).fadeOutAndRemove();
@@ -88,11 +86,21 @@ class Spinner {
 exports.Spinner = Spinner
 
 class SpinnerSize {
-    static V_SMALL = { SIZE_F_1:  30, SIZE_F_2:  22, BORDER: 2 };
-    static SMALL = { SIZE_F_1:  50, SIZE_F_2:  41, BORDER: 2 };
-    static DEFAULT = { SIZE_F_1:  70, SIZE_F_2:  58, BORDER: 3 };
-    static BIG = { SIZE_F_1:  90, SIZE_F_2:  75, BORDER: 4 };
-    static V_BIG = { SIZE_F_1:  110, SIZE_F_2:  95, BORDER: 4 };
+    static SMALL = {
+        SIZE: 60,
+        TEST: 8,
+        BORDER: 2
+    };
+    static DEFAULT = {
+        SIZE: 90,
+        TEST:  12,
+        BORDER: 3
+    };
+    static BIG = {
+        SIZE: 120,
+        TEST:  16,
+        BORDER: 4
+    };
 }
 
 exports.SpinnerSize = SpinnerSize
