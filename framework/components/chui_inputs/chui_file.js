@@ -135,7 +135,7 @@ class FileInput {
                     "background": "var(--button_background)",
                     "color": "var(--button_text_color)",
                     "box-sizing": "border-box",
-                    "transition": "all .3s",
+                    "transition": "all .26s",
                     "font-family": "chui_Inter",
                     "letter-spacing": "0.33px",
                     "word-spacing": "0.33px",

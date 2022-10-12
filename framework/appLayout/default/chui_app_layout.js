@@ -77,8 +77,8 @@ class AppLayout extends Route {
                     "line-height": "normal",
                     "user-select": "none",
                     "outline": "none",
-                    "transition": "all .3s",
-                    "animation-duration": ".3s",
+                    "transition": "all .26s",
+                    "animation-duration": ".26s",
                     "position": "relative"
                 }
             },
@@ -92,8 +92,8 @@ class AppLayout extends Route {
                     "direction": "ltr",
                     "user-select": "none",
                     "outline": "none",
-                    "transition": "all .3s",
-                    "animation-duration": ".3s",
+                    "transition": "all .26s",
+                    "animation-duration": ".26s",
                     "position": "relative",
                 }
             },

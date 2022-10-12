@@ -20,7 +20,7 @@ class Icon {
                     "text-rendering": "text-rendering",
                     "color": "var(--text_color)",
                     "pointer-events": "none",
-                    "transition": "all .3s",
+                    "transition": "all .26s",
                 }
             }
         ], 'chUiJS_Icons');
