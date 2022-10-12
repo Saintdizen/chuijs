@@ -1,11 +1,11 @@
-const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView, Notification} = require('../../index');
+const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView, Notification, Spinner, SpinnerSize} = require('../../index');
 const {Popup} = require("../../framework/components/chui_popups");
 
 class OthersComponentsPage extends Page {
     constructor() {
         super();
         this.setTitle('Остальные компоненты');
-        this.setMain(false)
+        this.setMain(true)
 
         let h1_modals = new H(1, "Диалоговые окна")
         let dialog = new Dialog({
@@ -117,6 +117,14 @@ class OthersComponentsPage extends Page {
             ]
         });
         this.add(treeView)
+
+        let spinner_v_small = new Spinner(SpinnerSize.V_SMALL, 'auto');
+        let spinner_small = new Spinner(SpinnerSize.SMALL, 'auto');
+        let spinner_def = new Spinner(SpinnerSize.DEFAULT, 'auto');
+        let spinner_big = new Spinner(SpinnerSize.BIG, 'auto');
+        let spinner_v_big = new Spinner(SpinnerSize.V_BIG, 'auto');
+        this.add(spinner_v_small, spinner_small, spinner_def, spinner_big, spinner_v_big)
+
     }
 }
 

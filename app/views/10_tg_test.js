@@ -7,7 +7,7 @@ class TgTestPage extends Page {
     constructor() {
         super();
         this.setTitle('Телеграм-бот тест');
-        this.setMain(true)
+        this.setMain(false)
         // Отправка сообщения
         let bot_chat_data = TgTestPage.#fieldSet({
             title: "Данные чата и бота", components: [this.#chat_id, this.#bot_token]
