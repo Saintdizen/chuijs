@@ -283,7 +283,7 @@ class AppLayout extends Route {
                     "display": "flex",
                     "align-items": "center",
                     "background": "transparent",
-                    //"backdrop-filter": "saturate(150%) blur(15px)",
+                    "backdrop-filter": "blur(15px)",
                     "justify-content": "space-between",
                     "-webkit-app-region": "drag",
                     "z-index": "999",
