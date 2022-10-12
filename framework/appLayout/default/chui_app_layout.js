@@ -948,6 +948,7 @@ class AppLayout extends Route {
                         if (this.#app_menu.style.transform === `translateX(${this.#def_menu_block_width + 25}px)`) {
                             this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width + 25}px)`;
                             this.#menu_button.classList.toggle("app_menu_button_active");
+                            this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
                         }
                     }
                 }
