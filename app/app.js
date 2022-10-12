@@ -14,6 +14,7 @@ const {SlidesPage} = require('./views/7_slideshow');
 const {WebViewsPage} = require('./views/8_webviews');
 const {TabsPage} = require('./views/9_tabs');
 const {TgTestPage} = require("./views/10_tg_test");
+const {SpinnerPage} = require("./views/11_spinners");
 
 class App extends AppLayout {
     constructor() {
@@ -36,6 +37,7 @@ class App extends AppLayout {
         this.setRoute(new WebViewsPage());
         this.setRoute(new TabsPage());
         this.setRoute(new TgTestPage());
+        this.setRoute(new SpinnerPage());
 
         this.addComponentToAppLayout({
             headerRight: [
