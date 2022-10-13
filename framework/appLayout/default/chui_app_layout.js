@@ -136,10 +136,8 @@ class AppLayout extends Route {
                     "--badge_warning_back": "rgba(255, 204, 0, 0.45)",
                     "--badge_warning_text": "rgba(146, 81, 0, 1)",
                     //SPINNER COLOR
-                    "--spinner_blue_1": "rgba(0, 112, 245, 0.8)",
-                    "--spinner_blue_2": "rgba(0, 112, 245, 0.8)",
-                    "--spinner_blue_3": "rgba(0, 112, 245, 0.8)",
-                    "--spinner_blue_4": "rgba(0, 112, 245, 0.8)",
+                    "--spinner_blue": "rgba(0, 112, 245, 1)",
+                    "--spinner_blue_trans": "rgba(0, 112, 245, 0.25)",
                     // Полоса состояния
                     "--progress_bar_back": "rgba(209, 209, 214, 0.45)",
                     // Уведомления
@@ -199,10 +197,8 @@ class AppLayout extends Route {
                     "--badge_warning_back": "rgba(255, 214, 10, 0.45)",
                     "--badge_warning_text": "rgba(255, 212, 38, 1)",
                     //SPINNER COLOR
-                    "--spinner_blue_1": "rgba(20, 142, 255, 0.8)",
-                    "--spinner_blue_2": "rgba(20, 142, 255, 0.8)",
-                    "--spinner_blue_3": "rgba(20, 142, 255, 0.8)",
-                    "--spinner_blue_4": "rgba(20, 142, 255, 0.8)",
+                    "--spinner_blue": "rgba(20, 142, 255, 1)",
+                    "--spinner_blue_trans": "rgba(20, 142, 255, 0.45)",
                     // Полоса состояния
                     "--progress_bar_back": "rgba(58, 58, 60, 0.45)",
                     // Уведомления
