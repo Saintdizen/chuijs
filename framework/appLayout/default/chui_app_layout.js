@@ -135,6 +135,11 @@ class AppLayout extends Route {
                     "--badge_cancel_text": "rgba(97, 97, 101, 1)",
                     "--badge_warning_back": "rgba(255, 204, 0, 0.45)",
                     "--badge_warning_text": "rgba(146, 81, 0, 1)",
+                    //SPINNER COLOR
+                    "--spinner_blue_1": "rgba(0, 112, 245, 0.8)",
+                    "--spinner_blue_2": "rgba(0, 112, 245, 0.8)",
+                    "--spinner_blue_3": "rgba(0, 112, 245, 0.8)",
+                    "--spinner_blue_4": "rgba(0, 112, 245, 0.8)",
                     // Полоса состояния
                     "--progress_bar_back": "rgba(209, 209, 214, 0.45)",
                     // Уведомления
@@ -193,6 +198,11 @@ class AppLayout extends Route {
                     "--badge_cancel_text": "rgba(152, 152, 157, 1)",
                     "--badge_warning_back": "rgba(255, 214, 10, 0.45)",
                     "--badge_warning_text": "rgba(255, 212, 38, 1)",
+                    //SPINNER COLOR
+                    "--spinner_blue_1": "rgba(20, 142, 255, 0.8)",
+                    "--spinner_blue_2": "rgba(20, 142, 255, 0.8)",
+                    "--spinner_blue_3": "rgba(20, 142, 255, 0.8)",
+                    "--spinner_blue_4": "rgba(20, 142, 255, 0.8)",
                     // Полоса состояния
                     "--progress_bar_back": "rgba(58, 58, 60, 0.45)",
                     // Уведомления

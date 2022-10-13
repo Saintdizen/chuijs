@@ -48,27 +48,19 @@ class Spinner {
         // element_1
         this.#element_1.style.width = `${elem_1_size}px`;
         this.#element_1.style.height = `${elem_1_size}px`;
-        this.#element_1.style.border = `${size.BORDER}px solid transparent`;
-        this.#element_1.style.borderBottom = `${size.BORDER}px solid var(--blue_prime_background)`;
-        this.#element_1.style.borderRight = `${size.BORDER}px solid var(--blue_prime_background)`;
+        this.#element_1.style.borderTop = `${size.BORDER}px solid var(--spinner_blue_1)`;
         // element_2
         this.#element_2.style.width = `${elem_2_size}px`;
         this.#element_2.style.height = `${elem_2_size}px`;
-        this.#element_2.style.border = `${size.BORDER}px solid transparent`;
-        this.#element_2.style.borderBottom = `${size.BORDER}px solid var(--blue_prime_background)`;
-        this.#element_2.style.borderRight = `${size.BORDER}px solid var(--blue_prime_background)`;
+        this.#element_2.style.borderTop = `${size.BORDER}px solid var(--spinner_blue_2)`;
         // element_3
         this.#element_3.style.width = `${elem_3_size}px`;
         this.#element_3.style.height = `${elem_3_size}px`;
-        this.#element_3.style.border = `${size.BORDER}px solid transparent`;
-        this.#element_3.style.borderBottom = `${size.BORDER}px solid var(--blue_prime_background)`;
-        this.#element_3.style.borderRight = `${size.BORDER}px solid var(--blue_prime_background)`;
+        this.#element_3.style.borderTop = `${size.BORDER}px solid var(--spinner_blue_3)`;
         // element_4
         this.#element_4.style.width = `${elem_4_size}px`;
         this.#element_4.style.height = `${elem_4_size}px`;
-        this.#element_4.style.border = `${size.BORDER}px solid transparent`;
-        this.#element_4.style.borderBottom = `${size.BORDER}px solid var(--blue_prime_background)`;
-        this.#element_4.style.borderRight = `${size.BORDER}px solid var(--blue_prime_background)`;
+        this.#element_4.style.borderTop = `${size.BORDER}px solid var(--spinner_blue_4)`;
         //ADDS
         this.#element_3.appendChild(this.#element_4);
         this.#element_2.appendChild(this.#element_3);
@@ -87,19 +79,19 @@ exports.Spinner = Spinner
 
 class SpinnerSize {
     static SMALL = {
-        SIZE: 60,
-        TEST: 8,
-        BORDER: 2
-    };
-    static DEFAULT = {
-        SIZE: 90,
-        TEST:  12,
+        SIZE: 48,
+        TEST: 12,
         BORDER: 3
     };
-    static BIG = {
-        SIZE: 120,
+    static DEFAULT = {
+        SIZE: 74,
         TEST:  16,
         BORDER: 4
+    };
+    static BIG = {
+        SIZE: 100,
+        TEST:  20,
+        BORDER: 5
     };
 }
 
