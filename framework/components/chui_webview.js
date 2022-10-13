@@ -1,5 +1,5 @@
 const { Animation } = require('../modules/chui_animations')
-const { Spinner, SpinnerSize } = require('../components/chui_spinner')
+const { Spinner } = require('../components/chui_spinner')
 
 
 // https://www.electronjs.org/ru/docs/latest/api/webview-tag
@@ -54,7 +54,7 @@ class WebView {
         this.#WebView.setAttribute('src', url)
         this.#main_block.appendChild(this.#WebView)
         this.#main_block.appendChild(this.#chui_load)
-        let spinner = new Spinner(SpinnerSize.BIG);
+        let spinner = new Spinner(Spinner.SIZE.BIG);
         const loadStart = () => {
             this.#chui_load.appendChild(spinner.set());
         }

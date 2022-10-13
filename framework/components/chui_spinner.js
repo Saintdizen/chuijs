@@ -6,7 +6,7 @@ class Spinner {
     #element_2 = document.createElement('spinner')
     #element_3 = document.createElement('spinner')
     #element_4 = document.createElement('spinner')
-    constructor(size = new SpinnerSize(), margin = String(undefined)) {
+    constructor(size = Spinner.SIZE, margin = String(undefined)) {
         require('../modules/chui_functions').style_parse([
             {
                 name: "chui_spiner",
@@ -73,26 +73,23 @@ class Spinner {
     set() {
         return this.#spiner;
     }
+    static SIZE = {
+        SMALL: {
+            SIZE: 48,
+            TEST: 12,
+            BORDER: 3
+        },
+        DEFAULT: {
+            SIZE: 74,
+            TEST:  16,
+            BORDER: 4
+        },
+        BIG: {
+            SIZE: 100,
+            TEST:  20,
+            BORDER: 5
+        }
+    }
 }
 
 exports.Spinner = Spinner
-
-class SpinnerSize {
-    static SMALL = {
-        SIZE: 48,
-        TEST: 12,
-        BORDER: 3
-    };
-    static DEFAULT = {
-        SIZE: 74,
-        TEST:  16,
-        BORDER: 4
-    };
-    static BIG = {
-        SIZE: 100,
-        TEST:  20,
-        BORDER: 5
-    };
-}
-
-exports.SpinnerSize = SpinnerSize

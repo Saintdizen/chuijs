@@ -22,7 +22,7 @@ const { AppLayout, Route } = require('./framework/appLayout/default/chui_app_lay
 const { Page } = require('./framework/modules/chui_page');
 const { WebView } = require('./framework/components/chui_webview');
 const { Button } = require('./framework/components/chui_button');
-const { Spinner, SpinnerSize } = require('./framework/components/chui_spinner');
+const { Spinner } = require('./framework/components/chui_spinner');
 const { Icon, Icons } = require('./framework/components/chui_icons');
 const { TextEditor } = require('./framework/components/chui_text_editor/chui_text_editor');
 const { Badge } = require('./framework/components/chui_badge');
@@ -186,7 +186,6 @@ module.exports = {
     WebView: WebView,
     Button: Button,
     Spinner: Spinner,
-    SpinnerSize: SpinnerSize,
     TextInput: TextInput,
     DateInput: DateInput,
     NumberInput: NumberInput,

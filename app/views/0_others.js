@@ -1,4 +1,4 @@
-const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView, Notification, Spinner, SpinnerSize} = require('../../index');
+const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView, Notification} = require('../../index');
 const {Popup} = require("../../framework/components/chui_popups");
 
 class OthersComponentsPage extends Page {
