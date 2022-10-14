@@ -13,8 +13,7 @@ class Page {
                     "display": "flex",
                     "flex-direction": "column",
                     "width": "-webkit-fill-available",
-                    "align-items": "baseline",
-                    "animation-duration": ".26s",
+                    "align-items": "baseline"
                 }
             }
         ], 'chUiJS_Page');

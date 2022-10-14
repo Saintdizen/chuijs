@@ -305,7 +305,13 @@ class AppLayout extends Route {
                     "background": "var(--center_background)",
                     "padding-top": "48px",
                     "margin": "0",
-                    "overflow": "overlay",
+                    "overflow": "hidden hidden",
+                }
+            },
+            {
+                name: "main_center_block:hover",
+                style: {
+                    "overflow": "hidden overlay",
                 }
             },
             {
@@ -314,7 +320,7 @@ class AppLayout extends Route {
                     "display": "flex",
                     "flex-direction": "column",
                     "position": "fixed",
-                    "bottom": "10px",
+                    "top": "55px",
                     "right": "10px",
                     "margin": "var(--margin)",
                     "align-items": "flex-start",
@@ -322,7 +328,7 @@ class AppLayout extends Route {
                     "z-index": "1001",
                     "-webkit-app-region": "no-drag",
                     "overflow": "hidden hidden",
-                    "height": "calc(100% - 68px - (var(--margin) * 2))"
+                    "max-height": "calc(100% - 65px - (var(--margin) * 2))"
                 }
             },
             {
@@ -504,8 +510,14 @@ class AppLayout extends Route {
                     "padding": "6px",
                     "width": "-webkit-fill-available",
                     "height": "-webkit-fill-available",
-                    "overflow": "overlay",
+                    "overflow": "hidden hidden",
                     "-webkit-app-region": "no-drag"
+                }
+            },
+            {
+                name: "route_views:hover",
+                style: {
+                    "overflow": "hidden overlay",
                 }
             },
             {

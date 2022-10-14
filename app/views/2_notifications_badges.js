@@ -13,7 +13,7 @@ class Notifications_Badges_Page extends Page {
                 new Notification({
                     markdownTitle: "**Пожелание!**", markdownText: `Хорошего дня, Иван!  
                 Не удивляйтесь, если увидите оформленый на вас кредит!  
-                **Вы уволены!**`, showTime: 5000
+                **Вы уволены!**`, showTime: 50000
                 }).show()
             }
         })
