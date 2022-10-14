@@ -1,6 +1,6 @@
 // GLOBAL VARS
 globalThis.ctxs = [];
-const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell} = require('electron');
+const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, remote} = require('electron');
 
 //ПОЛЯ ВВОДА
 const { TextInput } = require('./framework/components/chui_inputs/chui_text');
@@ -140,6 +140,10 @@ class Main {
             //app.disableHardwareAcceleration();
         }
         app.whenReady().then(() => {
+            ipcMain.on("show_system_notification",  (e, title, body) => {
+                let { Notification } = require('electron');
+                new Notification({ title, body }).show();
+            })
             process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
             //START
             this.#window.loadURL(`data:text/html;charset=UTF-8,<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${this.#appName}</title></head><body><div id="app"></div></body></html>`).then(() => {
@@ -173,6 +177,7 @@ module.exports = {
     ipcMain: ipcMain,
     ipcRenderer: ipcRenderer,
     shell: shell,
+    remote: remote,
     Main: Main,
     sleep: sleep,
     render: render,

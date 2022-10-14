@@ -14,7 +14,7 @@ class Notifications_Badges_Page extends Page {
                     markdownTitle: "**Пожелание!**", markdownText: `Хорошего дня, Иван!  
                 Не удивляйтесь, если увидите оформленый на вас кредит!  
                 **Вы уволены!**`, showTime: 50000
-                }).show()
+                }).show(true)
             }
         })
         let WARNING = new Button({
@@ -23,7 +23,7 @@ class Notifications_Badges_Page extends Page {
                 new Notification({
                     title: "Заголовок", text: "Текст",
                     style: Notification.STYLE.WARNING, showTime: 1000
-                }).show()
+                }).show(true)
             }
         })
         let SUCCESS = new Button({
