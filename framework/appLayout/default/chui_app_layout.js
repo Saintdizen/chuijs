@@ -142,6 +142,7 @@ class AppLayout extends Route {
                     "--progress_bar_back": "rgba(209, 209, 214, 0.45)",
                     // Уведомления
                     "--notification_background": "rgba(229, 229, 234, 0.45)",
+                    "--notification_background_popup": "rgba(209, 209, 214, 0.45)",
                     //Остальное
                     "--text_color_hover": "rgb(242, 242, 247)",
                     "--disable_color": "#e9ecef",
@@ -203,6 +204,7 @@ class AppLayout extends Route {
                     "--progress_bar_back": "rgba(58, 58, 60, 0.45)",
                     // Уведомления
                     "--notification_background": "rgba(44, 44, 46, 0.45)",
+                    "--notification_background_popup": "rgba(58, 58, 60, 0.45)",
                     //Остальное
                     "--disable_color": "#e9ecef",
                     "--scroll_bar_background": "rgb(58, 58, 60)",

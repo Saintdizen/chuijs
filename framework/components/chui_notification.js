@@ -30,9 +30,9 @@ class Notification {
                     "margin": "var(--margin)",
                     "font-size": "12pt",
                     "padding": "6px 10px",
-                    "background": "var(--badge_cancel_back)",
+                    "background": "var(--notification_background_popup)",
                     "backdrop-filter": "saturate(150%) blur(15px)",
-                    "border": "2px solid var(--badge_cancel_back)",
+                    "border": "2px solid var(--border_main)",
                     "z-index": "1002"
                 }
             },
