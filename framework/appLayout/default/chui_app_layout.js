@@ -305,7 +305,7 @@ class AppLayout extends Route {
                     "background": "var(--center_background)",
                     "padding-top": "48px",
                     "margin": "0",
-                    "overflow": "auto",
+                    "overflow": "overlay",
                 }
             },
             {
@@ -317,10 +317,18 @@ class AppLayout extends Route {
                     "bottom": "10px",
                     "right": "10px",
                     "margin": "var(--margin)",
-                    "align-items": "flex-end",
-                    "justify-content": "flex-end",
+                    "align-items": "flex-start",
+                    "justify-content": "flex-start",
                     "z-index": "1001",
-                    "-webkit-app-region": "no-drag"
+                    "-webkit-app-region": "no-drag",
+                    "overflow": "hidden hidden",
+                    "height": "calc(100% - 68px - (var(--margin) * 2))"
+                }
+            },
+            {
+                name: "notification_panel:hover",
+                style: {
+                    "overflow": "hidden overlay",
                 }
             },
             {
@@ -393,11 +401,17 @@ class AppLayout extends Route {
                 style: {
                     "display": "flex",
                     "flex-direction": "column",
-                    "overflow": "hidden auto",
+                    "overflow": "hidden hidden",
                     "height": "-webkit-fill-available",
                     "width": "-webkit-fill-available",
                     "padding": "0px 6px 6px 6px",
                     "-webkit-app-region": "no-drag"
+                }
+            },
+            {
+                name: "notification_box_main:hover",
+                style: {
+                    "overflow": "hidden overlay",
                 }
             },
             {
@@ -490,7 +504,7 @@ class AppLayout extends Route {
                     "padding": "6px",
                     "width": "-webkit-fill-available",
                     "height": "-webkit-fill-available",
-                    "overflow": "auto",
+                    "overflow": "overlay",
                     "-webkit-app-region": "no-drag"
                 }
             },
@@ -700,8 +714,6 @@ class AppLayout extends Route {
         center = document.createElement('main_center_block');
         this.#applayout.appendChild(center)
         this.#applayout.appendChild(header)
-        this.#notification_panel.style.height = 'calc(100% - 68px - (var(--margin) * 2))';
-        this.#notification_panel.style.overflow = 'hidden auto';
         document.body.appendChild(this.#notification_panel);
 
         this.#app_menu.style.top = `calc(${header.style.height})`;

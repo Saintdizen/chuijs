@@ -66,7 +66,7 @@ class Select {
             {
                 name: "selectbox_dropdown",
                 style: {
-                    "overflow": "auto",
+                    "overflow": "overlay",
                     "background": "var(--dropdown_background)",
                     "color": "var(--text_color)",
                     "outline": "none",

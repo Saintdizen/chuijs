@@ -179,7 +179,7 @@ class TextEditorSelects {
             {
                 name: "text_editor_selectbox_dropdown",
                 style: {
-                    "overflow": "auto",
+                    "overflow": "overlay",
                     "background": "var(--dropdown_background)",
                     "color": "var(--text_color)",
                     "outline": "none",
