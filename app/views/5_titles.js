@@ -3,7 +3,7 @@ const {Page, H, Label, Styles} = require('../../index');
 class TitlesPage extends Page {
     constructor() {
         super();
-        this.setTitle('Заголовки');
+        this.setTitle('Текстовые блоки');
         this.setMain(false)
         this.setFullWidth()
         this.setFullHeight()

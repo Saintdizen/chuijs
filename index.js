@@ -41,7 +41,7 @@ const { H } = require('./framework/components/chui_hx');
 const { Table } = require('./framework/components/chui_table');
 const { Details } = require('./framework/components/chui_details');
 const { Accordion } = require('./framework/components/chui_accordion')
-const { Pre } = require('./framework/components/chui_pre')
+const { CodeBlock } = require('./framework/components/chui_code')
 const { HtmlBlock } = require('./framework/components/chui_html_block')
 const { sleep, render, getDefaultIcon } = require('./framework/modules/chui_functions');
 const { FileInput, AcceptTypes } = require("./framework/components/chui_inputs/chui_file");
@@ -218,7 +218,7 @@ module.exports = {
     ComboBox: ComboBox,
     RadioGroup: RadioGroup,
     Accordion: Accordion,
-    Pre: Pre,
+    CodeBlock: CodeBlock,
     HtmlBlock: HtmlBlock,
     FileInput: FileInput,
     AcceptTypes: AcceptTypes,
