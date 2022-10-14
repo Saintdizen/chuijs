@@ -328,7 +328,8 @@ class AppLayout extends Route {
                     "z-index": "1001",
                     "-webkit-app-region": "no-drag",
                     "overflow": "hidden hidden",
-                    "max-height": "calc(100% - 65px - (var(--margin) * 2))"
+                    "max-height": "calc(100% - 65px - (var(--margin) * 2))",
+                    "transition": "max-height 1s ease-in-out"
                 }
             },
             {
