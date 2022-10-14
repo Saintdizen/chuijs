@@ -160,7 +160,6 @@ class Notification {
     #removeNotification(notification) {
         new Animation(notification).slideRightOutAndRemove();
         notification.addEventListener("animationend", (e) => {
-            console.log(e.target.offsetTop)
             notification.removeAttribute("style");
             notification.style.display = 'flex';
             notification.style.width = '-webkit-fill-available';
