@@ -66,7 +66,7 @@ class Select {
             {
                 name: "selectbox_dropdown",
                 style: {
-                    "overflow": "overlay",
+                    "overflow": "hidden hidden",
                     "background": "var(--dropdown_background)",
                     "color": "var(--text_color)",
                     "outline": "none",
@@ -82,6 +82,12 @@ class Select {
                     "border": "2px solid var(--border_main)",
                     "flex-direction": "column",
                     "z-index": "1",
+                }
+            },
+            {
+                name: "selectbox_dropdown:hover",
+                style: {
+                    "overflow": "hidden overlay",
                 }
             },
             {

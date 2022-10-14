@@ -323,7 +323,7 @@ class AppLayout extends Route {
                     "top": "55px",
                     "right": "10px",
                     "margin": "var(--margin)",
-                    "align-items": "flex-start",
+                    "align-items": "flex-end",
                     "justify-content": "flex-start",
                     "z-index": "1001",
                     "-webkit-app-region": "no-drag",

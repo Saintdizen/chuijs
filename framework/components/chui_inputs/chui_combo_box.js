@@ -71,6 +71,13 @@ class ComboBox {
                     "flex-direction": "column",
                     "z-index": "1",
                     "width": "-webkit-fill-available",
+                    "overflow": "hidden hidden"
+                }
+            },
+            {
+                name: "combobox_dropdown:hover",
+                style: {
+                    "overflow": "hidden overlay"
                 }
             },
             {

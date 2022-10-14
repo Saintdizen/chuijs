@@ -59,7 +59,7 @@ class DateInput {
                     "color": "var(--text_color)",
                     "padding": "6px",
                     "background": "var(--dropdown_background)",
-                    "border": "none",
+                    "border": "2px solid var(--border_main)",
                     "border-radius": "var(--border_radius)",
                     "position":"absolute",
                     "top": "-2px",
