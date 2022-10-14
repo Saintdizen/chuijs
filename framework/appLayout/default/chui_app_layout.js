@@ -320,7 +320,7 @@ class AppLayout extends Route {
                     "display": "flex",
                     "flex-direction": "column",
                     "position": "fixed",
-                    "top": "55px",
+                    "bottom": "10px",
                     "right": "10px",
                     "margin": "var(--margin)",
                     "align-items": "flex-end",
