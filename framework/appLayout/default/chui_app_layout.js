@@ -700,6 +700,8 @@ class AppLayout extends Route {
         center = document.createElement('main_center_block');
         this.#applayout.appendChild(center)
         this.#applayout.appendChild(header)
+        this.#notification_panel.style.height = 'calc(100% - 68px - (var(--margin) * 2))';
+        this.#notification_panel.style.overflow = 'hidden auto';
         document.body.appendChild(this.#notification_panel);
 
         this.#app_menu.style.top = `calc(${header.style.height})`;

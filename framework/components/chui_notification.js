@@ -150,7 +150,8 @@ class Notification {
         this.#notification.appendChild(this.#notification_content)
     }
     show() {
-        document.getElementsByTagName('notification_panel')[0].appendChild(this.#notification);
+        let notification_panel = document.getElementsByTagName('notification_panel')[0];
+        notification_panel.appendChild(this.#notification);
         let notification = document.getElementById(this.#id);
 
         new Animation(notification).slideRightIn();
@@ -172,6 +173,23 @@ class Notification {
                 })
             }, this.#time);
         });
+
+        notification.addEventListener("click", () => {
+            new Animation(notification).slideRightOutAndRemove();
+            notification.addEventListener("animationend", () => {
+                notification.removeAttribute("style");
+                notification.style.display = 'flex';
+                notification.style.width = '-webkit-fill-available';
+                notification.style.opacity = "0"
+                notification.style.transform = "translateX(100%)"
+                let box = document.getElementById("chui_notification_box");
+                box.appendChild(notification)
+                setTimeout(() => {
+                    notification.style.opacity = "1"
+                    notification.style.transform = "translateX(0)"
+                }, 300)
+            })
+        })
     }
     static #getDate() {
         let date = new Date();
