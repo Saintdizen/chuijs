@@ -87,7 +87,7 @@ class WebView {
         this.#WebView.addEventListener('did-start-loading', () => {
             if (options.enable) {
                 let webview = document.getElementById(this.#id);
-                webview.addEventListener('dom-ready', function () {
+                webview.addEventListener('dom-ready', () => {
                     webview.insertCSS(`*::-webkit-scrollbar { width: ${options.width}; }
                     *::-webkit-scrollbar-track { background-color: ${options.trackBackgroundColor}; }
                     *::-webkit-scrollbar-thumb { border-radius: ${options.thumbRadius}; background: ${options.thumbColor}; }`);
