@@ -3,6 +3,8 @@ let {Animation} = require('../modules/chui_animations');
 class Spinner {
     #spinner_main = document.createElement('chui_spiner')
     #spinner = document.createElement('spinner')
+    #spinner_2 = document.createElement('spinner')
+    #spinner_3 = document.createElement('spinner')
     constructor(size = Spinner.SIZE, margin = String(undefined)) {
         require('../modules/chui_functions').style_parse([
             {
@@ -28,7 +30,7 @@ class Spinner {
                 name: "spinner",
                 style: {
                   "border-radius": "50%",
-                  "animation": `spinner 1.25s linear infinite`,
+                  "animation": `spinner 2s linear infinite`,
                   "display": "flex",
                   "justify-content": "center",
                   "align-items": "center"
@@ -37,11 +39,26 @@ class Spinner {
         ], 'chUiJS_Spinner');
         this.#spinner_main.style.margin = margin;
         //
-        this.#spinner.style.width = `${size.SIZE}px`;
-        this.#spinner.style.height = `${size.SIZE}px`;
-        this.#spinner.style.border = `${size.BORDER}px solid var(--spinner_blue_trans)`;
+        let size_1 = size.SIZE;
+        this.#spinner.style.width = `${size_1}px`;
+        this.#spinner.style.height = `${size_1}px`;
+        //this.#spinner.style.border = `${size.BORDER}px solid var(--spinner_track)`;
         this.#spinner.style.borderTop = `${size.BORDER}px solid var(--spinner_blue)`;
+        //
+        let size_2 = size_1 - size.BORDER * 2;
+        this.#spinner_2.style.width = `${size_2}px`;
+        this.#spinner_2.style.height = `${size_2}px`;
+        //this.#spinner_2.style.border = `${size.BORDER}px solid var(--spinner_track)`;
+        this.#spinner_2.style.borderTop = `${size.BORDER}px solid var(--spinner_blue)`;
+        //
+        let size_3 = size_2 - size.BORDER * 2;
+        this.#spinner_3.style.width = `${size_3}px`;
+        this.#spinner_3.style.height = `${size_3}px`;
+        //this.#spinner_3.style.border = `${size.BORDER}px solid var(--spinner_track)`;
+        this.#spinner_3.style.borderTop = `${size.BORDER}px solid var(--spinner_blue)`;
         //ADDS
+        this.#spinner_2.appendChild(this.#spinner_3)
+        this.#spinner.appendChild(this.#spinner_2)
         this.#spinner_main.appendChild(this.#spinner);
     }
     remove() {
@@ -51,11 +68,11 @@ class Spinner {
         return this.#spinner_main;
     }
     static SIZE = {
-        V_SMALL: { SIZE: 20, BORDER: 4 },
-        SMALL: { SIZE: 40, BORDER: 6 },
-        DEFAULT: { SIZE: 60, BORDER: 8 },
-        BIG: { SIZE: 80, BORDER: 10 },
-        V_BIG: { SIZE: 100, BORDER: 12 }
+        V_SMALL: { SIZE: 30, BORDER: 3 },
+        SMALL: { SIZE: 45, BORDER: 3 },
+        DEFAULT: { SIZE: 60, BORDER: 4 },
+        BIG: { SIZE: 75, BORDER: 5 },
+        V_BIG: { SIZE: 90, BORDER: 5 }
     }
 }
 
