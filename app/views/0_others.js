@@ -92,18 +92,27 @@ class OthersComponentsPage extends Page {
             components: [
                 TreeView.Button({
                     title: "Главная",
-                    listener: () => { new Notification({ title: "Главная", text: "Открыта главная страница", style: Notification.STYLE.SUCCESS, showTime: 50000 }).show() }
+                    listener: () => { new Notification({
+                        title: "Главная", text: "Открыта главная страница",
+                        style: Notification.STYLE.SUCCESS, showTime: 50000
+                    }).show() }
                 }),
                 TreeView.ExpandButton({
                     title: "Страницы",
                     subButtons: [
                         TreeView.Button({
                             title: "Страница 1",
-                            listener: () => { new Notification({ title: "Страница 1", text: "Открыта Страница 1", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show() }
+                            listener: () => { new Notification({
+                                title: "Страница 1", text: "Открыта Страница 1",
+                                style: Notification.STYLE.SUCCESS, showTime: 5000
+                            }).show() }
                         }),
                         TreeView.Button({
                             title: "Страница 2",
-                            listener: () => { new Notification({ title: "Страница 2", text: "Открыта Страница 2", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show() }
+                            listener: () => { new Notification({
+                                title: "Страница 2", text: "Открыта Страница 2",
+                                style: Notification.STYLE.SUCCESS, showTime: 5000
+                            }).show() }
                         }),
                     ]
                 }),
