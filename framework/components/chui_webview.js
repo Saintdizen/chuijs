@@ -8,7 +8,7 @@ class WebView {
     #main_block = document.createElement('chui_webview')
     #WebView = document.createElement('webview')
     #chui_load = document.createElement('chui_load')
-    constructor(url) {
+    constructor(url = String()) {
           require('../modules/chui_functions').style_parse([
             {
                 name: "chui_webview",
@@ -94,6 +94,9 @@ class WebView {
                 });
             }
         })
+    }
+    setUrl(url = String()) {
+        this.#WebView.setAttribute('src', url)
     }
     set() {
         return this.#main_block

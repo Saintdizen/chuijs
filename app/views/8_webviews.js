@@ -1,4 +1,4 @@
-const {Page, WebView} = require('../../index');
+const {Page, WebView, TextInput, Button} = require('../../index');
 
 class WebViewsPage extends Page {
     constructor() {
