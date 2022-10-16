@@ -63,7 +63,6 @@ class OthersComponentsPage extends Page {
         })
         this.add(button_2, button_3, button_4)
 
-
         let h1_progress = new H(1, "Прогресс бары")
         let progress = new ProgressBar(100)
         progress.setValue(50)
@@ -110,9 +109,20 @@ class OthersComponentsPage extends Page {
                 }),
                 TreeView.ExpandButton({
                     title: "Страницы",
-                    components: [
-                        new Button({ title: "Кнопочка!" })
-                    ]
+                    subButtons: [
+                        TreeView.ExpandButton({
+                            title: "Страницы",
+                            components: [
+                                new Button({ title: "Кнопочка!" })
+                            ]
+                        }),
+                        TreeView.ExpandButton({
+                            title: "Страницы",
+                            components: [
+                                new Button({ title: "Кнопочка!" })
+                            ]
+                        }),
+                    ],
                 }),
             ]
         });

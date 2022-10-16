@@ -58,7 +58,7 @@ class TreeView {
                     "display": "block",
                     "overflow": "hidden",
                     "width": "-webkit-fill-available",
-                    "max-height": "0",
+                    "max-height": "0px",
                     "border-bottom-right-radius": "var(--border_radius)",
                     "border-bottom-left-radius": "var(--border_radius)",
                     "color": "var(--text_color)",
@@ -150,15 +150,23 @@ class TreeView {
             button.classList.toggle('tree_view_button_active')
             let panel = button.nextElementSibling;
             if (panel.style.maxHeight) {
-                button.children[1].children[0].style.transform = 'rotate(0deg)'
-                panel.style.maxHeight = null;
-                button.style.borderBottomLeftRadius = 'var(--border_radius)'
-                button.style.borderBottomRightRadius = 'var(--border_radius)'
+                panel.style.maxHeight = panel.scrollHeight + "px";
+                setTimeout(() => {
+                    button.children[1].children[0].style.transform = 'rotate(0deg)';
+                    panel.style.maxHeight = null;
+                    button.style.borderBottomLeftRadius = 'var(--border_radius)';
+                    button.style.borderBottomRightRadius = 'var(--border_radius)';
+                }, 25);
             } else {
-                button.children[1].children[0].style.transform = 'rotate(180deg)'
-                button.style.borderBottomLeftRadius = '0px'
-                button.style.borderBottomRightRadius = '0px'
-                panel.style.maxHeight = "max-content"  //panel.scrollHeight + "px";
+                setTimeout(() => {
+                    button.children[1].children[0].style.transform = 'rotate(180deg)';
+                    button.style.borderBottomLeftRadius = '0px';
+                    button.style.borderBottomRightRadius = '0px';
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    panel.addEventListener('transitionend', () => {
+                        if (panel.style.maxHeight) panel.style.maxHeight = "max-content";
+                    }, false);
+                }, 25);
             }
         })
         let button_text = document.createElement('tree_view_button_text');
