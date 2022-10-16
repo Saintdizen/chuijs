@@ -165,7 +165,7 @@ class TreeView {
                     panel.style.maxHeight = panel.scrollHeight + "px";
                     panel.addEventListener('transitionend', () => {
                         if (panel.style.maxHeight) panel.style.maxHeight = "max-content";
-                    }, false);
+                    });
                 }, 1);
             }
         })
