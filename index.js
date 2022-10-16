@@ -50,7 +50,8 @@ const { Form } = require("./framework/components/chui_form");
 const { SlideShow } = require("./framework/components/chui_slideshow");
 const { FieldSet } = require("./framework/components/chui_fieldset");
 const { Popup } = require("./framework/components/chui_popups");
-const {TelegramBot} = require("./framework/components/telegram_bot/chui_telegram_bot");
+const { TelegramBot } = require("./framework/components/telegram_bot/chui_telegram_bot");
+const { MenuBar } = require("./framework/components/chui_menu_bar")
 
 //VARS
 let isQuiting = false;
@@ -97,7 +98,7 @@ class Main {
                     nodeIntegration: true,
                     contextIsolation: false,
                     preload: this.#renderer,
-                    spellcheck: false,
+                    spellcheck: true,
                     webviewTag: true,
                     enableRemoteModule: true
                 },
@@ -232,5 +233,6 @@ module.exports = {
     SlideShow: SlideShow,
     FieldSet: FieldSet,
     Popup: Popup,
-    TelegramBot: TelegramBot
+    TelegramBot: TelegramBot,
+    MenuBar: MenuBar
 }

@@ -1,4 +1,4 @@
-const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView, Notification} = require('../../index');
+const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView, Notification, MenuBar} = require('../../index');
 const {Popup} = require("../../framework/components/chui_popups");
 
 class OthersComponentsPage extends Page {
@@ -6,6 +6,13 @@ class OthersComponentsPage extends Page {
         super();
         this.setTitle('Остальные компоненты');
         this.setMain(true)
+
+        let menuBar = new MenuBar();
+        menuBar.addMenuItems(
+            MenuBar.BUTTON({title:"Кнопка 1"}),
+            MenuBar.BUTTON({title:"Кнопка 2"})
+        )
+        this.add(menuBar)
 
         let h1_modals = new H(1, "Диалоговые окна")
         let dialog = new Dialog({

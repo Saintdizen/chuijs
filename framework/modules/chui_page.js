@@ -17,6 +17,12 @@ class Page {
                 }
             }
         ], 'chUiJS_Page');
+
+        this.#page.onmousedown = function(event) {
+            if (event.which === 3) {
+                console.log(`X: ${event.clientX} Y: ${event.clientY}`)
+            }
+        }
     }
     add(...components) {
         for (let component of components) {
