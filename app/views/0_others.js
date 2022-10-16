@@ -88,7 +88,7 @@ class OthersComponentsPage extends Page {
         this.add(h1_others, accordion, details)
 
         let treeView = new TreeView({
-            width: "-webkit-fill-available",
+            width: "max-content",
             components: [
                 TreeView.Button({
                     title: "Главная",
@@ -108,16 +108,16 @@ class OthersComponentsPage extends Page {
                     ]
                 }),
                 TreeView.ExpandButton({
-                    title: "Страницы",
+                    title: "Выпадашки",
                     subButtons: [
                         TreeView.ExpandButton({
-                            title: "Страницы",
+                            title: "Выпадашка 1",
                             components: [
                                 new Button({ title: "Кнопочка!" })
                             ]
                         }),
                         TreeView.ExpandButton({
-                            title: "Страницы",
+                            title: "Выпадашка 2",
                             components: [
                                 new Button({ title: "Кнопочка!" })
                             ]
