@@ -34,7 +34,7 @@ class Inputs_Buttons_Page extends Page {
         email.setValue("email@input.ru");
         let pass = new PasswordInput({title: "PasswordInput"})
         pass.setValue("1234567890");
-        let number = new NumberInput({title: "NumberInput"})
+        let number = new NumberInput({title: "NumberInput", width: "500px"})
         number.setValue("1000");
         let textArea = new TextArea({title: "TextArea"})
         textArea.setValue("1000");

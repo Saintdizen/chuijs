@@ -70,7 +70,8 @@ class FieldSet {
         if (options.components.length !== 0) for (let component of options.components) this.#fieldset.appendChild(component.set());
     }
     getId() { return this.#fieldset.id; }
-    getTitle() { return this.#fieldset.innerText; }
+    getLegend() { return this.#legend.innerText; }
+    setLegend(text = String()) { return this.#legend.innerText = text; }
     add(...components) { for (let component of components) this.#fieldset.appendChild(component.set()); }
     set() { return this.#chui_fieldset; }
 }

@@ -14,7 +14,8 @@ class NumberInput {
     constructor(options = {
         name: String(undefined),
         title: String(undefined),
-        required: Boolean(undefined)
+        required: Boolean(undefined),
+        width: String(undefined),
     }) {
         require('../../modules/chui_functions').style_parse([
             {
@@ -22,7 +23,7 @@ class NumberInput {
                 style: {
                     "display": "flex",
                     "flex-direction": "column",
-                    "width": "140px",
+                    "width": "200px",
                     "height": "max-content",
                     "margin": "var(--margin)",
                 }
@@ -157,6 +158,7 @@ class NumberInput {
             this.#label.setAttribute('for', this.#id);
             this.#chui_number_input.appendChild(this.#label);
         }
+        if (options.width !== undefined) this.#chui_number_input.style.width = options.width;
         this.#input.addEventListener('focus', () => {
             this.#number_main.style.border = '2px solid var(--blue_prime_background)';
             this.#label.style.color = 'var(--blue_prime_background)';
