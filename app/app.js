@@ -20,11 +20,26 @@ class App extends AppLayout {
     constructor() {
         super();
         // Настройки окна
-        this.setWindowControlsPositionLeft(true)
-        this.setHideOnClose(true)
+        this.setWindowControlsPositionLeft(true);
+        this.setHideOnClose(true);
+        this.setNotDuplicatePages(true);
 
         // Настройка роутов
         this.setAutoCloseRouteMenu(true);
+        this.setRoute(new MainPage());
+        this.setRoute(new Inputs_Buttons_Page());
+        this.setRoute(new Notifications_Badges_Page());
+        this.setRoute(new TablesPage());
+        this.setRoute(new TextEditorPage());
+        this.setRoute(new OthersComponentsPage());
+        this.setRoute(new TitlesPage());
+        this.setRoute(new FormsPage());
+        this.setRoute(new SlidesPage());
+        this.setRoute(new WebViewsPage());
+        this.setRoute(new TabsPage());
+        this.setRoute(new TgTestPage());
+        this.setRoute(new SpinnerPage());
+
         this.setRoute(new MainPage());
         this.setRoute(new Inputs_Buttons_Page());
         this.setRoute(new Notifications_Badges_Page());
