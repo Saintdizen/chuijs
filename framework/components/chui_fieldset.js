@@ -4,6 +4,7 @@ class FieldSet {
     #legend = document.createElement("legend")
     constructor(options = {
         id: String(undefined),
+        name: String(undefined),
         title: String(undefined),
         style: {
             width: String(undefined),
@@ -52,6 +53,7 @@ class FieldSet {
             }
         ], 'chUiJS_FieldSet');
         if (options.id !== undefined) this.#fieldset.id = options.id;
+        if (options.name !== undefined) this.#fieldset.name = options.name;
         this.#legend.innerText = options.title;
         // Установка стилей
         if (options.style !== undefined) {
