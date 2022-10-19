@@ -54,8 +54,8 @@ class RadioGroup {
         this.#RadioGroup.appendChild(this.#groupForm)
     }
     addOptions(options = [{ name: String(), value: String() }]) {
-        options.forEach(value => {
-            const radio = new RadioButton({ title: value.name, stringValue: value.value, name: this.#name })
+        options.forEach(option => {
+            const radio = new RadioButton({ title: option.name, stringValue: option.value, name: this.#name })
             this.#groupForm.appendChild(radio.set())
         })
     }
