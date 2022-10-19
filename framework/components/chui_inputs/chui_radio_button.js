@@ -4,10 +4,11 @@ class RadioButton {
     #input = document.createElement('input');
     #label = document.createElement('label');
     constructor(options = {
-        name: String(undefined),
-        title: String(undefined),
-        value: Boolean(undefined),
-        required: Boolean(undefined)
+        name: String(),
+        title: String(),
+        stringValue: String(),
+        value: Boolean(),
+        required: Boolean()
     }) {
         require('../../modules/chui_functions').style_parse([
             {
@@ -112,7 +113,7 @@ class RadioButton {
         this.#input.type = 'radio';
         this.#input.classList.add('radiobutton_input');
         this.#input.id = this.#id;
-        this.#input.value = options.title;
+        this.#input.value = options.stringValue;
         this.#label.innerText = options.title;
         this.#label.setAttribute('for', this.#id);
         this.#label.classList.add('labelr')
