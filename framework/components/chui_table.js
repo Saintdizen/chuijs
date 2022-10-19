@@ -222,10 +222,21 @@ class Table {
             if (data.indexOf(dat) !== data.length - 1) row.style.borderBottom = '2px solid var(--input_background)'
             for (let col of this.#columns) {
                 let cell = row.insertCell();
-                if (cell.cellIndex !== 0) {
-                    cell.style.borderLeft = '2px solid var(--input_background)'
+
+                if (typeof dat[col] === 'object') {
+                    if (cell.cellIndex !== 0) {
+                        cell.style.borderLeft = '2px solid var(--input_background)'
+                    }
+                    for (let comp of dat[col]) {
+                        cell.style.display = "flex"
+                        cell.appendChild(comp.set());
+                    }
+                } else {
+                    if (cell.cellIndex !== 0) {
+                        cell.style.borderLeft = '2px solid var(--input_background)'
+                    }
+                    cell.innerHTML = dat[col];
                 }
-                cell.innerHTML = dat[col];
             }
         }
     }

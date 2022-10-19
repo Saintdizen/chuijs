@@ -40,20 +40,6 @@ class App extends AppLayout {
         this.setRoute(new TgTestPage());
         this.setRoute(new SpinnerPage());
 
-        this.setRoute(new MainPage());
-        this.setRoute(new Inputs_Buttons_Page());
-        this.setRoute(new Notifications_Badges_Page());
-        this.setRoute(new TablesPage());
-        this.setRoute(new TextEditorPage());
-        this.setRoute(new OthersComponentsPage());
-        this.setRoute(new TitlesPage());
-        this.setRoute(new FormsPage());
-        this.setRoute(new SlidesPage());
-        this.setRoute(new WebViewsPage());
-        this.setRoute(new TabsPage());
-        this.setRoute(new TgTestPage());
-        this.setRoute(new SpinnerPage());
-
         this.addComponentToAppLayout({
             headerRight: [
                 AppLayout.USER_PROFILE({

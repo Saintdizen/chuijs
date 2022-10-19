@@ -1,4 +1,4 @@
-const {Page, Table, TextInput, Styles, ContentBlock} = require('../../index');
+const {Page, Table, TextInput, Styles, ContentBlock, Button} = require('../../index');
 
 class TablesPage extends Page {
     constructor() {
@@ -18,7 +18,10 @@ class TablesPage extends Page {
 
         let table  = new Table({
             data: [
-                new Test("Январь", 1, false),
+                new Test("Январь", 1, false, [
+                    new Button({ title: "Изменить", clickEvent: () => { console.log("Изменить") } }),
+                    new Button({ title: "Удалить", clickEvent: () => { console.log("Удалить") } })
+                ]),
                 new Test("Февраль", 2, false),
                 new Test("Март", 3, false),
                 new Test("Апрель", 4, false),
@@ -33,7 +36,7 @@ class TablesPage extends Page {
             ],
             sorted: true,
             userSelect: true,
-            customName: ["Месяц", "Номер", "Активный месяц"],
+            customName: ["Месяц", "Номер", "Активный месяц", "Действия"],
             //columnsWidth: ["20%", "40%", "40%"]
         })
 
@@ -44,10 +47,11 @@ class TablesPage extends Page {
 }
 
 class Test {
-    constructor(month, number, active) {
+    constructor(month, number, active, actions) {
         this.month = month
         this.number = number
         this.active = active
+        this.actions = actions
     }
 }
 
