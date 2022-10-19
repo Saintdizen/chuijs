@@ -98,8 +98,9 @@ class Table {
         })
         return column;
     }
+    setData(data = []) { this.#data = data; }
     getData() { return this.#data; }
-    refresh(data) { this.#setTable(data); }
+    refresh(data = []) { this.#setTable(data); }
     set() { return this.#table; }
 
     //Функции фильтров
