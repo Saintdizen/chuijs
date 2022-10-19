@@ -85,9 +85,6 @@ class Table {
         this.#setHeaders();
         //Заполнение таобицы
         this.#setTable(this.#data);
-        if (options.userSelect !== undefined) {
-            this.#setUserSelect()
-        }
     }
     setContextMenu(ctx = new HTMLElement()) { globalThis.ctxs.push({ elem: this.#table, ctx: ctx }) }
     getColumn(col = Number(undefined)) {
@@ -239,6 +236,7 @@ class Table {
                 }
             }
         }
+        if (this.#userSelect !== undefined) this.#setUserSelect();
     }
     #setUserSelect() {
         for (let row of this.#tBody.rows) {
