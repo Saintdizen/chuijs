@@ -97,7 +97,7 @@ class Image {
                     } else {
                         image_size = [`-webkit-fill-available`, "-webkit-fill-available"];
                     }
-                    popup_size = ["80%", "80%"];
+                    popup_size = ["93%", "93%"];
 
                     //
                     imageSet = new Image({ disableMargin: true, openPopup: false, base64: options.base64, width: image_size[0], height: image_size[1] });
