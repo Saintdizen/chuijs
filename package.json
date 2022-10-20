@@ -28,6 +28,7 @@
   "dependencies": {
     "electron": "https://github.com/castlabs/electron-releases#v13.6.2-wvvmp",
     "electron-store": "~8.1.0",
+    "image-size": "~1.0.2",
     "randomstring": "~1.2.2",
     "showdown": "~2.1.0"
   }

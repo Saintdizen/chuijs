@@ -1,4 +1,4 @@
-const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView, Notification, MenuBar} = require('../../index');
+const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView, Notification, MenuBar, Image} = require('../../index');
 const {Popup} = require("../../framework/components/chui_popups");
 
 class OthersComponentsPage extends Page {
@@ -143,6 +143,24 @@ class OthersComponentsPage extends Page {
             ]
         });
         this.add(treeView)
+
+        let test = new Button({
+            title: "test",
+            clickEvent: () => {
+                require('electron').remote.dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }).then(result => {
+                    if (!result.canceled) {
+                        result.filePaths.forEach(path => {
+                            let buff = new Buffer(require('fs').readFileSync(path)).toString('base64');
+                            let image = new Image({ openPopup: true, base64: buff, width: "200px", height: "auto" });
+                            this.add(image);
+                        })
+                    }
+                }).catch(err => {
+                    console.log(err)
+                })
+            }
+        })
+        this.add(test)
     }
 }
 
