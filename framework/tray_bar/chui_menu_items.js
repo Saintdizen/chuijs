@@ -45,9 +45,6 @@ class MenuItem {
     forceReload(title= String(undefined)) {
         return { label: title, role: 'forceReload' }
     }
-    toggleDevTools(title= String(undefined)) {
-        return { label: title, role: 'toggleDevTools' }
-    }
     quit(title= String(undefined)) {
         return { label: title, role: 'quit' }
     }

@@ -55,9 +55,11 @@ const { MenuBar } = require("./framework/components/chui_menu_bar")
 
 //VARS
 let isQuiting = false;
-let tray = null
+let context = null
 
 class Main {
+    #tray = undefined;
+    //
     #app_icon = undefined;
     #window = undefined;
     //
@@ -65,6 +67,7 @@ class Main {
     #height = undefined;
     #width = undefined;
     #renderer = undefined;
+    #devToolsOpened = false;
     constructor(options = {
         name: String(undefined),
         width: Number(undefined),
@@ -108,17 +111,26 @@ class Main {
             if (options.devTools) { this.#window.webContents.openDevTools() }
         })
     }
+    toggleDevTools() {
+        if (this.#devToolsOpened) {
+            this.#window.webContents.closeDevTools();
+            this.#devToolsOpened = false;
+        } else {
+            this.#window.webContents.openDevTools();
+            this.#devToolsOpened = true;
+        }
+    }
     hideAndShow() {
         app.whenReady().then(() => {
             if (this.#window.isVisible()) {
-                this.#window.hide()
+                this.#window.hide();
             } else {
-                this.#window.show()
+                this.#window.show();
             }
         })
     }
     stop() {
-        if(process.platform !== 'darwin') {
+        if (process.platform !== 'darwin') {
             app.quit();
         } else {
             app.exit(0)
@@ -153,8 +165,9 @@ class Main {
                 });
             })
             if (options.tray) {
-                tray = new Tray(this.#app_icon)
-                tray.setContextMenu(Menu.buildFromTemplate(options.tray))
+                this.#tray = new Tray(this.#app_icon)
+                context = Menu.buildFromTemplate(options.tray);
+                this.#tray.setContextMenu(context)
             }
             this.#window.on('ready-to-show', () => this.#window.show());
             app.on('ready', () => setTimeout(() => {}, 1000));

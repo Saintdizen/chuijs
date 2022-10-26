@@ -4,13 +4,13 @@ const main = new Main({
     width: 1000,
     height: 500,
     render: `${__dirname}/app/app.js`,
-    devTools: true
+    devTools: false
 });
 main.start({
     tray: [
-        new MenuItem().button('Показать \ Скрыть', () => main.hideAndShow()),
+        new MenuItem().button('Скрыть | Показать', () => main.hideAndShow()),
         new MenuItem().separator(),
-        new MenuItem().toggleDevTools('Консоль разработчика'),
+        new MenuItem().button('Консоль', () => main.toggleDevTools()),
         new MenuItem().separator(),
         new MenuItem().quit("Выход")
     ]
