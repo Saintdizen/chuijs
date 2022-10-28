@@ -24,6 +24,10 @@ class OthersComponentsPage extends Page {
                         title:"Кнопка в выпадашке 1",
                         clickEvent: () => new Notification({ title: "Менюбар", text: "Кнопка в выпадашке 1 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
                     }),
+                    MenuBar.BUTTON({
+                        title:"Кнопка в выпадашке 2",
+                        clickEvent: () => new Notification({ title: "Менюбар", text: "Кнопка в выпадашке 2 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
+                    }),
                 ]
             })
         )
