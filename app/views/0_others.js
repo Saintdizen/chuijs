@@ -11,21 +11,20 @@ class OthersComponentsPage extends Page {
         menuBar.addMenuItems(
             MenuBar.BUTTON({
                 title:"Кнопка 1",
-                clickEvent: () => {
-                    new Notification({
-                        title: "Менюбар", text: "Кнопка 1 нажата",
-                        style: Notification.STYLE.SUCCESS, showTime: 5000
-                    }).show()
-                }
+                clickEvent: () => new Notification({ title: "Менюбар", text: "Кнопка 1 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
             }),
             MenuBar.BUTTON({
                 title:"Кнопка 2",
-                clickEvent: () => {
-                    new Notification({
-                        title: "Менюбар", text: "Кнопка 2 нажата",
-                        style: Notification.STYLE.SUCCESS, showTime: 5000
-                    }).show()
-                }
+                clickEvent: () => new Notification({ title: "Менюбар", text: "Кнопка 2 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
+            }),
+            MenuBar.DROPDOWN({
+                title:"Выпадашка 1",
+                items: [
+                    MenuBar.BUTTON({
+                        title:"Кнопка в выпадашке 1",
+                        clickEvent: () => new Notification({ title: "Менюбар", text: "Кнопка в выпадашке 1 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
+                    }),
+                ]
             })
         )
         this.add(menuBar)
