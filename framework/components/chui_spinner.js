@@ -5,7 +5,7 @@ class Spinner {
     #spinner = document.createElement('spinner')
     #spinner_2 = document.createElement('spinner')
     #spinner_3 = document.createElement('spinner')
-    constructor(size = Spinner.SIZE, margin = String(undefined)) {
+    constructor(size = Spinner.SIZE, margin = String()) {
         require('../modules/chui_functions').style_parse([
             {
                 name: "chui_spiner",

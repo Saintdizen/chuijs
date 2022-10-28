@@ -123,9 +123,9 @@ class RadioButton {
     }
     getName() { return this.#input.name; }
     getValue() { return this.#input.checked; }
-    setValue(value = Boolean(undefined)) { this.#input.checked = value; }
+    setValue(value = Boolean()) { this.#input.checked = value; }
     addChangeListener(listener) { this.#input.addEventListener('change', listener); }
-    setDisabled(boolean = Boolean(undefined)) { this.#input.disabled = boolean; }
+    setDisabled(boolean = Boolean()) { this.#input.disabled = boolean; }
     set() {
         this.#radioButton.appendChild(this.#input);
         this.#radioButton.appendChild(this.#label);

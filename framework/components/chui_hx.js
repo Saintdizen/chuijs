@@ -1,6 +1,6 @@
 class H {
     #h = undefined;
-    constructor(num = Number(undefined), text = String(undefined)) {
+    constructor(num = Number(), text = String()) {
         require('../modules/chui_functions').style_parse([
             {
                 name: "h1, h2, h3, h4, h5, h6",
@@ -33,7 +33,7 @@ class H {
         this.#h = document.createElement(`h${num}`)
         this.#h.innerText = text;
     }
-    setText(text = String(undefined)) {
+    setText(text = String()) {
         this.#h.innerText = text;
     }
     set() {

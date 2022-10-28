@@ -1,7 +1,7 @@
 class HtmlBlock {
     #id = require("randomstring").generate()
     #html_block = document.createElement('chui_html_block')
-    constructor(width = String(undefined)) {
+    constructor(width = String()) {
           require('../modules/chui_functions').style_parse([
             {
                 name: "chui_html_block",

@@ -69,11 +69,11 @@ class Main {
     #renderer = undefined;
     #devToolsOpened = false;
     constructor(options = {
-        name: String(undefined),
-        width: Number(undefined),
-        height: Number(undefined),
-        render: String(undefined),
-        devTools: Boolean(undefined)
+        name: String(),
+        width: Number(),
+        height: Number(),
+        render: String(),
+        devTools: Boolean()
     }) {
         this.#app_icon = options.icon;
         if (this.#app_icon === undefined) {

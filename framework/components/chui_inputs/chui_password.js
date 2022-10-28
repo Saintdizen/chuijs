@@ -12,11 +12,7 @@ class PasswordInput {
     #title = undefined;
     #error_message_password = document.createElement("error_message_password");
     constructor(options = {
-        name: String(undefined),
-        title: String(undefined),
-        placeholder: String(undefined),
-        width: String(undefined),
-        required: Boolean(undefined)
+        name: String(), title: String(), placeholder: String(), width: String(), required: Boolean()
     }) {
         require('../../modules/chui_functions').style_parse([
             {
@@ -187,8 +183,8 @@ class PasswordInput {
     getName() { return this.#input.name; }
     getTitle() { return this.#title; }
     getValue() { return this.#input.value; }
-    setValue(text = String(undefined)) { this.#input.value = text; }
-    setDisabled(boolean = Boolean(undefined)) {
+    setValue(text = String()) { this.#input.value = text; }
+    setDisabled(boolean = Boolean()) {
         this.#input.disabled = boolean
         if (boolean) {
             this.#password_main.classList.add("password_main_disabled")
@@ -204,7 +200,7 @@ class PasswordInput {
             this.#password_main.appendChild(this.#see_pass_button);
         }
     }
-    setErrorMessage(message = String(undefined)) {
+    setErrorMessage(message = String()) {
         this.#password_main.classList.add("error_border");
         this.#error_message_password.innerText = message;
         this.#chui_password_input.appendChild(this.#error_message_password);

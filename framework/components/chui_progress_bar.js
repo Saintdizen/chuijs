@@ -4,9 +4,7 @@ class ProgressBar {
     #main = document.createElement("progress_block");
     #progress_count = document.createElement('progress_count');
     #progress_text = document.createElement('progress_text');
-    constructor(options = {
-        max: Number(undefined)
-    }) {
+    constructor(options = { max: Number() }) {
         require('../modules/chui_functions').style_parse([
             {
                 name: "progress_block",
@@ -57,11 +55,11 @@ class ProgressBar {
         this.#main.appendChild(this.#ProgressBar)
         this.#main.appendChild(this.#progress_text)
     }
-    setMax(max = Number(undefined)) { this.#ProgressBar.max = max; }
-    setWidth(width = String(undefined)) { this.#main.style.width = width; }
-    setProgressCountText(text = String(undefined)) { this.#progress_count.innerText = text; }
-    setValue(value = Number(undefined)) { this.#ProgressBar.value = value; }
-    setProgressText(text = String(undefined)) { this.#progress_text.innerText = text; }
+    setMax(max = Number()) { this.#ProgressBar.max = max; }
+    setWidth(width = String()) { this.#main.style.width = width; }
+    setProgressCountText(text = String()) { this.#progress_count.innerText = text; }
+    setValue(value = Number()) { this.#ProgressBar.value = value; }
+    setProgressText(text = String()) { this.#progress_text.innerText = text; }
     set() { return this.#main; }
 }
 

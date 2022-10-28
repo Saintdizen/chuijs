@@ -6,11 +6,11 @@ class EmailInput {
     #input = document.createElement('input');
     #title = undefined;
     constructor(options = {
-        name: String(undefined),
-        title: String(undefined),
-        placeholder: String(undefined),
-        width: String(undefined),
-        required: Boolean(undefined)
+        name: String(),
+        title: String(),
+        placeholder: String(),
+        width: String(),
+        required: Boolean()
     }) {
         require('../../modules/chui_functions').style_parse([
             {
@@ -138,8 +138,8 @@ class EmailInput {
     getName() { return this.#input.name; }
     getTitle() { return this.#title; }
     getValue() { return this.#input.value; }
-    setValue(text = String(undefined)) { this.#input.value = text; }
-    setDisabled(boolean = Boolean(undefined)) {
+    setValue(text = String()) { this.#input.value = text; }
+    setDisabled(boolean = Boolean()) {
         this.#input.disabled = boolean
         if (boolean) {
             this.#chui_email_main.classList.add("chui_email_main_disabled")

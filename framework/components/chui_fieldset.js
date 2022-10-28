@@ -3,16 +3,11 @@ class FieldSet {
     #fieldset = document.createElement("fieldset")
     #legend = document.createElement("legend")
     constructor(options = {
-        id: String(undefined),
-        name: String(undefined),
-        title: String(undefined),
+        id: String(), name: String(), title: String(),
         style: {
-            width: String(undefined),
-            height: String(undefined),
-            direction: String(undefined),
-            wrap: String(undefined),
-            align: String(undefined),
-            justify: String(undefined),
+            width: String(), height: String(),
+            direction: String(), wrap: String(),
+            align: String(), justify: String(),
         },
         components: []
     }) {

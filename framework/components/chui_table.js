@@ -12,14 +12,14 @@ class Table {
     #columns = [];
     #data = [];
     #customNames = [];
-    #userSelect = Boolean(false);
+    #userSelect = Boolean();
     #columnsWidth = undefined;
     #sorted = undefined;
     constructor(options = {
         data: undefined,
         customName: undefined,
-        userSelect: Boolean(undefined),
-        sorted: Boolean(undefined),
+        userSelect: Boolean(),
+        sorted: Boolean(),
         columnsWidth: undefined,
     }) {
         this.#sorted = options.sorted;
@@ -87,7 +87,7 @@ class Table {
         this.#setTable(this.#data);
     }
     setContextMenu(ctx = new HTMLElement()) { globalThis.ctxs.push({ elem: this.#table, ctx: ctx }) }
-    getColumn(col = Number(undefined)) {
+    getColumn(col = Number()) {
         let column = [];
         Array.from(this.#table.rows).forEach(row => {
             Array.from(row.cells).forEach(cell => {
@@ -246,7 +246,7 @@ class Table {
             }
         }
     }
-    #sortTable(sortMethod = String(undefined), col = Number(undefined)) {
+    #sortTable(sortMethod = String(), col = Number()) {
         if (this.#filtered_data.length !== 0) {
             this.#sorted_data = this.#filtered_data;
             this.#sort(col, sortMethod);
@@ -255,7 +255,7 @@ class Table {
             this.#sort(col, sortMethod);
         }
     }
-    #sort(colIndex = Number(undefined), sortMethod = String(undefined)) {
+    #sort(colIndex = Number(), sortMethod = String()) {
         let cols = Object.getOwnPropertyNames(this.#sorted_data[0]);
         let arr = [];
         for (let data of this.#sorted_data) {

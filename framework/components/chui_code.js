@@ -1,9 +1,9 @@
 class CodeBlock {
     #chui_code = document.createElement(`code`);
-    constructor(text = String(undefined), options = {
-        textAlign: String(undefined),
-        wordBreak: String(undefined),
-        width: String(undefined)
+    constructor(text = String(), options = {
+        textAlign: String(),
+        wordBreak: String(),
+        width: String()
     }) {
         require('../modules/chui_functions').style_parse([
             {
@@ -28,7 +28,7 @@ class CodeBlock {
         if (options.wordBreak !== undefined) this.#chui_code.style.wordBreak = options.wordBreak;
         if (options.width !== undefined) this.#chui_code.style.width = options.width;
     }
-    setText(text = String(undefined)) {
+    setText(text = String()) {
         this.#chui_code.innerText = text;
     }
     set() {

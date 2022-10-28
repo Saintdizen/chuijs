@@ -1,6 +1,6 @@
 class Icon {
     #chui_icon = document.createElement('chui_icon');
-    constructor(name = String(undefined), size = String(undefined), color = String(undefined)) {
+    constructor(name = String(), size = String(), color = String()) {
         require('../modules/chui_functions').style_parse([
             {
                 name: "chui_icon",

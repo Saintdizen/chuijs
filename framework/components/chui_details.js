@@ -16,13 +16,13 @@ class Details {
     #justify;
     #width;
     constructor(options = {
-        title: String(undefined),
-        contenteditable: Boolean(false),
-        direction: String(undefined),
-        wrap: String(undefined),
-        align: String(undefined),
-        justify: String(undefined),
-        width: String(undefined)
+        title: String(),
+        contenteditable: Boolean(),
+        direction: String(),
+        wrap: String(),
+        align: String(),
+        justify: String(),
+        width: String()
     }) {
         this.#direction = options.direction;
         this.#wrap = options.wrap;

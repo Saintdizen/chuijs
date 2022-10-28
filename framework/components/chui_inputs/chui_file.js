@@ -21,19 +21,13 @@ class FileInput {
     #chui_file_main = document.createElement('chui_file_main');
     #chui_file_input = document.createElement('chui_file_input');
     #id = require("randomstring").generate();
-    #title = String(undefined);
+    #title = String();
     #input = document.createElement('input');
     #label = document.createElement('label');
     constructor(options = {
-        name: String(undefined),
-        title: String(undefined),
-        accept: new Array(undefined),
-        required: Boolean(undefined),
-        disableFocus: Boolean(false),
-        multiple: Boolean(false),
-        changeListener: () => undefined,
-        focusListener: () => undefined,
-        blurListener: () => undefined
+        name: String(), title: String(), accept: [],
+        required: Boolean(), disableFocus: Boolean(), multiple: Boolean(),
+        changeListener: () => {}, focusListener: () => {}, blurListener: () => {}
     }) {
         require('../../modules/chui_functions').style_parse([
             {
@@ -194,9 +188,9 @@ class FileInput {
     addBlurListener(listener = () => {}) { this.#input.addEventListener('blur', listener); }
     getName() { return this.#input.name; }
     getTitle() { return this.#title; }
-    getFile(index = Number(0)) { return this.#input.files[index]; }
+    getFile(index = Number()) { return this.#input.files[index]; }
     getFiles() { return this.#input.files; }
-    setDisabled(value = Boolean(undefined)) {
+    setDisabled(value = Boolean()) {
         this.#input.disabled = value
         if (value) {
             this.#chui_file_main.classList.add("chui_file_main_disabled")

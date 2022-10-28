@@ -5,21 +5,21 @@ class TextInput {
     #chui_text_main = document.createElement('chui_text_main');
     #chui_text_input = document.createElement('chui_text_input');
     #id = require("randomstring").generate();
-    #title = String(undefined);
+    #title = String();
     #input = document.createElement('input');
     #label = document.createElement('label');
     #error_message_text = document.createElement("error_message_text");
     constructor(options = {
-        name: String(undefined),
-        title: String(undefined),
-        placeholder: String(undefined),
-        width: String(undefined),
-        required: Boolean(undefined),
-        value: String(undefined),
-        disableFocus: Boolean(false),
-        inputListener: () => undefined,
-        focusListener: () => undefined,
-        blurListener: () => undefined
+        name: String(),
+        title: String(),
+        placeholder: String(),
+        width: String(),
+        required: Boolean(),
+        value: String(),
+        disableFocus: Boolean(),
+        inputListener: () => {},
+        focusListener: () => {},
+        blurListener: () => {}
     }) {
         require('../../modules/chui_functions').style_parse([
             {
@@ -175,8 +175,8 @@ class TextInput {
     getName() { return this.#input.name; }
     getTitle() { return this.#title; }
     getValue() { return this.#input.value; }
-    setValue(text = String(undefined)) { this.#input.value = text; }
-    setDisabled(boolean = Boolean(undefined)) {
+    setValue(text = String()) { this.#input.value = text; }
+    setDisabled(boolean = Boolean()) {
         this.#input.disabled = boolean
         if (boolean) {
             this.#chui_text_main.classList.add("chui_text_main_disabled")
@@ -188,7 +188,7 @@ class TextInput {
             this.#label.className = "input_label"
         }
     }
-    setErrorMessage(message = String(undefined)) {
+    setErrorMessage(message = String()) {
         this.#chui_text_main.classList.add("error_border");
         this.#error_message_text.innerText = message;
         this.#chui_text_input.appendChild(this.#error_message_text);

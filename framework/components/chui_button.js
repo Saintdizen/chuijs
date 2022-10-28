@@ -6,9 +6,9 @@ class Button {
     #button_text = document.createElement('button_text');
     #button_icon = document.createElement('button_icon');
     constructor(options = {
-        title: String(undefined),
+        title: String(),
         icon: undefined,
-        reverse: Boolean(undefined),
+        reverse: Boolean(),
         clickEvent: () => {}
     }) {
         const {style_parse} = require('../modules/chui_functions');
@@ -143,9 +143,9 @@ class Button {
         this.#chui_button.appendChild(this.#button)
     }
     getText() { return this.#button.innerText; }
-    setText(text = String(undefined)) { this.#button.innerText = text; }
+    setText(text = String()) { this.#button.innerText = text; }
     addClickListener(listener = () => {}) { this.#button.addEventListener('click', listener); }
-    setDisabled(boolean = Boolean(undefined)) {
+    setDisabled(boolean = Boolean()) {
         this.#button.disabled = boolean
     }
     set() { return this.#chui_button; }

@@ -13,11 +13,8 @@ class Select {
     #disabled_trigger = false;
     #dropdown = document.createElement('selectbox_dropdown');
     constructor(options = {
-        name: String(undefined),
-        title: String(undefined),
-        placeholder: String(undefined),
-        width: String(undefined),
-        required: Boolean(undefined)
+        name: String(), title: String(), placeholder: String(),
+        width: String(), required: Boolean()
     }) {
         require('../../modules/chui_functions').style_parse([
             {
@@ -224,7 +221,7 @@ class Select {
         });
         this.#Select_main.appendChild(this.#Select_second)
     }
-    setBottonOpenVisible(visible = Boolean(undefined)) {
+    setBottonOpenVisible(visible = Boolean()) {
         if (!visible) {
             this.#button_open.style.display = 'none';
             this.#input.style.padding = '5px 10px';
@@ -243,10 +240,10 @@ class Select {
             this.#dropdown.appendChild(option);
         }
     }
-    setDropdownHeight(height = String(undefined)) {
+    setDropdownHeight(height = String()) {
         this.#dropdown.style.height = height;
     }
-    setDefaultOption(value = Object(undefined)) {
+    setDefaultOption(value = Object()) {
         let opt = this.#dropdown.getElementsByTagName('selectbox_option');
         for (let i = 0; i < opt.length; i++) {
             let test = opt.item(i);
@@ -269,7 +266,7 @@ class Select {
     }
     getName() { return this.#input.name; }
     getValue() { return this.#input.value; }
-    setDisabled(boolean = Boolean(undefined)) {
+    setDisabled(boolean = Boolean()) {
         this.#disabled_trigger = boolean
         if (boolean) {
             this.#Select_second.classList.add("selectbox_disabled")

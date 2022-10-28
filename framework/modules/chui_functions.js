@@ -42,12 +42,12 @@ function getDefaultIcon() {
     return require('path').join(__dirname, 'chui_icon.png');
 }
 
-function markdownToHtml(text = String(undefined)) {
+function markdownToHtml(text = String()) {
     let showdown = require('showdown');
     return new showdown.Converter().makeHtml(text);
 }
 
-function htmlToMarkdown(text = String(undefined)) {
+function htmlToMarkdown(text = String()) {
     let showdown = require('showdown');
     return new showdown.Converter().makeMarkdown(text);
 }

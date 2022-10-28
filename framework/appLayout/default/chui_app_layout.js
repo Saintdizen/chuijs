@@ -926,11 +926,11 @@ class AppLayout extends Route {
         }
     }
 
-    setHideOnClose(boolean = Boolean(undefined)) {
+    setHideOnClose(boolean = Boolean()) {
         this.#windowHideOnClose = boolean;
     }
 
-    setWindowControlsPositionLeft(position = Boolean(undefined)) {
+    setWindowControlsPositionLeft(position = Boolean()) {
         this.#windowControlsPositionLeft = position;
         if (this.#windowControlsPositionLeft) {
             this.#window_control_box.style.marginLeft = '6px';
@@ -956,7 +956,7 @@ class AppLayout extends Route {
         this.#not_duplicate_page = boolean;
     }
 
-    setAutoCloseRouteMenu(boolean = Boolean(undefined)) {
+    setAutoCloseRouteMenu(boolean = Boolean()) {
         this.#auto_close = boolean;
     }
 
@@ -1027,9 +1027,9 @@ class AppLayout extends Route {
     }
 
     static BUTTON(options = {
-        title: String(undefined),
+        title: String(),
         icon: undefined,
-        reverse: Boolean(undefined),
+        reverse: Boolean(),
         clickEvent: () => {
         }
     }) {
@@ -1037,11 +1037,11 @@ class AppLayout extends Route {
     }
 
     static USER_PROFILE(options = {
-        username: String(undefined),
+        username: String(),
         image: {
-            noImage: Boolean(undefined),
-            imageLink: String(undefined),
-            imageBase64: String(undefined),
+            noImage: Boolean(),
+            imageLink: String(),
+            imageBase64: String(),
         },
         items: []
     }) {
@@ -1049,28 +1049,27 @@ class AppLayout extends Route {
     }
 
     static USER_PROFILE_ITEM(options = {
-        title: String(undefined),
+        title: String(),
         icon: undefined,
-        clickEvent: () => {
-        }
+        clickEvent: () => {}
     }) {
         return new UserDDItem(options).set();
     }
 
     static DIALOG(options = {
-        title: String(undefined),
+        title: String(),
         icon: undefined,
-        reverse: Boolean(undefined),
+        reverse: Boolean(),
         dialogOptions: {
-            title: String(undefined),
-            closeOutSideClick: Boolean(undefined),
+            title: String(),
+            closeOutSideClick: Boolean(),
             style: {
-                width: String(undefined),
-                height: String(undefined),
-                direction: String(undefined),
-                wrap: String(undefined),
-                align: String(undefined),
-                justify: String(undefined),
+                width: String(),
+                height: String(),
+                direction: String(),
+                wrap: String(),
+                align: String(),
+                justify: String(),
             },
             components: []
         }
@@ -1089,11 +1088,11 @@ class UserProfile {
 
     //
     constructor(options = {
-        username: String(undefined),
+        username: String(),
         image: {
-            noImage: Boolean(undefined),
-            imageLink: String(undefined),
-            imageBase64: String(undefined),
+            noImage: Boolean(),
+            imageLink: String(),
+            imageBase64: String(),
         },
         items: []
     }) {
@@ -1242,7 +1241,7 @@ class UserDDItem {
     #user_item = document.createElement("user_item");
 
     constructor(options = {
-        title: String(undefined),
+        title: String(),
         icon: undefined,
         clickEvent: () => {}
     }) {
@@ -1263,19 +1262,19 @@ class HeaderDialog {
     #header_button_icon = document.createElement("header_button_icon");
 
     constructor(options = {
-        title: String(undefined),
+        title: String(),
         icon: undefined,
-        reverse: Boolean(undefined),
+        reverse: Boolean(),
         dialogOptions: {
-            title: String(undefined),
-            closeOutSideClick: Boolean(undefined),
+            title: String(),
+            closeOutSideClick: Boolean(),
             style: {
-                width: String(undefined),
-                height: String(undefined),
-                direction: String(undefined),
-                wrap: String(undefined),
-                align: String(undefined),
-                justify: String(undefined),
+                width: String(),
+                height: String(),
+                direction: String(),
+                wrap: String(),
+                align: String(),
+                justify: String(),
             },
             components: []
         }
@@ -1404,9 +1403,9 @@ class HeaderButton {
     #header_button_icon = document.createElement("header_button_icon");
 
     constructor(options = {
-        title: String(undefined),
+        title: String(),
         icon: undefined,
-        reverse: Boolean(undefined),
+        reverse: Boolean(),
         clickEvent: () => {
         }
     }) {

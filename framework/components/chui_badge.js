@@ -3,9 +3,9 @@ const {style_parse, markdownToHtml, htmlToMarkdown} = require('../modules/chui_f
 class Badge {
     #chui_badge = document.createElement(`chui_badge`);
     constructor(options = {
-        id: String(undefined),
-        text: String(undefined),
-        markdownText: String(undefined),
+        id: String(),
+        text: String(),
+        markdownText: String(),
         style: undefined
     }) {
         style_parse([
@@ -72,16 +72,16 @@ class Badge {
         return htmlToMarkdown(this.#chui_badge.innerHTML);
     }
     // SET
-    setText(text = String(undefined)) {
+    setText(text = String()) {
         this.#chui_badge.innerText = text;
     }
-    setMarkdownText(text = String(undefined)) {
+    setMarkdownText(text = String()) {
         this.#chui_badge.innerHTML = markdownToHtml(text);
     }
-    setId(id = String(undefined)) {
+    setId(id = String()) {
         this.#chui_badge.id = id;
     }
-    setStyle(style = String(undefined)) {
+    setStyle(style = String()) {
         this.#chui_badge.classList.add(style);
     }
     // RENDER

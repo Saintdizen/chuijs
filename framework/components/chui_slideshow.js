@@ -11,10 +11,10 @@ class SlideShow {
     //
     #slides_list = undefined;
     constructor(options = {
-        width: String(undefined),
-        height: String(undefined),
+        width: String(),
+        height: String(),
         autoplay: {
-            status: Boolean(false),
+            status: Boolean(),
             interval: Number(10),
         },
         slides: []
@@ -126,7 +126,7 @@ class SlideShow {
         new Animation(slide).fadeIn()
         //
     }
-    #changeSlide(n = Number(undefined)) {
+    #changeSlide(n = Number()) {
         let sum_slides = this.#slides_list.length;
         this.#default_slide = this.#default_slide + n;
         if (this.#default_slide > (sum_slides - 1)) this.#default_slide = 0;
@@ -140,7 +140,7 @@ class SlideShow {
     set() {
         return this.#chui_slides_main;
     }
-    static SLIDE(options = { width: String(undefined), height: String(undefined), components: [] }) {
+    static SLIDE(options = { width: String(), height: String(), components: [] }) {
         return new Slide(options)
     }
 }
@@ -151,14 +151,11 @@ class Slide {
     #chui_slide_content = document.createElement('chui_slide_content');
     constructor(options = {
         size: {
-            width: String(undefined),
-            height: String(undefined),
+            width: String(), height: String(),
         },
         style: {
-            direction: String(undefined),
-            wrap: String(undefined),
-            align: String(undefined),
-            justify: String(undefined),
+            direction: String(), wrap: String(),
+            align: String(), justify: String(),
         },
         components: []
     }) {

@@ -12,11 +12,11 @@ class ComboBox {
     #button_open_disabled = document.createElement('combo_button_open');
     #dropdown = document.createElement('combobox_dropdown');
     constructor(options = {
-        name: String(undefined),
-        title: String(undefined),
-        placeholder: String(undefined),
-        width: String(undefined),
-        required: Boolean(undefined),
+        name: String(),
+        title: String(),
+        placeholder: String(),
+        width: String(),
+        required: Boolean(),
     }) {
         require('../../modules/chui_functions').style_parse([
             {
@@ -233,7 +233,7 @@ class ComboBox {
     }
     getName() { return this.#input.name; }
     getValue() { return this.#input.value; }
-    setDisabled(boolean = Boolean(undefined)) {
+    setDisabled(boolean = Boolean()) {
         this.#input.disabled = boolean
         if (boolean) {
             this.#ComboBox_second.classList.add("combobox_disabled")

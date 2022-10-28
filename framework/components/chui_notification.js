@@ -11,12 +11,12 @@ class Notification {
     #notification_date = document.createElement("notification_date");
     #notification_text = document.createElement("notification_text")
     constructor(options = {
-        title: String(undefined),
-        markdownTitle: String(undefined),
-        text: String(undefined),
-        markdownText: String(undefined),
+        title: String(),
+        markdownTitle: String(),
+        text: String(),
+        markdownText: String(),
         style: undefined,
-        showTime: Number(undefined)
+        showTime: Number()
     }) {
         style_parse([
             {
@@ -149,7 +149,7 @@ class Notification {
         this.#notification_content.appendChild(this.#notification_text)
         this.#notification.appendChild(this.#notification_content)
     }
-    show(showOnSystem = Boolean(undefined)) {
+    show(showOnSystem = Boolean()) {
         document.getElementsByTagName('notification_panel')[0].appendChild(this.#notification);
         let notification = document.getElementById(this.#id);
         new Animation(notification).slideRightIn();

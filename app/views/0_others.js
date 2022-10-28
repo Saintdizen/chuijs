@@ -9,8 +9,24 @@ class OthersComponentsPage extends Page {
 
         let menuBar = new MenuBar();
         menuBar.addMenuItems(
-            MenuBar.BUTTON({title:"Кнопка 1"}),
-            MenuBar.BUTTON({title:"Кнопка 2"})
+            MenuBar.BUTTON({
+                title:"Кнопка 1",
+                clickEvent: () => {
+                    new Notification({
+                        title: "Менюбар", text: "Кнопка 1 нажата",
+                        style: Notification.STYLE.SUCCESS, showTime: 5000
+                    }).show()
+                }
+            }),
+            MenuBar.BUTTON({
+                title:"Кнопка 2",
+                clickEvent: () => {
+                    new Notification({
+                        title: "Менюбар", text: "Кнопка 2 нажата",
+                        style: Notification.STYLE.SUCCESS, showTime: 5000
+                    }).show()
+                }
+            })
         )
         this.add(menuBar)
 

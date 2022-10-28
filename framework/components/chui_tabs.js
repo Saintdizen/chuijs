@@ -33,9 +33,9 @@ class Tabs {
     #list = document.createElement('list');
     #content = document.createElement('content');
     constructor(options = {
-        tabsJustify: String(undefined),
-        width: String(undefined),
-        default: Number(undefined),
+        tabsJustify: String(),
+        width: String(),
+        default: Number(),
         tabs: []
     }) {
         if (options.tabsJustify === undefined) options.tabsJustify = 'flex-start';

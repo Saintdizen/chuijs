@@ -2,10 +2,7 @@ const {Icon, Icons} = require("./chui_icons");
 
 class TreeView {
     #chui_tree_view = document.createElement(`chui_tree_view`);
-    constructor(options = {
-        width: String(undefined),
-        components: []
-    }) {
+    constructor(options = { width: String(), components: [] }) {
         require('../modules/chui_functions').style_parse([
             {
                 name: "chui_tree_view",
@@ -125,10 +122,7 @@ class TreeView {
     set() {
         return this.#chui_tree_view;
     }
-    static Button(options = {
-        title: String(undefined),
-        listener: () => {}
-    }) {
+    static Button(options = { title: String(), listener: () => {} }) {
         let button = document.createElement('tree_view_button');
         button.addEventListener("click", options.listener);
         let button_text = document.createElement('tree_view_button_text');
@@ -139,11 +133,7 @@ class TreeView {
             button: button
         };
     }
-    static ExpandButton(options = {
-        title: String(undefined),
-        subButtons: [],
-        components: []
-    }) {
+    static ExpandButton(options = { title: String(), subButtons: [], components: [] }) {
         let button = document.createElement('tree_view_button');
         let panel = document.createElement('tree_view_panel')
         button.addEventListener('click', (e) => {

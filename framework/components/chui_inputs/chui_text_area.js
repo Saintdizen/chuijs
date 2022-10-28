@@ -5,12 +5,8 @@ class TextArea {
     #label = document.createElement('label');
     #title = undefined;
     constructor(options = {
-        name: String(undefined),
-        title: String(undefined),
-        placeholder: String(undefined),
-        width: String(undefined),
-        height: String(undefined),
-        required: Boolean(undefined)
+        name: String(), title: String(), placeholder: String(),
+        width: String(), height: String(), required: Boolean()
     }) {
         require('../../modules/chui_functions').style_parse([
             {
@@ -122,8 +118,8 @@ class TextArea {
     getName() { return this.#text_area.name; }
     getTitle() { return this.#title; }
     getValue() { return this.#text_area.value; }
-    setValue(text = String(undefined)) { this.#text_area.value = text; }
-    setDisabled(boolean = Boolean(undefined)) {
+    setValue(text = String()) { this.#text_area.value = text; }
+    setDisabled(boolean = Boolean()) {
         this.#text_area.disabled = boolean
         if (boolean) {
             this.#text_area.classList.remove("area_input")

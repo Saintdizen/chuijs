@@ -8,9 +8,9 @@ class Dialog {
     #body = document.createElement('dialog_body');
     #footer = document.createElement('dialog_footer');
     constructor(options = {
-        width: String(undefined),
-        height: String(undefined),
-        closeOutSideClick: Boolean(undefined)
+        width: String(),
+        height: String(),
+        closeOutSideClick: Boolean()
     }) {
         require('../modules/chui_functions').style_parse([
             {

@@ -16,7 +16,7 @@ class TextEditor {
     // status
     #cater_position = new Label({text: "0"});
     //
-    constructor(height = String(undefined), options) {
+    constructor(height = String(), options) {
         require('../../modules/chui_functions').style_parse([
             {
                 name: "chui_text_editor_test",

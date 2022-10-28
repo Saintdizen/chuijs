@@ -154,13 +154,12 @@ class Popup {
         ], 'chUiJS_Popups');
     }
 
-    alert(options = {title: String(undefined), message: String(undefined)}) {
+    alert(options = {title: String(), message: String()}) {
         new PopupAlert(options);
     }
 
     async confirm(options = {
-        title: String(undefined), message: String(undefined),
-        okText: String(undefined), cancelText: String(undefined),
+        title: String(), message: String(), okText: String(), cancelText: String(),
     }) {
         try {
             return await new PopupConfirm(options);
@@ -170,18 +169,16 @@ class Popup {
     }
 
     async prompt(options = {
-        title: String(undefined), message: String(undefined),
+        title: String(), message: String(),
         inputs: {
             text: {
-                placeholder: String(undefined),
-                errorMessage: String(undefined)
+                placeholder: String(), errorMessage: String()
             },
             password: {
-                placeholder: String(undefined),
-                errorMessage: String(undefined)
+                placeholder: String(), errorMessage: String()
             },
         },
-        okText: String(undefined), cancelText: String(undefined)
+        okText: String(), cancelText: String()
     }) {
         try {
             return await new PopupPrompt(options);
@@ -204,7 +201,7 @@ class PopupAlert {
     #popup_title = document.createElement("popup_title")
     #popup_message = document.createElement("popup_message")
 
-    constructor(options = {title: String(undefined), message: String(undefined)}) {
+    constructor(options = {title: String(), message: String()}) {
         this.#chui_popup.id = this.#id
         //ADDS
         this.#popup_content.appendChild(this.#popup_body)
@@ -247,8 +244,8 @@ class PopupConfirm {
     #popup_message = document.createElement("popup_message")
 
     constructor(options = {
-        title: String(undefined), message: String(undefined),
-        okText: String(undefined), cancelText: String(undefined),
+        title: String(), message: String(),
+        okText: String(), cancelText: String(),
     }) {
         this.#chui_popup.id = this.#id
         //ADDS
@@ -307,18 +304,18 @@ class PopupPrompt {
     #input_pass = undefined;
 
     constructor(options = {
-        title: String(undefined), message: String(undefined),
+        title: String(), message: String(),
         inputs: {
             text: {
-                placeholder: String(undefined),
-                errorMessage: String(undefined)
+                placeholder: String(),
+                errorMessage: String()
             },
             password: {
-                placeholder: String(undefined),
-                errorMessage: String(undefined)
+                placeholder: String(),
+                errorMessage: String()
             },
         },
-        okText: String(undefined), cancelText: String(undefined)
+        okText: String(), cancelText: String()
     }) {
         this.#chui_popup.id = this.#id
         //ADDS

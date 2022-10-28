@@ -3,13 +3,13 @@ const {style_parse, htmlToMarkdown, markdownToHtml} = require('../modules/chui_f
 class Label {
     #chui_label = document.createElement(`chui_label`);
     constructor(options = {
-        id: String(undefined),
-        text: String(undefined),
-        markdownText: String(undefined),
-        textAlign: String(undefined),
-        wordBreak: String(undefined),
-        width: String(undefined),
-        fontSize: String(undefined),
+        id: String(),
+        text: String(),
+        markdownText: String(),
+        textAlign: String(),
+        wordBreak: String(),
+        width: String(),
+        fontSize: String(),
     }) {
         style_parse([
             {
@@ -56,13 +56,13 @@ class Label {
         return htmlToMarkdown(this.#chui_label.innerHTML);
     }
     // SET
-    setId(id = String(undefined)) {
+    setId(id = String()) {
         this.#chui_label.id = id;
     }
-    setText(text = String(undefined)) {
+    setText(text = String()) {
         this.#chui_label.innerText = text;
     }
-    setMarkdownText(text = String(undefined)) {
+    setMarkdownText(text = String()) {
         this.#chui_label.innerHTML = markdownToHtml(text);
     }
     // RENDER

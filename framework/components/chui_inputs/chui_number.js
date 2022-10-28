@@ -12,10 +12,8 @@ class NumberInput {
     #input = document.createElement('input');
     #label = document.createElement('label');
     constructor(options = {
-        name: String(undefined),
-        title: String(undefined),
-        required: Boolean(undefined),
-        width: String(undefined),
+        name: String(), title: String(),
+        required: Boolean(), width: String(),
     }) {
         require('../../modules/chui_functions').style_parse([
             {
@@ -194,8 +192,8 @@ class NumberInput {
     getName() { return this.#input.name; }
     getTitle() { return this.#title; }
     getValue() { return this.#input.value; }
-    setValue(num = Number(undefined)) { this.#input.value = num; }
-    setDisabled(boolean = Boolean(undefined)) {
+    setValue(num = Number()) { this.#input.value = num; }
+    setDisabled(boolean = Boolean()) {
         this.#input.disabled = boolean
         if (boolean) {
             this.#number_main.classList.add("number_main_disabled")

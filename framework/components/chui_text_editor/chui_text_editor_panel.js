@@ -111,7 +111,7 @@ class TextEditorSelects {
     #button_open = document.createElement('text_editor_select_button_open');
     #dropdown = document.createElement('text_editor_selectbox_dropdown');
     constructor(options = {
-        icon: String(undefined)
+        icon: String()
     }) {
         require('../../modules/chui_functions').style_parse([
             {
@@ -316,8 +316,8 @@ class TextEditorSelects {
 
 class TextEditorPanel {
     #panel = document.createElement("text_editor_panel")
-    constructor(text_editor_id = String(undefined), controls = {
-        UNDO_REDO: Boolean(undefined),
+    constructor(text_editor_id = String(), controls = {
+        UNDO_REDO: Boolean(),
     }) {
         require('../../modules/chui_functions').style_parse([
             {

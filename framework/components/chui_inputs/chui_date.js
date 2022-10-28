@@ -15,9 +15,9 @@ class DateInput {
     #dropdown_id = require("randomstring").generate();
     #date_now = new Date();
     constructor(options = {
-        name: String(undefined),
-        title: String(undefined),
-        required: Boolean(undefined)
+        name: String(),
+        title: String(),
+        required: Boolean()
     }) {
         require('../../modules/chui_functions').style_parse([
             {
@@ -310,8 +310,8 @@ class DateInput {
     getName() { return this.#input.name; }
     getTitle() { return this.#label.innerText; }
     getValue() { return this.#input.value; }
-    setValue(date = String(undefined)) { this.#input.value = date; }
-    setDisabled(boolean = Boolean(undefined)) {
+    setValue(date = String()) { this.#input.value = date; }
+    setDisabled(boolean = Boolean()) {
         this.#input.disabled = boolean
         if (boolean) {
             this.#date_main_block.classList.add("date_main_block_disabled")

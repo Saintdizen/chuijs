@@ -4,11 +4,11 @@ class ContentBlock {
     #body = document.createElement(`contentblock`);
     #disableMarginChild = false;
     constructor(options = {
-        direction: String(undefined),
-        wrap: String(undefined),
-        align: String(undefined),
-        justify: String(undefined),
-        disableMarginChild: Boolean(undefined),
+        direction: String(),
+        wrap: String(),
+        align: String(),
+        justify: String(),
+        disableMarginChild: Boolean(),
     }) {
         require('../modules/chui_functions').style_parse([
             {
@@ -48,9 +48,9 @@ class ContentBlock {
     // SETS
     setAutoOverflow(boolean = Boolean(false)) { if (boolean) this.#body.style.overflow = 'auto'; }
     setContentEditable(boolean= Boolean(false)) { this.#body.setAttribute('contenteditable', boolean); }
-    setWidth(width = String(undefined)) { this.#body.style.width = width; }
-    setHeight(height = String(undefined)) { this.#body.style.height = height; }
-    setPadding(value = String(undefined)) { this.#body.style.padding = value; }
+    setWidth(width = String()) { this.#body.style.width = width; }
+    setHeight(height = String()) { this.#body.style.height = height; }
+    setPadding(value = String()) { this.#body.style.padding = value; }
     set() { return this.#body; }
 }
 

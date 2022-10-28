@@ -6,9 +6,9 @@ class CheckBox {
     #input = document.createElement('input');
     #label = document.createElement('label');
     constructor(options = {
-        name: String(undefined),
-        title: String(undefined),
-        required: Boolean(undefined),
+        name: String(),
+        title: String(),
+        required: Boolean(),
         changeListener: () => {}
     }) {
         require('../../modules/chui_functions').style_parse([
@@ -131,9 +131,9 @@ class CheckBox {
     getName() { return this.#input.name; }
     getValue() { return this.#input.checked; }
     getTitle() { return this.#label.innerText; }
-    setValue(value = Boolean(undefined)) { this.#input.checked = value; }
+    setValue(value = Boolean()) { this.#input.checked = value; }
     addChangeListener(listener = () => {}) { this.#input.addEventListener('change', listener); }
-    setDisabled(boolean = Boolean(undefined)) { this.#input.disabled = boolean; }
+    setDisabled(boolean = Boolean()) { this.#input.disabled = boolean; }
     set() {
         this.#checkBox.appendChild(this.#input);
         this.#checkBox.appendChild(this.#label);

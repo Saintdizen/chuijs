@@ -1,6 +1,6 @@
 class Paragraph {
     #Paragraph = document.createElement(`p`);
-    constructor(text = String(undefined)) {
+    constructor(text = String()) {
         require('../modules/chui_functions').style_parse([
             {
                 name: "p",
@@ -15,7 +15,7 @@ class Paragraph {
         ], 'chUiJS_Paragraph');
         this.#Paragraph.innerText = text;
     }
-    setText(text = String(undefined)) {
+    setText(text = String()) {
         this.#Paragraph.innerText = text;
     }
     set() {
