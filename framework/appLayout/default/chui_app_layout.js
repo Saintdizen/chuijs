@@ -33,7 +33,7 @@ class Route {
         if (page.getMenuBar() !== undefined) {
             new Animation(page.getMenuBar()).fadeIn();
             header_second_test.appendChild(page.getMenuBar());
-            center.className = "header_padding";
+            center.classList.add("header_padding");
         } else {
             header_second_test.children[1].remove();
             center.classList.remove("header_padding");
