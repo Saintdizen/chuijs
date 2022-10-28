@@ -18,7 +18,7 @@ class MenuItem {
     resetZoom(title= String()) { return { label: title, role: 'resetZoom' } }
     zoomIn(title= String()) { return { label: title, role: 'zoomIn' } }
     zoomOut(title= String()) { return { label: title, role: 'zoomOut' } }
-    togglefullscreen(title= String()) { return { label: title, role: 'togglefullscreen' } }
+    toggleFullScreen(title= String()) { return { label: title, role: 'togglefullscreen' } }
     window(title= String()) { return { label: title, role: 'window' } }
     minimize(title= String()) { return { label: title, role: 'minimize' } }
     close(title= String()) { return { label: title, role: 'close' } }
