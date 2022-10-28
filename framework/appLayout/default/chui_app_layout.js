@@ -15,11 +15,13 @@ const store = new Store();
 let header = null;
 let center = null;
 let header_first_test = null;
+let header_second_test = null;
 let page_name = null;
 let route_list = [];
 
 class Route {
     go(page) {
+        header_second_test.innerHTML = ''
         page_name.innerHTML = page.getTitle();
         center.innerHTML = '';
         center.appendChild(page.render());
@@ -29,10 +31,12 @@ class Route {
             center.removeAttribute('style');
         });
         if (page.getMenuBar() !== undefined) {
-            let elem = page.getMenuBar();
-            new Animation(elem).fadeIn();
-            document.getElementById("header").appendChild(elem);
-            document.getElementById("center").className = "header_padding";
+            new Animation(page.getMenuBar()).fadeIn();
+            header_second_test.appendChild(page.getMenuBar());
+            center.className = "header_padding";
+        } else {
+            header_second_test.children[1].remove();
+            center.classList.remove("header_padding");
         }
     }
 }
@@ -745,7 +749,9 @@ class AppLayout extends Route {
         header = document.createElement('header');
         header.id = "header";
         header_first_test = document.createElement("header_first_test");
+        header_second_test = document.createElement("header_second_test");
         header.appendChild(header_first_test)
+        header.appendChild(header_second_test)
         center = document.createElement('main_center_block');
         center.id = "center";
         this.#applayout.appendChild(center)

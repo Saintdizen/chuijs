@@ -1,10 +1,28 @@
-const {Page, Button, Notification, TextInput, FieldSet, Styles} = require('../../index');
+const {Page, Button, Notification, TextInput, FieldSet, Styles, MenuBar} = require('../../index');
 
 class MainPage extends Page {
     constructor() {
         super();
         this.setTitle('Сказать привет!');
         this.setMain(false)
+
+        let menuBar = new MenuBar({test: true});
+        menuBar.addMenuItems(
+            MenuBar.BUTTON({
+                title:"Кнопка 1",
+                clickEvent: () => new Notification({ title: "Менюбар", text: "Кнопка 1 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
+            }),
+            MenuBar.DROPDOWN({
+                title:"Выпадашка 1",
+                items: [
+                    MenuBar.BUTTON({
+                        title:"Кнопка в выпадашке 1",
+                        clickEvent: () => new Notification({ title: "Менюбар", text: "Кнопка в выпадашке 1 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
+                    }),
+                ]
+            })
+        )
+        this.setMenuBar(menuBar)
 
         let name = new TextInput({
             title: 'Введите ваше имя',
