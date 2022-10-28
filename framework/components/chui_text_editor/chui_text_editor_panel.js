@@ -705,7 +705,7 @@ class TextEditorPanel {
                         document.getElementById(text_editor_id).focus()
                         let image = file.getFile(0)
                         let reader  = new FileReader();
-                        reader.addEventListener("load", function () {
+                        reader.addEventListener("load", () => {
                             document.execCommand('insertImage', false, reader.result);
                         }, false);
                         if (image) reader.readAsDataURL(image);

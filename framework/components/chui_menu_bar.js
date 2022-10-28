@@ -2,7 +2,7 @@ const {Animation} = require("../modules/chui_animations");
 
 class MenuBar {
     #chui_menu_bar_main = document.createElement("chui_menu_bar_main")
-    constructor() {
+    constructor(options = { test: Boolean() }) {
         require('../modules/chui_functions').style_parse([
             {
                 name: "chui_menu_bar_main",
@@ -10,10 +10,11 @@ class MenuBar {
                     "display": "flex",
                     "width": "max-content",
                     "height": "max-content",
-                    "border-radius": "var(--border_radius)",
-                    "border": "2px solid var(--border_main)",
-                    "background": "var(--button_background)",
-                    "padding": "2px"
+                    //"border-radius": "var(--border_radius)",
+                    //"border": "2px solid var(--border_main)",
+                    //"background": "var(--button_background)",
+                    "padding": "2px",
+                    //"backdrop-filter": "blur(15px)",
                 }
             },
             {
@@ -43,6 +44,7 @@ class MenuBar {
                     "color": "var(--text_color_hover)",
                 }
             },
+            //
             {
                 name: "menu_bar_drop_down_main",
                 style: {
@@ -99,31 +101,14 @@ class MenuBar {
                     "z-index": "1",
                     "left": "0",
                     "min-width": "max-content",
-                    "flex-direction": "column"
-                }
-            },
-            {
-                name: "menu_bar_dropdown user_item",
-                style: {
-                    "color": "var(--text_color)",
-                    "display": "block",
-                    "font-weight": "500",
-                    "cursor": "pointer",
-                    "text-align": "start",
-                    "padding": "6px",
-                    "border-radius": "var(--border_radius)"
-                }
-            },
-            {
-                name: "menu_bar_dropdown user_item:hover",
-                style: {
-                    "background-color": "#ddd",
-                    "padding": "6px 10px",
-                    "background": "var(--blue_prime_background)",
-                    "color": "var(--text_color_hover)",
+                    "flex-direction": "column",
+                    "backdrop-filter": "blur(15px)",
                 }
             }
+            //
         ], 'chUiJS_MenuBar');
+
+        this.#chui_menu_bar_main.setAttribute("test", options.test)
     }
     addMenuItems(...components) {
         for (let component of components) {
@@ -144,10 +129,12 @@ class MenuBar {
 
 class MenuBarButton {
     #button = document.createElement("chui_menu_bar_button");
-
-    constructor(options) {
+    constructor(options = {title: String(), items: []}) {
         this.#button.innerText = options.title;
         this.#button.addEventListener("click", options.clickEvent);
+        return this.#button;
+    }
+    set() {
         return this.#button;
     }
 }
@@ -160,22 +147,26 @@ class MenuBarDropDown {
         this.#mb_dd_button.innerText = options.title;
         this.#mb_dd_main.appendChild(this.#mb_dd_button)
         this.#mb_dd_main.appendChild(this.#mb_dd_dropdown)
-        this.#mb_dd_button.addEventListener("click", (e) => {
-            if (this.#mb_dd_dropdown.style.display === "flex") {
-                this.#mb_dd_button.classList.remove("user_button");
-                new Animation(this.#mb_dd_dropdown).fadeOut();
-            } else {
-                this.#mb_dd_button.classList.add("user_button");
-                new Animation(this.#mb_dd_dropdown).fadeIn();
-            }
-        })
-        window.addEventListener('click', (event) => {
-            if (event.target.parentNode !== this.#mb_dd_main) {
-                this.#mb_dd_button.classList.remove("user_button");
-                new Animation(this.#mb_dd_dropdown).fadeOut();
-            }
-        });
         for (let item of options.items) this.#mb_dd_dropdown.appendChild(item);
+
+        // Слушатели
+        this.#mb_dd_button.addEventListener("click", this.#mb_dd_button_click_event);
+        window.addEventListener('click', this.#window_click_event);
+    }
+    #mb_dd_button_click_event = () => {
+        if (this.#mb_dd_dropdown.style.display === "flex") {
+            this.#mb_dd_button.classList.remove("menu_bar_drop_down_button");
+            new Animation(this.#mb_dd_dropdown).fadeOut();
+        } else {
+            this.#mb_dd_button.classList.add("menu_bar_drop_down_button");
+            new Animation(this.#mb_dd_dropdown).fadeIn();
+        }
+    }
+    #window_click_event = (event) => {
+        if (event.target.parentNode !== this.#mb_dd_main) {
+            this.#mb_dd_button.classList.remove("menu_bar_drop_down_button");
+            new Animation(this.#mb_dd_dropdown).fadeOut();
+        }
     }
     set() {
         return this.#mb_dd_main;

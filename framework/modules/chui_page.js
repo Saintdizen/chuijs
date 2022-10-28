@@ -4,6 +4,7 @@ class Page {
     #page = document.createElement('page');
     #title = undefined;
     #main = false;
+    #menu_bar = undefined;
     constructor() {
         require('../modules/chui_functions').style_parse([
             {
@@ -15,6 +16,12 @@ class Page {
                     "width": "-webkit-fill-available",
                     "align-items": "baseline"
                 }
+            },
+            {
+                name: ".header_padding",
+                style: {
+                    "padding-top": "92px",
+                }
             }
         ], 'chUiJS_Page');
 
@@ -23,6 +30,12 @@ class Page {
                 console.log(`X: ${event.clientX} Y: ${event.clientY}`)
             }
         }
+    }
+    setMenuBar(menubar) {
+        this.#menu_bar = menubar.set();
+    }
+    getMenuBar() {
+        return this.#menu_bar;
     }
     add(...components) {
         for (let component of components) {

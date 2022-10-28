@@ -14,6 +14,7 @@ const store = new Store();
 //VARS
 let header = null;
 let center = null;
+let header_first_test = null;
 let page_name = null;
 let route_list = [];
 
@@ -27,6 +28,12 @@ class Route {
         _page.addEventListener('animationend', () => {
             center.removeAttribute('style');
         });
+        if (page.getMenuBar() !== undefined) {
+            let elem = page.getMenuBar();
+            new Animation(elem).fadeIn();
+            document.getElementById("header").appendChild(elem);
+            document.getElementById("center").className = "header_padding";
+        }
     }
 }
 
@@ -289,13 +296,24 @@ class AppLayout extends Route {
                     "position": "absolute",
                     "top": "0",
                     "display": "flex",
-                    "align-items": "center",
+                    "align-items": "start",
                     "background": "transparent",
                     "backdrop-filter": "blur(15px)",
                     "justify-content": "space-between",
-                    "-webkit-app-region": "drag",
+                    "-webkit-app-region": "no-drag",
                     "z-index": "999",
-                    "border": "2px solid transparent"
+                    "border": "2px solid transparent",
+                    "flex-direction": "column"
+                }
+            },
+            {
+                name: "header_first_test",
+                style: {
+                    "width": "-webkit-fill-available",
+                    "display": "flex",
+                    "align-items": "center",
+                    "justify-content": "center",
+                    "-webkit-app-region": "drag",
                 }
             },
             {
@@ -725,7 +743,11 @@ class AppLayout extends Route {
         document.body.setAttribute('theme', 'light')
         document.getElementById('app').append(this.#applayout);
         header = document.createElement('header');
+        header.id = "header";
+        header_first_test = document.createElement("header_first_test");
+        header.appendChild(header_first_test)
         center = document.createElement('main_center_block');
+        center.id = "center";
         this.#applayout.appendChild(center)
         this.#applayout.appendChild(header)
         document.body.appendChild(this.#notification_panel);
@@ -843,7 +865,7 @@ class AppLayout extends Route {
             }
         })
 
-        center.onscroll = function () {
+        center.onscroll = () => {
             if (center.scrollTop > 25) {
                 header.style.background = 'var(--header_background)'
                 header.style.backdropFilter = 'saturate(150%) blur(15px)'
@@ -887,8 +909,8 @@ class AppLayout extends Route {
         this.#notification_button.innerHTML = new Icon(Icons.SOCIAL.NOTIFICATIONS).getHTML();
         this.#header_right_box.appendChild(this.#notification_button)
         //
-        header.appendChild(this.#header_left_box)
-        header.appendChild(this.#header_right_box)
+        header_first_test.appendChild(this.#header_left_box)
+        header_first_test.appendChild(this.#header_right_box)
 
         // Свернуть
         this.#window_minimize_button.innerHTML = new Icon(Icons.ACTIONS.MINIMIZE, "12pt").getHTML();
@@ -922,7 +944,7 @@ class AppLayout extends Route {
             this.#window_control_box.appendChild(this.#window_minimize_button)
             this.#window_control_box.appendChild(this.#window_maximize_button)
             this.#window_control_box.appendChild(this.#window_close_button)
-            header.appendChild(this.#window_control_box)
+            header_first_test.appendChild(this.#window_control_box)
         }
     }
 
@@ -937,13 +959,13 @@ class AppLayout extends Route {
             this.#window_control_box.appendChild(this.#window_close_button)
             this.#window_control_box.appendChild(this.#window_maximize_button)
             this.#window_control_box.appendChild(this.#window_minimize_button)
-            header.insertBefore(this.#window_control_box, header.firstChild)
+            header_first_test.insertBefore(this.#window_control_box, header_first_test.firstChild)
         } else {
             this.#window_control_box.style.marginRight = '6px';
             this.#window_control_box.appendChild(this.#window_minimize_button)
             this.#window_control_box.appendChild(this.#window_maximize_button)
             this.#window_control_box.appendChild(this.#window_close_button)
-            header.appendChild(this.#window_control_box)
+            header_first_test.appendChild(this.#window_control_box)
         }
     }
 

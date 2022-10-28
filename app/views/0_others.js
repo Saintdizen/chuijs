@@ -7,7 +7,7 @@ class OthersComponentsPage extends Page {
         this.setTitle('Остальные компоненты');
         this.setMain(true)
 
-        let menuBar = new MenuBar();
+        let menuBar = new MenuBar({test: true});
         menuBar.addMenuItems(
             MenuBar.BUTTON({
                 title:"Кнопка 1",
@@ -31,7 +31,7 @@ class OthersComponentsPage extends Page {
                 ]
             })
         )
-        this.add(menuBar)
+        this.setMenuBar(menuBar)
 
         let h1_modals = new H(1, "Диалоговые окна")
         let dialog = new Dialog({
