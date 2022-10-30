@@ -33,9 +33,9 @@ class Route {
         if (page.getMenuBar() !== undefined) {
             new Animation(page.getMenuBar()).fadeIn();
             header_second_test.appendChild(page.getMenuBar());
-            center.classList.add("header_padding");
+            center.classList.add("header_padding", "test_scroll_track");
         } else {
-            center.classList.remove("header_padding");
+            center.classList.remove("header_padding", "test_scroll_track");
         }
     }
 }
@@ -255,6 +255,12 @@ class AppLayout extends Route {
                 name: "main_center_block::-webkit-scrollbar-track",
                 style: {
                     "margin-top": "47px",
+                }
+            },
+            {
+                name: ".test_scroll_track::-webkit-scrollbar-track",
+                style: {
+                    "margin-top": "92px",
                 }
             },
             {
