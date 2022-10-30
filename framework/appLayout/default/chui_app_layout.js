@@ -35,7 +35,6 @@ class Route {
             header_second_test.appendChild(page.getMenuBar());
             center.classList.add("header_padding");
         } else {
-            header_second_test.children[1].remove();
             center.classList.remove("header_padding");
         }
     }
