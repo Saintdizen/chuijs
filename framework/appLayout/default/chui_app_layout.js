@@ -374,7 +374,7 @@ class AppLayout extends Route {
                     "border": "2px solid var(--border_main)",
                     "backdrop-filter": "saturate(150%) blur(15px)",
                     "-webkit-app-region": "no-drag",
-                    "margin": "64px 20px 20px 20px",
+                    "margin": "46px 10px 10px 10px",
                     "border-radius": "var(--border_radius)",
                 }
             },
@@ -392,7 +392,7 @@ class AppLayout extends Route {
                     "border": "2px solid var(--border_main)",
                     "backdrop-filter": "saturate(150%) blur(15px)",
                     "-webkit-app-region": "no-drag",
-                    "margin": "64px 20px 20px 20px",
+                    "margin": "46px 10px 10px 10px",
                     "border-radius": "var(--border_radius)",
                 }
             },
