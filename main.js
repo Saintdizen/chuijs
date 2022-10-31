@@ -13,6 +13,12 @@ main.start({
         new MenuItem().button('Консоль', () => main.toggleDevTools()),
         new MenuItem().separator(),
         new MenuItem().quit("Выход")
-    ],
-    autoUpdateApp: true
+    ]
 })
+
+setTimeout(async () => {
+    const test = await main.getAutoUpdateAdapter();
+    let tt = await test.checkUpdates();
+    console.log(tt)
+}, 1000)
+

@@ -150,27 +150,20 @@ class Main {
     getWindow() {
         return this.#window;
     }
-    start(options = {
-        tray: [],
-        autoUpdateApp: Boolean()
-    }) {
+    start(options = { tray: [] }) {
         if (process.platform === "linux") {
             //app.commandLine.hasSwitch("enable-transparent-visuals");
             //app.commandLine.hasSwitch("disable-gpu");
             //app.commandLine.appendSwitch('enable-transparent-visuals');
             //app.disableHardwareAcceleration();
         }
-        app.whenReady().then(async () => {
+        app.whenReady().then(() => {
             if (options.tray) {
                 this.#tray = new Tray(this.#app_icon)
                 context = Menu.buildFromTemplate(options.tray);
                 this.#tray.setContextMenu(context)
             }
-            this.#createWindow()
-            if (options.autoUpdateApp) {
-                await this.#checkUpdateFromRepo();
-            }
-            //
+            this.#createWindow();
             ipcMain.on("show_system_notification", (e, title, body) => {
                 let {Notification} = require('electron');
                 new Notification({title, body}).show();
@@ -178,30 +171,28 @@ class Main {
             //process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
         })
     }
-    async #checkUpdateFromRepo() {
-        const {autoUpdater} = require("electron-updater");
+    getAutoUpdateAdapter() {
+        return new AutoUpdate();
+    }
+}
 
-        //await autoUpdater.checkForUpdates();
-        await autoUpdater.checkForUpdatesAndNotify({title: "НАЧАЛОСЬ ОБНОВЛЕНИЕ", body: "НАЧАЛОСЬ ОБНОВЛЕНИЕ"});
-        autoUpdater.on('checking-for-update', () => {
-            console.log("Генерируется при проверке того, началось ли обновление.")
-        });
-        autoUpdater.on('update-available', () => {
-            console.log("Испускается при наличии доступного обновления. Обновление загружается автоматически.")
-        });
-        autoUpdater.on('update-not-available', () => {
-            console.log("Выдается при отсутствии доступных обновлений.")
-        });
-        autoUpdater.on('download-progress', (ev, progressObj) => {
-            let log_message = "Download speed: " + progressObj.bytesPerSecond;
-            log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
-            log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
-            console.log(log_message);
-        })
-        autoUpdater.on('update-downloaded', async () => {
-            console.log("Обновление загружено и готово к установке.")
-            await autoUpdater.quitAndInstall();
-        });
+class AutoUpdate {
+    #binary = require("electron-updater");
+    #autoUpdater = undefined;
+    constructor() {
+        this.#autoUpdater = this.#binary.autoUpdater;
+    }
+    async checkUpdates() {
+        return this.#autoUpdater.checkForUpdatesAndNotify();
+    }
+    addUpdateAvailableEvent(listener = () => {}) {
+        this.#autoUpdater.on('update-available', listener);
+    }
+    addUpdateDownloadedEvent(listener = () => {}) {
+        this.#autoUpdater.on('update-downloaded', listener);
+    }
+    async quitAndInstall() {
+        await this.#autoUpdater.quitAndInstall();
     }
 }
 
