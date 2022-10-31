@@ -14,5 +14,5 @@ main.start({
         new MenuItem().separator(),
         new MenuItem().quit("Выход")
     ],
-    autoUpdateApp: false
+    autoUpdateApp: true
 })

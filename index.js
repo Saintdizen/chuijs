@@ -168,7 +168,7 @@ class Main {
             }
             this.#createWindow()
             if (options.autoUpdateApp) {
-                await test()
+                await this.#checkUpdateFromRepo();
             }
             //
             ipcMain.on("show_system_notification", (e, title, body) => {
@@ -178,22 +178,32 @@ class Main {
             //process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
         })
     }
+    async #checkUpdateFromRepo() {
+        const {autoUpdater} = require("electron-updater");
+
+        //await autoUpdater.checkForUpdates();
+        await autoUpdater.checkForUpdatesAndNotify({title: "НАЧАЛОСЬ ОБНОВЛЕНИЕ", body: "НАЧАЛОСЬ ОБНОВЛЕНИЕ"});
+        autoUpdater.on('checking-for-update', () => {
+            console.log("Генерируется при проверке того, началось ли обновление.")
+        });
+        autoUpdater.on('update-available', () => {
+            console.log("Испускается при наличии доступного обновления. Обновление загружается автоматически.")
+        });
+        autoUpdater.on('update-not-available', () => {
+            console.log("Выдается при отсутствии доступных обновлений.")
+        });
+        autoUpdater.on('download-progress', (ev, progressObj) => {
+            let log_message = "Download speed: " + progressObj.bytesPerSecond;
+            log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
+            log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
+            console.log(log_message);
+        })
+        autoUpdater.on('update-downloaded', async () => {
+            console.log("Обновление загружено и готово к установке.")
+            await autoUpdater.quitAndInstall();
+        });
+    }
 }
-
-async function test() {
-    const {autoUpdater} = require("electron-updater");
-    await autoUpdater.checkForUpdatesAndNotify()
-    autoUpdater.on('update-available', () => {
-        let {Notification} = require('electron');
-        new Notification({title:"Обновление", body: "Скачивание обновления"}).show();
-    });
-    autoUpdater.on('update-downloaded', async () => {
-        await autoUpdater.quitAndInstall();
-    });
-}
-
-
-
 
 class Styles {
     static WORD_BREAK = { NORMAL: "normal", BREAK_ALL: "break-all", KEEP_ALL: "keep-all", BREAK_WORD: "break-word" }
