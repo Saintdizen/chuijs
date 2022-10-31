@@ -1,6 +1,7 @@
 // GLOBAL VARS
 globalThis.ctxs = [];
 const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, remote} = require('electron');
+const log = require('electron-log');
 
 //ПОЛЯ ВВОДА
 const { TextInput } = require('./framework/components/chui_inputs/chui_text');
@@ -53,6 +54,7 @@ const { Popup } = require("./framework/components/chui_popups");
 const { TelegramBot } = require("./framework/components/telegram_bot/chui_telegram_bot");
 const { MenuBar } = require("./framework/components/chui_menu_bar");
 
+
 //VARS
 let isQuiting = false;
 let context = null
@@ -87,28 +89,35 @@ class Main {
         this.#width = options.width;
         this.#renderer = options.render;
         // ===
-
-        app.whenReady().then(() => {
-            this.#window = new BrowserWindow({
-                minWidth: this.#width,
-                minHeight: this.#height,
-                name: this.#appName,
-                title: this.#appName,
-                show: false,
-                icon: this.#app_icon,
-                webPreferences: {
-                    plugins: false,
-                    nodeIntegration: true,
-                    contextIsolation: false,
-                    preload: this.#renderer,
-                    spellcheck: true,
-                    webviewTag: true,
-                    enableRemoteModule: true
-                },
-                frame: false,
-                transparent: false,
+        if (options.devTools) { this.#window.webContents.openDevTools() }
+    }
+    #createWindow() {
+        this.#window = new BrowserWindow({
+            minWidth: this.#width,
+            minHeight: this.#height,
+            name: this.#appName,
+            title: this.#appName,
+            show: false,
+            icon: this.#app_icon,
+            webPreferences: {
+                plugins: false,
+                nodeIntegration: true,
+                contextIsolation: false,
+                preload: this.#renderer,
+                spellcheck: false,
+                webviewTag: true,
+                enableRemoteModule: true
+            },
+            frame: false,
+            transparent: false,
+        });
+        this.#window.loadURL(`data:text/html;charset=UTF-8,<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${this.#appName}</title></head><body><div id="app"></div></body></html>`).then(() => {
+            app.on('before-quit', () => {
+                isQuiting = true;
             });
-            if (options.devTools) { this.#window.webContents.openDevTools() }
+        });
+        this.#window.on("ready-to-show", () => {
+            this.#window.show()
         })
     }
     toggleDevTools() {
@@ -121,13 +130,11 @@ class Main {
         }
     }
     hideAndShow() {
-        app.whenReady().then(() => {
-            if (this.#window.isVisible()) {
-                this.#window.hide();
-            } else {
-                this.#window.show();
-            }
-        })
+        if (this.#window.isVisible()) {
+            this.#window.hide();
+        } else {
+            this.#window.show();
+        }
     }
     stop() {
         if (process.platform !== 'darwin') {
@@ -154,41 +161,39 @@ class Main {
             //app.disableHardwareAcceleration();
         }
         app.whenReady().then(async () => {
-            ipcMain.on("show_system_notification", (e, title, body) => {
-                let {Notification} = require('electron');
-                new Notification({title, body}).show();
-            })
-            process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
-            //START
-            this.#window.loadURL(`data:text/html;charset=UTF-8,<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${this.#appName}</title></head><body><div id="app"></div></body></html>`).then(() => {
-                app.on('before-quit', () => {
-                    isQuiting = true;
-                });
-            })
             if (options.tray) {
                 this.#tray = new Tray(this.#app_icon)
                 context = Menu.buildFromTemplate(options.tray);
                 this.#tray.setContextMenu(context)
             }
-            this.#window.on('ready-to-show', () => this.#window.show());
-            app.on('ready', () => setTimeout(async () => {
-
-            }, 1000));
+            this.#createWindow()
             if (options.autoUpdateApp) {
-                const {autoUpdater} = require('electron-updater');
-                await autoUpdater.checkForUpdatesAndNotify();
-
-                autoUpdater.on('update-available', () => {
-                    let {Notification} = require('electron');
-                    new Notification({title:"Обновление", body: "Скачивание обновления"}).show();
-                });
-                autoUpdater.on('update-downloaded', async () => {
-                    await autoUpdater.quitAndInstall();
-                });
+                await test()
             }
+            //
+            ipcMain.on("show_system_notification", (e, title, body) => {
+                let {Notification} = require('electron');
+                new Notification({title, body}).show();
+            })
+            //process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
         })
     }
 }
+
+async function test() {
+    const {autoUpdater} = require("electron-updater");
+    await autoUpdater.checkForUpdatesAndNotify()
+    autoUpdater.on('update-available', () => {
+        let {Notification} = require('electron');
+        new Notification({title:"Обновление", body: "Скачивание обновления"}).show();
+    });
+    autoUpdater.on('update-downloaded', async () => {
+        await autoUpdater.quitAndInstall();
+    });
+}
+
+
+
 
 class Styles {
     static WORD_BREAK = { NORMAL: "normal", BREAK_ALL: "break-all", KEEP_ALL: "keep-all", BREAK_WORD: "break-word" }

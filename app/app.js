@@ -1,5 +1,6 @@
 /** RENDERER PROCESS */
 /** IMPORTS */
+
 const {AppLayout, render, Icons, Notification, Styles, Button} = require('../index');
 
 const {MainPage} = require('./views/_main');
@@ -16,7 +17,7 @@ const {TabsPage} = require('./views/9_tabs');
 const {TgTestPage} = require("./views/10_tg_test");
 const {SpinnerPage} = require("./views/11_spinners");
 
-class App extends AppLayout {
+class Test extends AppLayout {
     constructor() {
         super();
         // Настройки окна
@@ -105,4 +106,4 @@ class App extends AppLayout {
     }
 }
 
-render(() => new App()).catch(e => console.log(e));
+render(() => new Test()).catch(e => console.log(e));
