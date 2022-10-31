@@ -51,7 +51,7 @@ const { SlideShow } = require("./framework/components/chui_slideshow");
 const { FieldSet } = require("./framework/components/chui_fieldset");
 const { Popup } = require("./framework/components/chui_popups");
 const { TelegramBot } = require("./framework/components/telegram_bot/chui_telegram_bot");
-const { MenuBar } = require("./framework/components/chui_menu_bar")
+const { MenuBar } = require("./framework/components/chui_menu_bar");
 
 //VARS
 let isQuiting = false;
@@ -144,7 +144,8 @@ class Main {
         return this.#window;
     }
     start(options = {
-        tray: []
+        tray: [],
+        autoUpdateApp: Boolean()
     }) {
         if (process.platform === "linux") {
             //app.commandLine.hasSwitch("enable-transparent-visuals");
@@ -152,10 +153,10 @@ class Main {
             //app.commandLine.appendSwitch('enable-transparent-visuals');
             //app.disableHardwareAcceleration();
         }
-        app.whenReady().then(() => {
-            ipcMain.on("show_system_notification",  (e, title, body) => {
-                let { Notification } = require('electron');
-                new Notification({ title, body }).show();
+        app.whenReady().then(async () => {
+            ipcMain.on("show_system_notification", (e, title, body) => {
+                let {Notification} = require('electron');
+                new Notification({title, body}).show();
             })
             process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
             //START
@@ -170,7 +171,21 @@ class Main {
                 this.#tray.setContextMenu(context)
             }
             this.#window.on('ready-to-show', () => this.#window.show());
-            app.on('ready', () => setTimeout(() => {}, 1000));
+            app.on('ready', () => setTimeout(async () => {
+
+            }, 1000));
+            if (options.autoUpdateApp) {
+                const {autoUpdater} = require('electron-updater');
+                await autoUpdater.checkForUpdatesAndNotify();
+
+                autoUpdater.on('update-available', () => {
+                    let {Notification} = require('electron');
+                    new Notification({title:"Обновление", body: "Скачивание обновления"}).show();
+                });
+                autoUpdater.on('update-downloaded', async () => {
+                    await autoUpdater.quitAndInstall();
+                });
+            }
         })
     }
 }
