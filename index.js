@@ -1,7 +1,6 @@
 // GLOBAL VARS
 globalThis.ctxs = [];
 const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, remote} = require('electron');
-const log = require('electron-log');
 
 //ПОЛЯ ВВОДА
 const { TextInput } = require('./framework/components/chui_inputs/chui_text');
