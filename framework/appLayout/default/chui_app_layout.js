@@ -7,7 +7,10 @@ const Store = require('electron-store');
 const {Dialog} = require("../../components/chui_modal");
 const {Label} = require("../../components/chui_label");
 const {ContentBlock} = require("../../components/chui_content_block");
+const {Popup} = require("../../components/chui_popups");
+const {Notification} = require("../../components/chui_notification")
 const remote = require('electron').remote;
+const ipcRenderer = require('electron').ipcRenderer;
 const store = new Store();
 //
 
@@ -957,6 +960,20 @@ class AppLayout extends Route {
             this.#window_control_box.appendChild(this.#window_close_button)
             header_first_test.appendChild(this.#window_control_box)
         }
+        //
+        ipcRenderer.once("sendNotificationUpdate", async (e, text, body) => {
+            new Notification({ title: text, text: body, style: Notification.STYLE.WARNING, showTime: 3000 }).show(true);
+        })
+        let popup = new Popup();
+        ipcRenderer.once("checkUpdatesTrue", async (e, check, version) => {
+            if (check) {
+                let confirm_res = await popup.confirm({
+                    title: `Доступна новая версия ${version}`, message: 'Установить сейчас?',
+                    cancelText: 'Отмена', okText: 'Установить'
+                });
+                e.sender.send("updateInstallConfirm", confirm_res)
+            }
+        })
     }
 
     setHideOnClose(boolean = Boolean()) {

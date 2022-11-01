@@ -53,7 +53,6 @@ const { Popup } = require("./framework/components/chui_popups");
 const { TelegramBot } = require("./framework/components/telegram_bot/chui_telegram_bot");
 const { MenuBar } = require("./framework/components/chui_menu_bar");
 
-
 //VARS
 let isQuiting = false;
 let context = null
@@ -167,31 +166,32 @@ class Main {
                 let {Notification} = require('electron');
                 new Notification({title, body}).show();
             })
-            //process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+            process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
         })
     }
-    getAutoUpdateAdapter() {
-        return new AutoUpdate();
+    enableAutoUpdateApp(start = Number(), version) {
+        setTimeout(async () => {
+            const { autoUpdater } = require("electron-updater");
+            let updates = await autoUpdater.checkForUpdates();
+            if (updates !== null) {
+                if (updates.versionInfo.version > version) {
+                    await this.#sendNotificationUpdate(this.#appName, `Доступна новая версия ${updates.versionInfo.version}\nОбновление будет загружено в фоновом режиме`);
+                }
+            }
+            /*autoUpdater.on('update-available', () => {  });*/
+            autoUpdater.on('update-downloaded', () => {
+                this.#window.webContents.send("checkUpdatesTrue", true, updates.versionInfo.version);
+                ipcMain.on("updateInstallConfirm", (e, check) => {
+                    if (check) {
+                        console.log("Установка обновления");
+                        autoUpdater.quitAndInstall();
+                    }
+                })
+            });
+        }, start);
     }
-}
-
-class AutoUpdate {
-    #binary = require("electron-updater");
-    #autoUpdater = undefined;
-    constructor() {
-        this.#autoUpdater = this.#binary.autoUpdater;
-    }
-    async checkUpdates() {
-        return this.#autoUpdater.checkForUpdatesAndNotify();
-    }
-    addUpdateAvailableEvent(listener = () => {}) {
-        this.#autoUpdater.on('update-available', listener);
-    }
-    addUpdateDownloadedEvent(listener = () => {}) {
-        this.#autoUpdater.on('update-downloaded', listener);
-    }
-    async quitAndInstall() {
-        await this.#autoUpdater.quitAndInstall();
+    async #sendNotificationUpdate(text, body) {
+        this.#window.webContents.send("sendNotificationUpdate", text, body);
     }
 }
 

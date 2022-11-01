@@ -15,10 +15,5 @@ main.start({
         new MenuItem().quit("Выход")
     ]
 })
-
-setTimeout(async () => {
-    const test = await main.getAutoUpdateAdapter();
-    let tt = await test.checkUpdates();
-    console.log(tt)
-}, 1000)
+main.enableAutoUpdateApp(1000);
 
