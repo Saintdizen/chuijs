@@ -1,6 +1,9 @@
 // GLOBAL VARS
 globalThis.ctxs = [];
 const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, remote} = require('electron');
+const log = require('electron-log');
+log.transports.file.resolvePath = () => require("path").join(app.getPath('userData'), `electron-log/logs.log`);
+Object.assign(console, log.functions);
 
 //ПОЛЯ ВВОДА
 const { TextInput } = require('./framework/components/chui_inputs/chui_text');
@@ -179,28 +182,29 @@ class Main {
                 }
             }
             autoUpdater.on('checking-for-update', () => {
-                console.log('Checking for update...');
+                log.info('Проверка обновлений...');
             })
             autoUpdater.on('update-available', (info) => {
-                console.log(`Update available. ${info}`);
+                log.info(`Обновления доступны. ${info}`);
             })
             autoUpdater.on('update-not-available', (info) => {
-                console.log(`Update not available. ${info}`);
+                log.info(`Обновление недоступно. ${info}`);
             })
             autoUpdater.on('download-progress', (progressObj) => {
-                let log_message = "Download speed: " + progressObj.bytesPerSecond;
-                log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
+                let log_message = "Скорость загрузки: " + progressObj.bytesPerSecond;
+                log_message = log_message + ' - Скачано ' + progressObj.percent + '%';
                 log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
-                console.log(log_message);
+                log.info(log_message);
             })
             autoUpdater.on('error', (err) => {
-                console.log('Error in auto-updater. ' + err);
+                log.error('Ошибка авто-обновления. ' + err);
             })
             autoUpdater.on('update-downloaded', () => {
+                log.info("Обновление скачано!");
                 this.#window.webContents.send("checkUpdatesTrue", true, updates.versionInfo.version);
                 ipcMain.on("updateInstallConfirm", (e, check) => {
                     if (check) {
-                        console.log("Установка обновления");
+                        log.info("Установка обновления...");
                         autoUpdater.quitAndInstall();
                     }
                 })
@@ -284,5 +288,6 @@ module.exports = {
     FieldSet: FieldSet,
     Popup: Popup,
     TelegramBot: TelegramBot,
-    MenuBar: MenuBar
+    MenuBar: MenuBar,
+    log: log
 }
