@@ -8,7 +8,7 @@ const {Dialog} = require("../../components/chui_modal");
 const {Label} = require("../../components/chui_label");
 const {ContentBlock} = require("../../components/chui_content_block");
 const {Popup} = require("../../components/chui_popups");
-const {Notification} = require("../../components/chui_notification")
+const {UpdateNotification} = require("../../components/chui_update_notification");
 const remote = require('electron').remote;
 const ipcRenderer = require('electron').ipcRenderer;
 const store = new Store();
@@ -961,8 +961,15 @@ class AppLayout extends Route {
             header_first_test.appendChild(this.#window_control_box)
         }
         //
-        ipcRenderer.once("sendNotificationUpdate", async (e, text, body) => {
-            new Notification({ title: text, text: body, style: Notification.STYLE.WARNING, showTime: 3000 }).show(true);
+        ipcRenderer.on("sendNotificationUpdateLoad", async (e, text, body) => {
+            let updateNotificationLoad = new UpdateNotification({ title: text, text: body, spinner: true });
+            updateNotificationLoad.show(true);
+            ipcRenderer.on("sendNotificationUpdateLoadClose", () => updateNotificationLoad.hide());
+        })
+        ipcRenderer.on("sendNotificationUpdate", async (e, text, body) => {
+            let updateNotification = new UpdateNotification({ title: text, text: body, spinner: false });
+            updateNotification.show(true);
+            ipcRenderer.on("sendNotificationUpdateClose", () => updateNotification.hide());
         })
         let popup = new Popup();
         ipcRenderer.once("checkUpdatesTrue", async (e, check, version) => {

@@ -55,6 +55,7 @@ const { FieldSet } = require("./framework/components/chui_fieldset");
 const { Popup } = require("./framework/components/chui_popups");
 const { TelegramBot } = require("./framework/components/telegram_bot/chui_telegram_bot");
 const { MenuBar } = require("./framework/components/chui_menu_bar");
+const {UpdateNotification} = require("./framework/components/chui_update_notification");
 
 //VARS
 let isQuiting = false;
@@ -175,31 +176,17 @@ class Main {
     enableAutoUpdateApp(start = Number(), version) {
         setTimeout(async () => {
             const { autoUpdater } = require("electron-updater");
+            autoUpdater.autoInstallOnAppQuit = false;
             let updates = await autoUpdater.checkForUpdates();
             if (updates !== null) {
                 if (updates.versionInfo.version > version) {
-                    await this.#sendNotificationUpdate(this.#appName, `Доступна новая версия ${updates.versionInfo.version}\nОбновление будет загружено в фоновом режиме`);
+                    await this.#sendNotificationUpdateLoad(this.#appName, `Загрузка новой версии ${updates.versionInfo.version}`);
                 }
             }
-            autoUpdater.on('checking-for-update', () => {
-                log.info('Проверка обновлений...');
-            })
-            autoUpdater.on('update-available', (info) => {
-                log.info(`Обновления доступны. ${info}`);
-            })
-            autoUpdater.on('update-not-available', (info) => {
-                log.info(`Обновление недоступно. ${info}`);
-            })
-            autoUpdater.on('download-progress', (progressObj) => {
-                let log_message = "Скорость загрузки: " + progressObj.bytesPerSecond;
-                log_message = log_message + ' - Скачано ' + progressObj.percent + '%';
-                log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
-                log.info(log_message);
-            })
-            autoUpdater.on('error', (err) => {
-                log.error('Ошибка авто-обновления. ' + err);
-            })
-            autoUpdater.on('update-downloaded', () => {
+            autoUpdater.on('update-downloaded', async () => {
+                await this.#sendNotificationUpdateLoadClose();
+                await this.#sendNotificationUpdate(this.#appName, `Загрузка завершена`);
+                setTimeout(async () => await this.#sendNotificationUpdateClose(), 3000);
                 log.info("Обновление скачано!");
                 this.#window.webContents.send("checkUpdatesTrue", true, updates.versionInfo.version);
                 ipcMain.on("updateInstallConfirm", (e, check) => {
@@ -211,8 +198,17 @@ class Main {
             });
         }, start);
     }
+    async #sendNotificationUpdateLoad(text, body) {
+        this.#window.webContents.send("sendNotificationUpdateLoad", text, body);
+    }
+    async #sendNotificationUpdateLoadClose() {
+        this.#window.webContents.send("sendNotificationUpdateLoadClose");
+    }
     async #sendNotificationUpdate(text, body) {
         this.#window.webContents.send("sendNotificationUpdate", text, body);
+    }
+    async #sendNotificationUpdateClose() {
+        this.#window.webContents.send("sendNotificationUpdateClose");
     }
 }
 
@@ -289,5 +285,6 @@ module.exports = {
     Popup: Popup,
     TelegramBot: TelegramBot,
     MenuBar: MenuBar,
+    UpdateNotification: UpdateNotification,
     log: log
 }
