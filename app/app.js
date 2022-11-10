@@ -17,6 +17,7 @@ const {TabsPage} = require('./views/9_tabs');
 const {TgTestPage} = require("./views/10_tg_test");
 const {SpinnerPage} = require("./views/11_spinners");
 const {MainPageRoute} = require("./views/routes_pages/main");
+const {SettingsPage} = require("./views/12_settings");
 
 class Test extends AppLayout {
     constructor() {
@@ -42,6 +43,7 @@ class Test extends AppLayout {
         this.setRoute(new TabsPage());
         this.setRoute(new TgTestPage());
         this.setRoute(new SpinnerPage());
+        this.setRoute(new SettingsPage());
 
         this.addComponentToAppLayout({
             headerRight: [

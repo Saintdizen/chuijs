@@ -1,5 +1,5 @@
 const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView, Notification, MenuBar, Image,
-    CheckBox, Select
+    CheckBox
 } = require('../../index');
 const {Popup} = require("../../framework/components/chui_popups");
 
@@ -7,7 +7,7 @@ class OthersComponentsPage extends Page {
     constructor() {
         super();
         this.setTitle('Остальные компоненты');
-        this.setMain(true)
+        this.setMain(false)
 
         let button1 = new Button({
             title:"Кнопка 1",
