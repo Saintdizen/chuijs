@@ -201,7 +201,7 @@ class MenuBarDropDown {
 
         // Слушатели
         this.#mb_dd_button.addEventListener("click", this.#mb_dd_button_click_event);
-        //window.addEventListener('click', this.#window_click_event);
+        window.addEventListener('click', this.#window_click_event);
     }
     #mb_dd_button_click_event = () => {
         if (this.#mb_dd_dropdown.style.display === "flex") {
@@ -213,7 +213,8 @@ class MenuBarDropDown {
         }
     }
     #window_click_event = (event) => {
-        if (event.target.parentNode !== this.#mb_dd_main) {
+        let parent = event.target.parentNode;
+        if (parent !== this.#mb_dd_main) {
             this.#mb_dd_button.classList.remove("menu_bar_drop_down_button");
             new Animation(this.#mb_dd_dropdown).fadeOut();
         }

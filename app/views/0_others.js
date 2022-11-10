@@ -9,14 +9,17 @@ class OthersComponentsPage extends Page {
         this.setTitle('Остальные компоненты');
         this.setMain(true)
 
+        let button1 = new Button({
+            title:"Кнопка 1",
+            clickEvent: () => {
+                new Notification({ title: "Менюбар", text: "Кнопка 1 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
+            }
+        });
+        button1.setDisabled(true)
+
         let menuBar = new MenuBar({test: true});
         menuBar.addMenuItems(
-            new Button({
-                title:"Кнопка 1",
-                clickEvent: () => {
-                    new Notification({ title: "Менюбар", text: "Кнопка 1 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
-                }
-            }),
+            button1,
             new CheckBox({ title: "Выключить кнопки" }),
             new Button({
                 title:"Кнопка 2",
