@@ -7,35 +7,22 @@ class FormsPage extends Page {
         this.setMain(false)
         this.setFullWidth()
         this.setFullHeight()
-
+        this.add(this.#createForm())
+    }
+    #createForm() {
         let bot_token = new TextInput({
-            title: "Ключ бота",
-            placeholder: "Ключ бота",
-            width: "400px",
-            required: false
+            title: "Ключ бота", placeholder: "Ключ бота", width: "400px", required: true
         });
-
-
         let chat_id = new TextInput({
-            name: "chat_id",
-            title: "Номер чата",
-            placeholder: "Номер чата",
-            width: "400px",
-            required: true
+            name: "chat_id", title: "Номер чата", placeholder: "Номер чата", width: "400px", required: true
         });
-
         let message = new TextArea({
-            name: "text",
-            title: 'Сообщение',
-            placeholder: 'Сообщение',
-            width: '400px',
-            required: true
+            name: "text", title: 'Сообщение', placeholder: 'Сообщение', width: '400px', required: true
         });
-
-        let form = new Form({
+        return new Form({
             action: "#",
             method: Form.METHOD.GET,
-            components: [ bot_token, chat_id, message, Form.SubmitButton("Отправить") ],
+            components: [bot_token, chat_id, message, Form.SubmitButton("Отправить")],
             submitEvent: (e) => {
                 e.preventDefault();
                 const request = new XMLHttpRequest();
@@ -43,8 +30,6 @@ class FormsPage extends Page {
                 request.send(new FormData(e.target));
             }
         });
-
-        this.add(form)
     }
 }
 

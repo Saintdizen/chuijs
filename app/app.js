@@ -16,6 +16,7 @@ const {WebViewsPage} = require('./views/8_webviews');
 const {TabsPage} = require('./views/9_tabs');
 const {TgTestPage} = require("./views/10_tg_test");
 const {SpinnerPage} = require("./views/11_spinners");
+const {MainPageRoute} = require("./views/routes_pages/main");
 
 class Test extends AppLayout {
     constructor() {
@@ -28,6 +29,7 @@ class Test extends AppLayout {
         // Настройка роутов
         this.setAutoCloseRouteMenu(true);
         this.setRoute(new MainPage());
+        this.setRoute(new MainPageRoute());
         this.setRoute(new Inputs_Buttons_Page());
         this.setRoute(new Notifications_Badges_Page());
         this.setRoute(new TablesPage());

@@ -1,4 +1,6 @@
 let {Animation} = require('../modules/chui_animations');
+const {Route} = require("../appLayout/default/chui_app_layout");
+const {Button} = require("../components/chui_button");
 
 class Page {
     #page = document.createElement('page');
@@ -30,6 +32,13 @@ class Page {
                 console.log(`X: ${event.clientX} Y: ${event.clientY}`)
             }
         }
+    }
+    setBackButton(options = { title: "", icon: undefined, reverse: false, page: undefined }) {
+        let back = new Button({
+            title: options.title, icon: options.icon, reverse: options.reverse,
+            clickEvent: () => new Route().go(options.page)
+        })
+        this.#page.appendChild(back.set());
     }
     setMenuBar(menubar) {
         this.#menu_bar = menubar.set();
