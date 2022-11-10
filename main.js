@@ -2,7 +2,7 @@ const { Main, MenuItem } = require('./index');
 const main = new Main({
     name: "Test Application",
     width: 1600,
-    height: 600,
+    height: 900,
     render: `${__dirname}/app/app.js`,
     devTools: false
 });
@@ -15,5 +15,5 @@ main.start({
         new MenuItem().quit("Выход")
     ]
 })
-main.enableAutoUpdateApp(1000);
+//main.enableAutoUpdateApp(1000);
 

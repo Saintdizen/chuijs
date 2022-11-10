@@ -1,4 +1,6 @@
-const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView, Notification, MenuBar, Image} = require('../../index');
+const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView, Notification, MenuBar, Image,
+    CheckBox, Select
+} = require('../../index');
 const {Popup} = require("../../framework/components/chui_popups");
 
 class OthersComponentsPage extends Page {
@@ -9,25 +11,35 @@ class OthersComponentsPage extends Page {
 
         let menuBar = new MenuBar({test: true});
         menuBar.addMenuItems(
-            MenuBar.BUTTON({
+            new Button({
                 title:"Кнопка 1",
-                clickEvent: () => new Notification({ title: "Менюбар", text: "Кнопка 1 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
+                clickEvent: () => {
+                    new Notification({ title: "Менюбар", text: "Кнопка 1 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
+                }
             }),
-            MenuBar.BUTTON({
+            new CheckBox({ title: "Выключить кнопки" }),
+            new Button({
                 title:"Кнопка 2",
-                clickEvent: () => new Notification({ title: "Менюбар", text: "Кнопка 2 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
+                clickEvent: () => {
+                    new Notification({ title: "Менюбар", text: "Кнопка 2 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
+                }
             }),
             MenuBar.DROPDOWN({
                 title:"Выпадашка 1",
                 items: [
-                    MenuBar.BUTTON({
-                        title:"Кнопка в выпадашке 1",
-                        clickEvent: () => new Notification({ title: "Менюбар", text: "Кнопка в выпадашке 1 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
+                    new Button({
+                        title:"Кнопка 1",
+                        clickEvent: () => {
+                            new Notification({ title: "Менюбар", text: "Кнопка 1 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
+                        }
                     }),
-                    MenuBar.BUTTON({
-                        title:"Кнопка в выпадашке 2",
-                        clickEvent: () => new Notification({ title: "Менюбар", text: "Кнопка в выпадашке 2 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
+                    new Button({
+                        title:"Кнопка 2",
+                        clickEvent: () => {
+                            new Notification({ title: "Менюбар", text: "Кнопка 2 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
+                        }
                     }),
+                    new CheckBox({ title: "Выключить кнопки" }),
                 ]
             })
         )
