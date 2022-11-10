@@ -38,13 +38,19 @@ class Tabs {
         default: Number(),
         tabs: []
     }) {
-        if (options.tabsJustify === undefined) options.tabsJustify = 'flex-start';
+        if (options.tabsJustify !== undefined && options.tabsJustify === "left") {
+            this.#list.style.justifyContent = 'flex-start'
+        } else if (options.tabsJustify !== undefined && options.tabsJustify === "center") {
+            this.#list.style.justifyContent = 'center'
+        } else if (options.tabsJustify !== undefined && options.tabsJustify === "right") {
+            this.#list.style.justifyContent = 'flex-end'
+        }
         require('../modules/chui_functions').style_parse([
             {
                 name: "list",
                 style: {
                     "display": "flex",
-                    "justify-content": `${options.tabsJustify}`,
+                    "justify-content": `flex-start`,
                     "align-items": 'center',
                     "width": "-webkit-fill-available"
                 }

@@ -71,6 +71,8 @@ class Toggle {
                 }
             }
         ], 'chUiJS_Toggle');
+        this.#Toggle.style.margin = "var(--margin)"
+        this.#Toggle.style.border = "2px solid var(--border_main)"
         this.#Toggle.className = 'switch';
         this.#toggle_input.type = 'checkbox';
         this.#toggle_span.className = 'slider round';
