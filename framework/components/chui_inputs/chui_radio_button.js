@@ -8,7 +8,8 @@ class RadioButton {
         title: String(),
         stringValue: String(),
         value: Boolean(),
-        required: Boolean()
+        required: Boolean(),
+        width: String()
     }) {
         require('../../modules/chui_functions').style_parse([
             {
@@ -16,7 +17,7 @@ class RadioButton {
                 style: {
                     "display": "flex",
                     "align-items": "center",
-                    "justify-content": "center",
+                    "justify-content": "flex-start",
                     "font-size": "12pt",
                     "margin": "var(--margin)",
                     "width": "max-content"
@@ -49,7 +50,7 @@ class RadioButton {
                     "flex-shrink": "0",
                     "flex-grow":"0",
                     "border-radius":"50%",
-                    "margin-right":"0.5em",
+                    "margin-right":"12px",
                     "align-items":"center",
                     "justify-content":"center",
                     "color":"transparent",
@@ -120,6 +121,12 @@ class RadioButton {
         if (options.name !== undefined) this.#input.name = options.name;
         if (options.value !== undefined) this.#input.checked = options.value;
         if (options.required !== undefined) this.#input.required = options.required;
+        if (options.width !== undefined) {
+            this.#radioButton.style.width = options.width;
+            if (options.width === "-webkit-fill-available") {
+                this.#label.style.width = options.width;
+            }
+        }
     }
     getName() { return this.#input.name; }
     getValue() { return this.#input.checked; }

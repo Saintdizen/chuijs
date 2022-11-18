@@ -12,7 +12,8 @@ class SettingsPage extends Page {
 
         this.#settings.addPage(
             this.#page1(),
-            this.#page2()
+            this.#page2(),
+            this.#page3()
         )
 
         this.add(this.#settings)
@@ -173,6 +174,30 @@ class SettingsPage extends Page {
                             changeEvent: (e) => {
                                 new Notification({
                                     title: e.target.value, text: e.target.value, style: Notification.STYLE.SUCCESS, showTime: 1000
+                                }).show()
+                            }
+                        })
+                    ]
+                })
+            ]
+        })
+    }
+    #page3() {
+        return this.#settings.page({
+            title: "Настройка радио-группы",
+            components: [
+                this.#settings.block({
+                    title: "Тестовая настройка радио-группы",
+                    components: [
+                        this.#settings.radioGroup({
+                            options: [
+                                { name: "Настройка один", value: "1" },
+                                { name: "Настройка два", value: "2" },
+                                { name: "Настройка три", value: "3" }
+                            ],
+                            changeEvent: (e) => {
+                                new Notification({
+                                    title: "Выбрано новое значение", text: `Выбрано ${e.target.value}`, showTime: 1000
                                 }).show()
                             }
                         })

@@ -2,6 +2,7 @@ const {ContentBlock} = require("./chui_content_block");
 const {Toggle} = require("./chui_toggle");
 const {Label} = require("./chui_label");
 const {Select} = require("./chui_inputs/chui_select_box");
+const {RadioButton} = require("./chui_inputs/chui_radio_button");
 
 class Settings {
     #chui_settings_main_block = document.createElement('chui_settings_main_block');
@@ -42,7 +43,8 @@ class Settings {
                     "padding": "10px",
                     "margin": "4px",
                     "border-radius": "var(--border_radius)",
-                    "font-weight": "500"
+                    "font-weight": "500",
+                    "word-break": "break-word"
                 }
             },
             {
@@ -90,6 +92,13 @@ class Settings {
             {
                 name: "settings_toggle_main",
                 style: {
+                    "padding": "12px",
+                }
+            },
+            {
+                name: "settings_radio_group_main",
+                style: {
+                    "display": "flex",
                     "padding": "12px",
                 }
             },
@@ -146,8 +155,6 @@ class Settings {
     addPage(...pages) {
         for (let page of pages) {
             let button = document.createElement("chui_settings_left_button");
-            if (pages.indexOf(page) === 0) button.style.margin = "8px 4px 4px 4px";
-            if (pages.indexOf(page) === pages.length - 1) button.style.margin = "4px 4px 8px 4px";
             button.innerText = page.getTitle()
             button.addEventListener("click", () => {
                 for (let act of document.getElementsByTagName('chui_settings_left_button')) act.classList.remove('chui_settings_left_button_active');
@@ -155,6 +162,11 @@ class Settings {
                 this.#go(page)
             });
             this.#chui_settings_left_block.appendChild(button)
+            if (pages.indexOf(page) === 0) {
+                button.style.margin = "8px 4px 4px 4px";
+                button.click()
+            }
+            if (pages.indexOf(page) === pages.length - 1) button.style.margin = "4px 4px 8px 4px";
         }
     }
     #go(page) {
@@ -178,6 +190,9 @@ class Settings {
     }
     block(options = { title: String(), description: String(), components: Array() }) {
         return new SettingBlock(options)
+    }
+    radioGroup(options = { options: [{ name: String(), value: String() }], changeEvent: () => {} }) {
+        return new SettingRadioGroup(options, this.#width)
     }
 }
 
@@ -219,6 +234,26 @@ class SettingBlock {
         }
         this.#main.appendChild(this.#chui_settings)
         for (let comp of options.components) this.#chui_settings.appendChild(comp.set());
+    }
+    set() {
+        return this.#main;
+    }
+}
+
+class SettingRadioGroup {
+    #name = require("randomstring").generate();
+    #main = document.createElement("settings_radio_group_main")
+    #block = new ContentBlock({ direction: "column", wrap: "nowrap", align: "start", justify: "center" });
+    constructor(options = { options: [{ name: String(), value: String() }], changeEvent: () => {} }, width = String()) {
+        this.#block.setWidth(width)
+        for (let option of options.options) {
+            let radio = new RadioButton({title: option.name, stringValue: option.value, name: this.#name, width: "-webkit-fill-available"})
+            radio.addChangeListener(options.changeEvent)
+            this.#block.add(radio)
+            radio.set().style.padding = '6px'
+        }
+        //
+        this.#main.appendChild(this.#block.set())
     }
     set() {
         return this.#main;
