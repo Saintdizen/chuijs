@@ -11,7 +11,8 @@ class SettingsPage extends Page {
 
         this.#settings.addPage(
             this.#page1(),
-            this.#page2()
+            this.#page2(),
+            this.#page3()
         )
 
         this.add(this.#settings)
@@ -40,6 +41,23 @@ class SettingsPage extends Page {
     #page2() {
         return this.#settings.page({
             title: "Настройки входа",
+            components: [
+                this.#settings.select({
+                    label:"Какая-то настройка с select",
+                    placeholder: "Опция?",
+                    options: ["Опция 1", "Опция 2"],
+                    changeEvent: (e) => {
+                        new Notification({
+                            title: e.target.value, text: e.target.value, style: Notification.STYLE.SUCCESS, showTime: 1000
+                        }).show()
+                    }
+                })
+            ]
+        })
+    }
+    #page3() {
+        return this.#settings.page({
+            title: "Какие-то настройки",
             components: [
                 this.#settings.select({
                     label:"Какая-то настройка с select",

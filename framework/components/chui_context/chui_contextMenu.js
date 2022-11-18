@@ -18,7 +18,7 @@ class ContextMenu {
                     "padding": "5px",
                     "background": "var(--notification_background)",
                     "color": "var(--text_color)",
-                    "animation-duration": ".26s",
+                    "animation-duration": ".22s",
                     "animation-fill-mode": "forwards"
                 }
             },

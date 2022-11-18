@@ -40,10 +40,18 @@ class Settings {
                     "padding": "10px",
                     "margin": "2px",
                     "border-radius": "var(--border_radius)",
+                    "font-weight": "500"
                 }
             },
             {
                 name: "chui_settings_left_button:hover",
+                style: {
+                    "color": "var(--text_color_hover)",
+                    "background": "var(--blue_prime_background)",
+                }
+            },
+            {
+                name: ".chui_settings_left_button_active",
                 style: {
                     "color": "var(--text_color_hover)",
                     "background": "var(--blue_prime_background)",
@@ -98,7 +106,11 @@ class Settings {
         for (let page of pages) {
             let button = document.createElement("chui_settings_left_button");
             button.innerText = page.getTitle()
-            button.addEventListener("click", () => this.#go(page));
+            button.addEventListener("click", () => {
+                for (let act of document.getElementsByTagName('chui_settings_left_button')) act.classList.remove('chui_settings_left_button_active');
+                if (!button.classList.contains("chui_settings_left_button_active")) button.classList.toggle("chui_settings_left_button_active");
+                this.#go(page)
+            });
             this.#chui_settings_left_block.appendChild(button)
         }
     }

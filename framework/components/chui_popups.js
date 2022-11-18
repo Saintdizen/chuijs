@@ -57,7 +57,8 @@ class Popup {
                     "border-top": "1px solid var(--shadow_three)",
                     "flex-direction": "row",
                     "justify-content": "center",
-                    "align-items": "center"
+                    "align-items": "center",
+                    "padding": "8px"
                 }
             },
             {

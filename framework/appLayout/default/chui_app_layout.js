@@ -90,8 +90,8 @@ class AppLayout extends Route {
                     "line-height": "normal",
                     "user-select": "none",
                     "outline": "none",
-                    "transition": "all .26s",
-                    "animation-duration": ".26s",
+                    "transition": "all .22s",
+                    "animation-duration": ".22s",
                     "position": "relative"
                 }
             },
@@ -105,8 +105,8 @@ class AppLayout extends Route {
                     "direction": "ltr",
                     "user-select": "none",
                     "outline": "none",
-                    "transition": "all .26s",
-                    "animation-duration": ".26s",
+                    "transition": "all .22s",
+                    "animation-duration": ".22s",
                     "position": "relative",
                 }
             },
@@ -205,11 +205,11 @@ class AppLayout extends Route {
                     "--dropdown_background": "rgb(51, 51, 51)",
                     //BADGE
                     "--badge_error_back": "rgba(255, 69, 58, 0.45)",
-                    "--badge_error_text": "rgba(255, 65, 54, 1)",
+                    "--badge_error_text": "rgba(255, 105, 94, 1)",
                     "--badge_success_back": "rgba(48, 209, 88, 0.45)",
                     "--badge_success_text": "rgba(49, 222, 75, 1)",
                     "--badge_cancel_back": "rgba(142, 142, 147, 0.45)",
-                    "--badge_cancel_text": "rgba(152, 152, 157, 1)",
+                    "--badge_cancel_text": "rgba(182, 182, 187, 1)",
                     "--badge_warning_back": "rgba(255, 214, 10, 0.45)",
                     "--badge_warning_text": "rgba(255, 212, 38, 1)",
                     //SPINNER COLOR
@@ -361,7 +361,7 @@ class AppLayout extends Route {
                     "-webkit-app-region": "no-drag",
                     "overflow": "hidden hidden",
                     "max-height": "calc(100% - 65px - (var(--margin) * 2))",
-                    "transition": "max-height 1s ease-in-out"
+                    "transition": "max-height .22s ease-in-out"
                 }
             },
             {
