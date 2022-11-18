@@ -115,15 +115,15 @@ class AppLayout extends Route {
                 style: {
                     //Цвета
                     //Глобальные цвета
-                    "--text_color": "rgb(28, 28, 30)",
-                    "--text_color_disabled": "rgba(28, 28, 30, 0.75)",
+                    "--text_color": "rgb(0, 0, 0)",
+                    "--text_color_disabled": "rgba(0, 0, 0, 0.5)",
                     "--header_background": "rgba(240, 240, 240, 0.45)",
                     "--header_background_dropdown": "rgb(240, 240, 240)",
                     "--center_background": "rgba(255, 255, 255)",
-                    "--border_main": "rgba(209, 209, 214, 0.85)",
+                    "--border_main": "rgba(220, 220, 220, 0.85)",
                     "--blue_prime_background": "rgba(20, 120, 255, 0.85)",
                     "--red_prime_background": "rgba(255, 59, 48, 0.85)",
-                    "--blue_prime_background_trans": "rgba(0, 112, 245, 0.45)",
+                    "--blue_prime_background_trans": "rgba(20, 120, 255, 0.45)",
                     //Кнопка
                     "--button_background": "rgba(240, 240, 240)",
                     "--button_background_disabled": "rgba(220, 220, 220, 0.15)",
@@ -134,7 +134,7 @@ class AppLayout extends Route {
                     "--app_menu_background": "rgba(240, 240, 240, 0.45)",
                     //Диалоговое окно
                     "--modal_overlay": "rgba(0, 0, 0, 0.45)",
-                    "--modal_background": "rgb(242, 242, 247)",
+                    "--modal_background": "rgb(255, 255, 255)",
                     //Поля ввода
                     "--input_background": "rgba(240, 240, 240)",
                     "--input_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
@@ -158,7 +158,7 @@ class AppLayout extends Route {
                     "--notification_background": "rgba(240, 240, 240, 0.45)",
                     "--notification_background_popup": "rgba(220, 220, 220, 0.45)",
                     //Остальное
-                    "--text_color_hover": "rgb(242, 242, 247)",
+                    "--text_color_hover": "rgb(255, 255, 255)",
                     "--disable_color": "#e9ecef",
                     // Управление окнами
                     "--window_close_button_hover": "rgba(255, 59, 48, 0.75)",
@@ -178,14 +178,15 @@ class AppLayout extends Route {
                 name: "[theme='dark']",
                 style: {
                     //Глобальные цвета
-                    "--text_color": "rgb(242, 242, 247)",
-                    "--text_color_disabled": "rgba(242, 242, 247, 0.75)",
+                    "--text_color": "rgb(255, 255, 255)",
+                    "--text_color_disabled": "rgba(255, 255, 255, 0.65)",
                     "--header_background": "rgba(51, 51, 51, 0.45)",
                     "--header_background_dropdown": "rgb(51, 51, 51)",
                     "--center_background": "rgb(36, 36, 36)",
-                    "--border_main": "rgba(58, 58, 60, 0.85)",
+                    "--border_main": "rgba(66, 66, 66, 0.85)",
                     "--blue_prime_background": "rgba(60, 160, 255, 0.85)",
                     "--red_prime_background": "rgba(255, 69, 58, 0.85)",
+                    "--blue_prime_background_trans": "rgba(60, 160, 255, 0.45)",
                     //Кнопка
                     "--button_background": "rgba(66, 66, 66, 0.45)",
                     "--button_background_disabled": "rgba(58, 58, 60, 0.15)",
@@ -196,7 +197,7 @@ class AppLayout extends Route {
                     "--app_menu_background": "rgba(51, 51, 51, 0.45)",
                     //Диалоговое окно
                     "--modal_overlay": "rgba(0, 0, 0, 0.45)",
-                    "--modal_background": "rgb(28, 28, 30)",
+                    "--modal_background": "rgb(36, 36, 36)",
                     //Поля ввода
                     "--input_background": "rgba(66, 66, 66, 0.45)",
                     "--input_box_shadow_normal": "0px 0px 1px 2px var(--input_background)",
