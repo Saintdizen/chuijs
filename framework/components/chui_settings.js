@@ -28,7 +28,7 @@ class Settings {
                     "border": "2px solid var(--border_main)",
                     "flex-direction": "column",
                     "height": "max-content",
-                    "padding": "10px"
+                    "padding": "8px"
                 }
             },
             {
