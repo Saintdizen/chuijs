@@ -153,7 +153,7 @@ class AppLayout extends Route {
                     "--spinner_blue": "rgba(0, 112, 245, 0.85)",
                     "--spinner_track": "rgba(209, 209, 214, 0.45)",
                     // Полоса состояния
-                    "--progress_bar_back": "rgba(209, 209, 214, 0.45)",
+                    "--progress_bar_back": "rgba(240, 240, 240)",
                     // Уведомления
                     "--notification_background": "rgba(240, 240, 240, 0.45)",
                     "--notification_background_popup": "rgba(220, 220, 220, 0.45)",
@@ -188,7 +188,7 @@ class AppLayout extends Route {
                     "--red_prime_background": "rgba(255, 69, 58, 0.85)",
                     "--blue_prime_background_trans": "rgba(60, 160, 255, 0.45)",
                     //Кнопка
-                    "--button_background": "rgba(66, 66, 66, 0.45)",
+                    "--button_background": "rgba(51, 51, 51)",
                     "--button_background_disabled": "rgba(58, 58, 60, 0.15)",
                     "--button_text_color": "rgb(60, 160, 255)",
                     "--button_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
@@ -199,7 +199,7 @@ class AppLayout extends Route {
                     "--modal_overlay": "rgba(0, 0, 0, 0.45)",
                     "--modal_background": "rgb(36, 36, 36)",
                     //Поля ввода
-                    "--input_background": "rgba(66, 66, 66, 0.45)",
+                    "--input_background": "rgba(51, 51, 51)",
                     "--input_box_shadow_normal": "0px 0px 1px 2px var(--input_background)",
                     "--input_box_shadow_focus": "0px 0px 1px 2px var(--blue_prime_background)",
                     "--dropdown_background": "rgb(51, 51, 51)",
@@ -216,7 +216,7 @@ class AppLayout extends Route {
                     "--spinner_blue": "rgba(20, 142, 255, 0.85)",
                     "--spinner_track": "rgba(58, 58, 60, 0.45)",
                     // Полоса состояния
-                    "--progress_bar_back": "rgba(58, 58, 60, 0.45)",
+                    "--progress_bar_back": "rgba(51, 51, 51)",
                     // Уведомления
                     "--notification_background": "rgba(51, 51, 51, 0.45)",
                     "--notification_background_popup": "rgba(66, 66, 66, 0.45)",

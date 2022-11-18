@@ -105,8 +105,8 @@ class OthersComponentsPage extends Page {
         this.add(button_2, button_3, button_4)
 
         let h1_progress = new H(1, "Прогресс бары")
-        let progress = new ProgressBar(100)
-        progress.setValue(50)
+        let progress = new ProgressBar({ max: 100 })
+        progress.setValue(10)
         progress.setWidth(Styles.SIZE.WEBKIT_FILL)
         progress.setProgressCountText("setProgressCountText")
         progress.setProgressText("setProgressText")
