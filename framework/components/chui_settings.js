@@ -7,7 +7,7 @@ class Settings {
     #chui_settings_main_block = document.createElement('chui_settings_main_block');
     #chui_settings_right_block = document.createElement("chui_settings_right_block");
     #chui_settings_left_block = document.createElement("chui_settings_left_block");
-    #chui_settings = document.createElement('chui_settings');
+    #chui_settings = document.createElement('chui_settings_blocks');
     #width = String();
     constructor(width = String()) {
         require('../modules/chui_functions').style_parse([
@@ -15,20 +15,22 @@ class Settings {
                 name: "chui_settings_main_block",
                 style: {
                     "display": "flex",
-                    "width": "-webkit-fill-available"
+                    "width": "-webkit-fill-available",
+                    "height": "-webkit-fill-available"
                 }
             },
             {
                 name: "chui_settings_left_block",
                 style: {
                     "display": "flex",
-                    "width": "25%",
+                    "width": "300px",
                     "background": "var(--header_background)",
                     "border-radius": "var(--border_radius)",
                     "border": "2px solid var(--border_main)",
                     "flex-direction": "column",
-                    "height": "max-content",
-                    "padding": "8px"
+                    "height": "100%",
+                    "overflow": "overlay",
+                    "padding": "0px 4px"
                 }
             },
             {
@@ -38,7 +40,7 @@ class Settings {
                     "width": "-webkit-fill-available",
                     "color": "var(--text_color)",
                     "padding": "10px",
-                    "margin": "2px",
+                    "margin": "4px",
                     "border-radius": "var(--border_radius)",
                     "font-weight": "500"
                 }
@@ -61,10 +63,18 @@ class Settings {
                 name: "chui_settings_right_block",
                 style: {
                     "display": "flex",
-                    "width": "75%",
+                    "width": "-webkit-fill-available",
                     "justify-content": "center",
                     "align-items": "flex-start",
-                    "height": "max-content",
+                    "height": "100%",
+                    "overflow": "overlay"
+                }
+            },
+            {
+                name: "chui_settings_blocks",
+                style: {
+                    "display": "flex",
+                    "flex-direction": "column",
                 }
             },
             {
@@ -94,6 +104,37 @@ class Settings {
                 style: {
                     "padding": "12px",
                 }
+            },
+            //
+            {
+                name: "settings_block_main",
+                style: {
+                    "display": "flex",
+                    "flex-direction": "column",
+                    "margin-bottom": "25px"
+                }
+            },
+            {
+                name: "chui_settings_title",
+                style: {
+                    "display": "flex",
+                    "flex-direction": "column",
+                    "margin": "10px 0px 15px 0px",
+                    "font-size": "13pt",
+                    "color": "var(--text_color)",
+                    "font-weight": "600"
+                }
+            },
+            {
+                name: "chui_settings_desc",
+                style: {
+                    "display": "flex",
+                    "flex-direction": "column",
+                    "margin": "10px 0px 15px 0px",
+                    "font-size": "9pt",
+                    "color": "var(--text_color)",
+                    "font-weight": "500"
+                }
             }
         ], 'chUiJS_Settings');
         this.#width = width;
@@ -105,6 +146,8 @@ class Settings {
     addPage(...pages) {
         for (let page of pages) {
             let button = document.createElement("chui_settings_left_button");
+            if (pages.indexOf(page) === 0) button.style.margin = "8px 4px 4px 4px";
+            if (pages.indexOf(page) === pages.length - 1) button.style.margin = "4px 4px 8px 4px";
             button.innerText = page.getTitle()
             button.addEventListener("click", () => {
                 for (let act of document.getElementsByTagName('chui_settings_left_button')) act.classList.remove('chui_settings_left_button_active');
@@ -133,6 +176,9 @@ class Settings {
     select(options = { label: String(), options: Array(), changeEvent: () => {} }) {
         return new SettingSelect(options, this.#width)
     }
+    block(options = { title: String(), description: String(), components: Array() }) {
+        return new SettingBlock(options)
+    }
 }
 
 class SettingsPage {
@@ -150,6 +196,32 @@ class SettingsPage {
     }
     set() {
         return this.#chui_settings_components;
+    }
+}
+
+class SettingBlock {
+    #main = document.createElement("settings_block_main");
+    #chui_settings_title = document.createElement("chui_settings_title");
+    #chui_settings_desc = document.createElement("chui_settings_desc");
+    #chui_settings = document.createElement('chui_settings');
+    constructor(options = { title: String(), description: String(), components: Array() }) {
+        if (options.title !== undefined) {
+            this.#chui_settings_title.innerText = options.title;
+            this.#main.appendChild(this.#chui_settings_title)
+        }
+        if (options.description !== undefined) {
+            this.#chui_settings_desc.innerText = options.description;
+            this.#main.appendChild(this.#chui_settings_desc)
+        }
+        if (options.title !== undefined && options.description !== undefined) {
+            this.#chui_settings_title.style.margin = "10px 0px 5px 0px";
+            this.#chui_settings_desc.style.margin = "5px 0px 15px 0px"
+        }
+        this.#main.appendChild(this.#chui_settings)
+        for (let comp of options.components) this.#chui_settings.appendChild(comp.set());
+    }
+    set() {
+        return this.#main;
     }
 }
 
