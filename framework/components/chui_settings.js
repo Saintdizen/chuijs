@@ -1,22 +1,70 @@
-const {Tabs, Tab} = require("../components/chui_tabs");
 const {ContentBlock} = require("./chui_content_block");
 const {Toggle} = require("./chui_toggle");
 const {Label} = require("./chui_label");
 const {Select} = require("./chui_inputs/chui_select_box");
 
 class Settings {
+    #chui_settings_main_block = document.createElement('chui_settings_main_block');
+    #chui_settings_right_block = document.createElement("chui_settings_right_block");
+    #chui_settings_left_block = document.createElement("chui_settings_left_block");
     #chui_settings = document.createElement('chui_settings');
-    #width = String()
-    #tabs = []
+    #width = String();
     constructor(width = String()) {
         require('../modules/chui_functions').style_parse([
+            {
+                name: "chui_settings_main_block",
+                style: {
+                    "display": "flex",
+                    "width": "-webkit-fill-available"
+                }
+            },
+            {
+                name: "chui_settings_left_block",
+                style: {
+                    "display": "flex",
+                    "width": "25%",
+                    "background": "var(--header_background)",
+                    "border-radius": "var(--border_radius)",
+                    "border": "2px solid var(--border_main)",
+                    "flex-direction": "column",
+                    "height": "max-content",
+                    "padding": "10px"
+                }
+            },
+            {
+                name: "chui_settings_left_button",
+                style: {
+                    "display": "flex",
+                    "width": "-webkit-fill-available",
+                    "color": "var(--text_color)",
+                    "padding": "10px",
+                    "margin": "2px",
+                    "border-radius": "var(--border_radius)",
+                }
+            },
+            {
+                name: "chui_settings_left_button:hover",
+                style: {
+                    "color": "var(--text_color_hover)",
+                    "background": "var(--blue_prime_background)",
+                }
+            },
+            {
+                name: "chui_settings_right_block",
+                style: {
+                    "display": "flex",
+                    "width": "75%",
+                    "justify-content": "center",
+                    "align-items": "flex-start",
+                    "height": "max-content",
+                }
+            },
             {
                 name: "chui_settings",
                 style: {
                     "display": "flex",
                     "background": "var(--header_background)",
                     "border-radius": "var(--border_radius)",
-                    "margin": "auto",
                     "flex-direction": "column",
                     "border": "2px solid var(--border_main)"
                 }
@@ -41,39 +89,55 @@ class Settings {
             }
         ], 'chUiJS_Settings');
         this.#width = width;
+        this.#chui_settings_main_block.appendChild(this.#chui_settings_left_block)
+        this.#chui_settings_main_block.appendChild(this.#chui_settings_right_block)
+        this.#chui_settings_right_block.appendChild(this.#chui_settings)
     }
 
-    setTabs(test = [{ title: String(), content: Array() }]) {
-        let main = document.createElement("settings_tabs_main")
-        for (let object of test) {
-            let tab = new Tab(object.title);
-            tab.addContent(...object.content);
-            this.#tabs.push(tab);
+    addPage(...pages) {
+        for (let page of pages) {
+            let button = document.createElement("chui_settings_left_button");
+            button.innerText = page.getTitle()
+            button.addEventListener("click", () => this.#go(page));
+            this.#chui_settings_left_block.appendChild(button)
         }
-        let tabs = new Tabs({
-            tabsJustify: "center",
-            default: 0,
-            width: "-webkit-fill-available",
-            tabs: this.#tabs
-        });
-        main.appendChild(tabs.set())
-        this.#chui_settings.appendChild(main)
     }
-
-    add(...components) {
-        for (let comp of components) {
+    #go(page) {
+        this.#chui_settings.innerHTML = '';
+        for (let comp of page.getComponents()) {
             this.#chui_settings.appendChild(comp.set())
         }
     }
 
     set() {
-        return this.#chui_settings
+        return this.#chui_settings_main_block
+    }
+    page(options = { title: String(), components: [] }) {
+        return new SettingsPage(options);
     }
     toggle(options = { label: String(), changeEvent: () => {} }) {
         return new SettingToggle(options, this.#width)
     }
     select(options = { label: String(), options: Array(), changeEvent: () => {} }) {
         return new SettingSelect(options, this.#width)
+    }
+}
+
+class SettingsPage {
+    #chui_settings_components = Array();
+    #chui_settings_title = String();
+    constructor(options = { title: String(), components: [] }) {
+        this.#chui_settings_title = options.title;
+        for (let comp of options.components) this.#chui_settings_components.push(comp);
+    }
+    getTitle() {
+        return this.#chui_settings_title;
+    }
+    getComponents() {
+        return this.#chui_settings_components;
+    }
+    set() {
+        return this.#chui_settings_components;
     }
 }
 
