@@ -15,6 +15,7 @@ const store = new Store();
 //
 
 //VARS
+let test2 = false;
 let header = null;
 let center = null;
 let header_first_test = null;
@@ -72,7 +73,6 @@ class AppLayout extends Route {
     //
     #windowControlsPositionLeft = undefined;
     #windowHideOnClose = false;
-
     //
     constructor() {
         super();
@@ -561,7 +561,19 @@ class AppLayout extends Route {
                     "width": "-webkit-fill-available",
                     "height": "max-content",
                     "justify-content": "center",
-                    "align-items": "center"
+                    "align-items": "center",
+                }
+            },
+            {
+                name: ".class_dark_mode",
+                style: {
+                    "display": "flex",
+                    "padding": "6px",
+                    "width": "max-content",
+                    "height": "max-content",
+                    "justify-content": "center",
+                    "align-items": "center",
+                    "-webkit-app-region": "no-drag"
                 }
             },
             {
@@ -827,7 +839,6 @@ class AppLayout extends Route {
         let icon_dark = new Icon(Icons.DEVICE.DARK_MODE, "20px", "").set();
         icon_dark.style.marginLeft = "6px";
 
-
         this.#dark_mode.appendChild(icon_light)
         this.#dark_mode.appendChild(this.#dark_mode_togle.set())
         this.#dark_mode.appendChild(icon_dark)
@@ -913,6 +924,7 @@ class AppLayout extends Route {
                 if (ctxz) new Animation(ctxz).fadeOutAndRemove();
             }
         })
+        //
         this.#applayout.appendChild(this.#app_menu)
         this.#app_menu.appendChild(this.#route_views)
         this.#app_menu.appendChild(this.#dark_mode)
