@@ -9,13 +9,11 @@ const {Label} = require("../../components/chui_label");
 const {ContentBlock} = require("../../components/chui_content_block");
 const {Popup} = require("../../components/chui_popups");
 const {UpdateNotification} = require("../../components/chui_update_notification");
-const remote = require('electron').remote;
-const ipcRenderer = require('electron').ipcRenderer;
+const {ipcRenderer, remote} = require("electron");
 const store = new Store();
 //
 
 //VARS
-let test2 = false;
 let header = null;
 let center = null;
 let header_first_test = null;

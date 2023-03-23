@@ -284,11 +284,11 @@ class Table {
 
         if (sortMethod.includes(Table.#SORT_METHOD.ASC)) {
             arr.sort(asc).forEach(data => {
-                sort_data.push(new this.#data[0].__proto__.constructor(...data))
+                sort_data.push(new this.#data[0].__proto__.constructor())
             })
         } else if (sortMethod.includes(Table.#SORT_METHOD.DESC)) {
             arr.sort(desc).forEach(data => {
-                sort_data.push(new this.#data[0].__proto__.constructor(...data))
+                sort_data.push(new this.#data[0].__proto__.constructor())
             })
         }
 

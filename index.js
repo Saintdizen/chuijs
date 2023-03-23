@@ -120,6 +120,7 @@ class Main {
         this.#window.on("ready-to-show", () => {
             this.#window.show()
         })
+
     }
     toggleDevTools() {
         if (this.#devToolsOpened) {
@@ -227,8 +228,8 @@ module.exports = {
     ipcMain: ipcMain,
     ipcRenderer: ipcRenderer,
     shell: shell,
-    remote: remote,
     Main: Main,
+    remote: remote,
     sleep: sleep,
     render: render,
     MenuItem: MenuItem,

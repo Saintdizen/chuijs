@@ -1,6 +1,5 @@
 /** RENDERER PROCESS */
 /** IMPORTS */
-
 const {AppLayout, render, Icons, Notification, Styles, Button} = require('../index');
 
 const {MainPage} = require('./views/_main');
