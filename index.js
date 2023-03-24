@@ -1,6 +1,6 @@
 // GLOBAL VARS
 globalThis.ctxs = [];
-const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, remote} = require('electron');
+const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell} = require('electron');
 const log = require('electron-log');
 log.transports.file.resolvePath = () => require("path").join(app.getPath('userData'), `electron-log/logs.log`);
 
@@ -171,6 +171,9 @@ class Main {
                 new Notification({title, body}).show();
             })
             process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+
+            require("@electron/remote/main").initialize();
+            require("@electron/remote/main").enable(this.#window.webContents);
         })
     }
     enableAutoUpdateApp(start = Number(), version) {
@@ -229,7 +232,6 @@ module.exports = {
     ipcRenderer: ipcRenderer,
     shell: shell,
     Main: Main,
-    remote: remote,
     sleep: sleep,
     render: render,
     MenuItem: MenuItem,

@@ -9,7 +9,7 @@ const {Label} = require("../../components/chui_label");
 const {ContentBlock} = require("../../components/chui_content_block");
 const {Popup} = require("../../components/chui_popups");
 const {UpdateNotification} = require("../../components/chui_update_notification");
-const {ipcRenderer, remote} = require("electron");
+const {ipcRenderer} = require("electron");
 const store = new Store();
 //
 
@@ -942,18 +942,18 @@ class AppLayout extends Route {
         // Свернуть
         this.#window_minimize_button.innerHTML = new Icon(Icons.ACTIONS.MINIMIZE, "12pt").getHTML();
         this.#window_minimize_button.addEventListener("click", () => {
-            remote.getCurrentWindow().minimize();
+            require("@electron/remote").getCurrentWindow().minimize();
         })
 
         // Развернуть на весь экран
         this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "12pt").getHTML();
         this.#window_maximize_button.addEventListener("click", () => {
-            if (remote.getCurrentWindow().isMaximized()) {
+            if (require("@electron/remote").getCurrentWindow().isMaximized()) {
                 this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "12pt").getHTML();
-                remote.getCurrentWindow().restore();
+                require("@electron/remote").getCurrentWindow().restore();
             } else {
                 this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN_EXIT, "12pt").getHTML();
-                remote.getCurrentWindow().maximize();
+                require("@electron/remote").getCurrentWindow().maximize();
             }
         })
 
@@ -961,9 +961,9 @@ class AppLayout extends Route {
         this.#window_close_button.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "12pt").getHTML();
         this.#window_close_button.addEventListener("click", () => {
             if (this.#windowHideOnClose) {
-                remote.getCurrentWindow().hide();
+                require("@electron/remote").getCurrentWindow().hide();
             } else {
-                remote.getCurrentWindow().close();
+                require("@electron/remote").getCurrentWindow().close();
             }
         })
         if (this.#windowControlsPositionLeft === undefined) {

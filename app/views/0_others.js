@@ -181,7 +181,7 @@ class OthersComponentsPage extends Page {
         let test = new Button({
             title: "test",
             clickEvent: () => {
-                require('electron').remote.dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }).then(result => {
+                require('@electron/remote').dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }).then(result => {
                     if (!result.canceled) {
                         result.filePaths.forEach(path => {
                             let buff = new Buffer(require('fs').readFileSync(path)).toString('base64');

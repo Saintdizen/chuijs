@@ -26,7 +26,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "electron": "https://github.com/castlabs/electron-releases#v13.6.2-wvvmp",
+    "electron": "~23.2.0",
+    "@electron/remote": "~2.0.9",
     "electron-log": "~4.4.8",
     "electron-store": "~8.1.0",
     "electron-updater": "4.3.9",
