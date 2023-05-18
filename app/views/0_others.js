@@ -7,7 +7,7 @@ class OthersComponentsPage extends Page {
     constructor() {
         super();
         this.setTitle('Остальные компоненты');
-        this.setMain(false)
+        this.setMain(true)
 
         let button1 = new Button({
             title:"Кнопка 1",
