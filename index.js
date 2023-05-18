@@ -110,7 +110,7 @@ class Main {
                 enableRemoteModule: true
             },
             frame: false,
-            transparent: false,
+            transparent: true,
         });
         this.#window.loadURL(`data:text/html;charset=UTF-8,<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${this.#appName}</title></head><body><div id="app"></div></body></html>`).then(() => {
             app.on('before-quit', () => {
@@ -132,10 +132,12 @@ class Main {
         }
     }
     hideAndShow() {
-        if (this.#window.isVisible()) {
-            this.#window.hide();
-        } else {
-            this.#window.show();
+        //let focused = this.#window.isFocused()
+        let visible = this.#window.isVisible()
+        if (!visible) {
+            this.#window.show()
+        } else if (visible) {
+            this.#window.hide()
         }
     }
     stop() {
