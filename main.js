@@ -9,9 +9,7 @@ const main = new Main({
 main.start({
     tray: [
         new MenuItem().button('Скрыть | Показать', () => main.hideAndShow()),
-        new MenuItem().separator(),
         new MenuItem().button('Консоль', () => main.toggleDevTools()),
-        new MenuItem().separator(),
         new MenuItem().quit("Выход")
     ]
 })
