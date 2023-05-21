@@ -2,7 +2,10 @@ const fs = require("fs");
 const dataurl = require("dataurl");
 const { Icon, Icons } = require(".././chui_icons");
 
+let play_list = []
+
 class AudioPlayer {
+    #current_track = 0
     #chui_audio_player_main = document.createElement(`chui_audio_player_main`);
     #chui_audio_tag = document.createElement(`audio`);
     #chui_source_tag = document.createElement(`source`);
@@ -17,7 +20,7 @@ class AudioPlayer {
     #chui_audio_player_play_pause = document.createElement(`chui_audio_player_play_pause`);
     #chui_audio_player_next = document.createElement(`chui_audio_player_next`);
     #chui_audio_player_prev = document.createElement(`chui_audio_player_prev`);
-    constructor(playList = [], type = String(), autoplay = Boolean()) {
+    constructor(autoplay = Boolean()) {
         require('../../modules/chui_functions').style_parse([
             {
                 name: "chui_audio_player_main",
@@ -85,13 +88,12 @@ class AudioPlayer {
         ], 'chUiJS_AudioPlayer');
         this.#chui_audio_tag.setAttribute("name", "media")
         this.#chui_audio_tag.controls = false;
-        this.#chui_source_tag.type = type
 
         // Настройки
         if (autoplay) {
             this.#chui_audio_tag.autoplay = autoplay;
             setTimeout(async () => {
-                this.#chui_source_tag.src = await this.#convertSong(src, type)
+                await this.#play(play_list[this.#current_track])
             }, 1)
         }
 
@@ -133,7 +135,7 @@ class AudioPlayer {
         // СОБЫТИЯ
         this.#chui_audio_player_play_pause.addEventListener("click", async () => {
             if (this.#chui_audio_tag.currentTime === 0) {
-                await this.#play(playList[0], type)
+                await this.#play(play_list[this.#current_track])
             } else if (this.#chui_audio_tag.currentTime > 0 && !this.#chui_audio_tag.paused) {
                 this.#chui_audio_tag.pause()
                 this.#chui_audio_player_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, "40px").getHTML()
@@ -142,9 +144,36 @@ class AudioPlayer {
                 this.#chui_audio_player_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, "40px").getHTML()
             }
         })
-        this.#chui_audio_tag.addEventListener("timeupdate", (e) => {
+        this.#chui_audio_player_next.addEventListener("click", async () => {
+            this.#current_track = this.#current_track + 1
+            if (this.#current_track < play_list.length) {
+                await this.#play(play_list[this.#current_track])
+            } else if (this.#current_track === play_list.length) {
+                this.#current_track = 0
+                await this.#play(play_list[this.#current_track])
+            }
+        })
+        this.#chui_audio_player_prev.addEventListener("click", async () => {
+            this.#current_track = this.#current_track - 1
+            if (this.#current_track < 0) {
+                this.#current_track = play_list.length - 1
+                await this.#play(play_list[this.#current_track])
+            } else {
+                await this.#play(play_list[this.#current_track])
+            }
+        })
+        this.#chui_audio_tag.addEventListener("timeupdate", async (e) => {
             this.#displayCurrentTime(e.target.currentTime)
             this.#setSliderValue(e.target.currentTime)
+            if (e.target.currentTime === e.target.duration) {
+                this.#current_track = this.#current_track + 1
+                if (this.#current_track < play_list.length) {
+                    await this.#play(play_list[this.#current_track])
+                } else if (this.#current_track === play_list.length) {
+                    this.#current_track = 0
+                    await this.#play(play_list[this.#current_track])
+                }
+            }
         });
         this.#chui_audio_player_seek.addEventListener('input', (e) => {
             this.#chui_audio_player_seek.textContent = this.#calculateTime(this.#chui_audio_player_seek.value);
@@ -170,16 +199,18 @@ class AudioPlayer {
             });
         });
     };
-    async #play(song, type) {
+    async #play(track) {
         this.#chui_audio_player_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, "40px").getHTML()
-        this.#chui_source_tag.src = await this.#convertSong(song, type)
+        if (track.trackPath.includes("http")) {
+            this.#chui_source_tag.src = track.trackPath
+        } else {
+            this.#chui_source_tag.src = await this.#convertSong(track.trackPath, track.mimetype)
+        }
         this.#chui_audio_tag.load()
         await this.#chui_audio_tag.play()
         this.#displayDuration()
         this.#setSliderMax()
     }
-
-    //
     #calculateTime = (secs) => {
         const minutes = Math.floor(secs / 60);
         const seconds = Math.floor(secs % 60);
@@ -198,7 +229,14 @@ class AudioPlayer {
     #setSliderValue = (value) => {
         this.#chui_audio_player_seek.value = Math.floor(value);
     }
-
+    //
+    setPlayList(list = [{ artist: String(), trackName: String(), trackPath: String(), mimetype: String() }]) {
+        play_list = list
+    }
+    getPlayList() {
+        return play_list
+    }
+    //
     static MIMETYPES = {
         AU_SND: 'audio/basic',
         LINEAR_PCM: 'auido/L24',
