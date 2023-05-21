@@ -54,7 +54,8 @@ const { FieldSet } = require("./framework/components/chui_fieldset");
 const { Popup } = require("./framework/components/chui_popups");
 const { TelegramBot } = require("./framework/components/telegram_bot/chui_telegram_bot");
 const { MenuBar } = require("./framework/components/chui_menu_bar");
-const {UpdateNotification} = require("./framework/components/chui_update_notification");
+const { UpdateNotification } = require("./framework/components/chui_update_notification");
+const { AudioPlayer } = require("./framework/components/media/chui_audio_player")
 
 //VARS
 let isQuiting = false;
@@ -83,6 +84,7 @@ class Main {
             this.#app_icon = getDefaultIcon();
         }
         //app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
+        app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 
         // Options
         this.#appName = options.name;
@@ -290,5 +292,6 @@ module.exports = {
     TelegramBot: TelegramBot,
     MenuBar: MenuBar,
     UpdateNotification: UpdateNotification,
-    log: log
+    log: log,
+    AudioPlayer: AudioPlayer
 }

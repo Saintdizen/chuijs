@@ -15,6 +15,7 @@ const {WebViewsPage} = require('./views/8_webviews');
 const {TabsPage} = require('./views/9_tabs');
 const {TgTestPage} = require("./views/10_tg_test");
 const {SpinnerPage} = require("./views/11_spinners");
+const {MediaPage} = require("./views/12_media");
 const {MainPageRoute} = require("./views/routes_pages/main");
 
 class Test extends AppLayout {
@@ -41,6 +42,7 @@ class Test extends AppLayout {
         this.setRoute(new TabsPage());
         this.setRoute(new TgTestPage());
         this.setRoute(new SpinnerPage());
+        this.setRoute(new MediaPage())
 
         this.addComponentToAppLayout({
             headerRight: [
