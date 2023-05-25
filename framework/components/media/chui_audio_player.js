@@ -40,20 +40,6 @@ class AudioPlayer {
                 }
             },
             {
-                name: "chui_audio_player_current_time",
-                style: {
-                    "display": "flex",
-                    "margin": "12px"
-                }
-            },
-            {
-                name: "chui_audio_player_duration",
-                style: {
-                    "display": "flex",
-                    "margin": "12px"
-                }
-            },
-            {
                 name: "#chui_audio_player_seek",
                 style: {
                     "width": "-webkit-fill-available"
