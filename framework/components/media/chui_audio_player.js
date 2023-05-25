@@ -1,6 +1,7 @@
 const fs = require("fs");
 const dataurl = require("dataurl");
 const { Icon, Icons } = require(".././chui_icons");
+const {Label} = require('.././chui_label');
 
 let play_list = []
 
@@ -11,8 +12,8 @@ class AudioPlayer {
     #chui_source_tag = document.createElement(`source`);
     // Блок информация
     #chui_audio_player_info = document.createElement(`chui_audio_player_info`);
-    #chui_audio_player_current_time = document.createElement(`chui_audio_player_current_time`);
-    #chui_audio_player_duration = document.createElement(`chui_audio_player_duration`);
+    #chui_audio_player_current_time = undefined;
+    #chui_audio_player_duration = undefined;
     #chui_audio_player_seek = document.createElement(`input`);
     #chui_audio_player_volume = document.createElement(`input`);
     // Блок управления
@@ -98,8 +99,8 @@ class AudioPlayer {
         }
 
         // ИНФОРМАЦИЯ
-        this.#chui_audio_player_current_time.textContent = this.#calculateTime(0)
-        this.#chui_audio_player_duration.textContent = this.#calculateTime(0)
+        this.#chui_audio_player_current_time = new Label({text: this.#calculateTime(0)})
+        this.#chui_audio_player_duration = new Label({text: this.#calculateTime(0)})
         this.#chui_audio_player_seek.type = "range"
         this.#chui_audio_player_seek.id = "chui_audio_player_seek"
         this.#chui_audio_player_seek.max = "100"
@@ -117,9 +118,9 @@ class AudioPlayer {
 
         //Заполнение элемента
         // ИНФОРМАЦИЯ
-        this.#chui_audio_player_info.appendChild(this.#chui_audio_player_current_time)
+        this.#chui_audio_player_info.appendChild(this.#chui_audio_player_current_time.set())
         this.#chui_audio_player_info.appendChild(this.#chui_audio_player_seek)
-        this.#chui_audio_player_info.appendChild(this.#chui_audio_player_duration)
+        this.#chui_audio_player_info.appendChild(this.#chui_audio_player_duration.set())
 
         // КНОПКИ
         this.#chui_audio_player_controls.appendChild(this.#chui_audio_player_prev)
@@ -218,10 +219,10 @@ class AudioPlayer {
         return `${minutes}:${returnedSeconds}`;
     }
     #displayCurrentTime = (time) => {
-        this.#chui_audio_player_current_time.textContent = this.#calculateTime(time);
+        this.#chui_audio_player_current_time.setText(this.#calculateTime(time));
     }
     #displayDuration = () => {
-        this.#chui_audio_player_duration.textContent = this.#calculateTime(this.#chui_audio_tag.duration);
+        this.#chui_audio_player_duration.setText(this.#calculateTime(this.#chui_audio_tag.duration));
     }
     #setSliderMax = () => {
         this.#chui_audio_player_seek.max = Math.floor(this.#chui_audio_tag.duration);
