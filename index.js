@@ -210,10 +210,9 @@ class Main {
                 let {Notification} = require('electron');
                 new Notification({title, body}).show();
             })
-            process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
-
             require("@electron/remote/main").initialize();
             require("@electron/remote/main").enable(this.#window.webContents);
+            process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = "true";
         })
     }
     enableAutoUpdateApp(start = Number(), version) {
