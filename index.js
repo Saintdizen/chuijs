@@ -72,12 +72,14 @@ class Main {
     #width = undefined;
     #renderer = undefined;
     #devToolsOpened = false;
+    #webSecurity = true;
     constructor(options = {
         name: String(),
         width: Number(),
         height: Number(),
         render: String(),
-        devTools: Boolean()
+        devTools: Boolean(),
+        webSecurity: Boolean(),
     }) {
         this.#app_icon = options.icon;
         if (this.#app_icon === undefined) {
@@ -91,6 +93,7 @@ class Main {
         this.#height = options.height;
         this.#width = options.width;
         this.#renderer = options.render;
+        this.#webSecurity = options.webSecurity;
         // ===
         if (options.devTools) { this.#window.webContents.openDevTools() }
     }
@@ -109,11 +112,31 @@ class Main {
                 preload: this.#renderer,
                 spellcheck: false,
                 webviewTag: true,
-                enableRemoteModule: true
+                enableRemoteModule: true,
+                webSecurity: this.#webSecurity,
             },
             frame: false,
             transparent: true,
         });
+
+        if (!this.#webSecurity) {
+            this.#window.webContents.session.webRequest.onBeforeSendHeaders(
+                (details, callback) => {
+                    const { requestHeaders } = details;
+                    this.#test(requestHeaders, 'Access-Control-Allow-Origin', ['*']);
+                    callback({ requestHeaders });
+                },
+            );
+            this.#window.webContents.session.webRequest.onHeadersReceived((details, callback) => {
+                const { responseHeaders } = details;
+                this.#test(responseHeaders, 'Access-Control-Allow-Origin', ['*']);
+                this.#test(responseHeaders, 'Access-Control-Allow-Headers', ['*']);
+                callback({
+                    responseHeaders,
+                });
+            });
+        }
+
         this.#window.loadURL(`data:text/html;charset=UTF-8,<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${this.#appName}</title></head><body><div id="app"></div></body></html>`).then(() => {
             app.on('before-quit', () => {
                 isQuiting = true;
@@ -123,6 +146,19 @@ class Main {
             this.#window.show()
         })
 
+    }
+    #test(obj, keyToChange, value) {
+        let keyToChangeLower = keyToChange.toLowerCase();
+        for (const key of Object.keys(obj)) {
+            if (key.toLowerCase() === keyToChangeLower) {
+                // Reassign old key
+                obj[key] = value;
+                // Done
+                return;
+            }
+        }
+        // Insert at end instead
+        obj[keyToChange] = value;
     }
     toggleDevTools() {
         if (this.#devToolsOpened) {
