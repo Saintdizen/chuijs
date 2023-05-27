@@ -116,7 +116,7 @@ class Main {
                 webSecurity: this.#webSecurity,
             },
             frame: false,
-            transparent: true,
+            transparent: false,
         });
 
         if (!this.#webSecurity) {
