@@ -217,7 +217,7 @@ class AudioPlayer {
         this.#chui_audio_player_seek.value = Math.floor(value);
     }
     //
-    setPlayList(list = [{ artist: String(), trackName: String(), trackPath: String(), mimetype: String() }]) {
+    setPlayList(list = [{ trackName: String(), trackPath: String(), mimetype: String() }]) {
         play_list = list
     }
     getPlayList() {

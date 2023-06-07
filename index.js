@@ -56,6 +56,7 @@ const { TelegramBot } = require("./framework/components/telegram_bot/chui_telegr
 const { MenuBar } = require("./framework/components/chui_menu_bar");
 const { UpdateNotification } = require("./framework/components/chui_update_notification");
 const { AudioPlayer } = require("./framework/components/media/chui_audio_player")
+const { VideoPlayer } = require("./framework/components/media/chui_video_player")
 
 //VARS
 let isQuiting = false;
@@ -328,5 +329,6 @@ module.exports = {
     MenuBar: MenuBar,
     UpdateNotification: UpdateNotification,
     log: log,
-    AudioPlayer: AudioPlayer
+    AudioPlayer: AudioPlayer,
+    VideoPlayer: VideoPlayer
 }
