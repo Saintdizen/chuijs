@@ -61,7 +61,7 @@ class VideoPlayer {
                     "border-radius": "6px",
                     "height": "2px",
                     "width": "-webkit-fill-available",
-                    "background": "linear-gradient(to right, #82CFD0 0%, #82CFD0 40%, #fff 40%, #fff 100%)"
+                    "background": "linear-gradient(to right, #82CFD0 0%, #82CFD0 0%, #fff 0%, #fff 100%)"
                 }
             },
             {
@@ -220,11 +220,11 @@ class VideoPlayer {
                 }
             }
         });
-        this.#chui_video_player_seek.addEventListener('input', (e) => {
+        this.#chui_video_player_seek.addEventListener('input', () => {
             this.#chui_video_player_seek.textContent = this.#calculateTime(this.#chui_video_player_seek.value);
-            this.#setSliderValue(e.target.value)
+            this.#setSliderValue(this.#chui_video_player_seek.value)
         });
-        this.#chui_video_player_seek.addEventListener('change', (e) => {
+        this.#chui_video_player_seek.addEventListener('change', () => {
             this.#chui_video_tag.currentTime = this.#chui_video_player_seek.value;
             this.#setSliderValue(this.#chui_video_player_seek.value)
         });
@@ -283,7 +283,7 @@ class VideoPlayer {
     }
     #setSliderValue = (value) => {
         this.#chui_video_player_seek.value = Math.floor(value);
-        this.#chui_video_player_seek.style.background = `linear-gradient(to right, #82CFD0 0%, #82CFD0 ${Math.floor(value)}%, #fff ${Math.floor(value)}%, white 100%)`
+        this.#chui_video_player_seek.style.background = `linear-gradient(to right, #82CFD0 0%, #82CFD0 ${Math.floor(value)}%, #fff ${Math.floor(value)}%, white ${Math.floor(this.#chui_video_player_seek.max)}%)`
     }
     //
     setPlayList(list = [{ videoName: String(), videoPath: String(), mimetype: String() }]) {
