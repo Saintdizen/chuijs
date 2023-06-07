@@ -4,7 +4,7 @@ class MediaPage extends Page {
     constructor() {
         super()
         this.setTitle('Медиа')
-        this.setMain(false)
+        this.setMain(true)
         this.setFullHeight()
         this.setFullWidth()
         let audio = new AudioPlayer(true)

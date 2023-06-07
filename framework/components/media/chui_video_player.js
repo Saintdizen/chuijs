@@ -43,7 +43,7 @@ class VideoPlayer {
                     "bottom": "0",
                     "backdrop-filter": "blur(15px)",
                     "border-radius": "var(--border_radius)",
-                    "opacity": "0"
+                    "opacity": "1"
                 }
             },
             // Блок информация
@@ -57,7 +57,42 @@ class VideoPlayer {
             {
                 name: "#chui_video_player_seek",
                 style: {
-                    "width": "-webkit-fill-available"
+                    "-webkit-appearance": "none",
+                    "border-radius": "6px",
+                    "height": "2px",
+                    "width": "-webkit-fill-available",
+                    "background": "linear-gradient(to right, #82CFD0 0%, #82CFD0 40%, #fff 40%, #fff 100%)"
+                }
+            },
+            {
+                name: "#chui_video_player_seek::-webkit-slider-runnable-track",
+                style: {
+                    //"background": "#ddd",
+                    "border": "none",
+                }
+            },
+            {
+                name: "#chui_video_player_seek::-webkit-slider-thumb",
+                style: {
+                    "-webkit-appearance": "none",
+                    "border": "none",
+                    "outline": "none",
+                    "height": "0px",
+                    "width": "0px",
+                }
+            },
+            {
+                name: "#chui_video_player_seek:focus",
+                style: {
+                    "outline": "none",
+                    "border": "none",
+                }
+            },
+            {
+                name: "#chui_video_player_seek:focus::-webkit-slider-runnable-track",
+                style: {
+                    "outline": "none",
+                    "border": "none",
                 }
             },
             // Блок управления
@@ -65,8 +100,9 @@ class VideoPlayer {
                 name: "chui_video_player_controls",
                 style: {
                     "display": "flex",
-                    "justify-content": "center",
+                    "justify-content": "left",
                     "margin": "var(--margin)",
+                    "align-items": "center"
                 }
             },
             // КНОПКИ
@@ -113,6 +149,7 @@ class VideoPlayer {
         this.#chui_video_player_volume.id = "chui_video_player_volume"
         this.#chui_video_player_volume.max = "100"
         this.#chui_video_player_volume.value = "100"
+        this.#chui_video_player_volume.style.marginLeft = "auto"
 
         // КНОПКИ
         this.#chui_video_player_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, "40px").getHTML()
@@ -121,20 +158,22 @@ class VideoPlayer {
 
         //Заполнение элемента
         // ИНФОРМАЦИЯ
-        this.#chui_video_player_info.appendChild(this.#chui_video_player_current_time.set())
+
+
         this.#chui_video_player_info.appendChild(this.#chui_video_player_seek)
-        this.#chui_video_player_info.appendChild(this.#chui_video_player_duration.set())
 
         // КНОПКИ
         this.#chui_video_player_controls.appendChild(this.#chui_video_player_prev)
         this.#chui_video_player_controls.appendChild(this.#chui_video_player_play_pause)
         this.#chui_video_player_controls.appendChild(this.#chui_video_player_next)
+        this.#chui_video_player_controls.appendChild(this.#chui_video_player_current_time.set())
+        this.#chui_video_player_controls.appendChild(this.#chui_video_player_duration.set())
         this.#chui_video_player_controls.appendChild(this.#chui_video_player_volume)
         //
         this.#chui_video_player_main.appendChild(this.#chui_video_tag)
         this.#chui_video_tag.appendChild(this.#chui_source_tag)
-        this.#chui_video_player_block.appendChild(this.#chui_video_player_info)
         this.#chui_video_player_block.appendChild(this.#chui_video_player_controls)
+        this.#chui_video_player_block.appendChild(this.#chui_video_player_info)
 
         this.#chui_video_player_main.appendChild(this.#chui_video_player_block)
 
@@ -183,9 +222,11 @@ class VideoPlayer {
         });
         this.#chui_video_player_seek.addEventListener('input', (e) => {
             this.#chui_video_player_seek.textContent = this.#calculateTime(this.#chui_video_player_seek.value);
+            this.#setSliderValue(e.target.value)
         });
-        this.#chui_video_player_seek.addEventListener('change', () => {
+        this.#chui_video_player_seek.addEventListener('change', (e) => {
             this.#chui_video_tag.currentTime = this.#chui_video_player_seek.value;
+            this.#setSliderValue(this.#chui_video_player_seek.value)
         });
         this.#chui_video_player_volume.addEventListener('input', (e) => {
             const value = e.target.value;
@@ -196,7 +237,7 @@ class VideoPlayer {
             this.#chui_video_player_block.style.opacity = "1"
         })
         this.#chui_video_player_main.addEventListener("mouseout", (e) => {
-            this.#chui_video_player_block.style.opacity = "0"
+            this.#chui_video_player_block.style.opacity = "1"
         })
 
     }
@@ -242,6 +283,7 @@ class VideoPlayer {
     }
     #setSliderValue = (value) => {
         this.#chui_video_player_seek.value = Math.floor(value);
+        this.#chui_video_player_seek.style.background = `linear-gradient(to right, #82CFD0 0%, #82CFD0 ${Math.floor(value)}%, #fff ${Math.floor(value)}%, white 100%)`
     }
     //
     setPlayList(list = [{ videoName: String(), videoPath: String(), mimetype: String() }]) {
