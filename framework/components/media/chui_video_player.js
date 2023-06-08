@@ -7,38 +7,49 @@ let play_list = []
 
 class VideoPlayer {
     #current_track = 0
-    #chui_video_player_main = document.createElement(`chui_video_player_main`);
-    #chui_video_player_block = document.createElement(`chui_video_player_block`);
-    #chui_video_tag = document.createElement(`video`);
+    #chui_vp_main = document.createElement(`chui_vp_main`);
+    #chui_vp_block = document.createElement(`chui_vp_block`);
+    #chui_vt = document.createElement(`video`);
+    #chui_vt_height = "auto"
+    #chui_vt_width = "auto"
     #chui_source_tag = document.createElement(`source`);
     // Блок информация
-    #chui_video_player_info = document.createElement(`chui_video_player_info`);
-    #chui_video_player_time = undefined;
-    #chui_video_player_seek = document.createElement(`input`);
-    #chui_video_player_seek_buf = document.createElement(`chui_video_player_seek_buf`);
-    #chui_video_player_volume = document.createElement(`input`);
+    #chui_vp_info = document.createElement(`chui_vp_info`);
+    #chui_vp_time = undefined;
+    #chui_vp_seek = document.createElement(`input`);
+    #chui_vp_seek_buf = document.createElement(`chui_vp_seek_buf`);
     // Блок управления
-    #chui_video_player_controls = document.createElement(`chui_video_player_controls`);
-    #chui_video_player_play_pause = document.createElement(`chui_video_player_play_pause`);
-    #chui_video_player_next = document.createElement(`chui_video_player_next`);
-    #chui_video_player_prev = document.createElement(`chui_video_player_prev`);
+    #chui_vp_controls = document.createElement(`chui_vp_controls`);
+    #chui_vp_play_pause = document.createElement(`chui_vp_play_pause`);
+    #chui_vp_next = document.createElement(`chui_vp_next`);
+    #chui_vp_prev = document.createElement(`chui_vp_prev`);
+    #chui_vp_full_mode = document.createElement(`chui_vp_full_mode`);
+
+    // Блок управления громкостью
+    #chui_vp_volume_block = document.createElement("chui_vp_volume_block");
+    #chui_vp_volume_icon = document.createElement(`chui_vp_volume_icon`);
+    #chui_vp_volume = document.createElement(`input`);
     //
     #size_play_stop = "36px"
     #size_next_prev = "30px"
-    constructor(autoplay = Boolean()) {
+    constructor(options = {
+        autoplay: Boolean(),
+        height: String(),
+        width: String()
+    }) {
         require('../../modules/chui_functions').style_parse([
             {
-                name: "chui_video_player_main",
+                name: "chui_vp_main",
                 style: {
                     "display": "flex",
                     "flex-direction": "column",
-                    "height": "max-content",
-                    "width": "400px",
                     "border-radius": "var(--border_radius)",
+                    "--seek-before-width": "0%",
+                    "--volume-before-width": "0%"
                 }
             },
             {
-                name: "chui_video_player_block",
+                name: "chui_vp_block",
                 style: {
                     "display": "block",
                     "position": "absolute",
@@ -47,22 +58,21 @@ class VideoPlayer {
                     "backdrop-filter": "saturate(150%) blur(15px)",
                     "border-radius": "var(--border_radius)",
                     "background": "var(--header_background)",
-                    "opacity": "1",
+                    "opacity": "0",
                     "margin": "6px",
                     //"border": "2px solid var(--border_main)"
                 }
             },
             // Блок информация
             {
-                name: "chui_video_player_info",
+                name: "chui_vp_info",
                 style: {
                     "display": "flex",
-                    "--seek-before-width": "0%",
                     "margin": "16px 12px",
                 }
             },
             {
-                name: "chui_video_player_seek_buf",
+                name: "chui_vp_seek_buf",
                 style: {
                     "width": "0%",
                     "height": "5px",
@@ -72,7 +82,7 @@ class VideoPlayer {
                 }
             },
             {
-                name: "#chui_video_player_seek",
+                name: "#chui_vp_seek",
                 style: {
                     "margin": "0",
                     "position": "relative",
@@ -88,7 +98,7 @@ class VideoPlayer {
                 }
             },
             {
-                name: "#chui_video_player_seek::-webkit-slider-runnable-track",
+                name: "#chui_vp_seek::-webkit-slider-runnable-track",
                 style: {
                     "width": "100%",
                     "height": "5px",
@@ -96,7 +106,7 @@ class VideoPlayer {
                 }
             },
             {
-                name: "#chui_video_player_seek::before",
+                name: "#chui_vp_seek::before",
                 style: {
                     "transition": "all 0s",
                     "position": "absolute",
@@ -110,7 +120,7 @@ class VideoPlayer {
                 }
             },
             {
-                name: "#chui_video_player_seek::-webkit-slider-thumb",
+                name: "#chui_vp_seek::-webkit-slider-thumb",
                 style: {
                     "position": "relative",
                     "-webkit-appearance": "none",
@@ -125,14 +135,89 @@ class VideoPlayer {
                 }
             },
             {
-                name: "#chui_video_player_seek:focus",
+                name: "#chui_vp_seek:focus",
                 style: {
                     "outline": "none",
                     "border": "none",
                 }
             },
             {
-                name: "#chui_video_player_seek:focus::-webkit-slider-runnable-track",
+                name: "#chui_vp_seek:focus::-webkit-slider-runnable-track",
+                style: {
+                    "outline": "none",
+                    "border": "none",
+                }
+            },
+            // УПРАВЛЕНИЕ ГРОМКОСТЬЮ
+            {
+                name: "chui_vp_volume_block",
+                style: {
+                    "display": "flex",
+                    "margin-left": "auto"
+                }
+            },
+            {
+                name: "#chui_vp_volume",
+                style: {
+                    "position": "relative",
+                    "-webkit-appearance": "none",
+                    "border-radius": "5px",
+                    "width": "100%",
+                    "height": "5px",
+                    "cursor": "pointer",
+                    "outline": "none",
+                    "background": "rgba(255,255,255,0.15)",
+                    "float": "left",
+                    "z-index": "1",
+                    "margin": "auto 6px",
+                }
+            },
+            {
+                name: "#chui_vp_volume::-webkit-slider-runnable-track",
+                style: {
+                    "width": "100%",
+                    "height": "5px",
+                    "border-radius": "5px"
+                }
+            },
+            {
+                name: "#chui_vp_volume::before",
+                style: {
+                    "transition": "all 0s",
+                    "position": "absolute",
+                    "content": "''",
+                    "left": "0",
+                    "width": "var(--volume-before-width)",
+                    "height": "5px",
+                    "border-radius": "5px",
+                    "background": "var(--blue_prime_background)",
+                    "cursor": "pointer",
+                }
+            },
+            {
+                name: "#chui_vp_volume::-webkit-slider-thumb",
+                style: {
+                    "position": "relative",
+                    "-webkit-appearance": "none",
+                    "box-sizing": "content-box",
+                    "border": "2px solid var(--blue_prime_background)",
+                    "height": "16px",
+                    "width": "16px",
+                    "border-radius": "50%",
+                    "background-color": "#fff",
+                    "cursor": "pointer",
+                    "margin": "-8px 0 0 0"
+                }
+            },
+            {
+                name: "#chui_vp_volume:focus",
+                style: {
+                    "outline": "none",
+                    "border": "none",
+                }
+            },
+            {
+                name: "#chui_vp_volume:focus::-webkit-slider-runnable-track",
                 style: {
                     "outline": "none",
                     "border": "none",
@@ -140,7 +225,7 @@ class VideoPlayer {
             },
             // Блок управления
             {
-                name: "chui_video_player_controls",
+                name: "chui_vp_controls",
                 style: {
                     "display": "flex",
                     "justify-content": "left",
@@ -150,87 +235,100 @@ class VideoPlayer {
             },
             // КНОПКИ
             {
-                name: "chui_video_player_play_pause",
+                name: "chui_vp_play_pause",
                 style: {
                     "display": "flex"
                 }
             },
             {
-                name: "chui_video_player_next",
+                name: "chui_vp_next",
                 style: {
                     "display": "flex"
                 }
             },
             {
-                name: "chui_video_player_prev",
+                name: "chui_vp_prev",
                 style: {
                     "display": "flex"
                 }
             }
         ], 'chUiJS_VideoPlayer');
-        this.#chui_video_tag.setAttribute("name", "media")
-        this.#chui_video_tag.controls = false;
-        this.#chui_video_tag.preload = "metadata"
-        this.#chui_video_tag.style.borderRadius = "var(--border_radius)"
+        this.#chui_vt.setAttribute("name", "media")
+        this.#chui_vt.controls = false;
+        this.#chui_vt.preload = "metadata"
+        this.#chui_vt.style.borderRadius = "var(--border_radius)"
+        this.#chui_vt.setAttribute("height", this.#chui_vt_height);
+        this.#chui_vt.setAttribute("width", this.#chui_vt_width);
 
         // Настройки
-        if (autoplay) {
-            this.#chui_video_tag.autoplay = autoplay;
+        if (options.autoplay) {
+            this.#chui_vt.autoplay = options.autoplay;
             setTimeout(async () => {
                 await this.#play(play_list[this.#current_track])
             }, 1)
         }
+        if (options.height) {
+            this.#chui_vt.setAttribute("height", options.height);
+        }
+        if (options.width) {
+            this.#chui_vt.setAttribute("width", options.width);
+        }
 
         // ИНФОРМАЦИЯ
-        this.#chui_video_player_time = new Label({text: `${this.#calculateTime(0)} - ${this.#calculateTime(0)}`})
-        this.#chui_video_player_seek.type = "range"
-        this.#chui_video_player_seek.id = "chui_video_player_seek"
-        this.#chui_video_player_seek.max = "0"
-        this.#chui_video_player_seek.value = "0"
-
-        this.#chui_video_player_volume.type = "range"
-        this.#chui_video_player_volume.id = "chui_video_player_volume"
-        this.#chui_video_player_volume.max = "100"
-        this.#chui_video_player_volume.value = "100"
-        this.#chui_video_player_volume.style.marginLeft = "auto"
+        this.#chui_vp_time = new Label({text: `${this.#calculateTime(0)} - ${this.#calculateTime(0)}`})
+        this.#chui_vp_seek.type = "range"
+        this.#chui_vp_seek.id = "chui_vp_seek"
+        this.#chui_vp_seek.max = "0"
+        this.#chui_vp_seek.value = "0"
 
         // КНОПКИ
-        this.#chui_video_player_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, this.#size_play_stop).getHTML()
-        this.#chui_video_player_next.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_NEXT, this.#size_next_prev).getHTML()
-        this.#chui_video_player_prev.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_PREVIOUS, this.#size_next_prev).getHTML()
+        this.#chui_vp_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, this.#size_play_stop).getHTML()
+        this.#chui_vp_next.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_NEXT, this.#size_next_prev).getHTML()
+        this.#chui_vp_prev.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_PREVIOUS, this.#size_next_prev).getHTML()
+        this.#chui_vp_full_mode.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, this.#size_next_prev).getHTML()
 
         //Заполнение элемента
+        // УПРАВЛЕНИЕ ГРОМКОСТЬЮ
+        this.#chui_vp_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#size_next_prev).getHTML()
+        this.#chui_vp_volume.type = "range"
+        this.#chui_vp_volume.id = "chui_vp_volume"
+        this.#chui_vp_volume.max = "100"
+        this.#chui_vp_volume.value = "50"
+        this.#chui_vt.volume = this.#chui_vp_volume.value / 100;
+        this.#chui_vp_volume_block.appendChild(this.#chui_vp_volume_icon)
+        this.#chui_vp_volume_block.appendChild(this.#chui_vp_volume)
         // ИНФОРМАЦИЯ
-        this.#chui_video_player_info.appendChild(this.#chui_video_player_seek)
-        this.#chui_video_player_info.appendChild(this.#chui_video_player_seek_buf)
+        this.#chui_vp_info.appendChild(this.#chui_vp_seek)
+        this.#chui_vp_info.appendChild(this.#chui_vp_seek_buf)
 
         // КНОПКИ
-        this.#chui_video_player_controls.appendChild(this.#chui_video_player_prev)
-        this.#chui_video_player_controls.appendChild(this.#chui_video_player_play_pause)
-        this.#chui_video_player_controls.appendChild(this.#chui_video_player_next)
-        this.#chui_video_player_controls.appendChild(this.#chui_video_player_time.set())
-        this.#chui_video_player_controls.appendChild(this.#chui_video_player_volume)
+        this.#chui_vp_controls.appendChild(this.#chui_vp_prev)
+        this.#chui_vp_controls.appendChild(this.#chui_vp_play_pause)
+        this.#chui_vp_controls.appendChild(this.#chui_vp_next)
+        this.#chui_vp_controls.appendChild(this.#chui_vp_time.set())
+        this.#chui_vp_controls.appendChild(this.#chui_vp_volume_block)
+        this.#chui_vp_controls.appendChild(this.#chui_vp_full_mode)
         //
-        this.#chui_video_player_main.appendChild(this.#chui_video_tag)
-        this.#chui_video_tag.appendChild(this.#chui_source_tag)
-        this.#chui_video_player_block.appendChild(this.#chui_video_player_controls)
-        this.#chui_video_player_block.appendChild(this.#chui_video_player_info)
+        this.#chui_vp_main.appendChild(this.#chui_vt)
+        this.#chui_vt.appendChild(this.#chui_source_tag)
+        this.#chui_vp_block.appendChild(this.#chui_vp_controls)
+        this.#chui_vp_block.appendChild(this.#chui_vp_info)
         //
-        this.#chui_video_player_main.appendChild(this.#chui_video_player_block)
+        this.#chui_vp_main.appendChild(this.#chui_vp_block)
 
         // СОБЫТИЯ
-        this.#chui_video_player_play_pause.addEventListener("click", async () => {
-            if (this.#chui_video_tag.currentTime === 0) {
+        this.#chui_vp_play_pause.addEventListener("click", async () => {
+            if (this.#chui_vt.currentTime === 0) {
                 await this.#play(play_list[this.#current_track])
-            } else if (this.#chui_video_tag.currentTime > 0 && !this.#chui_video_tag.paused) {
-                this.#chui_video_tag.pause()
-                this.#chui_video_player_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, this.#size_play_stop).getHTML()
-            } else if (this.#chui_video_tag.currentTime > 0 && this.#chui_video_tag.paused) {
-                await this.#chui_video_tag.play()
-                this.#chui_video_player_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#size_play_stop).getHTML()
+            } else if (this.#chui_vt.currentTime > 0 && !this.#chui_vt.paused) {
+                this.#chui_vt.pause()
+                this.#chui_vp_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, this.#size_play_stop).getHTML()
+            } else if (this.#chui_vt.currentTime > 0 && this.#chui_vt.paused) {
+                await this.#chui_vt.play()
+                this.#chui_vp_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#size_play_stop).getHTML()
             }
         })
-        this.#chui_video_player_next.addEventListener("click", async () => {
+        this.#chui_vp_next.addEventListener("click", async () => {
             this.#current_track = this.#current_track + 1
             if (this.#current_track < play_list.length) {
                 await this.#play(play_list[this.#current_track])
@@ -239,7 +337,7 @@ class VideoPlayer {
                 await this.#play(play_list[this.#current_track])
             }
         })
-        this.#chui_video_player_prev.addEventListener("click", async () => {
+        this.#chui_vp_prev.addEventListener("click", async () => {
             this.#current_track = this.#current_track - 1
             if (this.#current_track < 0) {
                 this.#current_track = play_list.length - 1
@@ -248,7 +346,7 @@ class VideoPlayer {
                 await this.#play(play_list[this.#current_track])
             }
         })
-        this.#chui_video_tag.addEventListener("timeupdate", async (e) => {
+        this.#chui_vt.addEventListener("timeupdate", async (e) => {
             this.#renderProgress(e.target.currentTime)
             this.#displayBufferedAmount()
             if (e.target.currentTime === e.target.duration) {
@@ -261,28 +359,44 @@ class VideoPlayer {
                 }
             }
         });
-        this.#chui_video_player_seek.addEventListener('input', () => {
-            this.#chui_video_player_seek.textContent = this.#calculateTime(this.#chui_video_player_seek.value);
-            this.#renderProgress(this.#chui_video_player_seek.value)
+        this.#chui_vp_seek.addEventListener('input', () => {
+            this.#chui_vp_seek.textContent = this.#calculateTime(this.#chui_vp_seek.value);
+            this.#renderProgress(this.#chui_vp_seek.value)
         });
-        this.#chui_video_player_seek.addEventListener('change', () => {
-            this.#chui_video_tag.currentTime = this.#chui_video_player_seek.value;
-            this.#renderProgress(this.#chui_video_player_seek.value)
+        this.#chui_vp_seek.addEventListener('change', () => {
+            this.#chui_vt.currentTime = this.#chui_vp_seek.value;
+            this.#renderProgress(this.#chui_vp_seek.value)
         });
-        this.#chui_video_player_volume.addEventListener('input', (e) => {
+        this.#chui_vp_volume.addEventListener('input', (e) => {
             const value = e.target.value;
-            this.#chui_video_tag.volume = value / 100;
+            this.#chui_vt.volume = value / 100;
+            this.#renderVolume()
+            console.log(e.target.value)
+            if (Number(e.target.value) === 0) {
+                this.#chui_vp_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_OFF, this.#size_next_prev).getHTML()
+            } else {
+                this.#chui_vp_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#size_next_prev).getHTML()
+            }
         });
 
-        this.#chui_video_player_main.addEventListener("mouseover", (e) => {
-            this.#chui_video_player_block.style.opacity = "1"
+        this.#chui_vp_main.addEventListener("mouseover", () => {
+            this.#chui_vp_block.style.opacity = "1"
         })
-        this.#chui_video_player_main.addEventListener("mouseout", (e) => {
-            this.#chui_video_player_block.style.opacity = "1"
+        this.#chui_vp_main.addEventListener("mouseout", () => {
+            this.#chui_vp_block.style.opacity = "0"
+        })
+        this.#renderVolume()
+
+        this.#chui_vp_full_mode.addEventListener("click", async () => {
+            if (!document.fullscreenElement) {
+                await this.#chui_vt.requestFullscreen({ navigationUI: "hide" });
+            } else {
+                await document.exitFullscreen();
+            }
         })
     }
     set() {
-        return this.#chui_video_player_main;
+        return this.#chui_vp_main;
     }
     async #convertSong(filePath, type) {
         return await new Promise((resolve, reject) => {
@@ -293,32 +407,40 @@ class VideoPlayer {
         });
     };
     async #play(track) {
-        this.#chui_video_player_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#size_play_stop).getHTML()
+        this.#chui_vp_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#size_play_stop).getHTML()
         if (track.videoPath.includes("http")) {
             this.#chui_source_tag.src = track.videoPath
         } else {
             this.#chui_source_tag.src = await this.#convertSong(track.videoPath, track.mimetype)
         }
-        this.#chui_video_tag.load()
-        await this.#chui_video_tag.play().then(() => {
+        this.#chui_vt.load()
+        await this.#chui_vt.play().then(() => {
             this.#setSliderMax()
             this.#displayBufferedAmount()
         })
     }
     #displayBufferedAmount = () => {
         try {
-            const end = Math.floor(this.#chui_video_tag.buffered.end(0) / this.#chui_video_player_seek.max * 100)
-            this.#chui_video_player_seek_buf.style.width = `${end}%`;
+            const end = Math.floor(this.#chui_vt.buffered.end(0) / this.#chui_vp_seek.max * 100)
+            if (end > 100) {
+                this.#chui_vp_seek_buf.style.width = `100%`;
+            } else {
+                this.#chui_vp_seek_buf.style.width = `${end}%`;
+            }
         } catch (e) {}
+    }
+    #renderVolume = () => {
+        let test = Math.floor(this.#chui_vp_volume.value / this.#chui_vp_volume.max * 100)
+        this.#chui_vp_main.style.setProperty('--volume-before-width', `${test}%`);
     }
     #renderProgress = (value) => {
         try {
-            this.#chui_video_player_time.setText(`${this.#calculateTime(value)} - ${this.#calculateTime(this.#chui_video_tag.duration)}`);
-            this.#chui_video_player_seek.value = Math.floor(value);
-            const test = Math.floor(this.#chui_video_player_seek.value / this.#chui_video_player_seek.max * 100)
-            this.#chui_video_player_info.style.setProperty('--seek-before-width', `${test}%`);
+            this.#chui_vp_time.setText(`${this.#calculateTime(value)} / ${this.#calculateTime(this.#chui_vt.duration)}`);
+            this.#chui_vp_seek.value = Math.floor(value);
+            const test = Math.floor(this.#chui_vp_seek.value / this.#chui_vp_seek.max * 100)
+            this.#chui_vp_main.style.setProperty('--seek-before-width', `${test}%`);
         } catch (e) {
-            this.#chui_video_player_time.setText(`${this.#calculateTime(0)} - ${this.#calculateTime(0)}`);
+            this.#chui_vp_time.setText(`${this.#calculateTime(0)} / ${this.#calculateTime(0)}`);
         }
     }
     #calculateTime = (secs) => {
@@ -328,7 +450,7 @@ class VideoPlayer {
         return `${minutes}:${returnedSeconds}`;
     }
     #setSliderMax = () => {
-        this.#chui_video_player_seek.max = Math.floor(this.#chui_video_tag.duration);
+        this.#chui_vp_seek.max = Math.floor(this.#chui_vt.duration);
     }
     //
     setPlayList(list = [{ videoName: String(), videoPath: String(), mimetype: String() }]) {

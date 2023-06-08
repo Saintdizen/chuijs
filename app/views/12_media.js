@@ -26,7 +26,11 @@ class MediaPage extends Page {
         )
         //this.add(audio)
 
-        let video = new VideoPlayer(false)
+        let video = new VideoPlayer({
+            autoplay: true,
+            height: "auto",
+            width: "450px"
+        })
         video.setPlayList(
             [
                 {
