@@ -48,14 +48,11 @@ class AudioPlayer {
                 name: "chui_ap_block",
                 style: {
                     "display": "block",
-                    //"position": "absolute",
                     "width": "-webkit-fill-available",
-                    //"bottom": "0",
                     "backdrop-filter": "saturate(150%) blur(15px)",
                     "border-radius": "var(--border_radius)",
                     "background": "var(--header_background)",
                     "margin": "6px",
-                    //"border": "2px solid var(--border_main)"
                 }
             },
             // Блок информация
@@ -120,11 +117,11 @@ class AudioPlayer {
                     "position": "relative",
                     "-webkit-appearance": "none",
                     "box-sizing": "content-box",
-                    "border": "2px solid var(--blue_prime_background)",
+                    "border": "2px solid rgba(255,255,255,0)",
                     "height": "16px",
                     "width": "16px",
                     "border-radius": "50%",
-                    "background-color": "#fff",
+                    "background-color": "rgba(255,255,255,0)",
                     "cursor": "pointer",
                     "margin": "-8px 0 0 0"
                 }
@@ -168,6 +165,12 @@ class AudioPlayer {
                 }
             },
             {
+                name: "#chui_ap_volume:disabled:before",
+                style: {
+                    "background": "rgba(255,255,255,0.30)"
+                }
+            },
+            {
                 name: "#chui_ap_volume::-webkit-slider-runnable-track",
                 style: {
                     "width": "100%",
@@ -195,11 +198,11 @@ class AudioPlayer {
                     "position": "relative",
                     "-webkit-appearance": "none",
                     "box-sizing": "content-box",
-                    "border": "2px solid var(--blue_prime_background)",
+                    "border": "2px solid rgba(255,255,255,0)",
                     "height": "16px",
                     "width": "16px",
                     "border-radius": "50%",
-                    "background-color": "#fff",
+                    "background-color": "rgba(255,255,255,0)",
                     "cursor": "pointer",
                     "margin": "-8px 0 0 0"
                 }
@@ -256,13 +259,11 @@ class AudioPlayer {
         // Настройки
         if (options.autoplay) {
             this.#chui_at.autoplay = options.autoplay;
-            setTimeout(async () => {
-                await this.#start(play_list[this.#current_audio])
-            }, 1)
+            setTimeout(async () => await this.#start(play_list[this.#current_audio]), 1)
         }
 
         // ИНФОРМАЦИЯ
-        this.#chui_ap_time = new Label({text: `${this.#calculateTime(0)} - ${this.#calculateTime(0)}`})
+        this.#chui_ap_time = new Label({text: `0:00 - 0:00`})
         this.#chui_ap_seek.type = "range"
         this.#chui_ap_seek.id = "chui_ap_seek"
         this.#chui_ap_seek.max = "0"
@@ -328,13 +329,23 @@ class AudioPlayer {
             const value = e.target.value;
             this.#chui_at.volume = value / 100;
             this.#renderVolume()
-            console.log(e.target.value)
             if (Number(e.target.value) === 0) {
                 this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_OFF, this.#size_next_prev).getHTML()
             } else {
                 this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#size_next_prev).getHTML()
             }
         });
+        this.#chui_ap_volume_icon.addEventListener('click', () => {
+            if (!this.#chui_at.muted) {
+                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_MUTE, this.#size_next_prev).getHTML()
+                this.#chui_at.muted = true
+                this.#chui_ap_volume.disabled = true
+            } else {
+                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#size_next_prev).getHTML()
+                this.#chui_at.muted = false
+                this.#chui_ap_volume.disabled = false
+            }
+        })
         this.#renderVolume()
     }
     set() {
@@ -407,12 +418,14 @@ class AudioPlayer {
     }
     #renderProgress = (value) => {
         try {
-            this.#chui_ap_time.setText(`${this.#calculateTime(value)} / ${this.#calculateTime(this.#chui_at.duration)}`);
-            this.#chui_ap_seek.value = String(Math.floor(value));
-            const test = Math.floor(this.#chui_ap_seek.value / this.#chui_ap_seek.max * 100)
-            this.#chui_ap_main.style.setProperty('--seek-before-width', `${test}%`);
+            if (value > 0 && this.#chui_at.duration > 0) {
+                this.#chui_ap_time.setText(`${this.#calculateTime(value)} - ${this.#calculateTime(this.#chui_at.duration)}`);
+                this.#chui_ap_seek.value = String(Math.floor(value));
+                const test = Math.floor(this.#chui_ap_seek.value / this.#chui_ap_seek.max * 100)
+                this.#chui_ap_main.style.setProperty('--seek-before-width', `${test}%`);
+            }
         } catch (e) {
-            this.#chui_ap_time.setText(`${this.#calculateTime(0)} / ${this.#calculateTime(0)}`);
+            this.#chui_ap_time.setText(`0:00 - 0:00`);
         }
     }
     #calculateTime = (secs) => {

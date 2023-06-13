@@ -120,6 +120,7 @@ class AppLayout extends Route {
                     "--center_background": "rgba(244, 244, 244)",
                     "--border_main": "rgba(211, 211, 211, 0.85)",
                     //
+                    "--blue_prime_background_2": "rgba(20, 120, 255, 1)",
                     "--blue_prime_background": "rgba(20, 120, 255, 0.85)",
                     "--red_prime_background": "rgba(255, 59, 48, 0.85)",
                     "--blue_prime_background_trans": "rgba(20, 120, 255, 0.45)",
@@ -184,6 +185,7 @@ class AppLayout extends Route {
                     "--center_background": "rgb(22, 22, 22)",
                     "--border_main": "rgba(55, 55, 55, 0.85)",
                     //
+                    "--blue_prime_background_2": "rgba(60, 160, 255, 1)",
                     "--blue_prime_background": "rgba(60, 160, 255, 0.85)",
                     "--red_prime_background": "rgba(255, 69, 58, 0.85)",
                     "--blue_prime_background_trans": "rgba(60, 160, 255, 0.45)",
