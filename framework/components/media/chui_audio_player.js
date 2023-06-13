@@ -21,7 +21,6 @@ class AudioPlayer {
     #chui_ap_play_pause = document.createElement(`chui_ap_play_pause`);
     #chui_ap_next = document.createElement(`chui_ap_next`);
     #chui_ap_prev = document.createElement(`chui_ap_prev`);
-
     // Блок управления громкостью
     #chui_ap_volume_block = document.createElement("chui_ap_volume_block");
     #chui_ap_volume_icon = document.createElement(`chui_ap_volume_icon`);
@@ -255,25 +254,21 @@ class AudioPlayer {
         this.#chui_at.controls = false;
         this.#chui_at.preload = "metadata"
         this.#chui_at.style.borderRadius = "var(--border_radius)"
-
         // Настройки
         if (options.autoplay) {
             this.#chui_at.autoplay = options.autoplay;
             setTimeout(async () => await this.#start(play_list[this.#current_audio]), 1)
         }
-
         // ИНФОРМАЦИЯ
         this.#chui_ap_time = new Label({text: `0:00 - 0:00`})
         this.#chui_ap_seek.type = "range"
         this.#chui_ap_seek.id = "chui_ap_seek"
         this.#chui_ap_seek.max = "0"
         this.#chui_ap_seek.value = "0"
-
         // КНОПКИ
         this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, this.#size_play_stop).getHTML()
         this.#chui_ap_next.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_NEXT, this.#size_next_prev).getHTML()
         this.#chui_ap_prev.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_PREVIOUS, this.#size_next_prev).getHTML()
-
         //Заполнение элемента
         // УПРАВЛЕНИЕ ГРОМКОСТЬЮ
         this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#size_next_prev).getHTML()
@@ -287,7 +282,6 @@ class AudioPlayer {
         // ИНФОРМАЦИЯ
         this.#chui_ap_info.appendChild(this.#chui_ap_seek)
         this.#chui_ap_info.appendChild(this.#chui_ap_seek_buf)
-
         // КНОПКИ
         this.#chui_ap_controls.appendChild(this.#chui_ap_prev)
         this.#chui_ap_controls.appendChild(this.#chui_ap_play_pause)
@@ -301,17 +295,14 @@ class AudioPlayer {
         this.#chui_ap_block.appendChild(this.#chui_ap_info)
         //
         this.#chui_ap_main.appendChild(this.#chui_ap_block)
-
         // СОБЫТИЯ
         this.#chui_ap_play_pause.addEventListener("click", async () => this.#playAudioPause())
         navigator.mediaSession.setActionHandler('play', async () => this.#playAudioPause());
         navigator.mediaSession.setActionHandler('pause', async () => this.#playAudioPause());
-
         this.#chui_ap_next.addEventListener("click", async () => this.#playAudioNext())
         this.#chui_ap_prev.addEventListener("click", async () => this.#playAudioPrev())
         navigator.mediaSession.setActionHandler('nexttrack', async () => this.#playAudioNext());
         navigator.mediaSession.setActionHandler('previoustrack', async () => this.#playAudioPrev());
-
         this.#chui_at.addEventListener("timeupdate", async (e) => {
             this.#renderProgress(e.target.currentTime)
             this.#displayBufferedAmount()
@@ -454,7 +445,6 @@ class AudioPlayer {
             });
         }
     }
-    //
     static MIMETYPES = {
         AU_SND: 'audio/basic',
         LINEAR_PCM: 'auido/L24',

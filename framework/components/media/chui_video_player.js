@@ -24,7 +24,6 @@ class VideoPlayer {
     #chui_vp_next = document.createElement(`chui_vp_next`);
     #chui_vp_prev = document.createElement(`chui_vp_prev`);
     #chui_vp_full_mode = document.createElement(`chui_vp_full_mode`);
-
     // Блок управления громкостью
     #chui_vp_volume_block = document.createElement("chui_vp_volume_block");
     #chui_vp_volume_icon = document.createElement(`chui_vp_volume_icon`);
@@ -59,8 +58,7 @@ class VideoPlayer {
                     "border-radius": "var(--border_radius)",
                     "background": "var(--header_background)",
                     "opacity": "0",
-                    "margin": "6px",
-                    //"border": "2px solid var(--border_main)"
+                    "margin": "6px"
                 }
             },
             // Блок информация
@@ -129,7 +127,7 @@ class VideoPlayer {
                     "height": "16px",
                     "width": "16px",
                     "border-radius": "50%",
-                    "background-color": "#fff",
+                    "background-color": "rgba(255,255,255,0)",
                     "cursor": "pointer",
                     "margin": "-8px 0 0 0"
                 }
@@ -204,7 +202,7 @@ class VideoPlayer {
                     "height": "16px",
                     "width": "16px",
                     "border-radius": "50%",
-                    "background-color": "#fff",
+                    "background-color": "rgba(255,255,255,0)",
                     "cursor": "pointer",
                     "margin": "-8px 0 0 0"
                 }
@@ -259,34 +257,24 @@ class VideoPlayer {
         this.#chui_vt.style.borderRadius = "var(--border_radius)"
         this.#chui_vt.setAttribute("height", this.#chui_vt_height);
         this.#chui_vt.setAttribute("width", this.#chui_vt_width);
-
         // Настройки
         if (options.autoplay) {
             this.#chui_vt.autoplay = options.autoplay;
-            setTimeout(async () => {
-                await this.#start(play_list[this.#current_video])
-            }, 1)
+            setTimeout(async () => await this.#start(play_list[this.#current_video]), 1)
         }
-        if (options.height) {
-            this.#chui_vt.setAttribute("height", options.height);
-        }
-        if (options.width) {
-            this.#chui_vt.setAttribute("width", options.width);
-        }
-
+        if (options.height) this.#chui_vt.setAttribute("height", options.height);
+        if (options.width) this.#chui_vt.setAttribute("width", options.width);
         // ИНФОРМАЦИЯ
         this.#chui_vp_time = new Label({text: `${this.#calculateTime(0)} - ${this.#calculateTime(0)}`})
         this.#chui_vp_seek.type = "range"
         this.#chui_vp_seek.id = "chui_vp_seek"
         this.#chui_vp_seek.max = "0"
         this.#chui_vp_seek.value = "0"
-
         // КНОПКИ
         this.#chui_vp_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, this.#size_play_stop).getHTML()
         this.#chui_vp_next.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_NEXT, this.#size_next_prev).getHTML()
         this.#chui_vp_prev.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_PREVIOUS, this.#size_next_prev).getHTML()
         this.#chui_vp_full_mode.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, this.#size_next_prev).getHTML()
-
         //Заполнение элемента
         // УПРАВЛЕНИЕ ГРОМКОСТЬЮ
         this.#chui_vp_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#size_next_prev).getHTML()
@@ -300,7 +288,6 @@ class VideoPlayer {
         // ИНФОРМАЦИЯ
         this.#chui_vp_info.appendChild(this.#chui_vp_seek)
         this.#chui_vp_info.appendChild(this.#chui_vp_seek_buf)
-
         // КНОПКИ
         this.#chui_vp_controls.appendChild(this.#chui_vp_prev)
         this.#chui_vp_controls.appendChild(this.#chui_vp_play_pause)
@@ -315,17 +302,14 @@ class VideoPlayer {
         this.#chui_vp_block.appendChild(this.#chui_vp_info)
         //
         this.#chui_vp_main.appendChild(this.#chui_vp_block)
-
         // СОБЫТИЯ
         this.#chui_vp_play_pause.addEventListener("click", async () => this.#playPause())
         navigator.mediaSession.setActionHandler('play', async () => this.#playPause());
         navigator.mediaSession.setActionHandler('pause', async () => this.#playPause());
-
         this.#chui_vp_next.addEventListener("click", async () => this.#playNext())
         this.#chui_vp_prev.addEventListener("click", async () => this.#playPrev())
         navigator.mediaSession.setActionHandler('nexttrack', async () => this.#playNext());
         navigator.mediaSession.setActionHandler('previoustrack', async () => this.#playPrev());
-
         this.#chui_vt.addEventListener("timeupdate", async (e) => {
             this.#renderProgress(e.target.currentTime)
             this.#displayBufferedAmount()
@@ -350,7 +334,6 @@ class VideoPlayer {
                 this.#chui_vp_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#size_next_prev).getHTML()
             }
         });
-
         this.#chui_vp_main.addEventListener("mouseover", () => {
             this.#chui_vp_block.style.opacity = "1"
         })
@@ -358,7 +341,6 @@ class VideoPlayer {
             this.#chui_vp_block.style.opacity = "0"
         })
         this.#renderVolume()
-
         this.#chui_vp_full_mode.addEventListener("click", async () => {
             if (!document.fullscreenElement) {
                 await this.#chui_vt.requestFullscreen({ navigationUI: "hide" });
@@ -454,7 +436,6 @@ class VideoPlayer {
     #setSliderMax = () => {
         this.#chui_vp_seek.max = String(Math.floor(this.#chui_vt.duration));
     }
-    //
     setPlayList(list = [{ title: String(), artist: String(), album: String(), mimetype: String(), videoPath: String(), artwork: [] }]) {
         play_list = list
     }
@@ -471,7 +452,6 @@ class VideoPlayer {
             });
         }
     }
-    //
     static MIMETYPES = {
         MP4: 'video/mp4',
         WEBM: 'video/webm',
