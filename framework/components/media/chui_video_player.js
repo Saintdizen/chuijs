@@ -6,7 +6,7 @@ const {Label} = require('.././chui_label');
 let play_list = []
 
 class VideoPlayer {
-    #current_track = 0
+    #current_video = 0
     #chui_vp_main = document.createElement(`chui_vp_main`);
     #chui_vp_block = document.createElement(`chui_vp_block`);
     #chui_vt = document.createElement(`video`);
@@ -264,7 +264,7 @@ class VideoPlayer {
         if (options.autoplay) {
             this.#chui_vt.autoplay = options.autoplay;
             setTimeout(async () => {
-                await this.#play(play_list[this.#current_track])
+                await this.#start(play_list[this.#current_video])
             }, 1)
         }
         if (options.height) {
@@ -317,54 +317,26 @@ class VideoPlayer {
         this.#chui_vp_main.appendChild(this.#chui_vp_block)
 
         // СОБЫТИЯ
-        this.#chui_vp_play_pause.addEventListener("click", async () => {
-            if (this.#chui_vt.currentTime === 0) {
-                await this.#play(play_list[this.#current_track])
-            } else if (this.#chui_vt.currentTime > 0 && !this.#chui_vt.paused) {
-                this.#chui_vt.pause()
-                this.#chui_vp_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, this.#size_play_stop).getHTML()
-            } else if (this.#chui_vt.currentTime > 0 && this.#chui_vt.paused) {
-                await this.#chui_vt.play()
-                this.#chui_vp_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#size_play_stop).getHTML()
-            }
-        })
-        this.#chui_vp_next.addEventListener("click", async () => {
-            this.#current_track = this.#current_track + 1
-            if (this.#current_track < play_list.length) {
-                await this.#play(play_list[this.#current_track])
-            } else if (this.#current_track === play_list.length) {
-                this.#current_track = 0
-                await this.#play(play_list[this.#current_track])
-            }
-        })
-        this.#chui_vp_prev.addEventListener("click", async () => {
-            this.#current_track = this.#current_track - 1
-            if (this.#current_track < 0) {
-                this.#current_track = play_list.length - 1
-                await this.#play(play_list[this.#current_track])
-            } else {
-                await this.#play(play_list[this.#current_track])
-            }
-        })
+        this.#chui_vp_play_pause.addEventListener("click", async () => this.#playPause())
+        navigator.mediaSession.setActionHandler('play', async () => this.#playPause());
+        navigator.mediaSession.setActionHandler('pause', async () => this.#playPause());
+
+        this.#chui_vp_next.addEventListener("click", async () => this.#playNext())
+        this.#chui_vp_prev.addEventListener("click", async () => this.#playPrev())
+        navigator.mediaSession.setActionHandler('nexttrack', async () => this.#playNext());
+        navigator.mediaSession.setActionHandler('previoustrack', async () => this.#playPrev());
+
         this.#chui_vt.addEventListener("timeupdate", async (e) => {
             this.#renderProgress(e.target.currentTime)
             this.#displayBufferedAmount()
-            if (e.target.currentTime === e.target.duration) {
-                this.#current_track = this.#current_track + 1
-                if (this.#current_track < play_list.length) {
-                    await this.#play(play_list[this.#current_track])
-                } else if (this.#current_track === play_list.length) {
-                    this.#current_track = 0
-                    await this.#play(play_list[this.#current_track])
-                }
-            }
+            if (e.target.currentTime === e.target.duration) await this.#playNext()
         });
         this.#chui_vp_seek.addEventListener('input', () => {
             this.#chui_vp_seek.textContent = this.#calculateTime(this.#chui_vp_seek.value);
             this.#renderProgress(this.#chui_vp_seek.value)
         });
         this.#chui_vp_seek.addEventListener('change', () => {
-            this.#chui_vt.currentTime = this.#chui_vp_seek.value;
+            this.#chui_vt.currentTime = Number(this.#chui_vp_seek.value);
             this.#renderProgress(this.#chui_vp_seek.value)
         });
         this.#chui_vp_volume.addEventListener('input', (e) => {
@@ -406,18 +378,48 @@ class VideoPlayer {
             });
         });
     };
-    async #play(track) {
+    async #start(track) {
         this.#chui_vp_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#size_play_stop).getHTML()
         if (track.videoPath.includes("http")) {
             this.#chui_source_tag.src = track.videoPath
         } else {
-            this.#chui_source_tag.src = await this.#convertSong(track.videoPath, track.mimetype)
+            this.#chui_source_tag.src = String(await this.#convertSong(track.videoPath, track.mimetype))
         }
         this.#chui_vt.load()
         await this.#chui_vt.play().then(() => {
             this.#setSliderMax()
             this.#displayBufferedAmount()
         })
+        VideoPlayer.#setMediaData(track)
+    }
+    async #playNext() {
+        this.#current_video = this.#current_video + 1
+        if (this.#current_video < play_list.length) {
+            await this.#start(play_list[this.#current_video])
+        } else if (this.#current_video === play_list.length) {
+            this.#current_video = 0
+            await this.#start(play_list[this.#current_video])
+        }
+    }
+    async #playPrev() {
+        this.#current_video = this.#current_video - 1
+        if (this.#current_video < 0) {
+            this.#current_video = play_list.length - 1
+            await this.#start(play_list[this.#current_video])
+        } else {
+            await this.#start(play_list[this.#current_video])
+        }
+    }
+    async #playPause() {
+        if (this.#chui_vt.currentTime === 0) {
+            await this.#start(play_list[this.#current_video])
+        } else if (this.#chui_vt.currentTime > 0 && !this.#chui_vt.paused) {
+            this.#chui_vt.pause()
+            this.#chui_vp_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, this.#size_play_stop).getHTML()
+        } else if (this.#chui_vt.currentTime > 0 && this.#chui_vt.paused) {
+            await this.#chui_vt.play()
+            this.#chui_vp_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#size_play_stop).getHTML()
+        }
     }
     #displayBufferedAmount = () => {
         try {
@@ -436,7 +438,7 @@ class VideoPlayer {
     #renderProgress = (value) => {
         try {
             this.#chui_vp_time.setText(`${this.#calculateTime(value)} / ${this.#calculateTime(this.#chui_vt.duration)}`);
-            this.#chui_vp_seek.value = Math.floor(value);
+            this.#chui_vp_seek.value = String(Math.floor(value));
             const test = Math.floor(this.#chui_vp_seek.value / this.#chui_vp_seek.max * 100)
             this.#chui_vp_main.style.setProperty('--seek-before-width', `${test}%`);
         } catch (e) {
@@ -450,14 +452,24 @@ class VideoPlayer {
         return `${minutes}:${returnedSeconds}`;
     }
     #setSliderMax = () => {
-        this.#chui_vp_seek.max = Math.floor(this.#chui_vt.duration);
+        this.#chui_vp_seek.max = String(Math.floor(this.#chui_vt.duration));
     }
     //
-    setPlayList(list = [{ videoName: String(), videoPath: String(), mimetype: String() }]) {
+    setPlayList(list = [{ title: String(), artist: String(), album: String(), mimetype: String(), videoPath: String(), artwork: [] }]) {
         play_list = list
     }
     getPlayList() {
         return play_list
+    }
+    static #setMediaData(media) {
+        if ("mediaSession" in navigator) {
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: media.title,
+                artist: media.artist,
+                album: media.album,
+                artwork: media.artwork
+            });
+        }
     }
     //
     static MIMETYPES = {
