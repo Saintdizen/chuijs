@@ -139,7 +139,14 @@ class Table {
                 dump.forEach(dump => this.#filtered_data.push(dump))
             }
         }
-        this.#setTable(this.#filtered_data)
+        console.log(this.#data)
+        console.log(this.#filtered_data)
+        console.log(this.#sorted_data)
+        if (filterValue.length > 0) {
+            this.#setTable(this.#filtered_data)
+        } else if (filterValue.length === 0) {
+            this.#setTable(this.#data)
+        }
         if (this.#userSelect !== undefined) this.#setUserSelect();
     }
     removeFilterByProperty(property= String(), filterValue = String()) {
@@ -176,7 +183,7 @@ class Table {
             cell_title.innerText = head;
             cell.appendChild(cell_title)
 
-            if (this.#sorted !== undefined) {
+            if (this.#sorted) {
                 let flag = 1;
                 let sort_button = document.createElement("sort_button");
                 sort_button.style.marginLeft = "10px";
@@ -184,8 +191,8 @@ class Table {
                 cell.appendChild(sort_button)
                 cell.addEventListener("click", () => {
                     if (flag === 1) {
-                        this.#sortTable(Table.#SORT_METHOD.ASC, cell.cellIndex)
                         sort_button.innerHTML = new Icon(Icons.NAVIGATION.EXPAND_MORE, "20px", "var(--button_text_color)").getHTML();
+                        this.#sortTable(Table.#SORT_METHOD.ASC, cell.cellIndex)
                         flag = 2;
                     } else if (flag === 2) {
                         sort_button.innerHTML = new Icon(Icons.NAVIGATION.EXPAND_LESS, "20px", "var(--button_text_color)").getHTML();
@@ -220,21 +227,10 @@ class Table {
             if (data.indexOf(dat) !== data.length - 1) row.style.borderBottom = '2px solid var(--input_background)'
             for (let col of this.#columns) {
                 let cell = row.insertCell();
-
-                if (typeof dat[col] === 'object') {
-                    if (cell.cellIndex !== 0) {
-                        cell.style.borderLeft = '2px solid var(--input_background)'
-                    }
-                    for (let comp of dat[col]) {
-                        cell.style.display = "flex"
-                        cell.appendChild(comp.set());
-                    }
-                } else {
-                    if (cell.cellIndex !== 0) {
-                        cell.style.borderLeft = '2px solid var(--input_background)'
-                    }
-                    cell.innerHTML = dat[col];
+                if (cell.cellIndex !== 0) {
+                    cell.style.borderLeft = '2px solid var(--input_background)'
                 }
+                cell.innerHTML = dat[col];
             }
         }
         if (this.#userSelect !== undefined) this.#setUserSelect();
@@ -284,14 +280,13 @@ class Table {
 
         if (sortMethod.includes(Table.#SORT_METHOD.ASC)) {
             arr.sort(asc).forEach(data => {
-                sort_data.push(new this.#data[0].__proto__.constructor())
+                sort_data.push(new this.#data[0].__proto__.constructor(...data))
             })
         } else if (sortMethod.includes(Table.#SORT_METHOD.DESC)) {
             arr.sort(desc).forEach(data => {
-                sort_data.push(new this.#data[0].__proto__.constructor())
+                sort_data.push(new this.#data[0].__proto__.constructor(...data))
             })
         }
-
         this.#setTable(sort_data)
     }
     static #SORT_METHOD = { ASC: "ASC", DESC: "DESC" }
