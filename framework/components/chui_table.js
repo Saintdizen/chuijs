@@ -1,5 +1,4 @@
 const {Icon, Icons} = require("./chui_icons");
-const Console = require("console");
 
 class Table {
     #filtered_data = [];
@@ -102,7 +101,6 @@ class Table {
     getData() { return this.#data; }
     refresh(data = []) { this.#setTable(data); }
     set() { return this.#table; }
-
     //Функции фильтров
     setFilterByProperty(type = String(), property = String(), filterValue = String()) {
         this.#filtered_data = [];
@@ -139,9 +137,6 @@ class Table {
                 dump.forEach(dump => this.#filtered_data.push(dump))
             }
         }
-        console.log(this.#data)
-        console.log(this.#filtered_data)
-        console.log(this.#sorted_data)
         if (filterValue.length > 0) {
             this.#setTable(this.#filtered_data)
         } else if (filterValue.length === 0) {
@@ -178,11 +173,9 @@ class Table {
         //row.style.borderBottom = '2px solid var(--input_background)'
         for (let head of cols) {
             const cell = row.insertCell()
-
             let cell_title = document.createElement("cell_title")
             cell_title.innerText = head;
             cell.appendChild(cell_title)
-
             if (this.#sorted) {
                 let flag = 1;
                 let sort_button = document.createElement("sort_button");
@@ -209,13 +202,11 @@ class Table {
                     }
                 })
             }
-
             cell.style.color = 'var(--button_text_color)';
             cell.style.display = "flex";
             cell.style.flexDirection = "row";
             cell.style.justifyContent = "space-between";
             cell.style.alignItems = "center";
-
             if (cell.cellIndex !== 0) cell.style.borderLeft = '2px solid transparent';
         }
     }
@@ -260,7 +251,6 @@ class Table {
             arr.push(sub_arr)
         }
         let sort_data = [];
-
         //
         function asc(a, b) {
             if (typeof a[colIndex] === "number") {
@@ -277,7 +267,6 @@ class Table {
             }
         }
         //
-
         if (sortMethod.includes(Table.#SORT_METHOD.ASC)) {
             arr.sort(asc).forEach(data => {
                 sort_data.push(new this.#data[0].__proto__.constructor(...data))
