@@ -120,14 +120,14 @@ class AppLayout extends Route {
                     "--center_background": "rgba(244, 244, 244)",
                     "--border_main": "rgba(211, 211, 211, 0.85)",
                     //
-                    "--blue_prime_background_2": "rgba(20, 120, 255, 1)",
-                    "--blue_prime_background": "rgba(20, 120, 255, 0.85)",
+                    "--blue_prime_background_2": "rgba(38, 136, 235, 1)",
+                    "--blue_prime_background": "rgba(38, 136, 235, 0.85)",
                     "--red_prime_background": "rgba(255, 59, 48, 0.85)",
-                    "--blue_prime_background_trans": "rgba(20, 120, 255, 0.45)",
+                    "--blue_prime_background_trans": "rgba(38, 136, 235, 0.45)",
                     //Кнопка
                     "--button_background": "rgba(225, 225, 225)",
                     "--button_background_disabled": "rgba(225, 225, 225, 0.15)",
-                    "--button_text_color": "rgb(20, 120, 255)",
+                    "--button_text_color": "rgb(38, 136, 235)",
                     "--button_box_shadow_normal": "0px 0px 1px 2px var(--input_background)",
                     "--button_box_shadow_focus": "0px 0px 1px 2px var(--blue_prime_background)",
                     //Боковое меню
@@ -150,7 +150,7 @@ class AppLayout extends Route {
                     "--badge_warning_back": "rgba(255, 204, 0, 0.45)",
                     "--badge_warning_text": "rgba(146, 81, 0, 1)",
                     //SPINNER COLOR
-                    "--spinner_blue": "rgba(0, 112, 245, 0.85)",
+                    "--spinner_blue": "rgba(38, 136, 235, 0.85)",
                     "--spinner_track": "rgba(209, 209, 214, 0.45)",
                     // Полоса состояния
                     "--progress_bar_back": "rgba(225, 225, 225)",
@@ -185,14 +185,14 @@ class AppLayout extends Route {
                     "--center_background": "rgb(22, 22, 22)",
                     "--border_main": "rgba(55, 55, 55, 0.85)",
                     //
-                    "--blue_prime_background_2": "rgba(60, 160, 255, 1)",
-                    "--blue_prime_background": "rgba(60, 160, 255, 0.85)",
+                    "--blue_prime_background_2": "rgba(82, 158, 244, 1)",
+                    "--blue_prime_background": "rgba(82, 158, 244, 0.85)",
                     "--red_prime_background": "rgba(255, 69, 58, 0.85)",
-                    "--blue_prime_background_trans": "rgba(60, 160, 255, 0.45)",
+                    "--blue_prime_background_trans": "rgba(82, 158, 244, 0.45)",
                     //Кнопка
                     "--button_background": "rgba(41, 41, 41)",
                     "--button_background_disabled": "rgba(41, 41, 41, 0.15)",
-                    "--button_text_color": "rgb(60, 160, 255)",
+                    "--button_text_color": "rgb(82, 158, 244)",
                     "--button_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
                     "--button_box_shadow_focus": "0px 0px 1px 2px var(--blue_prime_background)",
                     //Боковое меню
@@ -215,7 +215,7 @@ class AppLayout extends Route {
                     "--badge_warning_back": "rgba(255, 214, 10, 0.45)",
                     "--badge_warning_text": "rgba(255, 212, 38, 1)",
                     //SPINNER COLOR
-                    "--spinner_blue": "rgba(20, 142, 255, 0.85)",
+                    "--spinner_blue": "rgba(82, 158, 244, 0.85)",
                     "--spinner_track": "rgba(58, 58, 60, 0.45)",
                     // Полоса состояния
                     "--progress_bar_back": "rgba(41, 41, 41)",
