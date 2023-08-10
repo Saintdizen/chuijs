@@ -113,28 +113,28 @@ class AppLayout extends Route {
                 style: {
                     //Цвета
                     //Глобальные цвета
-                    "--text_color": "rgba(44, 44, 46, 1)",
-                    "--text_color_disabled": "rgba(44, 44, 46, 0.6)",
-                    "--header_background": "rgba(209, 209, 214, 0.2)",
-                    "--header_background_dropdown": "rgba(209, 209, 214, 1)",
-                    "--center_background": "rgba(229, 229, 234, 1)",
-                    "--border_main": "rgba(209, 209, 214, 1)",
+                    "--text_color": "rgba(44, 44, 44, 1)",
+                    "--text_color_disabled": "rgba(44, 44, 44, 0.6)",
+                    "--header_background": "rgba(219, 219, 219, 0.2)",
+                    "--header_background_dropdown": "rgba(219, 219, 219, 1)",
+                    "--center_background": "rgba(235, 235, 235, 1)",
+                    "--border_main": "rgba(219, 219, 219, 1)",
                     //Боковое меню
-                    "--app_menu_background": "rgba(229, 229, 234, 0.2)",
+                    "--app_menu_background": "rgba(235, 235, 235, 0.2)",
                     //Диалоговое окно
                     "--modal_overlay": "rgba(0, 0, 0, 0.2)",
-                    "--modal_background": "rgba(229, 229, 234, 1)",
+                    "--modal_background": "rgba(235, 235, 235, 1)",
                     //Кнопка
-                    "--button_background": "rgba(209, 209, 214, 1)",
-                    "--button_background_disabled": "rgba(209, 209, 214, 0.15)",
+                    "--button_background": "rgba(219, 219, 219, 1)",
+                    "--button_background_disabled": "rgba(219, 219, 219, 0.6)",
                     "--button_text_color": "rgba(20, 142, 255, 1)",
                     "--button_box_shadow_normal": "0px 0px 1px 1px var(--input_background)",
                     "--button_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
                     //Поля ввода
-                    "--input_background": "rgba(209, 209, 214, 1)",
+                    "--input_background": "rgba(219, 219, 219, 1)",
                     "--input_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
                     "--input_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
-                    "--dropdown_background": "rgba(209, 209, 214, 1)",
+                    "--dropdown_background": "rgba(219, 219, 219, 1)",
                     //
                     "--blue_prime_background_2": "rgba(20, 142, 255, 1)",
                     "--blue_prime_background": "rgba(20, 142, 255, 0.85)",
@@ -151,12 +151,12 @@ class AppLayout extends Route {
                     "--badge_warning_text": "rgba(146, 81, 0, 1)",
                     //SPINNER COLOR
                     "--spinner_blue": "rgba(38, 136, 235, 0.85)",
-                    "--spinner_track": "rgba(209, 209, 214, 0.45)",
+                    "--spinner_track": "rgba(219, 219, 219, 0.45)",
                     // Полоса состояния
                     "--progress_bar_back": "rgba(225, 225, 225)",
                     // Уведомления
-                    "--notification_background": "rgba(222, 222, 222, 0.44)",
-                    "--notification_background_popup": "rgba(230, 230, 230, 0.44)",
+                    "--notification_background": "rgba(219, 219, 219, 0.45)",
+                    "--notification_background_popup": "rgba(219, 219, 219, 0.45)",
                     //Остальное
                     "--text_color_hover": "rgb(255, 255, 255)",
                     "--disable_color": "#e9ecef",
@@ -182,28 +182,28 @@ class AppLayout extends Route {
                 name: "[theme='dark']",
                 style: {
                     //Глобальные цвета
-                    "--text_color": "rgba(229, 229, 234, 1)",
-                    "--text_color_disabled": "rgba(229, 229, 234, 0.6)",
-                    "--header_background": "rgba(58, 58, 60, 0.2)",
-                    "--header_background_dropdown": "rgba(58, 58, 60, 1)",
-                    "--center_background": "rgba(44, 44, 46, 1)",
-                    "--border_main": "rgba(58, 58, 60, 1)",
+                    "--text_color": "rgba(235, 235, 235, 1)",
+                    "--text_color_disabled": "rgba(235, 235, 235, 0.6)",
+                    "--header_background": "rgba(65, 65, 65, 0.2)",
+                    "--header_background_dropdown": "rgba(65, 65, 65, 1)",
+                    "--center_background": "rgba(44, 44, 44, 1)",
+                    "--border_main": "rgba(65, 65, 65, 1)",
                     //Боковое меню
-                    "--app_menu_background": "rgba(58, 58, 60, 0.2)",
+                    "--app_menu_background": "rgba(65, 65, 65, 0.2)",
                     //Диалоговое окно
                     "--modal_overlay": "rgba(0, 0, 0, 0.2)",
-                    "--modal_background": "rgba(44, 44, 46, 1)",
+                    "--modal_background": "rgba(44, 44, 44, 1)",
                     //Кнопка
-                    "--button_background": "rgba(58, 58, 60, 1)",
-                    "--button_background_disabled": "rgba(58, 58, 60, 0.15)",
+                    "--button_background": "rgba(65, 65, 65, 1)",
+                    "--button_background_disabled": "rgba(65, 65, 65, 0.6)",
                     "--button_text_color": "rgba(30, 152, 255, 1)",
                     "--button_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
                     "--button_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
                     //Поля ввода
-                    "--input_background": "rgba(58, 58, 60, 1)",
+                    "--input_background": "rgba(65, 65, 65, 1)",
                     "--input_box_shadow_normal": "0px 0px 1px 1px var(--input_background)",
                     "--input_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
-                    "--dropdown_background": "rgba(58, 58, 60, 1)",
+                    "--dropdown_background": "rgba(65, 65, 65, 1)",
                     //
                     "--blue_prime_background_2": "rgba(30, 152, 255, 1)",
                     "--blue_prime_background": "rgba(30, 152, 255, 0.85)",
@@ -220,12 +220,12 @@ class AppLayout extends Route {
                     "--badge_warning_text": "rgba(255, 212, 38, 1)",
                     //SPINNER COLOR
                     "--spinner_blue": "rgba(82, 158, 244, 0.85)",
-                    "--spinner_track": "rgba(58, 58, 60, 0.45)",
+                    "--spinner_track": "rgba(63, 63, 65, 0.45)",
                     // Полоса состояния
-                    "--progress_bar_back": "rgba(41, 41, 41)",
+                    "--progress_bar_back": "rgba(65, 65, 65)",
                     // Уведомления
-                    "--notification_background": "rgba(44, 44, 44, 0.44)",
-                    "--notification_background_popup": "rgba(66, 66, 66, 0.44)",
+                    "--notification_background": "rgba(44, 44, 44, 0.45)",
+                    "--notification_background_popup": "rgba(65, 65, 65, 0.45)",
                     //Остальное
                     "--disable_color": "#e9ecef",
                     "--scroll_bar_background": "rgb(58, 58, 60)",
@@ -257,7 +257,6 @@ class AppLayout extends Route {
                     "padding": "0",
                     "border": "1px solid var(--border_main)",
                     "background": "var(--center_background)",
-                    "box-shadow": "0 10px 15px rgb(0 0 0 / 20%)",
                     "box-sizing": "border-box"
                 }
             },
@@ -396,7 +395,7 @@ class AppLayout extends Route {
                     "align-items": "flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    "border": "1px solid var(--border_main)",
+                    //"border": "1px solid var(--border_main)",
                     "backdrop-filter": "blur(22px)",
                     "background-blend-mode": "overlay",
                     "-webkit-app-region": "no-drag",
@@ -417,7 +416,7 @@ class AppLayout extends Route {
                     "align-items": "flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    "border": "1px solid var(--border_main)",
+                    //"border": "1px solid var(--border_main)",
                     "backdrop-filter": "blur(22px)",
                     "background-blend-mode": "overlay",
                     "-webkit-app-region": "no-drag",
@@ -704,7 +703,6 @@ class AppLayout extends Route {
                     "outline": "none",
                     "height": "max-content",
                     "width": "max-content",
-                    "border": "1px solid var(--border_main)",
                     "border-radius": "100%",
                     "padding": "5px",
                     "margin": "2px",
@@ -733,7 +731,6 @@ class AppLayout extends Route {
                     "outline": "none",
                     "height": "max-content",
                     "width": "max-content",
-                    "border": "1px solid var(--border_main)",
                     "border-radius": "100%",
                     "padding": "3px",
                     "margin": "2px",
@@ -762,7 +759,6 @@ class AppLayout extends Route {
                     "outline": "none",
                     "height": "max-content",
                     "width": "max-content",
-                    "border": "1px solid var(--border_main)",
                     "border-radius": "100%",
                     "padding": "3px",
                     "margin": "2px",
@@ -1234,7 +1230,6 @@ class UserProfile {
                     "position": "absolute",
                     "background": "var(--header_background_dropdown)",
                     "color": "var(--text_color)",
-                    "border": "1px solid var(--border_main)",
                     "border-radius": "var(--border_radius)",
                     "padding": "6px",
                     "z-index": "1",
@@ -1287,7 +1282,6 @@ class UserProfile {
                     "height": "80px",
                     "display": "flex",
                     "padding": "6px",
-                    "border": "1px solid var(--border_main)",
                     "border-radius": "50%",
                     "align-items": "center",
                     "justify-content": "center",
