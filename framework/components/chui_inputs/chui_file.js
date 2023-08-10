@@ -133,7 +133,7 @@ class FileInput {
                     "font-family": "chui_Inter",
                     "letter-spacing": "0.33px",
                     "word-spacing": "0.33px",
-                    "border": "2px dashed rgba(0, 0, 0, 0)",
+                    "border": "1px dashed rgba(0, 0, 0, 0)",
                 }
             },
             {
@@ -149,7 +149,7 @@ class FileInput {
                     "cursor": "not-allowed",
                     "background": "var(--button_background_disabled)",
                     "color": "var(--text_color_disabled)",
-                    "border": "2px dashed var(--border_main)",
+                    "border": "1px dashed var(--border_main)",
                 }
             },
             {
@@ -157,7 +157,7 @@ class FileInput {
                 style: {
                     "background": "var(--button_background_disabled)",
                     "color": "var(--text_color_disabled)",
-                    "border": "2px dashed var(--border_main)"
+                    "border": "1px dashed var(--border_main)"
                 }
             },
         ], 'chUiJS_fileInput');

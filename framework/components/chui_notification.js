@@ -31,8 +31,8 @@ class Notification {
                     "font-size": "12pt",
                     "padding": "6px 10px",
                     "background": "var(--notification_background_popup)",
-                    "backdrop-filter": "saturate(150%) blur(15px)",
-                    "border": "2px solid var(--border_main)",
+                    "backdrop-filter": "blur(22px)",
+                    "border": "1px solid var(--border_main)",
                     "z-index": "1002"
                 }
             },
@@ -40,21 +40,21 @@ class Notification {
                 name: ".notification_warning",
                 style: {
                     "background": "var(--badge_warning_back)",
-                    "border": "2px solid var(--badge_warning_back)",
+                    "border": "1px solid var(--badge_warning_back)",
                 }
             },
             {
                 name: ".notification_error",
                 style: {
                     "background": "var(--badge_error_back)",
-                    "border": "2px solid var(--badge_error_back)",
+                    "border": "1px solid var(--badge_error_back)",
                 }
             },
             {
                 name: ".notification_success",
                 style: {
                     "background": "var(--badge_success_back)",
-                    "border": "2px solid var(--badge_success_back)",
+                    "border": "1px solid var(--badge_success_back)",
                 }
             },
             {

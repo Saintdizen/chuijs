@@ -41,7 +41,7 @@ class TextArea {
                     "font-size": "12pt",
                     "background": "var(--input_background)",
                     "color": "var(--text_color)",
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "box-sizing": "border-box",
                 }
             },
@@ -69,7 +69,7 @@ class TextArea {
                     "font-size": "12pt",
                     "background": "transparent",
                     "color": "var(--text_color_disabled)",
-                    "border": "2px dashed var(--border_main)",
+                    "border": "1px dashed var(--border_main)",
                     "box-sizing": "border-box",
                 }
             },
@@ -102,7 +102,7 @@ class TextArea {
         if (options.width !== undefined) this.#chui_text_input.style.width = options.width;
         if (options.height !== undefined) this.#chui_text_input.style.height = options.height;
         this.#text_area.addEventListener('focus', () => {
-            this.#text_area.style.border = '2px solid var(--blue_prime_background)';
+            this.#text_area.style.border = '1px solid var(--blue_prime_background)';
             if (options.title !== undefined) {
                 this.#label.style.color = 'var(--blue_prime_background)';
             }

@@ -36,7 +36,7 @@ class PasswordInput {
                     "font-size": "12pt",
                     "background": "var(--input_background)",
                     "color": "var(--text_color)",
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "position": "relative",
                     "padding": "6px 43px 6px 10px",
                 }
@@ -85,7 +85,7 @@ class PasswordInput {
             {
                 name: ".error_border",
                 style: {
-                    "border": "2px solid var(--red_prime_background)",
+                    "border": "1px solid var(--red_prime_background)",
                 }
             },
             {
@@ -107,7 +107,7 @@ class PasswordInput {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "2px dashed var(--border_main)"
+                    "border": "1px dashed var(--border_main)"
                 }
             },
             {
@@ -156,7 +156,7 @@ class PasswordInput {
         if (options.placeholder !== undefined) this.#input.placeholder = options.placeholder;
         if (options.width !== undefined) this.#chui_password_input.style.width = options.width;
         this.#input.addEventListener('focus', () => {
-            this.#password_main.style.border = '2px solid var(--blue_prime_background)';
+            this.#password_main.style.border = '1px solid var(--blue_prime_background)';
             this.#label.style.color = 'var(--blue_prime_background)';
         })
         this.#input.addEventListener('blur', () => {

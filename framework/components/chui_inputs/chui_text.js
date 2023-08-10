@@ -42,7 +42,7 @@ class TextInput {
                     "border-radius": "var(--border_radius)",
                     "background": "var(--input_background)",
                     "color": "var(--text_color)",
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "align-items": "center",
                     "position": "relative",
                     "padding": "6px 10px",
@@ -90,7 +90,7 @@ class TextInput {
             {
                 name: ".error_border",
                 style: {
-                    "border": "2px solid var(--red_prime_background)",
+                    "border": "1px solid var(--red_prime_background)",
                 }
             },
             // DISABLED STYLES
@@ -99,7 +99,7 @@ class TextInput {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "2px dashed var(--border_main)"
+                    "border": "1px dashed var(--border_main)"
                 }
             },
             {
@@ -153,7 +153,7 @@ class TextInput {
         if (options.placeholder !== undefined) this.#input.placeholder = options.placeholder;
         this.#input.addEventListener('focus', () => {
             if (options.disableFocus) return false
-            this.#chui_text_main.style.border = '2px solid var(--blue_prime_background)';
+            this.#chui_text_main.style.border = '1px solid var(--blue_prime_background)';
             this.#label.style.color = 'var(--blue_prime_background)';
         })
         this.#input.addEventListener('blur', () => {

@@ -35,7 +35,7 @@ class Button {
                     "font-weight": "500",
                     "background": "var(--button_background)",
                     "box-sizing": "border-box",
-                    "border": "2px dashed rgba(0, 0, 0, 0)",
+                    "border": "1px dashed rgba(0, 0, 0, 0)",
                     "display": "flex",
                     "flex-direction": "row",
                     "align-items": "center",
@@ -79,7 +79,7 @@ class Button {
                     "cursor": "not-allowed",
                     "background": "var(--button_background_disabled)",
                     "color": "var(--text_color_disabled)",
-                    "border": "2px dashed var(--border_main)",
+                    "border": "1px dashed var(--border_main)",
                 }
             },
             {
@@ -87,7 +87,7 @@ class Button {
                 style: {
                     "background": "var(--button_background_disabled)",
                     "color": "var(--text_color_disabled)",
-                    "border": "2px dashed var(--border_main)"
+                    "border": "1px dashed var(--border_main)"
                 }
             },
             {

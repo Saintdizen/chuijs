@@ -46,7 +46,7 @@ class Image {
                     "background-color": "var(--modal_overlay)",
                     "padding": "0px",
                     "border": "none",
-                    "backdrop-filter": "saturate(150%) blur(15px)"
+                    "backdrop-filter": "blur(22px)"
                 }
             },
             {

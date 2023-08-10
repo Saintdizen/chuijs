@@ -55,13 +55,13 @@ class RadioButton {
                     "justify-content":"center",
                     "color":"transparent",
                     "background-color": "var(--input_background)",
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                 }
             },
             {
                 name: ".radiobutton:not(:disabled):active+label::before",
                 style: {
-                    "border": "2px solid var(--blue_prime_background)",
+                    "border": "1px solid var(--blue_prime_background)",
                     "background": "radial-gradient(circle, rgba(242,242,247,1) 30%, var(--blue_prime_background) 42%)",
                     "color":"var(--text_color_hover)",
                 }
@@ -73,7 +73,7 @@ class RadioButton {
             {
                 name: ".radiobutton:checked+label::before",
                 style: {
-                    "border": "2px solid var(--blue_prime_background)",
+                    "border": "1px solid var(--blue_prime_background)",
                     "background": "radial-gradient(circle, rgba(242,242,247,1) 30%, var(--blue_prime_background) 42%)",
                     "color":"var(--text_color_hover)",
                 }
@@ -97,7 +97,7 @@ class RadioButton {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "2px dashed var(--border_main)",
+                    "border": "1px dashed var(--border_main)",
                 }
             },
             {
@@ -105,7 +105,7 @@ class RadioButton {
                 style: {
                     "cursor": "not-allowed",
                     "background": "radial-gradient(circle, var(--text_color_disabled) 30%, rgba(242,242,247,0) 42%)",
-                    "border": "2px dashed var(--border_main)"
+                    "border": "1px dashed var(--border_main)"
                 }
             },
         ], 'chUiJS_RadioButton');

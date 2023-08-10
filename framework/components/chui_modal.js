@@ -27,7 +27,7 @@ class Dialog {
                     "background-color": "var(--modal_overlay)",
                     "padding": "0px",
                     "border": "none",
-                    "backdrop-filter": "saturate(150%) blur(15px)"
+                    "backdrop-filter": "blur(22px)"
                 }
             },
             {
@@ -40,7 +40,7 @@ class Dialog {
                     "flex-direction": "column",
                     "padding": "7px",
                     "border-radius": "var(--border_radius)",
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "color": "var(--text_color)",
                     "background": "var(--modal_background)"
                 }

@@ -35,7 +35,7 @@ class NumberInput {
                     "margin": "0px",
                     "border-radius": "var(--border_radius)",
                     "background": "var(--input_background)",
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "align-items": "center",
                     "position": "relative",
                     "padding": "6px 43px"
@@ -92,7 +92,7 @@ class NumberInput {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "2px dashed var(--border_main)"
+                    "border": "1px dashed var(--border_main)"
                 }
             },
             {
@@ -158,7 +158,7 @@ class NumberInput {
         }
         if (options.width !== undefined) this.#chui_number_input.style.width = options.width;
         this.#input.addEventListener('focus', () => {
-            this.#number_main.style.border = '2px solid var(--blue_prime_background)';
+            this.#number_main.style.border = '1px solid var(--blue_prime_background)';
             this.#label.style.color = 'var(--blue_prime_background)';
         })
         this.#input.addEventListener('blur', () => {

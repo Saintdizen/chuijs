@@ -30,7 +30,7 @@ class Table {
             {
                 name: "table",
                 style: {
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "border-radius": "var(--border_radius)",
                     "margin": "var(--margin)",
                     "display": "grid",
@@ -207,7 +207,7 @@ class Table {
             cell.style.flexDirection = "row";
             cell.style.justifyContent = "space-between";
             cell.style.alignItems = "center";
-            if (cell.cellIndex !== 0) cell.style.borderLeft = '2px solid transparent';
+            if (cell.cellIndex !== 0) cell.style.borderLeft = '1px solid transparent';
         }
     }
     #setTable(data = []) {
@@ -215,11 +215,11 @@ class Table {
         for (let dat of data) {
             let row = this.#tBody.insertRow()
             this.#setWidthColumns(row);
-            if (data.indexOf(dat) !== data.length - 1) row.style.borderBottom = '2px solid var(--input_background)'
+            if (data.indexOf(dat) !== data.length - 1) row.style.borderBottom = '1px solid var(--input_background)'
             for (let col of this.#columns) {
                 let cell = row.insertCell();
                 if (cell.cellIndex !== 0) {
-                    cell.style.borderLeft = '2px solid var(--input_background)'
+                    cell.style.borderLeft = '1px solid var(--input_background)'
                 }
                 cell.innerHTML = dat[col];
             }

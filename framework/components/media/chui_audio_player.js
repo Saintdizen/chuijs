@@ -48,7 +48,7 @@ class AudioPlayer {
                 style: {
                     "display": "block",
                     "width": "-webkit-fill-available",
-                    "backdrop-filter": "saturate(150%) blur(15px)",
+                    "backdrop-filter": "blur(22px)",
                     "border-radius": "var(--border_radius)",
                     "background": "var(--header_background)"
                 }
@@ -115,7 +115,7 @@ class AudioPlayer {
                     "position": "relative",
                     "-webkit-appearance": "none",
                     "box-sizing": "content-box",
-                    "border": "2px solid rgba(255,255,255,0)",
+                    "border": "1px solid rgba(255,255,255,0)",
                     "height": "16px",
                     "width": "16px",
                     "border-radius": "50%",
@@ -196,7 +196,7 @@ class AudioPlayer {
                     "position": "relative",
                     "-webkit-appearance": "none",
                     "box-sizing": "content-box",
-                    "border": "2px solid rgba(255,255,255,0)",
+                    "border": "1px solid rgba(255,255,255,0)",
                     "height": "16px",
                     "width": "16px",
                     "border-radius": "50%",

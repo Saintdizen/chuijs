@@ -33,7 +33,7 @@ class EmailInput {
                     "border-radius": "var(--border_radius)",
                     "background": "var(--input_background)",
                     "color": "var(--text_color)",
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "align-items": "center",
                     "position": "relative",
                     "padding": "6px 10px"
@@ -105,7 +105,7 @@ class EmailInput {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "2px dashed var(--border_main)"
+                    "border": "1px dashed var(--border_main)"
                 }
             }
         ], 'chUiJS_EmailInput');
@@ -125,7 +125,7 @@ class EmailInput {
         if (options.placeholder !== undefined) this.#input.placeholder = options.placeholder;
         if (options.width !== undefined) this.#chui_email_input.style.width = options.width;
         this.#input.addEventListener('focus', () => {
-            this.#chui_email_main.style.border = '2px solid var(--blue_prime_background)';
+            this.#chui_email_main.style.border = '1px solid var(--blue_prime_background)';
             this.#label.style.color = 'var(--blue_prime_background)';
         })
         this.#input.addEventListener('blur', () => {

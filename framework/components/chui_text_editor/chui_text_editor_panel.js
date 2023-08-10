@@ -193,7 +193,7 @@ class TextEditorSelects {
                     "font-size": "var(--font_default_size)",
                     "flex-direction": "column",
                     "z-index": "1",
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                 }
             },
             {

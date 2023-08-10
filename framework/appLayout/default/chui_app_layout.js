@@ -113,33 +113,33 @@ class AppLayout extends Route {
                 style: {
                     //Цвета
                     //Глобальные цвета
-                    "--text_color": "rgba(17, 17, 17, 1)",
-                    "--text_color_disabled": "rgba(17, 17, 17, 0.65)",
-                    "--header_background": "rgba(222, 222, 222, 0.44)",
-                    "--header_background_dropdown": "rgb(222, 222, 222)",
-                    "--center_background": "rgba(244, 244, 244)",
-                    "--border_main": "rgba(211, 211, 211, 0.85)",
-                    //
-                    "--blue_prime_background_2": "rgba(38, 136, 235, 1)",
-                    "--blue_prime_background": "rgba(38, 136, 235, 0.85)",
-                    "--red_prime_background": "rgba(255, 59, 48, 0.85)",
-                    "--blue_prime_background_trans": "rgba(38, 136, 235, 0.45)",
-                    //Кнопка
-                    "--button_background": "rgba(225, 225, 225)",
-                    "--button_background_disabled": "rgba(225, 225, 225, 0.15)",
-                    "--button_text_color": "rgb(38, 136, 235)",
-                    "--button_box_shadow_normal": "0px 0px 1px 2px var(--input_background)",
-                    "--button_box_shadow_focus": "0px 0px 1px 2px var(--blue_prime_background)",
+                    "--text_color": "rgba(44, 44, 46, 1)",
+                    "--text_color_disabled": "rgba(44, 44, 46, 0.6)",
+                    "--header_background": "rgba(209, 209, 214, 0.2)",
+                    "--header_background_dropdown": "rgba(209, 209, 214, 1)",
+                    "--center_background": "rgba(229, 229, 234, 1)",
+                    "--border_main": "rgba(211, 211, 211, 1)",
                     //Боковое меню
-                    "--app_menu_background": "rgba(222, 222, 222, 0.44)",
+                    "--app_menu_background": "rgba(229, 229, 234, 0.2)",
                     //Диалоговое окно
-                    "--modal_overlay": "rgba(0, 0, 0, 0.45)",
-                    "--modal_background": "rgb(244, 244, 244)",
+                    "--modal_overlay": "rgba(0, 0, 0, 0.2)",
+                    "--modal_background": "rgba(229, 229, 234, 1)",
+                    //Кнопка
+                    "--button_background": "rgba(209, 209, 214, 1)",
+                    "--button_background_disabled": "rgba(209, 209, 214, 0.15)",
+                    "--button_text_color": "rgba(20, 142, 255, 1)",
+                    "--button_box_shadow_normal": "0px 0px 1px 1px var(--input_background)",
+                    "--button_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
                     //Поля ввода
-                    "--input_background": "rgba(225, 225, 225)",
+                    "--input_background": "rgba(209, 209, 214, 1)",
                     "--input_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
-                    "--input_box_shadow_focus": "0px 0px 1px 2px var(--blue_prime_background)",
-                    "--dropdown_background": "rgb(225, 225, 225)",
+                    "--input_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
+                    "--dropdown_background": "rgba(209, 209, 214, 1)",
+                    //
+                    "--blue_prime_background_2": "rgba(20, 142, 255, 1)",
+                    "--blue_prime_background": "rgba(20, 142, 255, 0.85)",
+                    "--red_prime_background": "rgba(255, 59, 48, 0.85)",
+                    "--blue_prime_background_trans": "rgba(20, 142, 255, 0.45)",
                     //BADGE
                     "--badge_error_back": "rgba(255, 59, 48, 0.45)",
                     "--badge_error_text": "rgba(194, 6, 24, 1)",
@@ -171,7 +171,7 @@ class AppLayout extends Route {
                     "--font_default_size": "12pt",
                     "--font_labels_size": "10pt",
                     //Закругление элементов
-                    "--border_radius": "8px",
+                    "--border_radius": "6px",
                     //Отступы
                     "--margin": "6px",
                     "--scroll_bar_background": "rgb(209, 209, 214)",
@@ -182,33 +182,33 @@ class AppLayout extends Route {
                 name: "[theme='dark']",
                 style: {
                     //Глобальные цвета
-                    "--text_color": "rgba(244, 244, 244, 1)",
-                    "--text_color_disabled": "rgba(244, 244, 244, 0.65)",
-                    "--header_background": "rgba(34, 34, 34, 0.34)",
-                    "--header_background_dropdown": "rgba(34, 34, 34, 1)",
-                    "--center_background": "rgba(17, 17, 17, 1)",
-                    "--border_main": "rgba(55, 55, 55, 0.85)",
-                    //
-                    "--blue_prime_background_2": "rgba(82, 158, 244, 1)",
-                    "--blue_prime_background": "rgba(82, 158, 244, 0.85)",
-                    "--red_prime_background": "rgba(255, 69, 58, 0.85)",
-                    "--blue_prime_background_trans": "rgba(82, 158, 244, 0.45)",
-                    //Кнопка
-                    "--button_background": "rgba(41, 41, 41)",
-                    "--button_background_disabled": "rgba(41, 41, 41, 0.15)",
-                    "--button_text_color": "rgb(82, 158, 244)",
-                    "--button_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
-                    "--button_box_shadow_focus": "0px 0px 1px 2px var(--blue_prime_background)",
+                    "--text_color": "rgba(229, 229, 234, 1)",
+                    "--text_color_disabled": "rgba(229, 229, 234, 0.6)",
+                    "--header_background": "rgba(58, 58, 60, 0.2)",
+                    "--header_background_dropdown": "rgba(58, 58, 60, 1)",
+                    "--center_background": "rgba(44, 44, 46, 1)",
+                    "--border_main": "rgba(55, 55, 55, 1)",
                     //Боковое меню
-                    "--app_menu_background": "rgba(44, 44, 44, 0.44)",
+                    "--app_menu_background": "rgba(58, 58, 60, 0.2)",
                     //Диалоговое окно
-                    "--modal_overlay": "rgba(0, 0, 0, 0.45)",
-                    "--modal_background": "rgb(22, 22, 22)",
+                    "--modal_overlay": "rgba(0, 0, 0, 0.2)",
+                    "--modal_background": "rgba(58, 58, 60, 1)",
+                    //Кнопка
+                    "--button_background": "rgba(58, 58, 60, 1)",
+                    "--button_background_disabled": "rgba(58, 58, 60, 0.15)",
+                    "--button_text_color": "rgba(30, 152, 255, 1)",
+                    "--button_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
+                    "--button_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
                     //Поля ввода
-                    "--input_background": "rgba(41, 41, 41)",
-                    "--input_box_shadow_normal": "0px 0px 1px 2px var(--input_background)",
-                    "--input_box_shadow_focus": "0px 0px 1px 2px var(--blue_prime_background)",
-                    "--dropdown_background": "rgb(41, 41, 41)",
+                    "--input_background": "rgba(58, 58, 60, 1)",
+                    "--input_box_shadow_normal": "0px 0px 1px 1px var(--input_background)",
+                    "--input_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
+                    "--dropdown_background": "rgba(58, 58, 60, 1)",
+                    //
+                    "--blue_prime_background_2": "rgba(30, 152, 255, 1)",
+                    "--blue_prime_background": "rgba(30, 152, 255, 0.85)",
+                    "--red_prime_background": "rgba(255, 69, 58, 0.85)",
+                    "--blue_prime_background_trans": "rgba(30, 152, 255, 0.45)",
                     //BADGE
                     "--badge_error_back": "rgba(255, 69, 58, 0.45)",
                     "--badge_error_text": "rgba(255, 105, 94, 1)",
@@ -257,6 +257,8 @@ class AppLayout extends Route {
                     "padding": "0",
                     "border": "1px solid var(--border_main)",
                     "background": "var(--center_background)",
+                    "box-shadow": "0 10px 15px rgb(0 0 0 / 20%)",
+                    "box-sizing": "border-box"
                 }
             },
             {
@@ -321,12 +323,14 @@ class AppLayout extends Route {
                     "display": "flex",
                     "align-items": "start",
                     "background": "transparent",
-                    "backdrop-filter": "blur(15px)",
+                    "backdrop-filter": "blur(22px)",
                     "justify-content": "space-between",
                     "-webkit-app-region": "no-drag",
                     "z-index": "999",
                     "border": "1px solid transparent",
-                    "flex-direction": "column"
+                    "flex-direction": "column",
+                    "border-top-left-radius": "6px",
+                    "border-top-right-radius": "6px"
                 }
             },
             {
@@ -348,14 +352,12 @@ class AppLayout extends Route {
                     "padding-top": "48px",
                     "margin": "0",
                     "overflow": "hidden hidden",
-                    "border-radius": "8px"
+                    "border-radius": "6px"
                 }
             },
             {
                 name: "main_center_block:hover",
                 style: {
-                    "width": "-webkit-fill-available",
-                    "height": "-webkit-fill-available",
                     "overflow": "hidden overlay",
                 }
             },
@@ -395,10 +397,13 @@ class AppLayout extends Route {
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
                     "border": "1px solid var(--border_main)",
-                    "backdrop-filter": "saturate(150%) blur(15px)",
+                    "backdrop-filter": "blur(22px)",
+                    "background-blend-mode": "overlay",
                     "-webkit-app-region": "no-drag",
                     "margin": "46px 10px 10px 10px",
                     "border-radius": "var(--border_radius)",
+                    "box-shadow": "0 6px 12px rgb(0 0 0 / 20%)",
+                    "box-sizing": "border-box"
                 }
             },
             {
@@ -413,10 +418,13 @@ class AppLayout extends Route {
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
                     "border": "1px solid var(--border_main)",
-                    "backdrop-filter": "saturate(150%) blur(15px)",
+                    "backdrop-filter": "blur(22px)",
+                    "background-blend-mode": "overlay",
                     "-webkit-app-region": "no-drag",
                     "margin": "46px 10px 10px 10px",
                     "border-radius": "var(--border_radius)",
+                    "box-shadow": "0 6px 12px rgb(0 0 0 / 20%)",
+                    "box-sizing": "border-box"
                 }
             },
             {
@@ -782,14 +790,14 @@ class AppLayout extends Route {
         document.getElementById('app').append(this.#applayout);
         header = document.createElement('header');
         header.id = "header";
-        header.style.borderRadius = "8px"
+        header.style.borderRadius = "6px"
         header_first_test = document.createElement("header_first_test");
         header_second_test = document.createElement("header_second_test");
         header.appendChild(header_first_test)
         header.appendChild(header_second_test)
         center = document.createElement('main_center_block');
         center.id = "center";
-        this.#applayout.style.borderRadius = "8px"
+        this.#applayout.style.borderRadius = "6px"
         this.#applayout.appendChild(center)
         this.#applayout.appendChild(header)
         document.body.appendChild(this.#notification_panel);
@@ -909,7 +917,7 @@ class AppLayout extends Route {
         center.onscroll = () => {
             if (center.scrollTop > 25) {
                 header.style.background = 'var(--header_background)'
-                header.style.backdropFilter = 'saturate(150%) blur(15px)'
+                header.style.backdropFilter = 'blur(22px)'
                 header.style.borderBottom = "1px solid var(--border_main)"
             } else {
                 header.removeAttribute('style')
@@ -1232,7 +1240,9 @@ class UserProfile {
                     "z-index": "1",
                     "right": "0",
                     "min-width": "165px",
-                    "flex-direction": "column"
+                    "flex-direction": "column",
+                    "box-shadow": "0 6px 12px rgb(0 0 0 / 20%)",
+                    "box-sizing": "border-box"
                 }
             },
             {

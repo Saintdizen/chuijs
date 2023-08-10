@@ -41,7 +41,7 @@ class Select {
                     "font-size": "var(--font_default_size)",
                     "background": "var(--input_background)",
                     "color": "var(--text_color)",
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                 }
             },
             {
@@ -76,7 +76,7 @@ class Select {
                     "margin-left": "0px",
                     "padding": "6px",
                     "font-size": "var(--font_default_size)",
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "flex-direction": "column",
                     "z-index": "1",
                 }
@@ -130,7 +130,7 @@ class Select {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "2px dashed var(--border_main)"
+                    "border": "1px dashed var(--border_main)"
                 }
             },
             {
@@ -188,7 +188,7 @@ class Select {
         //LISTENERS
         this.#input.addEventListener('focus', () => {
             this.#button_open.style.transform = 'rotate(180deg)'
-            this.#Select_second.style.border = '2px solid var(--blue_prime_background)';
+            this.#Select_second.style.border = '1px solid var(--blue_prime_background)';
         })
         this.#input.addEventListener('blur', () => {
             this.#button_open.style.transform = 'rotate(0deg)'

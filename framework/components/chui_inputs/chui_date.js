@@ -59,7 +59,7 @@ class DateInput {
                     "color": "var(--text_color)",
                     "padding": "6px",
                     "background": "var(--dropdown_background)",
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "border-radius": "var(--border_radius)",
                     "position":"absolute",
                     "top": "-2px",
@@ -113,7 +113,7 @@ class DateInput {
                     "font-size": "12pt",
                     "background": "var(--input_background)",
                     "color": "var(--text_color)",
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "position": "relative",
                     "display": "flex",
                 }
@@ -150,7 +150,7 @@ class DateInput {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "2px dashed var(--border_main)"
+                    "border": "1px dashed var(--border_main)"
                 }
             },
             {
@@ -198,7 +198,7 @@ class DateInput {
             this.#chui_date_input.appendChild(this.#label);
         }
         this.#input.addEventListener('focus', () => {
-            this.#date_main_block.style.border = '2px solid var(--blue_prime_background)';
+            this.#date_main_block.style.border = '1px solid var(--blue_prime_background)';
             this.#label.style.color = 'var(--blue_prime_background)';
         })
         this.#input.addEventListener('blur', () => {

@@ -35,7 +35,7 @@ class TextEditor {
                     "display": "flex",
                     "flex-direction": "column",
                     "background": "var(--input_background)",
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "height": `${height}`,
                     "width": "-webkit-fill-available",
                 }
@@ -142,7 +142,7 @@ class TextEditor {
         })
         this.#editor_controls.appendChild(editImage.set())
         this.#text_input.addEventListener('focus', (e) => {
-            this.#chui_text_editor.style.border = '2px solid var(--blue_prime_background)';
+            this.#chui_text_editor.style.border = '1px solid var(--blue_prime_background)';
             this.#label.style.color = 'var(--blue_prime_background)';
         })
         this.#text_input.addEventListener('blur', () => {
