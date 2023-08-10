@@ -100,6 +100,7 @@ class Main {
     }
     #createWindow() {
         this.#window = new BrowserWindow({
+            transparent: true,
             minWidth: this.#width,
             minHeight: this.#height,
             name: this.#appName,
@@ -116,8 +117,7 @@ class Main {
                 enableRemoteModule: true,
                 webSecurity: this.#webSecurity,
             },
-            frame: false,
-            transparent: false,
+            frame: false
         });
 
         if (!this.#webSecurity) {
@@ -138,7 +138,7 @@ class Main {
             });
         }
 
-        this.#window.loadURL(`data:text/html;charset=UTF-8,<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${this.#appName}</title></head><body><div id="app"></div></body></html>`).then(() => {
+        this.#window.loadURL(`data:text/html;charset=UTF-8,<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${this.#appName}</title></head><body style="background: transparent;border-radius: 16px;"><div id="app" style="border-radius: 16px;"></div></body></html>`).then(() => {
             app.on('before-quit', () => {
                 isQuiting = true;
             });

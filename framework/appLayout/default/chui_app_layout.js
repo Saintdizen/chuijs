@@ -340,6 +340,7 @@ class AppLayout extends Route {
                     "padding-top": "48px",
                     "margin": "0",
                     "overflow": "hidden hidden",
+                    "border-radius": "14px"
                 }
             },
             {
@@ -771,12 +772,15 @@ class AppLayout extends Route {
         document.getElementById('app').append(this.#applayout);
         header = document.createElement('header');
         header.id = "header";
+        header.style.borderRadius = "16px"
         header_first_test = document.createElement("header_first_test");
         header_second_test = document.createElement("header_second_test");
         header.appendChild(header_first_test)
         header.appendChild(header_second_test)
         center = document.createElement('main_center_block');
         center.id = "center";
+        center.style.borderRadius = "14px"
+        this.#applayout.style.borderRadius = "16px"
         this.#applayout.appendChild(center)
         this.#applayout.appendChild(header)
         document.body.appendChild(this.#notification_panel);
