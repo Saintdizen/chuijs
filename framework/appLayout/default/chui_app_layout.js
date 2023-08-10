@@ -118,7 +118,7 @@ class AppLayout extends Route {
                     "--header_background": "rgba(209, 209, 214, 0.2)",
                     "--header_background_dropdown": "rgba(209, 209, 214, 1)",
                     "--center_background": "rgba(229, 229, 234, 1)",
-                    "--border_main": "rgba(211, 211, 211, 1)",
+                    "--border_main": "rgba(209, 209, 214, 1)",
                     //Боковое меню
                     "--app_menu_background": "rgba(229, 229, 234, 0.2)",
                     //Диалоговое окно
@@ -187,7 +187,7 @@ class AppLayout extends Route {
                     "--header_background": "rgba(58, 58, 60, 0.2)",
                     "--header_background_dropdown": "rgba(58, 58, 60, 1)",
                     "--center_background": "rgba(44, 44, 46, 1)",
-                    "--border_main": "rgba(55, 55, 55, 1)",
+                    "--border_main": "rgba(58, 58, 60, 1)",
                     //Боковое меню
                     "--app_menu_background": "rgba(58, 58, 60, 0.2)",
                     //Диалоговое окно
