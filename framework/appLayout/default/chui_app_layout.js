@@ -232,7 +232,7 @@ class AppLayout extends Route {
                     // Управление окнами
                     "--window_close_button": "rgba(255, 69, 58, 0.66)",
                     "--window_maximize_button": "rgba(48, 209, 88, 0.66)",
-                    "--window_minimize_button": "rgba(82, 158, 244, 0.66)",
+                    "--window_minimize_button": "rgba(82, 158, 244, 0.77)",
                     "--window_close_button_hover": "rgba(255, 69, 58, 1)",
                     "--window_maximize_button_hover": "rgba(48, 209, 88, 1)",
                     "--window_minimize_button_hover": "rgba(82, 158, 244, 1)",
@@ -255,7 +255,7 @@ class AppLayout extends Route {
                     "height": "-webkit-fill-available",
                     "margin": "0",
                     "padding": "0",
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "background": "var(--center_background)",
                 }
             },
@@ -325,7 +325,7 @@ class AppLayout extends Route {
                     "justify-content": "space-between",
                     "-webkit-app-region": "no-drag",
                     "z-index": "999",
-                    "border": "2px solid transparent",
+                    "border": "1px solid transparent",
                     "flex-direction": "column"
                 }
             },
@@ -348,12 +348,14 @@ class AppLayout extends Route {
                     "padding-top": "48px",
                     "margin": "0",
                     "overflow": "hidden hidden",
-                    "border-radius": "6px"
+                    "border-radius": "8px"
                 }
             },
             {
                 name: "main_center_block:hover",
                 style: {
+                    "width": "-webkit-fill-available",
+                    "height": "-webkit-fill-available",
                     "overflow": "hidden overlay",
                 }
             },
@@ -392,7 +394,7 @@ class AppLayout extends Route {
                     "align-items": "flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "backdrop-filter": "saturate(150%) blur(15px)",
                     "-webkit-app-region": "no-drag",
                     "margin": "46px 10px 10px 10px",
@@ -410,7 +412,7 @@ class AppLayout extends Route {
                     "align-items": "flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "backdrop-filter": "saturate(150%) blur(15px)",
                     "-webkit-app-region": "no-drag",
                     "margin": "46px 10px 10px 10px",
@@ -685,9 +687,6 @@ class AppLayout extends Route {
                 name: "header_window_control_box",
                 style: {
                     "display": "flex",
-                    //"background": "var(--button_background)",
-                    //"border-radius": "var(--border_radius)",
-                    //"border": "2px solid var(--border_main)",
                 }
             },
             {
@@ -697,8 +696,8 @@ class AppLayout extends Route {
                     "outline": "none",
                     "height": "max-content",
                     "width": "max-content",
-                    "border": "none",
-                    "border-radius": "50%",
+                    "border": "1px solid var(--border_main)",
+                    "border-radius": "100%",
                     "padding": "5px",
                     "margin": "2px",
                     "font-size": "16pt",
@@ -726,14 +725,14 @@ class AppLayout extends Route {
                     "outline": "none",
                     "height": "max-content",
                     "width": "max-content",
-                    "border": "none",
-                    "border-radius": "50%",
+                    "border": "1px solid var(--border_main)",
+                    "border-radius": "100%",
                     "padding": "3px",
                     "margin": "2px",
                     "font-size": "16pt",
                     "background": "var(--window_close_button)",
                     "color": "var(--text_color)",
-                    "-webkit-app-region": "no-drag"
+                    "-webkit-app-region": "no-drag",
                 }
             },
             {
@@ -755,8 +754,8 @@ class AppLayout extends Route {
                     "outline": "none",
                     "height": "max-content",
                     "width": "max-content",
-                    "border": "none",
-                    "border-radius": "50%",
+                    "border": "1px solid var(--border_main)",
+                    "border-radius": "100%",
                     "padding": "3px",
                     "margin": "2px",
                     "font-size": "16pt",
@@ -911,7 +910,7 @@ class AppLayout extends Route {
             if (center.scrollTop > 25) {
                 header.style.background = 'var(--header_background)'
                 header.style.backdropFilter = 'saturate(150%) blur(15px)'
-                header.style.borderBottom = "2px solid var(--border_main)"
+                header.style.borderBottom = "1px solid var(--border_main)"
             } else {
                 header.removeAttribute('style')
             }
@@ -1227,7 +1226,7 @@ class UserProfile {
                     "position": "absolute",
                     "background": "var(--header_background_dropdown)",
                     "color": "var(--text_color)",
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "border-radius": "var(--border_radius)",
                     "padding": "6px",
                     "z-index": "1",
@@ -1278,7 +1277,7 @@ class UserProfile {
                     "height": "80px",
                     "display": "flex",
                     "padding": "6px",
-                    "border": "2px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "border-radius": "50%",
                     "align-items": "center",
                     "justify-content": "center",
