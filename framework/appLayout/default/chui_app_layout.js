@@ -192,7 +192,7 @@ class AppLayout extends Route {
                     "--app_menu_background": "rgba(58, 58, 60, 0.2)",
                     //Диалоговое окно
                     "--modal_overlay": "rgba(0, 0, 0, 0.2)",
-                    "--modal_background": "rgba(58, 58, 60, 1)",
+                    "--modal_background": "rgba(44, 44, 46, 1)",
                     //Кнопка
                     "--button_background": "rgba(58, 58, 60, 1)",
                     "--button_background_disabled": "rgba(58, 58, 60, 0.15)",
@@ -402,7 +402,7 @@ class AppLayout extends Route {
                     "-webkit-app-region": "no-drag",
                     "margin": "46px 10px 10px 10px",
                     "border-radius": "var(--border_radius)",
-                    "box-shadow": "0 6px 12px rgb(0 0 0 / 20%)",
+                    "box-shadow": "0 3px 12px rgb(0 0 0 / 20%)",
                     "box-sizing": "border-box"
                 }
             },
@@ -423,7 +423,7 @@ class AppLayout extends Route {
                     "-webkit-app-region": "no-drag",
                     "margin": "46px 10px 10px 10px",
                     "border-radius": "var(--border_radius)",
-                    "box-shadow": "0 6px 12px rgb(0 0 0 / 20%)",
+                    "box-shadow": "0 3px 12px rgb(0 0 0 / 20%)",
                     "box-sizing": "border-box"
                 }
             },
@@ -1241,7 +1241,7 @@ class UserProfile {
                     "right": "0",
                     "min-width": "165px",
                     "flex-direction": "column",
-                    "box-shadow": "0 6px 12px rgb(0 0 0 / 20%)",
+                    "box-shadow": "0 3px 12px rgb(0 0 0 / 20%)",
                     "box-sizing": "border-box"
                 }
             },
