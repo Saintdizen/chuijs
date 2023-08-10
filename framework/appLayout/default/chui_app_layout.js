@@ -113,8 +113,8 @@ class AppLayout extends Route {
                 style: {
                     //Цвета
                     //Глобальные цвета
-                    "--text_color": "rgb(0, 0, 0)",
-                    "--text_color_disabled": "rgba(0, 0, 0, 0.65)",
+                    "--text_color": "rgba(17, 17, 17, 1)",
+                    "--text_color_disabled": "rgba(17, 17, 17, 0.65)",
                     "--header_background": "rgba(222, 222, 222, 0.44)",
                     "--header_background_dropdown": "rgb(222, 222, 222)",
                     "--center_background": "rgba(244, 244, 244)",
@@ -161,8 +161,12 @@ class AppLayout extends Route {
                     "--text_color_hover": "rgb(255, 255, 255)",
                     "--disable_color": "#e9ecef",
                     // Управление окнами
-                    "--window_close_button_hover": "rgba(255, 59, 48, 0.75)",
-                    "--window_maximize_button_hover": "rgba(52, 199, 89, 0.75)",
+                    "--window_close_button": "rgba(255, 59, 48, 0.66)",
+                    "--window_maximize_button": "rgba(52, 199, 89, 0.66)",
+                    "--window_minimize_button": "rgba(38, 136, 235, 0.66)",
+                    "--window_close_button_hover": "rgba(255, 59, 48, 1)",
+                    "--window_maximize_button_hover": "rgba(52, 199, 89, 1)",
+                    "--window_minimize_button_hover": "rgba(38, 136, 235, 1)",
                     //Шрифты
                     "--font_default_size": "12pt",
                     "--font_labels_size": "10pt",
@@ -178,11 +182,11 @@ class AppLayout extends Route {
                 name: "[theme='dark']",
                 style: {
                     //Глобальные цвета
-                    "--text_color": "rgb(255, 255, 255)",
-                    "--text_color_disabled": "rgba(255, 255, 255, 0.65)",
-                    "--header_background": "rgba(44, 44, 44, 0.44)",
-                    "--header_background_dropdown": "rgb(44, 44, 44)",
-                    "--center_background": "rgb(22, 22, 22)",
+                    "--text_color": "rgba(244, 244, 244, 1)",
+                    "--text_color_disabled": "rgba(244, 244, 244, 0.65)",
+                    "--header_background": "rgba(34, 34, 34, 0.34)",
+                    "--header_background_dropdown": "rgba(34, 34, 34, 1)",
+                    "--center_background": "rgba(17, 17, 17, 1)",
                     "--border_main": "rgba(55, 55, 55, 0.85)",
                     //
                     "--blue_prime_background_2": "rgba(82, 158, 244, 1)",
@@ -226,8 +230,12 @@ class AppLayout extends Route {
                     "--disable_color": "#e9ecef",
                     "--scroll_bar_background": "rgb(58, 58, 60)",
                     // Управление окнами
-                    "--window_close_button_hover": "rgba(255, 69, 58, 0.75)",
-                    "--window_maximize_button_hover": "rgba(48, 209, 88, 0.75)",
+                    "--window_close_button": "rgba(255, 69, 58, 0.66)",
+                    "--window_maximize_button": "rgba(48, 209, 88, 0.66)",
+                    "--window_minimize_button": "rgba(82, 158, 244, 0.66)",
+                    "--window_close_button_hover": "rgba(255, 69, 58, 1)",
+                    "--window_maximize_button_hover": "rgba(48, 209, 88, 1)",
+                    "--window_minimize_button_hover": "rgba(82, 158, 244, 1)",
                     "--test": "#fff"
                 }
             },
@@ -340,7 +348,7 @@ class AppLayout extends Route {
                     "padding-top": "48px",
                     "margin": "0",
                     "overflow": "hidden hidden",
-                    "border-radius": "14px"
+                    "border-radius": "6px"
                 }
             },
             {
@@ -677,9 +685,9 @@ class AppLayout extends Route {
                 name: "header_window_control_box",
                 style: {
                     "display": "flex",
-                    "background": "var(--button_background)",
-                    "border-radius": "var(--border_radius)",
-                    "border": "2px solid var(--border_main)",
+                    //"background": "var(--button_background)",
+                    //"border-radius": "var(--border_radius)",
+                    //"border": "2px solid var(--border_main)",
                 }
             },
             {
@@ -690,10 +698,11 @@ class AppLayout extends Route {
                     "height": "max-content",
                     "width": "max-content",
                     "border": "none",
-                    "border-radius": "var(--border_radius)",
+                    "border-radius": "50%",
                     "padding": "5px",
+                    "margin": "2px",
                     "font-size": "16pt",
-                    "background": "transparent",
+                    "background": "var(--window_minimize_button)",
                     "color": "var(--text_color)",
                     "-webkit-app-region": "no-drag"
                 }
@@ -701,7 +710,7 @@ class AppLayout extends Route {
             {
                 name: "window_minimize_button:hover",
                 style: {
-                    "background": "var(--blue_prime_background)",
+                    "background": "var(--window_minimize_button_hover)",
                 }
             },
             {
@@ -718,10 +727,11 @@ class AppLayout extends Route {
                     "height": "max-content",
                     "width": "max-content",
                     "border": "none",
-                    "border-radius": "var(--border_radius)",
-                    "padding": "5px",
+                    "border-radius": "50%",
+                    "padding": "3px",
+                    "margin": "2px",
                     "font-size": "16pt",
-                    "background": "transparent",
+                    "background": "var(--window_close_button)",
                     "color": "var(--text_color)",
                     "-webkit-app-region": "no-drag"
                 }
@@ -746,10 +756,11 @@ class AppLayout extends Route {
                     "height": "max-content",
                     "width": "max-content",
                     "border": "none",
-                    "border-radius": "var(--border_radius)",
-                    "padding": "5px",
+                    "border-radius": "50%",
+                    "padding": "3px",
+                    "margin": "2px",
                     "font-size": "16pt",
-                    "background": "transparent",
+                    "background": "var(--window_maximize_button)",
                     "color": "var(--text_color)",
                     "-webkit-app-region": "no-drag"
                 }
@@ -772,15 +783,14 @@ class AppLayout extends Route {
         document.getElementById('app').append(this.#applayout);
         header = document.createElement('header');
         header.id = "header";
-        header.style.borderRadius = "16px"
+        header.style.borderRadius = "8px"
         header_first_test = document.createElement("header_first_test");
         header_second_test = document.createElement("header_second_test");
         header.appendChild(header_first_test)
         header.appendChild(header_second_test)
         center = document.createElement('main_center_block');
         center.id = "center";
-        center.style.borderRadius = "14px"
-        this.#applayout.style.borderRadius = "16px"
+        this.#applayout.style.borderRadius = "8px"
         this.#applayout.appendChild(center)
         this.#applayout.appendChild(header)
         document.body.appendChild(this.#notification_panel);
@@ -946,25 +956,25 @@ class AppLayout extends Route {
         header_first_test.appendChild(this.#header_right_box)
 
         // Свернуть
-        this.#window_minimize_button.innerHTML = new Icon(Icons.ACTIONS.MINIMIZE, "12pt").getHTML();
+        this.#window_minimize_button.innerHTML = new Icon(Icons.ACTIONS.MINIMIZE, "10px").getHTML();
         this.#window_minimize_button.addEventListener("click", () => {
             require("@electron/remote").getCurrentWindow().minimize();
         })
 
         // Развернуть на весь экран
-        this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "12pt").getHTML();
+        this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "14px").getHTML();
         this.#window_maximize_button.addEventListener("click", () => {
             if (require("@electron/remote").getCurrentWindow().isMaximized()) {
-                this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "12pt").getHTML();
+                this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "14px").getHTML();
                 require("@electron/remote").getCurrentWindow().restore();
             } else {
-                this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN_EXIT, "12pt").getHTML();
+                this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN_EXIT, "14px").getHTML();
                 require("@electron/remote").getCurrentWindow().maximize();
             }
         })
 
         // Закрыть
-        this.#window_close_button.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "12pt").getHTML();
+        this.#window_close_button.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "14px").getHTML();
         this.#window_close_button.addEventListener("click", () => {
             if (this.#windowHideOnClose) {
                 require("@electron/remote").getCurrentWindow().hide();
@@ -1009,13 +1019,13 @@ class AppLayout extends Route {
     setWindowControlsPositionLeft(position = Boolean()) {
         this.#windowControlsPositionLeft = position;
         if (this.#windowControlsPositionLeft) {
-            this.#window_control_box.style.marginLeft = '6px';
+            this.#window_control_box.style.marginLeft = '10px';
             this.#window_control_box.appendChild(this.#window_close_button)
             this.#window_control_box.appendChild(this.#window_maximize_button)
             this.#window_control_box.appendChild(this.#window_minimize_button)
             header_first_test.insertBefore(this.#window_control_box, header_first_test.firstChild)
         } else {
-            this.#window_control_box.style.marginRight = '6px';
+            this.#window_control_box.style.marginRight = '10px';
             this.#window_control_box.appendChild(this.#window_minimize_button)
             this.#window_control_box.appendChild(this.#window_maximize_button)
             this.#window_control_box.appendChild(this.#window_close_button)

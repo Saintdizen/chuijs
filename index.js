@@ -138,7 +138,7 @@ class Main {
             });
         }
 
-        this.#window.loadURL(`data:text/html;charset=UTF-8,<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${this.#appName}</title></head><body style="background: transparent;border-radius: 16px;"><div id="app" style="border-radius: 16px;"></div></body></html>`).then(() => {
+        this.#window.loadURL(`data:text/html;charset=UTF-8,<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${this.#appName}</title></head><body style="background: transparent;border-radius: 8px;"><div id="app" style="border-radius: 8px;"></div></body></html>`).then(() => {
             app.on('before-quit', () => {
                 isQuiting = true;
             });
