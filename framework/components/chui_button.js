@@ -20,7 +20,7 @@ class Button {
                     "height": "max-content",
                     "width": "max-content",
                     "border-radius": "var(--border_radius)",
-                    "margin": "var(--margin)",
+                    "margin": "var(--margin)"
                 }
             },
             {
@@ -35,17 +35,18 @@ class Button {
                     "font-weight": "500",
                     "background": "var(--button_background)",
                     "box-sizing": "border-box",
-                    "border": "1px dashed rgba(0, 0, 0, 0)",
                     "display": "flex",
                     "flex-direction": "row",
                     "align-items": "center",
-                    "justify-content": "center"
+                    "justify-content": "center",
+                    "border": "1px solid var(--button_border)"
                 }
             },
             {
                 name: "button:hover",
                 style: {
                     "background": "var(--blue_prime_background)",
+                    "border": "1px solid var(--button_border)"
                 }
             },
             {
@@ -79,7 +80,7 @@ class Button {
                     "cursor": "not-allowed",
                     "background": "var(--button_background_disabled)",
                     "color": "var(--text_color_disabled)",
-                    "border": "1px dashed var(--border_main)",
+                    "border": "1px solid var(--button_border)"
                 }
             },
             {
@@ -87,7 +88,7 @@ class Button {
                 style: {
                     "background": "var(--button_background_disabled)",
                     "color": "var(--text_color_disabled)",
-                    "border": "1px dashed var(--border_main)"
+                    "border": "1px solid var(--button_border)"
                 }
             },
             {

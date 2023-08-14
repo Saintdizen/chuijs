@@ -130,6 +130,7 @@ class AppLayout extends Route {
                     "--button_text_color": "rgba(20, 142, 255, 1)",
                     "--button_box_shadow_normal": "0px 0px 1px 1px var(--input_background)",
                     "--button_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
+                    "--button_border": "rgba(205, 205, 205, 0.7)",
                     //Поля ввода
                     "--input_background": "rgba(219, 219, 219, 0.7)",
                     "--input_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
@@ -199,6 +200,7 @@ class AppLayout extends Route {
                     "--button_text_color": "rgba(30, 152, 255, 1)",
                     "--button_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
                     "--button_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
+                    "--button_border": "rgba(75, 75, 75, 0.7)",
                     //Поля ввода
                     "--input_background": "rgba(65, 65, 65, 0.7)",
                     "--input_box_shadow_normal": "0px 0px 1px 1px var(--input_background)",
