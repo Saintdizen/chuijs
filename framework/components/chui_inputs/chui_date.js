@@ -65,7 +65,7 @@ class DateInput {
                     "top": "-2px",
                     "left": "-2px",
                     "z-index": "1",
-                    "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)"
+                    "box-shadow": "0 2px 12px rgb(0 0 0 / 40%)",
                 }
             },
             {
@@ -199,7 +199,7 @@ class DateInput {
             this.#chui_date_input.appendChild(this.#label);
         }
         this.#input.addEventListener('focus', () => {
-            this.#date_main_block.style.border = '1px solid var(--blue_prime_background)';
+            this.#date_main_block.style.boxShadow = '0 0 3px 2px var(--blue_prime_background)';
             this.#label.style.color = 'var(--blue_prime_background)';
         })
         this.#input.addEventListener('blur', () => {

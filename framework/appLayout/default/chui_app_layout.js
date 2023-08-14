@@ -115,14 +115,14 @@ class AppLayout extends Route {
                     //Глобальные цвета
                     "--text_color": "rgba(44, 44, 44, 1)",
                     "--text_color_disabled": "rgba(44, 44, 44, 0.6)",
-                    "--header_background": "rgba(219, 219, 219, 0.2)",
-                    "--header_background_dropdown": "rgba(219, 219, 219, 1)",
+                    "--header_background": "rgba(205, 205, 205, 0.45)",
+                    "--header_background_dropdown": "rgba(205, 205, 205, 1)",
                     "--center_background": "rgba(235, 235, 235, 1)",
-                    "--border_main": "rgba(219, 219, 219, 1)",
+                    "--border_main": "rgba(205, 205, 205, 1)",
                     //Боковое меню
-                    "--app_menu_background": "rgba(235, 235, 235, 0.2)",
+                    "--app_menu_background": "rgba(205, 205, 205, 0.45)",
                     //Диалоговое окно
-                    "--modal_overlay": "rgba(0, 0, 0, 0.2)",
+                    "--modal_overlay": "rgba(0, 0, 0, 0.45)",
                     "--modal_background": "rgba(235, 235, 235, 1)",
                     //Кнопка
                     "--button_background": "rgba(219, 219, 219, 1)",
@@ -131,7 +131,7 @@ class AppLayout extends Route {
                     "--button_box_shadow_normal": "0px 0px 1px 1px var(--input_background)",
                     "--button_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
                     //Поля ввода
-                    "--input_background": "rgba(219, 219, 219, 1)",
+                    "--input_background": "rgba(219, 219, 219, 0.75)",
                     "--input_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
                     "--input_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
                     "--dropdown_background": "rgba(219, 219, 219, 1)",
@@ -174,7 +174,7 @@ class AppLayout extends Route {
                     "--border_radius": "6px",
                     //Отступы
                     "--margin": "6px",
-                    "--scroll_bar_background": "rgb(209, 209, 214)",
+                    "--scroll_bar_background": "rgb(190, 190, 190)",
                     "--test": "#000",
                 }
             },
@@ -184,14 +184,14 @@ class AppLayout extends Route {
                     //Глобальные цвета
                     "--text_color": "rgba(235, 235, 235, 1)",
                     "--text_color_disabled": "rgba(235, 235, 235, 0.6)",
-                    "--header_background": "rgba(65, 65, 65, 0.2)",
-                    "--header_background_dropdown": "rgba(65, 65, 65, 1)",
+                    "--header_background": "rgba(75, 75, 75, 0.45)",
+                    "--header_background_dropdown": "rgba(75, 75, 75, 1)",
                     "--center_background": "rgba(44, 44, 44, 1)",
-                    "--border_main": "rgba(65, 65, 65, 1)",
+                    "--border_main": "rgba(75, 75, 75, 1)",
                     //Боковое меню
-                    "--app_menu_background": "rgba(65, 65, 65, 0.2)",
+                    "--app_menu_background": "rgba(75, 75, 75, 0.45)",
                     //Диалоговое окно
-                    "--modal_overlay": "rgba(0, 0, 0, 0.2)",
+                    "--modal_overlay": "rgba(0, 0, 0, 0.45)",
                     "--modal_background": "rgba(44, 44, 44, 1)",
                     //Кнопка
                     "--button_background": "rgba(65, 65, 65, 1)",
@@ -200,7 +200,7 @@ class AppLayout extends Route {
                     "--button_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
                     "--button_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
                     //Поля ввода
-                    "--input_background": "rgba(65, 65, 65, 1)",
+                    "--input_background": "rgba(65, 65, 65, 0.75)",
                     "--input_box_shadow_normal": "0px 0px 1px 1px var(--input_background)",
                     "--input_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
                     "--dropdown_background": "rgba(65, 65, 65, 1)",
@@ -228,7 +228,7 @@ class AppLayout extends Route {
                     "--notification_background_popup": "rgba(65, 65, 65, 0.45)",
                     //Остальное
                     "--disable_color": "#e9ecef",
-                    "--scroll_bar_background": "rgb(58, 58, 60)",
+                    "--scroll_bar_background": "rgb(75, 75, 75)",
                     // Управление окнами
                     "--window_close_button": "rgba(255, 69, 58, 0.66)",
                     "--window_maximize_button": "rgba(48, 209, 88, 0.66)",
@@ -376,7 +376,7 @@ class AppLayout extends Route {
                     "-webkit-app-region": "no-drag",
                     "overflow": "hidden hidden",
                     "max-height": "calc(100% - 65px - (var(--margin) * 2))",
-                    "transition": "max-height .22s ease-in-out"
+                    "transition": "max-height .22s ease-in-out",
                 }
             },
             {
@@ -402,7 +402,8 @@ class AppLayout extends Route {
                     "margin": "56px 10px 10px 10px",
                     "border-radius": "var(--border_radius)",
                     "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)",
-                    "box-sizing": "border-box"
+                    "box-sizing": "border-box",
+                    "border": "1px solid var(--border_main)",
                 }
             },
             {
@@ -422,7 +423,8 @@ class AppLayout extends Route {
                     "margin": "56px 10px 10px 10px",
                     "border-radius": "var(--border_radius)",
                     "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)",
-                    "box-sizing": "border-box"
+                    "box-sizing": "border-box",
+                    "border": "1px solid var(--border_main)",
                 }
             },
             {
@@ -913,6 +915,7 @@ class AppLayout extends Route {
             if (center.scrollTop > 25) {
                 header.style.background = 'var(--header_background)'
                 header.style.boxShadow = '0 3px 12px rgb(0 0 0 / 25%)'
+                header.style.border = "1px solid var(--border_main)"
             } else {
                 header.removeAttribute('style')
             }

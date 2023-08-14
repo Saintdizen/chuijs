@@ -83,7 +83,7 @@ class CheckBox {
             {
                 name: ".checkbox:not(:disabled):active+label::before",
                 style: {
-                    "border": "1px solid var(--blue_prime_background)",
+                    "box-shadow": "1px solid var(--blue_prime_background)",
                     "background-color": "var(--blue_prime_background)",
                     "color":"var(--text_color_hover)",
                 }
@@ -95,7 +95,7 @@ class CheckBox {
             {
                 name: ".checkbox:checked+label::before",
                 style: {
-                    "border": "1px solid var(--blue_prime_background)",
+                    "box-shadow": "1px solid var(--blue_prime_background)",
                     "background-color": "var(--blue_prime_background)",
                     "color":"var(--text_color_hover)",
                 }

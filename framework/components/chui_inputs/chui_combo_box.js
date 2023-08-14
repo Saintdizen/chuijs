@@ -40,8 +40,8 @@ class ComboBox {
                     "border-radius": "var(--border_radius)",
                     "padding": "0px",
                     "font-size": "var(--font_default_size)",
-                    "border": "1px solid var(--border_main)",
                     "background": "var(--input_background)",
+                    "border": "1px solid var(--border_main)",
                 }
             },
             {
@@ -67,12 +67,11 @@ class ComboBox {
                     "margin-top": "36px",
                     "padding": "6px",
                     "font-size": "12pt",
-                    "border": "1px solid var(--border_main)",
                     "flex-direction": "column",
                     "z-index": "1",
                     "width": "-webkit-fill-available",
                     "overflow": "hidden hidden",
-                    "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)",
+                    "box-shadow": "0 2px 12px rgb(0 0 0 / 40%)",
                 }
             },
             {
@@ -172,7 +171,7 @@ class ComboBox {
         this.#input.classList.add('combobox_input');
         this.#input.type = 'text';
         this.#input.addEventListener('focus', () => {
-            this.#ComboBox_second.style.border = '1px solid var(--blue_prime_background)';
+            this.#ComboBox_second.style.boxShadow = '0 0 3px 2px var(--blue_prime_background)';
             this.#label.style.color = 'var(--blue_prime_background)';
         })
         this.#input.addEventListener('blur', () => {
@@ -189,7 +188,7 @@ class ComboBox {
         //LISTENERS
         this.#input.addEventListener('focus', () => {
             this.#button_open.style.transform = 'rotate(180deg)'
-            this.#ComboBox_second.style.border = '1px solid var(--blue_prime_background)';
+            this.#ComboBox_second.style.boxShadow = '0 0 3px 2px var(--blue_prime_background)';
         })
         this.#input.addEventListener('blur', () => {
             this.#button_open.style.transform = 'rotate(0deg)'
