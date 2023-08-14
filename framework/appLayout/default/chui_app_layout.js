@@ -257,8 +257,7 @@ class AppLayout extends Route {
                     "height": "-webkit-fill-available",
                     "margin": "0",
                     "padding": "0",
-                    "border": "1px solid var(--border_main)",
-                    "background": "var(--center_background)",
+                    "background": "transparent",
                     "box-sizing": "border-box"
                 }
             },
@@ -313,7 +312,9 @@ class AppLayout extends Route {
                 style: {
                     "width": "-webkit-fill-available",
                     "height": "-webkit-fill-available",
-                    "background": "var(--center_background)"
+                    "background": "var(--center_background)",
+                    "border": "1px solid var(--border_main)",
+                    "border-radius": "var(--border_radius)",
                 }
             },
             {
@@ -329,7 +330,7 @@ class AppLayout extends Route {
                     "justify-content": "space-between",
                     "-webkit-app-region": "no-drag",
                     "z-index": "999",
-                    "border": "1px solid transparent",
+                    "border-bottom": "1px solid transparent",
                     "flex-direction": "column",
                     "border-top-left-radius": "6px",
                     "border-top-right-radius": "6px"
@@ -350,11 +351,9 @@ class AppLayout extends Route {
                 style: {
                     "width": "-webkit-fill-available",
                     "height": "-webkit-fill-available",
-                    //"background": "var(--center_background)",
                     "padding-top": "48px",
                     "margin": "0",
-                    "overflow": "hidden hidden",
-                    "border-radius": "6px"
+                    "overflow": "hidden hidden"
                 }
             },
             {
@@ -789,14 +788,12 @@ class AppLayout extends Route {
         document.getElementById('app').append(this.#applayout);
         header = document.createElement('header');
         header.id = "header";
-        header.style.borderRadius = "6px"
         header_first_test = document.createElement("header_first_test");
         header_second_test = document.createElement("header_second_test");
         header.appendChild(header_first_test)
         header.appendChild(header_second_test)
         center = document.createElement('main_center_block');
         center.id = "center";
-        this.#applayout.style.borderRadius = "6px"
         this.#applayout.appendChild(center)
         this.#applayout.appendChild(header)
         document.body.appendChild(this.#notification_panel);
@@ -917,7 +914,7 @@ class AppLayout extends Route {
             if (center.scrollTop > 25) {
                 header.style.background = 'var(--header_background)'
                 header.style.boxShadow = "rgba(0, 0, 0, 0.2) 0px 2px 10px 2px"
-                header.style.border = "1px solid var(--border_main)"
+                header.style.borderBottom = "1px solid var(--border_main)"
             } else {
                 header.removeAttribute('style')
             }
