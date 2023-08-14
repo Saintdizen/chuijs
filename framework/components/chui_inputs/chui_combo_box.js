@@ -71,7 +71,7 @@ class ComboBox {
                     "z-index": "1",
                     "width": "-webkit-fill-available",
                     "overflow": "hidden hidden",
-                    "box-shadow": "0 2px 12px rgb(0 0 0 / 40%)",
+                    "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
                 }
             },
             {

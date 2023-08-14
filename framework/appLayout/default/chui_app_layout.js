@@ -115,14 +115,14 @@ class AppLayout extends Route {
                     //Глобальные цвета
                     "--text_color": "rgba(44, 44, 44, 1)",
                     "--text_color_disabled": "rgba(44, 44, 44, 0.6)",
-                    "--header_background": "rgba(205, 205, 205, 0.45)",
-                    "--header_background_dropdown": "rgba(205, 205, 205, 1)",
+                    "--header_background": "rgba(205, 205, 205, 0.4)",
+                    "--header_background_dropdown": "rgba(219, 219, 219, 1)",
                     "--center_background": "rgba(235, 235, 235, 1)",
                     "--border_main": "rgba(205, 205, 205, 1)",
                     //Боковое меню
-                    "--app_menu_background": "rgba(205, 205, 205, 0.45)",
+                    "--app_menu_background": "rgba(205, 205, 205, 0.4)",
                     //Диалоговое окно
-                    "--modal_overlay": "rgba(0, 0, 0, 0.45)",
+                    "--modal_overlay": "rgba(0, 0, 0, 0.4)",
                     "--modal_background": "rgba(235, 235, 235, 1)",
                     //Кнопка
                     "--button_background": "rgba(219, 219, 219, 1)",
@@ -131,39 +131,39 @@ class AppLayout extends Route {
                     "--button_box_shadow_normal": "0px 0px 1px 1px var(--input_background)",
                     "--button_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
                     //Поля ввода
-                    "--input_background": "rgba(219, 219, 219, 0.75)",
+                    "--input_background": "rgba(219, 219, 219, 0.7)",
                     "--input_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
                     "--input_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
                     "--dropdown_background": "rgba(219, 219, 219, 1)",
                     //
                     "--blue_prime_background_2": "rgba(20, 142, 255, 1)",
-                    "--blue_prime_background": "rgba(20, 142, 255, 0.85)",
-                    "--red_prime_background": "rgba(255, 59, 48, 0.85)",
-                    "--blue_prime_background_trans": "rgba(20, 142, 255, 0.45)",
+                    "--blue_prime_background": "rgba(20, 142, 255, 0.8)",
+                    "--red_prime_background": "rgba(255, 59, 48, 0.8)",
+                    "--blue_prime_background_trans": "rgba(20, 142, 255, 0.4)",
                     //BADGE
-                    "--badge_error_back": "rgba(255, 59, 48, 0.45)",
+                    "--badge_error_back": "rgba(255, 59, 48, 0.4)",
                     "--badge_error_text": "rgba(194, 6, 24, 1)",
-                    "--badge_success_back": "rgba(52, 199, 89, 0.45)",
+                    "--badge_success_back": "rgba(52, 199, 89, 0.4)",
                     "--badge_success_text": "rgba(0, 112, 24, 1)",
-                    "--badge_cancel_back": "rgba(142, 142, 147, 0.45)",
+                    "--badge_cancel_back": "rgba(142, 142, 147, 0.4)",
                     "--badge_cancel_text": "rgba(97, 97, 101, 1)",
-                    "--badge_warning_back": "rgba(255, 204, 0, 0.45)",
+                    "--badge_warning_back": "rgba(255, 204, 0, 0.4)",
                     "--badge_warning_text": "rgba(146, 81, 0, 1)",
                     //SPINNER COLOR
-                    "--spinner_blue": "rgba(38, 136, 235, 0.85)",
-                    "--spinner_track": "rgba(219, 219, 219, 0.45)",
+                    "--spinner_blue": "rgba(38, 136, 235, 0.8)",
+                    "--spinner_track": "rgba(219, 219, 219, 0.4)",
                     // Полоса состояния
                     "--progress_bar_back": "rgba(225, 225, 225)",
                     // Уведомления
-                    "--notification_background": "rgba(219, 219, 219, 0.45)",
-                    "--notification_background_popup": "rgba(219, 219, 219, 0.45)",
+                    "--notification_background": "rgba(219, 219, 219, 0.4)",
+                    "--notification_background_popup": "rgba(219, 219, 219, 0.4)",
                     //Остальное
                     "--text_color_hover": "rgb(255, 255, 255)",
                     "--disable_color": "#e9ecef",
                     // Управление окнами
-                    "--window_close_button": "rgba(255, 59, 48, 0.66)",
-                    "--window_maximize_button": "rgba(52, 199, 89, 0.66)",
-                    "--window_minimize_button": "rgba(38, 136, 235, 0.66)",
+                    "--window_close_button": "rgba(255, 59, 48, 0.7)",
+                    "--window_maximize_button": "rgba(52, 199, 89, 0.7)",
+                    "--window_minimize_button": "rgba(38, 136, 235, 0.7)",
                     "--window_close_button_hover": "rgba(255, 59, 48, 1)",
                     "--window_maximize_button_hover": "rgba(52, 199, 89, 1)",
                     "--window_minimize_button_hover": "rgba(38, 136, 235, 1)",
@@ -184,14 +184,14 @@ class AppLayout extends Route {
                     //Глобальные цвета
                     "--text_color": "rgba(235, 235, 235, 1)",
                     "--text_color_disabled": "rgba(235, 235, 235, 0.6)",
-                    "--header_background": "rgba(75, 75, 75, 0.45)",
-                    "--header_background_dropdown": "rgba(75, 75, 75, 1)",
+                    "--header_background": "rgba(75, 75, 75, 0.4)",
+                    "--header_background_dropdown": "rgba(65, 65, 65, 1)",
                     "--center_background": "rgba(44, 44, 44, 1)",
                     "--border_main": "rgba(75, 75, 75, 1)",
                     //Боковое меню
-                    "--app_menu_background": "rgba(75, 75, 75, 0.45)",
+                    "--app_menu_background": "rgba(75, 75, 75, 0.4)",
                     //Диалоговое окно
-                    "--modal_overlay": "rgba(0, 0, 0, 0.45)",
+                    "--modal_overlay": "rgba(0, 0, 0, 0.4)",
                     "--modal_background": "rgba(44, 44, 44, 1)",
                     //Кнопка
                     "--button_background": "rgba(65, 65, 65, 1)",
@@ -200,39 +200,39 @@ class AppLayout extends Route {
                     "--button_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
                     "--button_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
                     //Поля ввода
-                    "--input_background": "rgba(65, 65, 65, 0.75)",
+                    "--input_background": "rgba(65, 65, 65, 0.7)",
                     "--input_box_shadow_normal": "0px 0px 1px 1px var(--input_background)",
                     "--input_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
                     "--dropdown_background": "rgba(65, 65, 65, 1)",
                     //
                     "--blue_prime_background_2": "rgba(30, 152, 255, 1)",
-                    "--blue_prime_background": "rgba(30, 152, 255, 0.85)",
-                    "--red_prime_background": "rgba(255, 69, 58, 0.85)",
-                    "--blue_prime_background_trans": "rgba(30, 152, 255, 0.45)",
+                    "--blue_prime_background": "rgba(30, 152, 255, 0.8)",
+                    "--red_prime_background": "rgba(255, 69, 58, 0.8)",
+                    "--blue_prime_background_trans": "rgba(30, 152, 255, 0.4)",
                     //BADGE
-                    "--badge_error_back": "rgba(255, 69, 58, 0.45)",
+                    "--badge_error_back": "rgba(255, 69, 58, 0.4)",
                     "--badge_error_text": "rgba(255, 105, 94, 1)",
-                    "--badge_success_back": "rgba(48, 209, 88, 0.45)",
+                    "--badge_success_back": "rgba(48, 209, 88, 0.4)",
                     "--badge_success_text": "rgba(49, 222, 75, 1)",
-                    "--badge_cancel_back": "rgba(142, 142, 147, 0.45)",
+                    "--badge_cancel_back": "rgba(142, 142, 147, 0.4)",
                     "--badge_cancel_text": "rgba(182, 182, 187, 1)",
-                    "--badge_warning_back": "rgba(255, 214, 10, 0.45)",
+                    "--badge_warning_back": "rgba(255, 214, 10, 0.4)",
                     "--badge_warning_text": "rgba(255, 212, 38, 1)",
                     //SPINNER COLOR
-                    "--spinner_blue": "rgba(82, 158, 244, 0.85)",
-                    "--spinner_track": "rgba(63, 63, 65, 0.45)",
+                    "--spinner_blue": "rgba(82, 158, 244, 0.8)",
+                    "--spinner_track": "rgba(63, 63, 65, 0.4)",
                     // Полоса состояния
                     "--progress_bar_back": "rgba(65, 65, 65)",
                     // Уведомления
-                    "--notification_background": "rgba(44, 44, 44, 0.45)",
-                    "--notification_background_popup": "rgba(65, 65, 65, 0.45)",
+                    "--notification_background": "rgba(65, 65, 65, 0.4)",
+                    "--notification_background_popup": "rgba(65, 65, 65, 0.4)",
                     //Остальное
                     "--disable_color": "#e9ecef",
                     "--scroll_bar_background": "rgb(75, 75, 75)",
                     // Управление окнами
-                    "--window_close_button": "rgba(255, 69, 58, 0.66)",
-                    "--window_maximize_button": "rgba(48, 209, 88, 0.66)",
-                    "--window_minimize_button": "rgba(82, 158, 244, 0.77)",
+                    "--window_close_button": "rgba(255, 69, 58, 0.7)",
+                    "--window_maximize_button": "rgba(48, 209, 88, 0.7)",
+                    "--window_minimize_button": "rgba(82, 158, 244, 0.7)",
                     "--window_close_button_hover": "rgba(255, 69, 58, 1)",
                     "--window_maximize_button_hover": "rgba(48, 209, 88, 1)",
                     "--window_minimize_button_hover": "rgba(82, 158, 244, 1)",
@@ -323,7 +323,7 @@ class AppLayout extends Route {
                     "display": "flex",
                     "align-items": "start",
                     "background": "transparent",
-                    "backdrop-filter": "blur(22px)",
+                    "backdrop-filter": "blur(20px)",
                     "justify-content": "space-between",
                     "-webkit-app-region": "no-drag",
                     "z-index": "999",
@@ -396,12 +396,12 @@ class AppLayout extends Route {
                     "align-items": "flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    "backdrop-filter": "blur(22px)",
+                    "backdrop-filter": "blur(20px)",
                     "background-blend-mode": "overlay",
                     "-webkit-app-region": "no-drag",
                     "margin": "56px 10px 10px 10px",
                     "border-radius": "var(--border_radius)",
-                    "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)",
+                    "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
                     "box-sizing": "border-box",
                     "border": "1px solid var(--border_main)",
                 }
@@ -417,12 +417,12 @@ class AppLayout extends Route {
                     "align-items": "flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    "backdrop-filter": "blur(22px)",
+                    "backdrop-filter": "blur(20px)",
                     "background-blend-mode": "overlay",
                     "-webkit-app-region": "no-drag",
                     "margin": "56px 10px 10px 10px",
                     "border-radius": "var(--border_radius)",
-                    "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)",
+                    "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
                     "box-sizing": "border-box",
                     "border": "1px solid var(--border_main)",
                 }
@@ -914,7 +914,7 @@ class AppLayout extends Route {
         center.onscroll = () => {
             if (center.scrollTop > 25) {
                 header.style.background = 'var(--header_background)'
-                header.style.boxShadow = '0 3px 12px rgb(0 0 0 / 25%)'
+                header.style.boxShadow = "rgba(0, 0, 0, 0.2) 0px 2px 10px 2px"
                 header.style.border = "1px solid var(--border_main)"
             } else {
                 header.removeAttribute('style')
@@ -1237,8 +1237,9 @@ class UserProfile {
                     "right": "0",
                     "min-width": "165px",
                     "flex-direction": "column",
-                    "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)",
-                    "box-sizing": "border-box"
+                    "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
+                    "box-sizing": "border-box",
+                    "border": "1px solid var(--border_main)",
                 }
             },
             {

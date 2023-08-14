@@ -54,7 +54,7 @@ class VideoPlayer {
                     "position": "absolute",
                     "width": "-webkit-fill-available",
                     "bottom": "0",
-                    "backdrop-filter": "saturate(150%) blur(22px)",
+                    "backdrop-filter": "blur(20px)",
                     "border-radius": "var(--border_radius)",
                     "background": "var(--header_background)",
                     "opacity": "0",

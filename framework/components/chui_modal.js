@@ -27,7 +27,7 @@ class Dialog {
                     "background-color": "var(--modal_overlay)",
                     "padding": "0px",
                     "border": "none",
-                    "backdrop-filter": "blur(22px)"
+                    "backdrop-filter": "blur(20px)"
                 }
             },
             {

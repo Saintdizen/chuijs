@@ -31,30 +31,34 @@ class Notification {
                     "font-size": "12pt",
                     "padding": "6px 10px",
                     "background": "var(--notification_background_popup)",
-                    "backdrop-filter": "blur(22px)",
-                    "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)",
-                    "z-index": "1002"
+                    "backdrop-filter": "blur(20px)",
+                    "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
+                    "z-index": "1002",
+                    //"border": "1px solid var(--border_main)",
                 }
             },
             {
                 name: ".notification_warning",
                 style: {
+                    //"border": "1px solid var(--border_main)",
                     "background": "var(--badge_warning_back)",
-                    "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)",
+                    "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
                 }
             },
             {
                 name: ".notification_error",
                 style: {
+                    //"border": "1px solid var(--border_main)",
                     "background": "var(--badge_error_back)",
-                    "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)",
+                    "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
                 }
             },
             {
                 name: ".notification_success",
                 style: {
+                    //"border": "1px solid var(--border_main)",
                     "background": "var(--badge_success_back)",
-                    "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)",
+                    "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
                 }
             },
             {

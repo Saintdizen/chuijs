@@ -29,9 +29,10 @@ class UpdateNotification {
                     "font-size": "12pt",
                     "padding": "6px 10px",
                     "background": "var(--notification_background_popup)",
-                    "backdrop-filter": "blur(22px)",
+                    "backdrop-filter": "blur(20px)",
                     "border": "1px solid var(--border_main)",
-                    "z-index": "1002"
+                    "z-index": "1002",
+                    "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
                 }
             },
             {
