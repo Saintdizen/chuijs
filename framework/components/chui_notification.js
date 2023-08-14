@@ -32,7 +32,7 @@ class Notification {
                     "padding": "6px 10px",
                     "background": "var(--notification_background_popup)",
                     "backdrop-filter": "blur(22px)",
-                    "box-shadow": "0 3px 12px rgb(0 0 0 / 20%)",
+                    "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)",
                     "z-index": "1002"
                 }
             },
@@ -40,21 +40,21 @@ class Notification {
                 name: ".notification_warning",
                 style: {
                     "background": "var(--badge_warning_back)",
-                    "box-shadow": "0 3px 12px rgb(0 0 0 / 20%)",
+                    "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)",
                 }
             },
             {
                 name: ".notification_error",
                 style: {
                     "background": "var(--badge_error_back)",
-                    "box-shadow": "0 3px 12px rgb(0 0 0 / 20%)",
+                    "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)",
                 }
             },
             {
                 name: ".notification_success",
                 style: {
                     "background": "var(--badge_success_back)",
-                    "box-shadow": "0 3px 12px rgb(0 0 0 / 20%)",
+                    "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)",
                 }
             },
             {

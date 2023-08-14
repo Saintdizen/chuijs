@@ -310,7 +310,8 @@ class AppLayout extends Route {
                 name: "#app",
                 style: {
                     "width": "-webkit-fill-available",
-                    "height": "-webkit-fill-available"
+                    "height": "-webkit-fill-available",
+                    "background": "var(--center_background)"
                 }
             },
             {
@@ -347,7 +348,7 @@ class AppLayout extends Route {
                 style: {
                     "width": "-webkit-fill-available",
                     "height": "-webkit-fill-available",
-                    "background": "var(--center_background)",
+                    //"background": "var(--center_background)",
                     "padding-top": "48px",
                     "margin": "0",
                     "overflow": "hidden hidden",
@@ -368,7 +369,7 @@ class AppLayout extends Route {
                     "position": "fixed",
                     "bottom": "10px",
                     "right": "10px",
-                    "margin": "var(--margin)",
+                    "padding": "var(--margin)",
                     "align-items": "flex-end",
                     "justify-content": "flex-start",
                     "z-index": "1001",
@@ -395,13 +396,12 @@ class AppLayout extends Route {
                     "align-items": "flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    //"border": "1px solid var(--border_main)",
                     "backdrop-filter": "blur(22px)",
                     "background-blend-mode": "overlay",
                     "-webkit-app-region": "no-drag",
-                    "margin": "46px 10px 10px 10px",
+                    "margin": "56px 10px 10px 10px",
                     "border-radius": "var(--border_radius)",
-                    "box-shadow": "0 3px 12px rgb(0 0 0 / 20%)",
+                    "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)",
                     "box-sizing": "border-box"
                 }
             },
@@ -416,13 +416,12 @@ class AppLayout extends Route {
                     "align-items": "flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    //"border": "1px solid var(--border_main)",
                     "backdrop-filter": "blur(22px)",
                     "background-blend-mode": "overlay",
                     "-webkit-app-region": "no-drag",
-                    "margin": "46px 10px 10px 10px",
+                    "margin": "56px 10px 10px 10px",
                     "border-radius": "var(--border_radius)",
-                    "box-shadow": "0 3px 12px rgb(0 0 0 / 20%)",
+                    "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)",
                     "box-sizing": "border-box"
                 }
             },
@@ -913,8 +912,7 @@ class AppLayout extends Route {
         center.onscroll = () => {
             if (center.scrollTop > 25) {
                 header.style.background = 'var(--header_background)'
-                header.style.backdropFilter = 'blur(22px)'
-                header.style.borderBottom = "1px solid var(--border_main)"
+                header.style.boxShadow = '0 3px 12px rgb(0 0 0 / 25%)'
             } else {
                 header.removeAttribute('style')
             }
@@ -1236,7 +1234,7 @@ class UserProfile {
                     "right": "0",
                     "min-width": "165px",
                     "flex-direction": "column",
-                    "box-shadow": "0 3px 12px rgb(0 0 0 / 20%)",
+                    "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)",
                     "box-sizing": "border-box"
                 }
             },

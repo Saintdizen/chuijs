@@ -64,7 +64,8 @@ class DateInput {
                     "position":"absolute",
                     "top": "-2px",
                     "left": "-2px",
-                    "z-index": "1"
+                    "z-index": "1",
+                    "box-shadow": "0 3px 12px rgb(0 0 0 / 25%)"
                 }
             },
             {
@@ -101,7 +102,7 @@ class DateInput {
                     "display": "inline-flex",
                     "justify-content": "center",
                     "align-items": "center",
-                    "color": "var(--badge_cancel_text)",
+                    "color": "var(--badge_cancel_text)"
                 }
             },
             {

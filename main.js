@@ -1,8 +1,8 @@
 const { Main, MenuItem } = require('./index');
 const main = new Main({
     name: "Test Application",
-    width: 800,
-    height: 600,
+    width: 1366,
+    height: 720,
     render: `${__dirname}/app/app.js`,
     devTools: false
 });

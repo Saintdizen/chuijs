@@ -83,8 +83,8 @@ class Test extends AppLayout {
                         title: "Заголовок диалогового окна",
                         closeOutSideClick: true,
                         style: {
-                            width: "800px",
-                            height: "600px",
+                            width: "60%",
+                            height: "30%",
                             direction: Styles.DIRECTION.COLUMN,
                             wrap: Styles.WRAP.NOWRAP,
                             align: Styles.ALIGN.CENTER,
