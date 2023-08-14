@@ -48,7 +48,7 @@ class AudioPlayer {
                 style: {
                     "display": "block",
                     "width": "-webkit-fill-available",
-                    "backdrop-filter": "blur(20px)",
+                    "backdrop-filter": "var(--global_blur)",
                     "border-radius": "var(--border_radius)",
                     "background": "var(--header_background)"
                 }

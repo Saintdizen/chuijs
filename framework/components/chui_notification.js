@@ -31,7 +31,7 @@ class Notification {
                     "font-size": "12pt",
                     "padding": "6px 10px",
                     "background": "var(--notification_background_popup)",
-                    "backdrop-filter": "blur(20px)",
+                    "backdrop-filter": "var(--global_blur)",
                     "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
                     "z-index": "1002",
                     //"border": "1px solid var(--border_main)",

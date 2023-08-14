@@ -111,6 +111,8 @@ class AppLayout extends Route {
             {
                 name: ":root",
                 style: {
+                    //
+                    "--global_blur": "blur(16px)",
                     //Цвета
                     //Глобальные цвета
                     "--text_color": "rgba(44, 44, 44, 1)",
@@ -326,7 +328,7 @@ class AppLayout extends Route {
                     "display": "flex",
                     "align-items": "start",
                     "background": "transparent",
-                    "backdrop-filter": "blur(20px)",
+                    "backdrop-filter": "var(--global_blur)",
                     "justify-content": "space-between",
                     "-webkit-app-region": "no-drag",
                     "z-index": "999",
@@ -397,7 +399,7 @@ class AppLayout extends Route {
                     "align-items": "flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    "backdrop-filter": "blur(20px)",
+                    "backdrop-filter": "var(--global_blur)",
                     "background-blend-mode": "overlay",
                     "-webkit-app-region": "no-drag",
                     "margin": "56px 10px 10px 10px",
@@ -418,7 +420,7 @@ class AppLayout extends Route {
                     "align-items": "flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    "backdrop-filter": "blur(20px)",
+                    "backdrop-filter": "var(--global_blur)",
                     "background-blend-mode": "overlay",
                     "-webkit-app-region": "no-drag",
                     "margin": "56px 10px 10px 10px",
@@ -433,28 +435,13 @@ class AppLayout extends Route {
                 style: {
                     "display": "flex",
                     "flex-direction": "row",
-                    "justify-content": "space-between",
+                    "justify-content": "center",
                     "align-items": "center",
                     "height": "max-content",
                     "width": "-webkit-fill-available",
-                    "-webkit-app-region": "no-drag"
-                }
-            },
-            {
-                name: "notification_box_controls_name",
-                style: {
-                    "outline": "none",
-                    "height": "max-content",
-                    "width": "max-content",
-                    "border": "none",
-                    "border-radius": "var(--border_radius)",
-                    "padding": "6px",
-                    "margin": "var(--margin)",
-                    "font-size": "12pt",
-                    "font-weight": "600",
+                    "-webkit-app-region": "no-drag",
                     "background": "transparent",
-                    "color": "var(--text_color)",
-                    "-webkit-app-region": "no-drag"
+                    "border-top": "1px solid var(--border_main)",
                 }
             },
             {
@@ -465,7 +452,7 @@ class AppLayout extends Route {
                     "overflow": "hidden hidden",
                     "height": "-webkit-fill-available",
                     "width": "-webkit-fill-available",
-                    "padding": "0px 6px 6px 6px",
+                    "padding": "6px",
                     "-webkit-app-region": "no-drag"
                 }
             },
@@ -584,6 +571,7 @@ class AppLayout extends Route {
                     "height": "max-content",
                     "justify-content": "center",
                     "align-items": "center",
+                    "border-top": "1px solid var(--border_main)",
                 }
             },
             {
@@ -805,10 +793,6 @@ class AppLayout extends Route {
         this.#dark_mode_togle.setId("dark_mode");
 
         // Меню уведомлений
-        let panel_name = document.createElement("notification_box_controls_name")
-        panel_name.innerText = "Панель уведомлений";
-        this.#notification_box_controls.appendChild(panel_name)
-
         let remove_button = new Button({
             icon: Icons.ACTIONS.DELETE,
             clickEvent: async () => {
@@ -825,9 +809,8 @@ class AppLayout extends Route {
 
         this.#notification_box_controls.appendChild(remove_button.set())
 
-        this.#notification_box.appendChild(this.#notification_box_controls)
         this.#notification_box.appendChild(this.#notification_box_main)
-
+        this.#notification_box.appendChild(this.#notification_box_controls)
 
         this.#notification_box_main.id = 'chui_notification_box';
         this.#notification_box.style.top = `calc(${header.style.height})`;

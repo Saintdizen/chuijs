@@ -14,7 +14,7 @@ class MenuBar {
                     //"border": "1px solid var(--border_main)",
                     //"background": "var(--button_background)",
                     "padding": "2px",
-                    //"backdrop-filter": "blur(20px)",
+                    //"backdrop-filter": "var(--global_blur)",
                 }
             },
             {
@@ -103,7 +103,7 @@ class MenuBar {
                     "left": "0",
                     "min-width": "max-content",
                     "flex-direction": "column",
-                    "backdrop-filter": "blur(20px)",
+                    "backdrop-filter": "var(--global_blur)",
                 }
             },
             //
