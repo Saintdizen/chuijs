@@ -125,7 +125,7 @@ class AppLayout extends Route {
                     "--modal_overlay": "rgba(0, 0, 0, 0.4)",
                     "--modal_background": "rgba(235, 235, 235, 1)",
                     //Кнопка
-                    "--button_background": "rgba(219, 219, 219, 1)",
+                    "--button_background": "rgba(219, 219, 219, 0.85)",
                     "--button_background_disabled": "rgba(219, 219, 219, 0.6)",
                     "--button_text_color": "rgba(20, 142, 255, 1)",
                     "--button_box_shadow_normal": "0px 0px 1px 1px var(--input_background)",
@@ -194,7 +194,7 @@ class AppLayout extends Route {
                     "--modal_overlay": "rgba(0, 0, 0, 0.4)",
                     "--modal_background": "rgba(44, 44, 44, 1)",
                     //Кнопка
-                    "--button_background": "rgba(65, 65, 65, 1)",
+                    "--button_background": "rgba(65, 65, 65, 0.85)",
                     "--button_background_disabled": "rgba(65, 65, 65, 0.6)",
                     "--button_text_color": "rgba(30, 152, 255, 1)",
                     "--button_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
