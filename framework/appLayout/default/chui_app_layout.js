@@ -83,14 +83,16 @@ class AppLayout extends Route {
                     "letter-spacing": "0.33px",
                     "word-spacing": "0.33px",
                     "font-family": "chui_Inter",
-                    "-webkit-font-smoothing": "antialiased",
                     "direction": "ltr",
                     "line-height": "normal",
                     "user-select": "none",
                     "outline": "none",
                     "transition": "all .22s",
                     "animation-duration": ".22s",
-                    "position": "relative"
+                    "position": "relative",
+                    "-webkit-font-smoothing": "antialiased",
+                    "text-rendering": "geometricPrecision",
+                    "-webkit-text-stroke": ".01em",
                 }
             },
             {
