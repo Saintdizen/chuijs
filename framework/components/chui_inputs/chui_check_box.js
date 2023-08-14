@@ -68,7 +68,7 @@ class CheckBox {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "1px dashed var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                 }
             },
             {
@@ -76,7 +76,7 @@ class CheckBox {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "1px dashed var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "color": "var(--text_color_disabled)",
                 }
             },

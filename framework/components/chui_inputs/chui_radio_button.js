@@ -97,7 +97,7 @@ class RadioButton {
                 style: {
                     "cursor": "not-allowed",
                     "background": "transparent",
-                    "border": "1px dashed var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                 }
             },
             {
@@ -105,7 +105,7 @@ class RadioButton {
                 style: {
                     "cursor": "not-allowed",
                     "background": "radial-gradient(circle, var(--text_color_disabled) 30%, rgba(242,242,247,0) 42%)",
-                    "border": "1px dashed var(--border_main)"
+                    "border": "1px solid var(--border_main)"
                 }
             },
         ], 'chUiJS_RadioButton');
