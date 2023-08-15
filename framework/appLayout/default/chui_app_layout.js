@@ -100,13 +100,15 @@ class AppLayout extends Route {
                     "letter-spacing": "0.33px",
                     "word-spacing": "0.33px",
                     "font-family": "chui_Inter",
-                    "-webkit-font-smoothing": "antialiased",
                     "direction": "ltr",
                     "user-select": "none",
                     "outline": "none",
                     "transition": "all .22s",
                     "animation-duration": ".22s",
                     "position": "relative",
+                    "-webkit-font-smoothing": "antialiased",
+                    "text-rendering": "geometricPrecision",
+                    "-webkit-text-stroke": ".01em",
                 }
             },
             {
@@ -164,13 +166,6 @@ class AppLayout extends Route {
                     //Остальное
                     "--text_color_hover": "rgb(255, 255, 255)",
                     "--disable_color": "#e9ecef",
-                    // Управление окнами
-                    "--window_close_button": "rgba(255, 59, 48, 0.7)",
-                    "--window_maximize_button": "rgba(52, 199, 89, 0.7)",
-                    "--window_minimize_button": "rgba(38, 136, 235, 0.7)",
-                    "--window_close_button_hover": "rgba(255, 59, 48, 1)",
-                    "--window_maximize_button_hover": "rgba(52, 199, 89, 1)",
-                    "--window_minimize_button_hover": "rgba(38, 136, 235, 1)",
                     //Шрифты
                     "--font_default_size": "12pt",
                     "--font_labels_size": "10pt",
@@ -179,7 +174,13 @@ class AppLayout extends Route {
                     //Отступы
                     "--margin": "6px",
                     "--scroll_bar_background": "rgb(190, 190, 190)",
-                    "--test": "#000",
+                    // Управление окнами
+                    "--window_close_button": "rgba(255, 59, 48, 0.7)",
+                    "--window_maximize_button": "rgba(52, 199, 89, 0.7)",
+                    "--window_minimize_button": "rgba(38, 136, 235, 0.7)",
+                    "--window_close_button_hover": "rgba(255, 59, 48, 1)",
+                    "--window_maximize_button_hover": "rgba(52, 199, 89, 1)",
+                    "--window_minimize_button_hover": "rgba(38, 136, 235, 1)",
                 }
             },
             {
@@ -241,7 +242,6 @@ class AppLayout extends Route {
                     "--window_close_button_hover": "rgba(255, 69, 58, 1)",
                     "--window_maximize_button_hover": "rgba(48, 209, 88, 1)",
                     "--window_minimize_button_hover": "rgba(82, 158, 244, 1)",
-                    "--test": "#fff"
                 }
             },
             {
