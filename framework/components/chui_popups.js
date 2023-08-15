@@ -31,9 +31,10 @@ class Popup {
                     "display": "flex",
                     "flex-direction": "column",
                     "border-radius": "var(--border_radius)",
-                    "border": "1px solid var(--border_main)",
                     "color": "var(--text_color)",
-                    "background": "var(--modal_background)"
+                    "background": "var(--modal_background)",
+                    "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
+                    "border": "1px solid var(--border_main)",
                 }
             },
             {
