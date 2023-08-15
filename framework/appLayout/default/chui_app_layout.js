@@ -175,9 +175,6 @@ class AppLayout extends Route {
                     "--margin": "6px",
                     "--scroll_bar_background": "rgb(190, 190, 190)",
                     // Управление окнами
-                    "--window_close_button": "rgba(255, 59, 48, 0.7)",
-                    "--window_maximize_button": "rgba(52, 199, 89, 0.7)",
-                    "--window_minimize_button": "rgba(38, 136, 235, 0.7)",
                     "--window_close_button_hover": "rgba(255, 59, 48, 1)",
                     "--window_maximize_button_hover": "rgba(52, 199, 89, 1)",
                     "--window_minimize_button_hover": "rgba(38, 136, 235, 1)",
@@ -239,9 +236,6 @@ class AppLayout extends Route {
                     "--disable_color": "#e9ecef",
                     "--scroll_bar_background": "rgb(75, 75, 75)",
                     // Управление окнами
-                    "--window_close_button": "rgba(255, 69, 58, 0.7)",
-                    "--window_maximize_button": "rgba(48, 209, 88, 0.7)",
-                    "--window_minimize_button": "rgba(82, 158, 244, 0.7)",
                     "--window_close_button_hover": "rgba(255, 69, 58, 1)",
                     "--window_maximize_button_hover": "rgba(48, 209, 88, 1)",
                     "--window_minimize_button_hover": "rgba(82, 158, 244, 1)",
@@ -701,12 +695,18 @@ class AppLayout extends Route {
                     "height": "max-content",
                     "width": "max-content",
                     "border-radius": "100%",
-                    "padding": "5px",
+                    "padding": "3px",
                     "margin": "2px",
-                    "font-size": "16pt",
-                    "background": "var(--window_minimize_button)",
+                    "background": "var(--button_background)",
                     "color": "var(--text_color)",
-                    "-webkit-app-region": "no-drag"
+                    "-webkit-app-region": "no-drag",
+                    "border": "1px solid var(--border_background_1)",
+                }
+            },
+            {
+                name: "window_minimize_button chui_icon",
+                style: {
+                    "color": "transparent"
                 }
             },
             {
@@ -729,12 +729,18 @@ class AppLayout extends Route {
                     "height": "max-content",
                     "width": "max-content",
                     "border-radius": "100%",
-                    "padding": "3px",
+                    "padding": "1px",
                     "margin": "2px",
-                    "font-size": "16pt",
-                    "background": "var(--window_close_button)",
+                    "background": "var(--button_background)",
                     "color": "var(--text_color)",
                     "-webkit-app-region": "no-drag",
+                    "border": "1px solid var(--border_background_1)",
+                }
+            },
+            {
+                name: "window_close_button chui_icon",
+                style: {
+                    "color": "transparent"
                 }
             },
             {
@@ -757,12 +763,18 @@ class AppLayout extends Route {
                     "height": "max-content",
                     "width": "max-content",
                     "border-radius": "100%",
-                    "padding": "3px",
+                    "padding": "1px",
                     "margin": "2px",
-                    "font-size": "16pt",
-                    "background": "var(--window_maximize_button)",
+                    "background": "var(--button_background)",
                     "color": "var(--text_color)",
-                    "-webkit-app-region": "no-drag"
+                    "-webkit-app-region": "no-drag",
+                    "border": "1px solid var(--border_background_1)",
+                }
+            },
+            {
+                name: "window_maximize_button chui_icon",
+                style: {
+                    "color": "transparent"
                 }
             },
             {
@@ -948,25 +960,25 @@ class AppLayout extends Route {
         header_first_test.appendChild(this.#header_right_box)
 
         // Свернуть
-        this.#window_minimize_button.innerHTML = new Icon(Icons.ACTIONS.MINIMIZE, "10px").getHTML();
+        this.#window_minimize_button.innerHTML = new Icon(Icons.ACTIONS.MINIMIZE, "13px").getHTML();
         this.#window_minimize_button.addEventListener("click", () => {
             require("@electron/remote").getCurrentWindow().minimize();
         })
 
         // Развернуть на весь экран
-        this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "14px").getHTML();
+        this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "17px").getHTML();
         this.#window_maximize_button.addEventListener("click", () => {
             if (require("@electron/remote").getCurrentWindow().isMaximized()) {
-                this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "14px").getHTML();
+                this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "17px").getHTML();
                 require("@electron/remote").getCurrentWindow().restore();
             } else {
-                this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN_EXIT, "14px").getHTML();
+                this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN_EXIT, "17px").getHTML();
                 require("@electron/remote").getCurrentWindow().maximize();
             }
         })
 
         // Закрыть
-        this.#window_close_button.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "14px").getHTML();
+        this.#window_close_button.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "17px").getHTML();
         this.#window_close_button.addEventListener("click", () => {
             if (this.#windowHideOnClose) {
                 require("@electron/remote").getCurrentWindow().hide();
