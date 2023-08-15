@@ -79,6 +79,7 @@ class Select {
                     "flex-direction": "column",
                     "z-index": "1",
                     "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
+                    "border": "1px solid var(--border_main)",
                 }
             },
             {

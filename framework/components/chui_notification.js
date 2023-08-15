@@ -34,13 +34,12 @@ class Notification {
                     "backdrop-filter": "var(--global_blur)",
                     "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
                     "z-index": "1002",
-                    //"border": "1px solid var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                 }
             },
             {
                 name: ".notification_warning",
                 style: {
-                    //"border": "1px solid var(--border_main)",
                     "background": "var(--badge_warning_back)",
                     "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
                 }
@@ -48,7 +47,6 @@ class Notification {
             {
                 name: ".notification_error",
                 style: {
-                    //"border": "1px solid var(--border_main)",
                     "background": "var(--badge_error_back)",
                     "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
                 }
@@ -56,7 +54,6 @@ class Notification {
             {
                 name: ".notification_success",
                 style: {
-                    //"border": "1px solid var(--border_main)",
                     "background": "var(--badge_success_back)",
                     "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
                 }
