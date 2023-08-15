@@ -120,7 +120,6 @@ class Select {
                     "margin": "var(--margin)",
                     "font-size": "var(--font_labels_size)",
                     "font-weight":"500",
-                    "line-height":"1",
                     "color": "var(--text_color)"
                 }
             },
@@ -145,7 +144,6 @@ class Select {
                     "text-align": "start",
                     "border": "none",
                     "font-size": "var(--font_default_size)",
-                    "line-height":"1",
                     "display": "block",
                     "outline": "none",
                 }
@@ -159,7 +157,6 @@ class Select {
                     "margin": "var(--margin)",
                     "font-size": "10pt",
                     "font-weight":"500",
-                    "line-height":"1",
                     "color": "var(--text_color_disabled)"
                 }
             }

@@ -74,7 +74,6 @@ class FileInput {
                     "text-align": "start",
                     "border": "0",
                     "font-size": "12pt",
-                    "line-height":"1",
                 }
             },
             {
@@ -86,7 +85,6 @@ class FileInput {
                     "margin": "var(--margin)",
                     "font-size": "10pt",
                     "font-weight":"500",
-                    "line-height":"1",
                     "color": "var(--text_color_disabled)"
                 }
             },
@@ -100,7 +98,6 @@ class FileInput {
                     "color": "var(--text_color)",
                     "border": "0",
                     "font-size": "12pt",
-                    "line-height":"1",
                 }
             },
             {
@@ -111,7 +108,6 @@ class FileInput {
                     "margin": "var(--margin)",
                     "font-size": "10pt",
                     "font-weight":"500",
-                    "line-height":"1",
                     "color": "var(--text_color)"
                 }
             },

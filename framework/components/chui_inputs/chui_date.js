@@ -141,7 +141,6 @@ class DateInput {
                     "margin": "var(--margin)",
                     "font-size": "10pt",
                     "font-weight":"500",
-                    "line-height":"1",
                     "color": "var(--text_color)"
                 }
             },
@@ -163,8 +162,7 @@ class DateInput {
                     "width": "max-content",
                     "margin": "var(--margin)",
                     "font-size": "10pt",
-                    "font-weight":"500",
-                    "line-height":"1",
+                    "font-weight":"500"
                 }
             },
             {

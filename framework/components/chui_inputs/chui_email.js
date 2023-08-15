@@ -49,8 +49,7 @@ class EmailInput {
                     "color": "var(--text_color)",
                     "text-align": "start",
                     "border": "0",
-                    "font-size": "12pt",
-                    "line-height":"1",
+                    "font-size": "12pt"
                 }
             },
             {
@@ -67,7 +66,6 @@ class EmailInput {
                     "margin": "var(--margin)",
                     "font-size": "10pt",
                     "font-weight":"500",
-                    "line-height":"1",
                     "color": "var(--text_color)"
                 }
             },
@@ -84,7 +82,6 @@ class EmailInput {
                     "text-align": "start",
                     "border": "0",
                     "font-size": "12pt",
-                    "line-height":"1",
                 }
             },
             {
@@ -96,7 +93,6 @@ class EmailInput {
                     "margin": "var(--margin)",
                     "font-size": "10pt",
                     "font-weight":"500",
-                    "line-height":"1",
                     "color": "var(--text_color_disabled)"
                 }
             },

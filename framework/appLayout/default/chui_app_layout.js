@@ -84,7 +84,6 @@ class AppLayout extends Route {
                     "word-spacing": "0.33px",
                     "font-family": "chui_Inter",
                     "direction": "ltr",
-                    "line-height": "normal",
                     "user-select": "none",
                     "outline": "none",
                     "transition": "all .22s",

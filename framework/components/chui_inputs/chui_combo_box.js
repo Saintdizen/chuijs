@@ -88,7 +88,6 @@ class ComboBox {
                     "margin": "var(--margin)",
                     "font-size": "10pt",
                     "font-weight":"500",
-                    "line-height":"1",
                     "color": "var(--text_color)"
                 }
             },
@@ -134,7 +133,6 @@ class ComboBox {
                     "background": "transparent",
                     "color": "var(--text_color_disabled)",
                     "text-align": "start",
-                    "line-height":"1",
                     "width": "100%",
                     "margin": "0px",
                     "padding": "6px 0px 6px 10px",
@@ -151,7 +149,6 @@ class ComboBox {
                     "margin": "var(--margin)",
                     "font-size": "10pt",
                     "font-weight":"500",
-                    "line-height":"1",
                     "color": "var(--text_color_disabled)"
                 }
             }

@@ -20,7 +20,6 @@ class Label {
                     "margin": "var(--margin)",
                     "font-size": "12pt",
                     "font-weight":"500",
-                    "line-height":"1",
                     "color": "var(--text_color)"
                 }
             },

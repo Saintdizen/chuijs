@@ -14,7 +14,6 @@ class Accordion {
                     "width": "max-content",
                     "font-size": "12pt",
                     "font-weight":"500",
-                    "line-height":"1",
                     "border": "none",
                     "margin": "var(--margin)",
                 }
@@ -28,7 +27,6 @@ class Accordion {
                     "width": "-webkit-fill-available",
                     "font-size": "12pt",
                     "font-weight":"500",
-                    "line-height":"1",
                     "border-radius": "var(--border_radius)",
                     "border": "none",
                 }

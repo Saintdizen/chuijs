@@ -27,7 +27,7 @@ class FieldSet {
                 style: {
                     "height": "-webkit-fill-available",
                     "width": "-webkit-fill-available",
-                    "border": "1px dashed var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "border-radius": "var(--border_radius)",
                     "padding": "0px 8px 8px 8px",
                     "display": "flex",
@@ -38,11 +38,10 @@ class FieldSet {
                 style: {
                     "color": "var(--button_text_color)",
                     //"background": "var(--input_background)",
-                    "padding": "4px 8px",
+                    "padding": "6px 10px",
                     "font-size": "10pt",
                     "font-weight":"500",
-                    "line-height":"1",
-                    "border": "1px dashed var(--border_main)",
+                    "border": "1px solid var(--border_main)",
                     "border-radius": "var(--border_radius)",
                 }
             }

@@ -10,7 +10,6 @@ class Icon {
                     "font-style": "normal",
                     "font-size": "20px",
                     "display": "inherit",
-                    "line-height": "1",
                     "text-transform": "none",
                     "letter-spacing": "normal",
                     "word-wrap": "normal",
