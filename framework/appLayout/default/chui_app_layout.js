@@ -91,7 +91,7 @@ class AppLayout extends Route {
                     "position": "relative",
                     "-webkit-font-smoothing": "antialiased",
                     "text-rendering": "geometricPrecision",
-                    "-webkit-text-stroke": ".01em",
+                    "-webkit-text-stroke": ".001em",
                 }
             },
             {
@@ -108,7 +108,7 @@ class AppLayout extends Route {
                     "position": "relative",
                     "-webkit-font-smoothing": "antialiased",
                     "text-rendering": "geometricPrecision",
-                    "-webkit-text-stroke": ".01em",
+                    "-webkit-text-stroke": ".001em",
                 }
             },
             {
