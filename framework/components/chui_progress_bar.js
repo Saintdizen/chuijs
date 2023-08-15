@@ -24,13 +24,14 @@ class ProgressBar {
                     "text-align": "start",
                     "margin": "var(--margin)",
                     "width": "-webkit-fill-available",
-                    "height": "15px"
+                    "height": "15px",
+                    "border": "1px solid var(--border_main)",
                 }
             },
             {
                 name: "progress::-webkit-progress-bar",
                 style: {
-                    "background": "var(--input_background)",
+                    "background": "var(--background_color_1)",
                     "border-radius": "50px",
                     "border": "none",
                 }

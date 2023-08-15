@@ -123,7 +123,7 @@ class AppLayout extends Route {
                     "--header_background": "rgba(205, 205, 205, 0.4)",
                     "--header_background_dropdown": "rgba(219, 219, 219, 1)",
                     "--center_background": "rgba(235, 235, 235, 1)",
-                    "--border_main": "rgba(205, 205, 205, 1)",
+                    "--border_main": "rgba(75, 75, 75, 0.2)",
                     //Боковое меню
                     "--app_menu_background": "rgba(205, 205, 205, 0.4)",
                     //Диалоговое окно
@@ -135,7 +135,7 @@ class AppLayout extends Route {
                     "--button_text_color": "rgba(20, 142, 255, 1)",
                     "--button_box_shadow_normal": "0px 0px 1px 1px var(--input_background)",
                     "--button_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
-                    "--button_border": "rgba(205, 205, 205, 0.7)",
+                    "--button_border": "rgba(75, 75, 75, 0.1)",
                     //Поля ввода
                     "--input_background": "rgba(219, 219, 219, 0.7)",
                     "--input_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
@@ -181,6 +181,9 @@ class AppLayout extends Route {
                     "--window_close_button_hover": "rgba(255, 59, 48, 1)",
                     "--window_maximize_button_hover": "rgba(52, 199, 89, 1)",
                     "--window_minimize_button_hover": "rgba(38, 136, 235, 1)",
+                    // Тестовые цвета
+                    "--background_color_1": "rgba(219, 219, 219, 0.35)",
+                    "--border_background_1": "rgba(75, 75, 75, 0.2)",
                 }
             },
             {
@@ -192,7 +195,7 @@ class AppLayout extends Route {
                     "--header_background": "rgba(75, 75, 75, 0.4)",
                     "--header_background_dropdown": "rgba(65, 65, 65, 1)",
                     "--center_background": "rgba(44, 44, 44, 1)",
-                    "--border_main": "rgba(75, 75, 75, 1)",
+                    "--border_main": "rgba(205, 205, 205, 0.2)",
                     //Боковое меню
                     "--app_menu_background": "rgba(75, 75, 75, 0.4)",
                     //Диалоговое окно
@@ -204,7 +207,7 @@ class AppLayout extends Route {
                     "--button_text_color": "rgba(30, 152, 255, 1)",
                     "--button_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
                     "--button_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
-                    "--button_border": "rgba(75, 75, 75, 0.7)",
+                    "--button_border": "rgba(205, 205, 205, 0.1)",
                     //Поля ввода
                     "--input_background": "rgba(65, 65, 65, 0.7)",
                     "--input_box_shadow_normal": "0px 0px 1px 1px var(--input_background)",
@@ -242,6 +245,9 @@ class AppLayout extends Route {
                     "--window_close_button_hover": "rgba(255, 69, 58, 1)",
                     "--window_maximize_button_hover": "rgba(48, 209, 88, 1)",
                     "--window_minimize_button_hover": "rgba(82, 158, 244, 1)",
+                    // Тестовые цвета
+                    "--background_color_1": "rgba(65, 65, 65, 0.35)",
+                    "--border_background_1": "rgba(205, 205, 205, 0.2)",
                 }
             },
             {
@@ -316,7 +322,7 @@ class AppLayout extends Route {
                     "width": "-webkit-fill-available",
                     "height": "-webkit-fill-available",
                     "background": "var(--center_background)",
-                    "border": "1px solid var(--border_main)",
+                    "border": "1px solid var(--border_background_1)",
                     "border-radius": "var(--border_radius)",
                 }
             },
@@ -327,16 +333,16 @@ class AppLayout extends Route {
                     "position": "absolute",
                     "top": "0",
                     "display": "flex",
+                    "-webkit-app-region": "no-drag",
+                    "z-index": "999",
+                    "flex-direction": "column",
+                    "border-top-left-radius": "6px",
+                    "border-top-right-radius": "6px",
                     "align-items": "start",
                     "background": "transparent",
                     "backdrop-filter": "var(--global_blur)",
                     "justify-content": "space-between",
-                    "-webkit-app-region": "no-drag",
-                    "z-index": "999",
                     "border-bottom": "1px solid transparent",
-                    "flex-direction": "column",
-                    "border-top-left-radius": "6px",
-                    "border-top-right-radius": "6px"
                 }
             },
             {
@@ -395,19 +401,19 @@ class AppLayout extends Route {
                     "display": "flex",
                     "flex-direction": "column",
                     "position": "fixed",
-                    "background": "var(--app_menu_background)",
                     "justify-content": "flex-start",
                     "align-items": "flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    "backdrop-filter": "var(--global_blur)",
-                    "background-blend-mode": "overlay",
                     "-webkit-app-region": "no-drag",
                     "margin": "56px 10px 10px 10px",
                     "border-radius": "var(--border_radius)",
                     "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
                     "box-sizing": "border-box",
-                    "border": "1px solid var(--border_main)",
+                    "border": "1px solid var(--border_background_1)",
+                    "background": "var(--app_menu_background)",
+                    "backdrop-filter": "var(--global_blur)",
+                    "width": "-webkit-fill-available"
                 }
             },
             {
@@ -416,19 +422,19 @@ class AppLayout extends Route {
                     "display": "flex",
                     "flex-direction": "column",
                     "position": "fixed",
-                    "background": "var(--app_menu_background)",
                     "justify-content": "flex-start",
                     "align-items": "flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    "backdrop-filter": "var(--global_blur)",
-                    "background-blend-mode": "overlay",
                     "-webkit-app-region": "no-drag",
                     "margin": "56px 10px 10px 10px",
                     "border-radius": "var(--border_radius)",
                     "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
                     "box-sizing": "border-box",
-                    "border": "1px solid var(--border_main)",
+                    "background": "var(--app_menu_background)",
+                    "backdrop-filter": "var(--global_blur)",
+                    "width": "-webkit-fill-available",
+                    "border": "1px solid var(--border_background_1)",
                 }
             },
             {
@@ -442,7 +448,7 @@ class AppLayout extends Route {
                     "width": "-webkit-fill-available",
                     "-webkit-app-region": "no-drag",
                     "background": "transparent",
-                    "border-top": "1px solid var(--border_main)",
+                    "border-top": "1px solid var(--border_background_1)",
                 }
             },
             {
@@ -572,7 +578,7 @@ class AppLayout extends Route {
                     "height": "max-content",
                     "justify-content": "center",
                     "align-items": "center",
-                    "border-top": "1px solid var(--border_main)",
+                    "border-top": "1px solid var(--border_background_1)",
                 }
             },
             {
@@ -809,10 +815,8 @@ class AppLayout extends Route {
         });
 
         this.#notification_box_controls.appendChild(remove_button.set())
-
         this.#notification_box.appendChild(this.#notification_box_main)
         this.#notification_box.appendChild(this.#notification_box_controls)
-
         this.#notification_box_main.id = 'chui_notification_box';
         this.#notification_box.style.top = `calc(${header.style.height})`;
         this.#notification_box.style.width = `${this.#notification_box_width}px`;
@@ -897,8 +901,8 @@ class AppLayout extends Route {
         center.onscroll = () => {
             if (center.scrollTop > 25) {
                 header.style.background = 'var(--header_background)'
-                header.style.boxShadow = "rgba(0, 0, 0, 0.2) 0px 2px 10px 2px"
-                header.style.borderBottom = "1px solid var(--border_main)"
+                header.style.boxShadow = "0 2px 10px 2px rgb(0 0 0 / 20%)"
+                header.style.borderBottom = "1px solid var(--border_background_1)"
             } else {
                 header.removeAttribute('style')
             }
@@ -931,6 +935,7 @@ class AppLayout extends Route {
         this.#applayout.appendChild(this.#app_menu)
         this.#app_menu.appendChild(this.#route_views)
         this.#app_menu.appendChild(this.#dark_mode)
+
         // Шапка левый блок
         this.#header_left_box.appendChild(this.#menu_button);
         this.#header_left_box.appendChild(page_name)

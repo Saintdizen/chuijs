@@ -28,7 +28,7 @@ class Accordion {
                     "font-size": "12pt",
                     "font-weight":"500",
                     "border-radius": "var(--border_radius)",
-                    "border": "none",
+                    "border": "1px solid var(--border_main)",
                 }
             },
             {
@@ -50,7 +50,7 @@ class Accordion {
             {
                 name: "accordion_panel",
                 style: {
-                    "background": "var(--button_background)",
+                    "background": "var(--background_color_1)",
                     "padding": "0px 12px",
                     "display": "block",
                     "overflow": "hidden",
@@ -99,7 +99,7 @@ class Accordion {
             {
                 name: ".accordion_active chui_icon",
                 style: {
-                    "background": "var(--blue_prime_background)",
+                    "background": "transparent",
                     "color": "var(--text_color_hover)"
                 }
             }

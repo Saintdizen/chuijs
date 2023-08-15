@@ -28,7 +28,7 @@ class MediaPage extends Page {
         )
         this.add(audio)
 
-        /*let video = new VideoPlayer({
+        let video = new VideoPlayer({
             autoplay: true,
             height: "auto",
             width: "450px"
@@ -53,7 +53,7 @@ class MediaPage extends Page {
                 }
             ]
         )
-        this.add(video)*/
+        //this.add(video)
     }
 }
 
