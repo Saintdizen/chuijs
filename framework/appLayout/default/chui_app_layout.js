@@ -713,6 +713,7 @@ class AppLayout extends Route {
                 name: "window_minimize_button:hover",
                 style: {
                     "background": "var(--window_minimize_button_hover)",
+                    "border": "1px solid var(--window_minimize_button_hover)",
                 }
             },
             {
@@ -747,6 +748,7 @@ class AppLayout extends Route {
                 name: "window_close_button:hover",
                 style: {
                     "background": "var(--window_close_button_hover)",
+                    "border": "1px solid var(--window_close_button_hover)",
                 }
             },
             {
@@ -764,7 +766,7 @@ class AppLayout extends Route {
                     "width": "max-content",
                     "border-radius": "100%",
                     "padding": "1px",
-                    "margin": "2px",
+                    "margin": "2px 3px",
                     "background": "var(--button_background)",
                     "color": "var(--text_color)",
                     "-webkit-app-region": "no-drag",
@@ -781,6 +783,7 @@ class AppLayout extends Route {
                 name: "window_maximize_button:hover",
                 style: {
                     "background": "var(--window_maximize_button_hover)",
+                    "border": "1px solid var(--window_maximize_button_hover)",
                 }
             },
             {
