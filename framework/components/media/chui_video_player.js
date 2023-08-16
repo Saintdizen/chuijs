@@ -44,7 +44,8 @@ class VideoPlayer {
                     "flex-direction": "column",
                     "border-radius": "var(--border_radius)",
                     "--seek-before-width": "0%",
-                    "--volume-before-width": "0%"
+                    "--volume-before-width": "0%",
+                    "border": "1px solid var(--border_background_1)",
                 }
             },
             {
@@ -55,10 +56,11 @@ class VideoPlayer {
                     "width": "-webkit-fill-available",
                     "bottom": "0",
                     "backdrop-filter": "var(--global_blur)",
-                    "border-radius": "var(--border_radius)",
+                    "border-bottom-right-radius": "var(--border_radius)",
+                    "border-bottom-left-radius": "var(--border_radius)",
                     "background": "var(--header_background)",
                     "opacity": "0",
-                    "margin": "6px"
+                    "border-top": "1px solid var(--border_background_1)",
                 }
             },
             // Блок информация

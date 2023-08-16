@@ -50,7 +50,8 @@ class AudioPlayer {
                     "width": "-webkit-fill-available",
                     "backdrop-filter": "var(--global_blur)",
                     "border-radius": "var(--border_radius)",
-                    "background": "var(--header_background)"
+                    "background": "var(--header_background)",
+                    "border": "1px solid var(--border_background_1)",
                 }
             },
             // Блок информация
