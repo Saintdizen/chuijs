@@ -67,10 +67,14 @@ class AppLayout extends Route {
     #dark_mode_togle = new Toggle();
     #menu_button = document.createElement('app_menu_button');
     #auto_close = false;
+    #disable_app_menu = false;
     #not_duplicate_page = false;
     //
     #windowControlsPositionLeft = undefined;
     #windowHideOnClose = false;
+    //
+    #icon_light = undefined;
+    #icon_dark = undefined;
     //
     constructor() {
         super();
@@ -317,7 +321,7 @@ class AppLayout extends Route {
                     "height": "-webkit-fill-available",
                     "background": "var(--center_background)",
                     "border": "1px solid var(--border_background_1)",
-                    "border-radius": "var(--border_radius)",
+                    //"border-radius": "var(--border_radius)",
                 }
             },
             {
@@ -355,7 +359,6 @@ class AppLayout extends Route {
                     "width": "-webkit-fill-available",
                     "height": "-webkit-fill-available",
                     "padding-top": "44px",
-                    "margin": "0px 0px 6px 0px",
                     "overflow": "hidden hidden"
                 }
             },
@@ -670,6 +673,7 @@ class AppLayout extends Route {
                 style: {
                     "display": "flex",
                     "width": "-webkit-fill-available",
+                    "align-items": "center"
                 }
             },
             {
@@ -854,14 +858,14 @@ class AppLayout extends Route {
             }
             store.set("dark", e.target.checked)
         })
-        let icon_light = new Icon(Icons.DEVICE.LIGHT_MODE, "20px", "").set();
-        icon_light.style.marginRight = "6px";
-        let icon_dark = new Icon(Icons.DEVICE.DARK_MODE, "20px", "").set();
-        icon_dark.style.marginLeft = "6px";
+        this.#icon_light = new Icon(Icons.DEVICE.LIGHT_MODE, "20px", "").set();
+        this.#icon_light.style.marginRight = "6px";
+        this.#icon_dark = new Icon(Icons.DEVICE.DARK_MODE, "20px", "").set();
+        this.#icon_dark.style.marginLeft = "6px";
 
-        this.#dark_mode.appendChild(icon_light)
+        this.#dark_mode.appendChild(this.#icon_light)
         this.#dark_mode.appendChild(this.#dark_mode_togle.set())
-        this.#dark_mode.appendChild(icon_dark)
+        this.#dark_mode.appendChild(this.#icon_dark)
         this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
 
         this.#menu_button.addEventListener("click", () => {
@@ -1015,6 +1019,24 @@ class AppLayout extends Route {
                 e.sender.send("updateInstallConfirm", confirm_res)
             }
         })
+    }
+
+    disableAppMenu() {
+        this.#header_left_box.removeChild(this.#menu_button);
+        for (let child of this.#header_left_box.children) {
+            child.remove()
+        }
+        let test = document.createElement("test1")
+        test.style.display = "flex"
+        test.style.alignItems = "center"
+        test.style.justifyContent = "center"
+        test.style.height = "-webkit-fill-available"
+        test.style.margin = "0px 6px"
+
+        test.appendChild(this.#icon_light)
+        test.appendChild(this.#dark_mode_togle.set())
+        test.appendChild(this.#icon_dark)
+        this.#header_left_box.appendChild(test)
     }
 
     setHideOnClose(boolean = Boolean()) {

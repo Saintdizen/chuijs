@@ -4,7 +4,7 @@ class WebViewsPage extends Page {
     constructor() {
         super();
         this.setTitle('Веб бразуер');
-        this.setMain(false)
+        this.setMain(true)
         this.setFullWidth()
         this.setFullHeight()
         this.disablePadding()

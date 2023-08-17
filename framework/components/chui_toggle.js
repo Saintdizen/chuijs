@@ -11,7 +11,8 @@ class Toggle {
                     "width": "50px",
                     "height": "25px",
                     "border": "none",
-                    "border-radius": "50px"
+                    "border-radius": "50px",
+                    "-webkit-app-region": "no-drag",
                 }
             },
             {
