@@ -183,7 +183,8 @@ class AppLayout extends Route {
                     "--background_color_1": "rgba(219, 219, 219, 0.35)",
                     "--border_background_1": "rgba(75, 75, 75, 0.2)",
                     //
-                    "--main_padding": "7px 11px"
+                    "--main_padding": "6px 12px",
+                    "--test_padding": "6px"
                 }
             },
             {
@@ -272,7 +273,7 @@ class AppLayout extends Route {
             {
                 name: "main_center_block::-webkit-scrollbar-track",
                 style: {
-                    "margin-top": "47px",
+                    "margin-top": "44px",
                 }
             },
             {
@@ -353,7 +354,7 @@ class AppLayout extends Route {
                 style: {
                     "width": "-webkit-fill-available",
                     "height": "-webkit-fill-available",
-                    "padding-top": "48px",
+                    "padding-top": "44px",
                     "margin": "0",
                     "overflow": "hidden hidden"
                 }
@@ -399,7 +400,7 @@ class AppLayout extends Route {
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
                     "-webkit-app-region": "no-drag",
-                    "margin": "56px 10px 10px 10px",
+                    "margin": "56px 12px 12px 12px",
                     "border-radius": "var(--border_radius)",
                     "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
                     "border": "1px solid var(--border_background_1)",
@@ -419,7 +420,7 @@ class AppLayout extends Route {
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
                     "-webkit-app-region": "no-drag",
-                    "margin": "56px 10px 10px 10px",
+                    "margin": "56px 12px 12px 12px",
                     "border-radius": "var(--border_radius)",
                     "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
                     "background": "var(--app_menu_background)",
@@ -450,7 +451,7 @@ class AppLayout extends Route {
                     "overflow": "hidden hidden",
                     "height": "-webkit-fill-available",
                     "width": "-webkit-fill-available",
-                    "padding": "6px",
+                    "padding": "var(--test_padding)",
                     "-webkit-app-region": "no-drag"
                 }
             },
@@ -469,7 +470,7 @@ class AppLayout extends Route {
                     "width": "max-content",
                     "border": "none",
                     "border-radius": "var(--border_radius)",
-                    "padding": "6px",
+                    "padding": "var(--test_padding)",
                     "margin": "var(--margin)",
                     "font-size": "22pt",
                     "background": "transparent",
@@ -510,7 +511,7 @@ class AppLayout extends Route {
                     "width": "max-content",
                     "border": "none",
                     "border-radius": "var(--border_radius)",
-                    "padding": "6px",
+                    "padding": "var(--test_padding)",
                     "margin": "var(--margin)",
                     "font-size": "22pt",
                     "background": "transparent",
@@ -547,7 +548,7 @@ class AppLayout extends Route {
                 style: {
                     "display": "flex",
                     "flex-direction": "column",
-                    "padding": "6px",
+                    "padding": "var(--test_padding)",
                     "width": "-webkit-fill-available",
                     "height": "-webkit-fill-available",
                     "overflow": "hidden hidden",
@@ -564,7 +565,7 @@ class AppLayout extends Route {
                 name: "dark_mode",
                 style: {
                     "display": "flex",
-                    "padding": "6px",
+                    "padding": "var(--test_padding)",
                     "width": "-webkit-fill-available",
                     "height": "max-content",
                     "justify-content": "center",
@@ -576,7 +577,7 @@ class AppLayout extends Route {
                 name: ".class_dark_mode",
                 style: {
                     "display": "flex",
-                    "padding": "6px",
+                    "padding": "var(--test_padding)",
                     "width": "max-content",
                     "height": "max-content",
                     "justify-content": "center",
@@ -592,7 +593,7 @@ class AppLayout extends Route {
                     "width": "max-content",
                     "border": "none",
                     "border-radius": "var(--border_radius)",
-                    "padding": "6px",
+                    "padding": "var(--test_padding)",
                     "margin": "var(--margin) var(--margin) var(--margin) 0px",
                     "font-size": "12pt",
                     "font-weight": "500",
@@ -611,7 +612,7 @@ class AppLayout extends Route {
                     "width": "-webkit-fill-available",
                     "border": "none",
                     "border-radius": "var(--border_radius)",
-                    "padding": "6px",
+                    "padding": "var(--test_padding)",
                     "margin": "var(--margin)",
                     "font-size": "12pt",
                     "font-weight": "500",
@@ -621,7 +622,7 @@ class AppLayout extends Route {
             {
                 name: "route:hover",
                 style: {
-                    "padding": "6px 12px",
+                    "padding": "var(--test_padding) 12px",
                     "background": "var(--blue_prime_background)",
                 }
             },
@@ -641,7 +642,7 @@ class AppLayout extends Route {
             {
                 name: ".route_active",
                 style: {
-                    "padding": "6px 12px",
+                    "padding": "var(--test_padding) 12px",
                     "background": "var(--blue_prime_background)",
                     "color": "var(--text_color_hover)",
                 }
@@ -692,7 +693,7 @@ class AppLayout extends Route {
                     "height": "max-content",
                     "width": "max-content",
                     "border-radius": "100%",
-                    "padding": "3px",
+                    "padding": "4px",
                     "margin": "2px",
                     "background": "var(--button_background)",
                     "color": "var(--text_color)",
@@ -727,7 +728,7 @@ class AppLayout extends Route {
                     "height": "max-content",
                     "width": "max-content",
                     "border-radius": "100%",
-                    "padding": "1px",
+                    "padding": "2px",
                     "margin": "2px",
                     "background": "var(--button_background)",
                     "color": "var(--text_color)",
@@ -762,7 +763,7 @@ class AppLayout extends Route {
                     "height": "max-content",
                     "width": "max-content",
                     "border-radius": "100%",
-                    "padding": "1px",
+                    "padding": "2px",
                     "margin": "2px 3px",
                     "background": "var(--button_background)",
                     "color": "var(--text_color)",
@@ -1023,13 +1024,13 @@ class AppLayout extends Route {
     setWindowControlsPositionLeft(position = Boolean()) {
         this.#windowControlsPositionLeft = position;
         if (this.#windowControlsPositionLeft) {
-            this.#window_control_box.style.marginLeft = '10px';
+            this.#window_control_box.style.marginLeft = '11px';
             this.#window_control_box.appendChild(this.#window_close_button)
             this.#window_control_box.appendChild(this.#window_maximize_button)
             this.#window_control_box.appendChild(this.#window_minimize_button)
             header_first_test.insertBefore(this.#window_control_box, header_first_test.firstChild)
         } else {
-            this.#window_control_box.style.marginRight = '10px';
+            this.#window_control_box.style.marginRight = '11px';
             this.#window_control_box.appendChild(this.#window_minimize_button)
             this.#window_control_box.appendChild(this.#window_maximize_button)
             this.#window_control_box.appendChild(this.#window_close_button)
@@ -1218,7 +1219,7 @@ class UserProfile {
                     "width": "max-content",
                     "color": "var(--text_color)",
                     "border-radius": "var(--border_radius)",
-                    "padding": "6px 12px",
+                    "padding": "var(--main_padding)",
                     "margin": "var(--margin) 0px var(--margin) var(--margin)",
                     "font-weight": "500"
                 }
@@ -1226,13 +1227,13 @@ class UserProfile {
             {
                 name: "user_dropdown",
                 style: {
-                    "margin-top": "44px",
+                    "margin-top": "43px",
                     "display": "none",
                     "position": "absolute",
                     "background": "var(--header_background_dropdown)",
                     "color": "var(--text_color)",
                     "border-radius": "var(--border_radius)",
-                    "padding": "6px",
+                    "padding": "var(--test_padding)",
                     "z-index": "1",
                     "right": "0",
                     "min-width": "165px",
@@ -1249,7 +1250,7 @@ class UserProfile {
                     "font-weight": "400",
                     "cursor": "pointer",
                     "text-align": "start",
-                    "padding": "6px",
+                    "padding": "var(--test_padding)",
                     "border-radius": "var(--border_radius)"
                 }
             },
@@ -1257,7 +1258,7 @@ class UserProfile {
                 name: "user_dropdown user_item:hover",
                 style: {
                     "background-color": "#ddd",
-                    "padding": "6px 12px",
+                    "padding": "var(--test_padding) 12px",
                     "background": "var(--blue_prime_background)",
                     "color": "var(--text_color_hover)",
                 }
@@ -1282,7 +1283,7 @@ class UserProfile {
                     "width": "80px",
                     "height": "80px",
                     "display": "flex",
-                    "padding": "6px",
+                    "padding": "var(--test_padding)",
                     "border-radius": "50%",
                     "align-items": "center",
                     "justify-content": "center",
@@ -1379,7 +1380,7 @@ class HeaderDialog {
                     "width": "max-content",
                     "border": "none",
                     "border-radius": "var(--border_radius)",
-                    "padding": "6px 12px",
+                    "padding": "var(--main_padding)",
                     "margin": "var(--margin) 0px var(--margin) var(--margin)",
                     "font-size": "12pt",
                     "background": "transparent",
@@ -1509,7 +1510,7 @@ class HeaderButton {
                     "width": "max-content",
                     "border": "none",
                     "border-radius": "var(--border_radius)",
-                    "padding": "6px 12px",
+                    "padding": "var(--test_padding) 12px",
                     "margin": "var(--margin) 0px var(--margin) var(--margin)",
                     "font-size": "12pt",
                     "background": "transparent",

@@ -29,7 +29,7 @@ class FieldSet {
                     "width": "-webkit-fill-available",
                     "border": "1px solid var(--border_main)",
                     "border-radius": "var(--border_radius)",
-                    "padding": "0px 8px 8px 8px",
+                    "padding": "0px 6px 6px 6px",
                     "display": "flex",
                 }
             },
@@ -37,8 +37,7 @@ class FieldSet {
                 name: "legend",
                 style: {
                     "color": "var(--button_text_color)",
-                    //"background": "var(--input_background)",
-                    "padding": "6px 9px",
+                    "padding": "6px 12px",
                     "font-size": "10pt",
                     "font-weight":"400",
                     "border": "1px solid var(--border_main)",

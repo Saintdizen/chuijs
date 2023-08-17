@@ -16,19 +16,19 @@ class H {
             {
                 name: "h1, h2",
                 style: {
-                    "padding": "12px 7px",
+                    "padding": "12px 6px",
                 }
             },
             {
                 name: "h3, h4",
                 style: {
-                    "padding": "10px 7px",
+                    "padding": "10px 6px",
                 }
             },
             {
                 name: "h5, h6",
                 style: {
-                    "padding": "8px 7px",
+                    "padding": "8px 6px",
                 }
             }
         ], 'chUiJS_HX');

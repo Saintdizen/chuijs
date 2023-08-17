@@ -30,7 +30,7 @@ class Button {
                     "height": "max-content",
                     "width": "max-content",
                     "border-radius": "var(--border_radius)",
-                    "padding": "7px 11px",
+                    "padding": "var(--main_padding)",
                     "font-size": "12pt",
                     "font-weight": "400",
                     "background": "var(--button_background)",
@@ -122,16 +122,16 @@ class Button {
         if (options.title !== undefined && options.icon === undefined) {
             this.#button.appendChild(this.#button_text);
         } else if (options.title === undefined && options.icon !== undefined) {
-            this.#button.style.padding = "6px"
+            this.#button.style.padding = "var(--test_padding)"
             this.#button.appendChild(this.#button_icon);
         } else {
             if (options.reverse) {
                 this.#button.appendChild(this.#button_icon);
-                this.#button_text.style.marginLeft = "6px";
+                this.#button_text.style.marginLeft = "var(--test_padding)";
                 this.#button.appendChild(this.#button_text);
             } else {
                 this.#button.appendChild(this.#button_text);
-                this.#button_icon.style.marginLeft = "6px";
+                this.#button_icon.style.marginLeft = "var(--test_padding)";
                 this.#button.appendChild(this.#button_icon);
             }
         }

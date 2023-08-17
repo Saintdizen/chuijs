@@ -50,7 +50,7 @@ class SlideShow {
                     "font-size": "18px",
                     "user-select": "none",
                     "border-radius": "var(--border_radius)",
-                    "padding": "7px 12px",
+                    "padding": "var(--main_padding)",
                     "height": "-webkit-fill-available",
                     "display": "flex",
                     "align-items": "center",

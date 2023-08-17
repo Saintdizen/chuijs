@@ -29,7 +29,7 @@ class Notification {
                     "border-radius": "var(--border_radius)",
                     "margin": "var(--margin)",
                     "font-size": "12pt",
-                    "padding": "7px 11px",
+                    "padding": "var(--main_padding)",
                     "background": "var(--notification_background_popup)",
                     "backdrop-filter": "var(--global_blur)",
                     "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",

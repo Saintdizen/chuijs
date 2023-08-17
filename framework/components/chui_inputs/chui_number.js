@@ -37,7 +37,7 @@ class NumberInput {
                     "background": "var(--input_background)",
                     "align-items": "center",
                     "position": "relative",
-                    "padding": "7px 43px",
+                    "padding": "var(--test_padding) 43px",
                     "border": "1px solid var(--border_main)",
                 }
             },

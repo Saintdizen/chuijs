@@ -51,7 +51,7 @@ class Select {
                     "display": "block",
                     "outline": "none",
                     "margin": "0px",
-                    "padding": "7px 0px 7px 10px",
+                    "padding": "var(--test_padding) 0px var(--main_padding)",
                     "background": "transparent",
                     "color": "var(--text_color)",
                     "text-align": "start",
@@ -73,7 +73,7 @@ class Select {
                     "border-radius": "var(--border_radius)",
                     "margin-top": "0px",
                     "margin-left": "0px",
-                    "padding": "7px",
+                    "padding": "var(--test_padding)",
                     "font-size": "var(--font_default_size)",
                     "flex-direction": "column",
                     "z-index": "1",
@@ -100,7 +100,7 @@ class Select {
                 style: {
                     "cursor": "pointer",
                     "text-align": "start",
-                    "padding": "7px",
+                    "padding": "var(--test_padding)",
                     "border-radius": "var(--border_radius)"
                 }
             },
@@ -138,7 +138,7 @@ class Select {
                     "cursor": "not-allowed",
                     "width":"100%",
                     "margin": "0px",
-                    "padding": "7px 0px 7px 10px",
+                    "padding": "var(--test_padding) 0px var(--main_padding)",
                     "background": "transparent",
                     "color": "var(--text_color_disabled)",
                     "text-align": "start",

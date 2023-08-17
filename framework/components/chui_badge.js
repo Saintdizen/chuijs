@@ -14,7 +14,7 @@ class Badge {
                 style: {
                     "height": "max-content",
                     "width": "max-content",
-                    "padding": "7px 11px",
+                    "padding": "var(--main_padding)",
                     "margin": "var(--margin)",
                     "border-radius": "var(--border_radius)",
                     "font-size": "var(--font_default_size)",

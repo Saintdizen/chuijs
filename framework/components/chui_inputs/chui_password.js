@@ -37,7 +37,7 @@ class PasswordInput {
                     "background": "var(--input_background)",
                     "color": "var(--text_color)",
                     "position": "relative",
-                    "padding": "7px 43px 7px 11px",
+                    "padding": "var(--test_padding) 43px var(--main_padding)",
                     "border": "1px solid var(--border_main)",
                 }
             },
