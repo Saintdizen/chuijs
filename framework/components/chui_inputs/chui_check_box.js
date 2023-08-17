@@ -50,7 +50,7 @@ class CheckBox {
                     "flex-shrink": "0",
                     "flex-grow":"0",
                     "border-radius":"25%",
-                    "margin-right":"12px",
+                    "margin-right":"10px",
                     "align-items":"center",
                     "justify-content":"center",
                     "color":"transparent",

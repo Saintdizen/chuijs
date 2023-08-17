@@ -171,7 +171,7 @@ class AppLayout extends Route {
                     "--font_default_size": "12pt",
                     "--font_labels_size": "10pt",
                     //Закругление элементов
-                    "--border_radius": "12px",
+                    "--border_radius": "10px",
                     //Отступы
                     "--margin": "6px",
                     "--scroll_bar_background": "rgb(190, 190, 190)",
@@ -183,7 +183,7 @@ class AppLayout extends Route {
                     "--background_color_1": "rgba(219, 219, 219, 0.35)",
                     "--border_background_1": "rgba(75, 75, 75, 0.2)",
                     //
-                    "--main_padding": "6px 12px",
+                    "--main_padding": "6px 10px",
                     "--test_padding": "6px"
                 }
             },
@@ -355,7 +355,7 @@ class AppLayout extends Route {
                     "width": "-webkit-fill-available",
                     "height": "-webkit-fill-available",
                     "padding-top": "44px",
-                    "margin": "0",
+                    "margin": "0px 0px 6px 0px",
                     "overflow": "hidden hidden"
                 }
             },
@@ -371,8 +371,8 @@ class AppLayout extends Route {
                     "display": "flex",
                     "flex-direction": "column",
                     "position": "fixed",
-                    "bottom": "10px",
-                    "right": "10px",
+                    "bottom": "0",
+                    "right": "0",
                     "padding": "var(--margin)",
                     "align-items": "flex-end",
                     "justify-content": "flex-start",
@@ -400,7 +400,7 @@ class AppLayout extends Route {
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
                     "-webkit-app-region": "no-drag",
-                    "margin": "56px 12px 12px 12px",
+                    "margin": "58px 12px 12px 12px",
                     "border-radius": "var(--border_radius)",
                     "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
                     "border": "1px solid var(--border_background_1)",
@@ -420,7 +420,7 @@ class AppLayout extends Route {
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
                     "-webkit-app-region": "no-drag",
-                    "margin": "56px 12px 12px 12px",
+                    "margin": "58px 12px 12px 12px",
                     "border-radius": "var(--border_radius)",
                     "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
                     "background": "var(--app_menu_background)",
@@ -622,7 +622,7 @@ class AppLayout extends Route {
             {
                 name: "route:hover",
                 style: {
-                    "padding": "var(--test_padding) 12px",
+                    "padding": "var(--main_padding)",
                     "background": "var(--blue_prime_background)",
                 }
             },
@@ -642,7 +642,7 @@ class AppLayout extends Route {
             {
                 name: ".route_active",
                 style: {
-                    "padding": "var(--test_padding) 12px",
+                    "padding": "var(--main_padding)",
                     "background": "var(--blue_prime_background)",
                     "color": "var(--text_color_hover)",
                 }
@@ -1258,7 +1258,7 @@ class UserProfile {
                 name: "user_dropdown user_item:hover",
                 style: {
                     "background-color": "#ddd",
-                    "padding": "var(--test_padding) 12px",
+                    "padding": "var(--main_padding)",
                     "background": "var(--blue_prime_background)",
                     "color": "var(--text_color_hover)",
                 }
@@ -1510,7 +1510,7 @@ class HeaderButton {
                     "width": "max-content",
                     "border": "none",
                     "border-radius": "var(--border_radius)",
-                    "padding": "var(--test_padding) 12px",
+                    "padding": "var(--main_padding)",
                     "margin": "var(--margin) 0px var(--margin) var(--margin)",
                     "font-size": "12pt",
                     "background": "transparent",

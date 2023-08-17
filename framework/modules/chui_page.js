@@ -12,7 +12,7 @@ class Page {
             {
                 name: "page",
                 style: {
-                    "padding": "6px",
+                    "padding": "6px 6px 0px 6px",
                     "display": "flex",
                     "flex-direction": "column",
                     "width": "-webkit-fill-available",

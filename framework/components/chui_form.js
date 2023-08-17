@@ -23,7 +23,7 @@ class Form {
                     "height": "max-content",
                     "width": "max-content",
                     "border-radius": "var(--border_radius)",
-                    "padding": "8px 12px",
+                    "padding": "var(--main_padding)",
                     "font-size": "12pt",
                     "font-weight": "400",
                     "margin": "var(--margin)",

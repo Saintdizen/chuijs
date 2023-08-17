@@ -50,7 +50,7 @@ class RadioButton {
                     "flex-shrink": "0",
                     "flex-grow":"0",
                     "border-radius":"50%",
-                    "margin-right":"12px",
+                    "margin-right":"10px",
                     "align-items":"center",
                     "justify-content":"center",
                     "color":"transparent",

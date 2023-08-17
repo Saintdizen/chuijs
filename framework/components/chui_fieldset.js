@@ -37,7 +37,7 @@ class FieldSet {
                 name: "legend",
                 style: {
                     "color": "var(--button_text_color)",
-                    "padding": "6px 12px",
+                    "padding": "var(--main_padding)",
                     "font-size": "10pt",
                     "font-weight":"400",
                     "border": "1px solid var(--border_main)",

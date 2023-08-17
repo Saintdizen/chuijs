@@ -74,7 +74,7 @@ class SlideShow {
                 style: {
                     "color": "#f2f2f2",
                     "font-size": "15px",
-                    "padding": "8px 12px",
+                    "padding": "var(--main_padding)",
                     "position": "absolute",
                     "bottom": "8px",
                     "width": "100%",
@@ -86,7 +86,7 @@ class SlideShow {
                 style: {
                     "color": "#f2f2f2",
                     "font-size": "12px",
-                    "padding": "8px 12px",
+                    "padding": "var(--main_padding)",
                     "position": "absolute",
                     "top": "0"
                 }

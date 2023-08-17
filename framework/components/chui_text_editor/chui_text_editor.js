@@ -52,8 +52,8 @@ class TextEditor {
                 name: "chui_editor_text_input",
                 style: {
                     "width": "-webkit-fill-available",
-                    "font-size": "17px",
-                    "padding": "0px 12px 6px 12px",
+                    "font-size": "12pt",
+                    "padding": "0px 10px 6px 10px",
                     "height": "calc(100% - 40px)",
                     "overflow": "overlay",
                     "text-align": "start",

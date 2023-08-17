@@ -74,7 +74,7 @@ class Table {
                     "white-space": "break-spaces",
                     "word-break": "break-all",
                     "align-items": "center",
-                    "padding": "8px 12px"
+                    "padding": "var(--main_padding)",
                 }
             }
         ], 'chUiJS_Table');

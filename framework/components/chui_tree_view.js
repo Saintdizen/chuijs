@@ -34,7 +34,7 @@ class TreeView {
                 name: "tree_view_button",
                 style: {
                     "cursor": "pointer",
-                    "padding": "8px 12px",
+                    "padding": "var(--main_padding)",
                     "width": "-webkit-fill-available",
                     "text-align": "left",
                     "outline": "none",
@@ -49,7 +49,7 @@ class TreeView {
             {
                 name: "tree_view_panel",
                 style: {
-                    "padding": "0px 0px 0px 12px",
+                    "padding": "0px 0px 0px 10px",
                     "display": "block",
                     "overflow": "hidden",
                     "width": "-webkit-fill-available",
