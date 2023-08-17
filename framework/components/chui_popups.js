@@ -67,7 +67,7 @@ class Popup {
                 style: {
                     "display": "block",
                     "text-align": "center",
-                    "font-size": "12.75pt",
+                    "font-size": "12pt",
                     "font-weight": "600",
                     "padding": "6px"
                 }
@@ -77,7 +77,7 @@ class Popup {
                 style: {
                     "display": "block",
                     "text-align": "center",
-                    "font-size": "10.75pt",
+                    "font-size": "10pt",
                     "font-weight": "500",
                     "padding": "6px"
                 }
@@ -95,7 +95,7 @@ class Popup {
                     "padding": "10px",
                     "border-radius": "var(--border_radius)",
                     "color": "var(--button_text_color)",
-                    "font-weight": "600",
+                    "font-weight": "500",
                     "font-size": "12pt",
                 }
             },
@@ -119,7 +119,7 @@ class Popup {
                     "padding": "10px",
                     "border-radius": "var(--border_radius)",
                     "color": "var(--button_text_color)",
-                    "font-weight": "600",
+                    "font-weight": "500",
                     "font-size": "12pt",
                 }
             },
@@ -142,7 +142,7 @@ class Popup {
                     "padding": "10px",
                     "border-radius": "var(--border_radius)",
                     "color": "var(--badge_error_text)",
-                    "font-weight": "600",
+                    "font-weight": "500",
                     "font-size": "12pt",
                 }
             },

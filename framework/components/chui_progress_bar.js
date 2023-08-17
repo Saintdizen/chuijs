@@ -12,9 +12,10 @@ class ProgressBar {
                     "width": "max-content",
                     "height": "max-content",
                     "margin": "var(--margin)",
-                    "font-size": "12pt",
+                    "font-size": "10pt",
                     "color": "var(--text_color)",
-                    "text-align": "center"
+                    "text-align": "center",
+                    "font-weight": "500"
                 }
             },
             {

@@ -8,7 +8,9 @@ class H {
                     "height": "max-content",
                     "width": "max-content",
                     "color": "var(--text_color)",
-                    "margin": "var(--margin)"
+                    "margin": "var(--margin)",
+                    "letter-spacing": "-0.031rem",
+                    "font-weight": "600"
                 }
             },
             {

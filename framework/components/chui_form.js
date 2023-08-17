@@ -25,11 +25,10 @@ class Form {
                     "border-radius": "var(--border_radius)",
                     "padding": "8px 12px",
                     "font-size": "12pt",
-                    "font-weight": "500",
+                    "font-weight": "400",
                     "margin": "var(--margin)",
                     "background": "var(--button_background)",
-                    "color": "var(--button_text_color)",
-                    "box-sizing": "border-box"
+                    "color": "var(--button_text_color)"
                 }
             },
             {

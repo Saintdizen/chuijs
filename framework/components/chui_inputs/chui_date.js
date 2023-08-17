@@ -111,7 +111,7 @@ class DateInput {
                     "height": "max-content",
                     "width": "max-content",
                     "border-radius": "var(--border_radius)",
-                    "font-size": "12pt",
+                    "font-size": "var(--font_default_size)",
                     "background": "var(--input_background)",
                     "color": "var(--text_color)",
                     "border": "1px solid var(--border_main)",
@@ -130,7 +130,7 @@ class DateInput {
                     "background": "transparent",
                     "color": "var(--text_color)",
                     "border": "0",
-                    "font-size": "12pt",
+                    "font-size": "var(--font_default_size)",
                 }
             },
             {
@@ -139,7 +139,7 @@ class DateInput {
                     "height": "max-content",
                     "width": "max-content",
                     "margin": "var(--margin)",
-                    "font-size": "10pt",
+                    "font-size": "var(--font_labels_size)",
                     "font-weight":"500",
                     "color": "var(--text_color)"
                 }
@@ -161,7 +161,7 @@ class DateInput {
                     "height": "max-content",
                     "width": "max-content",
                     "margin": "var(--margin)",
-                    "font-size": "10pt",
+                    "font-size": "var(--font_labels_size)",
                     "font-weight":"500"
                 }
             },
@@ -177,7 +177,7 @@ class DateInput {
                     "padding": "5px 0px",
                     "background": "transparent",
                     "border": "0",
-                    "font-size": "12pt",
+                    "font-size": "var(--font_default_size)",
                 }
             }
         ], 'chUiJS_DateInput');

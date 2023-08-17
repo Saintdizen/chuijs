@@ -18,7 +18,7 @@ class CheckBox {
                     "display": "flex",
                     "align-items": "center",
                     "justify-content": "center",
-                    "font-size": "16pt",
+                    "font-size": "var(--font_default_size)",
                     "margin": "var(--margin)",
                     "width": "max-content"
                 }

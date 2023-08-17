@@ -47,7 +47,7 @@ class BarGraph {
                 name: "legend_label",
                 style: {
                     "color": "var(--text_color)",
-                    "font-weight": "500",
+                    "font-weight": "400",
                     "margin": "var(--margin)"
                 }
             }

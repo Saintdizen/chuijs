@@ -73,7 +73,7 @@ class FileInput {
                     "color": "var(--text_color_disabled)",
                     "text-align": "start",
                     "border": "0",
-                    "font-size": "12pt",
+                    "font-size": "var(--font_default_size)",
                 }
             },
             {
@@ -83,7 +83,7 @@ class FileInput {
                     "height": "max-content",
                     "width": "max-content",
                     "margin": "var(--margin)",
-                    "font-size": "10pt",
+                    "font-size": "var(--font_labels_size)",
                     "font-weight":"500",
                     "color": "var(--text_color_disabled)"
                 }
@@ -97,7 +97,7 @@ class FileInput {
                     "background": "transparent",
                     "color": "var(--text_color)",
                     "border": "0",
-                    "font-size": "12pt",
+                    "font-size": "var(--font_default_size)",
                 }
             },
             {
@@ -106,7 +106,7 @@ class FileInput {
                     "height": "max-content",
                     "width": "max-content",
                     "margin": "var(--margin)",
-                    "font-size": "10pt",
+                    "font-size": "var(--font_labels_size)",
                     "font-weight":"500",
                     "color": "var(--text_color)"
                 }
@@ -119,12 +119,11 @@ class FileInput {
                     "width": "max-content",
                     "border-radius": "var(--border_radius)",
                     "padding": "6px 10px",
-                    "font-size": "12pt",
-                    "font-weight": "500",
+                    "font-size": "var(--font_default_size)",
+                    "font-weight": "400",
                     "margin": "0px var(--margin) 0px 0px",
                     "background": "var(--button_background)",
                     "color": "var(--button_text_color)",
-                    "box-sizing": "border-box",
                     "transition": "all .22s",
                     "font-family": "chui_Inter",
                     "letter-spacing": "0.33px",

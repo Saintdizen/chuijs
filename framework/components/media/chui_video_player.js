@@ -124,7 +124,6 @@ class VideoPlayer {
                 style: {
                     "position": "relative",
                     "-webkit-appearance": "none",
-                    "box-sizing": "content-box",
                     "border": "1px solid rgba(255,255,255,0)",
                     "height": "16px",
                     "width": "16px",
@@ -199,7 +198,6 @@ class VideoPlayer {
                 style: {
                     "position": "relative",
                     "-webkit-appearance": "none",
-                    "box-sizing": "content-box",
                     "border": "1px solid rgba(255,255,255,0)",
                     "height": "16px",
                     "width": "16px",

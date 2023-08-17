@@ -80,7 +80,6 @@ class AppLayout extends Route {
             {
                 name: "*",
                 style: {
-                    "letter-spacing": "0.33px",
                     "word-spacing": "0.33px",
                     "font-family": "chui_Inter",
                     "direction": "ltr",
@@ -89,15 +88,14 @@ class AppLayout extends Route {
                     "transition": "all .22s",
                     "animation-duration": ".22s",
                     "position": "relative",
-                    "-webkit-font-smoothing": "antialiased",
-                    "text-rendering": "geometricPrecision",
-                    "-webkit-text-stroke": ".001em",
+                    "-webkit-font-smoothing": "subpixel-antialiased",
+                    "text-rendering": "optimizeSpeed",
+                    "text-shadow": "var(--text_shadow_main)"
                 }
             },
             {
                 name: "*:before",
                 style: {
-                    "letter-spacing": "0.33px",
                     "word-spacing": "0.33px",
                     "font-family": "chui_Inter",
                     "direction": "ltr",
@@ -106,14 +104,17 @@ class AppLayout extends Route {
                     "transition": "all .22s",
                     "animation-duration": ".22s",
                     "position": "relative",
-                    "-webkit-font-smoothing": "antialiased",
-                    "text-rendering": "geometricPrecision",
-                    "-webkit-text-stroke": ".001em",
+                    "-webkit-font-smoothing": "subpixel-antialiased",
+                    "text-rendering": "optimizeSpeed",
+                    "text-shadow": "var(--text_shadow_main)"
                 }
             },
             {
                 name: ":root",
                 style: {
+                    //
+                    "--text_shadow_main": "0 0 1px rgba(44, 44, 44, 0.3)",
+                    "--text_shadow_buttons": "0 0 1px rgba(44, 44, 44, 0.3)",
                     //
                     "--global_blur": "blur(16px)",
                     //Цвета
@@ -133,19 +134,13 @@ class AppLayout extends Route {
                     "--button_background": "rgba(219, 219, 219, 0.85)",
                     "--button_background_disabled": "rgba(219, 219, 219, 0.6)",
                     "--button_text_color": "rgba(20, 142, 255, 1)",
-                    "--button_box_shadow_normal": "0px 0px 1px 1px var(--input_background)",
-                    "--button_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
                     "--button_border": "rgba(75, 75, 75, 0.1)",
                     //Поля ввода
                     "--input_background": "rgba(219, 219, 219, 0.7)",
-                    "--input_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
-                    "--input_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
                     "--dropdown_background": "rgba(219, 219, 219, 1)",
                     //
-                    "--blue_prime_background_2": "rgba(20, 142, 255, 1)",
-                    "--blue_prime_background": "rgba(20, 142, 255, 0.8)",
-                    "--red_prime_background": "rgba(255, 59, 48, 0.8)",
-                    "--blue_prime_background_trans": "rgba(20, 142, 255, 0.4)",
+                    "--blue_prime_background": "rgba(20, 142, 255, 0.7)",
+                    "--red_prime_background": "rgba(255, 59, 48, 0.7)",
                     //BADGE
                     "--badge_error_back": "rgba(255, 59, 48, 0.4)",
                     "--badge_error_text": "rgba(194, 6, 24, 1)",
@@ -186,6 +181,9 @@ class AppLayout extends Route {
             {
                 name: "[theme='dark']",
                 style: {
+                    //
+                    "--text_shadow_main": "0 0 1px rgba(235, 235, 235, 0.3)",
+                    "--text_shadow_buttons": "0 0 1px rgba(44, 44, 44, 0.3)",
                     //Глобальные цвета
                     "--text_color": "rgba(235, 235, 235, 1)",
                     "--text_color_disabled": "rgba(235, 235, 235, 0.6)",
@@ -202,19 +200,13 @@ class AppLayout extends Route {
                     "--button_background": "rgba(65, 65, 65, 0.85)",
                     "--button_background_disabled": "rgba(65, 65, 65, 0.6)",
                     "--button_text_color": "rgba(30, 152, 255, 1)",
-                    "--button_box_shadow_normal": "0px 0px 0px 1px var(--input_background)",
-                    "--button_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
                     "--button_border": "rgba(205, 205, 205, 0.1)",
                     //Поля ввода
                     "--input_background": "rgba(65, 65, 65, 0.7)",
-                    "--input_box_shadow_normal": "0px 0px 1px 1px var(--input_background)",
-                    "--input_box_shadow_focus": "0px 0px 1px 1px var(--blue_prime_background)",
                     "--dropdown_background": "rgba(65, 65, 65, 1)",
                     //
-                    "--blue_prime_background_2": "rgba(30, 152, 255, 1)",
-                    "--blue_prime_background": "rgba(30, 152, 255, 0.8)",
-                    "--red_prime_background": "rgba(255, 69, 58, 0.8)",
-                    "--blue_prime_background_trans": "rgba(30, 152, 255, 0.4)",
+                    "--blue_prime_background": "rgba(30, 152, 255, 0.7)",
+                    "--red_prime_background": "rgba(255, 69, 58, 0.7)",
                     //BADGE
                     "--badge_error_back": "rgba(255, 69, 58, 0.4)",
                     "--badge_error_text": "rgba(255, 105, 94, 1)",
@@ -260,8 +252,7 @@ class AppLayout extends Route {
                     "height": "-webkit-fill-available",
                     "margin": "0",
                     "padding": "0",
-                    "background": "transparent",
-                    "box-sizing": "border-box"
+                    "background": "transparent"
                 }
             },
             {
@@ -403,7 +394,6 @@ class AppLayout extends Route {
                     "margin": "56px 10px 10px 10px",
                     "border-radius": "var(--border_radius)",
                     "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
-                    "box-sizing": "border-box",
                     "border": "1px solid var(--border_background_1)",
                     "background": "var(--app_menu_background)",
                     "backdrop-filter": "var(--global_blur)",
@@ -424,7 +414,6 @@ class AppLayout extends Route {
                     "margin": "56px 10px 10px 10px",
                     "border-radius": "var(--border_radius)",
                     "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
-                    "box-sizing": "border-box",
                     "background": "var(--app_menu_background)",
                     "backdrop-filter": "var(--global_blur)",
                     "width": "-webkit-fill-available",
@@ -598,7 +587,7 @@ class AppLayout extends Route {
                     "padding": "6px",
                     "margin": "var(--margin) var(--margin) var(--margin) 0px",
                     "font-size": "12pt",
-                    "font-weight": "600",
+                    "font-weight": "500",
                     "background": "transparent",
                     "color": "var(--text_color)"
                 }
@@ -617,7 +606,7 @@ class AppLayout extends Route {
                     "padding": "6px",
                     "margin": "var(--margin)",
                     "font-size": "12pt",
-                    "font-weight": "600",
+                    "font-weight": "500",
                     "background": "transparent",
                 }
             },
@@ -659,7 +648,7 @@ class AppLayout extends Route {
                 name: "blockquote",
                 style: {
                     "background": "var(--button_background)",
-                    "border-left": "10px solid var(--blue_prime_background_trans)",
+                    "border-left": "10px solid var(--blue_prime_background)",
                     "margin": "1.5em 10px",
                     "padding": "9px 14px",
                     "color": "var(--text_color)",
@@ -1241,7 +1230,6 @@ class UserProfile {
                     "min-width": "165px",
                     "flex-direction": "column",
                     "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
-                    "box-sizing": "border-box",
                     "border": "1px solid var(--border_main)",
                 }
             },
@@ -1250,7 +1238,7 @@ class UserProfile {
                 style: {
                     "color": "var(--text_color)",
                     "display": "block",
-                    "font-weight": "500",
+                    "font-weight": "400",
                     "cursor": "pointer",
                     "text-align": "start",
                     "padding": "6px",

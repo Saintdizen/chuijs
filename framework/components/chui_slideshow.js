@@ -66,7 +66,7 @@ class SlideShow {
             {
                 name: "chui_next_slide:hover, chui_prev_slide:hover",
                 style: {
-                    "background-color": "var(--blue_prime_background_trans)"
+                    "background-color": "var(--blue_prime_background)"
                 }
             },
             {

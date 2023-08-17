@@ -63,7 +63,7 @@ class Tabs {
                     "font-size": "var(--font_default_size)",
                     "display": "flex",
                     "flex-direction": "column",
-                    "font-weight": "600",
+                    "font-weight": "500",
                     "color": "var(--text_color)"
                 }
             },

@@ -38,10 +38,9 @@ class TextArea {
                     "width": "-webkit-fill-available",
                     "border-radius": "var(--border_radius)",
                     "padding": "6px 10px",
-                    "font-size": "12pt",
+                    "font-size": "var(--font_default_size)",
                     "background": "var(--input_background)",
                     "color": "var(--text_color)",
-                    "box-sizing": "border-box",
                     "border": "1px solid var(--border_main)",
                 }
             },
@@ -51,7 +50,7 @@ class TextArea {
                     "height": "max-content",
                     "width": "max-content",
                     "margin": "var(--margin)",
-                    "font-size": "10pt",
+                    "font-size": "var(--font_labels_size)",
                     "font-weight":"500",
                     "color": "var(--text_color)"
                 }
@@ -65,11 +64,10 @@ class TextArea {
                     "width": "-webkit-fill-available",
                     "border-radius": "var(--border_radius)",
                     "padding": "6px 10px",
-                    "font-size": "12pt",
+                    "font-size": "var(--font_default_size)",
                     "background": "transparent",
                     "color": "var(--text_color_disabled)",
-                    "border": "1px dashed var(--border_main)",
-                    "box-sizing": "border-box",
+                    "border": "1px dashed var(--border_main)"
                 }
             },
             {
@@ -79,7 +77,7 @@ class TextArea {
                     "height": "max-content",
                     "width": "max-content",
                     "margin": "var(--margin)",
-                    "font-size": "10pt",
+                    "font-size": "var(--font_labels_size)",
                     "font-weight":"500",
                     "color": "var(--text_color_disabled)"
                 }

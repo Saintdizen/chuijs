@@ -18,7 +18,7 @@ class RadioButton {
                     "display": "flex",
                     "align-items": "center",
                     "justify-content": "flex-start",
-                    "font-size": "12pt",
+                    "font-size": "var(--font_labels_size)",
                     "margin": "var(--margin)",
                     "width": "max-content"
                 }

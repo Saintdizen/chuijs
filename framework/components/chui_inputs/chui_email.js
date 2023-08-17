@@ -49,7 +49,7 @@ class EmailInput {
                     "color": "var(--text_color)",
                     "text-align": "start",
                     "border": "0",
-                    "font-size": "12pt"
+                    "font-size": "var(--font_default_size)",
                 }
             },
             {
@@ -64,7 +64,7 @@ class EmailInput {
                     "height": "max-content",
                     "width": "max-content",
                     "margin": "var(--margin)",
-                    "font-size": "10pt",
+                    "font-size": "var(--font_labels_size)",
                     "font-weight":"500",
                     "color": "var(--text_color)"
                 }
@@ -81,7 +81,7 @@ class EmailInput {
                     "color": "var(--text_color_disabled)",
                     "text-align": "start",
                     "border": "0",
-                    "font-size": "12pt",
+                    "font-size": "var(--font_default_size)",
                 }
             },
             {
@@ -91,7 +91,7 @@ class EmailInput {
                     "height": "max-content",
                     "width": "max-content",
                     "margin": "var(--margin)",
-                    "font-size": "10pt",
+                    "font-size": "var(--font_labels_size)",
                     "font-weight":"500",
                     "color": "var(--text_color_disabled)"
                 }

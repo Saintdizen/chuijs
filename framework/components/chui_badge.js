@@ -18,7 +18,7 @@ class Badge {
                     "margin": "var(--margin)",
                     "border-radius": "var(--border_radius)",
                     "font-size": "var(--font_default_size)",
-                    "font-weight": "500",
+                    "font-weight": "400",
                     "background": "var(--badge_cancel_back)",
                     "color": "var(--badge_cancel_text)",
                 }

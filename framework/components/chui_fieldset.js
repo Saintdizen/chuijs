@@ -40,7 +40,7 @@ class FieldSet {
                     //"background": "var(--input_background)",
                     "padding": "6px 10px",
                     "font-size": "10pt",
-                    "font-weight":"500",
+                    "font-weight":"400",
                     "border": "1px solid var(--border_main)",
                     "border-radius": "var(--border_radius)",
                 }

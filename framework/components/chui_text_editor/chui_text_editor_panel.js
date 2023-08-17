@@ -64,16 +64,15 @@ class TextEditorButtons {
                     "width": "max-content",
                     "border-radius": "var(--border_radius)",
                     "padding": "9px",
-                    "font-size": "12pt",
+                    "font-size": "11pt",
                     "font-weight": "500",
-                    "color": "var(--button_text_color)",
-                    "box-sizing": "border-box",
+                    "color": "var(--button_text_color)"
                 }
             },
             {
                 name: "chui_button_format:hover",
                 style: {
-                    "background": "var(--blue_prime_background_trans)",
+                    "background": "var(--blue_prime_background)",
                 }
             }
         ], 'chUiJS_TextEditorButtons');
@@ -143,7 +142,7 @@ class TextEditorSelects {
             {
                 name: "text_editor_select_box:hover",
                 style: {
-                    "background": "var(--blue_prime_background_trans)",
+                    "background": "var(--blue_prime_background)",
                 }
             },
             {

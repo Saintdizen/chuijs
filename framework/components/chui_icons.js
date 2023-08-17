@@ -15,8 +15,6 @@ class Icon {
                     "word-wrap": "normal",
                     "white-space": "nowrap",
                     "direction": "ltr",
-                    "-webkit-font-smoothing": "antialiased",
-                    "text-rendering": "text-rendering",
                     "color": "var(--text_color)",
                     "pointer-events": "none",
                     "transition": "all .22s",

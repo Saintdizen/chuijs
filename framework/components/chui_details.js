@@ -40,7 +40,7 @@ class Details {
                     "width": "max-content",
                     "margin": "var(--margin)",
                     "font-size": "12pt",
-                    "font-weight":"500",
+                    "font-weight":"400",
                     "border-radius": "var(--border_radius)",
                     "border": "1px solid var(--border_main)",
                 }

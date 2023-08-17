@@ -86,7 +86,7 @@ class UpdateNotification {
                 name: "update_notification_date",
                 style: {
                     "font-size": "8pt",
-                    "font-weight": "500",
+                    "font-weight": "400",
                     "margin": "3px 0px 0px 10px",
                     "color": "var(--text_color)",
                     "white-space": "pre",
@@ -97,7 +97,7 @@ class UpdateNotification {
                 name: "update_notification_text",
                 style: {
                     "font-size": "11pt",
-                    "font-weight": "500",
+                    "font-weight": "400",
                     "margin": "6px 3px",
                     "color": "var(--text_color)",
                     "word-break": "break-word"

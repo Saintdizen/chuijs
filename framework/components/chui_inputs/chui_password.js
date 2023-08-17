@@ -33,7 +33,7 @@ class PasswordInput {
                     "width": "-webkit-fill-available",
                     "height": "max-content",
                     "border-radius": "var(--border_radius)",
-                    "font-size": "12pt",
+                    "font-size": "var(--font_default_size)",
                     "background": "var(--input_background)",
                     "color": "var(--text_color)",
                     "position": "relative",
@@ -51,7 +51,7 @@ class PasswordInput {
                     "color": "var(--text_color)",
                     "text-align": "start",
                     "border": "0",
-                    "font-size": "12pt"
+                    "font-size": "var(--font_default_size)",
                 }
             },
             {
@@ -76,7 +76,7 @@ class PasswordInput {
                     "height": "max-content",
                     "width": "max-content",
                     "margin": "var(--margin)",
-                    "font-size": "10pt",
+                    "font-size": "var(--font_labels_size)",
                     "font-weight":"500",
                     "color": "var(--text_color)"
                 }
@@ -94,7 +94,7 @@ class PasswordInput {
                     "height": "max-content",
                     "width": "max-content",
                     "margin": "var(--margin) var(--margin) 0px var(--margin)",
-                    "font-size": "10pt",
+                    "font-size": "var(--font_labels_size)",
                     "font-weight":"500",
                     "color": "var(--red_prime_background)"
                 }
@@ -115,7 +115,7 @@ class PasswordInput {
                     "height": "max-content",
                     "width": "max-content",
                     "margin": "var(--margin)",
-                    "font-size": "10pt",
+                    "font-size": "var(--font_labels_size)",
                     "font-weight":"500",
                     "color": "var(--text_color_disabled)"
                 }
@@ -131,7 +131,7 @@ class PasswordInput {
                     "color": "var(--text_color_disabled)",
                     "text-align": "start",
                     "border": "0",
-                    "font-size": "12pt"
+                    "font-size": "var(--font_default_size)",
                 }
             }
         ], 'chUiJS_PasswordInput');
