@@ -38,7 +38,7 @@ class FieldSet {
                 style: {
                     "color": "var(--button_text_color)",
                     //"background": "var(--input_background)",
-                    "padding": "6px 10px",
+                    "padding": "6px 9px",
                     "font-size": "10pt",
                     "font-weight":"400",
                     "border": "1px solid var(--border_main)",

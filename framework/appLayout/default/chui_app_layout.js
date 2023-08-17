@@ -78,6 +78,12 @@ class AppLayout extends Route {
         page_name = document.createElement('page_name');
         require('../../modules/chui_functions').style_parse([
             {
+                name: "strong",
+                style: {
+                    "font-weight": "600",
+                }
+            },
+            {
                 name: "*",
                 style: {
                     "word-spacing": "0.33px",
@@ -165,7 +171,7 @@ class AppLayout extends Route {
                     "--font_default_size": "12pt",
                     "--font_labels_size": "10pt",
                     //Закругление элементов
-                    "--border_radius": "6px",
+                    "--border_radius": "12px",
                     //Отступы
                     "--margin": "6px",
                     "--scroll_bar_background": "rgb(190, 190, 190)",
@@ -176,6 +182,8 @@ class AppLayout extends Route {
                     // Тестовые цвета
                     "--background_color_1": "rgba(219, 219, 219, 0.35)",
                     "--border_background_1": "rgba(75, 75, 75, 0.2)",
+                    //
+                    "--main_padding": "7px 11px"
                 }
             },
             {
@@ -613,7 +621,7 @@ class AppLayout extends Route {
             {
                 name: "route:hover",
                 style: {
-                    "padding": "6px 10px",
+                    "padding": "6px 12px",
                     "background": "var(--blue_prime_background)",
                 }
             },
@@ -633,7 +641,7 @@ class AppLayout extends Route {
             {
                 name: ".route_active",
                 style: {
-                    "padding": "6px 10px",
+                    "padding": "6px 12px",
                     "background": "var(--blue_prime_background)",
                     "color": "var(--text_color_hover)",
                 }
@@ -1210,7 +1218,7 @@ class UserProfile {
                     "width": "max-content",
                     "color": "var(--text_color)",
                     "border-radius": "var(--border_radius)",
-                    "padding": "6px 10px",
+                    "padding": "6px 12px",
                     "margin": "var(--margin) 0px var(--margin) var(--margin)",
                     "font-weight": "500"
                 }
@@ -1249,7 +1257,7 @@ class UserProfile {
                 name: "user_dropdown user_item:hover",
                 style: {
                     "background-color": "#ddd",
-                    "padding": "6px 10px",
+                    "padding": "6px 12px",
                     "background": "var(--blue_prime_background)",
                     "color": "var(--text_color_hover)",
                 }
@@ -1371,7 +1379,7 @@ class HeaderDialog {
                     "width": "max-content",
                     "border": "none",
                     "border-radius": "var(--border_radius)",
-                    "padding": "6px 10px",
+                    "padding": "6px 12px",
                     "margin": "var(--margin) 0px var(--margin) var(--margin)",
                     "font-size": "12pt",
                     "background": "transparent",
@@ -1501,7 +1509,7 @@ class HeaderButton {
                     "width": "max-content",
                     "border": "none",
                     "border-radius": "var(--border_radius)",
-                    "padding": "6px 10px",
+                    "padding": "6px 12px",
                     "margin": "var(--margin) 0px var(--margin) var(--margin)",
                     "font-size": "12pt",
                     "background": "transparent",

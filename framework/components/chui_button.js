@@ -30,7 +30,7 @@ class Button {
                     "height": "max-content",
                     "width": "max-content",
                     "border-radius": "var(--border_radius)",
-                    "padding": "6px 10px",
+                    "padding": "7px 11px",
                     "font-size": "12pt",
                     "font-weight": "400",
                     "background": "var(--button_background)",

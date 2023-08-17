@@ -22,7 +22,6 @@ class Select {
                 style: {
                     "display": "flex",
                     "flex-direction": "column",
-                    "align-items": "baseline",
                     "height": "max-content",
                     "margin": "var(--margin)",
                     "width": "200px"
@@ -52,7 +51,7 @@ class Select {
                     "display": "block",
                     "outline": "none",
                     "margin": "0px",
-                    "padding": "6px 0px 6px 10px",
+                    "padding": "7px 0px 7px 10px",
                     "background": "transparent",
                     "color": "var(--text_color)",
                     "text-align": "start",
@@ -74,7 +73,7 @@ class Select {
                     "border-radius": "var(--border_radius)",
                     "margin-top": "0px",
                     "margin-left": "0px",
-                    "padding": "6px",
+                    "padding": "7px",
                     "font-size": "var(--font_default_size)",
                     "flex-direction": "column",
                     "z-index": "1",
@@ -93,7 +92,7 @@ class Select {
                 style: {
                     "cursor": "pointer",
                     "outline": "none",
-                    "padding": "6px 10px",
+                    "padding": "var(--main_padding)",
                 }
             },
             {
@@ -101,14 +100,14 @@ class Select {
                 style: {
                     "cursor": "pointer",
                     "text-align": "start",
-                    "padding": "6px",
+                    "padding": "7px",
                     "border-radius": "var(--border_radius)"
                 }
             },
             {
                 name: "selectbox_option:hover",
                 style: {
-                    "padding": "6px 10px",
+                    "padding": "var(--main_padding)",
                     "background": "var(--blue_prime_background)",
                     "color": "var(--text_color_hover)"
                 }
@@ -139,7 +138,7 @@ class Select {
                     "cursor": "not-allowed",
                     "width":"100%",
                     "margin": "0px",
-                    "padding": "6px 0px 6px 10px",
+                    "padding": "7px 0px 7px 10px",
                     "background": "transparent",
                     "color": "var(--text_color_disabled)",
                     "text-align": "start",

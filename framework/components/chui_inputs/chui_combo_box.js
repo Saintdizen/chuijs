@@ -24,7 +24,6 @@ class ComboBox {
                 style: {
                     "display": "flex",
                     "flex-direction": "column",
-                    "align-items": "baseline",
                     "height": "max-content",
                     "margin": "var(--margin)",
                     "width": "200px"
@@ -49,7 +48,7 @@ class ComboBox {
                 style: {
                     "width": "100%",
                     "margin": "0px",
-                    "padding": "6px 0px 6px 10px",
+                    "padding": "7px 0px 7px 10px",
                     "background": "transparent",
                     "color": "var(--text_color)",
                     "border": "0",
@@ -65,7 +64,7 @@ class ComboBox {
                     "height": "max-content",
                     "border-radius": "var(--border_radius)",
                     "margin-top": "36px",
-                    "padding": "6px",
+                    "padding": "7px",
                     "font-size": "var(--font_default_size)",
                     "flex-direction": "column",
                     "z-index": "1",
@@ -96,7 +95,7 @@ class ComboBox {
                 name: "combo_button_open",
                 style: {
                     "cursor": "pointer",
-                    "padding": "6px 10px",
+                    "padding": "var(--main_padding)",
                     "color": "var(--blue_prime_background)"
                 }
             },
@@ -105,7 +104,7 @@ class ComboBox {
                 style: {
                     "cursor": "pointer",
                     "text-align": "start",
-                    "padding": "6px",
+                    "padding": "7px",
                     "border-radius": "var(--border_radius)",
                     "color": "var(--text_color)"
                 }
@@ -113,7 +112,7 @@ class ComboBox {
             {
                 name: "combobox_option:hover",
                 style: {
-                    "padding": "6px 10px",
+                    "padding": "var(--main_padding)",
                     "background": "var(--blue_prime_background)",
                     "color": "var(--text_color_hover)"
                 }
@@ -136,7 +135,7 @@ class ComboBox {
                     "text-align": "start",
                     "width": "100%",
                     "margin": "0px",
-                    "padding": "6px 0px 6px 10px",
+                    "padding": "7px 0px 7px 10px",
                     "border": "0",
                     "font-size": "var(--font_default_size)",
                 }

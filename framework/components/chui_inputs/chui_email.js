@@ -35,7 +35,7 @@ class EmailInput {
                     "color": "var(--text_color)",
                     "align-items": "center",
                     "position": "relative",
-                    "padding": "6px 10px",
+                    "padding": "var(--main_padding)",
                     "border": "1px solid var(--border_main)",
                 }
             },

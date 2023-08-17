@@ -118,7 +118,7 @@ class FileInput {
                     "height": "max-content",
                     "width": "max-content",
                     "border-radius": "var(--border_radius)",
-                    "padding": "6px 10px",
+                    "padding": "var(--main_padding)",
                     "font-size": "var(--font_default_size)",
                     "font-weight": "400",
                     "margin": "0px var(--margin) 0px 0px",
