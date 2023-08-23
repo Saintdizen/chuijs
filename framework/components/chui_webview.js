@@ -66,7 +66,11 @@ class WebView {
         this.#WebView.addEventListener('did-stop-loading', loadStop)
     }
     execJS(script) {
-        this.#WebView.executeJavaScript(script).then(r => console.log(r))
+        this.#WebView.addEventListener('did-start-loading', () => {
+            this.#WebView.addEventListener('dom-ready', () => {
+                this.#WebView.executeJavaScript(script, true).then(r => console.log(r))
+            });
+        })
     }
     addStartLoadEvent(listener = () => {}) {
         this.#WebView.addEventListener('did-start-loading', listener)
@@ -86,14 +90,18 @@ class WebView {
     }) {
         this.#WebView.addEventListener('did-start-loading', () => {
             if (options.enable) {
-                let webview = document.getElementById(this.#id);
-                webview.addEventListener('dom-ready', () => {
-                    webview.insertCSS(`*::-webkit-scrollbar { width: ${options.width}; }
+                this.#WebView.addEventListener('dom-ready', () => {
+                    this.#WebView.insertCSS(`*::-webkit-scrollbar { width: ${options.width}; }
                     *::-webkit-scrollbar-track { background-color: ${options.trackBackgroundColor}; }
-                    *::-webkit-scrollbar-thumb { border-radius: ${options.thumbRadius}; background: ${options.thumbColor}; }`);
+                    *::-webkit-scrollbar-thumb { border-radius: ${options.thumbRadius}; background: ${options.thumbColor}; }`).then(r => console.log(r));
                 });
             }
         })
+    }
+    insertCustomCSS(CSSString = String()) {
+        this.#WebView.addEventListener('dom-ready', () => {
+            this.#WebView.insertCSS(CSSString).then(r => console.log(r));
+        });
     }
     setUrl(url = String()) {
         this.#WebView.setAttribute('src', url)

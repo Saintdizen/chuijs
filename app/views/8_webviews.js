@@ -17,6 +17,7 @@ class WebViewsPage extends Page {
             thumbRadius: "6px",
             thumbColor: "#fcca00"
         });
+        web.insertCustomCSS('.player-controls.deco-player-controls { backdrop-filter: blur(16px); background-color: #22222250 !important; }')
         web.addFinishLoadEvent(() => console.log(this.getTitle()));
 
         this.add(web)
