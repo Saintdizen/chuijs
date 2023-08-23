@@ -98,9 +98,20 @@ class WebView {
             }
         })
     }
-    insertCustomCSS(CSSString = String()) {
+    insertCustomCSS(cssJson) {
         this.#WebView.addEventListener('dom-ready', () => {
-            this.#WebView.insertCSS(CSSString).then(r => console.log(r));
+            let parsed_json = JSON.parse(JSON.stringify(cssJson));
+            let css_array_string = [];
+            for (let i = 0; i < parsed_json.length; i++) {
+                css_array_string.push(`${parsed_json[i].name} {`)
+                JSON.parse(JSON.stringify(parsed_json[i].style), function(key, value) {
+                    if (typeof value !== 'object') css_array_string.push(`${key}:${value};`)
+                    return value;
+                });
+                css_array_string.push(`}\n`)
+            }
+            console.log(css_array_string.join("").slice(0, -1))
+            this.#WebView.insertCSS(css_array_string.join("").slice(0, -1)).then(r => console.log(r));
         });
     }
     setUrl(url = String()) {
