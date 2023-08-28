@@ -98,7 +98,7 @@ class Main {
     }
     #createWindow() {
         this.#window = new BrowserWindow({
-            transparent: false,
+            transparent: true,
             width: this.#width,
             height: this.#height,
             name: this.#appName,
@@ -118,8 +118,6 @@ class Main {
             frame: true
         });
         this.#window.setMenu(null)
-
-        nativeTheme.themeSource = "system"
 
         if (!this.#webSecurity) {
             this.#window.webContents.session.webRequest.onBeforeSendHeaders(
@@ -192,6 +190,7 @@ class Main {
         return this.#window;
     }
     start(options = { tray: [] }) {
+        nativeTheme.themeSource = "system";
         if (process.platform === "linux") {
             //app.commandLine.hasSwitch("enable-transparent-visuals");
             //app.commandLine.hasSwitch("disable-gpu");
