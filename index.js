@@ -1,6 +1,6 @@
 // GLOBAL VARS
 globalThis.ctxs = [];
-const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell} = require('electron');
+const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme} = require('electron');
 const log = require('electron-log');
 log.transports.file.resolvePath = () => require("path").join(app.getPath('userData'), `electron-log/logs.log`);
 
@@ -83,9 +83,7 @@ class Main {
         webSecurity: Boolean(),
     }) {
         this.#app_icon = options.icon;
-        if (this.#app_icon === undefined) {
-            this.#app_icon = getDefaultIcon();
-        }
+        if (this.#app_icon === undefined) this.#app_icon = getDefaultIcon();
         //app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
         app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 
@@ -96,13 +94,13 @@ class Main {
         this.#renderer = options.render;
         this.#webSecurity = options.webSecurity;
         // ===
-        if (options.devTools) { this.#window.webContents.openDevTools() }
+        if (options.devTools) this.#window.webContents.openDevTools();
     }
     #createWindow() {
         this.#window = new BrowserWindow({
-            transparent: true,
-            minWidth: this.#width,
-            minHeight: this.#height,
+            transparent: false,
+            width: this.#width,
+            height: this.#height,
             name: this.#appName,
             title: this.#appName,
             show: false,
@@ -117,8 +115,11 @@ class Main {
                 enableRemoteModule: true,
                 webSecurity: this.#webSecurity,
             },
-            frame: false
+            frame: true
         });
+        this.#window.setMenu(null)
+
+        nativeTheme.themeSource = "system"
 
         if (!this.#webSecurity) {
             this.#window.webContents.session.webRequest.onBeforeSendHeaders(
@@ -143,10 +144,7 @@ class Main {
                 isQuiting = true;
             });
         });
-        this.#window.on("ready-to-show", () => {
-            this.#window.show()
-        })
-
+        this.#window.on("ready-to-show", () => this.#window.show())
     }
     #test(obj, keyToChange, value) {
         let keyToChangeLower = keyToChange.toLowerCase();

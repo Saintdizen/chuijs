@@ -2,6 +2,26 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function parseRootStyles(themeType, json, component) {
+    let stringz = JSON.parse(JSON.stringify(json));
+    let style_string = [];
+    for (let i = 0; i < stringz.length; i++) {
+        style_string.push(`@media (prefers-color-scheme: ${themeType}) {`)
+        style_string.push(`${stringz[i].name} {`)
+        JSON.parse(JSON.stringify(stringz[i].style), function(key, value) {
+            if (typeof value !== 'object') style_string.push(`${key}:${value};`)
+            return value;
+        });
+        style_string.push(`}\n`)
+        style_string.push(`}\n`)
+    }
+    let style = document.createElement('style');
+    style.innerText = style_string.join("").slice(0, -1);
+    style.type = 'text/css';
+    style.setAttribute('id', component);
+    if (document.getElementById(component) == null) document.head.appendChild(style);
+}
+
 function style_parse(json, component) {
     let stringz = JSON.parse(JSON.stringify(json));
     let style_string = [];
@@ -54,6 +74,7 @@ function htmlToMarkdown(text = String()) {
 
 exports.sleep = sleep
 exports.style_parse = style_parse
+exports.parseRootStyles = parseRootStyles
 exports.render = render
 exports.markdownToHtml = markdownToHtml
 exports.htmlToMarkdown = htmlToMarkdown

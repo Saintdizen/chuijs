@@ -1,16 +1,14 @@
 const {Animation} = require('../../modules/chui_animations');
-const {Toggle} = require('../../components/chui_toggle');
 const {Icon, Icons} = require('../../components/chui_icons');
 const {Button} = require("../../components/chui_button");
 // НАСТРОЙКИ
-const Store = require('electron-store');
 const {Dialog} = require("../../components/chui_modal");
 const {Label} = require("../../components/chui_label");
 const {ContentBlock} = require("../../components/chui_content_block");
 const {Popup} = require("../../components/chui_popups");
 const {UpdateNotification} = require("../../components/chui_update_notification");
 const {ipcRenderer} = require("electron");
-const store = new Store();
+const chui_functions = require('../../modules/chui_functions');
 //
 
 //VARS
@@ -54,79 +52,26 @@ class AppLayout extends Route {
     #notification_box_width_test = 425;
     #notification_button = document.createElement('notification_button');
     //
-    #window_control_box = document.createElement("header_window_control_box");
-    #window_close_button = document.createElement("window_close_button");
-    #window_minimize_button = document.createElement("window_minimize_button");
-    #window_maximize_button = document.createElement("window_maximize_button");
-    //
     #app_menu = document.createElement('app_menu');
     #def_menu_block_width = 400;
     #def_menu_block_width_test = 425;
     #route_views = document.createElement('route_views');
-    #dark_mode = document.createElement('dark_mode');
-    #dark_mode_togle = new Toggle();
     #menu_button = document.createElement('app_menu_button');
     #auto_close = false;
-    #disable_app_menu = false;
     #not_duplicate_page = false;
     //
-    #windowControlsPositionLeft = undefined;
     #windowHideOnClose = false;
-    //
-    #icon_light = undefined;
-    #icon_dark = undefined;
-    //
     constructor() {
         super();
         require('../../modules/chui_fonts').install();
         page_name = document.createElement('page_name');
-        require('../../modules/chui_functions').style_parse([
-            {
-                name: "strong",
-                style: {
-                    "font-weight": "600",
-                }
-            },
-            {
-                name: "*",
-                style: {
-                    "word-spacing": "0.33px",
-                    "font-family": "chui_Inter",
-                    "direction": "ltr",
-                    "user-select": "none",
-                    "outline": "none",
-                    "transition": "all .22s",
-                    "animation-duration": ".22s",
-                    "position": "relative",
-                    "-webkit-font-smoothing": "subpixel-antialiased",
-                    "text-rendering": "optimizeSpeed",
-                    "text-shadow": "var(--text_shadow_main)"
-                }
-            },
-            {
-                name: "*:before",
-                style: {
-                    "word-spacing": "0.33px",
-                    "font-family": "chui_Inter",
-                    "direction": "ltr",
-                    "user-select": "none",
-                    "outline": "none",
-                    "transition": "all .22s",
-                    "animation-duration": ".22s",
-                    "position": "relative",
-                    "-webkit-font-smoothing": "subpixel-antialiased",
-                    "text-rendering": "optimizeSpeed",
-                    "text-shadow": "var(--text_shadow_main)"
-                }
-            },
+        chui_functions.parseRootStyles("light", [
             {
                 name: ":root",
                 style: {
                     //
                     "--text_shadow_main": "0 0 1px rgba(44, 44, 44, 0.3)",
                     "--text_shadow_buttons": "0 0 1px rgba(44, 44, 44, 0.3)",
-                    //
-                    "--global_blur": "blur(16px)",
                     //Цвета
                     //Глобальные цвета
                     "--text_color": "rgba(44, 44, 44, 1)",
@@ -171,31 +116,26 @@ class AppLayout extends Route {
                     //Остальное
                     "--text_color_hover": "rgb(255, 255, 255)",
                     "--disable_color": "#e9ecef",
-                    //Шрифты
-                    "--font_default_size": "12pt",
-                    "--font_labels_size": "10pt",
-                    //Закругление элементов
-                    "--border_radius": "10px",
-                    //Отступы
-                    "--margin": "6px",
                     "--scroll_bar_background": "rgb(190, 190, 190)",
-                    // Управление окнами
-                    "--window_close_button_hover": "rgba(255, 59, 48, 1)",
-                    "--window_maximize_button_hover": "rgba(52, 199, 89, 1)",
-                    "--window_minimize_button_hover": "rgba(38, 136, 235, 1)",
-                    // Тестовые цвета
                     "--background_color_1": "rgba(219, 219, 219, 0.35)",
                     "--border_background_1": "rgba(75, 75, 75, 0.2)",
                     //
                     "--main_padding": "6px 10px",
-                    "--test_padding": "6px"
+                    "--test_padding": "6px",
+                    "--font_default_size": "12pt",
+                    "--font_labels_size": "10pt",
+                    "--border_radius": "10px",
+                    "--margin": "6px",
+                    "--global_blur": "blur(16px)",
                 }
-            },
+            }
+        ], "chUiJS_light")
+        chui_functions.parseRootStyles("dark", [
             {
-                name: "[theme='dark']",
+                name: ":root",
                 style: {
                     //
-                    "--text_shadow_main": "0 0 1px rgba(235, 235, 235, 0.3)",
+                    "--text_shadow_main": "0 0 1px rgba(44, 44, 44, 0.3)",
                     "--text_shadow_buttons": "0 0 1px rgba(44, 44, 44, 0.3)",
                     //Глобальные цвета
                     "--text_color": "rgba(235, 235, 235, 1)",
@@ -240,13 +180,57 @@ class AppLayout extends Route {
                     //Остальное
                     "--disable_color": "#e9ecef",
                     "--scroll_bar_background": "rgb(75, 75, 75)",
-                    // Управление окнами
-                    "--window_close_button_hover": "rgba(255, 69, 58, 1)",
-                    "--window_maximize_button_hover": "rgba(48, 209, 88, 1)",
-                    "--window_minimize_button_hover": "rgba(82, 158, 244, 1)",
                     // Тестовые цвета
                     "--background_color_1": "rgba(65, 65, 65, 0.35)",
                     "--border_background_1": "rgba(205, 205, 205, 0.2)",
+                    //
+                    "--main_padding": "6px 10px",
+                    "--test_padding": "6px",
+                    "--font_default_size": "12pt",
+                    "--font_labels_size": "10pt",
+                    "--border_radius": "10px",
+                    "--margin": "6px",
+                    "--global_blur": "blur(16px)",
+                }
+            }
+        ], "chUiJS_dark")
+        chui_functions.style_parse([
+            {
+                name: "strong",
+                style: {
+                    "font-weight": "600",
+                }
+            },
+            {
+                name: "*",
+                style: {
+                    "word-spacing": "0.33px",
+                    "font-family": "chui_Inter",
+                    "direction": "ltr",
+                    "user-select": "none",
+                    "outline": "none",
+                    "transition": "all .22s",
+                    "animation-duration": ".22s",
+                    "position": "relative",
+                    "-webkit-font-smoothing": "subpixel-antialiased",
+                    "text-rendering": "optimizeSpeed",
+                    "text-shadow": "var(--text_shadow_main)"
+                }
+            },
+            {
+                name: "*:before",
+                style: {
+                    "word-spacing": "0.33px",
+                    "font-family": "chui_Inter",
+                    "direction": "ltr",
+                    "user-select": "none",
+                    "outline": "none",
+                    "transition": "all .22s",
+                    "animation-duration": ".22s",
+                    "position": "relative",
+                    "-webkit-font-smoothing": "subpixel-antialiased",
+                    "text-rendering": "optimizeSpeed",
+                    "text-shadow": "var(--text_shadow_main)"
                 }
             },
             {
@@ -319,9 +303,7 @@ class AppLayout extends Route {
                 style: {
                     "width": "-webkit-fill-available",
                     "height": "-webkit-fill-available",
-                    "background": "var(--center_background)",
-                    "border": "1px solid var(--border_background_1)",
-                    //"border-radius": "var(--border_radius)",
+                    "background": "var(--center_background)"
                 }
             },
             {
@@ -331,7 +313,6 @@ class AppLayout extends Route {
                     "position": "absolute",
                     "top": "0",
                     "display": "flex",
-                    "-webkit-app-region": "no-drag",
                     "z-index": "999",
                     "flex-direction": "column",
                     "border-top-left-radius": "6px",
@@ -380,7 +361,6 @@ class AppLayout extends Route {
                     "align-items": "flex-end",
                     "justify-content": "flex-start",
                     "z-index": "1001",
-                    "-webkit-app-region": "no-drag",
                     "overflow": "hidden hidden",
                     "max-height": "calc(100% - 65px - (var(--margin) * 2))",
                     "transition": "max-height .22s ease-in-out",
@@ -402,7 +382,6 @@ class AppLayout extends Route {
                     "align-items": "flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    "-webkit-app-region": "no-drag",
                     "margin": "58px 12px 12px 12px",
                     "border-radius": "var(--border_radius)",
                     "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
@@ -422,7 +401,6 @@ class AppLayout extends Route {
                     "align-items": "flex-start",
                     "height": "-webkit-fill-available",
                     "z-index": "1000",
-                    "-webkit-app-region": "no-drag",
                     "margin": "58px 12px 12px 12px",
                     "border-radius": "var(--border_radius)",
                     "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
@@ -441,7 +419,6 @@ class AppLayout extends Route {
                     "align-items": "center",
                     "height": "max-content",
                     "width": "-webkit-fill-available",
-                    "-webkit-app-region": "no-drag",
                     "background": "transparent",
                     "border-top": "1px solid var(--border_background_1)",
                 }
@@ -455,7 +432,6 @@ class AppLayout extends Route {
                     "height": "-webkit-fill-available",
                     "width": "-webkit-fill-available",
                     "padding": "var(--test_padding)",
-                    "-webkit-app-region": "no-drag"
                 }
             },
             {
@@ -478,7 +454,6 @@ class AppLayout extends Route {
                     "font-size": "22pt",
                     "background": "transparent",
                     "color": "var(--text_color)",
-                    "-webkit-app-region": "no-drag"
                 }
             },
             {
@@ -519,7 +494,6 @@ class AppLayout extends Route {
                     "font-size": "22pt",
                     "background": "transparent",
                     "color": "var(--text_color)",
-                    "-webkit-app-region": "no-drag"
                 }
             },
             {
@@ -555,37 +529,12 @@ class AppLayout extends Route {
                     "width": "-webkit-fill-available",
                     "height": "-webkit-fill-available",
                     "overflow": "hidden hidden",
-                    "-webkit-app-region": "no-drag"
                 }
             },
             {
                 name: "route_views:hover",
                 style: {
                     "overflow": "hidden overlay",
-                }
-            },
-            {
-                name: "dark_mode",
-                style: {
-                    "display": "flex",
-                    "padding": "var(--test_padding)",
-                    "width": "-webkit-fill-available",
-                    "height": "max-content",
-                    "justify-content": "center",
-                    "align-items": "center",
-                    "border-top": "1px solid var(--border_background_1)",
-                }
-            },
-            {
-                name: ".class_dark_mode",
-                style: {
-                    "display": "flex",
-                    "padding": "var(--test_padding)",
-                    "width": "max-content",
-                    "height": "max-content",
-                    "justify-content": "center",
-                    "align-items": "center",
-                    "-webkit-app-region": "no-drag"
                 }
             },
             {
@@ -681,122 +630,9 @@ class AppLayout extends Route {
                 style: {
                     "display": "flex",
                 }
-            },
-            ///
-            {
-                name: "header_window_control_box",
-                style: {
-                    "display": "flex",
-                }
-            },
-            {
-                name: "window_minimize_button",
-                style: {
-                    "cursor": "pointer",
-                    "outline": "none",
-                    "height": "max-content",
-                    "width": "max-content",
-                    "border-radius": "100%",
-                    "padding": "4px",
-                    "margin": "2px",
-                    "background": "var(--button_background)",
-                    "color": "var(--text_color)",
-                    "-webkit-app-region": "no-drag",
-                    "border": "1px solid var(--border_background_1)",
-                }
-            },
-            {
-                name: "window_minimize_button chui_icon",
-                style: {
-                    "color": "transparent"
-                }
-            },
-            {
-                name: "window_minimize_button:hover",
-                style: {
-                    "background": "var(--window_minimize_button_hover)",
-                    "border": "1px solid var(--window_minimize_button_hover)",
-                }
-            },
-            {
-                name: "window_minimize_button:hover chui_icon",
-                style: {
-                    "color": "var(--text_color_hover)"
-                }
-            },
-            {
-                name: "window_close_button",
-                style: {
-                    "cursor": "pointer",
-                    "outline": "none",
-                    "height": "max-content",
-                    "width": "max-content",
-                    "border-radius": "100%",
-                    "padding": "2px",
-                    "margin": "2px",
-                    "background": "var(--button_background)",
-                    "color": "var(--text_color)",
-                    "-webkit-app-region": "no-drag",
-                    "border": "1px solid var(--border_background_1)",
-                }
-            },
-            {
-                name: "window_close_button chui_icon",
-                style: {
-                    "color": "transparent"
-                }
-            },
-            {
-                name: "window_close_button:hover",
-                style: {
-                    "background": "var(--window_close_button_hover)",
-                    "border": "1px solid var(--window_close_button_hover)",
-                }
-            },
-            {
-                name: "window_close_button:hover chui_icon",
-                style: {
-                    "color": "var(--text_color_hover)"
-                }
-            },
-            {
-                name: "window_maximize_button",
-                style: {
-                    "cursor": "pointer",
-                    "outline": "none",
-                    "height": "max-content",
-                    "width": "max-content",
-                    "border-radius": "100%",
-                    "padding": "2px",
-                    "margin": "2px 3px",
-                    "background": "var(--button_background)",
-                    "color": "var(--text_color)",
-                    "-webkit-app-region": "no-drag",
-                    "border": "1px solid var(--border_background_1)",
-                }
-            },
-            {
-                name: "window_maximize_button chui_icon",
-                style: {
-                    "color": "transparent"
-                }
-            },
-            {
-                name: "window_maximize_button:hover",
-                style: {
-                    "background": "var(--window_maximize_button_hover)",
-                    "border": "1px solid var(--window_maximize_button_hover)",
-                }
-            },
-            {
-                name: "window_maximize_button:hover chui_icon",
-                style: {
-                    "color": "var(--text_color_hover)"
-                }
-            },
+            }
             ///
         ], 'chUiJS_AppLayout');
-        document.body.setAttribute('theme', 'light')
         document.getElementById('app').append(this.#applayout);
         header = document.createElement('header');
         header.id = "header";
@@ -814,7 +650,6 @@ class AppLayout extends Route {
         this.#app_menu.style.width = `${this.#def_menu_block_width}px`;
         this.#app_menu.style.left = `calc(-${this.#def_menu_block_width_test}px)`;
         this.#app_menu.style.height = `calc(100% - ${header.style.height})`;
-        this.#dark_mode_togle.setId("dark_mode");
 
         // Меню уведомлений
         let remove_button = new Button({
@@ -840,34 +675,7 @@ class AppLayout extends Route {
         this.#notification_box.style.right = `calc(-${this.#notification_box_width_test}px)`;
         this.#notification_box.style.height = `calc(100% - ${header.style.height})`;
 
-        // Установка темы
-        const dataTheme = store.get("dark");
-        if (dataTheme === undefined) store.set("dark", false)
-        this.#dark_mode_togle.setValue(store.get("dark"))
-
-        if (this.#dark_mode_togle.getValue()) {
-            document.body.setAttribute('theme', "dark");
-        } else {
-            document.body.setAttribute('theme', "light");
-        }
-        this.#dark_mode_togle.addChangeListener((e) => {
-            if (e.target.checked) {
-                document.body.setAttribute('theme', "dark");
-            } else {
-                document.body.setAttribute('theme', "light");
-            }
-            store.set("dark", e.target.checked)
-        })
-        this.#icon_light = new Icon(Icons.DEVICE.LIGHT_MODE, "20px", "").set();
-        this.#icon_light.style.marginRight = "6px";
-        this.#icon_dark = new Icon(Icons.DEVICE.DARK_MODE, "20px", "").set();
-        this.#icon_dark.style.marginLeft = "6px";
-
-        this.#dark_mode.appendChild(this.#icon_light)
-        this.#dark_mode.appendChild(this.#dark_mode_togle.set())
-        this.#dark_mode.appendChild(this.#icon_dark)
         this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
-
         this.#menu_button.addEventListener("click", () => {
             if (this.#menu_button.classList.contains("app_menu_button_active")) {
                 this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
@@ -951,7 +759,6 @@ class AppLayout extends Route {
         //
         this.#applayout.appendChild(this.#app_menu)
         this.#app_menu.appendChild(this.#route_views)
-        this.#app_menu.appendChild(this.#dark_mode)
 
         // Шапка левый блок
         this.#header_left_box.appendChild(this.#menu_button);
@@ -965,39 +772,27 @@ class AppLayout extends Route {
         header_first_test.appendChild(this.#header_right_box)
 
         // Свернуть
-        this.#window_minimize_button.innerHTML = new Icon(Icons.ACTIONS.MINIMIZE, "13px").getHTML();
-        this.#window_minimize_button.addEventListener("click", () => {
+        /*this.#window_minimize_button.addEventListener("click", () => {
             require("@electron/remote").getCurrentWindow().minimize();
-        })
+        })*/
 
         // Развернуть на весь экран
-        this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "17px").getHTML();
-        this.#window_maximize_button.addEventListener("click", () => {
+        /*this.#window_maximize_button.addEventListener("click", () => {
             if (require("@electron/remote").getCurrentWindow().isMaximized()) {
-                this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "17px").getHTML();
                 require("@electron/remote").getCurrentWindow().restore();
             } else {
-                this.#window_maximize_button.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN_EXIT, "17px").getHTML();
                 require("@electron/remote").getCurrentWindow().maximize();
             }
-        })
+        })*/
 
         // Закрыть
-        this.#window_close_button.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "17px").getHTML();
-        this.#window_close_button.addEventListener("click", () => {
+        /*this.#window_close_button.addEventListener("click", () => {
             if (this.#windowHideOnClose) {
                 require("@electron/remote").getCurrentWindow().hide();
             } else {
                 require("@electron/remote").getCurrentWindow().close();
             }
-        })
-        if (this.#windowControlsPositionLeft === undefined) {
-            this.#window_control_box.style.marginRight = '6px';
-            this.#window_control_box.appendChild(this.#window_minimize_button)
-            this.#window_control_box.appendChild(this.#window_maximize_button)
-            this.#window_control_box.appendChild(this.#window_close_button)
-            header_first_test.appendChild(this.#window_control_box)
-        }
+        })*/
         //
         ipcRenderer.on("sendNotificationUpdateLoad", async (e, text, body) => {
             let updateNotificationLoad = new UpdateNotification({ title: text, text: body, spinner: true });
@@ -1032,32 +827,11 @@ class AppLayout extends Route {
         test.style.justifyContent = "center"
         test.style.height = "-webkit-fill-available"
         test.style.margin = "0px 6px"
-
-        test.appendChild(this.#icon_light)
-        test.appendChild(this.#dark_mode_togle.set())
-        test.appendChild(this.#icon_dark)
         this.#header_left_box.appendChild(test)
     }
 
     setHideOnClose(boolean = Boolean()) {
         this.#windowHideOnClose = boolean;
-    }
-
-    setWindowControlsPositionLeft(position = Boolean()) {
-        this.#windowControlsPositionLeft = position;
-        if (this.#windowControlsPositionLeft) {
-            this.#window_control_box.style.marginLeft = '11px';
-            this.#window_control_box.appendChild(this.#window_close_button)
-            this.#window_control_box.appendChild(this.#window_maximize_button)
-            this.#window_control_box.appendChild(this.#window_minimize_button)
-            header_first_test.insertBefore(this.#window_control_box, header_first_test.firstChild)
-        } else {
-            this.#window_control_box.style.marginRight = '11px';
-            this.#window_control_box.appendChild(this.#window_minimize_button)
-            this.#window_control_box.appendChild(this.#window_maximize_button)
-            this.#window_control_box.appendChild(this.#window_close_button)
-            header_first_test.appendChild(this.#window_control_box)
-        }
     }
 
     setCustomHeaderHeight(height) {
@@ -1198,7 +972,6 @@ class UserProfile {
     //
     #user_dd_image_main = document.createElement("user_dd_image_main");
     #user_dd_image = document.createElement("user_dd_image");
-
     //
     constructor(options = {
         username: String(),
@@ -1209,13 +982,12 @@ class UserProfile {
         },
         items: []
     }) {
-        require('../../modules/chui_functions').style_parse([
+        chui_functions.style_parse([
             {
                 name: "user_main",
                 style: {
                     "position": "relative",
                     "display": "flex",
-                    "-webkit-app-region": "no-drag"
                 }
             },
             {
@@ -1316,7 +1088,7 @@ class UserProfile {
         this.#user_button.innerText = options.username;
         this.#user_main.appendChild(this.#user_button)
         this.#user_main.appendChild(this.#user_dropdown)
-        this.#user_button.addEventListener("click", (e) => {
+        this.#user_button.addEventListener("click", () => {
             if (this.#user_dropdown.style.display === "flex") {
                 this.#user_button.classList.remove("user_button");
                 new Animation(this.#user_dropdown).fadeOut();
@@ -1392,7 +1164,7 @@ class HeaderDialog {
             components: []
         }
     }) {
-        require('../../modules/chui_functions').style_parse([
+        chui_functions.style_parse([
             {
                 name: "header_button",
                 style: {
@@ -1408,8 +1180,7 @@ class HeaderDialog {
                     "background": "transparent",
                     "font-weight": "500",
                     "display": "flex",
-                    "flex-direction": "row",
-                    "-webkit-app-region": "no-drag"
+                    "flex-direction": "row"
                 }
             },
             {
@@ -1522,7 +1293,7 @@ class HeaderButton {
         clickEvent: () => {
         }
     }) {
-        require('../../modules/chui_functions').style_parse([
+        chui_functions.style_parse([
             {
                 name: "header_button",
                 style: {
@@ -1540,7 +1311,6 @@ class HeaderButton {
                     "font-weight": "500",
                     "display": "flex",
                     "flex-direction": "row",
-                    "-webkit-app-region": "no-drag"
                 }
             },
             {

@@ -22,7 +22,6 @@ class Test extends AppLayout {
     constructor() {
         super();
         // Настройки окна
-        this.setWindowControlsPositionLeft(true);
         this.setHideOnClose(true);
         this.setNotDuplicatePages(true);
         //this.disableAppMenu();

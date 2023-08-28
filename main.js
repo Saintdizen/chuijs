@@ -14,4 +14,3 @@ main.start({
     ]
 })
 //main.enableAutoUpdateApp(1000);
-
