@@ -1,0 +1,20 @@
+h1, h2, h3, h4, h5, h6 {
+    height: max-content;
+    width: max-content;
+    color: var(--text_color);
+    margin: var(--margin);
+    letter-spacing: -0.031rem;
+    font-weight: 600;
+}
+
+h1, h2 {
+    padding: 12px 6px;
+}
+
+h3, h4 {
+    padding: 10px 6px;
+}
+
+h5, h6 {
+    padding: 8px 6px;
+}

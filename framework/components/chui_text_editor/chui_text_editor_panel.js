@@ -1,14 +1,14 @@
 const {Icon, Icons} = require("../chui_icons");
 const {Animation} = require("../../modules/chui_animations/animations");
-const {Dialog} = require("../chui_modal");
+const {Dialog} = require("../chui_modal/modal");
 const {Button} = require("../chui_button/button");
 const {TextInput} = require("../chui_inputs/chui_text");
-const {Label} = require("../chui_label");
+const {Label} = require("../chui_label/label");
 const {ContentBlock} = require("../chui_content_block");
-const {Notification} = require("../../components/chui_notification");
+const {Notification} = require("../chui_notification/notification");
 const {NumberInput} = require("../chui_inputs/chui_number");
 const {CheckBox} = require("../chui_inputs/chui_check_box");
-const {NotificationStyle} = require("../chui_notification");
+const {NotificationStyle} = require("../chui_notification/notification");
 const {FileInput, AcceptTypes} = require("../chui_inputs/chui_file");
 
 class Commands {

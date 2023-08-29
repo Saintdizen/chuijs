@@ -1,0 +1,48 @@
+chui_dialog {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    overflow: auto;
+    background-color: var(--modal_overlay);
+    padding: 0;
+    border: none;
+    backdrop-filter: var(--global_blur);
+}
+
+dialog_content {
+    margin: 59px auto;
+    width: max-content;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    padding: 6px;
+    border-radius: var(--border_radius);
+    border: 1px solid var(--border_main);
+    color: var(--text_color);
+    background: var(--modal_background);
+    box-shadow: 0 2px 10px 2px rgb(0 0 0 / 20%);
+}
+
+dialog_header {
+    display: flex;
+    padding-bottom: 6px;
+    /*border-bottom : 1px solid var(--shadow_three)*/
+}
+
+dialog_body {
+    /*padding: 6px 0px;*/
+    display: flex;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+    overflow: auto;
+}
+
+dialog_footer {
+    display: flex;
+    padding-top: 6px;
+    /*border-top : 1px solid var(--shadow_three)*/
+}

@@ -1,5 +1,5 @@
-const {Animation} = require('../modules/chui_animations/animations');
-const {style_parse, markdownToHtml} = require('../modules/chui_functions');
+const {Animation} = require('../../modules/chui_animations/animations');
+const {setStyles, markdownToHtml} = require('../../modules/chui_functions');
 
 class Notification {
     #id = require("randomstring").generate();
@@ -11,118 +11,11 @@ class Notification {
     #notification_date = document.createElement("notification_date");
     #notification_text = document.createElement("notification_text")
     constructor(options = {
-        title: String(),
-        markdownTitle: String(),
-        text: String(),
-        markdownText: String(),
-        style: undefined,
-        showTime: Number()
+        title: String(), markdownTitle: String(),
+        text: String(), markdownText: String(),
+        style: undefined, showTime: Number()
     }) {
-        style_parse([
-            {
-                name: "notification",
-                style: {
-                    "display": "none",
-                    "height": "max-content",
-                    "width": "max-content",
-                    "max-width": "600px",
-                    "border-radius": "var(--border_radius)",
-                    "margin": "var(--margin)",
-                    "font-size": "12pt",
-                    "padding": "var(--main_padding)",
-                    "background": "var(--notification_background_popup)",
-                    "backdrop-filter": "var(--global_blur)",
-                    "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
-                    "z-index": "1002",
-                    "border": "1px solid var(--border_main)",
-                }
-            },
-            {
-                name: ".notification_warning",
-                style: {
-                    "background": "var(--badge_warning_back)",
-                    "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
-                }
-            },
-            {
-                name: ".notification_error",
-                style: {
-                    "background": "var(--badge_error_back)",
-                    "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
-                }
-            },
-            {
-                name: ".notification_success",
-                style: {
-                    "background": "var(--badge_success_back)",
-                    "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
-                }
-            },
-            {
-                name: "notification_content",
-                style: {
-                    "display": "flex",
-                    "flex-direction": "column",
-                    "flex": "1",
-                    "justify-content": "flex-start",
-                    "align-items": "flex-start"
-                }
-            },
-            {
-                name: "notification_header",
-                style: {
-                    "display": "flex",
-                    "flex-direction": "row",
-                    "flex": "1",
-                    "justify-content": "space-between",
-                    "align-items": "center",
-                    "width": "-webkit-fill-available"
-                }
-            },
-            {
-                name: "notification_title",
-                style: {
-                    "font-size": "12pt",
-                    "font-weight": "600",
-                    "margin": "3px",
-                    "color": "var(--text_color)",
-                    "word-break": "break-all",
-                }
-            },
-            {
-                name: "notification_title p",
-                style: {
-                    "margin": "0px"
-                }
-            },
-            {
-                name: "notification_date",
-                style: {
-                    "font-size": "8pt",
-                    "font-weight": "500",
-                    "margin": "3px 0px 0px 10px",
-                    "color": "var(--text_color)",
-                    "white-space": "pre",
-                    "text-align": "end"
-                }
-            },
-            {
-                name: "notification_text",
-                style: {
-                    "font-size": "10pt",
-                    "font-weight": "500",
-                    "margin": "3px 4px 6px 4px",
-                    "color": "var(--text_color)",
-                    "word-break": "break-word"
-                }
-            },
-            {
-                name: "notification_text p",
-                style: {
-                    "margin": "0px"
-                }
-            }
-        ], 'chUiJS_Notification');
+        setStyles(__dirname + "/styles.css", 'chUiJS_Notification');
         if (options.showTime !== undefined) this.#time = options.showTime;
         this.#notification.id = this.#id;
         // Стили заголовка уведомления

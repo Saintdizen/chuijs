@@ -1,0 +1,12 @@
+chui_label {
+    height: max-content;
+    width: max-content;
+    margin: var(--margin);
+    font-size: 12pt;
+    font-weight:500;
+    color: var(--text_color);
+}
+
+chui_label p {
+    margin: 0;
+}

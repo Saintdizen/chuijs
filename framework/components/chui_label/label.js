@@ -1,4 +1,4 @@
-const {style_parse, htmlToMarkdown, markdownToHtml} = require('../modules/chui_functions');
+const {setStyles, htmlToMarkdown, markdownToHtml} = require('../../modules/chui_functions');
 
 class Label {
     #chui_label = document.createElement(`chui_label`);
@@ -11,25 +11,7 @@ class Label {
         width: String(),
         fontSize: String(),
     }) {
-        style_parse([
-            {
-                name: "chui_label",
-                style: {
-                    "height": "max-content",
-                    "width": "max-content",
-                    "margin": "var(--margin)",
-                    "font-size": "12pt",
-                    "font-weight":"500",
-                    "color": "var(--text_color)"
-                }
-            },
-            {
-                name: "chui_label p",
-                style: {
-                    "margin": "0px",
-                }
-            }
-        ], 'chUiJS_Label');
+        setStyles(__dirname + "/styles.css", 'chUiJS_Label');
         // Стили текста лейбла
         if (options.text !== undefined && options.markdownText !== undefined) {
             throw new Error("Должна быть установлена одна опция text или markdownText");

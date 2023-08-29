@@ -1,165 +1,14 @@
-const {Animation} = require('../modules/chui_animations/animations');
-const {PasswordInput} = require("./chui_inputs/chui_password");
-const {TextInput} = require("./chui_inputs/chui_text");
+const {Animation} = require('../../modules/chui_animations/animations');
+const {PasswordInput} = require("../chui_inputs/chui_password");
+const {TextInput} = require("../chui_inputs/chui_text");
 
 class Popup {
     constructor() {
-        require('../modules/chui_functions').style_parse([
-            {
-                name: "chui_popup",
-                style: {
-                    "display": "none",
-                    "position": "fixed",
-                    "z-index": "1000",
-                    "left": "0",
-                    "top": "0",
-                    "width": "100%",
-                    "height": "100%",
-                    "overflow": "auto",
-                    "background-color": "var(--modal_overlay)",
-                    "padding": "0px",
-                    "border": "none",
-                    "backdrop-filter": "var(--global_blur)"
-                }
-            },
-            {
-                name: "popup_content",
-                style: {
-                    "margin": "60px auto",
-                    "width": "325px",
-                    "height": "max-content",
-                    "display": "flex",
-                    "flex-direction": "column",
-                    "border-radius": "var(--border_radius)",
-                    "color": "var(--text_color)",
-                    "background": "var(--modal_background)",
-                    "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
-                    "border": "1px solid var(--border_main)",
-                }
-            },
-            {
-                name: "popup_body",
-                style: {
-                    "padding": "10px",
-                    "display": "flex",
-                    "height": "-webkit-fill-available",
-                    "width": "-webkit-fill-available",
-                    "overflow": "auto",
-                    "flex-direction": "column",
-                    "justify-content": "center",
-                    "align-items": "center"
-                }
-            },
-            {
-                name: "popup_buttons",
-                style: {
-                    "display": "flex",
-                    "padding-top": "6px",
-                    "border-top": "1px solid var(--shadow_three)",
-                    "flex-direction": "row",
-                    "justify-content": "center",
-                    "align-items": "center",
-                    "padding": "8px"
-                }
-            },
-            {
-                name: "popup_title",
-                style: {
-                    "display": "block",
-                    "text-align": "center",
-                    "font-size": "12pt",
-                    "font-weight": "600",
-                    "padding": "6px"
-                }
-            },
-            {
-                name: "popup_message",
-                style: {
-                    "display": "block",
-                    "text-align": "center",
-                    "font-size": "10pt",
-                    "font-weight": "500",
-                    "padding": "6px"
-                }
-            },
-            //ALERT
-            {
-                name: "popup_button_ok",
-                style: {
-                    "display": "flex",
-                    "border-top": "1px solid var(--shadow_three)",
-                    "flex-direction": "row",
-                    "justify-content": "center",
-                    "align-items": "center",
-                    "width": "-webkit-fill-available",
-                    "padding": "10px",
-                    "border-radius": "var(--border_radius)",
-                    "color": "var(--button_text_color)",
-                    "font-weight": "500",
-                    "font-size": "12pt",
-                }
-            },
-            {
-                name: "popup_button_ok:hover",
-                style: {
-                    "color": "var(--text_color_hover)",
-                    "background": "var(--blue_prime_background)",
-                }
-            },
-            //CONFIRM
-            {
-                name: "popup_button_accept",
-                style: {
-                    "display": "flex",
-                    "border-top": "1px solid var(--shadow_three)",
-                    "flex-direction": "row",
-                    "justify-content": "center",
-                    "align-items": "center",
-                    "width": "-webkit-fill-available",
-                    "padding": "10px",
-                    "border-radius": "var(--border_radius)",
-                    "color": "var(--button_text_color)",
-                    "font-weight": "500",
-                    "font-size": "12pt",
-                }
-            },
-            {
-                name: "popup_button_accept:hover",
-                style: {
-                    "color": "var(--text_color_hover)",
-                    "background": "var(--blue_prime_background)",
-                }
-            },
-            {
-                name: "popup_button_cancel",
-                style: {
-                    "display": "flex",
-                    "border-top": "1px solid var(--shadow_three)",
-                    "flex-direction": "row",
-                    "justify-content": "center",
-                    "align-items": "center",
-                    "width": "-webkit-fill-available",
-                    "padding": "10px",
-                    "border-radius": "var(--border_radius)",
-                    "color": "var(--badge_error_text)",
-                    "font-weight": "500",
-                    "font-size": "12pt",
-                }
-            },
-            {
-                name: "popup_button_cancel:hover",
-                style: {
-                    "color": "var(--text_color_hover)",
-                    "background": "var(--red_prime_background)",
-                }
-            },
-        ], 'chUiJS_Popups');
+        require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_Popups');
     }
-
     alert(options = {title: String(), message: String()}) {
         new PopupAlert(options);
     }
-
     async confirm(options = {
         title: String(), message: String(), okText: String(), cancelText: String(),
     }) {
@@ -169,7 +18,6 @@ class Popup {
             return err;
         }
     }
-
     async prompt(options = {
         title: String(), message: String(),
         inputs: {
@@ -202,7 +50,6 @@ class PopupAlert {
 
     #popup_title = document.createElement("popup_title")
     #popup_message = document.createElement("popup_message")
-
     constructor(options = {title: String(), message: String()}) {
         this.#chui_popup.id = this.#id
         //ADDS
@@ -244,7 +91,6 @@ class PopupConfirm {
 
     #popup_title = document.createElement("popup_title")
     #popup_message = document.createElement("popup_message")
-
     constructor(options = {
         title: String(), message: String(),
         okText: String(), cancelText: String(),

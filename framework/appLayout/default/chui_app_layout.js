@@ -2,11 +2,11 @@ const {Animation} = require('../../modules/chui_animations/animations');
 const {Icon, Icons} = require('../../components/chui_icons');
 const {Button} = require("../../components/chui_button/button");
 // НАСТРОЙКИ
-const {Dialog} = require("../../components/chui_modal");
-const {Label} = require("../../components/chui_label");
+const {Dialog} = require("../../components/chui_modal/modal");
+const {Label} = require("../../components/chui_label/label");
 const {ContentBlock} = require("../../components/chui_content_block");
-const {Popup} = require("../../components/chui_popups");
-const {UpdateNotification} = require("../../components/chui_update_notification");
+const {Popup} = require("../../components/chui_popups/chui_popups");
+const {UpdateNotification} = require("../../components/chui_notification/notification_update");
 const {ipcRenderer} = require("electron");
 const chui_functions = require('../../modules/chui_functions');
 //

@@ -1,5 +1,5 @@
-const { Animation } = require('../modules/chui_animations/animations')
-const { Spinner } = require('../components/chui_spinner')
+const { Animation } = require('../../modules/chui_animations/animations')
+const { Spinner } = require('../chui_spinner/spinner')
 
 
 // https://www.electronjs.org/ru/docs/latest/api/webview-tag
@@ -9,45 +9,7 @@ class WebView {
     #WebView = document.createElement('webview')
     #chui_load = document.createElement('chui_load')
     constructor(url = String()) {
-          require('../modules/chui_functions').style_parse([
-            {
-                name: "chui_webview",
-                style: {
-                    "position": "relative",
-                    "width": "-webkit-fill-available",
-                    "height": "100%"
-                }
-            },
-            {
-              name: "chui_load",
-              style: {
-                  "display": "flex",
-                  "width": "-webkit-fill-available",
-                  "height": "100%",
-                  "position": "absolute",
-                  "top": "0px",
-                  "left": "0px",
-                  "justify-content": "center",
-                  "align-items": "center",
-                  "z-index": "0"
-              }
-          },
-          {
-            name: "webview",
-            style: {
-                "height": "100%",
-                "width": "-webkit-fill-available",
-                "display": "none",
-                "z-index": "1"
-            }
-          },
-          {
-            name: "webview.hide",
-            style: {
-                "visibility": "hidden"
-            }
-          }
-        ], 'chUiJS_WebView');
+        require('../../modules/chui_functions').setStyles(__dirname + '/styles.css', 'chUiJS_WebView');
         this.#WebView.setAttribute('id', this.#id)
         this.#WebView.setAttribute('useragent', getFirefoxUserAgent())
         this.#WebView.setAttribute('allowpopups', 'true')

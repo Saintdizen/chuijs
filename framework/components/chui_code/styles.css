@@ -1,0 +1,10 @@
+.chui_code {
+    height: max-content;
+    width: max-content;
+    margin: var(--margin);
+    font-size: 12pt;
+    font-weight: 400;
+    color: var(--text_color);
+    white-space: pre-wrap;
+    font-family: monospace;
+}

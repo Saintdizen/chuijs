@@ -1,4 +1,4 @@
-let { Notification } = require('./chui_notification')
+let { Notification } = require('./chui_notification/notification')
 
 class BarGraph {
     #canvas = document.createElement('canvas');
