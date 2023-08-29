@@ -1,0 +1,110 @@
+chui_menu_bar_main {
+    display: flex;
+    width: max-content;
+    height: max-content;
+    padding: 2px;
+}
+
+chui_menu_bar_button {
+    cursor: pointer;
+    height: max-content;
+    width: max-content;
+    border-radius: var(--border_radius);
+    padding: var(--main_padding);
+    font-size: 12pt;
+    font-weight: 400;
+    border: 1px dashed rgba(0, 0, 0, 0);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: var(--button_text_color);
+    margin: 2px
+}
+
+chui_menu_bar_button:hover {
+    background: var(--blue_prime_background);
+    color: var(--text_color_hover);
+}
+
+menu_bar_drop_down_main {
+    position: relative;
+    display: flex;
+    margin: auto 6px
+}
+
+menu_bar_drop_down_button:hover {
+    background: var(--blue_prime_background);
+    color: var(--text_color_hover);
+}
+
+.menu_bar_drop_down_button {
+    background: var(--blue_prime_background);
+    color: var(--text_color_hover);
+}
+
+menu_bar_drop_down_button {
+    cursor: pointer;
+    height: max-content;
+    width: max-content;
+    border-radius: var(--border_radius);
+    padding: var(--main_padding);
+    font-size: 12pt;
+    font-weight: 400;
+    border: 1px dashed rgba(0, 0, 0, 0);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: var(--button_text_color);
+}
+
+menu_bar_dropdown {
+    margin-top: 44px;
+    display: none;
+    position: absolute;
+    background: var(--header_background_dropdown);
+    color: var(--text_color);
+    border: 1px solid var(--border_main);
+    border-radius: var(--border_radius);
+    padding: 6px;
+    z-index: 1;
+    left: 0;
+    min-width: max-content;
+    flex-direction: column;
+    backdrop-filter: var(--global_blur);
+}
+
+.menu_bar_button {
+    cursor: pointer;
+    height: max-content;
+    width: max-content;
+    border-radius: var(--border_radius);
+    padding: var(--main_padding);
+    font-size: 12pt;
+    font-weight: 400;
+    background: transparent;
+    border: 1px dashed rgba(0, 0, 0, 0);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: var(--button_text_color);
+}
+
+.menu_bar_dropdown_button {
+    cursor: pointer;
+    height: max-content;
+    width: -webkit-fill-available;
+    border-radius: var(--border_radius);
+    padding: var(--main_padding);
+    font-size: 12pt;
+    font-weight: 400;
+    background: transparent;
+    border: 1px dashed rgba(0, 0, 0, 0);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    color: var(--button_text_color);
+}

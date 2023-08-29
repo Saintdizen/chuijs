@@ -1,0 +1,6 @@
+chui_html_block {
+    display: block;
+    color: var(--text_color);
+    margin: var(--margin);
+    height: max-content
+}

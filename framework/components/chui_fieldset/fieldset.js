@@ -11,40 +11,7 @@ class FieldSet {
         },
         components: []
     }) {
-        const {style_parse} = require('../modules/chui_functions');
-        style_parse([
-            {
-                name: "chui_fieldset",
-                style: {
-                    "height": "max-content",
-                    "width": "max-content",
-                    "border-radius": "var(--border_radius)",
-                    "margin": "var(--margin)",
-                }
-            },
-            {
-                name: "fieldset",
-                style: {
-                    "height": "-webkit-fill-available",
-                    "width": "-webkit-fill-available",
-                    "border": "1px solid var(--border_main)",
-                    "border-radius": "var(--border_radius)",
-                    "padding": "0px 6px 6px 6px",
-                    "display": "flex",
-                }
-            },
-            {
-                name: "legend",
-                style: {
-                    "color": "var(--button_text_color)",
-                    "padding": "var(--main_padding)",
-                    "font-size": "10pt",
-                    "font-weight":"400",
-                    "border": "1px solid var(--border_main)",
-                    "border-radius": "var(--border_radius)",
-                }
-            }
-        ], 'chUiJS_FieldSet');
+        require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_FieldSet');
         if (options.id !== undefined) this.#fieldset.id = options.id;
         if (options.name !== undefined) this.#fieldset.name = options.name;
         this.#legend.innerText = options.title;
