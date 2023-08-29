@@ -7,13 +7,13 @@ log.transports.file.resolvePath = () => require("path").join(app.getPath('userDa
 //ПОЛЯ ВВОДА
 const { TextInput } = require('./framework/components/chui_inputs/chui_text');
 const { DateInput } = require('./framework/components/chui_inputs/chui_date/date');
-const { NumberInput } = require('./framework/components/chui_inputs/chui_number');
+const { NumberInput } = require('./framework/components/chui_inputs/chui_number/number');
 const { EmailInput } = require('./framework/components/chui_inputs/chui_email/email');
-const { PasswordInput } = require('./framework/components/chui_inputs/chui_password');
+const { PasswordInput } = require('./framework/components/chui_inputs/chui_password/password');
 const { Select } = require('./framework/components/chui_inputs/chui_select_box');
 const { ComboBox } = require('./framework/components/chui_inputs/chui_combo_box/combo_box');
 const { TextArea } = require('./framework/components/chui_inputs/chui_text_area');
-const { RadioButton } = require('./framework/components/chui_inputs/chui_radio_button');
+const { RadioButton } = require('./framework/components/chui_inputs/chui_radio_button/radio_button');
 const { CheckBox } = require('./framework/components/chui_inputs/chui_check_box/check_box');
 const { RadioGroup } = require('./framework/components/chui_radio_group/radio_group');
 //==========
@@ -45,7 +45,7 @@ const { Accordion } = require('./framework/components/chui_accordion/accordion')
 const { CodeBlock } = require('./framework/components/chui_code/code')
 const { HtmlBlock } = require('./framework/components/chui_html_block/html_block')
 const { sleep, render, getDefaultIcon } = require('./framework/modules/chui_functions');
-const { FileInput, AcceptTypes } = require("./framework/components/chui_inputs/chui_file");
+const { FileInput, AcceptTypes } = require("./framework/components/chui_inputs/chui_file/file");
 const { TreeView } = require("./framework/components/chui_tree_view/tree_view");
 const { Form } = require("./framework/components/chui_form/form");
 const { SlideShow } = require("./framework/components/chui_slideshow/slideshow");

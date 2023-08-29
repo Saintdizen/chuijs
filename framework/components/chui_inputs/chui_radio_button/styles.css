@@ -1,0 +1,73 @@
+radiobutton {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: var(--font_labels_size);
+    margin: var(--margin);
+    width: max-content
+}
+
+.radiobutton {
+    position: absolute;
+    z-index: -1;
+    opacity: 0
+}
+
+.radiobutton+label {
+    display: inline-flex;
+    align-items: center;
+    color:var(--text_color)
+}
+
+.radiobutton+label::before {
+    font-size: var(--font_default_size);
+    content: '';
+    display: flex;
+    width: 1.2em;
+    height: 1.2em;
+    flex-shrink: 0;
+    flex-grow:0;
+    border-radius:50%;
+    margin-right:10px;
+    align-items:center;
+    justify-content:center;
+    color:transparent;
+    background-color: var(--input_background);
+    border: 1px solid var(--border_main);
+}
+
+.radiobutton:not(:disabled):active+label::before {
+    border: 1px solid var(--blue_prime_background);
+    background: radial-gradient(circle, rgba(242,242,247,1) 30%, var(--blue_prime_background) 42%);
+    color:var(--text_color_hover);
+}
+
+.radiobutton:focus+label::before {}
+
+.radiobutton:checked+label::before {
+    border: 1px solid var(--blue_prime_background);
+    background: radial-gradient(circle, rgba(242,242,247,1) 30%, var(--blue_prime_background) 42%);
+    color:var(--text_color_hover);
+}
+
+.labelr {
+    cursor: pointer;
+    font-size: var(--font_default_size)
+}
+
+.radiobutton:disabled+label {
+    cursor: not-allowed;
+    color: var(--text_color_disabled);
+}
+
+.radiobutton:disabled:not(:checked)+label::before {
+    cursor: not-allowed;
+    background: transparent;
+    border: 1px solid var(--border_main);
+}
+
+.radiobutton:disabled:checked+label::before {
+    cursor: not-allowed;
+    background: radial-gradient(circle, var(--text_color_disabled) 30%, rgba(242,242,247,0) 42%);
+    border: 1px solid var(--border_main)
+}

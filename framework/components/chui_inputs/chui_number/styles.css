@@ -1,4 +1,4 @@
-chui_email_input {
+chui_number_input {
     display: flex;
     flex-direction: column;
     width: 200px;
@@ -6,34 +6,47 @@ chui_email_input {
     margin: var(--margin);
 }
 
-chui_email_main {
+number_main {
     display: flex;
     width: -webkit-fill-available;
     height: max-content;
     margin: 0;
     border-radius: var(--border_radius);
     background: var(--input_background);
-    color: var(--text_color);
     align-items: center;
     position: relative;
-    padding: var(--main_padding);
+    padding: var(--test_padding) 43px;
     border: 1px solid var(--border_main);
 }
 
-.email_input {
+.number_buttons {
+    cursor: pointer;
+    height: -webkit-fill-available;
+    width: 43px;
+    margin: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    color: var(--badge_cancel_text);
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none
+}
+
+.number_input {
     width: -webkit-fill-available;
     margin: 0;
     padding: 0;
     background: transparent;
     color: var(--text_color);
-    text-align: start;
+    text-align: center;
     border: 0;
     font-size: var(--font_default_size);
 }
 
-email_input .email_input:valid {}
-
-.email_label {
+.number_label {
     height: max-content;
     width: max-content;
     margin: var(--margin);
@@ -43,19 +56,13 @@ email_input .email_input:valid {}
 }
 
 /* DISABLED STYLES */
-.email_input_disabled {
+.number_main_disabled {
     cursor: not-allowed;
-    width: -webkit-fill-available;
-    margin: 0;
-    padding: 0;
     background: transparent;
-    color: var(--text_color_disabled);
-    text-align: start;
-    border: 0;
-    font-size: var(--font_default_size);
+    border: 1px dashed var(--border_main)
 }
 
-.email_label_disabled {
+.number_label_disabled {
     cursor: not-allowed;
     height: max-content;
     width: max-content;
@@ -65,8 +72,14 @@ email_input .email_input:valid {}
     color: var(--text_color_disabled)
 }
 
-.chui_email_main_disabled {
+.number_input_disabled {
     cursor: not-allowed;
+    width: -webkit-fill-available;
+    margin: 0;
+    padding: 0;
     background: transparent;
-    border: 1px dashed var(--border_main)
+    color: var(--text_color_disabled);
+    text-align: center;
+    border: 0;
+    font-size: var(--font_default_size);
 }

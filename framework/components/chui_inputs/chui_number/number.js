@@ -1,4 +1,4 @@
-const { Icon, Icons } = require('../chui_icons/icons');
+const { Icon, Icons } = require('../../chui_icons/icons');
 
 class NumberInput {
     #chui_number_input = document.createElement('chui_number_input');
@@ -11,118 +11,9 @@ class NumberInput {
     #id = require("randomstring").generate();
     #input = document.createElement('input');
     #label = document.createElement('label');
-    constructor(options = {
-        name: String(), title: String(),
-        required: Boolean(), width: String(),
-    }) {
-        require('../../modules/chui_functions').style_parse([
-            {
-                name: "chui_number_input",
-                style: {
-                    "display": "flex",
-                    "flex-direction": "column",
-                    "width": "200px",
-                    "height": "max-content",
-                    "margin": "var(--margin)",
-                }
-            },
-            {
-                name: "number_main",
-                style: {
-                    "display": "flex",
-                    "width": "-webkit-fill-available",
-                    "height": "max-content",
-                    "margin": "0px",
-                    "border-radius": "var(--border_radius)",
-                    "background": "var(--input_background)",
-                    "align-items": "center",
-                    "position": "relative",
-                    "padding": "var(--test_padding) 43px",
-                    "border": "1px solid var(--border_main)",
-                }
-            },
-            {
-                name: ".number_buttons",
-                style: {
-                    "cursor": "pointer",
-                    "height": "-webkit-fill-available",
-                    "width": "43px",
-                    "margin": "0px",
-                    "display": "inline-flex",
-                    "justify-content": "center",
-                    "align-items": "center",
-                    "position": "absolute",
-                    "color": "var(--badge_cancel_text)",
-                }
-            },
-            {
-                name: "input[type=number]::-webkit-inner-spin-button",
-                style: {
-                    "-webkit-appearance": "none"
-                }
-            },
-            {
-                name: ".number_input",
-                style: {
-                    "width": "-webkit-fill-available",
-                    "margin": "0px",
-                    "padding": "0px",
-                    "background": "transparent",
-                    "color": "var(--text_color)",
-                    "text-align": "center",
-                    "border": "0",
-                    "font-size": "var(--font_default_size)",
-                }
-            },
-            {
-                name: ".number_label",
-                style: {
-                    "height": "max-content",
-                    "width": "max-content",
-                    "margin": "var(--margin)",
-                    "font-size": "var(--font_labels_size)",
-                    "font-weight":"500",
-                    "color": "var(--text_color)"
-                }
-            },
-            // DISABLED STYLES
-            {
-                name: ".number_main_disabled",
-                style: {
-                    "cursor": "not-allowed",
-                    "background": "transparent",
-                    "border": "1px dashed var(--border_main)"
-                }
-            },
-            {
-                name: ".number_label_disabled",
-                style: {
-                    "cursor": "not-allowed",
-                    "height": "max-content",
-                    "width": "max-content",
-                    "margin": "var(--margin)",
-                    "font-size": "var(--font_labels_size)",
-                    "font-weight":"500",
-                    "color": "var(--text_color_disabled)"
-                }
-            },
-            {
-                name: ".number_input_disabled",
-                style: {
-                    "cursor": "not-allowed",
-                    "width": "-webkit-fill-available",
-                    "margin": "0px",
-                    "padding": "0px",
-                    "background": "transparent",
-                    "color": "var(--text_color_disabled)",
-                    "text-align": "center",
-                    "border": "0",
-                    "font-size": "var(--font_default_size)",
-                }
-            }
-        ], 'chUiJS_NumberInput');
+    constructor(options = { name: String(), title: String(), required: Boolean(), width: String() }) {
+        require('../../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_NumberInput');
         this.#title = options.title;
-
 
         this.#number_button_plus.style.right = '0';
         this.#number_button_plus.className = 'number_buttons';

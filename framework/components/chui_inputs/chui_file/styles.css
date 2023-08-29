@@ -1,0 +1,103 @@
+chui_file_input {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    height: max-content;
+    margin: var(--margin)
+}
+
+chui_file_main {
+    display: block;
+    width: max-content;
+    height: max-content;
+    margin: 0;
+    border-radius: var(--border_radius);
+    background: transparent;
+    color: var(--text_color);
+    border: none;
+    align-items: center;
+    position: relative;
+}
+
+.chui_file_main_disabled {
+    cursor: not-allowed;
+    background: transparent;
+}
+
+.file_input_disabled {
+    cursor: not-allowed;
+    width: -webkit-fill-available;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--text_color_disabled);
+    text-align: start;
+    border: 0;
+    font-size: var(--font_default_size);
+}
+
+.input_label_disabled {
+    cursor: not-allowed;
+    height: max-content;
+    width: max-content;
+    margin: var(--margin);
+    font-size: var(--font_labels_size);
+    font-weight:500;
+    color: var(--text_color_disabled)
+}
+
+.file_input {
+    width: -webkit-fill-available;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--text_color);
+    border: 0;
+    font-size: var(--font_default_size);
+}
+
+.input_label {
+    height: max-content;
+    width: max-content;
+    margin: var(--margin);
+    font-size: var(--font_labels_size);
+    font-weight:500;
+    color: var(--text_color)
+}
+
+input[type=file]::file-selector-button {
+    cursor: pointer;
+    height: max-content;
+    width: max-content;
+    border-radius: var(--border_radius);
+    padding: var(--main_padding);
+    font-size: var(--font_default_size);
+    font-weight: 400;
+    margin: 0 var(--margin) 0 0;
+    background: var(--button_background);
+    color: var(--button_text_color);
+    transition: all .22s;
+    font-family: chui_Inter;
+    letter-spacing: 0.33px;
+    word-spacing: 0.33px;
+    border: 1px solid var(--button_border)
+}
+
+input[type=file]::file-selector-button:hover {
+    background: var(--blue_prime_background);
+    color: var(--text_color_hover);
+    border: 1px solid var(--button_border)
+}
+
+input[type=file]:disabled::file-selector-button {
+    cursor: not-allowed;
+    background: var(--button_background_disabled);
+    color: var(--text_color_disabled);
+    border: 1px solid var(--button_border)
+}
+
+input[type=file]:disabled::file-selector-button:hover {
+    background: var(--button_background_disabled);
+    color: var(--text_color_disabled);
+    border: 1px solid var(--button_border)
+}

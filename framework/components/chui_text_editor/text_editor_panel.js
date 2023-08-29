@@ -6,10 +6,10 @@ const {TextInput} = require("../chui_inputs/chui_text");
 const {Label} = require("../chui_label/label");
 const {ContentBlock} = require("../chui_content_block/content_block");
 const {Notification} = require("../chui_notification/notification");
-const {NumberInput} = require("../chui_inputs/chui_number");
+const {NumberInput} = require("../chui_inputs/chui_number/number");
 const {CheckBox} = require("../chui_inputs/chui_check_box/check_box");
 const {NotificationStyle} = require("../chui_notification/notification");
-const {FileInput, AcceptTypes} = require("../chui_inputs/chui_file");
+const {FileInput, AcceptTypes} = require("../chui_inputs/chui_file/file");
 
 class Commands {
     static COPY = "copy"
