@@ -1,4 +1,4 @@
-const {Icon, Icons} = require("./chui_icons");
+const {Icon, Icons} = require("../chui_icons/icons");
 
 class Table {
     #filtered_data = [];
@@ -26,58 +26,7 @@ class Table {
         this.#data = options.data;
         this.#customNames = options.customName;
         this.#userSelect = options.userSelect;
-        require('../modules/chui_functions').style_parse([
-            {
-                name: "table",
-                style: {
-                    "border": "1px solid var(--border_main)",
-                    "border-radius": "var(--border_radius)",
-                    "margin": "var(--margin)",
-                    "display": "grid",
-                    "width": "inherit",
-                    "height": "max-content",
-                    "overflow": "auto"
-                }
-            },
-            {
-                name: "thead",
-                style: {
-                    "background": "var(--input_background)",
-                    "font-weight": "600",
-                    "height": "max-content",
-                    "width": "100%"
-                }
-            },
-            {
-                name: "tbody",
-                style: {
-                    "overflow": "visible",
-                    "height": "max-content",
-                    "width": "100%"
-                }
-            },
-            {
-                name: "tr",
-                style: {
-                    "display": "grid",
-                    "height": "max-content",
-                    "width": "100%",
-                    "margin": "0",
-                    "grid-row-start": "1",
-                    "grid-row-end": "3"
-                }
-            },
-            {
-                name: "td",
-                style: {
-                    "color": "var(--text_color)",
-                    "white-space": "break-spaces",
-                    "word-break": "break-all",
-                    "align-items": "center",
-                    "padding": "var(--main_padding)",
-                }
-            }
-        ], 'chUiJS_Table');
+        require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_Table');
         //======================
         //Установка заголовков
         this.#columns = Object.getOwnPropertyNames(this.#data[0]);

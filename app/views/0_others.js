@@ -1,7 +1,7 @@
 const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView, Notification, MenuBar, Image,
     CheckBox
 } = require('../../index');
-const {Popup} = require("../../framework/components/chui_popups/chui_popups");
+const {Popup} = require("../../framework/components/chui_popups/popups");
 
 class OthersComponentsPage extends Page {
     constructor() {

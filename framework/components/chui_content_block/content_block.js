@@ -1,4 +1,4 @@
-const {Animation} = require("../modules/chui_animations/animations");
+const {Animation} = require("../../modules/chui_animations/animations");
 
 class ContentBlock {
     #body = document.createElement(`contentblock`);
@@ -10,14 +10,7 @@ class ContentBlock {
         justify: String(),
         disableMarginChild: Boolean(),
     }) {
-        require('../modules/chui_functions').style_parse([
-            {
-                name: "contentblock",
-                style: {
-                    "display": "flex"
-                }
-            }
-        ], 'chUiJS_ContentBlock');
+        require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_ContentBlock');
         if (options.direction !== undefined) this.#body.style.flexDirection = options.direction;
         if (options.wrap !== undefined) this.#body.style.flexWrap = options.wrap;
         if (options.align !== undefined) this.#body.style.alignItems = options.align;

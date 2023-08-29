@@ -1,7 +1,7 @@
 const {Label} = require("../chui_label/label");
-const {TextEditorPanel} = require("./chui_text_editor_panel");
+const {TextEditorPanel} = require("./text_editor_panel");
 const {Dialog} = require("../chui_modal/modal");
-const {ContentBlock} = require("../chui_content_block");
+const {ContentBlock} = require("../chui_content_block/content_block");
 const {Button} = require("../chui_button/button");
 const {TextInput} = require("../chui_inputs/chui_text");
 

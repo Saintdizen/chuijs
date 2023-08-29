@@ -1,0 +1,33 @@
+canvas {
+    "background": "var(--center_background)",
+    "height": "max-content",
+    "width": "max-content",
+    "border-radius": "var(--border_radius)",
+    "margin": "var(--margin)",
+}
+
+chui_piechart {
+    "display": "flex",
+    "align-items": "center",
+}
+
+legends {
+    "margin": "15px"
+}
+
+legend {
+    "display": "flex",
+    "align-items": "center",
+}
+
+legend_color {
+    "width": "20px",
+    "height": "20px",
+    "border-radius": "var(--border_radius)"
+}
+
+legend_label {
+    "color": "var(--text_color)",
+    "font-weight": "400",
+    "margin": "var(--margin)"
+}

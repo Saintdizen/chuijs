@@ -1,6 +1,6 @@
 const {Animation} = require("../../modules/chui_animations/animations");
 const sizeOf = require("image-size");
-const {Icon, Icons} = require("../chui_icons");
+const {Icon, Icons} = require("../chui_icons/icons");
 
 class Image {
     #chui_image = document.createElement('chui_image');

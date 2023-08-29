@@ -1,26 +1,7 @@
 class Icon {
     #chui_icon = document.createElement('chui_icon');
     constructor(name = String(), size = String(), color = String()) {
-        require('../modules/chui_functions').style_parse([
-            {
-                name: "chui_icon",
-                style: {
-                    "font-family":"'chui_mir'",
-                    "font-weight": "normal",
-                    "font-style": "normal",
-                    "font-size": "20px",
-                    "display": "inherit",
-                    "text-transform": "none",
-                    "letter-spacing": "normal",
-                    "word-wrap": "normal",
-                    "white-space": "nowrap",
-                    "direction": "ltr",
-                    "color": "var(--text_color)",
-                    "pointer-events": "none",
-                    "transition": "all .22s",
-                }
-            }
-        ], 'chUiJS_Icons');
+        require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_Icons');
         this.#chui_icon = document.createElement('chui_icon');
         this.#chui_icon.innerHTML = name;
         this.#chui_icon.style.fontSize = size;

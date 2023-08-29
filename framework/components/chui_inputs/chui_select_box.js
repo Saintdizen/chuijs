@@ -1,5 +1,5 @@
 const { Animation } = require('../../modules/chui_animations/animations');
-const { Icon, Icons } = require('../chui_icons');
+const { Icon, Icons } = require('../chui_icons/icons');
 
 class Select {
     #id = require("randomstring").generate();

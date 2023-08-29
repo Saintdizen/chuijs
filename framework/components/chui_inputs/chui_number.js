@@ -1,4 +1,4 @@
-const { Icon, Icons } = require('../chui_icons');
+const { Icon, Icons } = require('../chui_icons/icons');
 
 class NumberInput {
     #chui_number_input = document.createElement('chui_number_input');

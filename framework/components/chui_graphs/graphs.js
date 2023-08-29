@@ -1,57 +1,10 @@
-let { Notification } = require('./chui_notification/notification')
+let { Notification } = require('../chui_notification/notification')
 
 class BarGraph {
     #canvas = document.createElement('canvas');
     #options = undefined;
     constructor(options) {
-        require('../modules/chui_functions').style_parse([
-            {
-                name: "canvas",
-                style: {
-                    "background": "var(--center_background)",
-                    "height": "max-content",
-                    "width": "max-content",
-                    "border-radius": "var(--border_radius)",
-                    "margin": "var(--margin)",
-                }
-            },
-            {
-                name: "chui_piechart",
-                style: {
-                    "display": "flex",
-                    "align-items": "center",
-                }
-            },
-            {
-                name: "legends",
-                style: {
-                    "margin": "15px"
-                }
-            },
-            {
-                name: "legend",
-                style: {
-                    "display": "flex",
-                    "align-items": "center",
-                }
-            },
-            {
-                name: "legend_color",
-                style: {
-                    "width": "20px",
-                    "height": "20px",
-                    "border-radius": "var(--border_radius)"
-                }
-            },
-            {
-                name: "legend_label",
-                style: {
-                    "color": "var(--text_color)",
-                    "font-weight": "400",
-                    "margin": "var(--margin)"
-                }
-            }
-        ], 'chUiJS_Canvas');
+        require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_Canvas');
         this.#options = options;
         let colors = options.colors;
         let data_lenght = 0;

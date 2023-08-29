@@ -3,7 +3,7 @@ const {
     DateInput, NumberInput, TextArea, PasswordInput,
     EmailInput, CheckBox, RadioButton, Button, H, FileInput, Toggle
 } = require('../../index');
-const {Icons} = require("../../framework/components/chui_icons");
+const {Icons} = require("../../framework/components/chui_icons/icons");
 
 class Inputs_Buttons_Page extends Page {
     constructor() {

@@ -18,24 +18,10 @@ function style_parse(json, component) {
     let style_string = [];
     for (let i = 0; i < stringz.length; i++) {
         style_string.push(`${stringz[i].name} {`)
-        if (stringz[i].anim !== undefined) {
-            style_string.push(`from {`);
-            JSON.parse(JSON.stringify(stringz[i].anim.from), function(key, value) {
-                if (typeof value !== 'object') style_string.push(`${key}:${value};`);
-                return value;
-            });
-            style_string.push(`} to {`);
-            JSON.parse(JSON.stringify(stringz[i].anim.to), function(key, value) {
-                if (typeof value !== 'object') style_string.push(`${key}:${value};`)
-                return value;
-            });
-            style_string.push(`}`);
-        } else {
-            JSON.parse(JSON.stringify(stringz[i].style), function(key, value) {
-                if (typeof value !== 'object') style_string.push(`${key}:${value};`)
-                return value;
-            });
-        }
+        JSON.parse(JSON.stringify(stringz[i].style), function(key, value) {
+            if (typeof value !== 'object') style_string.push(`${key}:${value};`)
+            return value;
+        });
         style_string.push(`}\n`)
     }
     let style = document.createElement('style');

@@ -1,6 +1,6 @@
 const {Page, TextEditor, Styles} = require('../../index');
 const {Button} = require("../../framework/components/chui_button/button");
-const {HtmlBlock} = require("../../framework/components/chui_html_block");
+const {HtmlBlock} = require("../../framework/components/chui_html_block/chui_html_block");
 
 class TextEditorPage extends Page {
     constructor() {

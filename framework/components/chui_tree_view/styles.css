@@ -1,0 +1,77 @@
+chui_tree_view {
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+    font-size: 12pt;
+    font-weight:500;
+    border: none;
+    margin: var(--margin);
+    border-radius: var(--border_radius);
+}
+
+chui_tree_view_main_test {
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+    width: -webkit-fill-available;
+    font-size: 12pt;
+    font-weight:500;
+    border-radius: var(--border_radius);
+    border: none;
+}
+
+tree_view_button {
+    cursor: pointer;
+    padding: var(--main_padding);
+    width: -webkit-fill-available;
+    text-align: left;
+    outline: none;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    border-radius: var(--border_radius);
+    color: var(--text_color);
+    border: none;
+}
+
+tree_view_panel {
+    padding: 0 0 0 10px;
+    display: block;
+    overflow: hidden;
+    width: -webkit-fill-available;
+    max-height: 0;
+    border-bottom-right-radius: var(--border_radius);
+    border-bottom-left-radius: var(--border_radius);
+    color: var(--text_color);
+    border: none;
+}
+
+tree_view_html {
+    padding: 0;
+    width: -webkit-fill-available;
+    display: flex;
+    border: none;
+    flex-direction: column
+}
+
+tree_view_button:hover {
+    color: var(--blue_prime_background);
+}
+
+tree_view_button:hover tree_view_button_text {
+    color: var(--blue_prime_background)
+}
+
+tree_view_button:hover chui_icon {
+    color: var(--blue_prime_background)
+}
+
+.tree_view_button_active {
+    color: var(--blue_prime_background)
+}
+
+.tree_view_button_active chui_icon {
+    background: var(--button_background);
+    color: var(--blue_prime_background);
+    border-radius: 50%
+}

@@ -1,3 +1,5 @@
+let {Animation} = require('../../modules/chui_animations/animations');
+
 class Tab {
     #tab = document.createElement('tab');
     #active = document.createElement('active');
@@ -23,7 +25,6 @@ class Tab {
         return this.#tab;
     }
 }
-let {Animation} = require('../modules/chui_animations/animations');
 
 class Tabs {
     #tabzz = undefined;
@@ -32,12 +33,7 @@ class Tabs {
     #id_list = require("randomstring").generate();
     #list = document.createElement('list');
     #content = document.createElement('content');
-    constructor(options = {
-        tabsJustify: String(),
-        width: String(),
-        default: Number(),
-        tabs: []
-    }) {
+    constructor(options = { tabsJustify: String(), width: String(), default: Number(), tabs: [] }) {
         if (options.tabsJustify !== undefined && options.tabsJustify === "left") {
             this.#list.style.justifyContent = 'flex-start'
         } else if (options.tabsJustify !== undefined && options.tabsJustify === "center") {
@@ -45,63 +41,7 @@ class Tabs {
         } else if (options.tabsJustify !== undefined && options.tabsJustify === "right") {
             this.#list.style.justifyContent = 'flex-end'
         }
-        require('../modules/chui_functions').style_parse([
-            {
-                name: "list",
-                style: {
-                    "display": "flex",
-                    "justify-content": `flex-start`,
-                    "align-items": 'center',
-                    "width": "-webkit-fill-available"
-                }
-            },
-            {
-                name: "tab",
-                style: {
-                    "margin": "var(--margin) 0px",
-                    "padding": "0px 6px",
-                    "font-size": "var(--font_default_size)",
-                    "display": "flex",
-                    "flex-direction": "column",
-                    "font-weight": "500",
-                    "color": "var(--text_color)"
-                }
-            },
-            {
-                name: "tab:hover",
-                style: {
-                    "color": "var(--blue_prime_background)",
-                }
-            },
-            {
-                name: "tabs",
-                style: {
-                    "margin": "0px",
-                    "display": "flex",
-                    "flex-direction": "column",
-                    "justify-content": "flex-start",
-                    "align-items": "flex-start"
-                }
-            },
-            {
-                name: ".tab_active",
-                style: {
-                    "width": "50%",
-                    "height": "4px",
-                    "margin": "var(--margin) auto",
-                    "background": "transparent",
-                    "border-radius": "50px"
-                }
-            },
-            {
-                name: "content",
-                style: {
-                    "display": "flex",
-                    "flex-direction":"column",
-                    "width": "-webkit-fill-available"
-                }
-            }
-        ], 'chUiJS_Tabs');
+        require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_Tabs');
         this.#tabzz = options.tabs;
         this.#list.id = this.#id_list;
         this.#content.id = this.#id_contents;

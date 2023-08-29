@@ -1,0 +1,15 @@
+chui_icon {
+    font-family: 'chui_mir';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+    display: inherit;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    color: var(--text_color);
+    pointer-events: none;
+    transition: all .22s;
+}

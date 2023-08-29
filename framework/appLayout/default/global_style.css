@@ -350,3 +350,149 @@ header_left_box {
 header_right_box {
     display: flex;
 }
+
+/* chUiJS_UserProfile */
+user_main {
+    position: relative;
+    display: flex;
+}
+
+user_button:hover {
+    background: var(--blue_prime_background);
+    color: var(--text_color_hover);
+}
+
+.user_button {
+    background: var(--blue_prime_background);
+    color: var(--text_color_hover);
+}
+
+user_button {
+    cursor: pointer;
+    outline: none;
+    height: max-content;
+    width: max-content;
+    color: var(--text_color);
+    border-radius: var(--border_radius);
+    padding: var(--main_padding);
+    margin: var(--margin) 0 var(--margin) var(--margin);
+    font-weight: 500
+}
+
+user_dropdown {
+    margin-top: 43px;
+    display: none;
+    position: absolute;
+    background: var(--header_background_dropdown);
+    color: var(--text_color);
+    border-radius: var(--border_radius);
+    padding: var(--test_padding);
+    z-index: 1;
+    right: 0;
+    min-width: 165px;
+    flex-direction: column;
+    box-shadow: 0 2px 10px 2px rgb(0 0 0 / 20%);
+    border: 1px solid var(--border_main);
+}
+
+user_dropdown user_item {
+    color: var(--text_color);
+    display: block;
+    font-weight: 400;
+    cursor: pointer;
+    text-align: start;
+    padding: var(--test_padding);
+    border-radius: var(--border_radius)
+}
+
+user_dropdown user_item:hover {
+    background-color: #ddd;
+    padding: var(--main_padding);
+    background: var(--blue_prime_background);
+    color: var(--text_color_hover);
+}
+
+user_dd_image_main {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    margin-bottom: 6px
+}
+
+user_dd_image {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    padding: var(--test_padding);
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    font-size: 20pt;
+}
+
+/* chUiJS_HeaderButton */
+header_button {
+    cursor: pointer;
+    outline: none;
+    height: max-content;
+    width: max-content;
+    border: none;
+    border-radius: var(--border_radius);
+    padding: var(--main_padding);
+    margin: var(--margin) 0 var(--margin) var(--margin);
+    font-size: 12pt;
+    background: transparent;
+    font-weight: 500;
+    display: flex;
+    flex-direction: row
+}
+
+header_button header_button_title {
+    color: var(--text_color);
+}
+
+header_button:hover {
+    background: var(--blue_prime_background);
+}
+
+header_button:hover header_button_title {
+    color: var(--text_color_hover);
+}
+
+header_button:hover chui_icon {
+    color: var(--text_color_hover);
+}
+
+/* chUiJS_HeaderButton */
+header_button {
+    cursor: pointer;
+    outline: none;
+    height: max-content;
+    width: max-content;
+    border: none;
+    border-radius: var(--border_radius);
+    padding: var(--main_padding);
+    margin: var(--margin) 0 var(--margin) var(--margin);
+    font-size: 12pt;
+    background: transparent;
+    color: var(--text_color);
+    font-weight: 500;
+    display: flex;
+    flex-direction: row;
+}
+
+header_button:hover {
+    background: var(--blue_prime_background);
+}
+
+header_button:hover header_button_title {
+    color: var(--text_color_hover);
+}
+
+header_button:hover chui_icon {
+    color: var(--text_color_hover);
+}

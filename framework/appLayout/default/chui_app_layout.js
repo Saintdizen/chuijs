@@ -1,11 +1,11 @@
 const {Animation} = require('../../modules/chui_animations/animations');
-const {Icon, Icons} = require('../../components/chui_icons');
+const {Icon, Icons} = require('../../components/chui_icons/icons');
 const {Button} = require("../../components/chui_button/button");
 // НАСТРОЙКИ
 const {Dialog} = require("../../components/chui_modal/modal");
 const {Label} = require("../../components/chui_label/label");
-const {ContentBlock} = require("../../components/chui_content_block");
-const {Popup} = require("../../components/chui_popups/chui_popups");
+const {ContentBlock} = require("../../components/chui_content_block/content_block");
+const {Popup} = require("../../components/chui_popups/popups");
 const {UpdateNotification} = require("../../components/chui_notification/notification_update");
 const {ipcRenderer} = require("electron");
 const chui_functions = require('../../modules/chui_functions');
@@ -411,116 +411,9 @@ class UserProfile {
     //
     constructor(options = {
         username: String(),
-        image: {
-            noImage: Boolean(),
-            imageLink: String(),
-            imageBase64: String(),
-        },
+        image: { noImage: Boolean(), imageLink: String(), imageBase64: String() },
         items: []
     }) {
-        chui_functions.style_parse([
-            {
-                name: "user_main",
-                style: {
-                    "position": "relative",
-                    "display": "flex",
-                }
-            },
-            {
-                name: "user_button:hover",
-                style: {
-                    "background": "var(--blue_prime_background)",
-                    "color": "var(--text_color_hover)",
-                }
-            },
-            {
-                name: ".user_button",
-                style: {
-                    "background": "var(--blue_prime_background)",
-                    "color": "var(--text_color_hover)",
-                }
-            },
-            {
-                name: "user_button",
-                style: {
-                    "cursor": "pointer",
-                    "outline": "none",
-                    "height": "max-content",
-                    "width": "max-content",
-                    "color": "var(--text_color)",
-                    "border-radius": "var(--border_radius)",
-                    "padding": "var(--main_padding)",
-                    "margin": "var(--margin) 0px var(--margin) var(--margin)",
-                    "font-weight": "500"
-                }
-            },
-            {
-                name: "user_dropdown",
-                style: {
-                    "margin-top": "43px",
-                    "display": "none",
-                    "position": "absolute",
-                    "background": "var(--header_background_dropdown)",
-                    "color": "var(--text_color)",
-                    "border-radius": "var(--border_radius)",
-                    "padding": "var(--test_padding)",
-                    "z-index": "1",
-                    "right": "0",
-                    "min-width": "165px",
-                    "flex-direction": "column",
-                    "box-shadow": "0 2px 10px 2px rgb(0 0 0 / 20%)",
-                    "border": "1px solid var(--border_main)",
-                }
-            },
-            {
-                name: "user_dropdown user_item",
-                style: {
-                    "color": "var(--text_color)",
-                    "display": "block",
-                    "font-weight": "400",
-                    "cursor": "pointer",
-                    "text-align": "start",
-                    "padding": "var(--test_padding)",
-                    "border-radius": "var(--border_radius)"
-                }
-            },
-            {
-                name: "user_dropdown user_item:hover",
-                style: {
-                    "background-color": "#ddd",
-                    "padding": "var(--main_padding)",
-                    "background": "var(--blue_prime_background)",
-                    "color": "var(--text_color_hover)",
-                }
-            },
-            //
-            {
-                name: "user_dd_image_main",
-                style: {
-                    "width": "-webkit-fill-available",
-                    "height": "-webkit-fill-available",
-                    "display": "flex",
-                    "flex-direction": "column",
-                    "align-items": "center",
-                    "justify-content": "center",
-                    "flex-wrap": "nowrap",
-                    "margin-bottom": "6px"
-                }
-            },
-            {
-                name: "user_dd_image",
-                style: {
-                    "width": "80px",
-                    "height": "80px",
-                    "display": "flex",
-                    "padding": "var(--test_padding)",
-                    "border-radius": "50%",
-                    "align-items": "center",
-                    "justify-content": "center",
-                    "font-size": "20pt",
-                }
-            }
-        ], 'chUiJS_UserProfile');
         this.#user_button.innerText = options.username;
         this.#user_main.appendChild(this.#user_button)
         this.#user_main.appendChild(this.#user_dropdown)
@@ -581,7 +474,6 @@ class HeaderDialog {
     #header_button = document.createElement("header_button");
     #header_button_title = document.createElement("header_button_title");
     #header_button_icon = document.createElement("header_button_icon");
-
     constructor(options = {
         title: String(),
         icon: undefined,
@@ -600,50 +492,6 @@ class HeaderDialog {
             components: []
         }
     }) {
-        chui_functions.style_parse([
-            {
-                name: "header_button",
-                style: {
-                    "cursor": "pointer",
-                    "outline": "none",
-                    "height": "max-content",
-                    "width": "max-content",
-                    "border": "none",
-                    "border-radius": "var(--border_radius)",
-                    "padding": "var(--main_padding)",
-                    "margin": "var(--margin) 0px var(--margin) var(--margin)",
-                    "font-size": "12pt",
-                    "background": "transparent",
-                    "font-weight": "500",
-                    "display": "flex",
-                    "flex-direction": "row"
-                }
-            },
-            {
-                name: "header_button header_button_title",
-                style: {
-                    "color": "var(--text_color)",
-                }
-            },
-            {
-                name: "header_button:hover",
-                style: {
-                    "background": "var(--blue_prime_background)",
-                }
-            },
-            {
-                name: "header_button:hover header_button_title",
-                style: {
-                    "color": "var(--text_color_hover)",
-                }
-            },
-            {
-                name: "header_button:hover chui_icon",
-                style: {
-                    "color": "var(--text_color_hover)",
-                }
-            },
-        ], 'chUiJS_HeaderButton');
         let dialog = new Dialog({
             width: options.dialogOptions.style.width,
             height: options.dialogOptions.style.height,
@@ -729,45 +577,6 @@ class HeaderButton {
         clickEvent: () => {
         }
     }) {
-        chui_functions.style_parse([
-            {
-                name: "header_button",
-                style: {
-                    "cursor": "pointer",
-                    "outline": "none",
-                    "height": "max-content",
-                    "width": "max-content",
-                    "border": "none",
-                    "border-radius": "var(--border_radius)",
-                    "padding": "var(--main_padding)",
-                    "margin": "var(--margin) 0px var(--margin) var(--margin)",
-                    "font-size": "12pt",
-                    "background": "transparent",
-                    "color": "var(--text_color)",
-                    "font-weight": "500",
-                    "display": "flex",
-                    "flex-direction": "row",
-                }
-            },
-            {
-                name: "header_button:hover",
-                style: {
-                    "background": "var(--blue_prime_background)",
-                }
-            },
-            {
-                name: "header_button:hover header_button_title",
-                style: {
-                    "color": "var(--text_color_hover)",
-                }
-            },
-            {
-                name: "header_button:hover chui_icon",
-                style: {
-                    "color": "var(--text_color_hover)",
-                }
-            },
-        ], 'chUiJS_HeaderButton');
         if (options.title !== undefined && options.icon !== undefined) {
             if (options.reverse) {
                 this.#header_button_title.innerText = options.title;

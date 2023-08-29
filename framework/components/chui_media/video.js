@@ -1,6 +1,6 @@
 const fs = require("fs");
 const dataurl = require("dataurl");
-const { Icon, Icons } = require(".././chui_icons");
+const { Icon, Icons } = require("../chui_icons/icons");
 const {Label} = require('../chui_label/label');
 
 let play_list = []

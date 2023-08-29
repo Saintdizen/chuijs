@@ -1,4 +1,4 @@
-const {Icon} = require("../chui_icons");
+const {Icon} = require("../chui_icons/icons");
 
 class Button {
     #chui_button = document.createElement('chui_button');

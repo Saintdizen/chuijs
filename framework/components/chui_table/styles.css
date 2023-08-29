@@ -1,0 +1,39 @@
+table {
+    border: 1px solid var(--border_main);
+    border-radius: var(--border_radius);
+    margin: var(--margin);
+    display: grid;
+    width: inherit;
+    height: max-content;
+    overflow: auto
+}
+
+thead {
+    background: var(--input_background);
+    font-weight: 600;
+    height: max-content;
+    width: 100%
+}
+
+tbody {
+    overflow: visible;
+    height: max-content;
+    width: 100%
+}
+
+tr {
+    display: grid;
+    height: max-content;
+    width: 100%;
+    margin: 0;
+    grid-row-start: 1;
+    grid-row-end: 3
+}
+
+td {
+    color: var(--text_color);
+    white-space: break-spaces;
+    word-break: break-all;
+    align-items: center;
+    padding: var(--main_padding);
+}
