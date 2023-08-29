@@ -1,0 +1,73 @@
+chui_button {
+    cursor: pointer;
+    height: max-content;
+    width: max-content;
+    border-radius: var(--border_radius);
+    margin: var(--margin);
+}
+
+button {
+    cursor: pointer;
+    height: max-content;
+    width: max-content;
+    border-radius: var(--border_radius);
+    padding: var(--main_padding);
+    font-size: 12pt;
+    font-weight: 400;
+    background: var(--button_background);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--button_border);
+}
+
+button:hover {
+    background: var(--blue_prime_background);
+    border: 1px solid var(--button_border);
+}
+
+button_text {
+    color: var(--button_text_color);
+}
+
+button:hover button_text {
+    color: var(--text_color_hover);
+}
+
+button button_icon chui_icon {
+    color: var(--button_text_color);
+}
+
+button:hover button_icon chui_icon {
+    color: var(--text_color_hover);
+}
+/* DISABLED STYLES */
+button:disabled {
+    cursor: not-allowed;
+    background: var(--button_background_disabled);
+    color: var(--text_color_disabled);
+    border: 1px solid var(--button_border);
+}
+
+button:disabled:hover {
+    background: var(--button_background_disabled);
+    color: var(--text_color_disabled);
+    border: 1px solid var(--button_border);
+}
+
+button:disabled button_text {
+    color: var(--text_color_disabled);
+}
+
+button:disabled:hover button_text {
+    color: var(--text_color_disabled);
+}
+
+button:disabled button_icon chui_icon {
+    color: var(--text_color_disabled);
+}
+
+button:disabled:hover button_icon chui_icon {
+    color: var(--text_color_disabled);
+}

@@ -1,4 +1,4 @@
-const {Animation} = require("../modules/chui_animations");
+const {Animation} = require("../modules/chui_animations/animations");
 
 class MenuBar {
     #chui_menu_bar_main = document.createElement("chui_menu_bar_main")

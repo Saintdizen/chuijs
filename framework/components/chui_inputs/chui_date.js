@@ -1,4 +1,4 @@
-const {Animation} = require('../../modules/chui_animations');
+const {Animation} = require('../../modules/chui_animations/animations');
 const {Calendar} = require('../chui_calendar');
 const {Select} = require('./chui_select_box');
 const {Icon, Icons} = require('../chui_icons');

@@ -1,4 +1,4 @@
-const {style_parse, markdownToHtml, htmlToMarkdown} = require('../modules/chui_functions');
+const {setStyles, markdownToHtml, htmlToMarkdown} = require('../../modules/chui_functions');
 
 class Badge {
     #chui_badge = document.createElement(`chui_badge`);
@@ -8,49 +8,7 @@ class Badge {
         markdownText: String(),
         style: undefined
     }) {
-        style_parse([
-            {
-                name: "chui_badge",
-                style: {
-                    "height": "max-content",
-                    "width": "max-content",
-                    "padding": "var(--main_padding)",
-                    "margin": "var(--margin)",
-                    "border-radius": "var(--border_radius)",
-                    "font-size": "var(--font_default_size)",
-                    "font-weight": "400",
-                    "background": "var(--badge_cancel_back)",
-                    "color": "var(--badge_cancel_text)",
-                }
-            },
-            {
-                name: "chui_badge p",
-                style: {
-                    "margin": "0px",
-                }
-            },
-            {
-                name: ".badge_error",
-                style: {
-                    "background": "var(--badge_error_back)",
-                    "color": "var(--badge_error_text)",
-                }
-            },
-            {
-                name: ".badge_success",
-                style: {
-                    "background": "var(--badge_success_back)",
-                    "color": "var(--badge_success_text)",
-                }
-            },
-            {
-                name: ".badge_warning",
-                style: {
-                    "background": "var(--badge_warning_back)",
-                    "color": "var(--badge_warning_text)",
-                }
-            }
-        ], 'chUiJS_Badge');
+        setStyles(__dirname + "/styles.css", 'chUiJS_Badge');
         if (options.id !== undefined) this.#chui_badge.id = options.id;
         if (options.style !== undefined) this.#chui_badge.classList.add(options.style);
         // Стили текста баджей

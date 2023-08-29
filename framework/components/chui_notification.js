@@ -1,4 +1,4 @@
-const {Animation} = require('../modules/chui_animations');
+const {Animation} = require('../modules/chui_animations/animations');
 const {style_parse, markdownToHtml} = require('../modules/chui_functions');
 
 class Notification {

@@ -1,4 +1,4 @@
-const {Animation} = require('../modules/chui_animations');
+const {Animation} = require('../modules/chui_animations/animations');
 const {PasswordInput} = require("./chui_inputs/chui_password");
 const {TextInput} = require("./chui_inputs/chui_text");
 

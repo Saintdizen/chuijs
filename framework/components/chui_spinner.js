@@ -1,4 +1,4 @@
-let {Animation} = require('../modules/chui_animations');
+let {Animation} = require('../modules/chui_animations/animations');
 
 class Spinner {
     #spinner_main = document.createElement('chui_spiner')

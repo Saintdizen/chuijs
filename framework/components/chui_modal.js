@@ -1,4 +1,4 @@
-const { Animation } = require('../modules/chui_animations');
+const { Animation } = require('../modules/chui_animations/animations');
 
 class Dialog {
     #id = require("randomstring").generate();

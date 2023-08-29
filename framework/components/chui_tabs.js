@@ -23,7 +23,7 @@ class Tab {
         return this.#tab;
     }
 }
-let {Animation} = require('../modules/chui_animations');
+let {Animation} = require('../modules/chui_animations/animations');
 
 class Tabs {
     #tabzz = undefined;

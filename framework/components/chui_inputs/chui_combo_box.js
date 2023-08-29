@@ -1,4 +1,4 @@
-const { Animation } = require('../../modules/chui_animations');
+const { Animation } = require('../../modules/chui_animations/animations');
 const { Icon, Icons } = require('../chui_icons');
 
 class ComboBox {

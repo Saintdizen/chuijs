@@ -1,5 +1,5 @@
 const { Icon, Icons } = require('../chui_icons');
-const {Animation} = require("../../modules/chui_animations");
+const {Animation} = require("../../modules/chui_animations/animations");
 
 class PasswordInput {
     #id = require("randomstring").generate();

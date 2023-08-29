@@ -1,7 +1,7 @@
 const {
     Page, TextInput, Select, ComboBox,
     DateInput, NumberInput, TextArea, PasswordInput,
-    EmailInput, CheckBox, RadioButton, Button, H, FileInput
+    EmailInput, CheckBox, RadioButton, Button, H, FileInput, Toggle
 } = require('../../index');
 const {Icons} = require("../../framework/components/chui_icons");
 
@@ -79,6 +79,9 @@ class Inputs_Buttons_Page extends Page {
             clickEvent: (e) => console.log(e)
         });
         this.add(h1_buttons, disabler_2, button_text, button_icon, button_text_icon, button_text_icon_reverse);
+
+        let toggle = new Toggle();
+        this.add(toggle)
     }
 }
 

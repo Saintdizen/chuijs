@@ -1,5 +1,5 @@
 //version: 1.0.0
-const {Animation} = require('../../modules/chui_animations');
+const {Animation} = require('../../modules/chui_animations/animations');
 
 class TextInput {
     #chui_text_main = document.createElement('chui_text_main');

@@ -1,7 +1,7 @@
 const {Icon, Icons} = require("../chui_icons");
-const {Animation} = require("../../modules/chui_animations");
+const {Animation} = require("../../modules/chui_animations/animations");
 const {Dialog} = require("../chui_modal");
-const {Button} = require("../chui_button");
+const {Button} = require("../chui_button/button");
 const {TextInput} = require("../chui_inputs/chui_text");
 const {Label} = require("../chui_label");
 const {ContentBlock} = require("../chui_content_block");

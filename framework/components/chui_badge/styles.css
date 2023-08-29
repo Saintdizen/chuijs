@@ -1,0 +1,30 @@
+chui_badge {
+    font-weight: 400;
+    height: max-content;
+    width: max-content;
+    padding: var(--main_padding);
+    margin: var(--margin);
+    border-radius: var(--border_radius);
+    font-size: var(--font_default_size);
+    background: var(--badge_cancel_back);
+    color: var(--badge_cancel_text);
+}
+
+chui_badge p {
+    margin: 0;
+}
+
+.badge_error {
+    background: var(--badge_error_back);
+    color: var(--badge_error_text);
+}
+
+.badge_success {
+    background: var(--badge_success_back);
+    color: var(--badge_success_text);
+}
+
+.badge_warning {
+    background: var(--badge_warning_back);
+    color: var(--badge_warning_text);
+}

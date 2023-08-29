@@ -1,4 +1,4 @@
-const {RadioButton} = require("./chui_inputs/chui_radio_button");
+const {RadioButton} = require("../chui_inputs/chui_radio_button");
 
 class RadioGroup {
     #id = require("randomstring").generate();
@@ -20,36 +20,18 @@ class RadioGroup {
             width: undefined
         }
     }) {
-        require('../modules/chui_functions').style_parse([
-            {
-                name: ".radioGroupForm",
-                style: {
-                    "display": "flex",
-                    "width": "inherit"
-                }
-            }
-        ], 'chUiJS_RadioGroup');
+        require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", "chUiJS_RadioGroup")
         this.#groupForm.classList.add('radioGroupForm')
         this.#direction = options.styles.direction;
         this.#wrap = options.styles.wrap;
         this.#align = options.styles.align;
         this.#justify = options.styles.justify;
         this.#width = options.styles.width;
-        if (this.#width !== undefined) {
-            this.#RadioGroup.style.width = this.#width;
-        }
-        if (this.#direction !== undefined) {
-            this.#groupForm.style.flexDirection = this.#direction;
-        }
-        if (this.#wrap !== undefined) {
-            this.#groupForm.style.flexWrap = this.#wrap;
-        }
-        if (this.#align !== undefined) {
-            this.#groupForm.style.alignItems = this.#align;
-        }
-        if (this.#justify !== undefined) {
-            this.#groupForm.style.justifyContent = this.#justify;
-        }
+        if (this.#width !== undefined) this.#RadioGroup.style.width = this.#width;
+        if (this.#direction !== undefined) this.#groupForm.style.flexDirection = this.#direction;
+        if (this.#wrap !== undefined) this.#groupForm.style.flexWrap = this.#wrap;
+        if (this.#align !== undefined) this.#groupForm.style.alignItems = this.#align;
+        if (this.#justify !== undefined) this.#groupForm.style.justifyContent = this.#justify;
         this.#RadioGroup.id = this.#id;
         this.#RadioGroup.appendChild(this.#groupForm)
     }

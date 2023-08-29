@@ -1,0 +1,10 @@
+page {
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    width: -webkit-fill-available;
+    align-items: baseline;
+}
+.header_padding {
+    padding-top: 92px;
+}

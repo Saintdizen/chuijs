@@ -1,4 +1,4 @@
-const {Animation} = require("../modules/chui_animations");
+const {Animation} = require("../modules/chui_animations/animations");
 const sizeOf = require("image-size");
 const electron = require("electron");
 const {Icon, Icons} = require("./chui_icons");

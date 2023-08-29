@@ -1,6 +1,6 @@
-let {Animation} = require('../modules/chui_animations');
-const {Route} = require("../appLayout/default/chui_app_layout");
-const {Button} = require("../components/chui_button");
+let {Animation} = require('../chui_animations/animations');
+const {Route} = require("../../appLayout/default/chui_app_layout");
+const {Button} = require("../../components/chui_button/button");
 
 class Page {
     #page = document.createElement('page');
@@ -8,24 +8,7 @@ class Page {
     #main = false;
     #menu_bar = undefined;
     constructor() {
-        require('../modules/chui_functions').style_parse([
-            {
-                name: "page",
-                style: {
-                    "padding": "6px",
-                    "display": "flex",
-                    "flex-direction": "column",
-                    "width": "-webkit-fill-available",
-                    "align-items": "baseline"
-                }
-            },
-            {
-                name: ".header_padding",
-                style: {
-                    "padding-top": "92px",
-                }
-            }
-        ], 'chUiJS_Page');
+        require('../chui_functions').setStyles(__dirname + "/styles.css", "chUiJS_Page")
     }
     setBackButton(options = { title: "", icon: undefined, reverse: false, page: undefined }) {
         let back = new Button({
