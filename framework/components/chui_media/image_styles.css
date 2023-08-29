@@ -1,0 +1,62 @@
+chui_image {
+    height: max-content;
+    width: max-content;
+    border-radius: var(--border_radius);
+    margin: var(--margin);
+    display: flex
+}
+
+img {
+    border-radius: var(--border_radius)
+}
+
+/* IMAGE POPUP */
+chui_image_popup {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    overflow: auto;
+    background-color: var(--modal_overlay);
+    padding: 0;
+    border: none;
+    backdrop-filter: var(--global_blur)
+}
+
+popup_content_test {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+image_popup_content {
+    width: max-content;
+    height: max-content;
+    display: block;
+}
+
+image_popup_close {
+    color: var(--text_color);
+    position: absolute;
+    top: 48px;
+    right: 48px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--border_radius);
+}
+
+image_popup_close:hover {
+    background-color: var(--button_background);
+}
+
+image_popup_close:hover chui_icon {
+    color: var(--button_text_color);
+}

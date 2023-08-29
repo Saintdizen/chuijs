@@ -1,100 +1,16 @@
-const {Animation} = require("../modules/chui_animations/animations");
+const {Animation} = require("../../modules/chui_animations/animations");
 const sizeOf = require("image-size");
-const electron = require("electron");
-const {Icon, Icons} = require("./chui_icons");
+const {Icon, Icons} = require("../chui_icons");
 
 class Image {
     #chui_image = document.createElement('chui_image');
     #image = document.createElement('img');
     constructor(options = {
-        path: String(),
-        base64: String(),
-        width: String(),
-        height: String(),
-        openPopup: Boolean(),
-        disableMargin: Boolean()
+        path: String(), base64: String(),
+        width: String(), height: String(),
+        openPopup: Boolean(), disableMargin: Boolean()
     }) {
-        require('../modules/chui_functions').style_parse([
-            {
-                name: "chui_image",
-                style: {
-                    "height": "max-content",
-                    "width": "max-content",
-                    "border-radius": "var(--border_radius)",
-                    "margin": "var(--margin)",
-                    "display": "flex"
-                }
-            },
-            {
-                name: "img",
-                style: {
-                    "border-radius": "var(--border_radius)"
-                }
-            },
-            // IMAGE POPUP
-            {
-                name: "chui_image_popup",
-                style: {
-                    "display": "none",
-                    "position": "fixed",
-                    "z-index": "1000",
-                    "left": "0",
-                    "top": "0",
-                    "width": "-webkit-fill-available",
-                    "height": "-webkit-fill-available",
-                    "overflow": "auto",
-                    "background-color": "var(--modal_overlay)",
-                    "padding": "0px",
-                    "border": "none",
-                    "backdrop-filter": "var(--global_blur)"
-                }
-            },
-            {
-                name: "popup_content_test",
-                style: {
-                    "width": "-webkit-fill-available",
-                    "height": "-webkit-fill-available",
-                    "display": "flex",
-                    "align-items": "center",
-                    "justify-content": "center",
-                }
-            },
-            {
-                name: "image_popup_content",
-                style: {
-                    "width": "max-content",
-                    "height": "max-content",
-                    "display": "block",
-                }
-            },
-            {
-                name: "image_popup_close",
-                style: {
-                    "color": "var(--text_color)",
-                    "position": "absolute",
-                    "top": "48px",
-                    "right": "48px",
-                    "width": "60px",
-                    "height": "60px",
-                    "display": "flex",
-                    "justify-content": "center",
-                    "align-items": "center",
-                    "border-radius": "var(--border_radius)",
-                }
-            },
-            {
-                name: "image_popup_close:hover",
-                style: {
-                    "background-color": "var(--button_background)",
-                }
-            },
-            {
-                name: "image_popup_close:hover chui_icon",
-                style: {
-                    "color": "var(--button_text_color)",
-                }
-            }
-        ], 'chUiJS_Image');
+        require('../../modules/chui_functions').setStyles(__dirname + "/image_styles.css", 'chUiJS_Image');
         if (options.disableMargin) this.#chui_image.style.margin = '0px';
         if (options.path !== undefined) this.#image.setAttribute('src', `data:image/png;base64,${require('fs').readFileSync(options.path).toString("base64")}`)
         if (options.base64 !== undefined) this.#image.setAttribute('src', `data:image/png;base64,${options.base64}`);

@@ -8,37 +8,7 @@ class Form {
         components: [],
         submitEvent: () => {}
     }) {
-        require('../modules/chui_functions').style_parse([
-            {
-                name: `chui_form_main`,
-                style: {
-                    "color": "var(--text_color)"
-                }
-            },
-            {
-                name: ".chui_form_submit_button",
-                style: {
-                    "border": "none",
-                    "cursor": "pointer",
-                    "height": "max-content",
-                    "width": "max-content",
-                    "border-radius": "var(--border_radius)",
-                    "padding": "var(--main_padding)",
-                    "font-size": "12pt",
-                    "font-weight": "400",
-                    "margin": "var(--margin)",
-                    "background": "var(--button_background)",
-                    "color": "var(--button_text_color)"
-                }
-            },
-            {
-                name: ".chui_form_submit_button:hover",
-                style: {
-                    "background": "var(--blue_prime_background)",
-                    "color": "var(--text_color_hover)"
-                }
-            }
-        ], 'chUiJS_Forms');
+        require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_Forms');
         this.#chui_form_main.id = this.#id;
         this.#chui_form_main.appendChild(this.#form);
 

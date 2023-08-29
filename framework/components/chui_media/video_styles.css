@@ -1,0 +1,162 @@
+chui_vp_main {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--border_radius);
+    --seek-before-width: 0%;
+    --volume-before-width: 0%;
+    border: 1px solid var(--border_background_1);
+}
+
+chui_vp_block {
+    display: block;
+    position: absolute;
+    width: -webkit-fill-available;
+    bottom: 0;
+    backdrop-filter: var(--global_blur);
+    border-bottom-right-radius: var(--border_radius);
+    border-bottom-left-radius: var(--border_radius);
+    background: var(--header_background);
+    opacity: 0;
+    border-top: 1px solid var(--border_background_1);
+}
+
+/* Блок информация */
+chui_vp_info {
+    display: flex;
+    margin: 16px 12px;
+}
+
+chui_vp_seek_buf {
+    width: 0;
+    height: 5px;
+    border-radius: 5px;
+    background: rgba(255,255,255,0.30);
+    position: absolute
+}
+
+#chui_vp_seek {
+    margin: 0;
+    position: relative;
+    -webkit-appearance: none;
+    border-radius: 5px;
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    outline: none;
+    background: rgba(255,255,255,0.15);
+    float: left;
+    z-index: 1
+}
+
+#chui_vp_seek::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    border-radius: 5px
+}
+
+#chui_vp_seek::before {
+    transition: all 0s;
+    position: absolute;
+    content: '';
+    left: 0;
+    width: var(--seek-before-width);
+    height: 5px;
+    border-radius: 5px;
+    background: var(--blue_prime_background);
+    cursor: pointer;
+}
+
+#chui_vp_seek::-webkit-slider-thumb {
+    position: relative;
+    -webkit-appearance: none;
+    border: 1px solid rgba(255,255,255,0);
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0);
+    cursor: pointer;
+    margin: -8px 0 0 0
+}
+
+#chui_vp_seek:focus {
+    outline: none;
+    border: none;
+}
+
+#chui_vp_seek:focus::-webkit-slider-runnable-track {
+    outline: none;
+    border: none;
+}
+
+/* УПРАВЛЕНИЕ ГРОМКОСТЬЮ */
+chui_vp_volume_block {
+    display: flex;
+    margin-left: auto
+}
+
+#chui_vp_volume {
+    position: relative;
+    -webkit-appearance: none;
+    border-radius: 5px;
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    outline: none;
+    background: rgba(255,255,255,0.15);
+    float: left;
+    z-index: 1;
+    margin: auto 6px;
+}
+
+#chui_vp_volume::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    border-radius: 5px
+}
+
+#chui_vp_volume::before {
+    transition: all 0s;
+    position: absolute;
+    content: '';
+    left: 0;
+    width: var(--volume-before-width);
+    height: 5px;
+    border-radius: 5px;
+    background: var(--blue_prime_background);
+    cursor: pointer;
+}
+
+#chui_vp_volume::-webkit-slider-thumb {
+    position: relative;
+    -webkit-appearance: none;
+    border: 1px solid rgba(255,255,255,0);
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0);
+    cursor: pointer;
+    margin: -8px 0 0 0
+}
+
+#chui_vp_volume:focus {
+    outline: none;
+    border: none;
+}
+
+#chui_vp_volume:focus::-webkit-slider-runnable-track {
+    outline: none;
+    border: none;
+}
+
+/* Блок управления */
+chui_vp_controls {
+    display: flex;
+    justify-content: left;
+    margin: var(--margin);
+    align-items: center
+}
+
+/* КНОПКИ */
+chui_vp_play_pause, chui_vp_next, chui_vp_prev {
+    display: flex
+}

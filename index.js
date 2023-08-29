@@ -32,7 +32,6 @@ const { Calendar } = require('./framework/components/chui_calendar');
 const { Notification } = require('./framework/components/chui_notification/notification');
 const { Tabs, Tab } = require('./framework/components/chui_tabs');
 const { BarGraph, PieGraph } = require('./framework/components/chui_graphs');
-const { Image } = require('./framework/components/chui_image');
 const { Toggle } = require('./framework/components/chui_toggle/toggle');
 const { ContentBlock } = require('./framework/components/chui_content_block');
 const { ProgressBar } = require('./framework/components/chui_progress_bar/progress_bar');
@@ -48,15 +47,16 @@ const { HtmlBlock } = require('./framework/components/chui_html_block')
 const { sleep, render, getDefaultIcon } = require('./framework/modules/chui_functions');
 const { FileInput, AcceptTypes } = require("./framework/components/chui_inputs/chui_file");
 const { TreeView } = require("./framework/components/chui_tree_view");
-const { Form } = require("./framework/components/chui_form");
+const { Form } = require("./framework/components/chui_form/form");
 const { SlideShow } = require("./framework/components/chui_slideshow");
 const { FieldSet } = require("./framework/components/chui_fieldset");
 const { Popup } = require("./framework/components/chui_popups/chui_popups");
 const { TelegramBot } = require("./framework/components/telegram_bot/chui_telegram_bot");
 const { MenuBar } = require("./framework/components/chui_menu_bar");
 const { UpdateNotification } = require("./framework/components/chui_notification/notification_update");
-const { AudioPlayer } = require("./framework/components/media/chui_audio_player")
-const { VideoPlayer } = require("./framework/components/media/chui_video_player")
+const { Image } = require('./framework/components/chui_media/image');
+const { Audio } = require("./framework/components/chui_media/audio")
+const { Video } = require("./framework/components/chui_media/video")
 
 //VARS
 let isQuiting = false;
@@ -326,6 +326,6 @@ module.exports = {
     MenuBar: MenuBar,
     UpdateNotification: UpdateNotification,
     log: log,
-    AudioPlayer: AudioPlayer,
-    VideoPlayer: VideoPlayer
+    Audio: Audio,
+    Video: Video
 }
