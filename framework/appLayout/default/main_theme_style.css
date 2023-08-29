@@ -1,0 +1,107 @@
+@media (prefers-color-scheme: light) {
+    :root {
+        --text_shadow_main: 0 0 1px rgba(44, 44, 44, 0.3);
+        --text_shadow_buttons: 0 0 1px rgba(44, 44, 44, 0.3);
+
+        --text_color: rgba(44, 44, 44, 1);
+        --text_color_disabled: rgba(44, 44, 44, 0.6);
+        --text_color_hover: rgba(235, 235, 235, 1);
+        --header_background: rgba(205, 205, 205, 0.4);
+        --header_background_dropdown: rgba(219, 219, 219, 1);
+        --center_background: rgba(235, 235, 235, 1);
+        --border_main: rgba(75, 75, 75, 0.2);
+
+        --app_menu_background: rgba(205, 205, 205, 0.4);
+
+        --modal_overlay: rgba(0, 0, 0, 0.4);
+        --modal_background: rgba(235, 235, 235, 1);
+
+        --button_background: rgba(219, 219, 219, 0.85);
+        --button_background_disabled: rgba(219, 219, 219, 0.6);
+        --button_text_color: rgba(20, 142, 255, 1);
+        --button_border: rgba(75, 75, 75, 0.1);
+
+        --input_background: rgba(219, 219, 219, 0.7);
+        --dropdown_background: rgba(219, 219, 219, 1);
+
+        --blue_prime_background: rgba(20, 142, 255, 0.7);
+        --red_prime_background: rgba(255, 59, 48, 0.7);
+
+        --badge_error_back: rgba(255, 59, 48, 0.4);
+        --badge_error_text: rgba(194, 6, 24, 1);
+        --badge_success_back: rgba(52, 199, 89, 0.4);
+        --badge_success_text: rgba(0, 112, 24, 1);
+        --badge_cancel_back: rgba(142, 142, 147, 0.4);
+        --badge_cancel_text: rgba(97, 97, 101, 1);
+        --badge_warning_back: rgba(255, 204, 0, 0.4);
+        --badge_warning_text: rgba(146, 81, 0, 1);
+
+        --spinner_blue: rgba(38, 136, 235, 0.8);
+        --spinner_track: rgba(219, 219, 219, 0.4);
+
+        --progress_bar_back: rgba(225, 225, 225);
+
+        --notification_background: rgba(219, 219, 219, 0.4);
+        --notification_background_popup: rgba(219, 219, 219, 0.4);
+
+        --disable_color: #e9ecef;
+        --scroll_bar_background: rgb(190, 190, 190);
+
+        --background_color_1: rgba(219, 219, 219, 0.35);
+        --border_background_1: rgba(75, 75, 75, 0.2);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text_shadow_main: 0 0 1px rgba(235, 235, 235, 0.3);
+        --text_shadow_buttons: 0 0 1px rgba(235, 235, 235, 0.3);
+
+        --text_color: rgba(235, 235, 235, 1);
+        --text_color_disabled: rgba(235, 235, 235, 0.6);
+        --text_color_hover: rgba(255, 255, 255, 1);
+        --header_background: rgba(75, 75, 75, 0.4);
+        --header_background_dropdown: rgba(65, 65, 65, 1);
+        --center_background: rgba(44, 44, 44, 1);
+        --border_main: rgba(205, 205, 205, 0.2);
+
+        --app_menu_background: rgba(75, 75, 75, 0.4);
+
+        --modal_overlay: rgba(0, 0, 0, 0.4);
+        --modal_background: rgba(44, 44, 44, 1);
+
+        --button_background: rgba(65, 65, 65, 0.85);
+        --button_background_disabled: rgba(65, 65, 65, 0.6);
+        --button_text_color: rgba(30, 152, 255, 1);
+        --button_border: rgba(205, 205, 205, 0.1);
+
+        --input_background: rgba(65, 65, 65, 0.7);
+        --dropdown_background: rgba(65, 65, 65, 1);
+
+        --blue_prime_background: rgba(30, 152, 255, 0.7);
+        --red_prime_background: rgba(255, 69, 58, 0.7);
+
+        --badge_error_back: rgba(255, 69, 58, 0.4);
+        --badge_error_text: rgba(255, 105, 94, 1);
+        --badge_success_back: rgba(48, 209, 88, 0.4);
+        --badge_success_text: rgba(49, 222, 75, 1);
+        --badge_cancel_back: rgba(142, 142, 147, 0.4);
+        --badge_cancel_text: rgba(182, 182, 187, 1);
+        --badge_warning_back: rgba(255, 214, 10, 0.4);
+        --badge_warning_text: rgba(255, 212, 38, 1);
+
+        --spinner_blue: rgba(82, 158, 244, 0.8);
+        --spinner_track: rgba(63, 63, 65, 0.4);
+
+        --progress_bar_back: rgba(65, 65, 65);
+
+        --notification_background: rgba(65, 65, 65, 0.4);
+        --notification_background_popup: rgba(65, 65, 65, 0.4);
+
+        --disable_color: #e9ecef;
+        --scroll_bar_background: rgb(75, 75, 75);
+
+        --background_color_1: rgba(65, 65, 65, 0.35);
+        --border_background_1: rgba(205, 205, 205, 0.2);
+    }
+}

@@ -68,7 +68,7 @@ class WebView {
     execJS(script) {
         this.#WebView.addEventListener('did-start-loading', () => {
             this.#WebView.addEventListener('dom-ready', () => {
-                this.#WebView.executeJavaScript(script, true).then(r => console.log(r))
+                this.#WebView.executeJavaScript(script, true).catch(r => console.log(r))
             });
         })
     }
@@ -93,7 +93,7 @@ class WebView {
                 this.#WebView.addEventListener('dom-ready', () => {
                     this.#WebView.insertCSS(`*::-webkit-scrollbar { width: ${options.width}; }
                     *::-webkit-scrollbar-track { background-color: ${options.trackBackgroundColor}; }
-                    *::-webkit-scrollbar-thumb { border-radius: ${options.thumbRadius}; background: ${options.thumbColor}; }`).then(r => console.log(r));
+                    *::-webkit-scrollbar-thumb { border-radius: ${options.thumbRadius}; background: ${options.thumbColor}; }`).catch(r => console.log(r));
                 });
             }
         })
@@ -110,8 +110,7 @@ class WebView {
                 });
                 css_array_string.push(`}\n`)
             }
-            console.log(css_array_string.join("").slice(0, -1))
-            this.#WebView.insertCSS(css_array_string.join("").slice(0, -1)).then(r => console.log(r));
+            this.#WebView.insertCSS(css_array_string.join("").slice(0, -1)).catch(r => console.log(r));
         });
     }
     setUrl(url = String()) {
@@ -136,8 +135,7 @@ const getFirefoxUserAgent = () => {
     } else {
       rootUA = rootUAs.linux;
     }
-    const fxVersion = 91 + Math.floor((Date.now() - 1628553600000) / (4.1 * 7 * 24 * 60 * 60 * 1000));
-    return rootUA.replace(/FXVERSION/g, fxVersion);
+    return rootUA.replace(/FXVERSION/g, 91 + Math.floor((Date.now() - 1628553600000) / (4.1 * 7 * 24 * 60 * 60 * 1000)));
 };
 
 exports.WebView = WebView

@@ -158,7 +158,7 @@ class TextEditor {
     #getCaretPosition() {
         let select = this.#text_input.ownerDocument.defaultView.getSelection();
         if (select.focusNode.parentNode.tagName === "B") {
-            console.log("bold")
+            //console.log("bold")
         }
         let range = select.getRangeAt(0);
         let treeWalker = document.createTreeWalker(this.#text_input, NodeFilter.SHOW_TEXT, (node) => {

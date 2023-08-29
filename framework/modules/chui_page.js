@@ -12,7 +12,7 @@ class Page {
             {
                 name: "page",
                 style: {
-                    "padding": "6px 6px 0px 6px",
+                    "padding": "6px",
                     "display": "flex",
                     "flex-direction": "column",
                     "width": "-webkit-fill-available",
@@ -26,12 +26,6 @@ class Page {
                 }
             }
         ], 'chUiJS_Page');
-
-        this.#page.onmousedown = function(event) {
-            if (event.which === 3) {
-                console.log(`X: ${event.clientX} Y: ${event.clientY}`)
-            }
-        }
     }
     setBackButton(options = { title: "", icon: undefined, reverse: false, page: undefined }) {
         let back = new Button({

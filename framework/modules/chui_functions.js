@@ -1,5 +1,16 @@
+const fs = require("fs")
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function setStyles(pathToCSS, component) {
+    let data = fs.readFileSync(pathToCSS, 'utf8');
+    let style = document.createElement('style');
+    style.innerHTML = String(data);
+    style.type = 'text/css';
+    style.setAttribute('id', component);
+    if (document.getElementById(component) == null) document.head.appendChild(style);
 }
 
 function parseRootStyles(themeType, json, component) {
@@ -79,3 +90,4 @@ exports.render = render
 exports.markdownToHtml = markdownToHtml
 exports.htmlToMarkdown = htmlToMarkdown
 exports.getDefaultIcon = getDefaultIcon
+exports.setStyles = setStyles

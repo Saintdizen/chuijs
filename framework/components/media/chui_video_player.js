@@ -327,7 +327,6 @@ class VideoPlayer {
             const value = e.target.value;
             this.#chui_vt.volume = value / 100;
             this.#renderVolume()
-            console.log(e.target.value)
             if (Number(e.target.value) === 0) {
                 this.#chui_vp_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_OFF, this.#size_next_prev).getHTML()
             } else {
