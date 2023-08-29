@@ -1,0 +1,129 @@
+date_input_controls {
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+chui_date_input {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    height: max-content;
+    margin: var(--margin);
+}
+
+::-webkit-calendar-picker-indicator {
+    display: none
+}
+
+::-webkit-datetime-edit-text {
+    padding: 0;
+    width: 100%
+}
+
+date_select_dropdown {
+    display: none;
+    flex-direction: column;
+    color: var(--text_color);
+    padding: var(--test_padding);
+    background: var(--dropdown_background);
+    border: 1px solid var(--border_main);
+    border-radius: var(--border_radius);
+    position:absolute;
+    top: -2px;
+    left: -2px;
+    z-index: 1;
+    box-shadow: 0 2px 10px 2px rgb(0 0 0 / 20%);
+}
+
+date_week {
+    display: flex;
+}
+
+date_day {
+    cursor: pointer;
+    display: block;
+    width: 20px;
+    border-radius: var(--border_radius);
+    padding: var(--test_padding);
+    text-align: center
+}
+
+.date_day:hover {
+    background: var(--blue_prime_background);
+    color: var(--text_color_hover)
+}
+
+date_dropdown_open {
+    cursor: pointer;
+    padding: var(--test_padding) 10px var(--test_padding) 0;
+    height: auto;
+    margin: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--badge_cancel_text)
+}
+
+date_main_block {
+    height: max-content;
+    width: max-content;
+    border-radius: var(--border_radius);
+    font-size: var(--font_default_size);
+    background: var(--input_background);
+    color: var(--text_color);
+    border: 1px solid var(--border_main);
+    position: relative;
+    display: flex;
+}
+
+.date_input {
+    width:100%;
+    display: block;
+    text-align: center;
+    margin: 0;
+    padding: var(--test_padding) 0;
+    background: transparent;
+    color: var(--text_color);
+    border: 0;
+    font-size: var(--font_default_size);
+}
+
+.date_input_label {
+    height: max-content;
+    width: max-content;
+    margin: var(--margin);
+    font-size: var(--font_labels_size);
+    font-weight:500;
+    color: var(--text_color)
+}
+
+/* DISABLED STYLES */
+.date_main_block_disabled {
+    cursor: not-allowed;
+    background: transparent;
+    border: 1px dashed var(--border_main)
+}
+
+.date_input_label_disabled {
+    cursor: not-allowed;
+    color: var(--text_color_disabled);
+    height: max-content;
+    width: max-content;
+    margin: var(--margin);
+    font-size: var(--font_labels_size);
+    font-weight:500
+}
+
+.date_input_disabled {
+    cursor: not-allowed;
+    color: var(--text_color_disabled);
+    width:100%;
+    display: block;
+    text-align: center;
+    margin: 0;
+    padding: var(--test_padding) 0;
+    background: transparent;
+    border: 0;
+    font-size: var(--font_default_size);
+}

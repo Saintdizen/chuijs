@@ -6,15 +6,15 @@ log.transports.file.resolvePath = () => require("path").join(app.getPath('userDa
 
 //ПОЛЯ ВВОДА
 const { TextInput } = require('./framework/components/chui_inputs/chui_text');
-const { DateInput } = require('./framework/components/chui_inputs/chui_date');
+const { DateInput } = require('./framework/components/chui_inputs/chui_date/date');
 const { NumberInput } = require('./framework/components/chui_inputs/chui_number');
-const { EmailInput } = require('./framework/components/chui_inputs/chui_email');
+const { EmailInput } = require('./framework/components/chui_inputs/chui_email/email');
 const { PasswordInput } = require('./framework/components/chui_inputs/chui_password');
 const { Select } = require('./framework/components/chui_inputs/chui_select_box');
-const { ComboBox } = require('./framework/components/chui_inputs/chui_combo_box');
+const { ComboBox } = require('./framework/components/chui_inputs/chui_combo_box/combo_box');
 const { TextArea } = require('./framework/components/chui_inputs/chui_text_area');
 const { RadioButton } = require('./framework/components/chui_inputs/chui_radio_button');
-const { CheckBox } = require('./framework/components/chui_inputs/chui_check_box');
+const { CheckBox } = require('./framework/components/chui_inputs/chui_check_box/check_box');
 const { RadioGroup } = require('./framework/components/chui_radio_group/radio_group');
 //==========
 const { MenuItem } = require('./framework/tray_bar/chui_menu_items');

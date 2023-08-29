@@ -12,7 +12,7 @@ class EmailInput {
         width: String(),
         required: Boolean()
     }) {
-        require('../../modules/chui_functions').style_parse([
+        require('../../../modules/chui_functions').style_parse([
             {
                 name: "chui_email_input",
                 style: {
