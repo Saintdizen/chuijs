@@ -4,7 +4,7 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function setStyles(pathToCSS, component) {
+function setStyles(pathToCSS = String(), component = String()) {
     let data = fs.readFileSync(pathToCSS, 'utf8');
     let style = document.createElement('style');
     style.innerHTML = String(data);

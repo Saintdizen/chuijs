@@ -29,7 +29,7 @@ class TextEditor {
         //
         this.#text_input.contentEditable = 'true';
         this.#text_input.id = this.#id
-        this.#chui_text_editor.style.height = height;
+        this.#text_input.style.height = height;
         this.#chui_text_editor.appendChild(this.#editor_controls);
         this.#chui_text_editor.appendChild(this.#text_input);
         this.#chui_text_editor.appendChild(this.#status_row);
