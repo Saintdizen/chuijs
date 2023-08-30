@@ -2,7 +2,7 @@
 ### Структура
 #### exampleApp / app / views / main.js
 ```javascript
-const { Page, Button, TextInput, Notification, NotificationStyle } = require('chuijs');
+const { Page, Button, TextInput, Notification } = require('chuijs');
 class MainPage extends Page {
     constructor() {
         super();

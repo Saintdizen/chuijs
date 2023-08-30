@@ -8,8 +8,9 @@ const {ContentBlock} = require("../chui_content_block/content_block");
 const {Notification} = require("../chui_notification/notification");
 const {NumberInput} = require("../chui_inputs/chui_number/number");
 const {CheckBox} = require("../chui_inputs/chui_check_box/check_box");
-const {NotificationStyle} = require("../chui_notification/notification");
 const {FileInput, AcceptTypes} = require("../chui_inputs/chui_file/file");
+
+
 
 class Commands {
     static COPY = "copy"
@@ -49,33 +50,7 @@ class Commands {
 
 class TextEditorButtons {
     #button = undefined;
-    constructor(options = {
-        icon: undefined,
-        command: undefined,
-        value: undefined,
-        disableFocus: false,
-        listener: () => {}
-    }) {
-        require('../../modules/chui_functions').style_parse([
-            {
-                name: "chui_button_format",
-                style: {
-                    "height": "max-content",
-                    "width": "max-content",
-                    "border-radius": "var(--border_radius)",
-                    "padding": "9px",
-                    "font-size": "11pt",
-                    "font-weight": "500",
-                    "color": "var(--button_text_color)"
-                }
-            },
-            {
-                name: "chui_button_format:hover",
-                style: {
-                    "background": "var(--blue_prime_background)",
-                }
-            }
-        ], 'chUiJS_TextEditorButtons');
+    constructor(options = { icon: undefined, command: undefined, value: undefined, disableFocus: false, listener: () => {} }) {
         this.#button = document.createElement('chui_button_format');
         this.#button.innerHTML = new Icon(options.icon).getHTML();
         if (options.disableFocus) {
@@ -109,120 +84,7 @@ class TextEditorSelects {
     #div_value = document.createElement("text_editor_div_value")
     #button_open = document.createElement('text_editor_select_button_open');
     #dropdown = document.createElement('text_editor_selectbox_dropdown');
-    constructor(options = {
-        icon: String()
-    }) {
-        require('../../modules/chui_functions').style_parse([
-            {
-                name: "chui_text_editor_select_box",
-                style: {
-                    "display": "flex",
-                    "flex-direction": "column",
-                    "align-items": "baseline",
-                    "height": "max-content",
-                    //"margin": "var(--margin)",
-                    "width": "auto"
-                }
-            },
-            {
-                name: "text_editor_select_box",
-                style: {
-                    "position": "relative",
-                    "display":"flex",
-                    "outline": "none",
-                    "height": "max-content",
-                    "width": "-webkit-fill-available",
-                    "border-radius": "var(--border_radius)",
-                    "padding": "0px",
-                    "font-size": "var(--font_default_size)",
-                    //"background": "var(--input_background)",
-                    "color": "var(--text_color)",
-                }
-            },
-            {
-                name: "text_editor_select_box:hover",
-                style: {
-                    "background": "var(--blue_prime_background)",
-                }
-            },
-            {
-                name: ".text_editor_selectbox_input",
-                style: {
-                    "width":"100%",
-                    "display": "block",
-                    "outline": "none",
-                    "margin": "0px",
-                    "padding": "9px 0px 9px 9px",
-                    "background": "transparent",
-                    "color": "var(--text_color)",
-                    "text-align": "start",
-                    "border": "none",
-                    "font-size": "var(--font_default_size)",
-                }
-            },
-            {
-                name: "text_editor_div_value",
-                style: {
-                    "width":"100%",
-                    "display": "block",
-                    "outline": "none",
-                    "margin": "0px",
-                    "padding": "9px 0px 9px 9px",
-                    "background": "transparent",
-                    "color": "var(--text_color)",
-                    "text-align": "start",
-                    "border": "none",
-                    "font-size": "var(--font_default_size)",
-                }
-            },
-            {
-                name: "text_editor_selectbox_dropdown",
-                style: {
-                    "overflow": "overlay",
-                    "background": "var(--dropdown_background)",
-                    "color": "var(--text_color)",
-                    "outline": "none",
-                    "position":"absolute",
-                    "display":"none",
-                    "height": "max-content",
-                    "width": "max-content",
-                    "border-radius": "var(--border_radius)",
-                    "margin-top": "0px",
-                    "padding": "9px",
-                    "font-size": "var(--font_default_size)",
-                    "flex-direction": "column",
-                    "z-index": "1",
-                    "border": "1px solid var(--border_main)",
-                }
-            },
-            {
-                name: "text_editor_select_button_open",
-                style: {
-                    "outline": "none",
-                    "padding": "9px 9px 9px 3px",
-                }
-            },
-            {
-                name: "text_editor_selectbox_option",
-                style: {
-                    "text-align": "start",
-                    "padding": "8px 13px",
-                    "border-radius": "var(--border_radius)"
-                }
-            },
-            {
-                name: "text_editor_selectbox_option:hover",
-                style: {
-                    "background": "var(--blue_prime_background)"
-                }
-            },
-            {
-                name: "text_editor_selectbox_option:hover font",
-                style: {
-                    "color": "var(--text_color_hover)"
-                }
-            }
-        ], 'chUiJS_TextEditorSelects');
+    constructor(options = { icon: String() }) {
         if (options.icon !== undefined) {
             this.#div_value.innerHTML = options.icon;
         }
@@ -315,70 +177,7 @@ class TextEditorSelects {
 
 class TextEditorPanel {
     #panel = document.createElement("text_editor_panel")
-    constructor(text_editor_id = String(), controls = {
-        UNDO_REDO: Boolean(),
-    }) {
-        require('../../modules/chui_functions').style_parse([
-            {
-                name: "text_editor_panel",
-                style: {
-                    "height": "max-content",
-                    "width": "-webkit-fill-available",
-                    "display": "flex",
-                    "flex-wrap": "wrap",
-                    "justify-content": "center",
-                    "align-items": "center"
-                }
-            },
-            {
-                name: "text_editor_block",
-                style: {
-                    "height": "max-content",
-                    "width": "max-content",
-                    "display": "flex",
-                }
-            },
-            {
-                name: ".text_editor_table",
-                style: {
-                    "display": "table",
-                    "border-radius": "0",
-                    "width": "-webkit-fill-available",
-                    "border-collapse": "collapse",
-                    "border": "1px solid var(--blue_prime_background)",
-                }
-            },
-            {
-                name: ".text_editor_table_body",
-                style: {
-                    "border": "1px solid var(--blue_prime_background)",
-                    "width": "auto"
-                }
-            },
-            {
-                name: ".text_editor_table_row",
-                style: {
-                    "width": "auto",
-                    "display": "table-row"
-                }
-            },
-            {
-                name: ".text_editor_table_cell",
-                style: {
-                    "height": "max-content",
-                    "width": "auto",
-                    "display": "table-cell",
-                    "border": "1px solid var(--blue_prime_background)"
-                }
-            },
-            {
-                name: "pre",
-                style: {
-                    "font-family": "'chui_mono'",
-                    "font-weight": "400"
-                }
-            }
-        ], 'chUiJS_TextEditorPanel');
+    constructor(text_editor_id = String(), controls = { UNDO_REDO: Boolean() }) {
         // Управление
         if (controls.UNDO_REDO) {
             let button_undo = new TextEditorButtons({
@@ -621,13 +420,13 @@ class TextEditorPanel {
                     clickEvent: () => {
                         let error = false;
                         if (Number(table_rows.getValue()) === 0 && Number(table_cols.getValue()) === 0) {
-                            new Notification(`Установите количество столбцов и строк`, NotificationStyle.ERROR).show();
+                            new Notification(`Установите количество столбцов и строк`, Notification.STYLE.ERROR).show();
                             error = true;
                         } else if (Number(table_cols.getValue()) === 0) {
-                            new Notification(`Установите количество столбцов`, NotificationStyle.ERROR).show();
+                            new Notification(`Установите количество столбцов`, Notification.STYLE.ERROR).show();
                             error = true;
                         } else if (Number(table_rows.getValue()) === 0) {
-                            new Notification(`Установите количество строк`, NotificationStyle.ERROR).show();
+                            new Notification(`Установите количество строк`, Notification.STYLE.ERROR).show();
                             error = true;
                         }
                         if (!error) {

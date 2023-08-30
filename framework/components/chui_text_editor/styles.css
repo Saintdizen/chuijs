@@ -1,0 +1,213 @@
+chui_text_editor_test {
+    display: flex;
+    flex-direction: column;
+    width: -webkit-fill-available;
+    height: max-content;
+    margin: var(--margin)
+}
+
+chui_text_editor {
+    border-radius: var(--border_radius);
+    display: flex;
+    flex-direction: column;
+    background: var(--input_background);
+    border: 1px solid var(--border_main);
+    width: -webkit-fill-available;
+}
+
+chui_editor_controls {
+    width: -webkit-fill-available;
+    display: flex;
+    padding: 6px
+}
+
+chui_editor_text_input {
+    width: -webkit-fill-available;
+    font-size: 12pt;
+    padding: 0 10px 6px 10px;
+    height: calc(100% - 40px);
+    overflow: overlay;
+    text-align: start;
+    color: var(--text_color);
+}
+
+chui_editor_text_input div {
+    margin-bottom: 10px
+}
+
+chui_editor_status_row {
+    width: -webkit-fill-available;
+    display: flex;
+    padding: 6px
+}
+
+.text_editor_label {
+    height: max-content;
+    width: max-content;
+    margin: var(--margin);
+    font-size: 10pt;
+    font-weight:500;
+    color: var(--text_color)
+}
+
+chui_editor_text_input p {
+    margin: 5px 0
+}
+
+p img {
+    margin: 0;
+    padding: 0;
+    width: auto;
+    height: auto;
+    border:  2px solid transparent;
+    border-radius: var(--border_radius)
+}
+
+/* chUiJS_TextEditorButtons */
+chui_button_format {
+    height: max-content;
+    width: max-content;
+    border-radius: var(--border_radius);
+    padding: 9px;
+    font-size: 11pt;
+    font-weight: 500;
+    color: var(--button_text_color)
+}
+
+chui_button_format:hover {
+    background: var(--blue_prime_background);
+}
+
+/* chUiJS_TextEditorSelects */
+chui_text_editor_select_box {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    height: max-content;
+    width: auto
+}
+
+text_editor_select_box {
+    position: relative;
+    display:flex;
+    outline: none;
+    height: max-content;
+    width: -webkit-fill-available;
+    border-radius: var(--border_radius);
+    padding: 0;
+    font-size: var(--font_default_size);
+    color: var(--text_color);
+}
+
+text_editor_select_box:hover {
+    background: var(--blue_prime_background);
+}
+
+.text_editor_selectbox_input {
+    width:100%;
+    display: block;
+    outline: none;
+    margin: 0;
+    padding: 9px 0 9px 9px;
+    background: transparent;
+    color: var(--text_color);
+    text-align: start;
+    border: none;
+    font-size: var(--font_default_size);
+}
+
+text_editor_div_value {
+    width:100%;
+    display: block;
+    outline: none;
+    margin: 0;
+    padding: 9px 0 9px 9px;
+    background: transparent;
+    color: var(--text_color);
+    text-align: start;
+    border: none;
+    font-size: var(--font_default_size);
+}
+
+text_editor_selectbox_dropdown {
+    overflow: overlay;
+    background: var(--dropdown_background);
+    color: var(--text_color);
+    outline: none;
+    position:absolute;
+    display:none;
+    height: max-content;
+    width: max-content;
+    border-radius: var(--border_radius);
+    margin-top: 0;
+    padding: 9px;
+    font-size: var(--font_default_size);
+    flex-direction: column;
+    z-index: 1;
+    border: 1px solid var(--border_main);
+}
+
+text_editor_select_button_open {
+    outline: none;
+    padding: 9px 9px 9px 3px;
+}
+
+text_editor_selectbox_option {
+    text-align: start;
+    padding: 8px 13px;
+    border-radius: var(--border_radius)
+}
+
+text_editor_selectbox_option:hover {
+    background: var(--blue_prime_background)
+}
+
+text_editor_selectbox_option:hover font {
+    color: var(--text_color_hover)
+}
+
+/* chUiJS_TextEditorPanel */
+text_editor_panel {
+    height: max-content;
+    width: -webkit-fill-available;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center
+}
+
+text_editor_block {
+    height: max-content;
+    width: max-content;
+    display: flex;
+}
+
+.text_editor_table {
+    display: table;
+    border-radius: 0;
+    width: -webkit-fill-available;
+    border-collapse: collapse;
+    border: 1px solid var(--blue_prime_background);
+}
+
+.text_editor_table_body {
+    border: 1px solid var(--blue_prime_background);
+    width: auto
+}
+
+.text_editor_table_row {
+    width: auto;
+    display: table-row
+}
+
+.text_editor_table_cell {
+    height: max-content;
+    width: auto;
+    display: table-cell;
+    border: 1px solid var(--blue_prime_background)
+}
+
+pre {
+    font-family: 'chui_mono';
+    font-weight: 400
+}

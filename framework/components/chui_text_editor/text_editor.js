@@ -17,92 +17,7 @@ class TextEditor {
     #cater_position = new Label({text: "0"});
     //
     constructor(height = String(), options) {
-        require('../../modules/chui_functions').style_parse([
-            {
-                name: "chui_text_editor_test",
-                style: {
-                    "display": "flex",
-                    "flex-direction": "column",
-                    "width": "-webkit-fill-available",
-                    "height": `max-content`,
-                    "margin": "var(--margin)"
-                }
-            },
-            {
-                name: "chui_text_editor",
-                style: {
-                    "border-radius": "var(--border_radius)",
-                    "display": "flex",
-                    "flex-direction": "column",
-                    "background": "var(--input_background)",
-                    "border": "1px solid var(--border_main)",
-                    "height": `${height}`,
-                    "width": "-webkit-fill-available",
-                }
-            },
-            {
-                name: "chui_editor_controls",
-                style: {
-                    "width": "-webkit-fill-available",
-                    "display": "flex",
-                    "padding": "6px"
-                }
-            },
-            {
-                name: "chui_editor_text_input",
-                style: {
-                    "width": "-webkit-fill-available",
-                    "font-size": "12pt",
-                    "padding": "0px 10px 6px 10px",
-                    "height": "calc(100% - 40px)",
-                    "overflow": "overlay",
-                    "text-align": "start",
-                    "color": "var(--text_color)",
-                }
-            },
-            {
-                name: "chui_editor_text_input div",
-                style: {
-                    "margin-bottom": "10px"
-                }
-            },
-            {
-                name: "chui_editor_status_row",
-                style: {
-                    "width": "-webkit-fill-available",
-                    "display": "flex",
-                    "padding": "6px"
-                }
-            },
-            {
-                name: ".text_editor_label",
-                style: {
-                    "height": "max-content",
-                    "width": "max-content",
-                    "margin": "var(--margin)",
-                    "font-size": "10pt",
-                    "font-weight":"500",
-                    "color": "var(--text_color)"
-                }
-            },
-            {
-                name: "chui_editor_text_input p",
-                style: {
-                    "margin": "5px 0px"
-                }
-            },
-            {
-                name: "p img",
-                style: {
-                    "margin": "0px",
-                    "padding": "0px",
-                    "width": "auto",
-                    "height": "auto",
-                    "border":  "2px solid transparent",
-                    "border-radius": "var(--border_radius)"
-                }
-            }
-        ], 'chUiJS_TextEditor');
+        require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_TextEditor');
         if (options.title !== undefined) {
             this.#label.innerText = options.title;
             this.#label.className = 'text_editor_label';
@@ -114,6 +29,7 @@ class TextEditor {
         //
         this.#text_input.contentEditable = 'true';
         this.#text_input.id = this.#id
+        this.#chui_text_editor.style.height = height;
         this.#chui_text_editor.appendChild(this.#editor_controls);
         this.#chui_text_editor.appendChild(this.#text_input);
         this.#chui_text_editor.appendChild(this.#status_row);
