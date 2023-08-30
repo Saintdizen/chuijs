@@ -1,0 +1,84 @@
+chui_text_input {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: max-content;
+    margin: var(--margin)
+}
+
+chui_text_main {
+    display: flex;
+    width: -webkit-fill-available;
+    height: max-content;
+    margin: 0;
+    border-radius: var(--border_radius);
+    background: var(--input_background);
+    color: var(--text_color);
+    align-items: center;
+    position: relative;
+    padding: var(--main_padding);
+    border: 1px solid var(--border_main);
+}
+
+.text_input {
+    width: -webkit-fill-available;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--text_color);
+    text-align: start;
+    border: 0;
+    font-size: var(--font_default_size);
+}
+
+.input_label {
+    height: max-content;
+    width: max-content;
+    margin: var(--margin);
+    font-size: var(--font_labels_size);
+    font-weight:500;
+    color: var(--text_color)
+}
+
+error_message_text {
+    display: none;
+    height: max-content;
+    width: max-content;
+    margin: var(--margin) var(--margin) 0 var(--margin);
+    font-size: var(--font_labels_size);
+    font-weight:500;
+    color: var(--red_prime_background)
+}
+
+.error_border {
+    border: 1px solid var(--red_prime_background);
+}
+
+/* DISABLED STYLES */
+.chui_text_main_disabled {
+    cursor: not-allowed;
+    background: transparent;
+    border: 1px dashed var(--border_main)
+}
+
+.text_input_disabled {
+    cursor: not-allowed;
+    width: -webkit-fill-available;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--text_color_disabled);
+    text-align: start;
+    border: 0;
+    font-size: var(--font_default_size);
+}
+
+.input_label_disabled {
+    cursor: not-allowed;
+    height: max-content;
+    width: max-content;
+    margin: var(--margin);
+    font-size: var(--font_labels_size);
+    font-weight:500;
+    color: var(--text_color_disabled)
+}

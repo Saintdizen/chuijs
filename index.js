@@ -5,14 +5,14 @@ const log = require('electron-log');
 log.transports.file.resolvePath = () => require("path").join(app.getPath('userData'), `electron-log/logs.log`);
 
 //ПОЛЯ ВВОДА
-const { TextInput } = require('./framework/components/chui_inputs/chui_text');
+const { TextInput } = require('./framework/components/chui_inputs/chui_text/text');
 const { DateInput } = require('./framework/components/chui_inputs/chui_date/date');
 const { NumberInput } = require('./framework/components/chui_inputs/chui_number/number');
 const { EmailInput } = require('./framework/components/chui_inputs/chui_email/email');
 const { PasswordInput } = require('./framework/components/chui_inputs/chui_password/password');
-const { Select } = require('./framework/components/chui_inputs/chui_select_box');
+const { Select } = require('./framework/components/chui_inputs/chui_select_box/select_box');
 const { ComboBox } = require('./framework/components/chui_inputs/chui_combo_box/combo_box');
-const { TextArea } = require('./framework/components/chui_inputs/chui_text_area');
+const { TextArea } = require('./framework/components/chui_inputs/chui_text_area/text_area');
 const { RadioButton } = require('./framework/components/chui_inputs/chui_radio_button/radio_button');
 const { CheckBox } = require('./framework/components/chui_inputs/chui_check_box/check_box');
 const { RadioGroup } = require('./framework/components/chui_radio_group/radio_group');

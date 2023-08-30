@@ -3,7 +3,7 @@ const {TextEditorPanel} = require("./text_editor_panel");
 const {Dialog} = require("../chui_modal/modal");
 const {ContentBlock} = require("../chui_content_block/content_block");
 const {Button} = require("../chui_button/button");
-const {TextInput} = require("../chui_inputs/chui_text");
+const {TextInput} = require("../chui_inputs/chui_text/text");
 
 class TextEditor {
     #chui_text_editor_test = document.createElement("chui_text_editor_test");

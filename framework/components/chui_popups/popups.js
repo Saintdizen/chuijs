@@ -1,6 +1,6 @@
 const {Animation} = require('../../modules/chui_animations/animations');
 const {PasswordInput} = require("../chui_inputs/chui_password/password");
-const {TextInput} = require("../chui_inputs/chui_text");
+const {TextInput} = require("../chui_inputs/chui_text/text");
 
 class Popup {
     constructor() {
