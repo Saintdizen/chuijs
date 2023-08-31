@@ -120,8 +120,7 @@ class Main {
             resizable: true,
             minimizable: true,
             maximizable: true,
-            center: true,
-            titleBarStyle: "hidden"
+            center: true
         });
         this.#window.setMenu(null)
 
