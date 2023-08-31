@@ -97,7 +97,9 @@ class Main {
     }
     #createWindow() {
         this.#window = new BrowserWindow({
-            transparent: true,
+            transparent: false,
+            //minWidth: this.#width,
+            //minHeight: this.#height,
             width: this.#width,
             height: this.#height,
             name: this.#appName,
@@ -114,7 +116,12 @@ class Main {
                 enableRemoteModule: true,
                 webSecurity: this.#webSecurity,
             },
-            frame: true
+            frame: true,
+            resizable: true,
+            minimizable: true,
+            maximizable: true,
+            center: true,
+            titleBarStyle: "hidden"
         });
         this.#window.setMenu(null)
 
