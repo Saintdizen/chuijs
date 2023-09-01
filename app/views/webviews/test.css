@@ -1,0 +1,60 @@
+:root {
+    --ya_blur: blur(16px);
+    --ya_border_radius: 10px;
+    --ya_back_color_light: rgba(235, 235, 235, 0.6);
+    --ya_back_color_dark: rgba(44, 44, 44, 0.6);
+}
+
+/* SCROLL BARS */
+*::-webkit-scrollbar {
+    width: var(--ya_border_radius) !important;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: inherit !important;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: var(--ya_border_radius) !important;
+    background: #fcca00 !important;
+}
+
+/* ОСТАЛЬНЫЕ СТИЛИ */
+.theme-white .deco-player-controls {
+    backdrop-filter: var(--ya_blur) !important;
+    background-color: var(--ya_back_color_light) !important;
+}
+
+.theme-black .deco-player-controls {
+    backdrop-filter: var(--ya_blur) !important;
+    background-color: var(--ya_back_color_dark) !important;
+}
+
+.theme-white .deco-pane {
+    backdrop-filter: var(--ya_blur) !important;
+    background-color: var(--ya_back_color_light) !important;
+}
+
+.theme-black .deco-pane {
+    backdrop-filter: var(--ya_blur) !important;
+    background-color: var(--ya_back_color_dark) !important;
+}
+
+.theme-white .deco-popup-menu, .theme-white .deco-pane-popup {
+    backdrop-filter: var(--ya_blur) !important;
+    background-color: var(--ya_back_color_light) !important;
+}
+
+.theme-black .deco-popup-menu, .theme-black .deco-pane-popup {
+    backdrop-filter: var(--ya_blur) !important;
+    background-color: var(--ya_back_color_dark) !important;
+    border-radius: var(--ya_border_radius) !important;
+}
+
+figure, img, .entity-cover.deco-entity-image-placeholder.track-cover.entity-cover_size_Large, .d-cover__wrapper.playlist-cover__wrapper {
+    border-radius: var(--ya_border_radius) !important;
+}
+
+.rup__animation {
+    display: none !important;
+}

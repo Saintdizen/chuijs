@@ -1,5 +1,6 @@
 const { Animation } = require('../../modules/chui_animations/animations')
 const { Spinner } = require('../chui_spinner/spinner')
+const fs = require("fs");
 
 
 // https://www.electronjs.org/ru/docs/latest/api/webview-tag
@@ -43,36 +44,10 @@ class WebView {
     addFinishLoadEvent(listener = () => {}) {
         this.#WebView.addEventListener('did-finish-load', listener)
     }
-    customScrollBar(options = {
-        enable: Boolean(false),
-        width: String("6px"),
-        trackBackgroundColor: String("inherit"),
-        thumbRadius: String("6px"),
-        thumbColor: String("inherit")
-    }) {
-        this.#WebView.addEventListener('did-start-loading', () => {
-            if (options.enable) {
-                this.#WebView.addEventListener('dom-ready', () => {
-                    this.#WebView.insertCSS(`*::-webkit-scrollbar { width: ${options.width}; }
-                    *::-webkit-scrollbar-track { background-color: ${options.trackBackgroundColor}; }
-                    *::-webkit-scrollbar-thumb { border-radius: ${options.thumbRadius}; background: ${options.thumbColor}; }`).catch(r => console.log(r));
-                });
-            }
-        })
-    }
-    insertCustomCSS(cssJson) {
+    insertCustomCSS(pathToCSSFile) {
         this.#WebView.addEventListener('dom-ready', () => {
-            let parsed_json = JSON.parse(JSON.stringify(cssJson));
-            let css_array_string = [];
-            for (let i = 0; i < parsed_json.length; i++) {
-                css_array_string.push(`${parsed_json[i].name} {`)
-                JSON.parse(JSON.stringify(parsed_json[i].style), function(key, value) {
-                    if (typeof value !== 'object') css_array_string.push(`${key}:${value};`)
-                    return value;
-                });
-                css_array_string.push(`}\n`)
-            }
-            this.#WebView.insertCSS(css_array_string.join("").slice(0, -1)).catch(r => console.log(r));
+            let data = fs.readFileSync(pathToCSSFile, 'utf8');
+            this.#WebView.insertCSS(String(data)).catch(r => console.log(r));
         });
     }
     setUrl(url = String()) {

@@ -61,6 +61,8 @@ class AppLayout extends Route {
     #not_duplicate_page = false;
     //
     #windowHideOnClose = false;
+    //
+    #isDisableHeader = false;
     constructor() {
         super();
         require('../../modules/chui_fonts').install();
@@ -79,9 +81,10 @@ class AppLayout extends Route {
         center = document.createElement('main_center_block');
         center.id = "center";
         this.#applayout.appendChild(center)
-        this.#applayout.appendChild(header)
+        if (this.#isDisableHeader === true) {
+            this.#applayout.appendChild(header);
+        }
         document.body.appendChild(this.#notification_panel);
-
         this.#app_menu.style.top = `calc(${header.style.height})`;
         this.#app_menu.style.width = `${this.#def_menu_block_width}px`;
         this.#app_menu.style.left = `calc(-${this.#def_menu_block_width_test}px)`;
@@ -250,6 +253,10 @@ class AppLayout extends Route {
                 e.sender.send("updateInstallConfirm", confirm_res)
             }
         })
+    }
+
+    disableHeader(boolean = Boolean()) {
+        this.#isDisableHeader = boolean;
     }
 
     disableAppMenu() {

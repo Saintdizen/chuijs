@@ -11,7 +11,7 @@ const {TextEditorPage} = require('./views/4_text_editor');
 const {TitlesPage} = require('./views/5_titles');
 const {FormsPage} = require('./views/6_forms');
 const {SlidesPage} = require('./views/7_slideshow');
-const {WebViewsPage} = require('./views/8_webviews');
+const {WebViewsPage} = require('./views/webviews/webviews');
 const {TabsPage} = require('./views/9_tabs');
 const {TgTestPage} = require("./views/10_tg_test");
 const {SpinnerPage} = require("./views/11_spinners");
@@ -24,6 +24,7 @@ class Test extends AppLayout {
         // Настройки окна
         this.setHideOnClose(true);
         this.setNotDuplicatePages(true);
+        this.disableHeader(true);
         //this.disableAppMenu();
 
         // Настройка роутов
