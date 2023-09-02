@@ -71,7 +71,7 @@ popup_button_ok {
     width: -webkit-fill-available;
     padding: 10px;
     border-radius: var(--border_radius);
-    color: var(--button_text_color);
+    color: var(--text_color);
     font-weight: 500;
     font-size: 12pt;
 }
@@ -90,7 +90,7 @@ popup_button_accept {
     width: -webkit-fill-available;
     padding: 10px;
     border-radius: var(--border_radius);
-    color: var(--button_text_color);
+    color: var(--text_color);
     font-weight: 500;
     font-size: 12pt;
 }

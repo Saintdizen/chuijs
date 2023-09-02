@@ -58,5 +58,5 @@ image_popup_close:hover {
 }
 
 image_popup_close:hover chui_icon {
-    color: var(--button_text_color);
+    color: var(--text_color);
 }

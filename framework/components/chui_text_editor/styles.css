@@ -72,7 +72,7 @@ chui_button_format {
     margin: 0 3px;
     font-size: 11pt;
     font-weight: 500;
-    color: var(--button_text_color)
+    color: var(--text_color)
 }
 
 chui_button_format:hover {

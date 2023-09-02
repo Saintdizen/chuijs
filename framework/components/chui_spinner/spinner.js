@@ -12,17 +12,17 @@ class Spinner {
         let size_1 = size.SIZE;
         this.#spinner.style.width = `${size_1}px`;
         this.#spinner.style.height = `${size_1}px`;
-        this.#spinner.style.borderTop = `${size.BORDER}px solid var(--spinner_blue)`;
+        this.#spinner.style.borderTop = `${size.BORDER}px solid var(--blue_prime_background)`;
         //
         let size_2 = size_1 - size.BORDER * 2;
         this.#spinner_2.style.width = `${size_2}px`;
         this.#spinner_2.style.height = `${size_2}px`;
-        this.#spinner_2.style.borderTop = `${size.BORDER}px solid var(--spinner_blue)`;
+        this.#spinner_2.style.borderTop = `${size.BORDER}px solid var(--blue_prime_background)`;
         //
         let size_3 = size_2 - size.BORDER * 2;
         this.#spinner_3.style.width = `${size_3}px`;
         this.#spinner_3.style.height = `${size_3}px`;
-        this.#spinner_3.style.borderTop = `${size.BORDER}px solid var(--spinner_blue)`;
+        this.#spinner_3.style.borderTop = `${size.BORDER}px solid var(--blue_prime_background)`;
         //ADDS
         this.#spinner_2.appendChild(this.#spinner_3)
         this.#spinner.appendChild(this.#spinner_2)

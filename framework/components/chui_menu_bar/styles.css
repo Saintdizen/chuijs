@@ -18,7 +18,7 @@ chui_menu_bar_button {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    color: var(--button_text_color);
+    color: var(--text_color);
     margin: 2px
 }
 
@@ -56,14 +56,14 @@ menu_bar_drop_down_button {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    color: var(--button_text_color);
+    color: var(--text_color);
 }
 
 menu_bar_dropdown {
     margin-top: 44px;
     display: none;
     position: absolute;
-    background: var(--header_background_dropdown);
+    background: var(--main_background_3);
     color: var(--text_color);
     border: 1px solid var(--border_main);
     border-radius: var(--border_radius);
@@ -89,7 +89,7 @@ menu_bar_dropdown {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    color: var(--button_text_color);
+    color: var(--text_color);
 }
 
 .menu_bar_dropdown_button {
@@ -106,5 +106,5 @@ menu_bar_dropdown {
     flex-direction: row;
     align-items: center;
     justify-content: start;
-    color: var(--button_text_color);
+    color: var(--text_color);
 }

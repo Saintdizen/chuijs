@@ -13,7 +13,7 @@ chui_form_main {
     font-weight: 400;
     margin: var(--margin);
     background: var(--button_background);
-    color: var(--button_text_color);
+    color: var(--text_color);
 }
 
 .chui_form_submit_button:hover {

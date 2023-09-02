@@ -15,7 +15,7 @@ fieldset {
 }
 
 legend {
-    color: var(--button_text_color);
+    color: var(--text_color);
     padding: var(--main_padding);
     font-size: 10pt;
     font-weight:400;

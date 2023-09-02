@@ -15,7 +15,7 @@ chui_next_slide, chui_prev_slide {
     position: absolute;
     top: 0;
     width: auto;
-    color: var(--button_text_color);
+    color: var(--text_color);
     font-weight: bold;
     font-size: 18px;
     user-select: none;

@@ -73,7 +73,7 @@ main_center_block::-webkit-scrollbar-track {
 
 ::-webkit-scrollbar-thumb {
     border-radius: var(--border_radius);
-    background: var(--scroll_bar_background);
+    background: var(--main_background_3);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -90,7 +90,7 @@ applayout {
 #app {
     width: -webkit-fill-available;
     height: -webkit-fill-available;
-    background: var(--center_background)
+    background: var(--main_background)
 }
 
 header {
@@ -157,8 +157,8 @@ app_menu {
     margin: 58px 12px 12px 12px;
     border-radius: var(--border_radius);
     box-shadow: 0 2px 10px 2px rgb(0 0 0 / 20%);
-    border: 1px solid var(--border_background_1);
-    background: var(--app_menu_background);
+    border: 1px solid var(--border_main);
+    background: var(--main_background_2);
     backdrop-filter: var(--global_blur);
     width: -webkit-fill-available
 }
@@ -174,10 +174,10 @@ notification_box {
     margin: 58px 12px 12px 12px;
     border-radius: var(--border_radius);
     box-shadow: 0 2px 10px 2px rgb(0 0 0 / 20%);
-    background: var(--app_menu_background);
+    background: var(--main_background_2);
     backdrop-filter: var(--global_blur);
     width: -webkit-fill-available;
-    border: 1px solid var(--border_background_1);
+    border: 1px solid var(--border_main);
 }
 
 notification_box_controls {
@@ -188,7 +188,7 @@ notification_box_controls {
     height: max-content;
     width: -webkit-fill-available;
     background: transparent;
-    border-top: 1px solid var(--border_background_1);
+    border-top: 1px solid var(--border_main);
 }
 
 notification_box_main {
@@ -383,7 +383,7 @@ user_dropdown {
     margin-top: 43px;
     display: none;
     position: absolute;
-    background: var(--header_background_dropdown);
+    background: var(--main_background_3);
     color: var(--text_color);
     border-radius: var(--border_radius);
     padding: var(--test_padding);

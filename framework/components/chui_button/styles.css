@@ -28,7 +28,7 @@ button:hover {
 }
 
 button_text {
-    color: var(--button_text_color);
+    color: var(--text_color);
 }
 
 button:hover button_text {
@@ -36,7 +36,7 @@ button:hover button_text {
 }
 
 button button_icon chui_icon {
-    color: var(--button_text_color);
+    color: var(--text_color);
 }
 
 button:hover button_icon chui_icon {

@@ -4,7 +4,7 @@ chui_vp_main {
     border-radius: var(--border_radius);
     --seek-before-width: 0%;
     --volume-before-width: 0%;
-    border: 1px solid var(--border_background_1);
+    border: 1px solid var(--border_main);
 }
 
 chui_vp_block {
@@ -15,9 +15,9 @@ chui_vp_block {
     backdrop-filter: var(--global_blur);
     border-bottom-right-radius: var(--border_radius);
     border-bottom-left-radius: var(--border_radius);
-    background: var(--header_background);
+    background: var(--main_background_2);
     opacity: 0;
-    border-top: 1px solid var(--border_background_1);
+    border-top: 1px solid var(--border_main);
 }
 
 /* Блок информация */

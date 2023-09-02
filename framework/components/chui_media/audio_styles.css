@@ -12,8 +12,8 @@ chui_ap_block {
     width: -webkit-fill-available;
     backdrop-filter: var(--global_blur);
     border-radius: var(--border_radius);
-    background: var(--header_background);
-    border: 1px solid var(--border_background_1);
+    background: var(--main_background_2);
+    border: 1px solid var(--border_main);
 }
 
 /* Блок информация */

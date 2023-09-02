@@ -24,7 +24,6 @@ class Test extends AppLayout {
         // Настройки окна
         this.setHideOnClose(true);
         this.setNotDuplicatePages(true);
-        this.disableHeader(true);
         //this.disableAppMenu();
 
         // Настройка роутов
