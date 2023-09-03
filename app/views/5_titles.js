@@ -13,8 +13,7 @@ class TitlesPage extends Page {
         let h3 = new H(3, "Заголовок 3");
         let h4 = new H(4, "Заголовок 4");
         let h5 = new H(5, "Заголовок 5");
-        let h6 = new H(6, "Заголовок 6");
-        this.add(h1, h2, h3, h4, h5, h6);
+        this.add(h1, h2, h3, h4, h5);
 
         let label = new Label({
             markdownText: "NORMAL **BOLD**",

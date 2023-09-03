@@ -12,9 +12,9 @@ button {
     width: max-content;
     border-radius: var(--border_radius);
     padding: var(--main_padding);
-    font-size: 12pt;
+    font-size: var(--font_default_size);
     font-weight: 400;
-    background: var(--button_background);
+    background: var(--element_background);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -44,12 +44,12 @@ button:hover button_icon chui_icon {
 /* DISABLED STYLES */
 button:disabled {
     cursor: not-allowed;
-    background: var(--button_background_disabled);
+    background: var(--element_background_disabled);
     color: var(--text_color_disabled);
 }
 
 button:disabled:hover {
-    background: var(--button_background_disabled);
+    background: var(--element_background_disabled);
     color: var(--text_color_disabled);
 }
 

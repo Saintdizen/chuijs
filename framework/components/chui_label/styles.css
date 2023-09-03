@@ -2,7 +2,7 @@ chui_label {
     height: max-content;
     width: max-content;
     margin: var(--margin);
-    font-size: 12pt;
+    font-size: var(--font_default_size);
     font-weight:500;
     color: var(--text_color);
 }

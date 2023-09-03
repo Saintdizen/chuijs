@@ -26,7 +26,7 @@ date_select_dropdown {
     flex-direction: column;
     color: var(--text_color);
     padding: var(--test_padding);
-    background: var(--dropdown_background);
+    background: var(--element_background);
     border: 1px solid var(--border_main);
     border-radius: var(--border_radius);
     position:absolute;
@@ -70,7 +70,7 @@ date_main_block {
     width: max-content;
     border-radius: var(--border_radius);
     font-size: var(--font_default_size);
-    background: var(--input_background);
+    background: var(--element_background);
     color: var(--text_color);
     border: 1px solid var(--border_main);
     position: relative;

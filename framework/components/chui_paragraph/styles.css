@@ -3,5 +3,5 @@ p {
     width: max-content;
     color: var(--text_color);
     margin: var(--margin);
-    font-size: 12pt;
+    font-size: var(--font_default_size);
 }

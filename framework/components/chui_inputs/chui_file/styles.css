@@ -74,7 +74,7 @@ input[type=file]::file-selector-button {
     font-size: var(--font_default_size);
     font-weight: 400;
     margin: 0 var(--margin) 0 0;
-    background: var(--button_background);
+    background: var(--element_background);
     color: var(--text_color);
     transition: all .22s;
     font-family: chui_Inter;
@@ -90,11 +90,11 @@ input[type=file]::file-selector-button:hover {
 
 input[type=file]:disabled::file-selector-button {
     cursor: not-allowed;
-    background: var(--button_background_disabled);
+    background: var(--element_background_disabled);
     color: var(--text_color_disabled);
 }
 
 input[type=file]:disabled::file-selector-button:hover {
-    background: var(--button_background_disabled);
+    background: var(--element_background_disabled);
     color: var(--text_color_disabled);
 }

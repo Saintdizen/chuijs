@@ -1,27 +1,22 @@
 @media (prefers-color-scheme: light) {
     :root {
+        /* Текст */
+        --text_color: rgb(27, 27, 27);
+        --text_color_disabled: rgba(27, 27, 27, 0.5);
+        --text_color_hover: rgb(255, 255, 255);
         /* Основные цвета */
         --main_background: rgb(240, 240, 240);
+        --main_background_overlay: rgba(25, 25, 26, 0.25);
         --main_background_2: rgba(220, 220, 220, 0.66);
         --main_background_3: rgba(220, 220, 220, 1);
         --main_background_4: rgba(220, 220, 220, 0.66);
         --border_main: transparent;
-        /**/
-        --blue_prime_background: rgb(63, 138, 224);
-        --red_prime_background: rgb(218, 52, 80);
-        /* Текст */
-        --text_color: rgb(0, 0, 0);
-        --text_color_disabled: rgba(0, 0, 0, 0.5);
-        --text_color_hover: rgb(255, 255, 255);
-        /* Кнопки */
-        --button_background: rgb(221, 223, 225);
-        --button_background_disabled: rgba(221, 223, 225, 0.5);
-        /* Поля ввода */
-        --input_background: rgb(221, 223, 225);
-        --dropdown_background: rgb(221, 223, 225);
-        /* Модальные окна */
-        --modal_overlay: rgba(25, 25, 26, 0.25);
-        --modal_background: rgb(240, 240, 240);
+        /* Элементы */
+        --element_background: rgb(221, 223, 225);
+        --element_background_disabled: rgba(221, 223, 225, 0.5);
+        /* Акцент */
+        --blue_prime_background: rgb(0, 122, 245);
+        --red_prime_background: rgb(255, 49, 38);
         /* Бэйджи */
         --badge_error_back: rgba(255, 59, 48, 0.4);
         --badge_error_text: rgb(194, 6, 24);
@@ -36,28 +31,23 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        /* Основные цвета */
-        --main_background: rgb(25, 25, 26);
-        --main_background_2: rgba(44, 45, 46, 0.66);
-        --main_background_3: rgba(44, 45, 46, 1);
-        --main_background_4: rgba(44, 45, 46, 0.66);
-        --border_main: transparent;
-        /**/
-        --blue_prime_background: rgb(113, 170, 235);
-        --red_prime_background: rgb(218, 52, 80);
         /* Текст */
         --text_color: rgb(255, 255, 255);
         --text_color_disabled: rgba(255, 255, 255, 0.5);
         --text_color_hover: rgb(0, 0, 0);
-        /* Кнопки */
-        --button_background: rgb(61, 62, 63);
-        --button_background_disabled: rgba(61, 62, 63, 0.5);
-        /* Поля ввода */
-        --input_background: rgb(61, 62, 63);
-        --dropdown_background: rgb(61, 62, 63);
-        /* Модальные окна */
-        --modal_overlay: rgba(240, 240, 240, 0.25);
-        --modal_background: rgb(25, 25, 26);
+        /* Основные цвета */
+        --main_background: rgb(25, 25, 26);
+        --main_background_overlay: rgba(240, 240, 240, 0.25);
+        --main_background_2: rgba(44, 45, 46, 0.66);
+        --main_background_3: rgba(44, 45, 46, 1);
+        --main_background_4: rgba(44, 45, 46, 0.66);
+        --border_main: transparent;
+        /* Элементы */
+        --element_background: rgb(61, 62, 63);
+        --element_background_disabled: rgba(61, 62, 63, 0.5);
+        /* Акцент */
+        --blue_prime_background: rgb(20, 142, 255);
+        --red_prime_background: rgb(255, 79, 68);
         /* Бэйджи */
         --badge_error_back: rgba(255, 69, 58, 0.4);
         --badge_error_text: rgb(255, 105, 94);

@@ -9,10 +9,10 @@ chui_form_main {
     width: max-content;
     border-radius: var(--border_radius);
     padding: var(--main_padding);
-    font-size: 12pt;
+    font-size: var(--font_default_size);
     font-weight: 400;
     margin: var(--margin);
-    background: var(--button_background);
+    background: var(--element_background);
     color: var(--text_color);
 }
 

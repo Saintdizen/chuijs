@@ -7,7 +7,7 @@ chui_dialog {
     width: -webkit-fill-available;
     height: -webkit-fill-available;
     overflow: auto;
-    background-color: var(--modal_overlay);
+    background-color: var(--main_background_overlay);
     padding: 0;
     border: none;
     backdrop-filter: var(--global_blur);
@@ -23,7 +23,7 @@ dialog_content {
     border-radius: var(--border_radius);
     border: 1px solid var(--border_main);
     color: var(--text_color);
-    background: var(--modal_background);
+    background: var(--main_background);
     box-shadow: 0 2px 10px 2px rgb(0 0 0 / 20%);
 }
 

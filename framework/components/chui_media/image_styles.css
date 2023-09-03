@@ -20,7 +20,7 @@ chui_image_popup {
     width: -webkit-fill-available;
     height: -webkit-fill-available;
     overflow: auto;
-    background-color: var(--modal_overlay);
+    background-color: var(--main_background_overlay);
     padding: 0;
     border: none;
     backdrop-filter: var(--global_blur)
@@ -54,7 +54,7 @@ image_popup_close {
 }
 
 image_popup_close:hover {
-    background-color: var(--button_background);
+    background-color: var(--element_background);
 }
 
 image_popup_close:hover chui_icon {

@@ -10,7 +10,7 @@ chui_text_editor {
     border-radius: var(--border_radius);
     display: flex;
     flex-direction: column;
-    background: var(--input_background);
+    background: var(--element_background);
     border: 1px solid var(--border_main);
     width: -webkit-fill-available;
 }
@@ -23,7 +23,7 @@ chui_editor_controls {
 
 chui_editor_text_input {
     width: -webkit-fill-available;
-    font-size: 12pt;
+    font-size: var(--font_default_size);
     padding: 0 10px 6px 10px;
     height: calc(100% - 40px);
     overflow: overlay;
@@ -45,7 +45,7 @@ chui_editor_status_row {
     height: max-content;
     width: max-content;
     margin: var(--margin);
-    font-size: 10pt;
+    font-size: var(--font_labels_size);
     font-weight:500;
     color: var(--text_color)
 }
@@ -133,7 +133,7 @@ text_editor_div_value {
 
 text_editor_selectbox_dropdown {
     overflow: overlay;
-    background: var(--dropdown_background);
+    background: var(--element_background);
     color: var(--text_color);
     outline: none;
     position:absolute;

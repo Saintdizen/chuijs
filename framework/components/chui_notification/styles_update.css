@@ -6,7 +6,7 @@ update_notification {
     max-width: 600px;
     border-radius: var(--border_radius);
     margin: var(--margin);
-    font-size: 12pt;
+    font-size: var(--font_default_size);
     padding: 6px 10px;
     background: var(--main_background_4);
     backdrop-filter: var(--global_blur);
@@ -41,7 +41,7 @@ update_notification_header {
 }
 
 update_notification_title {
-    font-size: 12pt;
+    font-size: var(--font_default_size);
     font-weight: 600;
     margin: 3px;
     color: var(--text_color);

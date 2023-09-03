@@ -2,9 +2,9 @@
     --global_blur: blur(10px);
     --main_padding: 6px 10px;
     --test_padding: 6px;
-    --font_default_size: 12pt;
-    --font_labels_size: 10pt;
-    --border_radius: 10px;
+    --font_default_size: 1rem;
+    --font_labels_size: 0.833rem;
+    --border_radius: 0.6rem;
     --margin: 6px;
 }
 
@@ -20,28 +20,24 @@ strong {
 }
 
 * {
-    word-spacing: 0.33px;
+    letter-spacing: -.011em;
     font-family: chui_Inter, system-ui;
-    direction: ltr;
     user-select: none;
     outline: none;
     transition: all .22s;
     animation-duration: .22s;
     position: relative;
-    -webkit-font-smoothing: subpixel-antialiased;
     text-rendering: optimizeSpeed;
 }
 
 *:before {
-    word-spacing: 0.33px;
-    font-family: chui_Inter;
-    direction: ltr;
+    letter-spacing: -.011em;
+    font-family: chui_Inter, system-ui;
     user-select: none;
     outline: none;
     transition: all .22s;
     animation-duration: .22s;
     position: relative;
-    -webkit-font-smoothing: subpixel-antialiased;
     text-rendering: optimizeSpeed;
 }
 
@@ -283,7 +279,7 @@ page_name {
     border-radius: var(--border_radius);
     padding: var(--test_padding);
     margin: var(--margin) var(--margin) var(--margin) 0;
-    font-size: 12pt;
+    font-size: var(--font_default_size);
     font-weight: 500;
     background: transparent;
     color: var(--text_color)
@@ -300,7 +296,7 @@ route {
     border-radius: var(--border_radius);
     padding: var(--test_padding);
     margin: var(--margin);
-    font-size: 12pt;
+    font-size: var(--font_default_size);
     font-weight: 500;
     background: transparent;
 }
@@ -330,7 +326,7 @@ route_title {
 }
 
 blockquote {
-    background: var(--button_background);
+    background: var(--element_background);
     border-left: 10px solid var(--blue_prime_background);
     margin: 1.5em 10px;
     padding: 9px 14px;
@@ -442,7 +438,7 @@ header_button {
     border-radius: var(--border_radius);
     padding: var(--main_padding);
     margin: var(--margin) 0 var(--margin) var(--margin);
-    font-size: 12pt;
+    font-size: var(--font_default_size);
     background: transparent;
     font-weight: 500;
     display: flex;
@@ -475,7 +471,7 @@ header_button {
     border-radius: var(--border_radius);
     padding: var(--main_padding);
     margin: var(--margin) 0 var(--margin) var(--margin);
-    font-size: 12pt;
+    font-size: var(--font_default_size);
     background: transparent;
     color: var(--text_color);
     font-weight: 500;

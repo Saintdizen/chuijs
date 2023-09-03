@@ -13,7 +13,7 @@ password_main {
     height: max-content;
     border-radius: var(--border_radius);
     font-size: var(--font_default_size);
-    background: var(--input_background);
+    background: var(--element_background);
     color: var(--text_color);
     position: relative;
     padding: var(--test_padding) 43px var(--main_padding);

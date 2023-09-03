@@ -15,7 +15,7 @@ selectbox {
     border-radius: var(--border_radius);
     padding: 0;
     font-size: var(--font_default_size);
-    background: var(--input_background);
+    background: var(--element_background);
     color: var(--text_color);
     border: 1px solid var(--border_main);
 }
@@ -36,7 +36,7 @@ selectbox {
 
 selectbox_dropdown {
     overflow: hidden hidden;
-    background: var(--dropdown_background);
+    background: var(--element_background);
     color: var(--text_color);
     outline: none;
     position:absolute;

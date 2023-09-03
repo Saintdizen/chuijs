@@ -2,7 +2,7 @@ progress_block {
     width: max-content;
     height: max-content;
     margin: var(--margin);
-    font-size: 10pt;
+    font-size: var(--font_labels_size);
     color: var(--text_color);
     text-align: center;
     font-weight: 500
@@ -18,7 +18,7 @@ progress {
 }
 
 progress::-webkit-progress-bar {
-    background: var(--input_background);
+    background: var(--element_background);
     border-radius: 50px;
     border: none;
 }

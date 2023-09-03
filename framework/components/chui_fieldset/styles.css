@@ -15,10 +15,11 @@ fieldset {
 }
 
 legend {
-    color: var(--text_color);
+    color: var(--blue_prime_background);
     padding: var(--main_padding);
-    font-size: 10pt;
-    font-weight:400;
+    font-size: var(--font_default_size);
+    font-weight: 600;
     border: 1px solid var(--border_main);
     border-radius: var(--border_radius);
+    letter-spacing: -0.031rem;
 }

@@ -14,7 +14,7 @@ combobox {
     border-radius: var(--border_radius);
     padding: 0;
     font-size: var(--font_default_size);
-    background: var(--input_background);
+    background: var(--element_background);
     border: 1px solid var(--border_main);
 }
 
@@ -29,7 +29,7 @@ combobox {
 }
 
 combobox_dropdown {
-    background: var(--dropdown_background);
+    background: var(--element_background);
     position:absolute;
     display:none;
     height: max-content;

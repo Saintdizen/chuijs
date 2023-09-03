@@ -4,17 +4,17 @@ chui_details {
     height: max-content;
     width: max-content;
     margin: var(--margin);
-    font-size: 12pt;
+    font-size: var(--font_default_size);
     font-weight:400;
     border-radius: var(--border_radius);
     border: 1px solid var(--border_main);
 }
 
 details_button {
-    background: var(--button_background);
+    background: var(--element_background);
     cursor: pointer;
     padding: var(--main_padding);
-    font-size: 12pt;
+    font-size: var(--font_default_size);
     width: -webkit-fill-available;
     text-align: left;
     outline: none;

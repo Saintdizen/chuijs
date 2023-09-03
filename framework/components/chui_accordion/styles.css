@@ -3,7 +3,7 @@ chui_accordion {
     flex-direction: column;
     height: max-content;
     width: max-content;
-    font-size: 12pt;
+    font-size: var(--font_default_size);
     font-weight:400;
     border: none;
     margin: var(--margin);
@@ -14,14 +14,14 @@ chui_accordion_main_test {
     flex-direction: column;
     height: max-content;
     width: -webkit-fill-available;
-    font-size: 12pt;
+    font-size: var(--font_default_size);
     font-weight:400;
     border-radius: var(--border_radius);
     border: 1px solid var(--border_main);
 }
 
 accordion_button {
-    background: var(--button_background);
+    background: var(--element_background);
     cursor: pointer;
     padding: var(--main_padding);
     width: -webkit-fill-available;

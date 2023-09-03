@@ -9,7 +9,7 @@ table {
 }
 
 thead {
-    background: var(--input_background);
+    background: var(--element_background);
     font-weight: 600;
     height: max-content;
     width: 100%

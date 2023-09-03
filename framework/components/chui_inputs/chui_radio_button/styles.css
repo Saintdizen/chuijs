@@ -32,21 +32,18 @@ radiobutton {
     align-items:center;
     justify-content:center;
     color: transparent;
-    /*background-color: var(--input_background);*/
     border: 1px solid var(--border_main);
-    background: radial-gradient(circle, var(--text_color) 30%, var(--input_background) 30%);
+    background: radial-gradient(circle, var(--text_color) 30%, var(--element_background) 30%);
 }
 
 .radiobutton:not(:disabled):active+label::before {
     background: radial-gradient(circle, var(--text_color_hover) 30%, var(--blue_prime_background) 30%);
-    /*color:var(--text_color_hover);*/
 }
 
 .radiobutton:focus+label::before {}
 
 .radiobutton:checked+label::before {
     background: radial-gradient(circle, var(--text_color_hover) 30%, var(--blue_prime_background) 30%);
-    /*color:var(--text_color_hover);*/
 }
 
 .labelr {
@@ -67,6 +64,6 @@ radiobutton {
 
 .radiobutton:disabled:checked+label::before {
     cursor: not-allowed;
-    background: radial-gradient(circle, var(--text_color_disabled) 30%, var(--input_background) 30%);
+    background: radial-gradient(circle, var(--text_color_disabled) 30%, var(--element_background) 30%);
     border: 1px solid var(--border_main)
 }

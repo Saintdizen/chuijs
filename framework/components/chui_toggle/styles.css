@@ -19,7 +19,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--input_background);
+    background-color: var(--element_background);
 }
 
 .slider:before {
