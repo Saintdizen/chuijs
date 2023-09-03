@@ -30,7 +30,19 @@
     width: 15px;
     left: 5px;
     bottom: 5px;
+    background-color: var(--text_color);
+    text-shadow: var(--text_shadow_main);
+}
+
+input:checked + .slider:before {
+    position: absolute;
+    content: '';
+    height: 15px;
+    width: 15px;
+    left: 5px;
+    bottom: 5px;
     background-color: var(--text_color_hover);
+    text-shadow: var(--text_shadow_hover);
 }
 
 input:checked + .slider {

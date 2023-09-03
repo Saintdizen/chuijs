@@ -39,7 +39,7 @@ popup_body {
 
 popup_buttons {
     display: flex;
-    border-top: 1px solid var(--shadow_three);
+    border-top: 1px solid var(--border_main);
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -64,7 +64,6 @@ popup_message {
 /* ALERT */
 popup_button_ok {
     display: flex;
-    border-top: 1px solid var(--shadow_three);
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -78,12 +77,12 @@ popup_button_ok {
 
 popup_button_ok:hover {
     color: var(--text_color_hover);
+    text-shadow: var(--text_shadow_hover);
     background: var(--blue_prime_background);
 }
 /* CONFIRM */
 popup_button_accept {
     display: flex;
-    border-top: 1px solid var(--shadow_three);
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -97,24 +96,25 @@ popup_button_accept {
 
 popup_button_accept:hover {
     color: var(--text_color_hover);
+    text-shadow: var(--text_shadow_hover);
     background: var(--blue_prime_background);
 }
 
 popup_button_cancel {
     display: flex;
-    border-top: 1px solid var(--shadow_three);
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: -webkit-fill-available;
     padding: 10px;
     border-radius: var(--border_radius);
-    color: var(--badge_error_text);
+    color: var(--text_color);
     font-weight: 500;
     font-size: 12pt;
 }
 
 popup_button_cancel:hover {
     color: var(--text_color_hover);
-    background: var(--red_prime_background);
+    text-shadow: var(--text_shadow_hover);
+    background: var(--blue_prime_background);
 }

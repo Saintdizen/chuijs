@@ -59,19 +59,23 @@ accordion_button:hover {
 }
 
 accordion_button:hover accordion_button_text {
-    color: var(--text_color_hover)
+    color: var(--text_color_hover);
+    text-shadow: var(--text_shadow_hover);
 }
 
 accordion_button:hover chui_icon {
-    color: var(--text_color_hover)
+    color: var(--text_color_hover);
+    text-shadow: var(--text_shadow_hover);
 }
 
 .accordion_active {
     background: var(--blue_prime_background);
-    color: var(--text_color_hover)
+    color: var(--text_color_hover);
+    text-shadow: var(--text_shadow_hover);
 }
 
 .accordion_active chui_icon {
     background: transparent;
-    color: var(--text_color_hover)
+    color: var(--text_color_hover);
+    text-shadow: var(--text_shadow_hover);
 }

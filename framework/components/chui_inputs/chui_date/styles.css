@@ -51,7 +51,8 @@ date_day {
 
 .date_day:hover {
     background: var(--blue_prime_background);
-    color: var(--text_color_hover)
+    color: var(--text_color_hover);
+    text-shadow: var(--text_shadow_hover);
 }
 
 date_dropdown_open {

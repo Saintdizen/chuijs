@@ -25,6 +25,7 @@ chui_menu_bar_button {
 chui_menu_bar_button:hover {
     background: var(--blue_prime_background);
     color: var(--text_color_hover);
+    text-shadow: var(--text_shadow_hover);
 }
 
 menu_bar_drop_down_main {
@@ -36,11 +37,13 @@ menu_bar_drop_down_main {
 menu_bar_drop_down_button:hover {
     background: var(--blue_prime_background);
     color: var(--text_color_hover);
+    text-shadow: var(--text_shadow_hover);
 }
 
 .menu_bar_drop_down_button {
     background: var(--blue_prime_background);
     color: var(--text_color_hover);
+    text-shadow: var(--text_shadow_hover);
 }
 
 menu_bar_drop_down_button {

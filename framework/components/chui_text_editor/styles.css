@@ -166,7 +166,8 @@ text_editor_selectbox_option:hover {
 }
 
 text_editor_selectbox_option:hover font {
-    color: var(--text_color_hover)
+    color: var(--text_color_hover);
+    text-shadow: var(--text_shadow_hover);
 }
 
 /* chUiJS_TextEditorPanel */

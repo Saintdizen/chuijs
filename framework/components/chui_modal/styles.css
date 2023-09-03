@@ -30,7 +30,7 @@ dialog_content {
 dialog_header {
     display: flex;
     padding-bottom: 6px;
-    /*border-bottom : 1px solid var(--shadow_three)*/
+    border-bottom : 1px solid var(--border_main);
 }
 
 dialog_body {
@@ -44,5 +44,5 @@ dialog_body {
 dialog_footer {
     display: flex;
     padding-top: 6px;
-    /*border-top : 1px solid var(--shadow_three)*/
+    border-top : 1px solid var(--border_main);
 }

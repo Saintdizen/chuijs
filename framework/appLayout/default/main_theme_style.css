@@ -1,77 +1,77 @@
 @media (prefers-color-scheme: light) {
     :root {
         /* Основные цвета */
-        --main_background: rgba(228, 226, 227, 1);
-        --main_background_2: rgba(242, 240, 241, 1);
-        --main_background_3: rgba(237, 237, 237, 1);
-        --main_background_4: rgba(247, 247, 247, 1);
+        --main_background: rgb(228, 226, 227);
+        --main_background_2: rgba(242, 240, 241, 0.5);
+        --main_background_3: rgb(237, 237, 237);
+        --main_background_4: rgb(247, 247, 247);
         --border_main: rgba(75, 75, 75, 0.2);
         /**/
-        --blue_prime_background: rgba(90, 93, 108, 1);
-        --red_prime_background: rgba(255, 59, 48, 0.7);
+        --blue_prime_background: rgb(90, 93, 108);
+        --red_prime_background: rgb(255, 59, 48);
         /* Текст */
-        --text_color: rgba(17, 17, 17, 1);
-        --text_color_disabled: rgba(242, 242, 242, 0.5);
-        --text_shadow_main: 0 0 1px rgba(17, 17, 17, 0.4);
-        --text_color_hover: rgba(227, 227, 227, 1);
-        --text_shadow_hover: 0 0 1px rgba(227, 227, 227, 0.4);
+        --text_color: rgb(25, 23, 24);
+        --text_color_disabled: rgba(25, 23, 24, 0.5);
+        --text_shadow_main: 0 0 1px rgba(25, 23, 24, 0.4);
+        --text_color_hover: rgb(242, 242, 242);
+        --text_shadow_hover: 0 0 1px rgba(242, 242, 242, 0.4);
         /* Кнопки */
-        --button_background: rgba(251, 249, 250, 1);
+        --button_background: rgb(251, 249, 250);
         --button_background_disabled: rgba(251, 249, 250, 0.5);
         --button_border: rgba(251, 249, 250, 0.5);
         /* Поля ввода */
-        --input_background: rgba(251, 249, 250, 1);
-        --dropdown_background: rgba(251, 249, 250, 1);
+        --input_background: rgb(251, 249, 250);
+        --dropdown_background: rgb(251, 249, 250);
         /* Модальные окна */
-        --modal_overlay: rgba(0, 0, 0, 0.4);
-        --modal_background: rgba(235, 235, 235, 1);
+        --modal_overlay: rgba(17, 17, 19, 0.5);
+        --modal_background: rgb(228, 226, 227);
         /* Бэйджи */
         --badge_error_back: rgba(255, 59, 48, 0.4);
-        --badge_error_text: rgba(194, 6, 24, 1);
+        --badge_error_text: rgb(194, 6, 24);
         --badge_success_back: rgba(52, 199, 89, 0.4);
-        --badge_success_text: rgba(0, 112, 24, 1);
+        --badge_success_text: rgb(0, 112, 24);
         --badge_cancel_back: rgba(142, 142, 147, 0.4);
-        --badge_cancel_text: rgba(97, 97, 101, 1);
+        --badge_cancel_text: rgb(97, 97, 101);
         --badge_warning_back: rgba(255, 204, 0, 0.4);
-        --badge_warning_text: rgba(146, 81, 0, 1);
+        --badge_warning_text: rgb(146, 81, 0);
     }
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         /* Основные цвета */
-        --main_background: rgba(17, 17, 17, 1);
-        --main_background_2: rgba(27, 27, 27, 1);
-        --main_background_3: rgba(37, 37, 37, 1);
-        --main_background_4: rgba(47, 47, 47, 1);
+        --main_background: rgb(17, 17, 19);
+        --main_background_2: rgba(27, 27, 29, 0.5);
+        --main_background_3: rgb(37, 37, 39);
+        --main_background_4: rgb(47, 47, 49);
         --border_main: rgba(205, 205, 205, 0.2);
         /**/
-        --blue_prime_background: rgba(223, 226, 243, 1);
-        --red_prime_background: rgba(255, 69, 58, 0.7);
+        --blue_prime_background: rgb(223, 226, 243);
+        --red_prime_background: rgb(255, 69, 58);
         /* Текст */
-        --text_color: rgba(242, 242, 242, 1);
+        --text_color: rgb(242, 242, 242);
         --text_color_disabled: rgba(242, 242, 242, 0.5);
         --text_shadow_main: 0 0 1px rgba(242, 242, 242, 0.4);
-        --text_color_hover: rgba(17, 17, 17, 1);
-        --text_shadow_hover: 0 0 1px rgba(17, 17, 17, 0.4);
+        --text_color_hover: rgb(25, 23, 24);
+        --text_shadow_hover: 0 0 1px rgba(25, 23, 24, 0.4);
         /* Кнопки */
-        --button_background: rgba(48, 48, 48, 1);
-        --button_background_disabled: rgba(48, 48, 48, 0.5);
-        --button_border: rgba(48, 48, 48, 0.5);
+        --button_background: rgb(48, 48, 50);
+        --button_background_disabled: rgba(48, 48, 50, 0.5);
+        --button_border: rgba(48, 48, 50, 0.5);
         /* Поля ввода */
-        --input_background: rgba(48, 48, 48, 1);
-        --dropdown_background: rgba(48, 48, 48, 1);
+        --input_background: rgb(48, 48, 50);
+        --dropdown_background: rgb(48, 48, 50);
         /* Модальные окна */
-        --modal_overlay: rgba(0, 0, 0, 0.4);
-        --modal_background: rgba(44, 44, 44, 1);
+        --modal_overlay: rgba(228, 226, 227, 0.5);
+        --modal_background: rgb(17, 17, 19);
         /* Бэйджи */
         --badge_error_back: rgba(255, 69, 58, 0.4);
-        --badge_error_text: rgba(255, 105, 94, 1);
+        --badge_error_text: rgb(255, 105, 94);
         --badge_success_back: rgba(48, 209, 88, 0.4);
-        --badge_success_text: rgba(49, 222, 75, 1);
+        --badge_success_text: rgb(49, 222, 75);
         --badge_cancel_back: rgba(142, 142, 147, 0.4);
-        --badge_cancel_text: rgba(182, 182, 187, 1);
+        --badge_cancel_text: rgb(182, 182, 187);
         --badge_warning_back: rgba(255, 214, 10, 0.4);
-        --badge_warning_text: rgba(255, 212, 38, 1);
+        --badge_warning_text: rgb(255, 212, 38);
     }
 }

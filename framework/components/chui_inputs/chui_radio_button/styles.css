@@ -40,6 +40,7 @@ radiobutton {
     border: 1px solid var(--blue_prime_background);
     background: radial-gradient(circle, rgba(242,242,247,1) 30%, var(--blue_prime_background) 42%);
     color:var(--text_color_hover);
+    text-shadow: var(--text_shadow_hover);
 }
 
 .radiobutton:focus+label::before {}
@@ -48,6 +49,7 @@ radiobutton {
     border: 1px solid var(--blue_prime_background);
     background: radial-gradient(circle, rgba(242,242,247,1) 30%, var(--blue_prime_background) 42%);
     color:var(--text_color_hover);
+    text-shadow: var(--text_shadow_hover);
 }
 
 .labelr {

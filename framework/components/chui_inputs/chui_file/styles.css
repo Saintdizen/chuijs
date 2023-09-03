@@ -86,6 +86,7 @@ input[type=file]::file-selector-button {
 input[type=file]::file-selector-button:hover {
     background: var(--blue_prime_background);
     color: var(--text_color_hover);
+    text-shadow: var(--text_shadow_hover);
     border: 1px solid var(--button_border)
 }
 
