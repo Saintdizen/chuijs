@@ -80,25 +80,21 @@ input[type=file]::file-selector-button {
     font-family: chui_Inter;
     letter-spacing: 0.33px;
     word-spacing: 0.33px;
-    border: 1px solid var(--button_border)
+    border: none;
 }
 
 input[type=file]::file-selector-button:hover {
     background: var(--blue_prime_background);
     color: var(--text_color_hover);
-    text-shadow: var(--text_shadow_hover);
-    border: 1px solid var(--button_border)
 }
 
 input[type=file]:disabled::file-selector-button {
     cursor: not-allowed;
     background: var(--button_background_disabled);
     color: var(--text_color_disabled);
-    border: 1px solid var(--button_border)
 }
 
 input[type=file]:disabled::file-selector-button:hover {
     background: var(--button_background_disabled);
     color: var(--text_color_disabled);
-    border: 1px solid var(--button_border)
 }

@@ -19,12 +19,11 @@ button {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--button_border);
+    border: none;
 }
 
 button:hover {
     background: var(--blue_prime_background);
-    border: 1px solid var(--button_border);
 }
 
 button_text {
@@ -33,7 +32,6 @@ button_text {
 
 button:hover button_text {
     color: var(--text_color_hover);
-    text-shadow: var(--text_shadow_hover);
 }
 
 button button_icon chui_icon {
@@ -42,20 +40,17 @@ button button_icon chui_icon {
 
 button:hover button_icon chui_icon {
     color: var(--text_color_hover);
-    text-shadow: var(--text_shadow_hover);
 }
 /* DISABLED STYLES */
 button:disabled {
     cursor: not-allowed;
     background: var(--button_background_disabled);
     color: var(--text_color_disabled);
-    border: 1px solid var(--button_border);
 }
 
 button:disabled:hover {
     background: var(--button_background_disabled);
     color: var(--text_color_disabled);
-    border: 1px solid var(--button_border);
 }
 
 button:disabled button_text {

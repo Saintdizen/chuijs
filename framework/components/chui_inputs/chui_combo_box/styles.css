@@ -76,7 +76,6 @@ combobox_option:hover {
     padding: var(--main_padding);
     background: var(--blue_prime_background);
     color: var(--text_color_hover);
-    text-shadow: var(--text_shadow_hover);
 }
 
 /* DISABLED STYLES */

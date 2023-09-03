@@ -19,5 +19,4 @@ chui_form_main {
 .chui_form_submit_button:hover {
     background: var(--blue_prime_background);
     color: var(--text_color_hover);
-    text-shadow: var(--text_shadow_hover);
 }

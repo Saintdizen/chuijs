@@ -31,7 +31,6 @@
     left: 5px;
     bottom: 5px;
     background-color: var(--text_color);
-    text-shadow: var(--text_shadow_main);
 }
 
 input:checked + .slider:before {
@@ -42,7 +41,6 @@ input:checked + .slider:before {
     left: 5px;
     bottom: 5px;
     background-color: var(--text_color_hover);
-    text-shadow: var(--text_shadow_hover);
 }
 
 input:checked + .slider {

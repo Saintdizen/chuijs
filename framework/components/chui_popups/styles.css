@@ -77,7 +77,6 @@ popup_button_ok {
 
 popup_button_ok:hover {
     color: var(--text_color_hover);
-    text-shadow: var(--text_shadow_hover);
     background: var(--blue_prime_background);
 }
 /* CONFIRM */
@@ -96,7 +95,6 @@ popup_button_accept {
 
 popup_button_accept:hover {
     color: var(--text_color_hover);
-    text-shadow: var(--text_shadow_hover);
     background: var(--blue_prime_background);
 }
 
@@ -115,6 +113,5 @@ popup_button_cancel {
 
 popup_button_cancel:hover {
     color: var(--text_color_hover);
-    text-shadow: var(--text_shadow_hover);
     background: var(--blue_prime_background);
 }

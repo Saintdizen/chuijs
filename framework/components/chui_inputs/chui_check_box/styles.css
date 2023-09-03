@@ -55,7 +55,6 @@ checkbox {
 .checkbox:not(:disabled):active+label::before {
     background-color: var(--blue_prime_background);
     color:var(--text_color_hover);
-    text-shadow: var(--text_shadow_hover);
 }
 
 .checkbox:focus+label::before {}
@@ -63,7 +62,6 @@ checkbox {
 .checkbox:checked+label::before {
     background-color: var(--blue_prime_background);
     color:var(--text_color_hover);
-    text-shadow: var(--text_shadow_hover);
 }
 
 .labelz {
