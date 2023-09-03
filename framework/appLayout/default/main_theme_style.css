@@ -20,7 +20,7 @@
         --input_background: rgb(221, 223, 225);
         --dropdown_background: rgb(221, 223, 225);
         /* Модальные окна */
-        --modal_overlay: rgba(0, 0, 0, 0.5);
+        --modal_overlay: rgba(25, 25, 26, 0.25);
         --modal_background: rgb(240, 240, 240);
         /* Бэйджи */
         --badge_error_back: rgba(255, 59, 48, 0.4);
@@ -50,13 +50,13 @@
         --text_color_disabled: rgba(255, 255, 255, 0.5);
         --text_color_hover: rgb(0, 0, 0);
         /* Кнопки */
-        --button_background: rgb(69, 70, 71);
-        --button_background_disabled: rgba(69, 70, 71, 0.5);
+        --button_background: rgb(61, 62, 63);
+        --button_background_disabled: rgba(61, 62, 63, 0.5);
         /* Поля ввода */
-        --input_background: rgb(69, 70, 71);
-        --dropdown_background: rgb(69, 70, 71);
+        --input_background: rgb(61, 62, 63);
+        --dropdown_background: rgb(61, 62, 63);
         /* Модальные окна */
-        --modal_overlay: rgba(255, 255, 255, 0.25);
+        --modal_overlay: rgba(240, 240, 240, 0.25);
         --modal_background: rgb(25, 25, 26);
         /* Бэйджи */
         --badge_error_back: rgba(255, 69, 58, 0.4);
