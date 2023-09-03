@@ -4,7 +4,6 @@
     height: 25px;
     border-radius: 50px;
     margin: var(--margin);
-    border: 1px solid var(--border_main);
 }
 
 .switch input {

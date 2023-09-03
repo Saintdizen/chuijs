@@ -31,7 +31,7 @@ checkbox {
     margin-right:10px;
     align-items:center;
     justify-content:center;
-    color:transparent;
+    color: var(--text_color);
     background: var(--input_background);
     font-family: chui_Inter;
     border: 1px solid var(--border_main);
