@@ -39,7 +39,6 @@ popup_body {
 
 popup_buttons {
     display: flex;
-    border-top: 1px solid var(--border_main);
     flex-direction: row;
     justify-content: center;
     align-items: center;

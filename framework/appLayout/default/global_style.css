@@ -100,7 +100,6 @@ header {
     background: transparent;
     backdrop-filter: var(--global_blur);
     justify-content: space-between;
-    border-bottom: 1px solid transparent;
 }
 
 header_first_test {
@@ -182,7 +181,6 @@ notification_box_controls {
     height: max-content;
     width: -webkit-fill-available;
     background: transparent;
-    border-top: 1px solid var(--border_main);
 }
 
 notification_box_main {

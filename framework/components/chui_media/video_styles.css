@@ -17,7 +17,6 @@ chui_vp_block {
     border-bottom-left-radius: var(--border_radius);
     background: var(--main_background_2);
     opacity: 0;
-    border-top: 1px solid var(--border_main);
 }
 
 /* Блок информация */

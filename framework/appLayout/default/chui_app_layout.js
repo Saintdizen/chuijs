@@ -163,7 +163,6 @@ class AppLayout extends Route {
             if (center.scrollTop > 25) {
                 header.style.background = 'var(--main_background_2)'
                 header.style.boxShadow = "0 2px 10px 2px rgb(0 0 0 / 20%)"
-                header.style.borderBottom = "1px solid var(--border_main)"
             } else {
                 header.removeAttribute('style')
             }
