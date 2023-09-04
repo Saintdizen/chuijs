@@ -13,7 +13,7 @@ chui_ap_block {
     backdrop-filter: var(--global_blur);
     border-radius: var(--border_radius);
     background: var(--main_background_2);
-    border: 1px solid var(--border_main);
+    border: none;
 }
 
 /* Блок информация */
@@ -65,7 +65,7 @@ chui_ap_seek_buf {
 #chui_ap_seek::-webkit-slider-thumb {
     position: relative;
     -webkit-appearance: none;
-    border: 1px solid rgba(255,255,255,0);
+    border: none;
     height: 16px;
     width: 16px;
     border-radius: 50%;
@@ -129,7 +129,7 @@ chui_ap_volume_block {
 #chui_ap_volume::-webkit-slider-thumb {
     position: relative;
     -webkit-appearance: none;
-    border: 1px solid rgba(255,255,255,0);
+    border: none;
     height: 16px;
     width: 16px;
     border-radius: 50%;

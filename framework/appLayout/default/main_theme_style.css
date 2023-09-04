@@ -34,7 +34,7 @@
         /* Текст */
         --text_color: rgb(255, 255, 255);
         --text_color_disabled: rgba(255, 255, 255, 0.5);
-        --text_color_hover: rgb(0, 0, 0);
+        --text_color_hover: rgb(255, 255, 255);
         /* Основные цвета */
         --main_background: rgb(25, 25, 26);
         --main_background_overlay: rgba(240, 240, 240, 0.25);

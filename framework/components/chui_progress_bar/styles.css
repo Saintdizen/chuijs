@@ -14,7 +14,7 @@ progress {
     margin: var(--margin);
     width: -webkit-fill-available;
     height: 15px;
-    border: 1px solid var(--border_main);
+    border: none;
 }
 
 progress::-webkit-progress-bar {

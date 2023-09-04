@@ -17,7 +17,7 @@ chui_email_main {
     align-items: center;
     position: relative;
     padding: var(--main_padding);
-    border: 1px solid var(--border_main);
+    border: none;
 }
 
 .email_input {
@@ -68,5 +68,5 @@ email_input .email_input:valid {}
 .chui_email_main_disabled {
     cursor: not-allowed;
     background: transparent;
-    border: 1px dashed var(--border_main)
+    border: none;
 }

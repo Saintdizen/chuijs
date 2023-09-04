@@ -17,7 +17,7 @@ chui_text_main {
     align-items: center;
     position: relative;
     padding: var(--main_padding);
-    border: 1px solid var(--border_main);
+    border: none;
 }
 
 .text_input {
@@ -51,14 +51,14 @@ error_message_text {
 }
 
 .error_border {
-    border: 1px solid var(--red_prime_background);
+    border: none;
 }
 
 /* DISABLED STYLES */
 .chui_text_main_disabled {
     cursor: not-allowed;
     background: transparent;
-    border: 1px dashed var(--border_main)
+    border: none;
 }
 
 .text_input_disabled {

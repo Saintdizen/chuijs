@@ -22,7 +22,7 @@ chui_area_input {
     font-size: var(--font_default_size);
     background: var(--element_background);
     color: var(--text_color);
-    border: 1px solid var(--border_main);
+    border: none;
 }
 
 .textarea_label {
@@ -44,7 +44,7 @@ chui_area_input {
     font-size: var(--font_default_size);
     background: var(--element_background_disabled);
     color: var(--text_color_disabled);
-    border: 1px dashed var(--border_main)
+    border: none;
 }
 
 .textarea_label_disabled {

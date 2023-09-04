@@ -4,7 +4,7 @@ chui_vp_main {
     border-radius: var(--border_radius);
     --seek-before-width: 0%;
     --volume-before-width: 0%;
-    border: 1px solid var(--border_main);
+    border: none;
 }
 
 chui_vp_block {
@@ -69,7 +69,7 @@ chui_vp_seek_buf {
 #chui_vp_seek::-webkit-slider-thumb {
     position: relative;
     -webkit-appearance: none;
-    border: 1px solid rgba(255,255,255,0);
+    border: none;
     height: 16px;
     width: 16px;
     border-radius: 50%;
@@ -129,7 +129,7 @@ chui_vp_volume_block {
 #chui_vp_volume::-webkit-slider-thumb {
     position: relative;
     -webkit-appearance: none;
-    border: 1px solid rgba(255,255,255,0);
+    border: none;
     height: 16px;
     width: 16px;
     border-radius: 50%;

@@ -23,7 +23,7 @@ popup_content {
     color: var(--text_color);
     background: var(--main_background);
     box-shadow: 0 2px 10px 2px rgb(0 0 0 / 20%);
-    border: 1px solid var(--border_main);
+    border: none;
 }
 
 popup_body {

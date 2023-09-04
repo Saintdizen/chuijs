@@ -17,7 +17,7 @@ chui_accordion_main_test {
     font-size: var(--font_default_size);
     font-weight:400;
     border-radius: var(--border_radius);
-    border: 1px solid var(--border_main);
+    border: none;
 }
 
 accordion_button {

@@ -13,7 +13,7 @@ chui_menu_bar_button {
     padding: var(--main_padding);
     font-size: var(--font_default_size);
     font-weight: 400;
-    border: 1px dashed rgba(0, 0, 0, 0);
+    border: none;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -51,7 +51,7 @@ menu_bar_drop_down_button {
     padding: var(--main_padding);
     font-size: var(--font_default_size);
     font-weight: 400;
-    border: 1px dashed rgba(0, 0, 0, 0);
+    border: none;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -65,7 +65,7 @@ menu_bar_dropdown {
     position: absolute;
     background: var(--main_background_3);
     color: var(--text_color);
-    border: 1px solid var(--border_main);
+    border: none;
     border-radius: var(--border_radius);
     padding: 6px;
     z-index: 1;
@@ -84,7 +84,7 @@ menu_bar_dropdown {
     font-size: var(--font_default_size);
     font-weight: 400;
     background: transparent;
-    border: 1px dashed rgba(0, 0, 0, 0);
+    border: none;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -101,7 +101,7 @@ menu_bar_dropdown {
     font-size: var(--font_default_size);
     font-weight: 400;
     background: transparent;
-    border: 1px dashed rgba(0, 0, 0, 0);
+    border: none;
     display: flex;
     flex-direction: row;
     align-items: center;

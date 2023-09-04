@@ -15,7 +15,7 @@ combobox {
     padding: 0;
     font-size: var(--font_default_size);
     background: var(--element_background);
-    border: 1px solid var(--border_main);
+    border: none;
 }
 
 .combobox_input {
@@ -24,7 +24,7 @@ combobox {
     padding: var(--test_padding) 0 var(--test_padding) 10px;
     background: transparent;
     color: var(--text_color);
-    border: 0;
+    border: none;
     font-size: var(--font_default_size);
 }
 
@@ -42,7 +42,7 @@ combobox_dropdown {
     width: -webkit-fill-available;
     overflow: hidden hidden;
     box-shadow: 0 2px 10px 2px rgb(0 0 0 / 20%);
-    border: 1px solid var(--border_main);
+    border: none;
 }
 
 combobox_dropdown:hover {
@@ -82,7 +82,7 @@ combobox_option:hover {
 .combobox_disabled {
     cursor: not-allowed;
     background: transparent;
-    border: 1px dashed var(--border_main)
+    border: none;
 }
 
 .combobox_input_disabled {
@@ -93,7 +93,7 @@ combobox_option:hover {
     width: 100%;
     margin: 0;
     padding: var(--test_padding) 0 var(--test_padding) 10px;
-    border: 0;
+    border: none;
     font-size: var(--font_default_size);
 }
 

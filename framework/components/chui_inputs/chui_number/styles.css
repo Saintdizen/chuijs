@@ -16,7 +16,7 @@ number_main {
     align-items: center;
     position: relative;
     padding: var(--test_padding) 43px;
-    border: 1px solid var(--border_main);
+    border: none;
 }
 
 .number_buttons {
@@ -59,7 +59,7 @@ input[type=number]::-webkit-inner-spin-button {
 .number_main_disabled {
     cursor: not-allowed;
     background: transparent;
-    border: 1px dashed var(--border_main)
+    border: none;
 }
 
 .number_label_disabled {

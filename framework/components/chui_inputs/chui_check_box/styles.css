@@ -33,8 +33,8 @@ checkbox {
     justify-content:center;
     color: var(--text_color);
     background: var(--element_background);
-    font-family: chui_Inter;
-    border: 1px solid var(--border_main);
+    font-family: chui_Inter, system-ui;
+    border: none;
 }
 
 .checkbox:not(:disabled):not(:checked):hover::before {}
@@ -42,13 +42,13 @@ checkbox {
 .checkbox:disabled:not(:checked)+label::before {
     cursor: not-allowed;
     background: transparent;
-    border: 1px solid var(--border_main);
+    border: none;
 }
 
 .checkbox:disabled:checked+label::before {
     cursor: not-allowed;
     background: transparent;
-    border: 1px solid var(--border_main);
+    border: none;
     color: var(--text_color_disabled);
 }
 

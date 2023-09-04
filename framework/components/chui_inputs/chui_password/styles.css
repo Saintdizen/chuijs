@@ -17,7 +17,7 @@ password_main {
     color: var(--text_color);
     position: relative;
     padding: var(--test_padding) 43px var(--main_padding);
-    border: 1px solid var(--border_main);
+    border: none;
 }
 
 .password_input {
@@ -55,7 +55,7 @@ see_pass_button {
 }
 
 .error_border {
-    border: 1px solid var(--red_prime_background);
+    border: none;
 }
 
 error_message_password {
@@ -72,7 +72,7 @@ error_message_password {
 .password_main_disabled {
     cursor: not-allowed;
     background: transparent;
-    border: 1px dashed var(--border_main)
+    border: none;
 }
 
 .password_label_disabled {
