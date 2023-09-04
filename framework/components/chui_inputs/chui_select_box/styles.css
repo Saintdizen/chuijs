@@ -89,7 +89,7 @@ selectbox_option:hover {
 /* DISABLED STYLES */
 .selectbox_disabled {
     cursor: not-allowed;
-    background: transparent;
+    background: var(--element_background_disabled);
     border: none;
 }
 

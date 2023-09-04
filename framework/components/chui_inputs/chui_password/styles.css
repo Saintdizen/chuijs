@@ -71,7 +71,7 @@ error_message_password {
 /* DISABLED STYLES */
 .password_main_disabled {
     cursor: not-allowed;
-    background: transparent;
+    background: var(--element_background_disabled);
     border: none;
 }
 

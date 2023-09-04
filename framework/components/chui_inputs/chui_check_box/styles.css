@@ -41,20 +41,21 @@ checkbox {
 
 .checkbox:disabled:not(:checked)+label::before {
     cursor: not-allowed;
-    background: transparent;
+    background: var(--element_background_disabled);
     border: none;
+    color: var(--text_color_disabled);
 }
 
 .checkbox:disabled:checked+label::before {
     cursor: not-allowed;
-    background: transparent;
+    background: var(--element_background_disabled);
     border: none;
     color: var(--text_color_disabled);
 }
 
 .checkbox:not(:disabled):active+label::before {
     background-color: var(--blue_prime_background);
-    color:var(--text_color_hover);
+    color:var(--text_color_disabled);
 }
 
 .checkbox:focus+label::before {}

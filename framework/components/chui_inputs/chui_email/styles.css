@@ -48,7 +48,7 @@ email_input .email_input:valid {}
     width: -webkit-fill-available;
     margin: 0;
     padding: 0;
-    background: transparent;
+    background: var(--element_background_disabled);
     color: var(--text_color_disabled);
     text-align: start;
     border: 0;

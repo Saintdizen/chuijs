@@ -101,7 +101,7 @@ date_main_block {
 /* DISABLED STYLES */
 .date_main_block_disabled {
     cursor: not-allowed;
-    background: transparent;
+    background: var(--element_background_disabled);
     border: none;
 }
 

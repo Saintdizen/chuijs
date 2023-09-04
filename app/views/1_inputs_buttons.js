@@ -9,7 +9,7 @@ class Inputs_Buttons_Page extends Page {
     constructor() {
         super();
         this.setTitle('Поля ввода и Кнопки');
-        this.setMain(false)
+        this.setMain(true)
 
         // Поля ввода
         let h1_inputs = new H(1, "Поля ввода");

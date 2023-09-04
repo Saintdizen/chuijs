@@ -81,7 +81,7 @@ combobox_option:hover {
 /* DISABLED STYLES */
 .combobox_disabled {
     cursor: not-allowed;
-    background: transparent;
+    background: var(--element_background_disabled);
     border: none;
 }
 
