@@ -8,9 +8,12 @@ const main = new Main({
 });
 main.start({
     tray: [
+        new MenuItem().separator(),
+        new MenuItem().help(`Версия: ${require("./package.json").version}`),
+        new MenuItem().separator(),
         new MenuItem().button('Скрыть | Показать', () => main.hideAndShow()),
         new MenuItem().button('Консоль', () => main.toggleDevTools()),
-        new MenuItem().quit("Выход")
+        new MenuItem().quit("Выход"),
     ]
 })
 //main.enableAutoUpdateApp(1000);
