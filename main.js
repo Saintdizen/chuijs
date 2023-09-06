@@ -1,6 +1,7 @@
 const { Main, MenuItem } = require('./index');
+let json = require("./package.json");
 const main = new Main({
-    name: "Test Application",
+    name: `${json.name} (${json.version})`,
     width: 1300,
     height: 900,
     render: `${__dirname}/app/app.js`,
