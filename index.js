@@ -59,7 +59,7 @@ const { Video } = require("./framework/components/chui_media/video")
 
 //VARS
 let isQuiting = false;
-let context = null
+let context = null;
 
 class Main {
     #tray = undefined;
@@ -95,7 +95,7 @@ class Main {
         // ===
         if (options.devTools) this.#window.webContents.openDevTools();
     }
-    #createWindow() {
+    #createWindow(hideOnClose = Boolean()) {
         this.#window = new BrowserWindow({
             transparent: false,
             //minWidth: this.#width,
@@ -128,14 +128,14 @@ class Main {
             this.#window.webContents.session.webRequest.onBeforeSendHeaders(
                 (details, callback) => {
                     const { requestHeaders } = details;
-                    this.#test(requestHeaders, 'Access-Control-Allow-Origin', ['*']);
+                    Main.#keyToChangeLower(requestHeaders, 'Access-Control-Allow-Origin', ['*']);
                     callback({ requestHeaders });
                 },
             );
             this.#window.webContents.session.webRequest.onHeadersReceived((details, callback) => {
                 const { responseHeaders } = details;
-                this.#test(responseHeaders, 'Access-Control-Allow-Origin', ['*']);
-                this.#test(responseHeaders, 'Access-Control-Allow-Headers', ['*']);
+                Main.#keyToChangeLower(responseHeaders, 'Access-Control-Allow-Origin', ['*']);
+                Main.#keyToChangeLower(responseHeaders, 'Access-Control-Allow-Headers', ['*']);
                 callback({
                     responseHeaders,
                 });
@@ -148,18 +148,22 @@ class Main {
             });
         });
         this.#window.on("ready-to-show", () => this.#window.show())
+
+        if (hideOnClose) {
+            this.#window.on('close', (evt) => {
+                evt.preventDefault();
+                this.#window.hide();
+            });
+        }
     }
-    #test(obj, keyToChange, value) {
+    static #keyToChangeLower(obj, keyToChange, value) {
         let keyToChangeLower = keyToChange.toLowerCase();
         for (const key of Object.keys(obj)) {
             if (key.toLowerCase() === keyToChangeLower) {
-                // Reassign old key
                 obj[key] = value;
-                // Done
                 return;
             }
         }
-        // Insert at end instead
         obj[keyToChange] = value;
     }
     toggleDevTools() {
@@ -194,21 +198,21 @@ class Main {
     getWindow() {
         return this.#window;
     }
-    start(options = { tray: [] }) {
+    start(options = { hideOnClose: Boolean(), tray: [] }) {
         nativeTheme.themeSource = "system";
-        if (process.platform === "linux") {
-            //app.commandLine.hasSwitch("enable-transparent-visuals");
-            //app.commandLine.hasSwitch("disable-gpu");
-            //app.commandLine.appendSwitch('enable-transparent-visuals');
-            //app.disableHardwareAcceleration();
-        }
+        /*if (process.platform === "linux") {
+            app.commandLine.hasSwitch("enable-transparent-visuals");
+            app.commandLine.hasSwitch("disable-gpu");
+            app.commandLine.appendSwitch('enable-transparent-visuals');
+            app.disableHardwareAcceleration();
+        }*/
         app.whenReady().then(() => {
             if (options.tray) {
-                this.#tray = new Tray(this.#app_icon)
+                this.#tray = new Tray(this.#app_icon);
                 context = Menu.buildFromTemplate(options.tray);
-                this.#tray.setContextMenu(context)
+                this.#tray.setContextMenu(context);
             }
-            this.#createWindow();
+            this.#createWindow(options.hideOnClose);
             ipcMain.on("show_system_notification", (e, title, body) => {
                 let {Notification} = require('electron');
                 new Notification({title, body}).show();
