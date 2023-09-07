@@ -8,7 +8,7 @@ const main = new Main({
     devTools: false
 });
 main.start({
-    hideOnClose: false,
+    hideOnClose: true,
     tray: [
         new MenuItem().separator(),
         new MenuItem().help(`Версия: ${require("./package.json").version}`),

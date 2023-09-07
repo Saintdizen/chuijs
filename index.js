@@ -151,7 +151,9 @@ class Main {
 
         if (hideOnClose) {
             this.#window.on('close', (evt) => {
-                evt.preventDefault();
+                if (!isQuiting) {
+                    evt.preventDefault();
+                }
                 this.#window.hide();
             });
         }
