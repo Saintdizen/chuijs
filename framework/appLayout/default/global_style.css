@@ -50,12 +50,11 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
 }
 
 main_center_block::-webkit-scrollbar-track {
     margin-top: 44px;
-    margin-bottom: 0.4rem;
 }
 
 .test_scroll_track::-webkit-scrollbar-track {
