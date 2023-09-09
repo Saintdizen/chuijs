@@ -1,5 +1,5 @@
 :root {
-    --global_blur: blur(10px);
+    --global_blur: blur(22px);
     --main_padding: 6px 10px;
     --test_padding: 6px;
     --font_default_size: 1rem;
@@ -24,8 +24,8 @@ strong {
     font-family: chui_Inter, system-ui;
     user-select: none;
     outline: none;
-    transition: all .22s;
-    animation-duration: .22s;
+    transition: all .2s;
+    animation-duration: .2s;
     position: relative;
     text-rendering: optimizeSpeed;
 }
@@ -35,8 +35,8 @@ strong {
     font-family: chui_Inter, system-ui;
     user-select: none;
     outline: none;
-    transition: all .22s;
-    animation-duration: .22s;
+    transition: all .2s;
+    animation-duration: .2s;
     position: relative;
     text-rendering: optimizeSpeed;
 }
@@ -100,8 +100,9 @@ header {
     /*border-top-left-radius: var(--border_radius);
     border-top-right-radius: var(--border_radius);*/
     align-items: start;
-    background: transparent;
+    background-color: transparent;
     backdrop-filter: var(--global_blur);
+    background-blend-mode: overlay;
     justify-content: space-between;
     /*-webkit-app-region: no-drag;*/
 }
@@ -138,7 +139,7 @@ notification_panel {
     z-index: 1001;
     overflow: hidden hidden;
     max-height: calc(100% - 65px - (var(--margin) * 2));
-    transition: max-height .22s ease-in-out;
+    transition: max-height .2s ease-in-out;
 }
 
 notification_panel:hover {

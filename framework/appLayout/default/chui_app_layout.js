@@ -197,8 +197,8 @@ class AppLayout extends Route {
         })
 
         center.onscroll = () => {
-            if (center.scrollTop > 25) {
-                header.style.background = 'var(--main_background_2)'
+            if (center.scrollTop > 15) {
+                header.style.backgroundColor = 'var(--main_background_2)'
                 header.style.boxShadow = "0 2px 10px 2px rgb(0 0 0 / 20%)"
             } else {
                 header.removeAttribute('style')
