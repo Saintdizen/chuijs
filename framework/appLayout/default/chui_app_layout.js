@@ -55,20 +55,17 @@ class WindowControls {
         this.#maximize.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "14px").getHTML();
         this.#minimize.innerHTML = new Icon(Icons.ACTIONS.MINIMIZE, "14px").getHTML();
 
-        //
         this.#close.addEventListener("click", () => {
-            require("@electron/remote").BrowserWindow.getFocusedWindow().close()
+            let r_window = require("@electron/remote").BrowserWindow.getFocusedWindow();
+            r_window.close();
         })
         this.#maximize.addEventListener("click", () => {
             let r_window = require("@electron/remote").BrowserWindow.getFocusedWindow();
-            if (r_window.isMaximized()) {
-                r_window.unmaximize()
-            } else {
-                r_window.maximize()
-            }
+            r_window.isMaximized() ? r_window.unmaximize() : r_window.maximize();
         })
         this.#minimize.addEventListener("click", () => {
-            require("@electron/remote").BrowserWindow.getFocusedWindow().minimize()
+            let r_window = require("@electron/remote").BrowserWindow.getFocusedWindow();
+            r_window.minimize();
         })
     }
     set() {
