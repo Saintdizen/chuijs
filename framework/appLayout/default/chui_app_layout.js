@@ -14,14 +14,14 @@ const chui_functions = require('../../modules/chui_functions');
 //VARS
 let header = null;
 let center = null;
-let header_first_test = null;
-let header_second_test = null;
+let header_main = null;
+let header_toolbar = null;
 let page_name = null;
 let route_list = [];
 
 class Route {
     go(page) {
-        header_second_test.innerHTML = ''
+        header_toolbar.innerHTML = ''
         page_name.innerHTML = page.getTitle();
         center.innerHTML = '';
         center.appendChild(page.render());
@@ -32,12 +32,49 @@ class Route {
         });
         if (page.getMenuBar() !== undefined) {
             new Animation(page.getMenuBar()).fadeIn();
-            header_second_test.appendChild(page.getMenuBar());
+            header_toolbar.appendChild(page.getMenuBar());
             center.classList.add("header_padding", "test_scroll_track");
         } else {
             center.classList.remove("header_padding", "test_scroll_track");
         }
     }
+}
+
+class WindowControls {
+    // Управление кнопками
+    #box = document.createElement("wc_box")
+    #close = document.createElement("wc_close")
+    #maximize = document.createElement("wc_maximize")
+    #minimize = document.createElement("wc_minimize")
+    constructor() {
+        this.#box.appendChild(this.#close)
+        this.#box.appendChild(this.#maximize)
+        this.#box.appendChild(this.#minimize)
+
+        this.#close.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "14px").getHTML();
+        this.#maximize.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "14px").getHTML();
+        this.#minimize.innerHTML = new Icon(Icons.ACTIONS.MINIMIZE, "14px").getHTML();
+
+        //
+        this.#close.addEventListener("click", () => {
+            require("@electron/remote").BrowserWindow.getFocusedWindow().close()
+        })
+        this.#maximize.addEventListener("click", () => {
+            let r_window = require("@electron/remote").BrowserWindow.getFocusedWindow();
+            if (r_window.isMaximized()) {
+                r_window.unmaximize()
+            } else {
+                r_window.maximize()
+            }
+        })
+        this.#minimize.addEventListener("click", () => {
+            require("@electron/remote").BrowserWindow.getFocusedWindow().minimize()
+        })
+    }
+    set() {
+        return this.#box;
+    }
+
 }
 
 class AppLayout extends Route {
@@ -73,10 +110,10 @@ class AppLayout extends Route {
         document.getElementById('app').append(this.#applayout);
         header = document.createElement('header');
         header.id = "header";
-        header_first_test = document.createElement("header_first_test");
-        header_second_test = document.createElement("header_second_test");
-        header.appendChild(header_first_test)
-        header.appendChild(header_second_test)
+        header_main = document.createElement("header_main");
+        header_toolbar = document.createElement("header_toolbar");
+        header.appendChild(header_main)
+        header.appendChild(header_toolbar)
         center = document.createElement('main_center_block');
         center.id = "center";
         this.#applayout.appendChild(center)
@@ -203,8 +240,9 @@ class AppLayout extends Route {
         this.#notification_button.innerHTML = new Icon(Icons.SOCIAL.NOTIFICATIONS).getHTML();
         this.#header_right_box.appendChild(this.#notification_button)
         //
-        header_first_test.appendChild(this.#header_left_box)
-        header_first_test.appendChild(this.#header_right_box)
+        header_main.appendChild(new WindowControls().set())
+        header_main.appendChild(this.#header_left_box)
+        header_main.appendChild(this.#header_right_box)
 
         // Свернуть
         /*this.#window_minimize_button.addEventListener("click", () => {

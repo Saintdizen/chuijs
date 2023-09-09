@@ -55,6 +55,7 @@ body {
 
 main_center_block::-webkit-scrollbar-track {
     margin-top: 44px;
+    margin-bottom: 0.4rem;
 }
 
 .test_scroll_track::-webkit-scrollbar-track {
@@ -84,7 +85,9 @@ applayout {
 #app {
     width: -webkit-fill-available;
     height: -webkit-fill-available;
-    background: var(--main_background)
+    background: var(--main_background);
+    border-radius: var(--border_radius);
+    border: 1px solid var(--main_background_3);
 }
 
 header {
@@ -94,19 +97,22 @@ header {
     display: flex;
     z-index: 999;
     flex-direction: column;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+    border-top-left-radius: var(--border_radius);
+    border-top-right-radius: var(--border_radius);
     align-items: start;
     background: transparent;
     backdrop-filter: var(--global_blur);
     justify-content: space-between;
+    /*-webkit-app-region: no-drag;*/
 }
 
-header_first_test {
+header_main {
     width: -webkit-fill-available;
     display: flex;
     align-items: center;
     justify-content: center;
+    -webkit-app-region: drag;
+    -webkit-user-select: none;
 }
 
 main_center_block {
@@ -208,6 +214,7 @@ notification_button {
     font-size: 22pt;
     background: transparent;
     color: var(--text_color);
+    -webkit-app-region: no-drag;
 }
 
 notification_button:hover {
@@ -238,6 +245,7 @@ app_menu_button {
     font-size: 22pt;
     background: transparent;
     color: var(--text_color);
+    -webkit-app-region: no-drag;
 }
 
 app_menu_button:hover {
@@ -487,4 +495,34 @@ header_button:hover header_button_title {
 
 header_button:hover chui_icon {
     color: var(--text_color_hover);
+}
+
+/*Управление окном*/
+wc_box {
+    -webkit-app-region: no-drag;
+    color: var(--text_color);
+    margin: 0 3px;
+    padding: 0 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+wc_close, wc_maximize, wc_minimize {
+    margin: 6px 3px;
+    padding: 6px;
+    border-radius: 100%;
+    background-color: var(--element_background);
+}
+
+wc_close:hover {
+    background-color: var(--red_prime_background);
+}
+
+wc_maximize:hover, wc_minimize:hover {
+    background-color: var(--blue_prime_background);
+}
+
+wc_close:hover chui_icon, wc_maximize:hover chui_icon, wc_minimize:hover chui_icon {
+    color: white;
 }

@@ -1,5 +1,5 @@
 table {
-    border: 1px solid var(--border_main);
+    border: 1px solid var(--element_background);
     border-radius: var(--border_radius);
     margin: var(--margin);
     display: grid;

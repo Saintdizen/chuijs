@@ -119,10 +119,10 @@ class Table {
         if (this.#customNames !== undefined) { cols = this.#customNames }
         const row = this.#tHead.insertRow();
         this.#setWidthColumns(row);
-        row.style.borderBottom = '1px solid var(--border_main)'
+        row.style.borderBottom = '1px solid var(--element_background)'
         for (let head of cols) {
             const cell = row.insertCell()
-            if (cell.cellIndex !== 0) cell.style.borderLeft = '1px solid var(--border_main)'
+            if (cell.cellIndex !== 0) cell.style.borderLeft = '1px solid var(--element_background)'
             let cell_title = document.createElement("cell_title")
             cell_title.innerText = head;
             cell.appendChild(cell_title)
@@ -165,11 +165,11 @@ class Table {
         for (let dat of data) {
             let row = this.#tBody.insertRow()
             this.#setWidthColumns(row);
-            if (data.indexOf(dat) !== data.length - 1) row.style.borderBottom = '1px solid var(--border_main)'
+            if (data.indexOf(dat) !== data.length - 1) row.style.borderBottom = '1px solid var(--element_background)'
             for (let col of this.#columns) {
                 let cell = row.insertCell();
                 if (cell.cellIndex !== 0) {
-                    cell.style.borderLeft = '1px solid var(--border_main)'
+                    cell.style.borderLeft = '1px solid var(--element_background)'
                 }
                 cell.innerHTML = dat[col];
             }

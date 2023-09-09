@@ -11,6 +11,7 @@ chui_popup {
     padding: 0;
     border: none;
     backdrop-filter: var(--global_blur);
+    border-radius: var(--border_radius);
 }
 
 popup_content {

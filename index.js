@@ -97,7 +97,7 @@ class Main {
     }
     #createWindow(hideOnClose = Boolean()) {
         this.#window = new BrowserWindow({
-            transparent: false,
+            transparent: true,
             //minWidth: this.#width,
             //minHeight: this.#height,
             width: this.#width,
@@ -116,7 +116,7 @@ class Main {
                 enableRemoteModule: true,
                 webSecurity: this.#webSecurity,
             },
-            frame: true,
+            frame: false,
             resizable: true,
             minimizable: true,
             maximizable: true,
