@@ -47,10 +47,6 @@ class WindowControls {
     #maximize = document.createElement("wc_maximize")
     #minimize = document.createElement("wc_minimize")
     constructor() {
-        this.#box.appendChild(this.#close)
-        this.#box.appendChild(this.#maximize)
-        this.#box.appendChild(this.#minimize)
-
         this.#close.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "14px").getHTML();
         this.#maximize.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "14px").getHTML();
         this.#minimize.innerHTML = new Icon(Icons.ACTIONS.MINIMIZE, "14px").getHTML();
@@ -68,13 +64,23 @@ class WindowControls {
             r_window.minimize();
         })
     }
-    set() {
+    set(pos_bool = Boolean()) {
+        if (pos_bool) {
+            this.#box.appendChild(this.#close)
+            this.#box.appendChild(this.#maximize)
+            this.#box.appendChild(this.#minimize)
+        } else {
+            this.#box.appendChild(this.#minimize)
+            this.#box.appendChild(this.#maximize)
+            this.#box.appendChild(this.#close)
+        }
         return this.#box;
     }
 
 }
 
 class AppLayout extends Route {
+    #wc_box = new WindowControls();
     #applayout = document.createElement('applayout');
     #header_left_box = document.createElement("header_left_box");
     #header_right_box = document.createElement("header_right_box");
@@ -93,8 +99,6 @@ class AppLayout extends Route {
     #menu_button = document.createElement('app_menu_button');
     #auto_close = false;
     #not_duplicate_page = false;
-    //
-    #windowHideOnClose = false;
     //
     constructor() {
         super();
@@ -237,32 +241,12 @@ class AppLayout extends Route {
         this.#notification_button.innerHTML = new Icon(Icons.SOCIAL.NOTIFICATIONS).getHTML();
         this.#header_right_box.appendChild(this.#notification_button)
         //
-        header_main.appendChild(new WindowControls().set())
+
+
         header_main.appendChild(this.#header_left_box)
         header_main.appendChild(this.#header_right_box)
+        header_main.appendChild(this.#wc_box.set(false))
 
-        // Свернуть
-        /*this.#window_minimize_button.addEventListener("click", () => {
-            require("@electron/remote").getCurrentWindow().minimize();
-        })*/
-
-        // Развернуть на весь экран
-        /*this.#window_maximize_button.addEventListener("click", () => {
-            if (require("@electron/remote").getCurrentWindow().isMaximized()) {
-                require("@electron/remote").getCurrentWindow().restore();
-            } else {
-                require("@electron/remote").getCurrentWindow().maximize();
-            }
-        })*/
-
-        // Закрыть
-        /*this.#window_close_button.addEventListener("click", () => {
-            if (this.#windowHideOnClose) {
-                require("@electron/remote").getCurrentWindow().hide();
-            } else {
-                require("@electron/remote").getCurrentWindow().close();
-            }
-        })*/
         //
         ipcRenderer.on("sendNotificationUpdateLoad", async (e, text, body) => {
             let updateNotificationLoad = new UpdateNotification({ title: text, text: body, spinner: true });
@@ -286,11 +270,13 @@ class AppLayout extends Route {
         })
     }
 
+    setLeftPositionWindowControls(boolean = Boolean()) {
+        if (boolean) header_main.insertBefore(this.#wc_box.set(boolean), header_main.firstChild);
+    }
+
     disableAppMenu() {
         this.#header_left_box.removeChild(this.#menu_button);
-        for (let child of this.#header_left_box.children) {
-            child.remove()
-        }
+        for (let child of this.#header_left_box.children) child.remove();
         let test = document.createElement("test1")
         test.style.display = "flex"
         test.style.alignItems = "center"
@@ -298,15 +284,6 @@ class AppLayout extends Route {
         test.style.height = "-webkit-fill-available"
         test.style.margin = "0px 6px"
         this.#header_left_box.appendChild(test)
-    }
-
-    setHideOnClose(boolean = Boolean()) {
-        this.#windowHideOnClose = boolean;
-    }
-
-    setCustomHeaderHeight(height) {
-        header.style.height = height;
-        center.style.paddingTop = height;
     }
 
     setNotDuplicatePages(boolean = Boolean()) {
