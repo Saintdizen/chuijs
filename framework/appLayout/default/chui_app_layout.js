@@ -275,6 +275,7 @@ class AppLayout extends Route {
 
     disableAppMenu() {
         this.#header_left_box.removeChild(this.#menu_button);
+        page_name.style.margin = "var(--margin) calc(var(--margin) + 4px)"
     }
 
     setNotDuplicatePages(boolean = Boolean()) {

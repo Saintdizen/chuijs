@@ -22,9 +22,9 @@ class Test extends AppLayout {
     constructor() {
         super();
         // Настройки окна
-        this.setLeftPositionWindowControls(true);
+        this.setLeftPositionWindowControls(false);
         this.setNotDuplicatePages(true);
-        //this.disableAppMenu();
+        this.disableAppMenu();
 
         // Настройка роутов
         this.setAutoCloseRouteMenu(true);
