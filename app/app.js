@@ -75,9 +75,14 @@ class Test extends AppLayout {
 
         this.addComponentToAppLayout({
             headerRight: [
+                AppLayout.BUTTON({
+                    title: "Настройки",
+                    icon: Icons.ACTIONS.SETTINGS,
+                    clickEvent: () => alert("test")
+                }),
                 AppLayout.DIALOG({
-                    title: "Диалоговое окно!",
-                    icon: Icons.ACTIONS.SYSTEM_UPDATE_ALT,
+                    title: "Настройки",
+                    icon: Icons.ACTIONS.SETTINGS,
                     reverse: false,
                     dialogOptions: {
                         title: "Заголовок диалогового окна",

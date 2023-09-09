@@ -275,14 +275,6 @@ class AppLayout extends Route {
 
     disableAppMenu() {
         this.#header_left_box.removeChild(this.#menu_button);
-        for (let child of this.#header_left_box.children) child.remove();
-        let test = document.createElement("test1")
-        test.style.display = "flex"
-        test.style.alignItems = "center"
-        test.style.justifyContent = "center"
-        test.style.height = "-webkit-fill-available"
-        test.style.margin = "0px 6px"
-        this.#header_left_box.appendChild(test)
     }
 
     setNotDuplicatePages(boolean = Boolean()) {
@@ -363,19 +355,14 @@ class AppLayout extends Route {
         title: String(),
         icon: undefined,
         reverse: Boolean(),
-        clickEvent: () => {
-        }
+        clickEvent: () => {}
     }) {
         return new HeaderButton(options).set();
     }
 
     static USER_PROFILE(options = {
         username: String(),
-        image: {
-            noImage: Boolean(),
-            imageLink: String(),
-            imageBase64: String(),
-        },
+        image: { noImage: Boolean(), imageLink: String(), imageBase64: String() },
         items: []
     }) {
         return new UserProfile(options).set();
@@ -590,13 +577,13 @@ class HeaderButton {
         if (options.title !== undefined && options.icon !== undefined) {
             if (options.reverse) {
                 this.#header_button_title.innerText = options.title;
-                this.#header_button_icon.innerHTML = options.icon.getHTML();
+                this.#header_button_icon.innerHTML = new Icon(options.icon).getHTML();
                 this.#header_button_icon.style.marginRight = "6px";
                 this.#header_button.appendChild(this.#header_button_icon)
                 this.#header_button.appendChild(this.#header_button_title)
             } else {
                 this.#header_button_title.innerText = options.title;
-                this.#header_button_icon.innerHTML = options.icon.getHTML();
+                this.#header_button_icon.innerHTML = new Icon(options.icon).getHTML();
                 this.#header_button_icon.style.marginLeft = "6px";
                 this.#header_button.appendChild(this.#header_button_title)
                 this.#header_button.appendChild(this.#header_button_icon)
@@ -605,7 +592,7 @@ class HeaderButton {
             this.#header_button_title.innerText = options.title;
             this.#header_button.appendChild(this.#header_button_title)
         } else if (options.title === undefined && options.icon !== undefined) {
-            this.#header_button_icon.innerHTML = options.icon.getHTML();
+            this.#header_button_icon.innerHTML = new Icon(options.icon).getHTML();
             this.#header_button.appendChild(this.#header_button_icon)
         }
         this.#header_button.addEventListener("click", options.clickEvent);

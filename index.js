@@ -157,10 +157,6 @@ class Main {
                 this.#window.hide();
             });
         }
-
-        this.#window.on('resize', (event) => {
-            console.log(event)
-        });
     }
     static #keyToChangeLower(obj, keyToChange, value) {
         let keyToChangeLower = keyToChange.toLowerCase();
@@ -230,6 +226,7 @@ class Main {
     }
     enableAutoUpdateApp(start = Number(), version) {
         setTimeout(async () => {
+            //await this.#sendNotificationUpdateLoad(this.#appName, `Загрузка новой версии 0.0.1`)
             const { autoUpdater } = require("electron-updater");
             autoUpdater.autoInstallOnAppQuit = false;
             let updates = await autoUpdater.checkForUpdates();

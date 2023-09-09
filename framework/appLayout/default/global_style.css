@@ -355,6 +355,7 @@ header_right_box {
 user_main {
     position: relative;
     display: flex;
+    -webkit-app-region: no-drag;
 }
 
 user_button:hover {
@@ -448,7 +449,9 @@ header_button {
     background: transparent;
     font-weight: 500;
     display: flex;
-    flex-direction: row
+    flex-direction: row;
+    -webkit-app-region: no-drag;
+
 }
 
 header_button header_button_title {
