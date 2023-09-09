@@ -113,5 +113,5 @@ popup_button_cancel {
 
 popup_button_cancel:hover {
     color: var(--text_color_hover);
-    background: var(--blue_prime_background);
+    background: var(--red_prime_background);
 }

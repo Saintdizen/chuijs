@@ -74,8 +74,8 @@ class OthersComponentsPage extends Page {
                 let confirm_res = await popup.confirm({
                     title: 'Удалить РГ в СМ',
                     message: 'Удалить? Точно? Вы, уверены? А может не надо?!',
-                    okText: 'Я ЕСТЬ ДИМА',
-                    cancelText: 'Я ЕСТЬ ДИМА',
+                    okText: 'OK',
+                    cancelText: 'Отмена',
                 })
                 console.log(confirm_res)
             }

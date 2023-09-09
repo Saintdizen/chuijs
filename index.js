@@ -157,6 +157,10 @@ class Main {
                 this.#window.hide();
             });
         }
+
+        this.#window.on('resize', (event) => {
+            console.log(event)
+        });
     }
     static #keyToChangeLower(obj, keyToChange, value) {
         let keyToChangeLower = keyToChange.toLowerCase();

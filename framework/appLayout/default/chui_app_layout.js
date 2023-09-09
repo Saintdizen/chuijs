@@ -50,7 +50,6 @@ class WindowControls {
         this.#close.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "14px").getHTML();
         this.#maximize.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "14px").getHTML();
         this.#minimize.innerHTML = new Icon(Icons.ACTIONS.MINIMIZE, "14px").getHTML();
-
         this.#close.addEventListener("click", () => {
             let r_window = require("@electron/remote").BrowserWindow.getFocusedWindow();
             r_window.close();
