@@ -86,7 +86,7 @@ applayout {
     width: -webkit-fill-available;
     height: -webkit-fill-available;
     background: var(--main_background);
-    border-radius: var(--border_radius);
+    /*border-radius: var(--border_radius);*/
     border: 1px solid var(--main_background_3);
 }
 
@@ -97,8 +97,8 @@ header {
     display: flex;
     z-index: 999;
     flex-direction: column;
-    border-top-left-radius: var(--border_radius);
-    border-top-right-radius: var(--border_radius);
+    /*border-top-left-radius: var(--border_radius);
+    border-top-right-radius: var(--border_radius);*/
     align-items: start;
     background: transparent;
     backdrop-filter: var(--global_blur);
