@@ -159,7 +159,8 @@ app_menu {
     border: none;
     background: var(--main_background_2);
     backdrop-filter: var(--global_blur);
-    width: -webkit-fill-available
+    width: -webkit-fill-available;
+    border: 1px solid var(--main_background_3);
 }
 
 notification_box {
@@ -176,7 +177,7 @@ notification_box {
     background: var(--main_background_2);
     backdrop-filter: var(--global_blur);
     width: -webkit-fill-available;
-    border: none;
+    border: 1px solid var(--main_background_3);
 }
 
 notification_box_controls {

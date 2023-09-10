@@ -27,14 +27,7 @@ class Tabs {
     #id_list = require("randomstring").generate();
     #list = document.createElement('list');
     #content = document.createElement('content');
-    constructor(options = { tabsJustify: String(), width: String(), default: Number(), tabs: [] }) {
-        if (options.tabsJustify !== undefined && options.tabsJustify === "left") {
-            this.#list.style.justifyContent = 'flex-start'
-        } else if (options.tabsJustify !== undefined && options.tabsJustify === "center") {
-            this.#list.style.justifyContent = 'center'
-        } else if (options.tabsJustify !== undefined && options.tabsJustify === "right") {
-            this.#list.style.justifyContent = 'flex-end'
-        }
+    constructor(options = { width: String(), default: Number(), tabs: [] }) {
         require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_Tabs');
         this.#tabzz = options.tabs;
         this.#list.id = this.#id_list;

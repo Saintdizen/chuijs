@@ -35,7 +35,7 @@ accordion_button {
 }
 
 accordion_panel {
-    background: var(--main_background_3);
+    background: var(--main_background_5);
     padding: 0 10px;
     display: block;
     overflow: hidden;

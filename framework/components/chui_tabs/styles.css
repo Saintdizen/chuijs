@@ -1,12 +1,16 @@
 list {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    width: -webkit-fill-available
+    width: max-content;
+    border-radius: var(--border_radius);
+    background: var(--main_background_5);
+    margin: var(--margin) 0;
+    padding: var(--test_padding);
 }
 
 tab {
-    margin: var(--margin) 3px;
+    margin: 0 3px;
     padding: var(--main_padding);
     font-size: var(--font_default_size);
     display: flex;
@@ -32,5 +36,8 @@ tabs {
 content {
     display: flex;
     flex-direction:column;
-    width: -webkit-fill-available
+    width: -webkit-fill-available;
+    background: var(--main_background_5);
+    padding: var(--test_padding);
+    border-radius: var(--border_radius);
 }
