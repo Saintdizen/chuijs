@@ -24,7 +24,7 @@ class Test extends AppLayout {
         // Настройки окна
         this.setLeftPositionWindowControls(false);
         this.setNotDuplicatePages(true);
-        this.disableAppMenu();
+        //this.disableAppMenu();
 
         // Настройка роутов
         this.setAutoCloseRouteMenu(true);

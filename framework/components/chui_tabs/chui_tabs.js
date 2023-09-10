@@ -2,21 +2,15 @@ let {Animation} = require('../../modules/chui_animations/animations');
 
 class Tab {
     #tab = document.createElement('tab');
-    #active = document.createElement('active');
     #tab_content = [];
     constructor(title) {
         this.#tab.innerText = title;
-        this.#active.className = 'tab_active';
-        this.#tab.appendChild(this.#active)
     }
     addContent(...contents) {
         for (let content of contents) this.#tab_content.push(content);
     }
     getTab() {
         return this.#tab;
-    }
-    getActive() {
-        return this.#active;
     }
     getContent() {
         return this.#tab_content;
@@ -47,14 +41,16 @@ class Tabs {
         this.#content.id = this.#id_contents;
         for (let item of options.tabs) {
             item.getTab().addEventListener('click', (event) => {
-                if (event.target.childNodes.item(1).style.background !== 'var(--blue_prime_background)') {
+                if (event.target.getAttribute("active") === null) {
                     document.getElementById(this.#id_list).childNodes.forEach(child => {
-                        child.childNodes.item(1).removeAttribute('style');
+                        //child.childNodes.item(0).removeAttribute('style');
+                        child.removeAttribute("active");
                         child.removeAttribute("style");
                         this.#content.removeAttribute('style')
                     })
-                    event.target.childNodes.item(1).style.background = 'var(--blue_prime_background)';
-                    event.target.style.color = 'var(--blue_prime_background)';
+                    //event.target.childNodes.item(1).style.background = 'var(--blue_prime_background)';
+                    event.target.setAttribute("active", true);
+                    event.target.style.background = 'var(--blue_prime_background)';
                     let contentz = document.getElementById(this.#id_contents);
                     contentz.innerHTML = '';
                     for (let con of item.getContent()) this.#content.appendChild(con.set());
@@ -79,8 +75,8 @@ class Tabs {
             new Animation(this.#content).fadeIn();
             this.#content.addEventListener('animationend', () => this.#content.removeAttribute('style'));
         }
-        this.#tabzz[num].getActive().style.background = 'var(--blue_prime_background)';
-        this.#tabzz[num].getTab().style.color = 'var(--blue_prime_background)';
+        this.#tabzz[num].getTab().setAttribute("active", true);
+        this.#tabzz[num].getTab().style.background = 'var(--blue_prime_background)';
     }
     set() {
         return this.#tabs;
