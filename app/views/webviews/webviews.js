@@ -1,4 +1,4 @@
-const {Page, WebView, Styles} = require('../../../index');
+const {Page, WebView} = require('../../../index');
 
 class WebViewsPage extends Page {
     constructor() {
@@ -9,7 +9,7 @@ class WebViewsPage extends Page {
         this.setFullHeight()
         this.disablePadding()
 
-        let web = new WebView("https://music.yandex.ru/");
+        let web = new WebView("https://www.google.com/");
         web.insertCustomCSS(__dirname + '/test.css')
 
         this.add(web)

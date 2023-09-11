@@ -54,8 +54,8 @@ const { TelegramBot } = require("./framework/components/telegram_bot/chui_telegr
 const { MenuBar } = require("./framework/components/chui_menu_bar/menu_bar");
 const { UpdateNotification } = require("./framework/components/chui_notification/notification_update");
 const { Image } = require('./framework/components/chui_media/image');
-const { Audio } = require("./framework/components/chui_media/audio")
-const { Video } = require("./framework/components/chui_media/video")
+const { Audio } = require("./framework/components/chui_media/audio");
+const { Video } = require("./framework/components/chui_media/video");
 
 //VARS
 let isQuiting = false;
@@ -115,6 +115,7 @@ class Main {
                 webviewTag: true,
                 enableRemoteModule: true,
                 webSecurity: this.#webSecurity,
+                nodeIntegrationInSubFrames: true
             },
             frame: false,
             resizable: true,
@@ -129,6 +130,7 @@ class Main {
                 (details, callback) => {
                     const { requestHeaders } = details;
                     Main.#keyToChangeLower(requestHeaders, 'Access-Control-Allow-Origin', ['*']);
+                    Main.#keyToChangeLower(requestHeaders, 'X-Frame-Options', ['*']);
                     callback({ requestHeaders });
                 },
             );
@@ -136,8 +138,9 @@ class Main {
                 const { responseHeaders } = details;
                 Main.#keyToChangeLower(responseHeaders, 'Access-Control-Allow-Origin', ['*']);
                 Main.#keyToChangeLower(responseHeaders, 'Access-Control-Allow-Headers', ['*']);
+                Main.#keyToChangeLower(responseHeaders, 'X-Frame-Options', ['*']);
                 callback({
-                    responseHeaders,
+                    responseHeaders, cancel: false
                 });
             });
         }

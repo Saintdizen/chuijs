@@ -12,9 +12,15 @@ class WebView {
     constructor(url = String()) {
         require('../../modules/chui_functions').setStyles(__dirname + '/styles.css', 'chUiJS_WebView');
         this.#WebView.setAttribute('id', this.#id)
-        this.#WebView.setAttribute('useragent', getFirefoxUserAgent())
-        this.#WebView.setAttribute('allowpopups', 'true')
         this.#WebView.setAttribute('src', url)
+        this.#WebView.setAttribute('nodeintegration', 'true');
+        this.#WebView.setAttribute('nodeintegrationinsubframes', 'true');
+        this.#WebView.setAttribute('plugins', 'true')
+        this.#WebView.setAttribute('useragent', getFirefoxUserAgent())
+        this.#WebView.setAttribute('disablewebsecurity', 'true')
+        this.#WebView.setAttribute('allowpopups', 'true')
+        this.#WebView.setAttribute("webpreferences", "allowRunningInsecureContent, javascript=yes")
+
         this.#main_block.appendChild(this.#WebView)
         this.#main_block.appendChild(this.#chui_load)
         let spinner = new Spinner(Spinner.SIZE.BIG);
@@ -27,13 +33,6 @@ class WebView {
         }
         this.#WebView.addEventListener('did-start-loading', loadStart)
         this.#WebView.addEventListener('did-stop-loading', loadStop)
-    }
-    execJS(script) {
-        this.#WebView.addEventListener('did-start-loading', () => {
-            this.#WebView.addEventListener('dom-ready', () => {
-                this.#WebView.executeJavaScript(script, true).catch(r => console.log(r))
-            });
-        })
     }
     addStartLoadEvent(listener = () => {}) {
         this.#WebView.addEventListener('did-start-loading', listener)
