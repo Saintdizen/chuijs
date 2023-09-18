@@ -41,7 +41,7 @@ combobox_dropdown {
     z-index: 1;
     width: -webkit-fill-available;
     overflow: hidden hidden;
-    box-shadow: 0 2px 10px 2px rgb(0 0 0 / 20%);
+    box-shadow: var(--box_shadow_main);
     border: none;
 }
 

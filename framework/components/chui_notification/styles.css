@@ -9,24 +9,24 @@ notification {
     padding: var(--main_padding);
     background: var(--main_background_4);
     backdrop-filter: var(--global_blur);
-    box-shadow: 0 2px 10px 2px rgb(0 0 0 / 20%);
+    box-shadow: var(--box_shadow_main);
     z-index: 1002;
     border: none;
 }
 
 .notification_warning {
     background: var(--badge_warning_back);
-    box-shadow: 0 2px 10px 2px rgb(0 0 0 / 20%);
+    box-shadow: var(--box_shadow_main);
 }
 
 .notification_error {
     background: var(--badge_error_back);
-    box-shadow: 0 2px 10px 2px rgb(0 0 0 / 20%);
+    box-shadow: var(--box_shadow_main);
 }
 
 .notification_success {
     background: var(--badge_success_back);
-    box-shadow: 0 2px 10px 2px rgb(0 0 0 / 20%);
+    box-shadow: var(--box_shadow_main);
 }
 
 notification_content {

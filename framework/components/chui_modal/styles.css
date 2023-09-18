@@ -24,7 +24,7 @@ dialog_content {
     border: none;
     color: var(--text_color);
     background: var(--main_background);
-    box-shadow: 0 2px 10px 2px rgb(0 0 0 / 20%);
+    box-shadow: var(--box_shadow_main);
 }
 
 dialog_header {

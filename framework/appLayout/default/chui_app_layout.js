@@ -96,6 +96,10 @@ class AppLayout extends Route {
     #def_menu_block_width_test = 425;
     #route_views = document.createElement('route_views');
     #menu_button = document.createElement('app_menu_button');
+    // Блок поиска
+    #app_menu_search_main = document.createElement("app_menu_search_main");
+    #app_menu_search_input = document.createElement("input");
+    //
     #auto_close = false;
     #not_duplicate_page = false;
     //
@@ -199,7 +203,7 @@ class AppLayout extends Route {
         center.onscroll = () => {
             if (center.scrollTop > 15) {
                 header.style.backgroundColor = 'var(--main_background_2)'
-                header.style.boxShadow = "0 2px 10px 2px rgb(0 0 0 / 20%)"
+                header.style.boxShadow = "var(--box_shadow_main)"
             } else {
                 header.removeAttribute('style')
             }
@@ -230,7 +234,34 @@ class AppLayout extends Route {
         })
         //
         this.#applayout.appendChild(this.#app_menu)
+
+        this.#app_menu_search_input.classList.add("app_menu_search_input")
+        this.#app_menu_search_input.placeholder = "Поиск..."
+
+        this.#app_menu_search_input.addEventListener('focus', () => {
+            this.#app_menu_search_input.style.boxShadow = '0 0 3px 2px var(--blue_prime_background)';
+        })
+        this.#app_menu_search_input.addEventListener('blur', () => {
+            this.#app_menu_search_input.removeAttribute("style");
+        })
+
+        this.#app_menu_search_input.addEventListener("input", (evt) => {
+            console.log(evt.data)
+            for (let item of this.#route_views.children) {
+                if (!item.children.item(0).textContent.includes(evt.data)) {
+                    item.style.display = 'none'
+                } else {
+                    item.removeAttribute("style")
+                }
+            }
+        })
+
+        this.#app_menu_search_main.appendChild(this.#app_menu_search_input)
+        this.#app_menu.appendChild(this.#app_menu_search_main)
+
         this.#app_menu.appendChild(this.#route_views)
+
+
 
         // Шапка левый блок
         this.#header_left_box.appendChild(this.#menu_button);
