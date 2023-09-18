@@ -78,6 +78,11 @@ class WindowControls {
 
 }
 
+class AppMenuSearchBlock {
+    constructor() {
+    }
+}
+
 class AppLayout extends Route {
     #wc_box = new WindowControls();
     #applayout = document.createElement('applayout');
@@ -246,9 +251,10 @@ class AppLayout extends Route {
         })
 
         this.#app_menu_search_input.addEventListener("input", (evt) => {
-            console.log(evt.data)
             for (let item of this.#route_views.children) {
-                if (!item.children.item(0).textContent.includes(evt.data)) {
+                let text1 = item.children.item(0).textContent.toLowerCase();
+                let text2 = evt.target.value.toLowerCase();
+                if (!text1.includes(text2)) {
                     item.style.display = 'none'
                 } else {
                     item.removeAttribute("style")
@@ -260,8 +266,6 @@ class AppLayout extends Route {
         this.#app_menu.appendChild(this.#app_menu_search_main)
 
         this.#app_menu.appendChild(this.#route_views)
-
-
 
         // Шапка левый блок
         this.#header_left_box.appendChild(this.#menu_button);

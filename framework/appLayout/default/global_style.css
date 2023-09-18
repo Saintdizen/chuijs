@@ -61,7 +61,7 @@ app_menu_search_main {
 }
 
 .app_menu_search_input {
-    border: 1px solid var(--main_background_3);
+    border: none;
     border-radius: var(--border_radius);
     background: var(--element_background_2);
     padding: var(--main_padding);
