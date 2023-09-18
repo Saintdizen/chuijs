@@ -56,14 +56,15 @@ tree_view_html {
 
 tree_view_button:hover {
     color: var(--blue_prime_background);
+    background: var(--blue_prime_background);
 }
 
 tree_view_button:hover tree_view_button_text {
-    color: var(--blue_prime_background)
+    color: var(--text_color);
 }
 
 tree_view_button:hover chui_icon {
-    color: var(--blue_prime_background)
+    color: var(--text_color);
 }
 
 .tree_view_button_active {
@@ -71,7 +72,5 @@ tree_view_button:hover chui_icon {
 }
 
 .tree_view_button_active chui_icon {
-    background: var(--element_background);
     color: var(--blue_prime_background);
-    border-radius: 50%
 }

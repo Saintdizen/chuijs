@@ -129,7 +129,7 @@ class OthersComponentsPage extends Page {
         this.add(h1_others, accordion, details)
 
         let treeView = new TreeView({
-            width: "max-content",
+            width: "600px",
             components: [
                 TreeView.Button({
                     title: "Главная",

@@ -62,7 +62,7 @@ class TreeView {
         button_text.innerHTML = options.title;
         button.appendChild(button_text)
         let barrow = document.createElement('tree_view_button_arrow')
-        barrow.style.marginLeft = '10px'
+        barrow.style.marginLeft = 'auto'
         barrow.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN).getHTML();
         button.appendChild(barrow)
         let html = document.createElement('tree_view_html')
@@ -79,10 +79,7 @@ class TreeView {
                 html.appendChild(sub.set())
             })
         }
-
         panel.appendChild(html)
-
-
         return {
             title: options.title,
             button: button,
