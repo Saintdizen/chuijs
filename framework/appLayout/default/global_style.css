@@ -47,7 +47,9 @@ body {
     height: -webkit-fill-available;
     margin: 0;
     padding: 0;
-    background: transparent
+    background: var(--main_background);
+    /*border-radius: var(--border_radius);*/
+    border: 1px solid var(--main_background_3);
 }
 
 app_menu_search_main {
@@ -89,26 +91,18 @@ main_center_block::-webkit-scrollbar-track {
 
 ::-webkit-scrollbar-thumb {
     border-radius: var(--border_radius);
-    background: var(--main_background_3);
+    background: var(--element_background_2);
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--blue_prime_background)
 }
 
-applayout {
+app_layout {
     width: -webkit-fill-available;
     height: -webkit-fill-available;
     display: flex;
     flex-direction: column
-}
-
-#app {
-    width: -webkit-fill-available;
-    height: -webkit-fill-available;
-    background: var(--main_background);
-    /*border-radius: var(--border_radius);*/
-    border: 1px solid var(--main_background_3);
 }
 
 header {

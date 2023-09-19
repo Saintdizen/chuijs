@@ -51,7 +51,7 @@ class Image {
 
 
                 }
-                document.getElementById("app").appendChild(popup.set())
+                document.body.appendChild(popup.set())
                 popup.open();
             })
         }

@@ -9,14 +9,13 @@ const {Popup} = require("../../components/chui_popups/popups");
 const {UpdateNotification} = require("../../components/chui_notification/notification_update");
 const {ipcRenderer} = require("electron");
 const chui_functions = require('../../modules/chui_functions');
-//
-
-//VARS
-let page_name = null;
-let route_list = [];
 
 class Route {
     go(page) {
+        let header_toolbar = document.getElementById("header_toolbar");
+        let page_name = document.getElementById("page_name");
+        let center = document.getElementById("center");
+        //
         header_toolbar.innerHTML = ''
         page_name.innerHTML = page.getTitle();
         center.innerHTML = '';
@@ -118,11 +117,12 @@ class Center {
 }
 
 class AppMenu extends Route {
-    #app_menu = document.createElement('app_menu');
-    #def_menu_block_width = 400;
-    #def_menu_block_width_test = 425;
-    #route_views = document.createElement('route_views');
-    #menu_button = document.createElement('app_menu_button');
+    #routeList = [];
+    #appMenu = document.createElement('app_menu');
+    #appMenuWidth = 400;
+    #appMenuWidthTest = 425;
+    #routeViews = document.createElement('route_views');
+    #appMenuButton = document.createElement('app_menu_button');
     // Блок поиска
     #app_menu_search_main = document.createElement("app_menu_search_main");
     #app_menu_search_input = document.createElement("input");
@@ -130,40 +130,42 @@ class AppMenu extends Route {
     #auto_close = false;
     constructor(header, center) {
         super();
-        this.#app_menu.style.top = `calc(${header.style.height})`;
-        this.#app_menu.style.width = `${this.#def_menu_block_width}px`;
-        this.#app_menu.style.left = `calc(-${this.#def_menu_block_width_test}px)`;
-        this.#app_menu.style.height = `calc(100% - ${header.style.height})`;
+        this.#appMenu.style.top = `calc(${header.set().style.height})`;
+        this.#appMenu.style.width = `${this.#appMenuWidth}px`;
+        this.#appMenu.style.left = `calc(-${this.#appMenuWidthTest}px)`;
+        this.#appMenu.style.height = `calc(100% - ${header.set().style.height})`;
         //
-        this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
-        this.#menu_button.addEventListener("click", () => {
-            if (this.#menu_button.classList.contains("app_menu_button_active")) {
-                this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
-                this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
+        this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
+        this.#appMenuButton.addEventListener("click", () => {
+            if (this.#appMenuButton.classList.contains("app_menu_button_active")) {
+                this.#appMenu.style.transform = `translateX(-${this.#appMenuWidth}px)`;
+                this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
             } else {
-                this.#app_menu.style.transform = `translateX(${this.#def_menu_block_width_test}px)`;
-                this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU_OPEN).getHTML();
+                this.#appMenu.style.transform = `translateX(${this.#appMenuWidthTest}px)`;
+                this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU_OPEN).getHTML();
             }
-            this.#menu_button.classList.toggle("app_menu_button_active")
+            this.#appMenuButton.classList.toggle("app_menu_button_active")
         })
-        header.addEventListener('click', (e) => {
-            if (e.target !== this.#menu_button) {
-                this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
-                this.#menu_button.classList.remove("app_menu_button_active")
-                this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
+        header.set().addEventListener('click', (e) => {
+            if (e.target !== this.#appMenuButton) {
+                this.#appMenu.style.transform = `translateX(-${this.#appMenuWidth}px)`;
+                this.#appMenuButton.classList.remove("app_menu_button_active")
+                this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
             }
         })
         center.addEventListener('click', (e) => {
-            if (!this.#app_menu.contains(e.target)) {
-                if (this.#app_menu.style.transform === `translateX(${this.#def_menu_block_width_test}px)`) {
-                    this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width_test}px)`;
-                    this.#menu_button.classList.toggle("app_menu_button_active")
-                    this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
+            if (!this.#appMenu.contains(e.target)) {
+                if (this.#appMenu.style.transform === `translateX(${this.#appMenuWidthTest}px)`) {
+                    this.#appMenu.style.transform = `translateX(-${this.#appMenuWidthTest}px)`;
+                    this.#appMenuButton.classList.toggle("app_menu_button_active")
+                    this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
                 }
             }
         })
-        //
-        this.#app_menu.appendChild(this.#route_views)
+        let page_name = document.createElement('page_name');
+        page_name.id = "page_name"
+        header.addToLeft(this.#appMenuButton, page_name);
+        this.#appMenu.appendChild(this.#routeViews)
     }
     enableSearchInput() {
         this.#app_menu_search_input.classList.add("app_menu_search_input")
@@ -175,7 +177,7 @@ class AppMenu extends Route {
             this.#app_menu_search_input.removeAttribute("style");
         })
         this.#app_menu_search_input.addEventListener("input", (evt) => {
-            for (let item of this.#route_views.children) {
+            for (let item of this.#routeViews.children) {
                 let text1 = item.children.item(0).textContent.toLowerCase();
                 let text2 = evt.target.value.toLowerCase();
                 if (!text1.includes(text2)) {
@@ -186,11 +188,11 @@ class AppMenu extends Route {
             }
         })
         this.#app_menu_search_main.appendChild(this.#app_menu_search_input)
-        this.#app_menu.insertBefore(this.#app_menu_search_main, this.#route_views)
+        this.#appMenu.insertBefore(this.#app_menu_search_main, this.#routeViews)
     }
     setRouteTest(page) {
-        route_list.push(page);
-        let test = route_list.filter(route => route.getTitle().includes(page.getTitle()));
+        this.#routeList.push(page);
+        let test = this.#routeList.filter(route => route.getTitle().includes(page.getTitle()));
         if (test.length === 1) {
             let button_route = document.createElement('route');
             let title_menu = document.createElement('route_title');
@@ -205,16 +207,16 @@ class AppMenu extends Route {
                     this.go(page);
                     button_route.classList.add("route_active");
                     if (this.#auto_close) {
-                        if (this.#app_menu.style.transform === `translateX(${this.#def_menu_block_width + 25}px)`) {
-                            this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width + 25}px)`;
-                            this.#menu_button.classList.toggle("app_menu_button_active");
-                            this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
+                        if (this.#appMenu.style.transform === `translateX(${this.#appMenuWidth + 25}px)`) {
+                            this.#appMenu.style.transform = `translateX(-${this.#appMenuWidth + 25}px)`;
+                            this.#appMenuButton.classList.toggle("app_menu_button_active");
+                            this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
                         }
                     }
                 }
             });
             button_route.appendChild(title_menu)
-            this.#route_views.appendChild(button_route)
+            this.#routeViews.appendChild(button_route)
         } else {
             console.error(`Страница "${page.getTitle()}" уже добавлена в меню`)
         }
@@ -223,10 +225,10 @@ class AppMenu extends Route {
         this.#auto_close = true;
     }
     getMenu() {
-        return this.#app_menu;
+        return this.#appMenu;
     }
     getMenuButton() {
-        return this.#menu_button;
+        return this.#appMenuButton;
     }
 }
 
@@ -255,10 +257,10 @@ class NotificationBox {
         this.#notification_box.appendChild(this.#notification_box_main)
         this.#notification_box.appendChild(this.#notification_box_controls)
         this.#notification_box_main.id = 'chui_notification_box';
-        this.#notification_box.style.top = `calc(${header.style.height})`;
+        this.#notification_box.style.top = `calc(${header.set().style.height})`;
         this.#notification_box.style.width = `${this.#notification_box_width}px`;
         this.#notification_box.style.right = `calc(-${this.#notification_box_width_test}px)`;
-        this.#notification_box.style.height = `calc(100% - ${header.style.height})`;
+        this.#notification_box.style.height = `calc(100% - ${header.set().style.height})`;
         this.#notification_button.addEventListener("click", () => {
             if (this.#notification_button.classList.contains("notification_button_active")) {
                 this.#notification_box.style.transform = `translateX(${this.#notification_box_width}px)`;
@@ -268,7 +270,7 @@ class NotificationBox {
             this.#notification_button.classList.toggle("notification_button_active")
         })
         this.#notification_button.innerHTML = new Icon(Icons.SOCIAL.NOTIFICATIONS).getHTML();
-        header.addEventListener('click', (e) => {
+        header.set().addEventListener('click', (e) => {
             if (e.target !== this.#notification_button) {
                 this.#notification_box.style.transform = `translateX(${this.#notification_box_width}px)`;
                 this.#notification_button.classList.remove("notification_button_active")
@@ -284,51 +286,43 @@ class NotificationBox {
         })
         center.onscroll = () => {
             if (center.scrollTop > 15) {
-                header.style.backgroundColor = 'var(--main_background_2)'
-                header.style.boxShadow = "var(--box_shadow_main)"
+                header.set().style.backgroundColor = 'var(--main_background_2)'
+                header.set().style.boxShadow = "var(--box_shadow_main)"
             } else {
-                header.removeAttribute('style')
+                header.set().removeAttribute('style')
             }
         };
+        header.addToRight(this.#notification_button)
     }
     getBox() {
         return this.#notification_box;
-    }
-    getButton() {
-        return this.#notification_button;
     }
 }
 
 class AppLayout {
     #header = new Header();
     #center = new Center().set();
-    #appMenu = new AppMenu(this.#header.set(), this.#center);
-    #notificationBox = new NotificationBox(this.#header.set(), this.#center);
-    //
-    #applayout = document.createElement('applayout');
-
-    #notification_panel = document.createElement('notification_panel');
-    //
+    #appMenu = new AppMenu(this.#header, this.#center);
+    #notificationBox = new NotificationBox(this.#header, this.#center);
+    #appLayout = document.createElement('app_layout');
+    #notificationPanel = document.createElement('notification_panel');
     constructor() {
         require('../../modules/chui_fonts').install();
         // Глобальные стили
         chui_functions.setStyles(__dirname + "/global_style.css", 'chUiJS_Global_App')
         chui_functions.setStyles(__dirname + "/main_theme_style.css", 'chUiJS_Main_Theme')
         // ===
-        page_name = document.createElement('page_name');
-        document.getElementById('app').append(this.#applayout);
-        document.body.appendChild(this.#notification_panel);
+        document.body.appendChild(this.#appLayout);
+        document.body.appendChild(this.#notificationPanel);
 
-        this.#applayout.appendChild(this.#appMenu.getMenu())
-        this.#applayout.appendChild(this.#notificationBox.getBox())
+        this.#appLayout.appendChild(this.#appMenu.getMenu())
+        this.#appLayout.appendChild(this.#notificationBox.getBox())
         //
-        this.#header.addToLeft(this.#appMenu.getMenuButton(), page_name);
-        this.#header.addToRight(this.#notificationBox.getButton())
-        this.#applayout.appendChild(this.#header.set());
+        this.#appLayout.appendChild(this.#header.set());
         //
-        this.#applayout.appendChild(this.#center)
+        this.#appLayout.appendChild(this.#center)
 
-        this.#applayout.addEventListener('contextmenu', (e) => {
+        this.#appLayout.addEventListener('contextmenu', (e) => {
             let item;
             for (item of globalThis.ctxs) {
                 let ctxz = document.getElementById(item.ctx.id);
@@ -345,7 +339,7 @@ class AppLayout {
                 }
             }
         })
-        this.#applayout.addEventListener('click', () => {
+        this.#appLayout.addEventListener('click', () => {
             for (let item of globalThis.ctxs) {
                 let ctxz = document.getElementById(item.ctx.id);
                 if (ctxz) new Animation(ctxz).fadeOutAndRemove();
@@ -557,7 +551,7 @@ class HeaderDialog {
         // FOOTER
 
         //
-        document.getElementById("app").appendChild(dialog.set());
+        document.body.appendChild(dialog.set());
         //center.appendChild(dialog.set());
         if (options.title !== undefined && options.icon !== undefined) {
             if (options.reverse) {

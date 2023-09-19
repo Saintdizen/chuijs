@@ -73,7 +73,7 @@ class PopupAlert {
         this.#popup_buttons.appendChild(this.#button_OK);
 
         //
-        document.getElementById("app").appendChild(this.#chui_popup)
+        document.body.appendChild(this.#chui_popup)
         let popup = document.getElementById(this.#id);
         new Animation(popup).fadeIn();
         new Animation(popup.firstChild).scaleIn();
@@ -128,7 +128,7 @@ class PopupConfirm {
                 resolve(true);
             });
 
-            document.getElementById("app").appendChild(this.#chui_popup)
+            document.body.appendChild(this.#chui_popup)
             let popup = document.getElementById(this.#id);
             new Animation(popup).fadeIn();
             new Animation(popup.firstChild).scaleIn();
@@ -241,7 +241,7 @@ class PopupPrompt {
                 }
             })
 
-            document.getElementById("app").appendChild(this.#chui_popup);
+            document.body.appendChild(this.#chui_popup);
 
             let popup = document.getElementById(this.#id);
             new Animation(popup).fadeIn();
