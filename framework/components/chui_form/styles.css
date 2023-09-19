@@ -3,7 +3,7 @@ chui_form_main {
 }
 
 .chui_form_submit_button {
-    border: none;
+    border: 1px solid var(--main_background_6);
     cursor: pointer;
     height: max-content;
     width: max-content;

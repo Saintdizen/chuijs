@@ -20,7 +20,7 @@ progress {
 progress::-webkit-progress-bar {
     background: var(--element_background);
     border-radius: 50px;
-    border: none;
+    border: 1px solid var(--main_background_6);
 }
 
 progress::-webkit-progress-value {

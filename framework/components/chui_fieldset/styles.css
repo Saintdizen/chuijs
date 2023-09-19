@@ -8,7 +8,7 @@ chui_fieldset {
 fieldset {
     height: -webkit-fill-available;
     width: -webkit-fill-available;
-    border: none;
+    border: 1px solid var(--main_background_6);
     border-radius: var(--border_radius);
     padding: 0 6px 6px 6px;
     display: flex;
@@ -16,10 +16,11 @@ fieldset {
 
 legend {
     color: var(--blue_prime_background);
-    padding: var(--main_padding);
+    padding: var(--test_padding);
     font-size: var(--font_default_size);
     font-weight: 500;
     border: none;
     border-radius: var(--border_radius);
     letter-spacing: -0.031rem;
+    margin-left: var(--margin);
 }
