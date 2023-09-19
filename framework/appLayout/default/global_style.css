@@ -327,6 +327,7 @@ route {
     font-size: var(--font_default_size);
     font-weight: 500;
     background: transparent;
+    max-height: max-content;
 }
 
 route:hover {

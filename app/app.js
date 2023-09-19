@@ -22,8 +22,8 @@ class Test extends AppLayout {
     constructor() {
         super();
         // Настройки окна
-        this.setLeftPositionWindowControls(false);
-        this.setNotDuplicatePages(true);
+        this.setLeftPositionWindowControls();
+        this.setSearchToAppMenu();
         //this.disableAppMenu();
 
         // Настройка роутов
@@ -73,44 +73,42 @@ class Test extends AppLayout {
             ]
         })
 
-        this.addComponentToAppLayout({
-            headerRight: [
-                AppLayout.BUTTON({
-                    title: "Настройки",
-                    icon: Icons.ACTIONS.SETTINGS,
-                    clickEvent: () => alert("test")
-                }),
-                AppLayout.DIALOG({
-                    title: "Настройки",
-                    icon: Icons.ACTIONS.SETTINGS,
-                    reverse: false,
-                    dialogOptions: {
-                        title: "Заголовок диалогового окна",
-                        closeOutSideClick: true,
-                        style: {
-                            width: "60%",
-                            height: "30%",
-                            direction: Styles.DIRECTION.COLUMN,
-                            wrap: Styles.WRAP.NOWRAP,
-                            align: Styles.ALIGN.CENTER,
-                            justify: Styles.JUSTIFY.CENTER,
-                        },
-                        components: [
-                            new Button({
-                                title: "КНОПКА",
-                                icon: Icons.MAPS.MAP,
-                                clickEvent: () => {
-                                    new Notification({
-                                        title: "Заголовок", text: "Текст",
-                                        style: Notification.STYLE.WARNING, showTime: 1000
-                                    }).show()
-                                }
-                            })
-                        ]
-                    }
-                }),
-            ]
-        })
+        this.addToHeader([
+            AppLayout.BUTTON({
+                title: "Настройки",
+                icon: Icons.ACTIONS.SETTINGS,
+                clickEvent: () => alert("test")
+            }),
+            AppLayout.DIALOG({
+                title: "Настройки",
+                icon: Icons.ACTIONS.SETTINGS,
+                reverse: false,
+                dialogOptions: {
+                    title: "Заголовок диалогового окна",
+                    closeOutSideClick: true,
+                    style: {
+                        width: "60%",
+                        height: "30%",
+                        direction: Styles.DIRECTION.COLUMN,
+                        wrap: Styles.WRAP.NOWRAP,
+                        align: Styles.ALIGN.CENTER,
+                        justify: Styles.JUSTIFY.CENTER,
+                    },
+                    components: [
+                        new Button({
+                            title: "КНОПКА",
+                            icon: Icons.MAPS.MAP,
+                            clickEvent: () => {
+                                new Notification({
+                                    title: "Заголовок", text: "Текст",
+                                    style: Notification.STYLE.WARNING, showTime: 1000
+                                }).show()
+                            }
+                        })
+                    ]
+                }
+            }),
+        ])
     }
 }
 

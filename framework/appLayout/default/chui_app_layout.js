@@ -78,11 +78,6 @@ class WindowControls {
 
 }
 
-class AppMenuSearchBlock {
-    constructor() {
-    }
-}
-
 class AppLayout extends Route {
     #wc_box = new WindowControls();
     #applayout = document.createElement('applayout');
@@ -106,7 +101,6 @@ class AppLayout extends Route {
     #app_menu_search_input = document.createElement("input");
     //
     #auto_close = false;
-    #not_duplicate_page = false;
     //
     constructor() {
         super();
@@ -239,32 +233,6 @@ class AppLayout extends Route {
         })
         //
         this.#applayout.appendChild(this.#app_menu)
-
-        this.#app_menu_search_input.classList.add("app_menu_search_input")
-        this.#app_menu_search_input.placeholder = "Поиск..."
-
-        this.#app_menu_search_input.addEventListener('focus', () => {
-            this.#app_menu_search_input.style.boxShadow = '0 0 3px 2px var(--blue_prime_background)';
-        })
-        this.#app_menu_search_input.addEventListener('blur', () => {
-            this.#app_menu_search_input.removeAttribute("style");
-        })
-
-        this.#app_menu_search_input.addEventListener("input", (evt) => {
-            for (let item of this.#route_views.children) {
-                let text1 = item.children.item(0).textContent.toLowerCase();
-                let text2 = evt.target.value.toLowerCase();
-                if (!text1.includes(text2)) {
-                    item.style.display = 'none'
-                } else {
-                    item.removeAttribute("style")
-                }
-            }
-        })
-
-        this.#app_menu_search_main.appendChild(this.#app_menu_search_input)
-        this.#app_menu.appendChild(this.#app_menu_search_main)
-
         this.#app_menu.appendChild(this.#route_views)
 
         // Шапка левый блок
@@ -304,17 +272,37 @@ class AppLayout extends Route {
         })
     }
 
-    setLeftPositionWindowControls(boolean = Boolean()) {
-        if (boolean) header_main.insertBefore(this.#wc_box.set(boolean), header_main.firstChild);
+    setSearchToAppMenu() {
+        this.#app_menu_search_input.classList.add("app_menu_search_input")
+        this.#app_menu_search_input.placeholder = "Поиск..."
+        this.#app_menu_search_input.addEventListener('focus', () => {
+            this.#app_menu_search_input.style.boxShadow = '0 0 3px 2px var(--blue_prime_background)';
+        })
+        this.#app_menu_search_input.addEventListener('blur', () => {
+            this.#app_menu_search_input.removeAttribute("style");
+        })
+        this.#app_menu_search_input.addEventListener("input", (evt) => {
+            for (let item of this.#route_views.children) {
+                let text1 = item.children.item(0).textContent.toLowerCase();
+                let text2 = evt.target.value.toLowerCase();
+                if (!text1.includes(text2)) {
+                    item.style.display = "none"
+                } else {
+                    item.removeAttribute("style")
+                }
+            }
+        })
+        this.#app_menu_search_main.appendChild(this.#app_menu_search_input)
+        this.#app_menu.insertBefore(this.#app_menu_search_main, this.#route_views)
+    }
+
+    setLeftPositionWindowControls() {
+        header_main.insertBefore(this.#wc_box.set(true), header_main.firstChild);
     }
 
     disableAppMenu() {
         this.#header_left_box.removeChild(this.#menu_button);
         page_name.style.margin = "var(--margin) calc(var(--margin) + 4px)"
-    }
-
-    setNotDuplicatePages(boolean = Boolean()) {
-        this.#not_duplicate_page = boolean;
     }
 
     setAutoCloseRouteMenu(boolean = Boolean()) {
@@ -324,35 +312,7 @@ class AppLayout extends Route {
     setRoute(page) {
         route_list.push(page);
         let test = route_list.filter(route => route.getTitle().includes(page.getTitle()));
-        if (this.#not_duplicate_page) {
-            if (test.length === 1) {
-                let button_route = document.createElement('route');
-                let title_menu = document.createElement('route_title');
-                title_menu.innerHTML = page.getTitle();
-                if (page.getMain()) {
-                    this.go(page);
-                    button_route.classList.add("route_active");
-                }
-                button_route.addEventListener('click', () => {
-                    if (!button_route.classList.contains('route_active')) {
-                        for (let act of document.getElementsByTagName('route')) act.classList.remove('route_active');
-                        this.go(page);
-                        button_route.classList.add("route_active");
-                        if (this.#auto_close) {
-                            if (this.#app_menu.style.transform === `translateX(${this.#def_menu_block_width + 25}px)`) {
-                                this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width + 25}px)`;
-                                this.#menu_button.classList.toggle("app_menu_button_active");
-                                this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
-                            }
-                        }
-                    }
-                });
-                button_route.appendChild(title_menu)
-                this.#route_views.appendChild(button_route)
-            } else {
-                console.error(`Страница "${page.getTitle()}" уже добавлена в меню`)
-            }
-        } else {
+        if (test.length === 1) {
             let button_route = document.createElement('route');
             let title_menu = document.createElement('route_title');
             title_menu.innerHTML = page.getTitle();
@@ -376,15 +336,13 @@ class AppLayout extends Route {
             });
             button_route.appendChild(title_menu)
             this.#route_views.appendChild(button_route)
+        } else {
+            console.error(`Страница "${page.getTitle()}" уже добавлена в меню`)
         }
     }
 
-    addComponentToAppLayout(options = {
-        //center: [],
-        headerRight: []
-    }) {
-        //if (options.center !== undefined) for (let component of options.center) this.#applayout.appendChild(component.set());
-        if (options.headerRight !== undefined) this.#header_right_box.firstChild.before(...options.headerRight);
+    addToHeader(headerRight = []) {
+        this.#header_right_box.firstChild.before(...headerRight);
     }
 
     static BUTTON(options = {
