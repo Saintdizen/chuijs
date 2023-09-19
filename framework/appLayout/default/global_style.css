@@ -407,7 +407,7 @@ user_dropdown {
     min-width: 165px;
     flex-direction: column;
     box-shadow: var(--box_shadow_main);
-    border: none;
+    border: 1px solid var(--main_background_6);
 }
 
 user_dropdown user_item {

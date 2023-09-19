@@ -74,7 +74,7 @@ input[type=file]::file-selector-button {
     font-size: var(--font_default_size);
     font-weight: 400;
     margin: 0 var(--margin) 0 0;
-    color: var(--text_color);
+    color: var(--blue_prime_background);
     transition: all .22s;
     font-family: chui_Inter;
     letter-spacing: 0.33px;
