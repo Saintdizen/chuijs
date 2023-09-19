@@ -24,7 +24,6 @@ class Test extends AppLayout {
         // Настройки окна
         this.setLeftPositionWindowControls();
         this.setSearchToAppMenu();
-        //this.disableAppMenu();
 
         // Настройка роутов
         this.setAutoCloseRouteMenu(true);
@@ -44,36 +43,31 @@ class Test extends AppLayout {
         this.setRoute(new SpinnerPage());
         this.setRoute(new MediaPage())
 
-        this.addComponentToAppLayout({
-            headerRight: [
-                AppLayout.USER_PROFILE({
-                    username: "Чувахин Иван",
-                    image: {
-                        noImage: true
-                    },
-                    items: [
-                        AppLayout.USER_PROFILE_ITEM({
-                            title: "Профиль",
-                            clickEvent: () => {
-                                new Notification({
-                                    title: "Профиль", text: "Профиль", showTime: 1000
-                                }).show()
-                            }
-                        }),
-                        AppLayout.USER_PROFILE_ITEM({
-                            title: "Выход",
-                            clickEvent: () => {
-                                new Notification({
-                                    title: "Выход", text: "Выход", showTime: 1000
-                                }).show()
-                            }
-                        })
-                    ]
-                })
-            ]
-        })
-
         this.addToHeader([
+            AppLayout.USER_PROFILE({
+                username: "Чувахин Иван",
+                image: {
+                    noImage: true
+                },
+                items: [
+                    AppLayout.USER_PROFILE_ITEM({
+                        title: "Профиль",
+                        clickEvent: () => {
+                            new Notification({
+                                title: "Профиль", text: "Профиль", showTime: 1000
+                            }).show()
+                        }
+                    }),
+                    AppLayout.USER_PROFILE_ITEM({
+                        title: "Выход",
+                        clickEvent: () => {
+                            new Notification({
+                                title: "Выход", text: "Выход", showTime: 1000
+                            }).show()
+                        }
+                    })
+                ]
+            }),
             AppLayout.BUTTON({
                 title: "Настройки",
                 icon: Icons.ACTIONS.SETTINGS,

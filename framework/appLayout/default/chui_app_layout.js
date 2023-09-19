@@ -12,10 +12,6 @@ const chui_functions = require('../../modules/chui_functions');
 //
 
 //VARS
-let header = null;
-let center = null;
-let header_main = null;
-let header_toolbar = null;
 let page_name = null;
 let route_list = [];
 
@@ -78,19 +74,50 @@ class WindowControls {
 
 }
 
-class AppLayout extends Route {
+class Header {
     #wc_box = new WindowControls();
-    #applayout = document.createElement('applayout');
+    #header = document.createElement("header");
+    #header_main = document.createElement("header_main");
+    #header_toolbar = document.createElement("header_toolbar");
     #header_left_box = document.createElement("header_left_box");
     #header_right_box = document.createElement("header_right_box");
-    #notification_panel = document.createElement('notification_panel');
-    #notification_box = document.createElement('notification_box');
-    #notification_box_main = document.createElement("notification_box_main");
-    #notification_box_controls = document.createElement("notification_box_controls");
-    #notification_box_width = 400;
-    #notification_box_width_test = 425;
-    #notification_button = document.createElement('notification_button');
-    //
+    constructor() {
+        this.#header.id = "header";
+        this.#header_main.id = "header_main";
+        this.#header_toolbar.id = "header_toolbar";
+        this.#header_main.appendChild(this.#header_left_box);
+        this.#header_main.appendChild(this.#header_right_box);
+        this.#header_main.appendChild(this.#wc_box.set(false));
+        this.#header.appendChild(this.#header_main)
+        this.#header.appendChild(this.#header_toolbar)
+    }
+    addWC() {
+        this.#header_main.insertBefore(this.#wc_box.set(true), this.#header_main.firstChild);
+    }
+    addToLeft(...components) {
+        for (let component of components) {
+            this.#header_left_box.appendChild(component)
+        }
+    }
+    addToRight(...components) {
+        for (let component of components) this.#header_right_box.insertBefore(component, this.#header_right_box.firstChild);
+    }
+    set() {
+        return this.#header;
+    }
+}
+
+class Center {
+    #center = document.createElement('main_center_block');
+    constructor() {
+        this.#center.id = "center";
+    }
+    set() {
+        return this.#center;
+    }
+}
+
+class AppMenu extends Route {
     #app_menu = document.createElement('app_menu');
     #def_menu_block_width = 400;
     #def_menu_block_width_test = 425;
@@ -99,58 +126,15 @@ class AppLayout extends Route {
     // Блок поиска
     #app_menu_search_main = document.createElement("app_menu_search_main");
     #app_menu_search_input = document.createElement("input");
-    //
+    // ===
     #auto_close = false;
-    //
-    constructor() {
+    constructor(header, center) {
         super();
-        require('../../modules/chui_fonts').install();
-        // Глобальные стили
-        chui_functions.setStyles(__dirname + "/global_style.css", 'chUiJS_Global_App')
-        chui_functions.setStyles(__dirname + "/main_theme_style.css", 'chUiJS_Main_Theme')
-        // ===
-        page_name = document.createElement('page_name');
-        document.getElementById('app').append(this.#applayout);
-        header = document.createElement('header');
-        header.id = "header";
-        header_main = document.createElement("header_main");
-        header_toolbar = document.createElement("header_toolbar");
-        header.appendChild(header_main)
-        header.appendChild(header_toolbar)
-        center = document.createElement('main_center_block');
-        center.id = "center";
-        this.#applayout.appendChild(center)
-        this.#applayout.appendChild(header);
-        document.body.appendChild(this.#notification_panel);
         this.#app_menu.style.top = `calc(${header.style.height})`;
         this.#app_menu.style.width = `${this.#def_menu_block_width}px`;
         this.#app_menu.style.left = `calc(-${this.#def_menu_block_width_test}px)`;
         this.#app_menu.style.height = `calc(100% - ${header.style.height})`;
-
-        // Меню уведомлений
-        let remove_button = new Button({
-            icon: Icons.ACTIONS.DELETE,
-            clickEvent: async () => {
-                let box = document.getElementById("chui_notification_box");
-                for (let child of box.children) {
-                    child.style.transform = "translateX(100%)"
-                    child.style.opacity = "0"
-                    setTimeout(async () => {
-                        await child.remove()
-                    }, 300)
-                }
-            }
-        });
-
-        this.#notification_box_controls.appendChild(remove_button.set())
-        this.#notification_box.appendChild(this.#notification_box_main)
-        this.#notification_box.appendChild(this.#notification_box_controls)
-        this.#notification_box_main.id = 'chui_notification_box';
-        this.#notification_box.style.top = `calc(${header.style.height})`;
-        this.#notification_box.style.width = `${this.#notification_box_width}px`;
-        this.#notification_box.style.right = `calc(-${this.#notification_box_width_test}px)`;
-        this.#notification_box.style.height = `calc(100% - ${header.style.height})`;
-
+        //
         this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
         this.#menu_button.addEventListener("click", () => {
             if (this.#menu_button.classList.contains("app_menu_button_active")) {
@@ -162,25 +146,11 @@ class AppLayout extends Route {
             }
             this.#menu_button.classList.toggle("app_menu_button_active")
         })
-
-        this.#notification_button.addEventListener("click", () => {
-            if (this.#notification_button.classList.contains("notification_button_active")) {
-                this.#notification_box.style.transform = `translateX(${this.#notification_box_width}px)`;
-            } else {
-                this.#notification_box.style.transform = `translateX(-${this.#notification_box_width_test}px)`;
-            }
-            this.#notification_button.classList.toggle("notification_button_active")
-        })
-
         header.addEventListener('click', (e) => {
             if (e.target !== this.#menu_button) {
                 this.#app_menu.style.transform = `translateX(-${this.#def_menu_block_width}px)`;
                 this.#menu_button.classList.remove("app_menu_button_active")
                 this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
-            }
-            if (e.target !== this.#notification_button) {
-                this.#notification_box.style.transform = `translateX(${this.#notification_box_width}px)`;
-                this.#notification_button.classList.remove("notification_button_active")
             }
         })
         center.addEventListener('click', (e) => {
@@ -191,88 +161,11 @@ class AppLayout extends Route {
                     this.#menu_button.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
                 }
             }
-            if (!this.#notification_box.contains(e.target)) {
-                if (this.#notification_box.style.transform === `translateX(-${this.#notification_box_width_test}px)`) {
-                    this.#notification_box.style.transform = `translateX(${this.#notification_box_width_test}px)`;
-                    this.#notification_button.classList.toggle("notification_button_active")
-                }
-            }
-        })
-
-        center.onscroll = () => {
-            if (center.scrollTop > 15) {
-                header.style.backgroundColor = 'var(--main_background_2)'
-                header.style.boxShadow = "var(--box_shadow_main)"
-            } else {
-                header.removeAttribute('style')
-            }
-        };
-
-        this.#applayout.addEventListener('contextmenu', (e) => {
-            let item;
-            for (item of globalThis.ctxs) {
-                let ctxz = document.getElementById(item.ctx.id);
-                if (ctxz) {
-                    document.body.removeChild(ctxz)
-                }
-            }
-            for (item of globalThis.ctxs) {
-                if (item.elem.contains(e.target)) {
-                    document.body.appendChild(item.ctx.set())
-                    document.getElementById(item.ctx.id).style.top = `${e.clientY}px`;
-                    document.getElementById(item.ctx.id).style.left = `${e.clientX}px`;
-                    new Animation(document.getElementById(item.ctx.id)).fadeIn()
-                }
-            }
-        })
-        this.#applayout.addEventListener('click', () => {
-            for (let item of globalThis.ctxs) {
-                let ctxz = document.getElementById(item.ctx.id);
-                if (ctxz) new Animation(ctxz).fadeOutAndRemove();
-            }
         })
         //
-        this.#applayout.appendChild(this.#app_menu)
         this.#app_menu.appendChild(this.#route_views)
-
-        // Шапка левый блок
-        this.#header_left_box.appendChild(this.#menu_button);
-        this.#header_left_box.appendChild(page_name)
-        // Шапка правый блок
-        this.#applayout.appendChild(this.#notification_box)
-        this.#notification_button.innerHTML = new Icon(Icons.SOCIAL.NOTIFICATIONS).getHTML();
-        this.#header_right_box.appendChild(this.#notification_button)
-        //
-
-
-        header_main.appendChild(this.#header_left_box)
-        header_main.appendChild(this.#header_right_box)
-        header_main.appendChild(this.#wc_box.set(false))
-
-        //
-        ipcRenderer.on("sendNotificationUpdateLoad", async (e, text, body) => {
-            let updateNotificationLoad = new UpdateNotification({ title: text, text: body, spinner: true });
-            updateNotificationLoad.show(true);
-            ipcRenderer.on("sendNotificationUpdateLoadClose", () => updateNotificationLoad.hide());
-        })
-        ipcRenderer.on("sendNotificationUpdate", async (e, text, body) => {
-            let updateNotification = new UpdateNotification({ title: text, text: body, spinner: false });
-            updateNotification.show(true);
-            ipcRenderer.on("sendNotificationUpdateClose", () => updateNotification.hide());
-        })
-        let popup = new Popup();
-        ipcRenderer.once("checkUpdatesTrue", async (e, check, version) => {
-            if (check) {
-                let confirm_res = await popup.confirm({
-                    title: `Доступна новая версия ${version}`, message: 'Установить сейчас?',
-                    cancelText: 'Отмена', okText: 'Установить'
-                });
-                e.sender.send("updateInstallConfirm", confirm_res)
-            }
-        })
     }
-
-    setSearchToAppMenu() {
+    enableSearchInput() {
         this.#app_menu_search_input.classList.add("app_menu_search_input")
         this.#app_menu_search_input.placeholder = "Поиск..."
         this.#app_menu_search_input.addEventListener('focus', () => {
@@ -295,21 +188,7 @@ class AppLayout extends Route {
         this.#app_menu_search_main.appendChild(this.#app_menu_search_input)
         this.#app_menu.insertBefore(this.#app_menu_search_main, this.#route_views)
     }
-
-    setLeftPositionWindowControls() {
-        header_main.insertBefore(this.#wc_box.set(true), header_main.firstChild);
-    }
-
-    disableAppMenu() {
-        this.#header_left_box.removeChild(this.#menu_button);
-        page_name.style.margin = "var(--margin) calc(var(--margin) + 4px)"
-    }
-
-    setAutoCloseRouteMenu(boolean = Boolean()) {
-        this.#auto_close = boolean;
-    }
-
-    setRoute(page) {
+    setRouteTest(page) {
         route_list.push(page);
         let test = route_list.filter(route => route.getTitle().includes(page.getTitle()));
         if (test.length === 1) {
@@ -340,36 +219,191 @@ class AppLayout extends Route {
             console.error(`Страница "${page.getTitle()}" уже добавлена в меню`)
         }
     }
-
-    addToHeader(headerRight = []) {
-        this.#header_right_box.firstChild.before(...headerRight);
+    setAutoClose() {
+        this.#auto_close = true;
     }
+    getMenu() {
+        return this.#app_menu;
+    }
+    getMenuButton() {
+        return this.#menu_button;
+    }
+}
 
+class NotificationBox {
+    #notification_box = document.createElement('notification_box');
+    #notification_box_main = document.createElement("notification_box_main");
+    #notification_box_controls = document.createElement("notification_box_controls");
+    #notification_box_width = 400;
+    #notification_box_width_test = 425;
+    #notification_button = document.createElement('notification_button');
+    constructor(header, center) {
+        let remove_button = new Button({
+            icon: Icons.ACTIONS.DELETE,
+            clickEvent: async () => {
+                let box = document.getElementById("chui_notification_box");
+                for (let child of box.children) {
+                    child.style.transform = "translateX(100%)"
+                    child.style.opacity = "0"
+                    setTimeout(async () => {
+                        await child.remove()
+                    }, 300)
+                }
+            }
+        });
+        this.#notification_box_controls.appendChild(remove_button.set())
+        this.#notification_box.appendChild(this.#notification_box_main)
+        this.#notification_box.appendChild(this.#notification_box_controls)
+        this.#notification_box_main.id = 'chui_notification_box';
+        this.#notification_box.style.top = `calc(${header.style.height})`;
+        this.#notification_box.style.width = `${this.#notification_box_width}px`;
+        this.#notification_box.style.right = `calc(-${this.#notification_box_width_test}px)`;
+        this.#notification_box.style.height = `calc(100% - ${header.style.height})`;
+        this.#notification_button.addEventListener("click", () => {
+            if (this.#notification_button.classList.contains("notification_button_active")) {
+                this.#notification_box.style.transform = `translateX(${this.#notification_box_width}px)`;
+            } else {
+                this.#notification_box.style.transform = `translateX(-${this.#notification_box_width_test}px)`;
+            }
+            this.#notification_button.classList.toggle("notification_button_active")
+        })
+        this.#notification_button.innerHTML = new Icon(Icons.SOCIAL.NOTIFICATIONS).getHTML();
+        header.addEventListener('click', (e) => {
+            if (e.target !== this.#notification_button) {
+                this.#notification_box.style.transform = `translateX(${this.#notification_box_width}px)`;
+                this.#notification_button.classList.remove("notification_button_active")
+            }
+        })
+        center.addEventListener('click', (e) => {
+            if (!this.#notification_box.contains(e.target)) {
+                if (this.#notification_box.style.transform === `translateX(-${this.#notification_box_width_test}px)`) {
+                    this.#notification_box.style.transform = `translateX(${this.#notification_box_width_test}px)`;
+                    this.#notification_button.classList.toggle("notification_button_active")
+                }
+            }
+        })
+        center.onscroll = () => {
+            if (center.scrollTop > 15) {
+                header.style.backgroundColor = 'var(--main_background_2)'
+                header.style.boxShadow = "var(--box_shadow_main)"
+            } else {
+                header.removeAttribute('style')
+            }
+        };
+    }
+    getBox() {
+        return this.#notification_box;
+    }
+    getButton() {
+        return this.#notification_button;
+    }
+}
+
+class AppLayout {
+    #header = new Header();
+    #center = new Center().set();
+    #appMenu = new AppMenu(this.#header.set(), this.#center);
+    #notificationBox = new NotificationBox(this.#header.set(), this.#center);
+    //
+    #applayout = document.createElement('applayout');
+
+    #notification_panel = document.createElement('notification_panel');
+    //
+    constructor() {
+        require('../../modules/chui_fonts').install();
+        // Глобальные стили
+        chui_functions.setStyles(__dirname + "/global_style.css", 'chUiJS_Global_App')
+        chui_functions.setStyles(__dirname + "/main_theme_style.css", 'chUiJS_Main_Theme')
+        // ===
+        page_name = document.createElement('page_name');
+        document.getElementById('app').append(this.#applayout);
+        document.body.appendChild(this.#notification_panel);
+
+        this.#applayout.appendChild(this.#appMenu.getMenu())
+        this.#applayout.appendChild(this.#notificationBox.getBox())
+        //
+        this.#header.addToLeft(this.#appMenu.getMenuButton(), page_name);
+        this.#header.addToRight(this.#notificationBox.getButton())
+        this.#applayout.appendChild(this.#header.set());
+        //
+        this.#applayout.appendChild(this.#center)
+
+        this.#applayout.addEventListener('contextmenu', (e) => {
+            let item;
+            for (item of globalThis.ctxs) {
+                let ctxz = document.getElementById(item.ctx.id);
+                if (ctxz) {
+                    document.body.removeChild(ctxz)
+                }
+            }
+            for (item of globalThis.ctxs) {
+                if (item.elem.contains(e.target)) {
+                    document.body.appendChild(item.ctx.set())
+                    document.getElementById(item.ctx.id).style.top = `${e.clientY}px`;
+                    document.getElementById(item.ctx.id).style.left = `${e.clientX}px`;
+                    new Animation(document.getElementById(item.ctx.id)).fadeIn()
+                }
+            }
+        })
+        this.#applayout.addEventListener('click', () => {
+            for (let item of globalThis.ctxs) {
+                let ctxz = document.getElementById(item.ctx.id);
+                if (ctxz) new Animation(ctxz).fadeOutAndRemove();
+            }
+        })
+        //
+        ipcRenderer.on("sendNotificationUpdateLoad", async (e, text, body) => {
+            let updateNotificationLoad = new UpdateNotification({ title: text, text: body, spinner: true });
+            updateNotificationLoad.show(true);
+            ipcRenderer.on("sendNotificationUpdateLoadClose", () => updateNotificationLoad.hide());
+        })
+        ipcRenderer.on("sendNotificationUpdate", async (e, text, body) => {
+            let updateNotification = new UpdateNotification({ title: text, text: body, spinner: false });
+            updateNotification.show(true);
+            ipcRenderer.on("sendNotificationUpdateClose", () => updateNotification.hide());
+        })
+        let popup = new Popup();
+        ipcRenderer.once("checkUpdatesTrue", async (e, check, version) => {
+            if (check) {
+                let confirm_res = await popup.confirm({
+                    title: `Доступна новая версия ${version}`, message: 'Установить сейчас?',
+                    cancelText: 'Отмена', okText: 'Установить'
+                });
+                e.sender.send("updateInstallConfirm", confirm_res)
+            }
+        })
+    }
+    setSearchToAppMenu() {
+        this.#appMenu.enableSearchInput();
+    }
+    setLeftPositionWindowControls() {
+        this.#header.addWC(true)
+    }
+    setAutoCloseRouteMenu() {
+        this.#appMenu.setAutoClose();
+    }
+    setRoute(page) {
+        this.#appMenu.setRouteTest(page);
+    }
+    addToHeader(headerRight = []) {
+        this.#header.addToRight(...headerRight);
+    }
     static BUTTON(options = {
         title: String(),
         icon: undefined,
         reverse: Boolean(),
         clickEvent: () => {}
-    }) {
-        return new HeaderButton(options).set();
-    }
-
+    }) { return new HeaderButton(options).set(); }
     static USER_PROFILE(options = {
         username: String(),
         image: { noImage: Boolean(), imageLink: String(), imageBase64: String() },
         items: []
-    }) {
-        return new UserProfile(options).set();
-    }
-
+    }) { return new UserProfile(options).set(); }
     static USER_PROFILE_ITEM(options = {
         title: String(),
         icon: undefined,
         clickEvent: () => {}
-    }) {
-        return new UserDDItem(options).set();
-    }
-
+    }) { return new UserDDItem(options).set(); }
     static DIALOG(options = {
         title: String(),
         icon: undefined,
@@ -387,9 +421,7 @@ class AppLayout extends Route {
             },
             components: []
         }
-    }) {
-        return new HeaderDialog(options).set();
-    }
+    }) { return new HeaderDialog(options).set(); }
 }
 
 class UserProfile {

@@ -22,7 +22,7 @@
     "JavaScript"
   ],
   "scripts": {
-    "start": "electron --trace-warnings main.js"
+    "start": "electron main.js"
   },
   "license": "MIT",
   "dependencies": {
