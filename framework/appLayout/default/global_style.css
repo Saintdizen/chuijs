@@ -66,13 +66,14 @@ app_menu_search_main {
 
 .app_menu_search_input {
     border-radius: var(--border_radius);
-    background: var(--element_background_2);
+    background: transparent;
     padding: var(--main_padding);
     margin: var(--margin);
     width: -webkit-fill-available;
     color: var(--text_color);
     font-size: var(--font_default_size);
     border: 1px solid var(--main_background_6);
+    box-shadow: 0 0 1px 0 var(--main_background_6);
 }
 
 ::-webkit-scrollbar {
