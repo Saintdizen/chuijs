@@ -15,9 +15,10 @@ selectbox {
     border-radius: var(--border_radius);
     padding: 0;
     font-size: var(--font_default_size);
-    background: var(--element_background);
     color: var(--text_color);
-    border: 1px solid var(--main_background_6);
+    background: var(--element_background);
+    border: 1px solid var(--element_background_2);
+    box-shadow: 0 0 1px 0 var(--element_background_2);
 }
 
 .selectbox_input {
@@ -90,7 +91,9 @@ selectbox_option:hover {
 .selectbox_disabled {
     cursor: not-allowed;
     background: var(--element_background_disabled);
-    border: 1px solid var(--main_background_6);
+    background: var(--element_background);
+    border: 1px solid var(--element_background);
+    box-shadow: 0 0 1px 0 var(--element_background);
 }
 
 .selectbox_input_disabled {

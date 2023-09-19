@@ -15,7 +15,7 @@ class OthersComponentsPage extends Page {
                 new Notification({ title: "Менюбар", text: "Кнопка 1 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
             }
         });
-        button1.setDisabled(true)
+        button1.setDisabled(false)
 
         let menuBar = new MenuBar({test: true});
         menuBar.addMenuItems(

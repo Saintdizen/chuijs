@@ -65,7 +65,7 @@ menu_bar_dropdown {
     position: absolute;
     background: var(--main_background_3);
     color: var(--text_color);
-    border: none;
+    border: 1px solid var(--main_background_6);
     border-radius: var(--border_radius);
     padding: 6px;
     z-index: 1;
@@ -73,38 +73,5 @@ menu_bar_dropdown {
     min-width: max-content;
     flex-direction: column;
     backdrop-filter: var(--global_blur);
-}
-
-.menu_bar_button {
-    cursor: pointer;
-    height: max-content;
-    width: max-content;
-    border-radius: var(--border_radius);
-    padding: var(--main_padding);
-    font-size: var(--font_default_size);
-    font-weight: 400;
-    background: transparent;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    color: var(--text_color);
-}
-
-.menu_bar_dropdown_button {
-    cursor: pointer;
-    height: max-content;
-    width: -webkit-fill-available;
-    border-radius: var(--border_radius);
-    padding: var(--main_padding);
-    font-size: var(--font_default_size);
-    font-weight: 400;
-    background: transparent;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: start;
-    color: var(--text_color);
+    box-shadow: var(--box_shadow_main);
 }

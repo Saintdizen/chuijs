@@ -9,9 +9,6 @@ class MenuBar {
     addMenuItems(...components) {
         for (let component of components) {
             let element = component.set()
-            for (let child of element.children) {
-                if (child.tagName === "BUTTON") child.classList.add("menu_bar_button");
-            }
             new Animation(element).fadeIn()
             this.#chui_menu_bar_main.appendChild(element);
         }
@@ -35,7 +32,7 @@ class MenuBarDropDown {
         for (let item of options.items) {
             let element = item.set();
             for (let child of element.children) {
-                if (child.tagName === "BUTTON") {
+                /*if (child.tagName === "BUTTON") {
                     element.style.width = "-webkit-fill-available"
                     element.style.margin = "0px 0px 3px 0px"
                     child.classList.add("menu_bar_dropdown_button")
@@ -45,7 +42,7 @@ class MenuBarDropDown {
                     element.style.margin = "0px 0px 3px 0px"
                     element.style.padding = "6px 10px"
                     //child.classList.add("menu_bar_dropdown_button")
-                }
+                }*/
             }
             this.#mb_dd_dropdown.appendChild(item.set());
         }

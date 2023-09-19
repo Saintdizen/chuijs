@@ -1,23 +1,24 @@
 @media (prefers-color-scheme: light) {
     :root {
         /* Текст */
-        --text_color: rgb(27, 27, 27);
-        --text_color_disabled: rgba(27, 27, 27, 0.5);
-        --text_color_hover: rgb(255, 255, 255);
+        --text_color: rgb(29, 29, 31);
+        --text_color_disabled: rgba(29, 29, 31, 0.5);
+        --text_color_hover: rgb(245, 245, 247);
         /* Основные цвета */
-        --main_background: rgb(240, 240, 240);
+        --main_background: rgb(255, 255, 255);
         --main_background_overlay: rgba(25, 25, 26, 0.25);
-        --main_background_2: rgba(220, 220, 220, 0.5);
-        --main_background_3: rgba(220, 220, 220, 1);
-        --main_background_4: rgba(220, 220, 220, 0.5);
-        --main_background_5: rgba(220, 220, 220, 0.75);
-        --main_background_6: rgba(200, 200, 200, 1);
+        --main_background_2: rgba(255, 255, 255, 0.5);
+        --main_background_3: rgba(220, 225, 230, 1);
+        --main_background_4: rgba(220, 225, 230, 0.5);
+        --main_background_5: rgba(220, 225, 230, 0.75);
+        --main_background_6: rgba(200, 205, 210, 1);
         /* Элементы */
-        --element_background: rgb(221, 223, 225);
-        --element_background_disabled: rgba(221, 223, 225, 0.5);
-        --element_background_2: rgba(201, 203, 205, 0.5);
+        --element_background: rgb(235, 235, 237);
+        --button_text_color: rgb(0, 102, 204);
+        --element_background_disabled: rgba(235, 235, 237, 0.5);
+        --element_background_2: rgba(201, 208, 210, 0.5);
         /* Акцент */
-        --blue_prime_background: rgb(0, 122, 245);
+        --blue_prime_background: rgb(0, 113, 227);
         --red_prime_background: rgb(255, 49, 38);
         /* Бэйджи */
         --badge_error_back: rgba(255, 59, 48, 0.4);

@@ -20,9 +20,10 @@ chui_area_input {
     border-radius: var(--border_radius);
     padding: var(--main_padding);
     font-size: var(--font_default_size);
-    background: var(--element_background);
     color: var(--text_color);
-    border: 1px solid var(--main_background_6);
+    background: var(--element_background);
+    border: 1px solid var(--element_background);
+    box-shadow: 0 0 1px 0 var(--element_background_2);
 }
 
 .textarea_label {
