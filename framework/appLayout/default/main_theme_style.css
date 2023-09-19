@@ -14,12 +14,12 @@
         --main_background_6: rgba(200, 205, 210, 1);
         /* Элементы */
         --element_background: rgb(235, 235, 237);
-        --button_text_color: rgb(0, 102, 204);
         --element_background_disabled: rgba(235, 235, 237, 0.5);
-        --element_background_2: rgba(201, 208, 210, 0.5);
+        --element_background_2: rgb(220, 220, 222, 1);
+        --element_background_disabled_2: rgba(220, 220, 222, 0.5);
         /* Акцент */
-        --blue_prime_background: rgb(0, 113, 227);
-        --red_prime_background: rgb(255, 49, 38);
+        --blue_prime_background: rgb(0, 122, 245);
+        --red_prime_background: rgb(246, 52, 40);
         /* Бэйджи */
         --badge_error_back: rgba(255, 59, 48, 0.4);
         --badge_error_text: rgb(194, 6, 24);
@@ -39,20 +39,21 @@
         --text_color_disabled: rgba(255, 255, 255, 0.5);
         --text_color_hover: rgb(255, 255, 255);
         /* Основные цвета */
-        --main_background: rgb(25, 25, 26);
+        --main_background: rgb(14, 14, 14);
         --main_background_overlay: rgba(240, 240, 240, 0.25);
-        --main_background_2: rgba(44, 45, 46, 0.5);
+        --main_background_2: rgba(29, 29, 31, 0.72);
         --main_background_3: rgba(44, 45, 46, 1);
         --main_background_4: rgba(44, 45, 46, 0.5);
         --main_background_5: rgba(44, 45, 46, 0.75);
         --main_background_6: rgba(74, 75, 76, 1);
         /* Элементы */
-        --element_background: rgb(51, 52, 53);
-        --element_background_disabled: rgba(51, 52, 53, 0.5);
-        --element_background_2: rgba(71, 72, 73, 0.5);
+        --element_background: rgb(39, 39, 41);
+        --element_background_disabled: rgba(39, 39, 41, 0.5);
+        --element_background_2: rgb(54, 54, 56);
+        --element_background_disabled_2: rgba(54, 54, 56, 0.5);
         /* Акцент */
-        --blue_prime_background: rgb(20, 142, 255);
-        --red_prime_background: rgb(255, 79, 68);
+        --blue_prime_background: rgb(64, 156, 255);
+        --red_prime_background: rgb(255, 105, 97);
         /* Бэйджи */
         --badge_error_back: rgba(255, 69, 58, 0.4);
         --badge_error_text: rgb(255, 105, 94);

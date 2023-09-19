@@ -80,8 +80,8 @@ input[type=file]::file-selector-button {
     letter-spacing: 0.33px;
     word-spacing: 0.33px;
     background: var(--element_background);
-    border: 1px solid var(--element_background);
-    box-shadow: 0 0 1px 0 var(--element_background) inset,0 0 1px 0 var(--element_background);
+    border: 1px solid var(--element_background_2);
+    box-shadow: 0 0 1px 0 var(--element_background_2);
 }
 
 input[type=file]::file-selector-button:hover {
@@ -91,8 +91,10 @@ input[type=file]::file-selector-button:hover {
 
 input[type=file]:disabled::file-selector-button {
     cursor: not-allowed;
-    background: var(--element_background_disabled);
     color: var(--text_color_disabled);
+    background: var(--element_background_disabled);
+    border: 1px solid var(--element_background_disabled_2);
+    box-shadow: 0 0 1px 0 var(--element_background_disabled_2);
 }
 
 input[type=file]:disabled::file-selector-button:hover {

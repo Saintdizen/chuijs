@@ -19,7 +19,7 @@ button {
     align-items: center;
     justify-content: center;
     background: var(--element_background);
-    border: 1px solid var(--element_background);
+    border: 1px solid var(--element_background_2);
     box-shadow: 0 0 1px 0 var(--element_background_2);
 }
 
@@ -28,7 +28,7 @@ button:hover {
 }
 
 button_text {
-    color: var(--text_color);
+    color: var(--blue_prime_background);
 }
 
 button:hover button_text {
@@ -36,7 +36,7 @@ button:hover button_text {
 }
 
 button button_icon chui_icon {
-    color: var(--text_color);
+    color: var(--blue_prime_background);
 }
 
 button:hover button_icon chui_icon {
@@ -47,8 +47,8 @@ button:disabled {
     cursor: not-allowed;
     color: var(--text_color_disabled);
     background: var(--element_background_disabled);
-    border: 1px solid var(--element_background_disabled);
-    box-shadow: 0 0 1px 0 var(--element_background_disabled) inset,0 0 1px 0 var(--element_background_disabled);
+    border: 1px solid var(--element_background_disabled_2);
+    box-shadow: 0 0 1px 0 var(--element_background_disabled_2);
 }
 
 button:disabled:hover {

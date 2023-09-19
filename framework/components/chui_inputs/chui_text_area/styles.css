@@ -22,7 +22,7 @@ chui_area_input {
     font-size: var(--font_default_size);
     color: var(--text_color);
     background: var(--element_background);
-    border: 1px solid var(--element_background);
+    border: 1px solid var(--element_background_2);
     box-shadow: 0 0 1px 0 var(--element_background_2);
 }
 
@@ -43,9 +43,10 @@ chui_area_input {
     border-radius: var(--border_radius);
     padding: var(--main_padding);
     font-size: var(--font_default_size);
-    background: var(--element_background_disabled);
     color: var(--text_color_disabled);
-    border: 1px solid var(--main_background_6);
+    background: var(--element_background_disabled);
+    border: 1px solid var(--element_background_disabled_2);
+    box-shadow: 0 0 1px 0 var(--element_background_disabled_2);
 }
 
 .textarea_label_disabled {

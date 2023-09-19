@@ -12,12 +12,13 @@ chui_email_main {
     height: max-content;
     margin: 0;
     border-radius: var(--border_radius);
-    background: var(--element_background);
     color: var(--text_color);
     align-items: center;
     position: relative;
     padding: var(--main_padding);
-    border: 1px solid var(--main_background_6);
+    background: var(--element_background);
+    border: 1px solid var(--element_background_2);
+    box-shadow: 0 0 1px 0 var(--element_background_2);
 }
 
 .email_input {
@@ -68,5 +69,6 @@ email_input .email_input:valid {}
 .chui_email_main_disabled {
     cursor: not-allowed;
     background: var(--element_background_disabled);
-    border: 1px solid var(--main_background_6);
+    border: 1px solid var(--element_background_disabled_2);
+    box-shadow: 0 0 1px 0 var(--element_background_disabled_2);
 }

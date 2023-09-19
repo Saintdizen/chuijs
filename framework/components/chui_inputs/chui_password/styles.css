@@ -13,11 +13,12 @@ password_main {
     height: max-content;
     border-radius: var(--border_radius);
     font-size: var(--font_default_size);
-    background: var(--element_background);
     color: var(--text_color);
     position: relative;
     padding: var(--test_padding) 43px var(--main_padding);
-    border: 1px solid var(--main_background_6);
+    background: var(--element_background);
+    border: 1px solid var(--element_background_2);
+    box-shadow: 0 0 1px 0 var(--element_background_2);
 }
 
 .password_input {
@@ -72,7 +73,8 @@ error_message_password {
 .password_main_disabled {
     cursor: not-allowed;
     background: var(--element_background_disabled);
-    border: 1px solid var(--main_background_6);
+    border: 1px solid var(--element_background_disabled_2);
+    box-shadow: 0 0 1px 0 var(--element_background_disabled_2);
 }
 
 .password_label_disabled {

@@ -18,8 +18,8 @@ chui_text_main {
     position: relative;
     padding: var(--main_padding);
     background: var(--element_background);
-    border: 1px solid var(--element_background);
-    box-shadow: 0 0 1px 0 var(--element_background);
+    border: 1px solid var(--element_background_2);
+    box-shadow: 0 0 1px 0 var(--element_background_2);
 }
 
 .text_input {
@@ -60,7 +60,8 @@ error_message_text {
 .chui_text_main_disabled {
     cursor: not-allowed;
     background: var(--element_background_disabled);
-    border: 1px solid var(--main_background_6);
+    border: 1px solid var(--element_background_disabled_2);
+    box-shadow: 0 0 1px 0 var(--element_background_disabled_2);
 }
 
 .text_input_disabled {

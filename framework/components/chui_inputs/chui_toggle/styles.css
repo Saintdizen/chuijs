@@ -5,7 +5,7 @@
     border-radius: 50px;
     margin: var(--margin);
     background: var(--element_background);
-    border: 1px solid var(--element_background);
+    border: 1px solid var(--element_background_2);
     box-shadow: 0 0 1px 0 var(--element_background_2);
 }
 
