@@ -11,10 +11,11 @@
         --main_background_3: rgba(220, 220, 220, 1);
         --main_background_4: rgba(220, 220, 220, 0.5);
         --main_background_5: rgba(220, 220, 220, 0.75);
+        --main_background_6: rgba(200, 200, 200, 1);
         /* Элементы */
         --element_background: rgb(221, 223, 225);
         --element_background_disabled: rgba(221, 223, 225, 0.5);
-        --element_background_2: rgba(201, 203, 205, 0.75);
+        --element_background_2: rgba(201, 203, 205, 0.5);
         /* Акцент */
         --blue_prime_background: rgb(0, 122, 245);
         --red_prime_background: rgb(255, 49, 38);
@@ -43,10 +44,11 @@
         --main_background_3: rgba(44, 45, 46, 1);
         --main_background_4: rgba(44, 45, 46, 0.5);
         --main_background_5: rgba(44, 45, 46, 0.75);
+        --main_background_6: rgba(74, 75, 76, 1);
         /* Элементы */
-        --element_background: rgb(61, 62, 63);
-        --element_background_disabled: rgba(61, 62, 63, 0.5);
-        --element_background_2: rgba(81, 82, 83, 0.75);
+        --element_background: rgb(51, 52, 53);
+        --element_background_disabled: rgba(51, 52, 53, 0.5);
+        --element_background_2: rgba(71, 72, 73, 0.5);
         /* Акцент */
         --blue_prime_background: rgb(20, 142, 255);
         --red_prime_background: rgb(255, 79, 68);

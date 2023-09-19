@@ -3,7 +3,7 @@ class Toggle {
     #toggle_span = document.createElement('span');
     #toggle_input = document.createElement('input');
     constructor() {
-        require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", "chUiJS_Toggle")
+        require('../../../modules/chui_functions').setStyles(__dirname + "/styles.css", "chUiJS_Toggle")
         this.#Toggle.className = 'switch';
         this.#toggle_input.type = 'checkbox';
         this.#toggle_span.className = 'slider round';

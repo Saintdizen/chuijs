@@ -17,7 +17,7 @@ chui_email_main {
     align-items: center;
     position: relative;
     padding: var(--main_padding);
-    border: none;
+    border: 1px solid var(--main_background_6);
 }
 
 .email_input {
@@ -48,7 +48,7 @@ email_input .email_input:valid {}
     width: -webkit-fill-available;
     margin: 0;
     padding: 0;
-    background: var(--element_background_disabled);
+    background: transparent;
     color: var(--text_color_disabled);
     text-align: start;
     border: 0;
@@ -67,6 +67,6 @@ email_input .email_input:valid {}
 
 .chui_email_main_disabled {
     cursor: not-allowed;
-    background: transparent;
-    border: none;
+    background: var(--element_background_disabled);
+    border: 1px solid var(--main_background_6);
 }

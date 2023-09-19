@@ -17,7 +17,7 @@ chui_text_main {
     align-items: center;
     position: relative;
     padding: var(--main_padding);
-    border: none;
+    border: 1px solid var(--main_background_6);
 }
 
 .text_input {
@@ -58,7 +58,7 @@ error_message_text {
 .chui_text_main_disabled {
     cursor: not-allowed;
     background: var(--element_background_disabled);
-    border: none;
+    border: 1px solid var(--main_background_6);
 }
 
 .text_input_disabled {

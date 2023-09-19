@@ -18,7 +18,7 @@ legend {
     color: var(--blue_prime_background);
     padding: var(--main_padding);
     font-size: var(--font_default_size);
-    font-weight: 600;
+    font-weight: 500;
     border: none;
     border-radius: var(--border_radius);
     letter-spacing: -0.031rem;

@@ -49,7 +49,9 @@ body {
     padding: 0;
     background: var(--main_background);
     /*border-radius: var(--border_radius);*/
-    border: 1px solid var(--main_background_3);
+    border: 1px solid var(--main_background_6);
+    display: flex;
+    flex-direction: column;
 }
 
 app_menu_search_main {
@@ -63,7 +65,6 @@ app_menu_search_main {
 }
 
 .app_menu_search_input {
-    border: none;
     border-radius: var(--border_radius);
     background: var(--element_background_2);
     padding: var(--main_padding);
@@ -71,13 +72,14 @@ app_menu_search_main {
     width: -webkit-fill-available;
     color: var(--text_color);
     font-size: var(--font_default_size);
+    border: 1px solid var(--main_background_6);
 }
 
 ::-webkit-scrollbar {
     width: 8px;
 }
 
-main_center_block::-webkit-scrollbar-track {
+center::-webkit-scrollbar-track {
     margin-top: 44px;
 }
 
@@ -91,18 +93,11 @@ main_center_block::-webkit-scrollbar-track {
 
 ::-webkit-scrollbar-thumb {
     border-radius: var(--border_radius);
-    background: var(--element_background_2);
+    background: var(--main_background_6);
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--blue_prime_background)
-}
-
-app_layout {
-    width: -webkit-fill-available;
-    height: -webkit-fill-available;
-    display: flex;
-    flex-direction: column
 }
 
 header {
@@ -120,6 +115,7 @@ header {
     background-blend-mode: overlay;
     justify-content: space-between;
     /*-webkit-app-region: no-drag;*/
+    border: 1px solid transparent;
 }
 
 header_main {
@@ -131,14 +127,14 @@ header_main {
     -webkit-user-select: none;
 }
 
-main_center_block {
+center {
     width: -webkit-fill-available;
     height: -webkit-fill-available;
     padding-top: 44px;
     overflow: hidden hidden
 }
 
-main_center_block:hover {
+center:hover {
     overflow: hidden overlay;
 }
 
@@ -175,7 +171,7 @@ app_menu {
     backdrop-filter: var(--global_blur);
     height: -webkit-fill-available;
     width: -webkit-fill-available;
-    border: 1px solid var(--main_background_3);
+    border: 1px solid var(--main_background_6);
 }
 
 notification_box {
@@ -192,7 +188,7 @@ notification_box {
     background: var(--main_background_2);
     backdrop-filter: var(--global_blur);
     width: -webkit-fill-available;
-    border: 1px solid var(--main_background_3);
+    border: 1px solid var(--main_background_6);
 }
 
 notification_box_controls {
@@ -530,9 +526,10 @@ wc_box {
 
 wc_close, wc_maximize, wc_minimize {
     margin: 6px 3px;
-    padding: 6px;
+    padding: 5px;
     border-radius: 100%;
     background-color: var(--element_background);
+    border: 1px solid var(--main_background_6);
 }
 
 wc_close:hover {

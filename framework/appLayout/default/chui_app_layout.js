@@ -107,7 +107,7 @@ class Header {
 }
 
 class Center {
-    #center = document.createElement('main_center_block');
+    #center = document.createElement('center');
     constructor() {
         this.#center.id = "center";
     }
@@ -227,9 +227,6 @@ class AppMenu extends Route {
     getMenu() {
         return this.#appMenu;
     }
-    getMenuButton() {
-        return this.#appMenuButton;
-    }
 }
 
 class NotificationBox {
@@ -288,6 +285,7 @@ class NotificationBox {
             if (center.scrollTop > 15) {
                 header.set().style.backgroundColor = 'var(--main_background_2)'
                 header.set().style.boxShadow = "var(--box_shadow_main)"
+                header.set().style.borderBottom = "1px solid var(--main_background_6)"
             } else {
                 header.set().removeAttribute('style')
             }
@@ -304,7 +302,6 @@ class AppLayout {
     #center = new Center().set();
     #appMenu = new AppMenu(this.#header, this.#center);
     #notificationBox = new NotificationBox(this.#header, this.#center);
-    #appLayout = document.createElement('app_layout');
     #notificationPanel = document.createElement('notification_panel');
     constructor() {
         require('../../modules/chui_fonts').install();
@@ -312,17 +309,12 @@ class AppLayout {
         chui_functions.setStyles(__dirname + "/global_style.css", 'chUiJS_Global_App')
         chui_functions.setStyles(__dirname + "/main_theme_style.css", 'chUiJS_Main_Theme')
         // ===
-        document.body.appendChild(this.#appLayout);
+        document.body.appendChild(this.#header.set());
+        document.body.appendChild(this.#center)
+        document.body.appendChild(this.#appMenu.getMenu())
+        document.body.appendChild(this.#notificationBox.getBox())
         document.body.appendChild(this.#notificationPanel);
-
-        this.#appLayout.appendChild(this.#appMenu.getMenu())
-        this.#appLayout.appendChild(this.#notificationBox.getBox())
-        //
-        this.#appLayout.appendChild(this.#header.set());
-        //
-        this.#appLayout.appendChild(this.#center)
-
-        this.#appLayout.addEventListener('contextmenu', (e) => {
+        document.body.addEventListener('contextmenu', (e) => {
             let item;
             for (item of globalThis.ctxs) {
                 let ctxz = document.getElementById(item.ctx.id);
@@ -339,7 +331,7 @@ class AppLayout {
                 }
             }
         })
-        this.#appLayout.addEventListener('click', () => {
+        document.body.addEventListener('click', () => {
             for (let item of globalThis.ctxs) {
                 let ctxz = document.getElementById(item.ctx.id);
                 if (ctxz) new Animation(ctxz).fadeOutAndRemove();

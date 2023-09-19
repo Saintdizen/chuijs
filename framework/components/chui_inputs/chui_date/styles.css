@@ -27,7 +27,7 @@ date_select_dropdown {
     color: var(--text_color);
     padding: var(--test_padding);
     background: var(--element_background);
-    border: none;
+    border: 1px solid var(--main_background_6);
     border-radius: var(--border_radius);
     position:absolute;
     top: -2px;
@@ -72,7 +72,7 @@ date_main_block {
     font-size: var(--font_default_size);
     background: var(--element_background);
     color: var(--text_color);
-    border: none;
+    border: 1px solid var(--main_background_6);
     position: relative;
     display: flex;
 }
@@ -102,7 +102,7 @@ date_main_block {
 .date_main_block_disabled {
     cursor: not-allowed;
     background: var(--element_background_disabled);
-    border: none;
+    border: 1px solid var(--main_background_6);
 }
 
 .date_input_label_disabled {

@@ -34,7 +34,7 @@ checkbox {
     color: var(--text_color);
     background: var(--element_background);
     font-family: chui_Inter, system-ui;
-    border: none;
+    border: 1px solid var(--main_background_6);
 }
 
 .checkbox:not(:disabled):not(:checked):hover::before {}
@@ -42,14 +42,14 @@ checkbox {
 .checkbox:disabled:not(:checked)+label::before {
     cursor: not-allowed;
     background: var(--element_background_disabled);
-    border: none;
+    border: 1px solid var(--main_background_6);
     color: var(--text_color_disabled);
 }
 
 .checkbox:disabled:checked+label::before {
     cursor: not-allowed;
     background: var(--element_background_disabled);
-    border: none;
+    border: 1px solid var(--main_background_6);
     color: var(--text_color_disabled);
 }
 

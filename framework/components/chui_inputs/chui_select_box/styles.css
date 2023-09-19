@@ -17,7 +17,7 @@ selectbox {
     font-size: var(--font_default_size);
     background: var(--element_background);
     color: var(--text_color);
-    border: none;
+    border: 1px solid var(--main_background_6);
 }
 
 .selectbox_input {
@@ -51,7 +51,7 @@ selectbox_dropdown {
     flex-direction: column;
     z-index: 1;
     box-shadow: var(--box_shadow_main);
-    border: none;
+    border: 1px solid var(--main_background_6);
 }
 
 selectbox_dropdown:hover {
@@ -90,7 +90,7 @@ selectbox_option:hover {
 .selectbox_disabled {
     cursor: not-allowed;
     background: var(--element_background_disabled);
-    border: none;
+    border: 1px solid var(--main_background_6);
 }
 
 .selectbox_input_disabled {
