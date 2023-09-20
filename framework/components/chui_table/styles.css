@@ -10,7 +10,7 @@ table {
 
 thead {
     background: var(--element_background);
-    font-weight: 600;
+    font-weight: 500;
     height: max-content;
     width: 100%
 }
@@ -36,4 +36,8 @@ td {
     word-break: break-all;
     align-items: center;
     padding: var(--main_padding);
+}
+
+cell_title, sort_button {
+    color: var(--blue_prime_background);
 }

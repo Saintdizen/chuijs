@@ -10,12 +10,8 @@ class TextEditor {
     #chui_text_editor = document.createElement('chui_text_editor');
     #editor_controls = document.createElement('chui_editor_controls');
     #text_input = document.createElement('chui_editor_text_input');
-    #status_row = document.createElement('chui_editor_status_row');
     #id = require("randomstring").generate();
     #label = document.createElement("label");
-    // status
-    #cater_position = new Label({text: "0"});
-    //
     constructor(height = String(), options) {
         require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_TextEditor');
         if (options.title !== undefined) {
@@ -32,8 +28,6 @@ class TextEditor {
         this.#text_input.style.height = height;
         this.#chui_text_editor.appendChild(this.#editor_controls);
         this.#chui_text_editor.appendChild(this.#text_input);
-        this.#chui_text_editor.appendChild(this.#status_row);
-        this.#status_row.appendChild(this.#cater_position.set())
         //
         document.execCommand('defaultParagraphSeparator', false, 'p');
         this.#text_input.appendChild(initFirstLine())
@@ -42,10 +36,6 @@ class TextEditor {
             if (e.keyCode === 8 && this.#text_input.children.length === 0) {
                 this.#text_input.appendChild(initFirstLine())
             }
-            this.#cater_position.setText(this.#getCaretPosition().toString());
-        })
-        this.#text_input.addEventListener("mouseup", () => {
-            this.#cater_position.setText(this.#getCaretPosition().toString());
         })
         let editImage = new DialogEdit("Редактирование изображения")
         document.getElementsByTagName("img")

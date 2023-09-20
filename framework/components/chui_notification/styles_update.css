@@ -42,7 +42,7 @@ update_notification_header {
 
 update_notification_title {
     font-size: var(--font_default_size);
-    font-weight: 600;
+    font-weight: 500;
     margin: 3px;
     color: var(--text_color);
     word-break: break-all;
