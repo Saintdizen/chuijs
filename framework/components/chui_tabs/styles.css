@@ -4,7 +4,7 @@ list {
     align-items: center;
     width: max-content;
     border-radius: var(--border_radius);
-    background: var(--main_background_5);
+    background: var(--main_background_2);
     margin: var(--margin) 0;
     padding: var(--test_padding);
 }
@@ -37,7 +37,7 @@ content {
     display: flex;
     flex-direction:column;
     width: -webkit-fill-available;
-    background: var(--main_background_5);
+    background: var(--main_background_2);
     padding: var(--test_padding);
     border-radius: var(--border_radius);
 }

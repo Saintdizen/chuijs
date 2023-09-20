@@ -27,7 +27,7 @@ date_select_dropdown {
     color: var(--text_color);
     padding: var(--test_padding);
     background: var(--element_background);
-    border: 1px solid var(--main_background_6);
+    border: 1px solid var(--element_background_2);
     border-radius: var(--border_radius);
     position:absolute;
     top: -2px;

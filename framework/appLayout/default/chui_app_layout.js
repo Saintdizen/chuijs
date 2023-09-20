@@ -285,7 +285,7 @@ class NotificationBox {
             if (center.scrollTop > 15) {
                 header.set().style.backgroundColor = 'var(--main_background_2)'
                 header.set().style.boxShadow = "var(--box_shadow_main)"
-                header.set().style.borderBottom = "1px solid var(--main_background_6)"
+                header.set().style.borderBottom = "1px solid var(--element_background_2)"
             } else {
                 header.set().removeAttribute('style')
             }

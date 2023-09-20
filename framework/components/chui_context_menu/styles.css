@@ -9,7 +9,7 @@ chui_context_menu {
     margin: 5px;
     font-size: 12px;
     padding: 5px;
-    background: var(--main_background_4);
+    background: var(--main_background_2);
     color: var(--text_color);
     animation-duration: .22s;
     animation-fill-mode: forwards

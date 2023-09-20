@@ -17,7 +17,7 @@ chui_accordion_main_test {
     font-size: var(--font_default_size);
     font-weight:400;
     border-radius: var(--border_radius);
-    border: 1px solid var(--main_background_6);
+    border: 1px solid var(--element_background_2);
 }
 
 accordion_button {
@@ -35,7 +35,7 @@ accordion_button {
 }
 
 accordion_panel {
-    background: var(--main_background_5);
+    background: var(--main_background_2);
     padding: 0 10px;
     display: block;
     overflow: hidden;

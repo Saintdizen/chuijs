@@ -52,7 +52,7 @@ selectbox_dropdown {
     flex-direction: column;
     z-index: 1;
     box-shadow: var(--box_shadow_main);
-    border: 1px solid var(--main_background_6);
+    border: 1px solid var(--element_background_2);
 }
 
 selectbox_dropdown:hover {

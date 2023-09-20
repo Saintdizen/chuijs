@@ -63,9 +63,9 @@ menu_bar_dropdown {
     margin-top: 44px;
     display: none;
     position: absolute;
-    background: var(--main_background_3);
+    background: var(--main_background_2);
     color: var(--text_color);
-    border: 1px solid var(--main_background_6);
+    border: 1px solid var(--element_background_2);
     border-radius: var(--border_radius);
     padding: 6px;
     z-index: 1;
