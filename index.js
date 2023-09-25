@@ -90,7 +90,7 @@ class Main {
             }
         } else {
             if (process.platform === "darwin") {
-                let image = require('electron').nativeImage.createFromPath(getDefaultIcon());
+                let image = require('electron').nativeImage.createFromPath(options.icon);
                 this.#app_icon = image.resize({ width: 16, height: 16 });
             } else {
                 this.#app_icon = options.icon;
