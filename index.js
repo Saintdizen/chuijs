@@ -81,13 +81,19 @@ class Main {
         devTools: Boolean(),
         webSecurity: Boolean(),
     }) {
-        this.#app_icon = options.icon;
         if (this.#app_icon === undefined) {
             if (process.platform === "darwin") {
                 let image = require('electron').nativeImage.createFromPath(getDefaultIcon());
                 this.#app_icon = image.resize({ width: 16, height: 16 });
             } else {
                 this.#app_icon = getDefaultIcon();
+            }
+        } else {
+            if (process.platform === "darwin") {
+                let image = require('electron').nativeImage.createFromPath(getDefaultIcon());
+                this.#app_icon = image.resize({ width: 16, height: 16 });
+            } else {
+                this.#app_icon = options.icon;
             }
         }
         //app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
