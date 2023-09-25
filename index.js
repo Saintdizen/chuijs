@@ -81,17 +81,16 @@ class Main {
         devTools: Boolean(),
         webSecurity: Boolean(),
     }) {
+        this.#app_icon = options.icon;
         if (this.#app_icon === undefined) {
             if (process.platform === "darwin") {
-                let image = require('electron').nativeImage.createFromPath(getDefaultIcon());
-                this.#app_icon = image.resize({ width: 16, height: 16 });
+                this.#app_icon = this.#resizeIconTray(getDefaultIcon())
             } else {
                 this.#app_icon = getDefaultIcon();
             }
         } else {
             if (process.platform === "darwin") {
-                let image = require('electron').nativeImage.createFromPath(options.icon);
-                this.#app_icon = image.resize({ width: 16, height: 16 });
+                this.#app_icon = this.#resizeIconTray(options.icon)
             } else {
                 this.#app_icon = options.icon;
             }
@@ -107,6 +106,9 @@ class Main {
         this.#webSecurity = options.webSecurity;
         // ===
         if (options.devTools) this.#window.webContents.openDevTools();
+    }
+    #resizeIconTray(image) {
+        return require('electron').nativeImage.createFromPath(image).resize({ width: 16, height: 16 });
     }
     #createWindow(hideOnClose = Boolean()) {
         this.#window = new BrowserWindow({

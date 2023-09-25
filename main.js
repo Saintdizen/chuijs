@@ -5,7 +5,8 @@ const main = new Main({
     width: 1300,
     height: 900,
     render: `${__dirname}/app/app.js`,
-    devTools: false
+    devTools: false,
+    //icon: `${__dirname}/icon.png`
 });
 main.start({
     hideOnClose: true,
