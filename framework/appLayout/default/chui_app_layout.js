@@ -283,7 +283,7 @@ class NotificationBox {
         })
         center.onscroll = () => {
             if (center.scrollTop > 15) {
-                header.set().style.backgroundColor = 'var(--main_background_2)'
+                header.set().style.backgroundColor = 'var(--header_background)'
                 header.set().style.boxShadow = "var(--box_shadow_main)"
                 header.set().style.borderBottom = "1px solid var(--element_background_2)"
             } else {
@@ -308,6 +308,7 @@ class AppLayout {
         // Глобальные стили
         chui_functions.setStyles(__dirname + "/global_style.css", 'chUiJS_Global_App')
         chui_functions.setStyles(__dirname + "/main_theme_style.css", 'chUiJS_Main_Theme')
+        if (process.platform !== "darwin") document.body.style.border = "1px solid var(--element_background_2)";
         // ===
         document.body.appendChild(this.#header.set());
         document.body.appendChild(this.#center)

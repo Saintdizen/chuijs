@@ -49,7 +49,7 @@ body {
     padding: 0;
     background: var(--main_background);
     /*border-radius: var(--border_radius);*/
-    border: 1px solid var(--element_background_2);
+    /*border: 1px solid var(--element_background_2);*/
     display: flex;
     flex-direction: column;
 }

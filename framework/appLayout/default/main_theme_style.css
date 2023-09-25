@@ -6,13 +6,14 @@
         --text_color_hover: rgb(245, 245, 247);
         /* Основные цвета */
         --main_background: rgb(255, 255, 255);
+        --header_background: rgb(255, 255, 255);
+        --main_background_2: rgba(246, 246, 246, 0.65);
         --main_background_overlay: rgba(14, 14, 14, 0.25);
-        --main_background_2: rgba(240, 240, 238, 0.65);
         /* Элементы */
-        --element_background: rgb(235, 235, 237);
-        --element_background_disabled: rgba(235, 235, 237, 0.5);
-        --element_background_2: rgb(220, 220, 222, 1);
-        --element_background_disabled_2: rgba(220, 220, 222, 0.5);
+        --element_background: rgb(240, 240, 240);
+        --element_background_disabled: rgba(240, 240, 240, 0.5);
+        --element_background_2: rgb(234, 234, 234, 1);
+        --element_background_disabled_2: rgba(234, 234, 234, 0.5);
         /* Акцент */
         --blue_prime_background: rgb(0, 122, 245);
         --red_prime_background: rgb(246, 52, 40);
@@ -35,14 +36,15 @@
         --text_color_disabled: rgba(255, 255, 255, 0.5);
         --text_color_hover: rgb(255, 255, 255);
         /* Основные цвета */
-        --main_background: rgb(14, 14, 14);
+        --main_background: rgb(30, 30, 30);
+        --header_background: rgb(38, 38, 38);
+        --main_background_2: rgba(56, 56, 56, 0.65);
         --main_background_overlay: rgba(255, 255, 255, 0.25);
-        --main_background_2: rgba(29, 29, 31, 0.65);
         /* Элементы */
-        --element_background: rgb(39, 39, 41);
-        --element_background_disabled: rgba(39, 39, 41, 0.5);
-        --element_background_2: rgb(54, 54, 56);
-        --element_background_disabled_2: rgba(54, 54, 56, 0.5);
+        --element_background: rgb(52,52,52);
+        --element_background_disabled: rgba(52,52,52, 0.5);
+        --element_background_2: rgb(68,68,68);
+        --element_background_disabled_2: rgba(68, 68, 68, 0.5);
         /* Акцент */
         --blue_prime_background: rgb(64, 156, 255);
         --red_prime_background: rgb(255, 105, 97);
