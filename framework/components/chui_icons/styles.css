@@ -2,7 +2,7 @@ chui_icon {
     font-family: 'chui_mir';
     font-weight: normal;
     font-style: normal;
-    font-size: 20px;
+    font-size: var(--header_icon_size);
     display: inherit;
     text-transform: none;
     letter-spacing: normal;

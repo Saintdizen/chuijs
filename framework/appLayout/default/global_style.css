@@ -2,8 +2,9 @@
     --global_blur: saturate(180%) blur(20px);
     --main_padding: 6px 10px;
     --test_padding: 6px;
-    --font_default_size: 1rem;
-    --font_labels_size: 0.833rem;
+    --header_icon_size: 13pt;
+    --font_default_size: 11pt;
+    --font_labels_size: 9pt;
     --border_radius: 0.6rem;
     --margin: 6px;
     --box_shadow_main: 0 1px 5px 1px rgb(0 0 0 / 20%);
@@ -21,25 +22,29 @@ strong {
 }
 
 * {
-    letter-spacing: -.011em;
+    /*letter-spacing: -.011em;*/
     font-family: chui_Inter, system-ui;
     user-select: none;
     outline: none;
     transition: all .2s;
     animation-duration: .2s;
     position: relative;
-    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: subpixel-antialiased;
+    font-size: var(--font_default_size);
+    line-height: normal;
 }
 
 *:before {
-    letter-spacing: -.011em;
+    /*letter-spacing: -.011em;*/
     font-family: chui_Inter, system-ui;
     user-select: none;
     outline: none;
     transition: all .2s;
     animation-duration: .2s;
     position: relative;
-    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: subpixel-antialiased;
+    font-size: var(--font_default_size);
+    line-height: normal;
 }
 
 body {
@@ -81,7 +86,7 @@ app_menu_search_main {
 }
 
 center::-webkit-scrollbar-track {
-    margin-top: 44px;
+    margin-top: 43px;
 }
 
 .test_scroll_track::-webkit-scrollbar-track {
@@ -131,7 +136,7 @@ header_main {
 center {
     width: -webkit-fill-available;
     height: -webkit-fill-available;
-    padding-top: 44px;
+    padding-top: 43px;
     overflow: hidden hidden
 }
 
@@ -525,7 +530,35 @@ wc_box {
     justify-content: center;
 }
 
-wc_close, wc_maximize, wc_minimize {
+/* MACOS STYLE */
+.wc_close_mac {
+    background: rgb(232, 87, 86);
+}
+.wc_minimize_mac {
+    background: rgb(246, 187, 44);
+}
+.wc_maximize_mac {
+    background: rgb(111, 202, 66);
+}
+
+.wc_close_mac, .wc_maximize_mac, .wc_minimize_mac {
+    margin: 6px 3px;
+    padding: 0px;
+    border-radius: 100%;
+    border: 1px solid var(--element_background_2);
+    box-shadow: 0 0 1px 0 var(--element_background_2);
+}
+
+.wc_close_mac chui_icon, .wc_maximize_mac chui_icon, .wc_minimize_mac chui_icon {
+    color: transparent;
+}
+
+.wc_close_mac:hover chui_icon, .wc_maximize_mac:hover chui_icon, .wc_minimize_mac:hover chui_icon {
+    color: black;
+}
+
+/* OTHER STYLE */
+.wc_close, .wc_maximize, .wc_minimize {
     margin: 6px 3px;
     padding: 5px;
     border-radius: 100%;
@@ -534,14 +567,14 @@ wc_close, wc_maximize, wc_minimize {
     box-shadow: 0 0 1px 0 var(--element_background_2);
 }
 
-wc_close:hover {
+.wc_close:hover {
     background-color: var(--red_prime_background);
 }
 
-wc_maximize:hover, wc_minimize:hover {
+.wc_maximize:hover, .wc_minimize:hover {
     background-color: var(--blue_prime_background);
 }
 
-wc_close:hover chui_icon, wc_maximize:hover chui_icon, wc_minimize:hover chui_icon {
+.wc_close:hover chui_icon, .wc_maximize:hover chui_icon, .wc_minimize:hover chui_icon {
     color: white;
 }

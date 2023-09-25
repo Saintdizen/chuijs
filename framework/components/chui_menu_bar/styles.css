@@ -60,7 +60,7 @@ menu_bar_drop_down_button {
 }
 
 menu_bar_dropdown {
-    margin-top: 44px;
+    margin-top: 43px;
     display: none;
     position: absolute;
     background: var(--main_background_2);

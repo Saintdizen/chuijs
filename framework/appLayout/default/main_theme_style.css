@@ -1,9 +1,9 @@
 @media (prefers-color-scheme: light) {
     :root {
         /* Текст */
-        --text_color: rgb(29, 29, 31);
-        --text_color_disabled: rgba(29, 29, 31, 0.5);
-        --text_color_hover: rgb(245, 245, 247);
+        --text_color: rgb(45, 45, 45);
+        --text_color_disabled: rgba(45, 45, 45, 0.5);
+        --text_color_hover: rgb(255, 255, 255);
         /* Основные цвета */
         --main_background: rgb(255, 255, 255);
         --header_background: rgb(255, 255, 255);

@@ -42,9 +42,22 @@ class WindowControls {
     #maximize = document.createElement("wc_maximize")
     #minimize = document.createElement("wc_minimize")
     constructor() {
-        this.#close.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "14px").getHTML();
-        this.#maximize.innerHTML = new Icon(Icons.NAVIGATION.FULLSCREEN, "14px").getHTML();
-        this.#minimize.innerHTML = new Icon(Icons.ACTIONS.MINIMIZE, "14px").getHTML();
+        if (process.platform === "darwin") {
+            this.#close.className = 'wc_close_mac'
+            this.#maximize.className = 'wc_maximize_mac'
+            this.#minimize.className = 'wc_minimize_mac'
+            this.#close.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "12px").getHTML();
+            this.#minimize.innerHTML = new Icon(Icons.CONTENT.REMOVE, "12px").getHTML();
+            this.#maximize.innerHTML = new Icon(Icons.CONTENT.ADD, "12px").getHTML();
+        } else {
+            this.#close.className = 'wc_close'
+            this.#maximize.className = 'wc_maximize'
+            this.#minimize.className = 'wc_minimize'
+            this.#close.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "14px").getHTML();
+            this.#maximize.innerHTML = new Icon(Icons.CONTENT.ADD, "14px").getHTML();
+            this.#minimize.innerHTML = new Icon(Icons.CONTENT.REMOVE, "14px").getHTML();
+        }
+        //
         this.#close.addEventListener("click", () => {
             let r_window = require("@electron/remote").BrowserWindow.getFocusedWindow();
             r_window.close();
@@ -59,14 +72,20 @@ class WindowControls {
         })
     }
     set(pos_bool = Boolean()) {
-        if (pos_bool) {
+        if (process.platform === "darwin") {
             this.#box.appendChild(this.#close)
-            this.#box.appendChild(this.#maximize)
             this.#box.appendChild(this.#minimize)
+            this.#box.appendChild(this.#maximize)
         } else {
-            this.#box.appendChild(this.#minimize)
-            this.#box.appendChild(this.#maximize)
-            this.#box.appendChild(this.#close)
+            if (pos_bool) {
+                this.#box.appendChild(this.#close)
+                this.#box.appendChild(this.#maximize)
+                this.#box.appendChild(this.#minimize)
+            } else {
+                this.#box.appendChild(this.#minimize)
+                this.#box.appendChild(this.#maximize)
+                this.#box.appendChild(this.#close)
+            }
         }
         return this.#box;
     }
@@ -102,6 +121,9 @@ class Header {
         for (let component of components) this.#header_right_box.insertBefore(component, this.#header_right_box.firstChild);
     }
     set() {
+        if (process.platform === "darwin") {
+            this.#header_main.insertBefore(this.#wc_box.set(true), this.#header_main.firstChild);
+        }
         return this.#header;
     }
 }
@@ -135,14 +157,14 @@ class AppMenu extends Route {
         this.#appMenu.style.left = `calc(-${this.#appMenuWidthTest}px)`;
         this.#appMenu.style.height = `calc(100% - ${header.set().style.height})`;
         //
-        this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
+        this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU, "var(--header_icon_size)").getHTML();
         this.#appMenuButton.addEventListener("click", () => {
             if (this.#appMenuButton.classList.contains("app_menu_button_active")) {
                 this.#appMenu.style.transform = `translateX(-${this.#appMenuWidth}px)`;
-                this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
+                this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU, "var(--header_icon_size)").getHTML();
             } else {
                 this.#appMenu.style.transform = `translateX(${this.#appMenuWidthTest}px)`;
-                this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU_OPEN).getHTML();
+                this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU_OPEN, "var(--header_icon_size)").getHTML();
             }
             this.#appMenuButton.classList.toggle("app_menu_button_active")
         })
@@ -150,7 +172,7 @@ class AppMenu extends Route {
             if (e.target !== this.#appMenuButton) {
                 this.#appMenu.style.transform = `translateX(-${this.#appMenuWidth}px)`;
                 this.#appMenuButton.classList.remove("app_menu_button_active")
-                this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
+                this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU, "var(--header_icon_size)").getHTML();
             }
         })
         center.addEventListener('click', (e) => {
@@ -158,7 +180,7 @@ class AppMenu extends Route {
                 if (this.#appMenu.style.transform === `translateX(${this.#appMenuWidthTest}px)`) {
                     this.#appMenu.style.transform = `translateX(-${this.#appMenuWidthTest}px)`;
                     this.#appMenuButton.classList.toggle("app_menu_button_active")
-                    this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
+                    this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU, "var(--header_icon_size)").getHTML();
                 }
             }
         })
@@ -210,7 +232,7 @@ class AppMenu extends Route {
                         if (this.#appMenu.style.transform === `translateX(${this.#appMenuWidth + 25}px)`) {
                             this.#appMenu.style.transform = `translateX(-${this.#appMenuWidth + 25}px)`;
                             this.#appMenuButton.classList.toggle("app_menu_button_active");
-                            this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU).getHTML();
+                            this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU, "var(--header_icon_size)").getHTML();
                         }
                     }
                 }
@@ -266,7 +288,7 @@ class NotificationBox {
             }
             this.#notification_button.classList.toggle("notification_button_active")
         })
-        this.#notification_button.innerHTML = new Icon(Icons.SOCIAL.NOTIFICATIONS).getHTML();
+        this.#notification_button.innerHTML = new Icon(Icons.SOCIAL.NOTIFICATIONS, "var(--header_icon_size)").getHTML();
         header.set().addEventListener('click', (e) => {
             if (e.target !== this.#notification_button) {
                 this.#notification_box.style.transform = `translateX(${this.#notification_box_width}px)`;
@@ -549,13 +571,13 @@ class HeaderDialog {
         if (options.title !== undefined && options.icon !== undefined) {
             if (options.reverse) {
                 this.#header_button_title.innerText = options.title;
-                this.#header_button_icon.innerHTML = new Icon(options.icon, "20px").getHTML();
+                this.#header_button_icon.innerHTML = new Icon(options.icon, "var(--header_icon_size)").getHTML();
                 this.#header_button_icon.style.marginRight = "6px";
                 this.#header_button.appendChild(this.#header_button_icon)
                 this.#header_button.appendChild(this.#header_button_title)
             } else {
                 this.#header_button_title.innerText = options.title;
-                this.#header_button_icon.innerHTML = new Icon(options.icon, "20px").getHTML();
+                this.#header_button_icon.innerHTML = new Icon(options.icon, "var(--header_icon_size)").getHTML();
                 this.#header_button_icon.style.marginLeft = "6px";
                 this.#header_button.appendChild(this.#header_button_title)
                 this.#header_button.appendChild(this.#header_button_icon)
@@ -564,7 +586,7 @@ class HeaderDialog {
             this.#header_button_title.innerText = options.title;
             this.#header_button.appendChild(this.#header_button_title)
         } else if (options.title === undefined && options.icon !== undefined) {
-            this.#header_button_icon.innerHTML = new Icon(options.icon, "20px").getHTML();
+            this.#header_button_icon.innerHTML = new Icon(options.icon, "var(--header_icon_size)").getHTML();
             this.#header_button.appendChild(this.#header_button_icon)
         }
         this.#header_button.addEventListener("click", () => dialog.open());
@@ -590,13 +612,13 @@ class HeaderButton {
         if (options.title !== undefined && options.icon !== undefined) {
             if (options.reverse) {
                 this.#header_button_title.innerText = options.title;
-                this.#header_button_icon.innerHTML = new Icon(options.icon).getHTML();
+                this.#header_button_icon.innerHTML = new Icon(options.icon, "var(--header_icon_size)").getHTML();
                 this.#header_button_icon.style.marginRight = "6px";
                 this.#header_button.appendChild(this.#header_button_icon)
                 this.#header_button.appendChild(this.#header_button_title)
             } else {
                 this.#header_button_title.innerText = options.title;
-                this.#header_button_icon.innerHTML = new Icon(options.icon).getHTML();
+                this.#header_button_icon.innerHTML = new Icon(options.icon, "var(--header_icon_size)").getHTML();
                 this.#header_button_icon.style.marginLeft = "6px";
                 this.#header_button.appendChild(this.#header_button_title)
                 this.#header_button.appendChild(this.#header_button_icon)
@@ -605,7 +627,7 @@ class HeaderButton {
             this.#header_button_title.innerText = options.title;
             this.#header_button.appendChild(this.#header_button_title)
         } else if (options.title === undefined && options.icon !== undefined) {
-            this.#header_button_icon.innerHTML = new Icon(options.icon).getHTML();
+            this.#header_button_icon.innerHTML = new Icon(options.icon, "var(--header_icon_size)").getHTML();
             this.#header_button.appendChild(this.#header_button_icon)
         }
         this.#header_button.addEventListener("click", options.clickEvent);

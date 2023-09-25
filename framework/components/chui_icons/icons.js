@@ -903,7 +903,7 @@ class Icons {
         MP14:'14mp',
         MP9:'9mp',
         CURRENCY_FRANC:'currency_franc',
-        BEDTIME_OFF:'bedtime_off' 
+        BEDTIME_OFF:'bedtime_off'
     }
     static HOME = {
         SENSOR_DOOR:'sensor_door',

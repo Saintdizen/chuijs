@@ -14,7 +14,7 @@ class Button {
         require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", "chUiJS_Button")
 
         if (options.title !== undefined) this.#button_text.innerText = options.title;
-        if (options.icon !== undefined) this.#button_icon.innerHTML = new Icon(options.icon, "20px").getHTML();
+        if (options.icon !== undefined) this.#button_icon.innerHTML = new Icon(options.icon, "var(--header_icon_size)").getHTML();
 
         if (options.title !== undefined && options.icon === undefined) {
             this.#button.appendChild(this.#button_text);
