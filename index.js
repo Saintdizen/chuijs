@@ -82,7 +82,14 @@ class Main {
         webSecurity: Boolean(),
     }) {
         this.#app_icon = options.icon;
-        if (this.#app_icon === undefined) this.#app_icon = getDefaultIcon();
+        if (this.#app_icon === undefined) {
+            if (process.platform === "darwin") {
+                let image = require('electron').nativeImage.createFromPath(getDefaultIcon());
+                this.#app_icon = image.resize({ width: 16, height: 16 });
+            } else {
+                this.#app_icon = getDefaultIcon();
+            }
+        }
         //app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
         app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 
@@ -121,7 +128,7 @@ class Main {
             resizable: true,
             minimizable: true,
             maximizable: true,
-            center: true
+            center: true,
         });
         this.#window.setMenu(null)
 
