@@ -43,6 +43,7 @@ class WindowControls {
     #minimize = document.createElement("wc_minimize")
     constructor() {
         if (process.platform === "darwin") {
+            this.#box.style.margin = "0px 3px 0px 8px"
             this.#close.className = 'wc_close_mac'
             this.#maximize.className = 'wc_maximize_mac'
             this.#minimize.className = 'wc_minimize_mac'

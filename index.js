@@ -121,6 +121,7 @@ class Main {
             title: this.#appName,
             show: false,
             icon: this.#app_icon,
+            //backgroundColor: "f000",
             webPreferences: {
                 plugins: false,
                 nodeIntegration: true,
@@ -220,12 +221,6 @@ class Main {
     }
     start(options = { hideOnClose: Boolean(), tray: [] }) {
         nativeTheme.themeSource = "system";
-        /*if (process.platform === "linux") {
-            app.commandLine.hasSwitch("enable-transparent-visuals");
-            app.commandLine.hasSwitch("disable-gpu");
-            app.commandLine.appendSwitch('enable-transparent-visuals');
-            app.disableHardwareAcceleration();
-        }*/
         app.whenReady().then(() => {
             if (options.tray) {
                 this.#tray = new Tray(this.#app_icon);
@@ -243,17 +238,24 @@ class Main {
         })
     }
     enableAutoUpdateApp(start = Number(), version) {
+        const { MacUpdater, autoUpdater } = require("electron-updater");
+        if (process.platform === "darwin") {
+            this.#updater(new MacUpdater(), version, start)
+        } else {
+            this.#updater(autoUpdater, version, start)
+        }
+    }
+
+    #updater(updater, version, start) {
         setTimeout(async () => {
-            //await this.#sendNotificationUpdateLoad(this.#appName, `Загрузка новой версии 0.0.1`)
-            const { autoUpdater } = require("electron-updater");
-            autoUpdater.autoInstallOnAppQuit = false;
-            let updates = await autoUpdater.checkForUpdates();
+            updater.autoInstallOnAppQuit = false;
+            let updates = await updater.checkForUpdates();
             if (updates !== null) {
                 if (updates.versionInfo.version > version) {
                     await this.#sendNotificationUpdateLoad(this.#appName, `Загрузка новой версии ${updates.versionInfo.version}`);
                 }
             }
-            autoUpdater.on('update-downloaded', async () => {
+            updater.on('update-downloaded', async () => {
                 await this.#sendNotificationUpdateLoadClose();
                 await this.#sendNotificationUpdate(this.#appName, `Загрузка завершена`);
                 setTimeout(async () => await this.#sendNotificationUpdateClose(), 3000);
@@ -262,12 +264,13 @@ class Main {
                 ipcMain.on("updateInstallConfirm", (e, check) => {
                     if (check) {
                         log.info("Установка обновления...");
-                        autoUpdater.quitAndInstall();
+                        updater.quitAndInstall();
                     }
                 })
             });
         }, start);
     }
+
     async #sendNotificationUpdateLoad(text, body) {
         this.#window.webContents.send("sendNotificationUpdateLoad", text, body);
     }

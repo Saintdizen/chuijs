@@ -8,7 +8,7 @@
         --main_background: rgb(255, 255, 255);
         --header_background: rgb(255, 255, 255);
         --main_background_2: rgba(246, 246, 246, 0.65);
-        --main_background_overlay: rgba(14, 14, 14, 0.25);
+        --main_background_overlay: rgba(255, 255, 255, 0.25);
         /* Элементы */
         --element_background: rgb(240, 240, 240);
         --element_background_disabled: rgba(240, 240, 240, 0.5);
@@ -39,7 +39,7 @@
         --main_background: rgb(30, 30, 30);
         --header_background: rgb(38, 38, 38);
         --main_background_2: rgba(56, 56, 56, 0.65);
-        --main_background_overlay: rgba(255, 255, 255, 0.25);
+        --main_background_overlay: rgba(14, 14, 14, 0.25);
         /* Элементы */
         --element_background: rgb(52,52,52);
         --element_background_disabled: rgba(52,52,52, 0.5);
