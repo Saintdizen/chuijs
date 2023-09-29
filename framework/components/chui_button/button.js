@@ -5,13 +5,7 @@ class Button {
     #button = document.createElement('button');
     #button_text = document.createElement('button_text');
     #button_icon = document.createElement('button_icon');
-    constructor(options = {
-        primary: Boolean(),
-        title: String(),
-        icon: undefined,
-        reverse: Boolean(),
-        clickEvent: () => {}
-    }) {
+    constructor(options = { primary: Boolean(), reverse: Boolean(), title: String(), icon: undefined, clickEvent: () => {} }) {
         require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", "chUiJS_Button")
 
         if (options.primary !== undefined) {
