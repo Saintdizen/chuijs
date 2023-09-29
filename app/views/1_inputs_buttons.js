@@ -73,6 +73,7 @@ class Inputs_Buttons_Page extends Page {
             clickEvent: (e) => console.log(e)
         });
         let button_text_icon_reverse = new Button({
+            primary: true,
             title: "Кнопка с текстом и иконкой",
             icon: Icons.MAPS.MAP,
             reverse: true,

@@ -6,7 +6,8 @@ chui_button {
     margin: var(--margin);
 }
 
-button {
+/* Secondary button */
+.secondary_button {
     cursor: pointer;
     height: max-content;
     width: max-content;
@@ -18,56 +19,119 @@ button {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background: var(--element_background);
-    border: 1px solid var(--element_background_2);
-    box-shadow: 0 0 1px 0 var(--element_background_2);
+    background: var(--element_background_2);
+    border: none;
 }
 
-button:hover {
+.secondary_button:hover {
     background: var(--blue_prime_background);
 }
 
-button_text {
-    color: var(--blue_prime_background);
+.secondary_button_text {
+    color: var(--text_color);
 }
 
-button:hover button_text {
+.secondary_button:hover .secondary_button_text {
     color: var(--text_color_hover);
 }
 
-button button_icon chui_icon {
-    color: var(--blue_prime_background);
+.secondary_button button_icon chui_icon {
+    color: var(--text_color);
 }
 
-button:hover button_icon chui_icon {
+.secondary_button:hover button_icon chui_icon {
     color: var(--text_color_hover);
 }
 /* DISABLED STYLES */
-button:disabled {
+.secondary_button:disabled {
     cursor: not-allowed;
     color: var(--text_color_disabled);
     background: var(--element_background_disabled);
-    border: 1px solid var(--element_background_disabled_2);
-    box-shadow: 0 0 1px 0 var(--element_background_disabled_2);
+    border: none;
 }
 
-button:disabled:hover {
+.secondary_button:disabled:hover {
     background: var(--element_background_disabled);
     color: var(--text_color_disabled);
 }
 
-button:disabled button_text {
+.secondary_button:disabled .secondary_button_text {
     color: var(--text_color_disabled);
 }
 
-button:disabled:hover button_text {
+.secondary_button:disabled:hover .secondary_button_text {
     color: var(--text_color_disabled);
 }
 
-button:disabled button_icon chui_icon {
+.secondary_button:disabled button_icon chui_icon {
     color: var(--text_color_disabled);
 }
 
-button:disabled:hover button_icon chui_icon {
+.secondary_button:disabled:hover button_icon chui_icon {
     color: var(--text_color_disabled);
+}
+
+/* Primary button */
+.primary_button {
+    cursor: pointer;
+    height: max-content;
+    width: max-content;
+    border-radius: var(--border_radius);
+    padding: var(--main_padding);
+    font-size: var(--font_default_size);
+    font-weight: 400;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: var(--element_background_prime);
+    border: none;
+}
+
+.primary_button:hover {
+    background: var(--blue_prime_background);
+}
+
+.primary_button_text {
+    color: var(--text_color_hover);
+}
+
+.primary_button:hover .primary_button_text {
+    color: var(--text_color_hover);
+}
+
+.primary_button button_icon chui_icon {
+    color: var(--text_color_hover);
+}
+
+.primary_button:hover button_icon chui_icon {
+    color: var(--text_color_hover);
+}
+/* DISABLED STYLES */
+.primary_button:disabled {
+    cursor: not-allowed;
+    color: var(--text_color_hover_disable);
+    background: var(--element_background_disabled_prime);
+    border: none;
+}
+
+.primary_button:disabled:hover {
+    background: var(--element_background_disabled_prime);
+    color: var(--text_color_hover_disable);
+}
+
+.primary_button:disabled .primary_button_text {
+    color: var(--text_color_hover_disable);
+}
+
+.primary_button:disabled:hover .primary_button_text {
+    color: var(--text_color_hover_disable);
+}
+
+.primary_button:disabled button_icon chui_icon {
+    color: var(--text_color_hover_disable);
+}
+
+.primary_button:disabled:hover button_icon chui_icon {
+    color: var(--text_color_hover_disable);
 }

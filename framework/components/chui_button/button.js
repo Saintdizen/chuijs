@@ -6,12 +6,21 @@ class Button {
     #button_text = document.createElement('button_text');
     #button_icon = document.createElement('button_icon');
     constructor(options = {
+        primary: Boolean(),
         title: String(),
         icon: undefined,
         reverse: Boolean(),
         clickEvent: () => {}
     }) {
         require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", "chUiJS_Button")
+
+        if (options.primary !== undefined) {
+            this.#button.className = "primary_button"
+            this.#button_text.className = "primary_button_text"
+        } else {
+            this.#button.className = "secondary_button"
+            this.#button_text.className = "secondary_button_text"
+        }
 
         if (options.title !== undefined) this.#button_text.innerText = options.title;
         if (options.icon !== undefined) this.#button_icon.innerHTML = new Icon(options.icon, "var(--header_icon_size)").getHTML();

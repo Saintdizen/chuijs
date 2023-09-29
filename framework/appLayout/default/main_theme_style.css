@@ -4,9 +4,10 @@
         --text_color: rgb(45, 45, 45);
         --text_color_disabled: rgba(45, 45, 45, 0.5);
         --text_color_hover: rgb(255, 255, 255);
+        --text_color_hover_disable: rgba(255, 255, 255, 0.5);
         /* Основные цвета */
         --main_background: rgb(255, 255, 255);
-        --header_background: rgb(255, 255, 255);
+        --header_background: rgb(255, 255, 255, 0.65);
         --main_background_2: rgba(246, 246, 246, 0.65);
         --main_background_overlay: rgba(255, 255, 255, 0.25);
         /* Элементы */
@@ -14,6 +15,8 @@
         --element_background_disabled: rgba(240, 240, 240, 0.5);
         --element_background_2: rgb(234, 234, 234, 1);
         --element_background_disabled_2: rgba(234, 234, 234, 0.5);
+        --element_background_prime: rgb(0, 102, 225);
+        --element_background_disabled_prime: rgba(0, 102, 225, 0.5);
         /* Акцент */
         --blue_prime_background: rgb(0, 122, 245);
         --red_prime_background: rgb(246, 52, 40);
@@ -35,16 +38,19 @@
         --text_color: rgb(255, 255, 255);
         --text_color_disabled: rgba(255, 255, 255, 0.5);
         --text_color_hover: rgb(255, 255, 255);
+        --text_color_hover_disable: rgba(255, 255, 255, 0.5);
         /* Основные цвета */
         --main_background: rgb(30, 30, 30);
-        --header_background: rgb(38, 38, 38);
+        --header_background: rgb(38, 38, 38, 0.65);
         --main_background_2: rgba(56, 56, 56, 0.65);
         --main_background_overlay: rgba(14, 14, 14, 0.25);
         /* Элементы */
-        --element_background: rgb(52,52,52);
-        --element_background_disabled: rgba(52,52,52, 0.5);
-        --element_background_2: rgb(68,68,68);
+        --element_background: rgb(52, 52, 52);
+        --element_background_disabled: rgba(52, 52, 52, 0.5);
+        --element_background_2: rgb(68, 68, 68);
         --element_background_disabled_2: rgba(68, 68, 68, 0.5);
+        --element_background_prime: rgb(34, 126, 225);
+        --element_background_disabled_prime: rgba(34, 126, 225, 0.5);
         /* Акцент */
         --blue_prime_background: rgb(64, 156, 255);
         --red_prime_background: rgb(255, 105, 97);

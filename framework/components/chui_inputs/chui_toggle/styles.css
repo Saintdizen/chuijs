@@ -32,7 +32,7 @@
     width: 15px;
     left: 5px;
     bottom: 5px;
-    background-color: var(--blue_prime_background);
+    background-color: var(--text_color);
 }
 
 input:checked + .slider:before {
