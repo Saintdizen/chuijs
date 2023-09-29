@@ -11,9 +11,9 @@
         --main_background_2: rgba(246, 246, 246, 0.6);
         --main_background_overlay: rgba(255, 255, 255, 0.25);
         /* Элементы */
-        --element_background: rgb(238, 238, 238);
-        --element_background_disabled: rgba(238, 238, 238, 0.5);
-        --element_background_2: rgb(230, 230, 230, 1);
+        --element_background: rgb(240, 240, 240);
+        --element_background_disabled: rgba(240, 240, 240, 0.5);
+        --element_background_2: rgb(230, 230, 230);
         --element_background_disabled_2: rgba(230, 230, 230, 0.5);
         --element_background_prime: rgb(0, 102, 225);
         --element_background_disabled_prime: rgba(0, 102, 225, 0.5);
