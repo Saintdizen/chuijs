@@ -18,7 +18,6 @@ const { CheckBox } = require('./framework/components/chui_inputs/chui_check_box/
 const { RadioGroup } = require('./framework/components/chui_radio_group/radio_group');
 //==========
 const { MenuItem } = require('./framework/tray_bar/chui_menu_items');
-const { ContextMenu, CtxMenuItem } = require('./framework/components/chui_context_menu/context_menu');
 const { AppLayout, Route } = require('./framework/appLayout/default/chui_app_layout');
 const { Page } = require('./framework/modules/chui_page/page');
 const { WebView } = require('./framework/components/chui_webview/webview');
@@ -305,8 +304,6 @@ module.exports = {
     sleep: sleep,
     render: render,
     MenuItem: MenuItem,
-    ContextMenu: ContextMenu,
-    CtxMenuItem: CtxMenuItem,
     Styles: Styles,
     AppLayout: AppLayout,
     Route: Route,

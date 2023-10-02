@@ -100,7 +100,6 @@ class WindowControls {
         }
         return this.#box;
     }
-
 }
 
 class Header {
@@ -344,33 +343,10 @@ class AppLayout {
         if (process.platform !== "darwin") document.body.style.border = "1px solid var(--element_background_2)";
         // ===
         document.body.appendChild(this.#header.set());
-        document.body.appendChild(this.#center)
-        document.body.appendChild(this.#appMenu.getMenu())
-        document.body.appendChild(this.#notificationBox.getBox())
+        document.body.appendChild(this.#center);
+        document.body.appendChild(this.#appMenu.getMenu());
+        document.body.appendChild(this.#notificationBox.getBox());
         document.body.appendChild(this.#notificationPanel);
-        document.body.addEventListener('contextmenu', (e) => {
-            let item;
-            for (item of globalThis.ctxs) {
-                let ctxz = document.getElementById(item.ctx.id);
-                if (ctxz) {
-                    document.body.removeChild(ctxz)
-                }
-            }
-            for (item of globalThis.ctxs) {
-                if (item.elem.contains(e.target)) {
-                    document.body.appendChild(item.ctx.set())
-                    document.getElementById(item.ctx.id).style.top = `${e.clientY}px`;
-                    document.getElementById(item.ctx.id).style.left = `${e.clientX}px`;
-                    new Animation(document.getElementById(item.ctx.id)).fadeIn()
-                }
-            }
-        })
-        document.body.addEventListener('click', () => {
-            for (let item of globalThis.ctxs) {
-                let ctxz = document.getElementById(item.ctx.id);
-                if (ctxz) new Animation(ctxz).fadeOutAndRemove();
-            }
-        })
         //
         ipcRenderer.on("sendNotificationUpdateLoad", async (e, text, body) => {
             let updateNotificationLoad = new UpdateNotification({ title: text, text: body, spinner: true });
