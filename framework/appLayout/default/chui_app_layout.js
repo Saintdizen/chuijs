@@ -43,6 +43,7 @@ class WindowControls {
     #minimize = document.createElement("wc_minimize")
     constructor() {
         if (process.platform === "darwin") {
+            this.#box.className = "wc_box_mac"
             this.#box.style.margin = "0px 3px 0px 8px"
             this.#close.className = 'wc_close_mac'
             this.#maximize.className = 'wc_maximize_mac'
@@ -50,7 +51,16 @@ class WindowControls {
             this.#close.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "12px").getHTML();
             this.#minimize.innerHTML = new Icon(Icons.CONTENT.REMOVE, "12px").getHTML();
             this.#maximize.innerHTML = new Icon(Icons.CONTENT.ADD, "12px").getHTML();
+        } else if (process.platform === "win32") {
+            this.#box.className = "wc_box_win"
+            this.#close.className = 'wc_close_win'
+            this.#maximize.className = 'wc_maximize_win'
+            this.#minimize.className = 'wc_minimize_win'
+            this.#close.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "16px").getHTML();
+            this.#maximize.innerHTML = new Icon(Icons.CONTENT.ADD, "16px").getHTML();
+            this.#minimize.innerHTML = new Icon(Icons.CONTENT.REMOVE, "16px").getHTML();
         } else {
+            this.#box.className = "wc_box"
             this.#close.className = 'wc_close'
             this.#maximize.className = 'wc_maximize'
             this.#minimize.className = 'wc_minimize'

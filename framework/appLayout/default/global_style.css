@@ -520,7 +520,8 @@ header_button:hover chui_icon {
 }
 
 /*Управление окном*/
-wc_box {
+/* MACOS STYLE */
+.wc_box_mac {
     -webkit-app-region: no-drag;
     color: var(--text_color);
     margin: 0 3px;
@@ -530,7 +531,6 @@ wc_box {
     justify-content: center;
 }
 
-/* MACOS STYLE */
 .wc_close_mac {
     background: rgb(232, 87, 86);
 }
@@ -557,7 +557,48 @@ wc_box {
     color: black;
 }
 
-/* OTHER STYLE */
+/* WINDOWS STYLE */
+.wc_box_win {
+    -webkit-app-region: no-drag;
+    color: var(--text_color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: auto;
+}
+
+.wc_close_win, .wc_maximize_win, .wc_minimize_win {
+    padding: 5px;
+    width: 30px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wc_close_win:hover {
+    background-color: var(--red_prime_background);
+}
+
+.wc_maximize_win:hover, .wc_minimize_win:hover {
+    background-color: var(--blue_prime_background);
+}
+
+.wc_close_win:hover chui_icon, .wc_maximize_win:hover chui_icon, .wc_minimize_win:hover chui_icon {
+    color: white;
+}
+
+/* LINUX STYLE */
+.wc_box {
+    -webkit-app-region: no-drag;
+    color: var(--text_color);
+    margin: 0 3px;
+    padding: 0 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .wc_close, .wc_maximize, .wc_minimize {
     margin: 6px 3px;
     padding: 5px;
