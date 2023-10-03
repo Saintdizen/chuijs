@@ -1,6 +1,6 @@
 // GLOBAL VARS
 globalThis.ctxs = [];
-const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme} = require('electron');
+const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme, dialog} = require('electron');
 const log = require('electron-log');
 log.transports.file.resolvePath = () => require("path").join(app.getPath('userData'), `electron-log/logs.log`);
 
@@ -55,7 +55,6 @@ const { UpdateNotification } = require("./framework/components/chui_notification
 const { Image } = require('./framework/components/chui_media/image');
 const { Audio } = require("./framework/components/chui_media/audio");
 const { Video } = require("./framework/components/chui_media/video");
-const {dialog} = require("@electron/remote");
 
 //VARS
 let isQuiting = false;
