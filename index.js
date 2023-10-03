@@ -1,6 +1,6 @@
 // GLOBAL VARS
 globalThis.ctxs = [];
-const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme, dialog} = require('electron');
+const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme, dialog, autoUpdater} = require('electron');
 const log = require('electron-log');
 log.transports.file.resolvePath = () => require("path").join(app.getPath('userData'), `electron-log/logs.log`);
 
@@ -237,12 +237,31 @@ class Main {
         })
     }
     enableAutoUpdateApp(start = Number(), version) {
-        const { MacUpdater, autoUpdater } = require("electron-updater");
+        const { autoUpdater } = require("electron-updater");
         if (process.platform === "darwin") {
-            this.#updater(new MacUpdater(), version, start)
+            this.#testMac();
         } else {
             this.#updater(autoUpdater, version, start)
         }
+    }
+
+    #testMac() {
+        autoUpdater.checkForUpdates();
+        autoUpdater.on("update-downloaded", () => {
+            dialog.showMessageBox({
+                type: 'question',
+                buttons: ['Обновить и запустить', 'Отмена'],
+                title: 'Доступно обновление',
+                defaultId: 0,
+                cancelId: 1,
+                message: 'Обновление готово. Обновить?',
+            }, response => {
+                if (response === 0) {
+                    autoUpdater.quitAndInstall();
+                    app.exit(0);
+                }
+            }).then(r => log.log(r))
+        })
     }
 
     #updater(updater, version, start) {
@@ -259,30 +278,13 @@ class Main {
                 await this.#sendNotificationUpdate(this.#appName, `Загрузка завершена`);
                 setTimeout(async () => await this.#sendNotificationUpdateClose(), 3000);
                 log.info("Обновление скачано!");
-                if (process.platform === "darwin") {
-                    await dialog.showMessageBox({
-                            type: 'question',
-                            buttons: ['Обновить и запустить', 'Отмена'],
-                            title: 'Доступно обновление',
-                            defaultId: 0,
-                            cancelId: 1,
-                            message: 'Обновление готово. Обновить?',
-                        }, response => {
-                            console.log(`Exit: ${response}`); // eslint-disable-line no-console
-                            if (response === 0) {
-                                updater.quitAndInstall();
-                                app.quit();
-                            }
-                        })
-                } else {
-                    this.#window.webContents.send("checkUpdatesTrue", true, updates.versionInfo.version);
-                    ipcMain.on("updateInstallConfirm", (e, check) => {
-                        if (check) {
-                            log.info("Установка обновления...");
-                            updater.quitAndInstall();
-                        }
-                    })
-                }
+                this.#window.webContents.send("checkUpdatesTrue", true, updates.versionInfo.version);
+                ipcMain.on("updateInstallConfirm", (e, check) => {
+                    if (check) {
+                        log.info("Установка обновления...");
+                        updater.quitAndInstall();
+                    }
+                })
             });
         }, start);
     }
