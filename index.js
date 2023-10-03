@@ -237,9 +237,9 @@ class Main {
         })
     }
     enableAutoUpdateApp(start = Number(), version) {
-        const { autoUpdater } = require("electron-updater");
+        const { autoUpdater, MacUpdater } = require("electron-updater");
         if (process.platform === "darwin") {
-            this.#testMac(autoUpdater, version, start);
+            this.#testMac(new MacUpdater(), version, start);
         } else {
             this.#updater(autoUpdater, version, start)
         }
