@@ -1,7 +1,6 @@
 // GLOBAL VARS
 globalThis.ctxs = [];
 const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme} = require('electron');
-const { autoUpdater } = require("electron-updater");
 const log = require('electron-log');
 log.transports.file.resolvePath = () => require("path").join(app.getPath('userData'), `electron-log/logs.log`);
 
@@ -238,6 +237,7 @@ class Main {
         })
     }
     enableAutoUpdateApp(start = Number(), version) {
+        const { autoUpdater } = require("electron-updater");
         if (process.platform === "darwin") {
             this.#testMac(autoUpdater, version, start);
         } else {
