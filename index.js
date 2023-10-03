@@ -55,6 +55,7 @@ const { UpdateNotification } = require("./framework/components/chui_notification
 const { Image } = require('./framework/components/chui_media/image');
 const { Audio } = require("./framework/components/chui_media/audio");
 const { Video } = require("./framework/components/chui_media/video");
+const {dialog} = require("@electron/remote");
 
 //VARS
 let isQuiting = false;
@@ -259,13 +260,30 @@ class Main {
                 await this.#sendNotificationUpdate(this.#appName, `Загрузка завершена`);
                 setTimeout(async () => await this.#sendNotificationUpdateClose(), 3000);
                 log.info("Обновление скачано!");
-                this.#window.webContents.send("checkUpdatesTrue", true, updates.versionInfo.version);
-                ipcMain.on("updateInstallConfirm", (e, check) => {
-                    if (check) {
-                        log.info("Установка обновления...");
-                        updater.quitAndInstall();
-                    }
-                })
+                if (process.platform === "darwin") {
+                    await dialog.showMessageBox({
+                            type: 'question',
+                            buttons: ['Обновить и запустить', 'Отмена'],
+                            title: 'Доступно обновление',
+                            defaultId: 0,
+                            cancelId: 1,
+                            message: 'Обновление готово. Обновить?',
+                        }, response => {
+                            console.log(`Exit: ${response}`); // eslint-disable-line no-console
+                            if (response === 0) {
+                                updater.quitAndInstall();
+                                app.quit();
+                            }
+                        })
+                } else {
+                    this.#window.webContents.send("checkUpdatesTrue", true, updates.versionInfo.version);
+                    ipcMain.on("updateInstallConfirm", (e, check) => {
+                        if (check) {
+                            log.info("Установка обновления...");
+                            updater.quitAndInstall();
+                        }
+                    })
+                }
             });
         }, start);
     }
