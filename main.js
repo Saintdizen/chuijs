@@ -1,5 +1,6 @@
 const { Main, MenuItem } = require('./index');
 let json = require("./package.json");
+const path = require("path");
 const main = new Main({
     name: `${json.name} (${json.version})`,
     width: 1300,
@@ -19,4 +20,4 @@ main.start({
         new MenuItem().quit("Выход"),
     ]
 })
-//main.enableAutoUpdateApp(1000);
+main.enableAutoUpdateApp(1000, require(path.join("/Users/syzoth/WebstormProjects/media_maze/package.json")));

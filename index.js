@@ -55,6 +55,7 @@ const { UpdateNotification } = require("./framework/components/chui_notification
 const { Image } = require('./framework/components/chui_media/image');
 const { Audio } = require("./framework/components/chui_media/audio");
 const { Video } = require("./framework/components/chui_media/video");
+const { AutoUpdater } = require("./framework/autoUpdater/auto_updater");
 
 //VARS
 let isQuiting = false;
@@ -236,61 +237,29 @@ class Main {
             process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = "true";
         })
     }
-    enableAutoUpdateApp(start = Number(), version) {
-        const { autoUpdater, MacUpdater } = require("electron-updater");
-        if (process.platform === "darwin") {
-            this.#testMac(new MacUpdater(), version, start);
-        } else {
-            this.#updater(autoUpdater, version, start)
-        }
+    enableAutoUpdateApp(start = Number(), json) {
+        this.#updater(new AutoUpdater(json), 1000)
     }
 
-    #testMac(updater, version, start) {
+    #updater(updater, start) {
         setTimeout(async () => {
-            let updates = await updater.checkForUpdates();
-            if (updates !== null) {
-                if (updates.versionInfo.version > version) {
-                    await this.#sendNotificationUpdateLoad(this.#appName, `Загрузка новой версии ${updates.versionInfo.version}`);
+            let check = await updater.checkUpdate();
+            if (check) {
+                await this.#sendNotificationUpdateLoad(this.#appName, `Загрузка новой версии ${updater.getVersion()}`);
+                let test = await updater.downloadUpdate();
+                if (test !== undefined) {
+                    await this.#sendNotificationUpdateLoadClose();
+                    await this.#sendNotificationUpdate(this.#appName, `Загрузка завершена`);
+                    setTimeout(async () => await this.#sendNotificationUpdateClose(), 3000);
+                    log.info("Обновление скачано!");
+                    this.#window.webContents.send("checkUpdatesTrue", true, updater.getVersion());
+                    ipcMain.on("updateInstallConfirm", (e, check) => {
+                        if (check) {
+                            updater.quitAndInstall(app);
+                        }
+                    })
                 }
             }
-            updater.on('update-downloaded', async () => {
-                await this.#sendNotificationUpdateLoadClose();
-                await this.#sendNotificationUpdate(this.#appName, `Загрузка завершена`);
-                setTimeout(async () => await this.#sendNotificationUpdateClose(), 3000);
-                log.info("Обновление скачано!");
-                this.#window.webContents.send("checkUpdatesTrue", true, updates.versionInfo.version);
-                ipcMain.on("updateInstallConfirm", (e, check) => {
-                    if (check) {
-                        log.info("Установка обновления...");
-                        setTimeout(() => updater.quitAndInstall(), 3000);
-                    }
-                })
-            });
-        }, start);
-    }
-
-    #updater(updater, version, start) {
-        setTimeout(async () => {
-            updater.autoInstallOnAppQuit = false;
-            let updates = await updater.checkForUpdates();
-            if (updates !== null) {
-                if (updates.versionInfo.version > version) {
-                    await this.#sendNotificationUpdateLoad(this.#appName, `Загрузка новой версии ${updates.versionInfo.version}`);
-                }
-            }
-            updater.on('update-downloaded', async () => {
-                await this.#sendNotificationUpdateLoadClose();
-                await this.#sendNotificationUpdate(this.#appName, `Загрузка завершена`);
-                setTimeout(async () => await this.#sendNotificationUpdateClose(), 3000);
-                log.info("Обновление скачано!");
-                this.#window.webContents.send("checkUpdatesTrue", true, updates.versionInfo.version);
-                ipcMain.on("updateInstallConfirm", (e, check) => {
-                    if (check) {
-                        log.info("Установка обновления...");
-                        updater.quitAndInstall();
-                    }
-                })
-            });
         }, start);
     }
 
@@ -381,5 +350,6 @@ module.exports = {
     UpdateNotification: UpdateNotification,
     log: log,
     Audio: Audio,
-    Video: Video
+    Video: Video,
+    AutoUpdater: AutoUpdater
 }

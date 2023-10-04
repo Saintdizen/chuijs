@@ -71,7 +71,7 @@ class Test extends AppLayout {
             AppLayout.BUTTON({
                 title: "Настройки",
                 icon: Icons.ACTIONS.SETTINGS,
-                clickEvent: () => alert("test")
+                clickEvent: async () => {}
             }),
             AppLayout.DIALOG({
                 title: "Настройки",
