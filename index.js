@@ -262,8 +262,7 @@ class Main {
                 ipcMain.on("updateInstallConfirm", (e, check) => {
                     if (check) {
                         log.info("Установка обновления...");
-                        updater.quitAndInstall();
-                        app.exit(0)
+                        setTimeout(() => updater.quitAndInstall(), 3000);
                     }
                 })
             });
