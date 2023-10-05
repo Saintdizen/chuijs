@@ -14,9 +14,9 @@ class AutoUpdater {
     #downloadUrl = undefined;
     #updateData = undefined;
     constructor(packageJson) {
-        this.#token = packageJson.build.publish.token;
-        this.#repo = packageJson.build.publish.repo;
-        this.#owner = packageJson.build.publish.owner;
+        this.#token = packageJson.token;
+        this.#repo = packageJson.repo;
+        this.#owner = packageJson.owner;
         this.#oldVersion = packageJson.version;
     }
     async checkUpdate() {

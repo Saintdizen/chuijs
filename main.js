@@ -19,4 +19,4 @@ main.start({
         new MenuItem().quit("Выход"),
     ]
 })
-//main.enableAutoUpdateApp(1000, json);
+//main.enableAutoUpdateApp(1000, require("./update.json"));
