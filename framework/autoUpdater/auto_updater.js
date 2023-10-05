@@ -2,8 +2,10 @@ const {Octokit} = require("octokit");
 const path = require("path");
 const fs = require("fs");
 const {shell} = require("electron");
+const log = require("electron-log");
 
 class AutoUpdater {
+    #private = false;
     #owner = undefined;
     #repo = undefined;
     #token = undefined;
@@ -12,19 +14,24 @@ class AutoUpdater {
     #res = undefined;
     #fileName = undefined;
     #downloadUrl = undefined;
-    #updateData = undefined;
     #downloadPath = undefined;
     #app = undefined;
+    #octokit = undefined;
     constructor(packageJson, app) {
         this.#app = app;
+        this.#private = packageJson.private;
         this.#token = packageJson.token;
         this.#repo = packageJson.repo;
         this.#owner = packageJson.owner;
         this.#oldVersion = packageJson.version;
+        if (this.#private) {
+            this.#octokit = new Octokit({ auth: this.#token })
+        } else {
+            this.#octokit = new Octokit();
+        }
     }
     async checkUpdate() {
-        const octokit = new Octokit({ auth: this.#token })
-        this.#res = await octokit.request(`GET /repos/${this.#owner}/${this.#repo}/releases/latest`, {
+        this.#res = await this.#octokit.request(`GET /repos/${this.#owner}/${this.#repo}/releases/latest`, {
             owner: this.#owner,
             repo: this.#repo,
             headers: { 'X-GitHub-Api-Version': '2022-11-28' }
@@ -37,31 +44,28 @@ class AutoUpdater {
                     if (process.platform === "darwin") {
                         if (name.includes("mac")) {
                             this.#fileName = name;
-                            this.#updateData = fileName;
                             this.#downloadUrl = `/repos/${this.#owner}/${this.#repo}/releases/assets/${fileName.id}`;
                             break;
                         }
                     } else if (process.platform === "win32") {
                         if (name.includes("win")) {
                             this.#fileName = name;
-                            this.#updateData = fileName;
                             this.#downloadUrl = `/repos/${this.#owner}/${this.#repo}/releases/assets/${fileName.id}`;
                             break;
                         }
                     } else if (process.platform === "linux") {
                         if (name.includes("linux")) {
                             this.#fileName = name;
-                            this.#updateData = fileName;
                             this.#downloadUrl = `/repos/${this.#owner}/${this.#repo}/releases/assets/${fileName.id}`;
                             break;
                         }
                     }
                 }
             }
-            console.log(this.#updateData.name)
-            console.log(this.#res.data.name)
+            log.info("Доступна новая версия: " + this.#res.data.name);
             return true;
         } else {
+            log.info("Обновлений не найдено");
             return false;
         }
     }
@@ -72,19 +76,18 @@ class AutoUpdater {
         let dir_updates = path.join(this.#app.getPath('userData'), `updates`);
         if (!fs.existsSync(dir_updates)) fs.mkdirSync(dir_updates);
         this.#downloadPath = path.join(dir_updates, this.#fileName)
-        let octokit = new Octokit({auth: this.#token})
         try {
-            let dres = await octokit.request(`get ${this.#downloadUrl}"`, {
+            let dres = await this.#octokit.request(`get ${this.#downloadUrl}"`, {
                 owner: this.#owner,
                 repo: this.#repo,
                 headers: {Accept: "application/octet-stream"},
             })
             await fs.appendFile(this.#downloadPath, Buffer.from(dres.data), (err) => {
-                if (err) console.log(err)
+                if (err) log.error(err);
             });
             return this.#downloadPath;
         } catch (error) {
-            console.log(error)
+            log.error(error);
             return undefined;
         }
     }
