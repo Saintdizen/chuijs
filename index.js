@@ -238,11 +238,7 @@ class Main {
         })
     }
     enableAutoUpdateApp(start = Number(), json) {
-        console.log(json)
-        this.#updater(new AutoUpdater(json), start)
-    }
-
-    #updater(updater, start) {
+        let updater = new AutoUpdater(json, app);
         setTimeout(async () => {
             let check = await updater.checkUpdate();
             if (check) {
@@ -255,9 +251,7 @@ class Main {
                     log.info("Обновление скачано!");
                     this.#window.webContents.send("checkUpdatesTrue", true, updater.getVersion());
                     ipcMain.on("updateInstallConfirm", (e, check) => {
-                        if (check) {
-                            updater.quitAndInstall(app);
-                        }
+                        if (check) updater.quitAndInstall();
                     })
                 }
             }

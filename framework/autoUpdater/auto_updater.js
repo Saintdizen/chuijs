@@ -13,7 +13,10 @@ class AutoUpdater {
     #fileName = undefined;
     #downloadUrl = undefined;
     #updateData = undefined;
-    constructor(packageJson) {
+    #downloadPath = undefined;
+    #app = undefined;
+    constructor(packageJson, app) {
+        this.#app = app;
         this.#token = packageJson.token;
         this.#repo = packageJson.repo;
         this.#owner = packageJson.owner;
@@ -66,6 +69,7 @@ class AutoUpdater {
         return this.#newVersion;
     }
     async downloadUpdate() {
+        this.#downloadPath = path.join(this.#app.getPath('userData'), `updates/${this.#fileName}`)
         let octokit = new Octokit({auth: this.#token})
         try {
             let dres = await octokit.request(`get ${this.#downloadUrl}"`, {
@@ -73,22 +77,21 @@ class AutoUpdater {
                 repo: this.#repo,
                 headers: {Accept: "application/octet-stream"},
             })
-            await fs.appendFile(`/Users/syzoth/${this.#fileName}`, Buffer.from(dres.data), (err) => {
+            await fs.appendFile(this.#downloadPath, Buffer.from(dres.data), (err) => {
                 if (err) console.log(err)
             });
-            return `/Users/syzoth/${this.#fileName}`;
+            return this.#downloadPath;
         } catch (error) {
             console.log(error)
             return undefined;
         }
     }
-    quitAndInstall(app) {
-        let path_update = path.join(app.getPath('userData'), `updates/${this.#fileName}`);
-        shell.openPath(path_update).then(() => {
+    quitAndInstall() {
+        shell.openPath(this.#downloadPath).then(() => {
             if (process.platform === "darwin") {
-                app.exit(0);
+                this.#app.exit(0);
             } else {
-                app.quit();
+                this.#app.quit();
             }
         })
     }
