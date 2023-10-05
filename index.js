@@ -238,7 +238,14 @@ class Main {
         })
     }
     enableAutoUpdateApp(start = Number(), json) {
-        let updater = new AutoUpdater(json, app);
+        if (process.platform === "linux") {
+            this.#updateAppImage(start)
+        } else {
+            this.#updaterAll(new AutoUpdater(json, app), start)
+        }
+    }
+
+    #updaterAll(updater, start) {
         setTimeout(async () => {
             let check = await updater.checkUpdate();
             if (check) {
@@ -255,6 +262,32 @@ class Main {
                     })
                 }
             }
+        }, start);
+    }
+
+    #updateAppImage(start) {
+        setTimeout(async () => {
+            const { autoUpdater } = require("electron-updater");
+            autoUpdater.autoInstallOnAppQuit = false;
+            let updates = await autoUpdater.checkForUpdates();
+            if (updates !== null) {
+                if (updates.versionInfo.version > app.getVersion()) {
+                    await this.#sendNotificationUpdateLoad(this.#appName, `Загрузка новой версии ${updates.versionInfo.version}`);
+                }
+            }
+            autoUpdater.on('update-downloaded', async () => {
+                await this.#sendNotificationUpdateLoadClose();
+                await this.#sendNotificationUpdate(this.#appName, `Загрузка завершена`);
+                setTimeout(async () => await this.#sendNotificationUpdateClose(), 3000);
+                log.info("Обновление скачано!");
+                this.#window.webContents.send("checkUpdatesTrue", true, updates.versionInfo.version);
+                ipcMain.on("updateInstallConfirm", (e, check) => {
+                    if (check) {
+                        log.info("Установка обновления...");
+                        autoUpdater.quitAndInstall();
+                    }
+                })
+            });
         }, start);
     }
 
