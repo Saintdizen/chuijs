@@ -28,7 +28,7 @@ class AutoUpdater {
             headers: { 'X-GitHub-Api-Version': '2022-11-28' }
         })
         this.#newVersion = this.#res.data.name
-        if (this.#newVersion === this.#oldVersion) {
+        if (this.#newVersion > this.#oldVersion) {
             for (let fileName of this.#res.data.assets) {
                 let name = fileName.name;
                 if (!name.includes("blockmap") && !name.includes("yml")) {

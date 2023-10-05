@@ -238,7 +238,7 @@ class Main {
         })
     }
     enableAutoUpdateApp(start = Number(), json) {
-        this.#updater(new AutoUpdater(json), 1000)
+        this.#updater(new AutoUpdater(json), start)
     }
 
     #updater(updater, start) {
