@@ -84,7 +84,14 @@ class AutoUpdater {
         }
     }
     quitAndInstall(app) {
-        shell.openPath(`/Users/syzoth/${this.#fileName}`).then(r => app.exit(0))
+        let path_update = path.join(app.getPath('userData'), `updates/${this.#fileName}`);
+        shell.openPath(path_update).then(() => {
+            if (process.platform === "darwin") {
+                app.exit(0);
+            } else {
+                app.quit();
+            }
+        })
     }
 }
 
