@@ -14,11 +14,10 @@ class AutoUpdater {
     #downloadUrl = undefined;
     #updateData = undefined;
     constructor(packageJson) {
-        let json = packageJson;
-        this.#token = json.build.publish.token;
-        this.#repo = json.build.publish.repo;
-        this.#owner = json.build.publish.owner;
-        this.#oldVersion = json.version;
+        this.#token = packageJson.build.publish.token;
+        this.#repo = packageJson.build.publish.repo;
+        this.#owner = packageJson.build.publish.owner;
+        this.#oldVersion = packageJson.version;
     }
     async checkUpdate() {
         const octokit = new Octokit({ auth: this.#token })

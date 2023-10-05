@@ -238,6 +238,7 @@ class Main {
         })
     }
     enableAutoUpdateApp(start = Number(), json) {
+        console.log(json)
         this.#updater(new AutoUpdater(json), start)
     }
 
