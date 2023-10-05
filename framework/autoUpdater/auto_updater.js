@@ -69,7 +69,9 @@ class AutoUpdater {
         return this.#newVersion;
     }
     async downloadUpdate() {
-        this.#downloadPath = path.join(this.#app.getPath('userData'), `updates/${this.#fileName}`)
+        let dir_updates = path.join(this.#app.getPath('userData'), `updates`);
+        if (!fs.existsSync(dir_updates)) fs.mkdirSync(dir_updates);
+        this.#downloadPath = path.join(dir_updates, this.#fileName)
         let octokit = new Octokit({auth: this.#token})
         try {
             let dres = await octokit.request(`get ${this.#downloadUrl}"`, {
