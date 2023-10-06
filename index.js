@@ -1,5 +1,3 @@
-// GLOBAL VARS
-globalThis.ctxs = [];
 const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme} = require('electron');
 const log = require('electron-log');
 log.transports.file.resolvePath = () => require("path").join(app.getPath('userData'), `electron-log/logs.log`);
@@ -316,7 +314,6 @@ class Styles {
 }
 
 module.exports = {
-    app: app,
     BrowserWindow: BrowserWindow,
     ipcMain: ipcMain,
     ipcRenderer: ipcRenderer,
