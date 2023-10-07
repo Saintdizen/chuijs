@@ -111,18 +111,26 @@ class Main {
         return require('electron').nativeImage.createFromPath(image).resize({width: 16, height: 16});
     }
 
+    static #keyToChangeLower(obj, keyToChange, value) {
+        let keyToChangeLower = keyToChange.toLowerCase();
+        for (const key of Object.keys(obj)) {
+            if (key.toLowerCase() === keyToChangeLower) {
+                obj[key] = value;
+                return;
+            }
+        }
+        obj[keyToChange] = value;
+    }
+
     #createWindow(hideOnClose = Boolean()) {
         this.#window = new BrowserWindow({
-            transparent: false,
-            //minWidth: this.#width,
-            //minHeight: this.#height,
+            transparent: false, //minWidth: this.#width, //minHeight: this.#height,
             width: this.#width,
             height: this.#height,
             name: this.#appName,
             title: this.#appName,
             show: false,
-            icon: this.#app_icon,
-            //backgroundColor: '#2e2c29',
+            icon: this.#app_icon, //backgroundColor: '#2e2c29',
             webPreferences: {
                 plugins: false,
                 nodeIntegration: true,
@@ -143,14 +151,12 @@ class Main {
         this.#window.setMenu(null)
 
         if (!this.#webSecurity) {
-            this.#window.webContents.session.webRequest.onBeforeSendHeaders(
-                (details, callback) => {
-                    const {requestHeaders} = details;
-                    Main.#keyToChangeLower(requestHeaders, 'Access-Control-Allow-Origin', ['*']);
-                    Main.#keyToChangeLower(requestHeaders, 'X-Frame-Options', ['*']);
-                    callback({requestHeaders});
-                },
-            );
+            this.#window.webContents.session.webRequest.onBeforeSendHeaders((details, callback) => {
+                const {requestHeaders} = details;
+                Main.#keyToChangeLower(requestHeaders, 'Access-Control-Allow-Origin', ['*']);
+                Main.#keyToChangeLower(requestHeaders, 'X-Frame-Options', ['*']);
+                callback({requestHeaders});
+            },);
             this.#window.webContents.session.webRequest.onHeadersReceived((details, callback) => {
                 const {responseHeaders} = details;
                 Main.#keyToChangeLower(responseHeaders, 'Access-Control-Allow-Origin', ['*']);
@@ -175,17 +181,6 @@ class Main {
                 this.#window.hide();
             });
         }
-    }
-
-    static #keyToChangeLower(obj, keyToChange, value) {
-        let keyToChangeLower = keyToChange.toLowerCase();
-        for (const key of Object.keys(obj)) {
-            if (key.toLowerCase() === keyToChangeLower) {
-                obj[key] = value;
-                return;
-            }
-        }
-        obj[keyToChange] = value;
     }
 
     toggleDevTools() {
