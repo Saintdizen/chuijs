@@ -342,11 +342,13 @@ class AppLayout {
         chui_functions.setStyles(__dirname + "/main_theme_style.css", 'chUiJS_Main_Theme')
         if (process.platform !== "darwin") document.body.style.border = "1px solid var(--element_background_2)";
         // ===
-        document.body.appendChild(this.#header.set());
-        document.body.appendChild(this.#center);
-        document.body.appendChild(this.#appMenu.getMenu());
-        document.body.appendChild(this.#notificationBox.getBox());
-        document.body.appendChild(this.#notificationPanel);
+
+        document.body.appendChild(this.#header.set())
+        document.body.appendChild(this.#center)
+        document.body.appendChild(this.#appMenu.getMenu())
+        document.body.appendChild(this.#notificationBox.getBox())
+        document.body.appendChild(this.#notificationPanel)
+
         //
         ipcRenderer.on("sendNotificationUpdateLoad", async (e, text, body) => {
             let updateNotificationLoad = new UpdateNotification({ title: text, text: body, spinner: true });
@@ -369,6 +371,7 @@ class AppLayout {
             }
         })
     }
+
     setSearchToAppMenu() {
         this.#appMenu.enableSearchInput();
     }

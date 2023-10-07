@@ -119,7 +119,7 @@ class Main {
             title: this.#appName,
             show: false,
             icon: this.#app_icon,
-            //backgroundColor: "f000",
+            //backgroundColor: '#2e2c29',
             webPreferences: {
                 plugins: false,
                 nodeIntegration: true,
@@ -136,6 +136,7 @@ class Main {
             minimizable: true,
             maximizable: true,
             center: true,
+            modal: false
         });
         this.#window.setMenu(null)
 
@@ -164,7 +165,7 @@ class Main {
                 isQuiting = true;
             });
         });
-        this.#window.on("ready-to-show", () => this.#window.show())
+        this.#window.on("ready-to-show", () => setTimeout(() => this.#window.show(), 750))
 
         if (hideOnClose) {
             this.#window.on('close', (evt) => {
