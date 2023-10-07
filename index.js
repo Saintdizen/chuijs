@@ -3,57 +3,57 @@ const log = require('electron-log');
 log.transports.file.resolvePath = () => require("path").join(app.getPath('userData'), `electron-log/logs.log`);
 
 //ПОЛЯ ВВОДА
-const { TextInput } = require('./framework/components/chui_inputs/chui_text/text');
-const { DateInput } = require('./framework/components/chui_inputs/chui_date/date');
-const { NumberInput } = require('./framework/components/chui_inputs/chui_number/number');
-const { EmailInput } = require('./framework/components/chui_inputs/chui_email/email');
-const { PasswordInput } = require('./framework/components/chui_inputs/chui_password/password');
-const { Select } = require('./framework/components/chui_inputs/chui_select_box/select_box');
-const { ComboBox } = require('./framework/components/chui_inputs/chui_combo_box/combo_box');
-const { TextArea } = require('./framework/components/chui_inputs/chui_text_area/text_area');
-const { RadioButton } = require('./framework/components/chui_inputs/chui_radio_button/radio_button');
-const { CheckBox } = require('./framework/components/chui_inputs/chui_check_box/check_box');
-const { RadioGroup } = require('./framework/components/chui_radio_group/radio_group');
+const {TextInput} = require('./framework/components/chui_inputs/chui_text/text');
+const {DateInput} = require('./framework/components/chui_inputs/chui_date/date');
+const {NumberInput} = require('./framework/components/chui_inputs/chui_number/number');
+const {EmailInput} = require('./framework/components/chui_inputs/chui_email/email');
+const {PasswordInput} = require('./framework/components/chui_inputs/chui_password/password');
+const {Select} = require('./framework/components/chui_inputs/chui_select_box/select_box');
+const {ComboBox} = require('./framework/components/chui_inputs/chui_combo_box/combo_box');
+const {TextArea} = require('./framework/components/chui_inputs/chui_text_area/text_area');
+const {RadioButton} = require('./framework/components/chui_inputs/chui_radio_button/radio_button');
+const {CheckBox} = require('./framework/components/chui_inputs/chui_check_box/check_box');
+const {RadioGroup} = require('./framework/components/chui_radio_group/radio_group');
 //==========
-const { MenuItem } = require('./framework/tray_bar/chui_menu_items');
-const { AppLayout, Route } = require('./framework/appLayout/default/chui_app_layout');
-const { Page } = require('./framework/modules/chui_page/page');
-const { WebView } = require('./framework/components/chui_webview/webview');
-const { Button } = require('./framework/components/chui_button/button');
-const { Spinner } = require('./framework/components/chui_spinner/spinner');
-const { Icon, Icons } = require('./framework/components/chui_icons/icons');
-const { TextEditor } = require('./framework/components/chui_text_editor/text_editor');
-const { Badge } = require('./framework/components/chui_badge/badge');
-const { Calendar } = require('./framework/components/chui_calendar/calendar');
-const { Notification } = require('./framework/components/chui_notification/notification');
-const { Tabs, Tab } = require('./framework/components/chui_tabs/chui_tabs');
-const { BarGraph, PieGraph } = require('./framework/components/chui_graphs/graphs');
-const { Toggle } = require('./framework/components/chui_inputs/chui_toggle/toggle');
-const { ContentBlock } = require('./framework/components/chui_content_block/content_block');
-const { ProgressBar } = require('./framework/components/chui_progress_bar/progress_bar');
-const { Label } = require('./framework/components/chui_label/label');
-const { Dialog } = require('./framework/components/chui_modal/modal');
-const { Paragraph } = require('./framework/components/chui_paragraph/paragraph');
-const { H } = require('./framework/components/chui_hx/hx');
-const { Table } = require('./framework/components/chui_table/table');
-const { Details } = require('./framework/components/chui_details/details');
-const { Accordion } = require('./framework/components/chui_accordion/accordion')
-const { CodeBlock } = require('./framework/components/chui_code/code')
-const { HtmlBlock } = require('./framework/components/chui_html_block/html_block')
-const { sleep, render, getDefaultIcon } = require('./framework/modules/chui_functions');
-const { FileInput, AcceptTypes } = require("./framework/components/chui_inputs/chui_file/file");
-const { TreeView } = require("./framework/components/chui_tree_view/tree_view");
-const { Form } = require("./framework/components/chui_form/form");
-const { SlideShow } = require("./framework/components/chui_slideshow/slideshow");
-const { FieldSet } = require("./framework/components/chui_fieldset/fieldset");
-const { Popup } = require("./framework/components/chui_popups/popups");
-const { TelegramBot } = require("./framework/components/telegram_bot/chui_telegram_bot");
-const { MenuBar } = require("./framework/components/chui_menu_bar/menu_bar");
-const { UpdateNotification } = require("./framework/components/chui_notification/notification_update");
-const { Image } = require('./framework/components/chui_media/image');
-const { Audio } = require("./framework/components/chui_media/audio");
-const { Video } = require("./framework/components/chui_media/video");
-const { AutoUpdater } = require("./framework/autoUpdater/auto_updater");
+const {MenuItem} = require('./framework/tray_bar/chui_menu_items');
+const {AppLayout, Route} = require('./framework/appLayout/default/chui_app_layout');
+const {Page} = require('./framework/modules/chui_page/page');
+const {WebView} = require('./framework/components/chui_webview/webview');
+const {Button} = require('./framework/components/chui_button/button');
+const {Spinner} = require('./framework/components/chui_spinner/spinner');
+const {Icon, Icons} = require('./framework/components/chui_icons/icons');
+const {TextEditor} = require('./framework/components/chui_text_editor/text_editor');
+const {Badge} = require('./framework/components/chui_badge/badge');
+const {Calendar} = require('./framework/components/chui_calendar/calendar');
+const {Notification} = require('./framework/components/chui_notification/notification');
+const {Tabs, Tab} = require('./framework/components/chui_tabs/chui_tabs');
+const {BarGraph, PieGraph} = require('./framework/components/chui_graphs/graphs');
+const {Toggle} = require('./framework/components/chui_inputs/chui_toggle/toggle');
+const {ContentBlock} = require('./framework/components/chui_content_block/content_block');
+const {ProgressBar} = require('./framework/components/chui_progress_bar/progress_bar');
+const {Label} = require('./framework/components/chui_label/label');
+const {Dialog} = require('./framework/components/chui_modal/modal');
+const {Paragraph} = require('./framework/components/chui_paragraph/paragraph');
+const {H} = require('./framework/components/chui_hx/hx');
+const {Table} = require('./framework/components/chui_table/table');
+const {Details} = require('./framework/components/chui_details/details');
+const {Accordion} = require('./framework/components/chui_accordion/accordion')
+const {CodeBlock} = require('./framework/components/chui_code/code')
+const {HtmlBlock} = require('./framework/components/chui_html_block/html_block')
+const {sleep, render, getDefaultIcon} = require('./framework/modules/chui_functions');
+const {FileInput, AcceptTypes} = require("./framework/components/chui_inputs/chui_file/file");
+const {TreeView} = require("./framework/components/chui_tree_view/tree_view");
+const {Form} = require("./framework/components/chui_form/form");
+const {SlideShow} = require("./framework/components/chui_slideshow/slideshow");
+const {FieldSet} = require("./framework/components/chui_fieldset/fieldset");
+const {Popup} = require("./framework/components/chui_popups/popups");
+const {TelegramBot} = require("./framework/components/telegram_bot/chui_telegram_bot");
+const {MenuBar} = require("./framework/components/chui_menu_bar/menu_bar");
+const {UpdateNotification} = require("./framework/components/chui_notification/notification_update");
+const {Image} = require('./framework/components/chui_media/image');
+const {Audio} = require("./framework/components/chui_media/audio");
+const {Video} = require("./framework/components/chui_media/video");
+const {AutoUpdater} = require("./framework/autoUpdater/auto_updater");
 
 //VARS
 let isQuiting = false;
@@ -71,6 +71,7 @@ class Main {
     #renderer = undefined;
     #devToolsOpened = false;
     #webSecurity = true;
+
     constructor(options = {
         name: String(),
         width: Number(),
@@ -82,19 +83,19 @@ class Main {
         this.#app_icon = options.icon;
         if (this.#app_icon === undefined) {
             if (process.platform === "darwin") {
-                this.#app_icon = this.#resizeIconTray(getDefaultIcon())
+                this.#app_icon = Main.#resizeIconTray(getDefaultIcon())
             } else {
                 this.#app_icon = getDefaultIcon();
             }
         } else {
             if (process.platform === "darwin") {
-                this.#app_icon = this.#resizeIconTray(options.icon)
+                this.#app_icon = Main.#resizeIconTray(options.icon)
             } else {
                 this.#app_icon = options.icon;
             }
         }
         //app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
-        app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
+        //app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 
         // Options
         this.#appName = options.name;
@@ -105,9 +106,11 @@ class Main {
         // ===
         if (options.devTools) this.#window.webContents.openDevTools();
     }
-    #resizeIconTray(image) {
-        return require('electron').nativeImage.createFromPath(image).resize({ width: 16, height: 16 });
+
+    static #resizeIconTray(image) {
+        return require('electron').nativeImage.createFromPath(image).resize({width: 16, height: 16});
     }
+
     #createWindow(hideOnClose = Boolean()) {
         this.#window = new BrowserWindow({
             transparent: false,
@@ -135,22 +138,21 @@ class Main {
             resizable: true,
             minimizable: true,
             maximizable: true,
-            center: true,
-            modal: false
+            center: true
         });
         this.#window.setMenu(null)
 
         if (!this.#webSecurity) {
             this.#window.webContents.session.webRequest.onBeforeSendHeaders(
                 (details, callback) => {
-                    const { requestHeaders } = details;
+                    const {requestHeaders} = details;
                     Main.#keyToChangeLower(requestHeaders, 'Access-Control-Allow-Origin', ['*']);
                     Main.#keyToChangeLower(requestHeaders, 'X-Frame-Options', ['*']);
-                    callback({ requestHeaders });
+                    callback({requestHeaders});
                 },
             );
             this.#window.webContents.session.webRequest.onHeadersReceived((details, callback) => {
-                const { responseHeaders } = details;
+                const {responseHeaders} = details;
                 Main.#keyToChangeLower(responseHeaders, 'Access-Control-Allow-Origin', ['*']);
                 Main.#keyToChangeLower(responseHeaders, 'Access-Control-Allow-Headers', ['*']);
                 Main.#keyToChangeLower(responseHeaders, 'X-Frame-Options', ['*']);
@@ -165,17 +167,16 @@ class Main {
                 isQuiting = true;
             });
         });
-        this.#window.on("ready-to-show", () => setTimeout(() => this.#window.show(), 750))
+        this.#window.on("ready-to-show", () => setTimeout(() => this.#window.show(), 650))
 
         if (hideOnClose) {
             this.#window.on('close', (evt) => {
-                if (!isQuiting) {
-                    evt.preventDefault();
-                }
+                if (!isQuiting) evt.preventDefault();
                 this.#window.hide();
             });
         }
     }
+
     static #keyToChangeLower(obj, keyToChange, value) {
         let keyToChangeLower = keyToChange.toLowerCase();
         for (const key of Object.keys(obj)) {
@@ -186,6 +187,7 @@ class Main {
         }
         obj[keyToChange] = value;
     }
+
     toggleDevTools() {
         if (this.#devToolsOpened) {
             this.#window.webContents.closeDevTools();
@@ -195,6 +197,7 @@ class Main {
             this.#devToolsOpened = true;
         }
     }
+
     hideAndShow() {
         //let focused = this.#window.isFocused()
         let visible = this.#window.isVisible()
@@ -204,6 +207,7 @@ class Main {
             this.#window.hide()
         }
     }
+
     stop() {
         if (process.platform !== 'darwin') {
             app.quit();
@@ -211,14 +215,17 @@ class Main {
             app.exit(0)
         }
     }
+
     restart() {
         app.relaunch();
         app.exit(0)
     }
+
     getWindow() {
         return this.#window;
     }
-    start(options = { hideOnClose: Boolean(), tray: [] }) {
+
+    start(options = {hideOnClose: Boolean(), tray: []}) {
         nativeTheme.themeSource = "system";
         app.whenReady().then(() => {
             if (options.tray) {
@@ -236,6 +243,7 @@ class Main {
             process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = "true";
         })
     }
+
     enableAutoUpdateApp(start = Number(), json) {
         if (process.platform === "linux") {
             this.#updateAppImage(start)
@@ -266,7 +274,7 @@ class Main {
 
     #updateAppImage(start) {
         setTimeout(async () => {
-            const { autoUpdater } = require("electron-updater");
+            const {autoUpdater} = require("electron-updater");
             autoUpdater.autoInstallOnAppQuit = false;
             let updates = await autoUpdater.checkForUpdates();
             if (updates !== null) {
@@ -293,25 +301,42 @@ class Main {
     async #sendNotificationUpdateLoad(text, body) {
         this.#window.webContents.send("sendNotificationUpdateLoad", text, body);
     }
+
     async #sendNotificationUpdateLoadClose() {
         this.#window.webContents.send("sendNotificationUpdateLoadClose");
     }
+
     async #sendNotificationUpdate(text, body) {
         this.#window.webContents.send("sendNotificationUpdate", text, body);
     }
+
     async #sendNotificationUpdateClose() {
         this.#window.webContents.send("sendNotificationUpdateClose");
     }
 }
 
 class Styles {
-    static WORD_BREAK = { NORMAL: "normal", BREAK_ALL: "break-all", KEEP_ALL: "keep-all", BREAK_WORD: "break-word" }
-    static TEXT_ALIGN = { CENTER: 'center', END: 'end', START: 'start' };
-    static ALIGN = { CENTER: 'center', END: 'flex-end', START: 'flex-start', BASELINE: 'baseline', STRETCH: 'stretch' };
-    static JUSTIFY = { CENTER: 'center', END: 'flex-end', START: 'flex-start', SPACE_AROUND: 'space-around', SPACE_BEETWEEN: 'space-between', SPACE_EVENLY: 'space-evenly' };
-    static DIRECTION = { ROW: 'row', COLUMN: 'column' };
-    static WRAP = { NOWRAP: 'nowrap', WRAP: 'wrap' };
-    static SIZE = { AUTO: 'auto', FIT_CONTENT: 'fit-content' , MAX_CONTENT: 'max-content' , MIN_CONTENT: 'min-content' , WEBKIT_FILL: '-webkit-fill-available' , INHERIT: 'inherit' };
+    static WORD_BREAK = {NORMAL: "normal", BREAK_ALL: "break-all", KEEP_ALL: "keep-all", BREAK_WORD: "break-word"}
+    static TEXT_ALIGN = {CENTER: 'center', END: 'end', START: 'start'};
+    static ALIGN = {CENTER: 'center', END: 'flex-end', START: 'flex-start', BASELINE: 'baseline', STRETCH: 'stretch'};
+    static JUSTIFY = {
+        CENTER: 'center',
+        END: 'flex-end',
+        START: 'flex-start',
+        SPACE_AROUND: 'space-around',
+        SPACE_BEETWEEN: 'space-between',
+        SPACE_EVENLY: 'space-evenly'
+    };
+    static DIRECTION = {ROW: 'row', COLUMN: 'column'};
+    static WRAP = {NOWRAP: 'nowrap', WRAP: 'wrap'};
+    static SIZE = {
+        AUTO: 'auto',
+        FIT_CONTENT: 'fit-content',
+        MAX_CONTENT: 'max-content',
+        MIN_CONTENT: 'min-content',
+        WEBKIT_FILL: '-webkit-fill-available',
+        INHERIT: 'inherit'
+    };
 }
 
 module.exports = {
