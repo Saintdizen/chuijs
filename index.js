@@ -358,8 +358,8 @@ class App {
 
 class Logger {
     #file_name = "APPLICATION_LOGS.log";
-    #main_format = '[{y}-{m}-{d} {h}:{i}:{s}.{ms}] [{level}] [MAIN] › {text}';
-    #render_format = '[{y}-{m}-{d} {h}:{i}:{s}.{ms}] [{level}] [RENDER] › {text}';
+    #main_format = '[{d}.{m}.{y} {h}:{i}] [{level}] [main] › {text}';
+    #render_format = '[{d}.{m}.{y} {h}:{i}] [{level}] [render] › {text}';
     constructor() {
         if (process && process.type === 'renderer') {
             log.transports.console.format = this.#render_format;
