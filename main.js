@@ -1,4 +1,4 @@
-const { Main, MenuItem, log, App, path} = require('./index');
+const { Main, MenuItem, Log, App, path} = require('./index');
 let json = require("./package.json");
 const main = new Main({
     name: `${json.name} (${json.version})`,
@@ -19,7 +19,5 @@ main.start({
         new MenuItem().quit("Выход"),
     ]
 })
-console.log(App.logsPath())
-log.transports.file.resolvePath = () => path.join(App.userDataPath(), `electron-log/logs.log`);
-log.info("dsaas", "dasdasdasd")
+Log.info("dsaas")
 //main.enableAutoUpdateApp(1000, require("./update.json"));
