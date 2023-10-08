@@ -356,6 +356,30 @@ class App {
     static tempPath() { return new Application().getApp().getPath("temp") }
 }
 
+class Logger {
+    #file_name = "APPLICATION_LOGS.log";
+    #main_format = '[{y}-{m}-{d} {h}:{i}:{s}.{ms}] [{level}] [MAIN] › {text}';
+    #render_format = '[{y}-{m}-{d} {h}:{i}:{s}.{ms}] [{level}] [RENDER] › {text}';
+    constructor() {
+        if (process && process.type === 'renderer') {
+            log.transports.console.format = this.#render_format;
+            log.transports.file.format = this.#render_format;
+            log.transports.file.resolvePath = () => path.join(require("@electron/remote").app.getPath("userData"), this.#file_name)
+        } else {
+            log.transports.console.format = this.#render_format;
+            log.transports.file.format = this.#main_format;
+            log.transports.file.resolvePath = () => path.join(app.getPath("userData"), this.#file_name)
+        }
+    }
+    getLogger() {
+        return log;
+    }
+}
+class Log {
+    static info(message = String()) { return new Logger().getLogger().info(message) }
+    static error(message = String()) { return new Logger().getLogger().error(message) }
+}
+
 module.exports = {
     Main: Main,
     sleep: sleep,
@@ -420,7 +444,7 @@ module.exports = {
     ipcMain: ipcMain,
     ipcRenderer: ipcRenderer,
     shell: shell,
-    log: log,
+    Log: Log,
     path: path,
     fs: fs,
     store: new Store(),
