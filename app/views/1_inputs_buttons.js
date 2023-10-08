@@ -1,7 +1,7 @@
 const {
     Page, TextInput, Select, ComboBox,
     DateInput, NumberInput, TextArea, PasswordInput,
-    EmailInput, CheckBox, RadioButton, Button, H, FileInput, Toggle
+    EmailInput, CheckBox, RadioButton, Button, H, FileInput, Toggle, log
 } = require('../../index');
 const {Icons} = require("../../framework/components/chui_icons/icons");
 

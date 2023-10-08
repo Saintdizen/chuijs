@@ -336,7 +336,15 @@ class Styles {
     };
 }
 
-class Application { getApp() { return app } }
+class Application {
+    getApp() {
+        if (process && process.type === 'renderer') {
+            return require("@electron/remote").app;
+        } else {
+            return app;
+        }
+    }
+}
 class App {
     // ('exe' | 'module' | 'desktop' | 'documents' | 'downloads' | 'music' | 'pictures' | 'videos' | 'recent' | 'crashDumps')
     static get() { return new Application().getApp() }
