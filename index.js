@@ -1,7 +1,8 @@
 const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme} = require('electron');
-const log = require('electron-log');
-log.transports.file.resolvePath = () => require("path").join(app.getPath('userData'), `electron-log/logs.log`);
 const Store = require("electron-store");
+const log = require("electron-log");
+const path = require("path");
+const fs = require("fs");
 
 //ПОЛЯ ВВОДА
 const {TextInput} = require('./framework/components/chui_inputs/chui_text/text');
@@ -258,7 +259,7 @@ class Main {
                     await this.#sendNotificationUpdateLoadClose();
                     await this.#sendNotificationUpdate(this.#appName, `Загрузка завершена`);
                     setTimeout(async () => await this.#sendNotificationUpdateClose(), 3000);
-                    log.info("Обновление скачано!");
+                    Logger.info("Обновление скачано!");
                     this.#window.webContents.send("checkUpdatesTrue", true, updater.getVersion());
                     ipcMain.on("updateInstallConfirm", (e, check) => {
                         if (check) updater.quitAndInstall();
@@ -282,11 +283,11 @@ class Main {
                 await this.#sendNotificationUpdateLoadClose();
                 await this.#sendNotificationUpdate(this.#appName, `Загрузка завершена`);
                 setTimeout(async () => await this.#sendNotificationUpdateClose(), 3000);
-                log.info("Обновление скачано!");
+                Logger.info("Обновление скачано!");
                 this.#window.webContents.send("checkUpdatesTrue", true, updates.versionInfo.version);
                 ipcMain.on("updateInstallConfirm", (e, check) => {
                     if (check) {
-                        log.info("Установка обновления...");
+                        Logger.info("Установка обновления...");
                         autoUpdater.quitAndInstall();
                     }
                 })
@@ -333,6 +334,18 @@ class Styles {
         WEBKIT_FILL: '-webkit-fill-available',
         INHERIT: 'inherit'
     };
+}
+
+class Application { getApp() { return app } }
+class App {
+    // ('exe' | 'module' | 'desktop' | 'documents' | 'downloads' | 'music' | 'pictures' | 'videos' | 'recent' | 'crashDumps')
+    static get() { return new Application().getApp() }
+    static homePath() { return new Application().getApp().getPath("home") }
+    static appDataPath() { return new Application().getApp().getPath("appData") }
+    static userDataPath() { return new Application().getApp().getPath("userData") }
+    static sessionDataPath() { return new Application().getApp().getPath("sessionData") }
+    static logsPath() { return new Application().getApp().getPath("logs") }
+    static tempPath() { return new Application().getApp().getPath("temp") }
 }
 
 module.exports = {
@@ -400,5 +413,9 @@ module.exports = {
     ipcRenderer: ipcRenderer,
     shell: shell,
     log: log,
-    store: new Store()
+    path: path,
+    fs: fs,
+    store: new Store(),
+    //
+    App: App
 }
