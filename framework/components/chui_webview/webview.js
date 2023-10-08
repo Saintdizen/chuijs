@@ -21,15 +21,16 @@ class WebView {
         this.#WebView.setAttribute('allowpopups', 'true')
         this.#WebView.setAttribute("webpreferences", "allowRunningInsecureContent, javascript=yes")
 
-        this.#main_block.appendChild(this.#WebView)
-        this.#main_block.appendChild(this.#chui_load)
         let spinner = new Spinner(Spinner.SIZE.BIG);
+        this.#chui_load.appendChild(spinner.set());
+        this.#main_block.appendChild(this.#WebView)
+
         const loadStart = () => {
-            this.#chui_load.appendChild(spinner.set());
+            this.#main_block.appendChild(this.#chui_load)
         }
         const loadStop = () => {
-            spinner.remove();
             new Animation(this.#WebView).fadeIn();
+            this.#main_block.removeChild(this.#chui_load)
         }
         this.#WebView.addEventListener('did-start-loading', loadStart)
         this.#WebView.addEventListener('did-stop-loading', loadStop)
