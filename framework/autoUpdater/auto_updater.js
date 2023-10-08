@@ -1,5 +1,8 @@
 const {Octokit} = require("octokit");
-const {shell, log, path, fs} = require("../../index");
+const {shell} = require("electron")
+const log  = require("electron-log")
+const path = require("path")
+const fs = require("fs")
 
 class AutoUpdater {
     #private = false;
