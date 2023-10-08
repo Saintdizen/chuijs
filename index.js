@@ -1,6 +1,7 @@
 const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme} = require('electron');
 const log = require('electron-log');
 log.transports.file.resolvePath = () => require("path").join(app.getPath('userData'), `electron-log/logs.log`);
+const Store = require("electron-store");
 
 //ПОЛЯ ВВОДА
 const {TextInput} = require('./framework/components/chui_inputs/chui_text/text');
@@ -335,10 +336,6 @@ class Styles {
 }
 
 module.exports = {
-    BrowserWindow: BrowserWindow,
-    ipcMain: ipcMain,
-    ipcRenderer: ipcRenderer,
-    shell: shell,
     Main: Main,
     sleep: sleep,
     render: render,
@@ -394,8 +391,14 @@ module.exports = {
     TelegramBot: TelegramBot,
     MenuBar: MenuBar,
     UpdateNotification: UpdateNotification,
-    log: log,
     Audio: Audio,
     Video: Video,
-    AutoUpdater: AutoUpdater
+    AutoUpdater: AutoUpdater,
+    //
+    BrowserWindow: BrowserWindow,
+    ipcMain: ipcMain,
+    ipcRenderer: ipcRenderer,
+    shell: shell,
+    log: log,
+    store: new Store()
 }
