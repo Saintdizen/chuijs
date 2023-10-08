@@ -124,13 +124,13 @@ class Main {
 
     #createWindow(hideOnClose = Boolean()) {
         this.#window = new BrowserWindow({
-            transparent: false, //minWidth: this.#width, //minHeight: this.#height,
+            transparent: false,
             width: this.#width,
             height: this.#height,
             name: this.#appName,
             title: this.#appName,
             show: false,
-            icon: this.#app_icon, //backgroundColor: '#2e2c29',
+            icon: this.#app_icon,
             webPreferences: {
                 plugins: false,
                 nodeIntegration: true,

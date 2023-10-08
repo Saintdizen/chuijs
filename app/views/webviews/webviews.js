@@ -9,8 +9,8 @@ class WebViewsPage extends Page {
         this.setFullHeight()
         this.disablePadding()
 
-        let web = new WebView("https://www.google.com/");
-        web.insertCustomCSS(__dirname + '/test.css')
+        let web = new WebView("https://hd.kinopoisk.ru/");
+        //web.insertCustomCSS(__dirname + '/test.css')
 
         this.add(web)
     }

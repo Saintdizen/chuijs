@@ -22,7 +22,6 @@ class Test extends AppLayout {
     constructor() {
         super();
         // Настройки окна
-        //this.setLeftPositionWindowControls();
         this.setSearchToAppMenu();
 
         // Настройка роутов

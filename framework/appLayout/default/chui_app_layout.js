@@ -375,9 +375,6 @@ class AppLayout {
     setSearchToAppMenu() {
         this.#appMenu.enableSearchInput();
     }
-    setLeftPositionWindowControls() {
-        this.#header.addWC(true)
-    }
     setAutoCloseRouteMenu() {
         this.#appMenu.setAutoClose();
     }
