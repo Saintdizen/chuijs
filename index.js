@@ -152,7 +152,6 @@ class Main {
             center: true
         });
         this.#window.setMenu(null)
-        this.#window.webContents.setFrameRate(60)
 
         if (!this.#webSecurity) {
             this.#window.webContents.session.webRequest.onBeforeSendHeaders((details, callback) => {

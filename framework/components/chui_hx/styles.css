@@ -3,7 +3,6 @@ h1, h2, h3, h4, h5, h6 {
     width: max-content;
     color: var(--text_color);
     margin: var(--margin);
-    letter-spacing: -0.033em;
     font-weight: 500;
 }
 

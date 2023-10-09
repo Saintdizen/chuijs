@@ -5,7 +5,6 @@ chui_icon {
     font-size: var(--header_icon_size);
     display: inherit;
     text-transform: none;
-    letter-spacing: normal;
     word-wrap: normal;
     white-space: nowrap;
     direction: ltr;

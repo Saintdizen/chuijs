@@ -2,9 +2,9 @@
     --global_blur: saturate(180%) blur(20px);
     --main_padding: 6px 10px;
     --test_padding: 6px;
-    --header_icon_size: 13pt;
-    --font_default_size: 11pt;
-    --font_labels_size: 9pt;
+    --header_icon_size: 14pt;
+    --font_default_size: 12pt;
+    --font_labels_size: 10pt;
     --border_radius: 0.6rem;
     --margin: 6px;
     --box_shadow_main: 0 1px 5px 1px rgb(0 0 0 / 20%);
@@ -22,27 +22,23 @@ strong {
 }
 
 * {
-    /*letter-spacing: -.011em;*/
-    font-family: chui_Inter, serif;
+    font-family: 'chui_Inter';
     user-select: none;
     outline: none;
     transition: all .2s;
     animation-duration: .2s;
     position: relative;
-    -webkit-font-smoothing: subpixel-antialiased;
     font-size: var(--font_default_size);
     line-height: normal;
 }
 
 *:before {
-    /*letter-spacing: -.011em;*/
-    font-family: chui_Inter, serif;
+    font-family: 'chui_Inter';
     user-select: none;
     outline: none;
     transition: all .2s;
     animation-duration: .2s;
     position: relative;
-    -webkit-font-smoothing: subpixel-antialiased;
     font-size: var(--font_default_size);
     line-height: normal;
 }
