@@ -42,16 +42,7 @@ class WindowControls {
     #maximize = document.createElement("wc_maximize")
     #minimize = document.createElement("wc_minimize")
     constructor() {
-        if (process.platform === "darwin") {
-            this.#box.className = "wc_box_mac"
-            this.#box.style.margin = "0px 3px 0px 8px"
-            this.#close.className = 'wc_close_mac'
-            this.#maximize.className = 'wc_maximize_mac'
-            this.#minimize.className = 'wc_minimize_mac'
-            this.#close.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "12px").getHTML();
-            this.#minimize.innerHTML = new Icon(Icons.CONTENT.REMOVE, "12px").getHTML();
-            this.#maximize.innerHTML = new Icon(Icons.CONTENT.ADD, "12px").getHTML();
-        } else if (process.platform === "win32") {
+        if (process.platform === "win32") {
             this.#box.className = "wc_box_win"
             this.#close.className = 'wc_close_win'
             this.#maximize.className = 'wc_maximize_win'
@@ -83,20 +74,14 @@ class WindowControls {
         })
     }
     set(pos_bool = Boolean()) {
-        if (process.platform === "darwin") {
+        if (pos_bool) {
             this.#box.appendChild(this.#close)
+            this.#box.appendChild(this.#maximize)
+            this.#box.appendChild(this.#minimize)
+        } else {
             this.#box.appendChild(this.#minimize)
             this.#box.appendChild(this.#maximize)
-        } else {
-            if (pos_bool) {
-                this.#box.appendChild(this.#close)
-                this.#box.appendChild(this.#maximize)
-                this.#box.appendChild(this.#minimize)
-            } else {
-                this.#box.appendChild(this.#minimize)
-                this.#box.appendChild(this.#maximize)
-                this.#box.appendChild(this.#close)
-            }
+            this.#box.appendChild(this.#close)
         }
         return this.#box;
     }
@@ -131,9 +116,7 @@ class Header {
         for (let component of components) this.#header_right_box.insertBefore(component, this.#header_right_box.firstChild);
     }
     set() {
-        if (process.platform === "darwin") {
-            this.#header_main.insertBefore(this.#wc_box.set(true), this.#header_main.firstChild);
-        }
+        this.#header_main.insertBefore(this.#wc_box.set(true), this.#header_main.firstChild);
         return this.#header;
     }
 }

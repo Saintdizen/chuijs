@@ -55,7 +55,6 @@ const {UpdateNotification} = require("./framework/components/chui_notification/n
 const {Image} = require('./framework/components/chui_media/image');
 const {Audio} = require("./framework/components/chui_media/audio");
 const {Video} = require("./framework/components/chui_media/video");
-const {AutoUpdater} = require("./framework/autoUpdater/auto_updater");
 
 //VARS
 let isQuiting = false;
@@ -96,8 +95,7 @@ class Main {
                 this.#app_icon = options.icon;
             }
         }
-        //app.disableHardwareAcceleration()
-        //app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
+        app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
         //app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 
         // Options
@@ -242,35 +240,7 @@ class Main {
         })
     }
 
-    enableAutoUpdateApp(start = Number(), json) {
-        if (process.platform === "linux") {
-            this.#updateAppImage(start)
-        } else {
-            this.#updaterAll(new AutoUpdater(json, app), start)
-        }
-    }
-
-    #updaterAll(updater, start) {
-        setTimeout(async () => {
-            let check = await updater.checkUpdate();
-            if (check) {
-                await this.#sendNotificationUpdateLoad(this.#appName, `Загрузка новой версии ${updater.getVersion()}`);
-                let test = await updater.downloadUpdate();
-                if (test !== undefined) {
-                    await this.#sendNotificationUpdateLoadClose();
-                    await this.#sendNotificationUpdate(this.#appName, `Загрузка завершена`);
-                    setTimeout(async () => await this.#sendNotificationUpdateClose(), 3000);
-                    Logger.info("Обновление скачано!");
-                    this.#window.webContents.send("checkUpdatesTrue", true, updater.getVersion());
-                    ipcMain.on("updateInstallConfirm", (e, check) => {
-                        if (check) updater.quitAndInstall();
-                    })
-                }
-            }
-        }, start);
-    }
-
-    #updateAppImage(start) {
+    enableAutoUpdateApp(start = Number()) {
         setTimeout(async () => {
             const {autoUpdater} = require("electron-updater");
             autoUpdater.autoInstallOnAppQuit = false;
@@ -284,11 +254,11 @@ class Main {
                 await this.#sendNotificationUpdateLoadClose();
                 await this.#sendNotificationUpdate(this.#appName, `Загрузка завершена`);
                 setTimeout(async () => await this.#sendNotificationUpdateClose(), 3000);
-                Logger.info("Обновление скачано!");
+                Log.info("Обновление скачано!");
                 this.#window.webContents.send("checkUpdatesTrue", true, updates.versionInfo.version);
                 ipcMain.on("updateInstallConfirm", (e, check) => {
                     if (check) {
-                        Logger.info("Установка обновления...");
+                        Log.info("Установка обновления...");
                         autoUpdater.quitAndInstall();
                     }
                 })
@@ -439,7 +409,6 @@ module.exports = {
     UpdateNotification: UpdateNotification,
     Audio: Audio,
     Video: Video,
-    AutoUpdater: AutoUpdater,
     //
     BrowserWindow: BrowserWindow,
     ipcMain: ipcMain,

@@ -516,43 +516,6 @@ header_button:hover chui_icon {
 }
 
 /*Управление окном*/
-/* MACOS STYLE */
-.wc_box_mac {
-    -webkit-app-region: no-drag;
-    color: var(--text_color);
-    margin: 0 3px;
-    padding: 0 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.wc_close_mac {
-    background: rgb(232, 87, 86);
-}
-.wc_minimize_mac {
-    background: rgb(246, 187, 44);
-}
-.wc_maximize_mac {
-    background: rgb(111, 202, 66);
-}
-
-.wc_close_mac, .wc_maximize_mac, .wc_minimize_mac {
-    margin: 6px 3px;
-    padding: 0px;
-    border-radius: 100%;
-    border: 1px solid var(--element_background_2);
-    box-shadow: 0 0 1px 0 var(--element_background_2);
-}
-
-.wc_close_mac chui_icon, .wc_maximize_mac chui_icon, .wc_minimize_mac chui_icon {
-    color: transparent;
-}
-
-.wc_close_mac:hover chui_icon, .wc_maximize_mac:hover chui_icon, .wc_minimize_mac:hover chui_icon {
-    color: black;
-}
-
 /* WINDOWS STYLE */
 .wc_box_win {
     -webkit-app-region: no-drag;
