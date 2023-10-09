@@ -32,7 +32,7 @@ checkbox {
     align-items:center;
     justify-content:center;
     color: var(--element_background_2);
-    font-family: 'chui_Inter';
+    font-family: 'chui_Ubuntu';
     background: var(--element_background);
     border: 1px solid var(--element_background_2);
     box-shadow: 0 0 1px 0 var(--element_background_2);

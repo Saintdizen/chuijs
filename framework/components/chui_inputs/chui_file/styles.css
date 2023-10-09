@@ -76,8 +76,7 @@ input[type=file]::file-selector-button {
     margin: 0 var(--margin) 0 0;
     color: var(--text_color);
     transition: all .22s;
-    font-family: 'chui_Inter';
-    word-spacing: 0.33px;
+    font-family: 'chui_Ubuntu';
     background: var(--element_background_2);
     border: none;
 }

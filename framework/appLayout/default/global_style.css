@@ -1,10 +1,10 @@
 :root {
     --global_blur: saturate(180%) blur(20px);
-    --main_padding: 6px 10px;
-    --test_padding: 6px;
-    --header_icon_size: 14pt;
-    --font_default_size: 12pt;
-    --font_labels_size: 10pt;
+    --main_padding: 8px 10px;
+    --test_padding: 8px;
+    --header_icon_size: 13pt;
+    --font_default_size: 11pt;
+    --font_labels_size: 9pt;
     --border_radius: 0.6rem;
     --margin: 6px;
     --box_shadow_main: 0 1px 5px 1px rgb(0 0 0 / 20%);
@@ -22,7 +22,7 @@ strong {
 }
 
 * {
-    font-family: 'chui_Inter';
+    font-family: 'chui_Ubuntu';
     user-select: none;
     outline: none;
     transition: all .2s;
@@ -33,7 +33,7 @@ strong {
 }
 
 *:before {
-    font-family: 'chui_Inter';
+    font-family: 'chui_Ubuntu';
     user-select: none;
     outline: none;
     transition: all .2s;
