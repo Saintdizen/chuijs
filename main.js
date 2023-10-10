@@ -6,6 +6,7 @@ const main = new Main({
     height: 900,
     render: `${__dirname}/app/app.js`,
     devTools: false,
+    resizable: true,
     //icon: `${__dirname}/icon.png`
 });
 main.start({

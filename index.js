@@ -72,6 +72,7 @@ class Main {
     #renderer = undefined;
     #devToolsOpened = false;
     #webSecurity = true;
+    #resizable = true;
 
     constructor(options = {
         name: String(),
@@ -80,6 +81,7 @@ class Main {
         render: String(),
         devTools: Boolean(),
         webSecurity: Boolean(),
+        resizable: Boolean()
     }) {
         this.#app_icon = options.icon;
         if (this.#app_icon === undefined) {
@@ -104,6 +106,7 @@ class Main {
         this.#width = options.width;
         this.#renderer = options.render;
         this.#webSecurity = options.webSecurity;
+        this.#resizable = options.resizable;
         // ===
         if (options.devTools) this.#window.webContents.openDevTools();
     }
@@ -144,7 +147,7 @@ class Main {
                 nodeIntegrationInSubFrames: true
             },
             frame: false,
-            resizable: true,
+            resizable: this.#resizable,
             minimizable: true,
             maximizable: true,
             center: true
