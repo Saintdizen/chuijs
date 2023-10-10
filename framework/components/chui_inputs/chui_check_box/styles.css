@@ -23,8 +23,8 @@ checkbox {
     font-size: var(--font_default_size);
     content: '\2714';
     display: flex;
-    width: 16px;
-    height: 16px;
+    width: 1.2em;
+    height: 1.2em;
     flex-shrink: 0;
     flex-grow:0;
     border-radius:25%;
@@ -68,6 +68,8 @@ checkbox {
 .checkbox:checked+label::before {
     background-color: var(--blue_prime_background);
     color:var(--text_color_hover);
+    border: 1px solid var(--blue_prime_background);
+    box-shadow: 0 0 1px 0 var(--blue_prime_background);
 }
 
 .labelz {

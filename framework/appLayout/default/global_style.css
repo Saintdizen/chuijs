@@ -1,6 +1,6 @@
 :root {
     --global_blur: saturate(180%) blur(20px);
-    --main_padding: 8px 10px;
+    --main_padding: 8px 11px;
     --test_padding: 8px;
     --header_icon_size: 13pt;
     --font_default_size: 11pt;
@@ -82,7 +82,7 @@ app_menu_search_main {
 }
 
 center::-webkit-scrollbar-track {
-    margin-top: 43px;
+    margin-top: 47px;
 }
 
 .test_scroll_track::-webkit-scrollbar-track {
@@ -166,7 +166,7 @@ app_menu {
     justify-content: flex-start;
     align-items: flex-start;
     z-index: 1000;
-    margin: 52px 8px 8px 8px;
+    margin: 57px 10px 10px 10px;
     border-radius: var(--border_radius);
     box-shadow: var(--box_shadow_main);
     background: var(--main_background_2);
@@ -184,7 +184,7 @@ notification_box {
     align-items: flex-start;
     height: -webkit-fill-available;
     z-index: 1000;
-    margin: 58px 12px 12px 12px;
+    margin: 57px 10px 10px 10px;
     border-radius: var(--border_radius);
     box-shadow: var(--box_shadow_main);
     background: var(--main_background_2);
@@ -209,7 +209,7 @@ notification_box_main {
     overflow: hidden hidden;
     height: -webkit-fill-available;
     width: -webkit-fill-available;
-    padding: var(--test_padding);
+    padding: 4px;
 }
 
 notification_box_main:hover {
@@ -396,7 +396,7 @@ user_button {
 }
 
 user_dropdown {
-    margin-top: 43px;
+    margin-top: 47px;
     display: none;
     position: absolute;
     background: var(--main_background_2);
