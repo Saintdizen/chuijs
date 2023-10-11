@@ -1,8 +1,14 @@
+// === ИНСТРУМЕНТЫ ===
 const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme} = require('electron');
 const Store = require("electron-store");
 const log = require("electron-log");
 const path = require("path");
 const fs = require("fs");
+const os = require("os");
+const request = require('request');
+const {transliterate} = require("transliteration");
+// === === ===
+
 
 //ПОЛЯ ВВОДА
 const {TextInput} = require('./framework/components/chui_inputs/chui_text/text');
@@ -128,7 +134,7 @@ class Main {
 
     #createWindow(hideOnClose = Boolean()) {
         this.#window = new BrowserWindow({
-            transparent: false,
+            transparent: true,
             width: this.#width,
             height: this.#height,
             name: this.#appName,
@@ -420,6 +426,9 @@ module.exports = {
     Log: Log,
     path: path,
     fs: fs,
+    os: os,
+    request: request,
+    transliterate: transliterate,
     store: new Store(),
     //
     App: App
