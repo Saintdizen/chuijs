@@ -88,14 +88,61 @@ async function run() {
 }
 ```
 ### Модули
-Themes (Dark|Light), Route, Page, ElectronTray, TelegramBot API
+| Компонент                            | Версия | Описание              |
+|--------------------------------------|--------|-----------------------|
+| Автоматическое обновление приложения | 1.0.0  | только AppImage, NSIS |
+| Themes                               | 1.0.0  | Зависит от системы    |
+| Route                                | 1.0.0  |                       |
+| Page                                 | 1.0.0  |                       |
+| ElectronTray                         | 1.0.0  |                       |
+| TelegramBot API                      | 1.0.0  |                       |
+
 ### Компоненты
-AppLayout, DateInput, NumberInput, EmailInput, TextArea,
-PasswordInput, FileInput, H1, H2, H3, H4, H5, H6, Label, 
-Paragraph, Button, CheckBox, ComboBox, SelectBox, 
-ContentBlock, Details, Dialogs, RadioButton, Table, 
-ProgressBar, Toggle, Tabs, Notification, Badge, 
-Image, Graphs (Bar, Pie), Icons, WebView, Spinner,
-GroupRadio, Accordion, Pre, HtmlBlock, TreeView, SlideShow,
-TextEditor, FieldSet, Popups (Alert, Confirm, Prompt), Forms,
-AudioPlayer
+| Компонент                       | Версия | Описание |
+|---------------------------------|--------|----------|
+| AppLayout                       | 1.0.0  |          |
+| DateInput                       | 1.0.0  |          |
+| NumberInput                     | 1.0.0  |          |
+| EmailInput                      | 1.0.0  |          |
+| TextArea                        | 1.0.0  |          |
+| PasswordInput                   | 1.0.0  |          |
+| FileInput                       | 1.0.0  |          |
+| H1, H2, H3, H4, H5, H6          | 1.0.0  |          |
+| Label                           | 1.0.0  |          |
+| Paragraph                       | 1.0.0  |          |
+| Button                          | 1.0.0  |          |
+| CheckBox                        | 1.0.0  |          |
+| ComboBox                        | 1.0.0  |          |
+| SelectBox                       | 1.0.0  |          |
+| ContentBlock                    | 1.0.0  |          |
+| Details                         | 1.0.0  |          |
+| Dialogs                         | 1.0.0  |          |
+| RadioButton                     | 1.0.0  |          |
+| Table                           | 1.0.0  |          |
+| ProgressBar                     | 1.0.0  |          |
+| Toggle                          | 1.0.0  |          |
+| Tabs                            | 1.0.0  |          |
+| Notification                    | 1.0.0  |          |
+| Badge                           | 1.0.0  |          |
+| Image                           | 1.0.0  |          |
+| Icons                           | 1.0.0  |          |
+| WebView                         | 1.0.0  |          |
+| Spinner                         | 1.0.0  |          |
+| GroupRadio                      | 1.0.0  |          |
+| Accordion                       | 1.0.0  |          |
+| Pre                             | 1.0.0  |          |
+| HtmlBlock                       | 1.0.0  |          |
+| TreeView                        | 1.0.0  |          |
+| SlideShow                       | 1.0.0  |          |
+| TextEditor                      | 1.0.0  |          |
+| FieldSet                        | 1.0.0  |          |
+| Popups (Alert, Confirm, Prompt) | 1.0.0  |          |
+| Forms                           | 1.0.0  |          |
+
+### В разработке
+| Компонент               | Версия | Описание |
+|-------------------------|--------|----------|
+| VideoPlayer             | dev    | -        |
+| AudioPlayer             | dev    | -        |
+| Graphs (Bar, Pie)       | dev    | -        |
+| Дочерние BrowserWindows | dev    | -        |
