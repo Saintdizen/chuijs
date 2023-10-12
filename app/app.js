@@ -23,6 +23,7 @@ class Test extends AppLayout {
         super();
         // Настройки окна
         this.setSearchToAppMenu();
+        //this.setWindowControlsLeft();
 
         // Настройка роутов
         this.setAutoCloseRouteMenu(true);

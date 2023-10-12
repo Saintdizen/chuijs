@@ -17,16 +17,19 @@ notification {
 .notification_warning {
     background: var(--badge_warning_back);
     box-shadow: var(--box_shadow_main);
+    border: 1px solid var(--badge_warning_back);
 }
 
 .notification_error {
     background: var(--badge_error_back);
     box-shadow: var(--box_shadow_main);
+    border: 1px solid var(--badge_error_back);
 }
 
 .notification_success {
     background: var(--badge_success_back);
     box-shadow: var(--box_shadow_main);
+    border: 1px solid var(--badge_success_back);
 }
 
 notification_content {
@@ -68,13 +71,21 @@ notification_date {
 }
 
 notification_text {
-    font-size: var(--font_labels_size);
-    font-weight: 500;
+    font-size: var(--font_notification_size);
+    font-weight: 400;
     margin: 3px 4px 6px 4px;
     color: var(--text_color);
     word-break: break-word;
 }
 
-notification_text p {
+notification_text * {
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
+}
+
+notification_text p strong {
+    font-size: inherit;
+    font-weight: 500;
     margin: 0;
 }

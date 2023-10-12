@@ -42,24 +42,9 @@ class WindowControls {
     #maximize = document.createElement("wc_maximize")
     #minimize = document.createElement("wc_minimize")
     constructor() {
-        if (process.platform === "win32") {
-            this.#box.className = "wc_box_win"
-            this.#close.className = 'wc_close_win'
-            this.#maximize.className = 'wc_maximize_win'
-            this.#minimize.className = 'wc_minimize_win'
-            this.#close.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "16px").getHTML();
-            this.#maximize.innerHTML = new Icon(Icons.CONTENT.ADD, "16px").getHTML();
-            this.#minimize.innerHTML = new Icon(Icons.CONTENT.REMOVE, "16px").getHTML();
-        } else {
-            this.#box.className = "wc_box"
-            this.#close.className = 'wc_close'
-            this.#maximize.className = 'wc_maximize'
-            this.#minimize.className = 'wc_minimize'
-            this.#close.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "14px").getHTML();
-            this.#maximize.innerHTML = new Icon(Icons.CONTENT.ADD, "14px").getHTML();
-            this.#minimize.innerHTML = new Icon(Icons.CONTENT.REMOVE, "14px").getHTML();
-        }
-        //
+        this.#close.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "16px").getHTML();
+        this.#maximize.innerHTML = new Icon(Icons.CONTENT.ADD, "16px").getHTML();
+        this.#minimize.innerHTML = new Icon(Icons.CONTENT.REMOVE, "16px").getHTML();
         this.#close.addEventListener("click", () => {
             let r_window = require("@electron/remote").BrowserWindow.getFocusedWindow();
             r_window.close();
@@ -104,8 +89,8 @@ class Header {
         this.#header.appendChild(this.#header_main)
         this.#header.appendChild(this.#header_toolbar)
     }
-    addWC() {
-        this.#header_main.insertBefore(this.#wc_box.set(true), this.#header_main.firstChild);
+    addWC(boolean = Boolean()) {
+        this.#header_main.insertBefore(this.#wc_box.set(boolean), this.#header_main.firstChild);
     }
     addToLeft(...components) {
         for (let component of components) {
@@ -116,7 +101,6 @@ class Header {
         for (let component of components) this.#header_right_box.insertBefore(component, this.#header_right_box.firstChild);
     }
     set() {
-        this.#header_main.insertBefore(this.#wc_box.set(true), this.#header_main.firstChild);
         return this.#header;
     }
 }
@@ -354,7 +338,9 @@ class AppLayout {
             }
         })
     }
-
+    setWindowControlsLeft() {
+        this.#header.addWC(true);
+    }
     setSearchToAppMenu() {
         this.#appMenu.enableSearchInput();
     }

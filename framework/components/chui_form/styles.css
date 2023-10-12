@@ -3,7 +3,7 @@ chui_form_main {
 }
 
 .chui_form_submit_button {
-    border: 1px solid var(--element_background_2);
+    border: none;
     cursor: pointer;
     height: max-content;
     width: max-content;
@@ -12,8 +12,8 @@ chui_form_main {
     font-size: var(--font_default_size);
     font-weight: 400;
     margin: var(--margin);
-    background: var(--element_background);
-    color: var(--blue_prime_background);
+    background: var(--element_background_2);
+    color: var(--text_color);
 }
 
 .chui_form_submit_button:hover {
