@@ -11,8 +11,7 @@ class WebViewsPage extends Page {
 
         let web = new WebView("https://music.yandex.ru/");
         web.insertCustomCSS(__dirname + '/test.css')
-        //web.executeJavaScript("Mu.blocks.di.repo.player.play();")
-        web.executeJavaScript("document.querySelector(\"body > div.page-root.page-root_no-player.deco-pane-back.theme.theme_dark.black > div.head-container > div > div > div.head-kids__left\").remove();")
+        web.executeJavaScriptFromFile(__dirname + "/test.js")
         this.add(web)
     }
 }

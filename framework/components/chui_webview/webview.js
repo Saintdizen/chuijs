@@ -36,9 +36,20 @@ class WebView {
         this.#WebView.addEventListener('did-start-loading', loadStart)
         this.#WebView.addEventListener('did-stop-loading', loadStop)
     }
-    executeJavaScript(script = String()) {
-        this.#WebView.addEventListener('did-stop-loading', () => {
-            this.#WebView.executeJavaScript(script).then(r => console.log(r))
+    executeJavaScriptFromFile(path = String()) {
+        this.#WebView.addEventListener('dom-ready', () => {
+            const fs = require('fs');
+            try {
+                const data = fs.readFileSync(path, 'utf8');
+                this.#WebView.executeJavaScript(data).then(r => console.log(r)).catch(e => console.error(e))
+            } catch (err) {
+                console.error(err);
+            }
+        })
+    }
+    executeJavaScript(code = String()) {
+        this.#WebView.addEventListener('dom-ready', () => {
+            this.#WebView.executeJavaScript(code).then(r => console.log(r)).catch(e => console.error(e))
         })
     }
     addStartLoadEvent(listener = () => {}) {
