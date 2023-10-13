@@ -28,12 +28,18 @@ class WebView {
         const loadStart = () => {
             this.#main_block.appendChild(this.#chui_load)
         }
+
         const loadStop = () => {
             new Animation(this.#WebView).fadeIn();
             this.#main_block.removeChild(this.#chui_load)
         }
         this.#WebView.addEventListener('did-start-loading', loadStart)
         this.#WebView.addEventListener('did-stop-loading', loadStop)
+    }
+    executeJavaScript(script = String()) {
+        this.#WebView.addEventListener('did-stop-loading', () => {
+            this.#WebView.executeJavaScript(script).then(r => console.log(r))
+        })
     }
     addStartLoadEvent(listener = () => {}) {
         this.#WebView.addEventListener('did-start-loading', listener)

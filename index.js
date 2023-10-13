@@ -105,11 +105,11 @@ class Main {
         app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
 
         app.on('session-created', (session) => {
-            console.log(session)
+            //console.log(session)
             session.on('will-download', (e, item, contents) => {
                 if (contents.getType() === 'webview') {
                     const hostWebContents = contents.hostWebContents;
-                    console.log(hostWebContents)
+                    //console.log(hostWebContents)
                 }
                 // Set the save path, making Electron not to prompt a save dialog.
                 /*item.setSavePath(path.join(App.homePath(), "test.mp3"))
@@ -261,11 +261,12 @@ class Main {
         return this.#window;
     }
 
-    start(options = {hideOnClose: Boolean(), tray: []}) {
+    start(options = {hideOnClose: Boolean(), tray: [], extensions: []}) {
         nativeTheme.themeSource = "system";
         app.whenReady().then(() => {
-            session.defaultSession.loadExtension(path.join(__dirname, "extensions/build")).then(r => console.log(r))
-
+            if (options.extensions) {
+                for (let extension of options.extensions) session.defaultSession.loadExtension(extension).then(r => Log.info(r)).catch(e => Log.error(e))
+            }
             if (options.tray) {
                 this.#tray = new Tray(this.#app_icon);
                 context = Menu.buildFromTemplate(options.tray);
@@ -374,16 +375,26 @@ class Application {
 }
 
 class App {
-    // ('exe' | 'module' | 'desktop' | 'documents' | 'downloads' | 'music' | 'pictures' | 'videos' | 'recent' | 'crashDumps')
     static get() { return new Application().getApp() }
+    static getSession() { return new Application().getSession() }
+    static getWebContents() { return new Application().getWebContents() }
+    // ПУТИ
     static homePath() { return new Application().getApp().getPath("home") }
     static appDataPath() { return new Application().getApp().getPath("appData") }
     static userDataPath() { return new Application().getApp().getPath("userData") }
     static sessionDataPath() { return new Application().getApp().getPath("sessionData") }
     static logsPath() { return new Application().getApp().getPath("logs") }
     static tempPath() { return new Application().getApp().getPath("temp") }
-    static getSession() { return new Application().getSession() }
-    static getWebContents() { return new Application().getWebContents() }
+    static exePath() { return new Application().getApp().getPath("exe") }
+    static modulePath() { return new Application().getApp().getPath("module") }
+    static desktopPath() { return new Application().getApp().getPath("desktop") }
+    static documentsPath() { return new Application().getApp().getPath("documents") }
+    static downloadsPath() { return new Application().getApp().getPath("downloads") }
+    static musicPath() { return new Application().getApp().getPath("music") }
+    static picturesPath() { return new Application().getApp().getPath("pictures") }
+    static videosPath() { return new Application().getApp().getPath("videos") }
+    static recentPath() { return new Application().getApp().getPath("recent") }
+    static crashDumpsPath() { return new Application().getApp().getPath("crashDumps") }
 }
 
 class Logger {
