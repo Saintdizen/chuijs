@@ -1,5 +1,5 @@
 // === ИНСТРУМЕНТЫ ===
-const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme} = require('electron');
+const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme, session, webContents} = require('electron');
 const Store = require("electron-store");
 const log = require("electron-log");
 const path = require("path");
@@ -8,7 +8,6 @@ const os = require("os");
 const request = require('request');
 const {transliterate} = require("transliteration");
 // === === ===
-
 
 //ПОЛЯ ВВОДА
 const {TextInput} = require('./framework/components/chui_inputs/chui_text/text');
@@ -104,6 +103,38 @@ class Main {
             }
         }
         app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
+
+        app.on('session-created', (session) => {
+            console.log(session)
+            session.on('will-download', (e, item, contents) => {
+                if (contents.getType() === 'webview') {
+                    const hostWebContents = contents.hostWebContents;
+                    console.log(hostWebContents)
+                }
+                // Set the save path, making Electron not to prompt a save dialog.
+                /*item.setSavePath(path.join(App.homePath(), "test.mp3"))
+
+                item.on('updated', (event, state) => {
+                    if (state === 'interrupted') {
+                        console.log('Download is interrupted but can be resumed')
+                    } else if (state === 'progressing') {
+                        if (item.isPaused()) {
+                            console.log('Download is paused')
+                        } else {
+                            console.log(`Received bytes: ${item.getReceivedBytes()}`)
+                        }
+                    }
+                })
+                item.once('done', (event, state) => {
+                    if (state === 'completed') {
+                        console.log('Download successfully')
+                    } else {
+                        console.log(`Download failed: ${state}`)
+                    }
+                })*/
+            });
+        });
+
         //app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 
         // Options
@@ -233,6 +264,8 @@ class Main {
     start(options = {hideOnClose: Boolean(), tray: []}) {
         nativeTheme.themeSource = "system";
         app.whenReady().then(() => {
+            session.defaultSession.loadExtension(path.join(__dirname, "extensions/build")).then(r => console.log(r))
+
             if (options.tray) {
                 this.#tray = new Tray(this.#app_icon);
                 context = Menu.buildFromTemplate(options.tray);
@@ -324,7 +357,22 @@ class Application {
             return app;
         }
     }
+    getSession() {
+        if (process && process.type === 'renderer') {
+            return require("@electron/remote").session;
+        } else {
+            return session;
+        }
+    }
+    getWebContents() {
+        if (process && process.type === 'renderer') {
+            return require("@electron/remote").webContents;
+        } else {
+            return webContents;
+        }
+    }
 }
+
 class App {
     // ('exe' | 'module' | 'desktop' | 'documents' | 'downloads' | 'music' | 'pictures' | 'videos' | 'recent' | 'crashDumps')
     static get() { return new Application().getApp() }
@@ -334,6 +382,8 @@ class App {
     static sessionDataPath() { return new Application().getApp().getPath("sessionData") }
     static logsPath() { return new Application().getApp().getPath("logs") }
     static tempPath() { return new Application().getApp().getPath("temp") }
+    static getSession() { return new Application().getSession() }
+    static getWebContents() { return new Application().getWebContents() }
 }
 
 class Logger {

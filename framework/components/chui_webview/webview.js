@@ -14,12 +14,12 @@ class WebView {
         this.#WebView.setAttribute('id', this.#id)
         this.#WebView.setAttribute('src', url)
         this.#WebView.setAttribute('nodeintegration', 'true');
-        this.#WebView.setAttribute('nodeintegrationinsubframes', 'true');
         this.#WebView.setAttribute('plugins', 'true')
         this.#WebView.setAttribute('useragent', getFirefoxUserAgent())
         this.#WebView.setAttribute('disablewebsecurity', 'true')
         this.#WebView.setAttribute('allowpopups', 'true')
         this.#WebView.setAttribute("webpreferences", "allowRunningInsecureContent, javascript=yes")
+        //this.#WebView.setAttribute("partition", "test")
 
         let spinner = new Spinner(Spinner.SIZE.BIG);
         this.#chui_load.appendChild(spinner.set());
@@ -52,6 +52,9 @@ class WebView {
     }
     setUrl(url = String()) {
         this.#WebView.setAttribute('src', url)
+    }
+    getWebContentsId() {
+        return this.#WebView.getWebContentsId()
     }
     set() {
         return this.#main_block
