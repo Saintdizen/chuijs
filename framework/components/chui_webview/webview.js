@@ -37,7 +37,8 @@ class WebView {
         this.#WebView.addEventListener('did-stop-loading', loadStop)
     }
     executeJavaScriptFromFile(path = String()) {
-        this.#WebView.addEventListener('dom-ready', () => {
+        this.#WebView.addEventListener('did-frame-finish-load', (e) => {
+            //e.preventDefault();
             const fs = require('fs');
             try {
                 const data = fs.readFileSync(path, 'utf8');
@@ -48,7 +49,7 @@ class WebView {
         })
     }
     executeJavaScript(code = String()) {
-        this.#WebView.addEventListener('dom-ready', () => {
+        this.#WebView.addEventListener('did-frame-finish-load', () => {
             this.#WebView.executeJavaScript(code).then(r => console.log(r)).catch(e => console.error(e))
         })
     }
@@ -62,7 +63,7 @@ class WebView {
         this.#WebView.addEventListener('did-finish-load', listener)
     }
     insertCustomCSS(pathToCSSFile) {
-        this.#WebView.addEventListener('dom-ready', () => {
+        this.#WebView.addEventListener('did-frame-finish-load', () => {
             let data = fs.readFileSync(pathToCSSFile, 'utf8');
             this.#WebView.insertCSS(String(data)).catch(r => console.log(r));
         });

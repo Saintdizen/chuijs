@@ -1,4 +1,4 @@
-const { Main, MenuItem, Log, App, path} = require('./index');
+const { Main, MenuItem, Log } = require('./index');
 let json = require("./package.json");
 const main = new Main({
     name: `${json.name} (${json.version})`,
