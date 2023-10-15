@@ -103,6 +103,16 @@ class Main {
             }
         }
         app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
+        app.commandLine.appendSwitch("disable-http-cache");
+        app.commandLine.appendSwitch("disable-http-cache");
+        app.commandLine.appendSwitch('enable-transparent-visuals');
+        app.commandLine.appendSwitch('enable-gpu-rasterization', "true");
+        app.commandLine.appendSwitch('enable-native-gpu-memory-buffers', "true");
+        app.commandLine.appendSwitch('high-dpi-support', "true");
+        app.commandLine.appendSwitch('device-scale-factor', "true");
+        app.commandLine.appendSwitch('disable-touch-adjustment', "true");
+        app.commandLine.appendSwitch('main-frame-resizes-are-orientation-changes', "true");
+        app.commandLine.appendSwitch('disable-pinch', "true");
 
         app.on('session-created', (session) => {
             //console.log(session)
