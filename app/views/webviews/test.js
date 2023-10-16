@@ -1,6 +1,4 @@
 //Mu.blocks.di.repo.player.play();
-//document.querySelector("body > div.page-root.page-root_no-player.deco-pane-back.theme.theme_dark.black > div.head-container > div > div > div.head-kids__left").remove();
-//document.querySelector("body > div.page-root.page-root_no-player.deco-pane-back.theme.theme_dark.black > div.centerblock-wrapper.deco-pane.theme.theme_dark.black > div.footer").remove();
 class Test {
     #div1 = document.createElement("div");
     #div2 = document.createElement("div");
@@ -11,30 +9,30 @@ class Test {
         this.#span1.className = "d-icon deco-icon d-icon_share"
         this.#span1.style.rotate = "180deg";
         this.#span1.id = "test111"
-
-
-        this.#div1.addEventListener("click", async (evt) => {
+        this.#div1.addEventListener("click", async () => {
             let xhr = new XMLHttpRequest();
-            xhr.open("GET", Mu.blocks.di.repo.player.getTrack()._$f9);
+            xhr.open("GET", this.#getTrackURL());
             xhr.responseType = "arraybuffer";
-            xhr.onloadend = function () {
-                if (this.status === 200) {
+            xhr.onloadend = () => {
+                if (xhr.status === 200) {
                     let artist = Mu.blocks.di.repo.player.getTrack().artists[0].name;
                     let title = Mu.blocks.di.repo.player.getTrack().title;
                     let link = document.createElement("a");
-                    let blob = new Blob([xhr.response], {type: "application/pdf"});
+                    let blob = new Blob([xhr.response], {type: "audio/mp3"}); //
                     link.href = URL.createObjectURL(blob);
                     link.download = `${artist} - ${title}.mp3`;
-                    link.target = '_blank'
+                    link.target = '_self'
                     document.body.appendChild(link)
                     link.click();
                     document.body.removeChild(link);
-                    URL.revokeObjectURL(link.href);
+                    //URL.revokeObjectURL(link.href);
                 }
             };
             xhr.send();
         })
-
+    }
+    #getTrackURL() {
+        return Mu.blocks.di.repo.player.getTrack()._$f9;
     }
     render() {
         this.#div1.appendChild(this.#div2)

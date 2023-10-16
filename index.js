@@ -116,35 +116,35 @@ class Main {
 
         app.on('session-created', (session) => {
             //console.log(session)
-            session.on('will-download', (e, item, contents) => {
+            session.on('will-download', async (e, item, contents) => {
                 if (contents.getType() === 'webview') {
-                    const hostWebContents = contents.hostWebContents;
-                    //console.log(hostWebContents)
-                }
-                // Set the save path, making Electron not to prompt a save dialog.
-                /*item.setSavePath(path.join(App.homePath(), "test.mp3"))
-
-                item.on('updated', (event, state) => {
-                    if (state === 'interrupted') {
-                        console.log('Download is interrupted but can be resumed')
-                    } else if (state === 'progressing') {
-                        if (item.isPaused()) {
-                            console.log('Download is paused')
-                        } else {
-                            console.log(`Received bytes: ${item.getReceivedBytes()}`)
+                    //const hostWebContents = contents.hostWebContents;
+                    item.setSavePath(path.join(App.downloadsPath(), item.getFilename()))
+                    await this.#sendNotificationUpdateLoad("Загрузка", item.getFilename());
+                    item.on('updated', (event, state) => {
+                        if (state === 'interrupted') {
+                            console.log('Download is interrupted but can be resumed')
+                        } else if (state === 'progressing') {
+                            if (item.isPaused()) {
+                                console.log('Download is paused')
+                            } else {
+                                console.log(`Received bytes: ${item.getReceivedBytes()}`)
+                            }
                         }
-                    }
-                })
-                item.once('done', (event, state) => {
-                    if (state === 'completed') {
-                        console.log('Download successfully')
-                    } else {
-                        console.log(`Download failed: ${state}`)
-                    }
-                })*/
+                    })
+                    item.once('done', async (event, state) => {
+                        if (state === 'completed') {
+                            console.log('Download successfully')
+                            await this.#sendNotificationUpdateLoadClose();
+                            await this.#sendNotificationUpdate("Загрузка", `Загрузка завершена`);
+                            setTimeout(async () => await this.#sendNotificationUpdateClose(), 3000);
+                        } else {
+                            console.log(`Download failed: ${state}`)
+                        }
+                    })
+                }
             });
         });
-
         //app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 
         // Options
