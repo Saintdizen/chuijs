@@ -2,7 +2,7 @@
   "name": "chuijs",
   "productName": "chuijs",
   "description": "component framework chUiJS",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "private": false,
   "main": "index.js",
   "author": {

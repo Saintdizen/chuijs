@@ -1,7 +1,5 @@
 const { Animation } = require('../../modules/chui_animations/animations')
 const { Spinner } = require('../chui_spinner/spinner')
-const fs = require("fs");
-
 
 // https://www.electronjs.org/ru/docs/latest/api/webview-tag
 class WebView {
@@ -36,23 +34,6 @@ class WebView {
         this.#WebView.addEventListener('did-start-loading', loadStart)
         this.#WebView.addEventListener('did-stop-loading', loadStop)
     }
-    executeJavaScriptFromFile(path = String()) {
-        this.#WebView.addEventListener('did-frame-finish-load', (e) => {
-            //e.preventDefault();
-            const fs = require('fs');
-            try {
-                const data = fs.readFileSync(path, 'utf8');
-                this.#WebView.executeJavaScript(data).then(r => console.log(r)).catch(e => console.error(e))
-            } catch (err) {
-                console.error(err);
-            }
-        })
-    }
-    executeJavaScript(code = String()) {
-        this.#WebView.addEventListener('did-frame-finish-load', () => {
-            this.#WebView.executeJavaScript(code).then(r => console.log(r)).catch(e => console.error(e))
-        })
-    }
     addStartLoadEvent(listener = () => {}) {
         this.#WebView.addEventListener('did-start-loading', listener)
     }
@@ -62,11 +43,22 @@ class WebView {
     addFinishLoadEvent(listener = () => {}) {
         this.#WebView.addEventListener('did-finish-load', listener)
     }
-    insertCustomCSS(pathToCSSFile) {
-        this.#WebView.addEventListener('did-frame-finish-load', () => {
-            let data = fs.readFileSync(pathToCSSFile, 'utf8');
-            this.#WebView.insertCSS(String(data)).catch(r => console.log(r));
-        });
+    insertCustomRes(options = { cssPath: String(), jsPath: String() }) {
+        this.#WebView.addEventListener('did-frame-finish-load', async () => {
+            const fs = require('fs');
+            if (options.cssPath !== undefined) {
+                let data = fs.readFileSync(options.cssPath, 'utf8');
+                this.#WebView.insertCSS(String(data)).catch(r => console.log(r));
+            }
+            if (options.jsPath !== undefined) {
+                try {
+                    const data = fs.readFileSync(options.jsPath, 'utf8');
+                    await this.#WebView.executeJavaScript(data);
+                } catch (err) {
+                    console.error(err);
+                }
+            }
+        })
     }
     setUrl(url = String()) {
         this.#WebView.setAttribute('src', url)

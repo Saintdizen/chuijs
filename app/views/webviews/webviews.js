@@ -10,8 +10,10 @@ class WebViewsPage extends Page {
         this.disablePadding()
 
         let web = new WebView("https://music.yandex.ru/");
-        //web.insertCustomCSS(__dirname + '/test.css')
-        web.executeJavaScriptFromFile(__dirname + "/test.js")
+        web.insertCustomRes({
+            cssPath: __dirname + '/test.css',
+            jsPath: __dirname + '/test.js'
+        })
         this.add(web)
     }
 }
