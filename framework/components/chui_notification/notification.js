@@ -1,5 +1,5 @@
 const {Animation} = require('../../modules/chui_animations/animations');
-const {setStyles, markdownToHtml} = require('../../modules/chui_functions');
+const {setStyles, markdownToHtml, getDate} = require('../../modules/chui_functions');
 
 class Notification {
     #id = require("randomstring").generate();
@@ -32,7 +32,7 @@ class Notification {
             if (options.text !== undefined) this.#notification_text.innerText = options.text;
             if (options.markdownText !== undefined) this.#notification_text.innerHTML = markdownToHtml(options.markdownText);
         }
-        this.#notification_date.innerHTML = Notification.#getDate();
+        this.#notification_date.innerHTML = getDate();
         //
         if (options.style !== undefined) this.#notification.classList.add(options.style);
         //
@@ -66,21 +66,6 @@ class Notification {
                 notification.style.transform = "translateX(0)"
             }, 500)
         })
-    }
-    static #getDate() {
-        let date = new Date();
-        // День
-        let day = ('0' + Number(date.getDate()).toString()).slice(-2);
-        // Месяц
-        let month = ('0' + Number(date.getMonth() + 1).toString()).slice(-2);
-        // Год
-        let year = date.getFullYear();
-        // Часы
-        let hours = ('0' + Number(date.getHours()).toString()).slice(-2);
-        // Минуты
-        let minutes = ('0' + Number(date.getMinutes()).toString()).slice(-2);
-        // Возвращаем дату
-        return `${day}.${month}.${year}\n${hours}:${minutes}`;
     }
     static STYLE = { ERROR: 'notification_error', SUCCESS: 'notification_success', WARNING: 'notification_warning' }
 }

@@ -9,6 +9,7 @@ const {Popup} = require("../../components/chui_popups/popups");
 const {UpdateNotification} = require("../../components/chui_notification/notification_update");
 const {ipcRenderer} = require("electron");
 const chui_functions = require('../../modules/chui_functions');
+const {DownloadNotification} = require("../../components/chui_notification/notification_download");
 
 class Route {
     go(page) {
@@ -317,6 +318,11 @@ class AppLayout {
         document.body.appendChild(this.#notificationPanel)
 
         // ЗАГРУЗКА ОБЬЕКТОВ
+        ipcRenderer.on("sendNotificationDownload", async (e, text, body) => {
+            let updateNotificationLoad = new DownloadNotification({ title: text, text: body });
+            updateNotificationLoad.show();
+            //ipcRenderer.on("sendNotificationUpdateLoadClose", () => updateNotificationLoad.hide());
+        })
         //
         ipcRenderer.on("sendNotificationUpdateLoad", async (e, text, body) => {
             let updateNotificationLoad = new UpdateNotification({ title: text, text: body, spinner: true });

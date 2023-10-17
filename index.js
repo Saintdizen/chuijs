@@ -33,6 +33,8 @@ const {TextEditor} = require('./framework/components/chui_text_editor/text_edito
 const {Badge} = require('./framework/components/chui_badge/badge');
 const {Calendar} = require('./framework/components/chui_calendar/calendar');
 const {Notification} = require('./framework/components/chui_notification/notification');
+const {UpdateNotification} = require("./framework/components/chui_notification/notification_update");
+const {DownloadNotification} = require("./framework/components/chui_notification/notification_download");
 const {Tabs, Tab} = require('./framework/components/chui_tabs/chui_tabs');
 const {BarGraph, PieGraph} = require('./framework/components/chui_graphs/graphs');
 const {Toggle} = require('./framework/components/chui_inputs/chui_toggle/toggle');
@@ -56,7 +58,6 @@ const {FieldSet} = require("./framework/components/chui_fieldset/fieldset");
 const {Popup} = require("./framework/components/chui_popups/popups");
 const {TelegramBot} = require("./framework/components/telegram_bot/chui_telegram_bot");
 const {MenuBar} = require("./framework/components/chui_menu_bar/menu_bar");
-const {UpdateNotification} = require("./framework/components/chui_notification/notification_update");
 const {Image} = require('./framework/components/chui_media/image');
 const {Audio} = require("./framework/components/chui_media/audio");
 const {Video} = require("./framework/components/chui_media/video");
@@ -120,7 +121,7 @@ class Main {
                 if (contents.getType() === 'webview') {
                     //const hostWebContents = contents.hostWebContents;
                     item.setSavePath(path.join(App.downloadsPath(), item.getFilename()))
-                    await this.#sendNotificationUpdateLoad("Загрузка", item.getFilename());
+                    await this.#sendNotificationDownload("Загрузка", item.getFilename());
                     item.on('updated', (event, state) => {
                         if (state === 'interrupted') {
                             console.log('Download is interrupted but can be resumed')
@@ -135,9 +136,9 @@ class Main {
                     item.once('done', async (event, state) => {
                         if (state === 'completed') {
                             console.log('Download successfully')
-                            await this.#sendNotificationUpdateLoadClose();
-                            await this.#sendNotificationUpdate("Загрузка", `Загрузка завершена`);
-                            setTimeout(async () => await this.#sendNotificationUpdateClose(), 3000);
+                            //await this.#sendNotificationUpdateLoadClose();
+                            //await this.#sendNotificationUpdate("Загрузка", `Загрузка завершена`);
+                            //setTimeout(async () => await this.#sendNotificationUpdateClose(), 3000);
                         } else {
                             console.log(`Download failed: ${state}`)
                         }
@@ -175,7 +176,7 @@ class Main {
 
     #createWindow(hideOnClose = Boolean()) {
         this.#window = new BrowserWindow({
-            transparent: true,
+            transparent: false,
             width: this.#width,
             height: this.#height,
             name: this.#appName,
@@ -245,7 +246,6 @@ class Main {
     }
 
     hideAndShow() {
-        //let focused = this.#window.isFocused()
         let visible = this.#window.isVisible()
         if (!visible) {
             this.#window.show()
@@ -317,6 +317,10 @@ class Main {
                 })
             });
         }, start);
+    }
+
+    async #sendNotificationDownload(text, body) {
+        this.#window.webContents.send("sendNotificationDownload", text, body);
     }
 
     async #sendNotificationUpdateLoad(text, body) {
@@ -487,6 +491,7 @@ module.exports = {
     TelegramBot: TelegramBot,
     MenuBar: MenuBar,
     UpdateNotification: UpdateNotification,
+    DownloadNotification: DownloadNotification,
     Audio: Audio,
     Video: Video,
     //

@@ -49,6 +49,17 @@ function htmlToMarkdown(text = String()) {
     return new showdown.Converter().makeMarkdown(text);
 }
 
+function getDate() {
+    let date = new Date();
+    let day = ('0' + Number(date.getDate()).toString()).slice(-2);
+    let month = ('0' + Number(date.getMonth() + 1).toString()).slice(-2);
+    let year = date.getFullYear();
+    let hours = ('0' + Number(date.getHours()).toString()).slice(-2);
+    let minutes = ('0' + Number(date.getMinutes()).toString()).slice(-2);
+    return `${day}.${month}.${year}\n${hours}:${minutes}`;
+}
+
+exports.getDate = getDate
 exports.sleep = sleep
 exports.style_parse = style_parse
 exports.render = render

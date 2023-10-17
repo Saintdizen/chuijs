@@ -1,5 +1,6 @@
 const {Animation} = require('../../modules/chui_animations/animations');
 const {Spinner} = require("../chui_spinner/spinner");
+const {setStyles, getDate} = require('../../modules/chui_functions');
 
 class UpdateNotification {
     #id = require("randomstring").generate();
@@ -11,7 +12,7 @@ class UpdateNotification {
     #update_notification_body = document.createElement("update_notification_body");
     #update_notification_text = document.createElement("update_notification_text");
     constructor(options = { title: String(), text: String(), spinner: Boolean() }) {
-        require('../../modules/chui_functions').setStyles(__dirname + "/styles_update.css", 'chUiJS_UpdateNotification');
+        setStyles(__dirname + "/styles_update.css", 'chUiJS_UpdateNotification');
         this.#update_notification.id = this.#id;
         // Стили заголовка уведомления
         if (options.title !== undefined) {
@@ -25,7 +26,7 @@ class UpdateNotification {
         } else {
             throw new Error("Должна быть установлена опция text");
         }
-        this.#update_notification_date.innerHTML = this.#getDate();
+        this.#update_notification_date.innerHTML = getDate();
         //
         this.#update_notification_header.appendChild(this.#update_notification_title)
         this.#update_notification_header.appendChild(this.#update_notification_date)
@@ -48,21 +49,6 @@ class UpdateNotification {
     }
     hide() {
         new Animation(this.#update_notification).slideRightOutAndRemove();
-    }
-    #getDate() {
-        let date = new Date();
-        // День
-        let day = ('0' + Number(date.getDate()).toString()).slice(-2);
-        // Месяц
-        let month = ('0' + Number(date.getMonth() + 1).toString()).slice(-2);
-        // Год
-        let year = date.getFullYear();
-        // Часы
-        let hours = ('0' + Number(date.getHours()).toString()).slice(-2);
-        // Минуты
-        let minutes = ('0' + Number(date.getMinutes()).toString()).slice(-2);
-        // Возвращаем дату
-        return `${day}.${month}.${year}\n${hours}:${minutes}`;
     }
 }
 
