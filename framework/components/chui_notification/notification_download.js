@@ -1,6 +1,6 @@
 const {Animation} = require('../../modules/chui_animations/animations');
-const {ProgressBar} = require("../chui_progress_bar/progress_bar");
 const {setStyles, getDate} = require('../../modules/chui_functions');
+const {Spinner} = require("../chui_spinner/spinner");
 
 class DownloadNotification {
     #id = require("randomstring").generate();
@@ -10,6 +10,8 @@ class DownloadNotification {
     #download_notification_title = document.createElement("download_notification_title");
     #download_notification_date = document.createElement("download_notification_date");
     #download_notification_body = document.createElement("download_notification_body");
+    #download_notification_text = document.createElement("download_notification_text");
+    #spinner = new Spinner(Spinner.SIZE.V_SMALL, '3px 8px 3px 3px');
     constructor(options = { title: String(), text: String() }) {
         setStyles(__dirname + "/styles_download.css", 'chUiJS_downloadNotification');
         //
@@ -21,13 +23,10 @@ class DownloadNotification {
             throw new Error("Должна быть установлена опция title");
         }
         // Стили текста уведомления
-        let progress = new ProgressBar({ max: 100 })
-        progress.setValue(0)
-        progress.setWidth("-webkit-fill-available")
         this.#download_notification_body.style.width = "-webkit-fill-available"
-        this.#download_notification_body.appendChild(progress.set());
+        this.#download_notification_body.appendChild(this.#spinner.set());
         if (options.text !== undefined) {
-            progress.setProgressCountText(options.text)
+            this.#download_notification_text.innerText = options.text;
         } else {
             throw new Error("Должна быть установлена опция text");
         }
@@ -37,6 +36,7 @@ class DownloadNotification {
         this.#download_notification_header.appendChild(this.#download_notification_date)
         //
         this.#download_notification_content.appendChild(this.#download_notification_header)
+        this.#download_notification_body.appendChild(this.#download_notification_text)
         this.#download_notification_content.appendChild(this.#download_notification_body)
         this.#download_notification.appendChild(this.#download_notification_content)
     }
@@ -46,11 +46,14 @@ class DownloadNotification {
         new Animation(notification).slideRightIn();
         notification.addEventListener("click", () => this.#hideNotification(notification));
     }
-    complete() {}
-    error() {}
-    /*hide() {
-        new Animation(this.#download_notification).slideRightOutAndRemove();
-    }*/
+    complete() {
+        this.#download_notification.className = "download_notification_success"
+        this.#download_notification_body.removeChild(this.#spinner.set());
+    }
+    error() {
+        this.#download_notification.className = "download_notification_error"
+        this.#download_notification_body.removeChild(this.#spinner.set());
+    }
     #hideNotification(notification) {
         new Animation(notification).slideRightOutAndRemove();
         notification.addEventListener("animationend", (e) => {

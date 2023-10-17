@@ -321,6 +321,7 @@ class AppLayout {
         ipcRenderer.on("sendNotificationDownload", async (e, text, body) => {
             let updateNotificationLoad = new DownloadNotification({ title: text, text: body });
             updateNotificationLoad.show();
+            ipcRenderer.on("sendNotificationDownloadComplete", () => updateNotificationLoad.complete())
             //ipcRenderer.on("sendNotificationUpdateLoadClose", () => updateNotificationLoad.hide());
         })
         //

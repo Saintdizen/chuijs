@@ -117,31 +117,30 @@ class Main {
 
         app.on('session-created', (session) => {
             //console.log(session)
-            session.on('will-download', async (e, item, contents) => {
+            session.on('will-download', (e, item, contents) => {
                 if (contents.getType() === 'webview') {
-                    //const hostWebContents = contents.hostWebContents;
-                    item.setSavePath(path.join(App.downloadsPath(), item.getFilename()))
-                    await this.#sendNotificationDownload("Загрузка", item.getFilename());
-                    item.on('updated', (event, state) => {
-                        if (state === 'interrupted') {
-                            console.log('Download is interrupted but can be resumed')
-                        } else if (state === 'progressing') {
-                            if (item.isPaused()) {
-                                console.log('Download is paused')
-                            } else {
-                                console.log(`Received bytes: ${item.getReceivedBytes()}`)
+                    this.#sendNotificationDownload("Загрузка", item.getFilename()).then(() => {
+                        item.setSavePath(path.join(App.downloadsPath(), item.getFilename()))
+                        /*item.on('updated', (event, state) => {
+                            if (state === 'interrupted') {
+                                console.log('Download is interrupted but can be resumed')
+                            } else if (state === 'progressing') {
+                                if (item.isPaused()) {
+                                    console.log('Download is paused')
+                                } else {
+                                    console.log(`Received bytes: ${item.getReceivedBytes()}`)
+                                }
                             }
-                        }
-                    })
-                    item.once('done', async (event, state) => {
-                        if (state === 'completed') {
-                            console.log('Download successfully')
-                            //await this.#sendNotificationUpdateLoadClose();
-                            //await this.#sendNotificationUpdate("Загрузка", `Загрузка завершена`);
-                            //setTimeout(async () => await this.#sendNotificationUpdateClose(), 3000);
-                        } else {
-                            console.log(`Download failed: ${state}`)
-                        }
+                        })*/
+                        item.on('done', async (event, state) => {
+                            if (state === 'completed') {
+                                console.log('Download successfully')
+                                setTimeout(async () => await this.#sendNotificationDownloadComplete(), 1500);
+                            } else {
+                                console.log(`Download failed: ${state}`)
+                                setTimeout(async () => await this.#sendNotificationDownloadError(), 1500);
+                            }
+                        })
                     })
                 }
             });
@@ -319,9 +318,20 @@ class Main {
         }, start);
     }
 
+    //
     async #sendNotificationDownload(text, body) {
         this.#window.webContents.send("sendNotificationDownload", text, body);
     }
+    async #sendNotificationDownloadHide(text, body) {
+        this.#window.webContents.send("sendNotificationDownloadHide", text, body);
+    }
+    async #sendNotificationDownloadComplete() {
+        this.#window.webContents.send("sendNotificationDownloadComplete");
+    }
+    async #sendNotificationDownloadError() {
+        this.#window.webContents.send("sendNotificationDownloadError");
+    }
+    //
 
     async #sendNotificationUpdateLoad(text, body) {
         this.#window.webContents.send("sendNotificationUpdateLoad", text, body);
