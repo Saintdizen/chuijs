@@ -12,8 +12,15 @@ class DownloadNotification {
     #download_notification_body = document.createElement("download_notification_body");
     #download_notification_text = document.createElement("download_notification_text");
     #spinner = new Spinner(Spinner.SIZE.V_SMALL, '3px 8px 3px 3px');
-    constructor(options = { title: String(), text: String() }) {
+    constructor(options = { title: String(), text: String(), type: String() }) {
         setStyles(__dirname + "/styles_download.css", 'chUiJS_downloadNotification');
+        if (options.type === "download_notification") {
+
+        } else if (options.type === "download_notification_success") {
+
+        } else if (options.type === "download_notification_error") {
+
+        }
         //
         this.#download_notification.id = this.#id;
         // Стили заголовка уведомления
@@ -46,16 +53,6 @@ class DownloadNotification {
         new Animation(notification).slideRightIn();
         notification.addEventListener("click", () => this.#hideNotification(notification));
     }
-    complete() {
-        let notification = document.getElementById(this.#id);
-        notification.className = "download_notification_success"
-        notification.removeChild(this.#spinner.set());
-    }
-    error() {
-        let notification = document.getElementById(this.#id);
-        notification.className = "download_notification_error"
-        notification.removeChild(this.#spinner.set());
-    }
     #hideNotification(notification) {
         new Animation(notification).slideRightOutAndRemove();
         notification.addEventListener("animationend", (e) => {
@@ -71,6 +68,11 @@ class DownloadNotification {
                 notification.style.transform = "translateX(0)"
             }, 500)
         })
+    }
+    static TYPES = {
+        DOWNLOAD: "download_notification",
+        COMPLETE: "download_notification_success",
+        ERROR: "download_notification_error"
     }
 }
 

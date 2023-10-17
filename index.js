@@ -117,9 +117,10 @@ class Main {
 
         app.on('session-created', (session) => {
             //console.log(session)
-            session.on('will-download', async (e, item, contents) => {
+            session.on('will-download', (e, item, contents) => {
+                console.log(item.getFilename())
                 if (contents.getType() === 'webview') {
-                    await this.#sendNotificationDownload("Загрузка", item.getFilename())
+                    this.#sendNotificationDownload("Загрузка", item.getFilename())
                     item.setSavePath(path.join(App.downloadsPath(), item.getFilename()))
                     /*item.on('updated', (event, state) => {
                         if (state === 'interrupted') {
@@ -132,13 +133,13 @@ class Main {
                             }
                         }
                     })*/
-                    item.on('done', async (event, state) => {
+                    item.on('done', (event, state) => {
                         if (state === 'completed') {
                             console.log('Download successfully')
-                            await this.#sendNotificationDownloadComplete()
+                            this.#sendNotificationDownloadComplete()
                         } else {
                             console.log(`Download failed: ${state}`)
-                            await this.#sendNotificationDownloadError()
+                            this.#sendNotificationDownloadError()
                         }
                     })
                 }
@@ -318,16 +319,16 @@ class Main {
     }
 
     //
-    async #sendNotificationDownload(text, body) {
+    #sendNotificationDownload(text, body) {
         this.#window.webContents.send("sendNotificationDownload", text, body);
     }
-    async #sendNotificationDownloadHide(text, body) {
+    #sendNotificationDownloadHide(text, body) {
         this.#window.webContents.send("sendNotificationDownloadHide", text, body);
     }
-    async #sendNotificationDownloadComplete() {
+    #sendNotificationDownloadComplete() {
         this.#window.webContents.send("sendNotificationDownloadComplete");
     }
-    async #sendNotificationDownloadError() {
+    #sendNotificationDownloadError() {
         this.#window.webContents.send("sendNotificationDownloadError");
     }
     //
