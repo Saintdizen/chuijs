@@ -47,12 +47,14 @@ class DownloadNotification {
         notification.addEventListener("click", () => this.#hideNotification(notification));
     }
     complete() {
-        this.#download_notification.className = "download_notification_success"
-        this.#download_notification_body.removeChild(this.#spinner.set());
+        let notification = document.getElementById(this.#id);
+        notification.className = "download_notification_success"
+        notification.removeChild(this.#spinner.set());
     }
     error() {
-        this.#download_notification.className = "download_notification_error"
-        this.#download_notification_body.removeChild(this.#spinner.set());
+        let notification = document.getElementById(this.#id);
+        notification.className = "download_notification_error"
+        notification.removeChild(this.#spinner.set());
     }
     #hideNotification(notification) {
         new Animation(notification).slideRightOutAndRemove();
