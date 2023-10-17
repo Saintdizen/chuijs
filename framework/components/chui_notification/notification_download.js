@@ -1,6 +1,5 @@
 const {Animation} = require('../../modules/chui_animations/animations');
 const {setStyles, getDate} = require('../../modules/chui_functions');
-const {Spinner} = require("../chui_spinner/spinner");
 
 class DownloadNotification {
     #id = require("randomstring").generate();
@@ -11,37 +10,23 @@ class DownloadNotification {
     #download_notification_date = document.createElement("download_notification_date");
     #download_notification_body = document.createElement("download_notification_body");
     #download_notification_text = document.createElement("download_notification_text");
-    #spinner = new Spinner(Spinner.SIZE.V_SMALL, '3px 8px 3px 3px');
     constructor(options = { title: String(), text: String(), type: String() }) {
         setStyles(__dirname + "/styles_download.css", 'chUiJS_downloadNotification');
-        if (options.type === "download_notification") {
-
-        } else if (options.type === "download_notification_success") {
-
-        } else if (options.type === "download_notification_error") {
-
-        }
-        //
         this.#download_notification.id = this.#id;
-        // Стили заголовка уведомления
         if (options.title !== undefined) {
             this.#download_notification_title.innerText = options.title;
         } else {
             throw new Error("Должна быть установлена опция title");
         }
-        // Стили текста уведомления
         this.#download_notification_body.style.width = "-webkit-fill-available"
-        this.#download_notification_body.appendChild(this.#spinner.set());
+        this.#download_notification_date.innerHTML = getDate();
         if (options.text !== undefined) {
             this.#download_notification_text.innerText = options.text;
         } else {
             throw new Error("Должна быть установлена опция text");
         }
-        this.#download_notification_date.innerHTML = getDate();
-        //
         this.#download_notification_header.appendChild(this.#download_notification_title)
         this.#download_notification_header.appendChild(this.#download_notification_date)
-        //
         this.#download_notification_content.appendChild(this.#download_notification_header)
         this.#download_notification_body.appendChild(this.#download_notification_text)
         this.#download_notification_content.appendChild(this.#download_notification_body)
@@ -53,9 +38,19 @@ class DownloadNotification {
         new Animation(notification).slideRightIn();
         notification.addEventListener("click", () => this.#hideNotification(notification));
     }
+    done() {
+        let notification = document.getElementById(this.#id);
+        notification.classList.add("download_notification_success");
+        setTimeout(() => this.#hideNotification(notification), 2000);
+    }
+    error() {
+        let notification = document.getElementById(this.#id);
+        notification.classList.add("download_notification_error");
+        setTimeout(() => this.#hideNotification(notification), 2000);
+    }
     #hideNotification(notification) {
         new Animation(notification).slideRightOutAndRemove();
-        notification.addEventListener("animationend", (e) => {
+        notification.addEventListener("animationend", () => {
             notification.removeAttribute("style");
             notification.style.display = 'flex';
             notification.style.width = '-webkit-fill-available';
@@ -68,11 +63,6 @@ class DownloadNotification {
                 notification.style.transform = "translateX(0)"
             }, 500)
         })
-    }
-    static TYPES = {
-        DOWNLOAD: "download_notification",
-        COMPLETE: "download_notification_success",
-        ERROR: "download_notification_error"
     }
 }
 

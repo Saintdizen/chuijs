@@ -322,14 +322,11 @@ class Main {
     #sendNotificationDownload(text, body) {
         this.#window.webContents.send("sendNotificationDownload", text, body);
     }
-    #sendNotificationDownloadHide(text, body) {
-        this.#window.webContents.send("sendNotificationDownloadHide", text, body);
+    #sendNotificationDownloadComplete(text, body) {
+        this.#window.webContents.send("sendNotificationDownloadComplete", text, body);
     }
-    #sendNotificationDownloadComplete() {
-        this.#window.webContents.send("sendNotificationDownloadComplete");
-    }
-    #sendNotificationDownloadError() {
-        this.#window.webContents.send("sendNotificationDownloadError");
+    #sendNotificationDownloadError(text, body) {
+        this.#window.webContents.send("sendNotificationDownloadError", text, body);
     }
     //
 

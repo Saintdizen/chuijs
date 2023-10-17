@@ -319,10 +319,10 @@ class AppLayout {
 
         // ЗАГРУЗКА ОБЬЕКТОВ
         ipcRenderer.on("sendNotificationDownload", (e, text, body) => {
-            let updateNotificationLoad = new DownloadNotification({ title: text, text: body });
-            updateNotificationLoad.show();
-            ipcRenderer.on("sendNotificationDownloadComplete", () => updateNotificationLoad.complete())
-            //ipcRenderer.on("sendNotificationUpdateLoadClose", () => updateNotificationLoad.hide());
+            let downloadNotificationLoad = new DownloadNotification({ title: text, text: body });
+            downloadNotificationLoad.show();
+            ipcRenderer.on("sendNotificationDownloadComplete", () => downloadNotificationLoad.done());
+            ipcRenderer.on("sendNotificationDownloadError", () => downloadNotificationLoad.error());
         })
         //
         ipcRenderer.on("sendNotificationUpdateLoad", async (e, text, body) => {
