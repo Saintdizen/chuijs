@@ -117,30 +117,29 @@ class Main {
 
         app.on('session-created', (session) => {
             //console.log(session)
-            session.on('will-download', (e, item, contents) => {
+            session.on('will-download', async (e, item, contents) => {
                 if (contents.getType() === 'webview') {
-                    this.#sendNotificationDownload("Загрузка", item.getFilename()).then(() => {
-                        item.setSavePath(path.join(App.downloadsPath(), item.getFilename()))
-                        /*item.on('updated', (event, state) => {
-                            if (state === 'interrupted') {
-                                console.log('Download is interrupted but can be resumed')
-                            } else if (state === 'progressing') {
-                                if (item.isPaused()) {
-                                    console.log('Download is paused')
-                                } else {
-                                    console.log(`Received bytes: ${item.getReceivedBytes()}`)
-                                }
-                            }
-                        })*/
-                        item.on('done', async (event, state) => {
-                            if (state === 'completed') {
-                                console.log('Download successfully')
-                                setTimeout(async () => await this.#sendNotificationDownloadComplete(), 1500);
+                    await this.#sendNotificationDownload("Загрузка", item.getFilename())
+                    item.setSavePath(path.join(App.downloadsPath(), item.getFilename()))
+                    /*item.on('updated', (event, state) => {
+                        if (state === 'interrupted') {
+                            console.log('Download is interrupted but can be resumed')
+                        } else if (state === 'progressing') {
+                            if (item.isPaused()) {
+                                console.log('Download is paused')
                             } else {
-                                console.log(`Download failed: ${state}`)
-                                setTimeout(async () => await this.#sendNotificationDownloadError(), 1500);
+                                console.log(`Received bytes: ${item.getReceivedBytes()}`)
                             }
-                        })
+                        }
+                    })*/
+                    item.on('done', async (event, state) => {
+                        if (state === 'completed') {
+                            console.log('Download successfully')
+                            await this.#sendNotificationDownloadComplete()
+                        } else {
+                            console.log(`Download failed: ${state}`)
+                            await this.#sendNotificationDownloadError()
+                        }
                     })
                 }
             });

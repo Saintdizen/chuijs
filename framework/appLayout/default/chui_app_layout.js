@@ -318,7 +318,7 @@ class AppLayout {
         document.body.appendChild(this.#notificationPanel)
 
         // ЗАГРУЗКА ОБЬЕКТОВ
-        ipcRenderer.on("sendNotificationDownload", async (e, text, body) => {
+        ipcRenderer.on("sendNotificationDownload", (e, text, body) => {
             let updateNotificationLoad = new DownloadNotification({ title: text, text: body });
             updateNotificationLoad.show();
             ipcRenderer.on("sendNotificationDownloadComplete", () => updateNotificationLoad.complete())
