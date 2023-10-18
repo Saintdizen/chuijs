@@ -75,7 +75,7 @@ input[type=file]::file-selector-button {
     font-weight: 400;
     margin: 0 var(--margin) 0 0;
     color: var(--text_color);
-    transition: all .22s;
+    transition: all var(--transition_time);
     font-family: 'chui_Ubuntu';
     background: var(--element_background_2);
     border: none;

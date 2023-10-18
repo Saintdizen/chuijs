@@ -10,5 +10,5 @@ chui_icon {
     direction: ltr;
     color: var(--text_color);
     pointer-events: none;
-    transition: all .22s;
+    transition: all var(--transition_time);
 }

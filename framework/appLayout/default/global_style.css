@@ -1,5 +1,5 @@
 :root {
-    --global_blur: saturate(180%) blur(20px);
+    --global_blur: saturate(180%) blur(30px);
     --main_padding: 8px 11px;
     --test_padding: 8px;
     --header_icon_size: 13pt;
@@ -9,6 +9,7 @@
     --border_radius: 0.6rem;
     --margin: 6px;
     --box_shadow_main: 0 1px 5px 1px rgb(0 0 0 / 20%);
+    --transition_time: .165s
 }
 
 html {
@@ -26,8 +27,8 @@ strong {
     font-family: 'chui_Ubuntu';
     user-select: none;
     outline: none;
-    transition: all .2s;
-    animation-duration: .2s;
+    transition: all var(--transition_time);
+    animation-duration: var(--transition_time);
     position: relative;
     font-size: var(--font_default_size);
     line-height: normal;
@@ -37,8 +38,8 @@ strong {
     font-family: 'chui_Ubuntu';
     user-select: none;
     outline: none;
-    transition: all .2s;
-    animation-duration: .2s;
+    transition: all var(--transition_time);
+    animation-duration: var(--transition_time);
     position: relative;
     font-size: var(--font_default_size);
     line-height: normal;
@@ -153,7 +154,7 @@ notification_panel {
     z-index: 1001;
     overflow: hidden hidden;
     max-height: calc(100% - 65px - (var(--margin) * 2));
-    transition: max-height .2s ease-in-out;
+    transition: max-height var(--transition_time) ease-in-out;
 }
 
 notification_panel:hover {
