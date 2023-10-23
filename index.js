@@ -5,7 +5,7 @@ const log = require("electron-log");
 const path = require("path");
 const fs = require("fs");
 const os = require("os");
-const request = require('request');
+const request = require('@cypress/request');
 const {transliterate} = require("transliteration");
 // === === ===
 
