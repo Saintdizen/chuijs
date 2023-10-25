@@ -1,7 +1,6 @@
 const { Animation } = require('../../modules/chui_animations/animations')
 const { Spinner } = require('../chui_spinner/spinner')
 
-// https://www.electronjs.org/ru/docs/latest/api/webview-tag
 class WebView {
     #id = require("randomstring").generate()
     #main_block = document.createElement('chui_webview')
@@ -17,22 +16,24 @@ class WebView {
         this.#WebView.setAttribute('disablewebsecurity', 'true')
         this.#WebView.setAttribute('allowpopups', 'true')
         this.#WebView.setAttribute("webpreferences", "allowRunningInsecureContent, javascript=yes")
-        //this.#WebView.setAttribute("partition", "test")
-
         let spinner = new Spinner(Spinner.SIZE.BIG);
         this.#chui_load.appendChild(spinner.set());
         this.#main_block.appendChild(this.#WebView)
-
         const loadStart = () => {
             this.#main_block.appendChild(this.#chui_load)
         }
-
         const loadStop = () => {
             new Animation(this.#WebView).fadeIn();
             this.#main_block.removeChild(this.#chui_load)
         }
         this.#WebView.addEventListener('did-start-loading', loadStart)
         this.#WebView.addEventListener('did-stop-loading', loadStop)
+    }
+    setPartition(partition = String()) {
+        this.#WebView.partition = partition;
+    }
+    setPreload(path = String()) {
+        this.#WebView.preload = "file://" + path;
     }
     addStartLoadEvent(listener = () => {}) {
         this.#WebView.addEventListener('did-start-loading', listener)
@@ -59,6 +60,9 @@ class WebView {
                 }
             }
         })
+    }
+    async send(channel = String(), ...args) {
+        await this.#WebView.send(channel, args)
     }
     setUrl(url = String()) {
         this.#WebView.setAttribute('src', url)

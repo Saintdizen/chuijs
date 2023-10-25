@@ -10,9 +10,14 @@ class WebViewsPage extends Page {
         this.disablePadding()
 
         let web = new WebView("https://music.yandex.ru/");
+        web.setPreload(__dirname + "/preload.js")
         web.insertCustomRes({
             cssPath: __dirname + '/test.css',
             jsPath: __dirname + '/test.js'
+        })
+
+        web.addFinishLoadEvent(async () => {
+            await web.send("test", "Xyu")
         })
         this.add(web)
     }
