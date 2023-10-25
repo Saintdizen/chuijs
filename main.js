@@ -1,4 +1,4 @@
-const { Main, MenuItem, Log } = require('./index');
+const { Main, MenuItem, Log, path, App} = require('./index');
 let json = require("./package.json");
 const main = new Main({
     name: `${json.name} (${json.version})`,
@@ -8,6 +8,9 @@ const main = new Main({
     devTools: false,
     resizable: true,
     //icon: `${__dirname}/icon.png`
+    paths: {
+        downloadPath: path.join(App.userDataPath(), "downloads")
+    }
 });
 main.start({
     hideOnClose: true,

@@ -79,6 +79,8 @@ class Main {
     #devToolsOpened = false;
     #webSecurity = true;
     #resizable = true;
+    // ПУТИ
+    #downloadPath = undefined;
 
     constructor(options = {
         name: String(),
@@ -87,7 +89,10 @@ class Main {
         render: String(),
         devTools: Boolean(),
         webSecurity: Boolean(),
-        resizable: Boolean()
+        resizable: Boolean(),
+        paths: {
+            downloadPath: String(),
+        }
     }) {
         this.#app_icon = options.icon;
         if (this.#app_icon === undefined) {
@@ -115,13 +120,19 @@ class Main {
         app.commandLine.appendSwitch('main-frame-resizes-are-orientation-changes', "true");
         app.commandLine.appendSwitch('disable-pinch', "true");
 
+        if (options.paths.downloadPath) {
+            this.#downloadPath = options.paths.downloadPath;
+        } else {
+            this.#downloadPath = App.downloadsPath();
+        }
+
         app.on('session-created', (session) => {
             //console.log(session)
             session.on('will-download', (e, item, contents) => {
                 console.log(item.getFilename())
                 if (contents.getType() === 'webview') {
                     this.#sendNotificationDownload("Загрузка", item.getFilename())
-                    item.setSavePath(path.join(App.downloadsPath(), item.getFilename()))
+                    item.setSavePath(path.join(this.#downloadPath, item.getFilename()))
                     /*item.on('updated', (event, state) => {
                         if (state === 'interrupted') {
                             console.log('Download is interrupted but can be resumed')
