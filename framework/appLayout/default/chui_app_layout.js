@@ -135,6 +135,7 @@ class AppMenu extends Route {
         this.#appMenu.style.left = `calc(-${this.#appMenuWidthTest}px)`;
         this.#appMenu.style.height = `calc(100% - ${header.set().style.height})`;
         //
+        this.#appMenuButton.id = "appMenuButton"
         this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU, "var(--header_icon_size)").getHTML();
         this.#appMenuButton.addEventListener("click", () => {
             if (this.#appMenuButton.classList.contains("app_menu_button_active")) {
@@ -360,6 +361,10 @@ class AppLayout {
     }
     addToHeader(headerRight = []) {
         this.#header.addToRight(...headerRight);
+    }
+    disableAppMenu() {
+        document.getElementById("appMenuButton").remove()
+        document.getElementById("page_name").style.marginLeft = "8px"
     }
     static BUTTON(options = {
         title: String(),

@@ -27,6 +27,7 @@ class Test extends AppLayout {
 
         // Настройка роутов
         this.setAutoCloseRouteMenu(true);
+        this.disableAppMenu()
         this.setRoute(new MainPage());
         this.setRoute(new MainPageRoute());
         this.setRoute(new Inputs_Buttons_Page());

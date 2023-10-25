@@ -84,7 +84,7 @@ app_menu_search_main {
 }
 
 center::-webkit-scrollbar-track {
-    margin-top: 47px;
+    margin-top: 45px;
 }
 
 .test_scroll_track::-webkit-scrollbar-track {
@@ -398,7 +398,7 @@ user_button {
 }
 
 user_dropdown {
-    margin-top: 47px;
+    margin-top: 45px;
     display: none;
     position: absolute;
     background: var(--main_background_2);
