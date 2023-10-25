@@ -1,5 +1,6 @@
 const { Animation } = require('../../modules/chui_animations/animations')
 const { Spinner } = require('../chui_spinner/spinner')
+const fs = require("fs");
 
 class WebView {
     #id = require("randomstring").generate()
@@ -43,6 +44,13 @@ class WebView {
     }
     addFinishLoadEvent(listener = () => {}) {
         this.#WebView.addEventListener('did-finish-load', listener)
+    }
+    async executeJavaScript(code = String()) {
+        try {
+            await this.#WebView.executeJavaScript(code);
+        } catch (err) {
+            console.error(err);
+        }
     }
     insertCustomRes(options = { cssPath: String(), jsPath: String() }) {
         this.#WebView.addEventListener('did-frame-finish-load', async () => {
