@@ -120,7 +120,7 @@ class Main {
         app.commandLine.appendSwitch('main-frame-resizes-are-orientation-changes', "true");
         app.commandLine.appendSwitch('disable-pinch', "true");
 
-        if (options.paths.downloadPath) {
+        if (options.paths.downloadPath !== undefined) {
             this.#downloadPath = options.paths.downloadPath;
         } else {
             this.#downloadPath = App.downloadsPath();
