@@ -228,13 +228,10 @@ chui_playlist_list {
 
 chui_track {
     display: flex;
-    padding: 6px;
+    padding: var(--test_padding);
     color: var(--text_color);
     border-radius: var(--border_radius);
 }
 chui_track:hover {
     background: var(--blue_prime_background);
-}
-chui_track_title {
-    margin-left: 6px;
 }

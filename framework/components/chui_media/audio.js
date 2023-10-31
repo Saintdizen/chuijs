@@ -232,25 +232,15 @@ class Audio {
     //
     setPlayList(list = [{ title: String(), artist: String(), album: String(), mimetype: String(), path: String(), artwork: [] }]) {
         play_list = list
-        for (let track of play_list) {
-            this.#chui_playlist_list.appendChild(this.#setTrack(track))
-            console.log(track)
-        }
+        for (let track of play_list) this.#chui_playlist_list.appendChild(this.#setTrack(track))
     }
     #setTrack(track = {}) {
-        let main = document.createElement("chui_track");
-        let art = document.createElement("chui_track_artist");
-        art.innerText = track.artist;
-        let tit = document.createElement("chui_track_title");
-        tit.innerText = track.title;
-
-        main.addEventListener("dblclick",  async () => {
+        let chui_track = document.createElement("chui_track");
+        chui_track.innerText = `${track.artist} - ${track.title}`
+        chui_track.addEventListener("dblclick",  async () => {
             await this.#start(track)
         })
-
-        main.appendChild(art)
-        main.appendChild(tit)
-        return main;
+        return chui_track;
     }
     getPlayList() {
         return play_list
