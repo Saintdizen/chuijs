@@ -4,50 +4,52 @@ chui_ap_main {
     border-radius: var(--border_radius);
     --seek-before-width: 0%;
     --volume-before-width: 0%;
-    width: 450px
+    min-width: 450px;
+    height: max-content;
 }
 
 chui_ap_block {
-    display: block;
+    display: flex;
+    flex-direction: column;
     width: -webkit-fill-available;
     backdrop-filter: var(--global_blur);
     border-radius: var(--border_radius);
-    background: var(--main_background_2);
+    background: var(--ap_main_background);
     border: none;
 }
 
 /* Блок информация */
 chui_ap_info {
     display: flex;
-    margin: 16px 12px;
+    margin: 12px;
 }
 
 chui_ap_seek_buf {
     width: 0;
-    height: 5px;
-    border-radius: 5px;
-    background: rgba(255,255,255,0.30);
-    position: absolute
+    height: 8px;
+    border-radius: 8px;
+    background: var(--ap_slider_buf_background);
+    position: absolute;
 }
 
 #chui_ap_seek {
     margin: 0;
     position: relative;
     -webkit-appearance: none;
-    border-radius: 5px;
+    border-radius: 8px;
     width: 100%;
-    height: 5px;
+    height: 8px;
     cursor: pointer;
     outline: none;
-    background: rgba(255,255,255,0.15);
+    background: var(--ap_slider_background);
     float: left;
     z-index: 1
 }
 
 #chui_ap_seek::-webkit-slider-runnable-track {
     width: 100%;
-    height: 5px;
-    border-radius: 5px
+    height: 8px;
+    border-radius: 8px
 }
 
 #chui_ap_seek::before {
@@ -56,8 +58,8 @@ chui_ap_seek_buf {
     content: '';
     left: 0;
     width: var(--seek-before-width);
-    height: 5px;
-    border-radius: 5px;
+    height: 8px;
+    border-radius: 8px;
     background: var(--blue_prime_background);
     cursor: pointer;
 }
@@ -93,25 +95,25 @@ chui_ap_volume_block {
 #chui_ap_volume {
     position: relative;
     -webkit-appearance: none;
-    border-radius: 5px;
+    border-radius: 8px;
     width: 100%;
-    height: 5px;
+    height: 8px;
     cursor: pointer;
     outline: none;
-    background: rgba(255,255,255,0.15);
+    background: var(--ap_slider_background);
     float: left;
     z-index: 1;
-    margin: auto 6px;
+    margin: auto 0 auto 6px;
 }
 
 #chui_ap_volume:disabled:before {
-    background: rgba(255,255,255,0.30)
+    background: var(--ap_slider_buf_background)
 }
 
 #chui_ap_volume::-webkit-slider-runnable-track {
     width: 100%;
-    height: 5px;
-    border-radius: 5px
+    height: 8px;
+    border-radius: 8px
 }
 
 #chui_ap_volume::before {
@@ -120,8 +122,8 @@ chui_ap_volume_block {
     content: '';
     left: 0;
     width: var(--volume-before-width);
-    height: 5px;
-    border-radius: 5px;
+    height: 8px;
+    border-radius: 8px;
     background: var(--blue_prime_background);
     cursor: pointer;
 }
@@ -130,8 +132,8 @@ chui_ap_volume_block {
     position: relative;
     -webkit-appearance: none;
     border: none;
-    height: 16px;
-    width: 16px;
+    height: 0px;
+    width: 0px;
     border-radius: 50%;
     background-color: rgba(255,255,255,0);
     cursor: pointer;
@@ -152,11 +154,75 @@ chui_ap_volume_block {
 chui_ap_controls {
     display: flex;
     justify-content: left;
-    margin: var(--margin);
+    margin: 8px 12px 0 12px;
     align-items: center
 }
 
 /* КНОПКИ */
 chui_ap_play_pause, chui_ap_next, chui_ap_prev {
     display: flex
+}
+
+.pin_bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: var(--margin);
+}
+
+.pin_top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: var(--margin);
+}
+
+/* Плейлист */
+chui_playlist_main {
+    display: flex;
+    min-height: 450px;
+    flex-direction: column;
+    width: -webkit-fill-available;
+    backdrop-filter: var(--global_blur);
+    border-radius: var(--border_radius);
+    background: var(--element_background_2);
+    border: none;
+    margin-top: var(--margin);
+}
+chui_playlist_search {
+    display: flex;
+    min-height: max-content;
+    flex-direction: column;
+    width: -webkit-fill-available;
+    border-radius: var(--border_radius);
+    background: transparent;
+    border: none;
+    margin: var(--margin);
+}
+.chui_playlist_search_input {
+    display: flex;
+    width: -webkit-fill-available;
+    height: max-content;
+    margin: 0;
+    border-radius: var(--border_radius);
+    background: var(--element_background);
+    color: var(--text_color);
+    align-items: center;
+    position: relative;
+    padding: var(--main_padding);
+    background: var(--element_background);
+    border: 1px solid var(--element_background_2);
+    box-shadow: 0 0 1px 0 var(--element_background_2);
+}
+chui_playlist_list {
+    display: flex;
+    min-height: 400px;
+    flex-direction: column;
+    width: -webkit-fill-available;
+    border-radius: var(--border_radius);
+    background: var(--ap_slider_background);
+    border: none;
+    margin: 0 var(--margin) var(--margin) var(--margin);
 }

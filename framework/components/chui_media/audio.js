@@ -25,12 +25,18 @@ class Audio {
     #chui_ap_volume_block = document.createElement("chui_ap_volume_block");
     #chui_ap_volume_icon = document.createElement(`chui_ap_volume_icon`);
     #chui_ap_volume = document.createElement(`input`);
-    //
-    #size_play_stop = "36px"
-    #size_next_prev = "30px"
-    constructor(options = {
-        autoplay: Boolean()
-    }) {
+    // Размеры иконок
+    #icons_sizes = {
+        play_pause: "30px",
+        next_prev: "24px",
+        volume: "24px"
+    }
+    // Плейлист
+    #chui_playlist_main = document.createElement("chui_playlist_main")
+    #chui_playlist_search = document.createElement("chui_playlist_search")
+    #chui_playlist_search_input = document.createElement("input")
+    #chui_playlist_list = document.createElement("chui_playlist_list")
+    constructor(options = { autoplay: Boolean(), pin: String(), width: String() }) {
         require('../../modules/chui_functions').setStyles(__dirname + "/audio_styles.css", 'chUiJS_Audio');
         this.#chui_at.setAttribute("name", "media")
         this.#chui_at.controls = false;
@@ -48,12 +54,12 @@ class Audio {
         this.#chui_ap_seek.max = "0"
         this.#chui_ap_seek.value = "0"
         // КНОПКИ
-        this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, this.#size_play_stop).getHTML()
-        this.#chui_ap_next.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_NEXT, this.#size_next_prev).getHTML()
-        this.#chui_ap_prev.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_PREVIOUS, this.#size_next_prev).getHTML()
-        //Заполнение элемента
+        this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, this.#icons_sizes.play_pause).getHTML()
+        this.#chui_ap_next.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_NEXT, this.#icons_sizes.next_prev).getHTML()
+        this.#chui_ap_prev.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_PREVIOUS, this.#icons_sizes.next_prev).getHTML()
+        // Заполнение элемента
         // УПРАВЛЕНИЕ ГРОМКОСТЬЮ
-        this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#size_next_prev).getHTML()
+        this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#icons_sizes.volume).getHTML()
         this.#chui_ap_volume.type = "range"
         this.#chui_ap_volume.id = "chui_ap_volume"
         this.#chui_ap_volume.max = "100"
@@ -103,23 +109,36 @@ class Audio {
             this.#chui_at.volume = value / 100;
             this.#renderVolume()
             if (Number(e.target.value) === 0) {
-                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_OFF, this.#size_next_prev).getHTML()
+                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_OFF, this.#icons_sizes.volume).getHTML()
             } else {
-                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#size_next_prev).getHTML()
+                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#icons_sizes.volume).getHTML()
             }
         });
         this.#chui_ap_volume_icon.addEventListener('click', () => {
             if (!this.#chui_at.muted) {
-                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_MUTE, this.#size_next_prev).getHTML()
+                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_MUTE, this.#icons_sizes.volume).getHTML()
                 this.#chui_at.muted = true
                 this.#chui_ap_volume.disabled = true
             } else {
-                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#size_next_prev).getHTML()
+                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#icons_sizes.volume).getHTML()
                 this.#chui_at.muted = false
                 this.#chui_ap_volume.disabled = false
             }
         })
         this.#renderVolume()
+
+        if (options.pin !== undefined) this.#chui_ap_main.classList.add(options.pin);
+        if (options.width !== undefined) this.#chui_ap_main.style.width = options.width;
+
+        //
+        this.#chui_playlist_main.appendChild(this.#chui_playlist_search)
+        this.#chui_playlist_search_input.classList.add("chui_playlist_search_input")
+        this.#chui_playlist_search_input.placeholder = "Поиск..."
+        this.#chui_playlist_search.appendChild(this.#chui_playlist_search_input)
+        //
+        this.#chui_playlist_main.appendChild(this.#chui_playlist_list)
+        //
+        this.#chui_ap_main.appendChild(this.#chui_playlist_main)
     }
     set() {
         return this.#chui_ap_main;
@@ -133,7 +152,7 @@ class Audio {
         });
     };
     async #start(track) {
-        this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#size_play_stop).getHTML()
+        this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#icons_sizes.play_pause).getHTML()
         if (track.path.includes("http")) {
             this.#chui_source_tag.src = track.path
         } else {
@@ -144,7 +163,7 @@ class Audio {
             this.#setSliderMax()
             this.#displayBufferedAmount()
         })
-        AudioPlayer.#setMediaData(track)
+        Audio.#setMediaData(track)
     }
     async #playAudioNext() {
         this.#current_audio = this.#current_audio + 1
@@ -169,10 +188,10 @@ class Audio {
             await this.#start(play_list[this.#current_audio])
         } else if (this.#chui_at.currentTime > 0 && !this.#chui_at.paused) {
             this.#chui_at.pause()
-            this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, this.#size_play_stop).getHTML()
+            this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, this.#icons_sizes.play_pause).getHTML()
         } else if (this.#chui_at.currentTime > 0 && this.#chui_at.paused) {
             await this.#chui_at.play()
-            this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#size_play_stop).getHTML()
+            this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#icons_sizes.play_pause).getHTML()
         }
     }
     #displayBufferedAmount = () => {
@@ -216,6 +235,10 @@ class Audio {
     }
     getPlayList() {
         return play_list
+    }
+    static PIN = {
+        TOP: "pin_top",
+        BOTTOM: "pin_bottom"
     }
     static #setMediaData(media) {
         if ("mediaSession" in navigator) {

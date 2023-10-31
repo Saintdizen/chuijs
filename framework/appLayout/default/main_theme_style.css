@@ -29,6 +29,10 @@
         --badge_cancel_text: rgb(97, 97, 101);
         --badge_warning_back: rgba(255, 204, 0, 0.4);
         --badge_warning_text: rgb(146, 81, 0);
+        /* Аудиоплеер */
+        --ap_main_background: rgb(230, 230, 230);
+        --ap_slider_background: rgba(255, 255, 255, 0.5);
+        --ap_slider_buf_background: rgba(0, 122, 245, 0.5);
     }
 }
 
@@ -63,5 +67,9 @@
         --badge_cancel_text: rgb(182, 182, 187);
         --badge_warning_back: rgba(255, 214, 10, 0.4);
         --badge_warning_text: rgb(255, 212, 38);
+        /* Аудиоплеер */
+        --ap_main_background: rgb(68, 68, 68);
+        --ap_slider_background: rgba(30, 30, 30, 0.5);
+        --ap_slider_buf_background: rgba(64, 156, 255, 0.5);
     }
 }
