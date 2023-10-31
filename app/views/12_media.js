@@ -9,7 +9,7 @@ class MediaPage extends Page {
         this.setFullWidth()
         let audio = new Audio({
             autoplay: false,
-            //width: Styles.SIZE.WEBKIT_FILL
+            width: Styles.SIZE.WEBKIT_FILL
         })
         audio.setPlayList(
             [

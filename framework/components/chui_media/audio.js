@@ -109,14 +109,14 @@ class Audio {
             this.#chui_at.volume = value / 100;
             this.#renderVolume()
             if (Number(e.target.value) === 0) {
-                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_OFF, this.#icons_sizes.volume).getHTML()
+                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_MUTE, this.#icons_sizes.volume).getHTML()
             } else {
                 this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#icons_sizes.volume).getHTML()
             }
         });
         this.#chui_ap_volume_icon.addEventListener('click', () => {
             if (!this.#chui_at.muted) {
-                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_MUTE, this.#icons_sizes.volume).getHTML()
+                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_OFF, this.#icons_sizes.volume).getHTML()
                 this.#chui_at.muted = true
                 this.#chui_ap_volume.disabled = true
             } else {
@@ -232,6 +232,25 @@ class Audio {
     //
     setPlayList(list = [{ title: String(), artist: String(), album: String(), mimetype: String(), path: String(), artwork: [] }]) {
         play_list = list
+        for (let track of play_list) {
+            this.#chui_playlist_list.appendChild(this.#setTrack(track))
+            console.log(track)
+        }
+    }
+    #setTrack(track = {}) {
+        let main = document.createElement("chui_track");
+        let art = document.createElement("chui_track_artist");
+        art.innerText = track.artist;
+        let tit = document.createElement("chui_track_title");
+        tit.innerText = track.title;
+
+        main.addEventListener("dblclick",  async () => {
+            await this.#start(track)
+        })
+
+        main.appendChild(art)
+        main.appendChild(tit)
+        return main;
     }
     getPlayList() {
         return play_list

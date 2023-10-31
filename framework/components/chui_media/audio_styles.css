@@ -207,7 +207,6 @@ chui_playlist_search {
     height: max-content;
     margin: 0;
     border-radius: var(--border_radius);
-    background: var(--element_background);
     color: var(--text_color);
     align-items: center;
     position: relative;
@@ -222,7 +221,20 @@ chui_playlist_list {
     flex-direction: column;
     width: -webkit-fill-available;
     border-radius: var(--border_radius);
-    background: var(--ap_slider_background);
+    background: var(--element_background);
     border: none;
     margin: 0 var(--margin) var(--margin) var(--margin);
+}
+
+chui_track {
+    display: flex;
+    padding: 6px;
+    color: var(--text_color);
+    border-radius: var(--border_radius);
+}
+chui_track:hover {
+    background: var(--blue_prime_background);
+}
+chui_track_title {
+    margin-left: 6px;
 }
