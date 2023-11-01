@@ -36,6 +36,10 @@ class Audio {
     #chui_playlist_search = document.createElement("chui_playlist_search")
     #chui_playlist_search_input = document.createElement("input")
     #chui_playlist_list = document.createElement("chui_playlist_list")
+    //
+    #chui_playlist_controls = document.createElement("chui_playlist_controls")
+    #chui_playlist_folder = document.createElement("chui_playlist_folder")
+    #chui_playlist_update = document.createElement("chui_playlist_update")
     constructor(options = { autoplay: Boolean(), pin: String(), width: String() }) {
         require('../../modules/chui_functions').setStyles(__dirname + "/audio_styles.css", 'chUiJS_Audio');
         this.#chui_at.setAttribute("name", "media")
@@ -138,7 +142,19 @@ class Audio {
         //
         this.#chui_playlist_main.appendChild(this.#chui_playlist_list)
         //
+        this.#chui_playlist_folder.innerText = "Открыть папку"
+        this.#chui_playlist_controls.appendChild(this.#chui_playlist_folder)
+        this.#chui_playlist_update.innerText = "Обновить список"
+        this.#chui_playlist_controls.appendChild(this.#chui_playlist_update)
+        this.#chui_playlist_main.appendChild(this.#chui_playlist_controls)
+        //
         this.#chui_ap_main.appendChild(this.#chui_playlist_main)
+    }
+    addClickListenerOne(listener = () => {}) {
+        this.#chui_playlist_folder.addEventListener("click", listener)
+    }
+    addClickListenerTwo(listener = () => {}) {
+        this.#chui_playlist_update.addEventListener("click", listener)
     }
     set() {
         return this.#chui_ap_main;
