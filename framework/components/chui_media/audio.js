@@ -6,6 +6,7 @@ const {Label} = require('../chui_label/label');
 let play_list = []
 
 class Audio {
+    #id_contents = require("randomstring").generate();
     #current_audio = 0
     #chui_ap_main = document.createElement(`chui_ap_main`);
     #chui_ap_block = document.createElement(`chui_ap_block`);
@@ -189,6 +190,7 @@ class Audio {
             this.#current_audio = 0
             await this.#start(play_list[this.#current_audio])
         }
+        this.setActive(this.#current_audio)
     }
     async #playAudioPrev() {
         this.#current_audio = this.#current_audio - 1
@@ -198,9 +200,11 @@ class Audio {
         } else {
             await this.#start(play_list[this.#current_audio])
         }
+        this.setActive(this.#current_audio)
     }
     async #playAudioPause() {
         if (this.#chui_at.currentTime === 0) {
+            this.setActive(this.#current_audio)
             await this.#start(play_list[this.#current_audio])
         } else if (this.#chui_at.currentTime > 0 && !this.#chui_at.paused) {
             this.#chui_at.pause()
@@ -248,16 +252,27 @@ class Audio {
     //
     setPlayList(list = [{ title: String(), artist: String(), album: String(), mimetype: String(), path: String(), artwork: [] }]) {
         this.#chui_playlist_list.innerHTML = '';
+        this.#chui_playlist_list.id = this.#id_contents;
         play_list = list;
-        for (let track of play_list) this.#chui_playlist_list.appendChild(this.#setTrack(track));
+        for (let track of play_list) this.#chui_playlist_list.appendChild(this.#setTrack(track, play_list.indexOf(track)));
     }
-    #setTrack(track = {}) {
+    #setTrack(track = {}, index = Number()) {
         let chui_track = document.createElement("chui_track");
+        chui_track.id = `${index}`
         chui_track.innerText = `${track.artist} - ${track.title}`
-        chui_track.addEventListener("dblclick",  async () => {
+        chui_track.addEventListener("dblclick",  async (ev) => {
+            console.log(ev.target.id)
+            this.setActive(ev.target.id)
             await this.#start(track)
         })
         return chui_track;
+    }
+    setActive(index = Number()) {
+        document.getElementById(this.#id_contents).childNodes.forEach(child => {
+            child.classList.remove("chui_track_active");
+        })
+        let element = document.getElementById(`${index}`)
+        element.classList.add("chui_track_active")
     }
     getPlayList() {
         return play_list
