@@ -247,11 +247,9 @@ class Audio {
     }
     //
     setPlayList(list = [{ title: String(), artist: String(), album: String(), mimetype: String(), path: String(), artwork: [] }]) {
-        play_list = list
-        for (let track of play_list) {
-            this.#chui_playlist_list.innerHTML = '';
-            this.#chui_playlist_list.appendChild(this.#setTrack(track))
-        }
+        this.#chui_playlist_list.innerHTML = '';
+        play_list = list;
+        for (let track of play_list) this.#chui_playlist_list.appendChild(this.#setTrack(track));
     }
     #setTrack(track = {}) {
         let chui_track = document.createElement("chui_track");
