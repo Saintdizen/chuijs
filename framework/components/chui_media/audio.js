@@ -14,9 +14,12 @@ class Audio {
     #chui_source_tag = document.createElement(`source`);
     // Блок информация
     #chui_ap_info = document.createElement(`chui_ap_info`);
-    #chui_ap_time = undefined;
+    #chui_ap_time1 = undefined;
+    #chui_ap_time2 = undefined;
+    #chui_ap_seek_block = document.createElement("chui_ap_seek_block")
     #chui_ap_seek = document.createElement(`input`);
     #chui_ap_seek_buf = document.createElement(`chui_ap_seek_buf`);
+    #chui_ap_track_title = document.createElement(`chui_ap_track_title`);
     // Блок управления
     #chui_ap_controls = document.createElement(`chui_ap_controls`);
     #chui_ap_play_pause = document.createElement(`chui_ap_play_pause`);
@@ -41,7 +44,7 @@ class Audio {
     #chui_playlist_controls = document.createElement("chui_playlist_controls")
     #chui_playlist_folder = document.createElement("chui_playlist_folder")
     #chui_playlist_update = document.createElement("chui_playlist_update")
-    constructor(options = { autoplay: Boolean(), pin: String(), width: String() }) {
+    constructor(options = { autoplay: Boolean(), pin: String(), width: String(), height: String() }) {
         require('../../modules/chui_functions').setStyles(__dirname + "/audio_styles.css", 'chUiJS_Audio');
         this.#chui_at.setAttribute("name", "media")
         this.#chui_at.controls = false;
@@ -53,7 +56,8 @@ class Audio {
             setTimeout(async () => await this.#start(play_list[this.#current_audio]), 1)
         }
         // ИНФОРМАЦИЯ
-        this.#chui_ap_time = new Label({text: `0:00 - 0:00`})
+        this.#chui_ap_time1 = new Label({text: `0:00`})
+        this.#chui_ap_time2 = new Label({text: `0:00`})
         this.#chui_ap_seek.type = "range"
         this.#chui_ap_seek.id = "chui_ap_seek"
         this.#chui_ap_seek.max = "0"
@@ -73,13 +77,17 @@ class Audio {
         this.#chui_ap_volume_block.appendChild(this.#chui_ap_volume_icon)
         this.#chui_ap_volume_block.appendChild(this.#chui_ap_volume)
         // ИНФОРМАЦИЯ
-        this.#chui_ap_info.appendChild(this.#chui_ap_seek)
-        this.#chui_ap_info.appendChild(this.#chui_ap_seek_buf)
+        this.#chui_ap_info.appendChild(this.#chui_ap_time1.set())
+        this.#chui_ap_seek_block.appendChild(this.#chui_ap_seek)
+        this.#chui_ap_seek_block.appendChild(this.#chui_ap_seek_buf)
+        this.#chui_ap_info.appendChild(this.#chui_ap_seek_block)
+        this.#chui_ap_info.appendChild(this.#chui_ap_time2.set())
         // КНОПКИ
         this.#chui_ap_controls.appendChild(this.#chui_ap_prev)
         this.#chui_ap_controls.appendChild(this.#chui_ap_play_pause)
         this.#chui_ap_controls.appendChild(this.#chui_ap_next)
-        this.#chui_ap_controls.appendChild(this.#chui_ap_time.set())
+        this.#chui_ap_controls.appendChild(this.#chui_ap_track_title)
+        //
         this.#chui_ap_controls.appendChild(this.#chui_ap_volume_block)
         //
         this.#chui_ap_main.appendChild(this.#chui_at)
@@ -134,6 +142,7 @@ class Audio {
 
         if (options.pin !== undefined) this.#chui_ap_main.classList.add(options.pin);
         if (options.width !== undefined) this.#chui_ap_main.style.width = options.width;
+        if (options.height !== undefined) this.#chui_ap_main.style.height = options.height;
 
         //
         this.#chui_playlist_main.appendChild(this.#chui_playlist_search)
@@ -150,6 +159,18 @@ class Audio {
         this.#chui_playlist_main.appendChild(this.#chui_playlist_controls)
         //
         this.#chui_ap_main.appendChild(this.#chui_playlist_main)
+
+        this.#chui_playlist_search_input.addEventListener("input", (evt) => {
+            for (let item of this.#chui_playlist_list.children) {
+                let text1 = item.textContent.toLowerCase();
+                let text2 = evt.target.value.toLowerCase();
+                if (!text1.includes(text2)) {
+                    item.style.display = "none"
+                } else {
+                    item.removeAttribute("style")
+                }
+            }
+        })
     }
     addClickListenerOne(listener = () => {}) {
         this.#chui_playlist_folder.addEventListener("click", listener)
@@ -169,6 +190,7 @@ class Audio {
         });
     };
     async #start(track) {
+        this.#chui_ap_track_title.innerText = `${track.artist} - ${track.title}`
         this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#icons_sizes.play_pause).getHTML()
         if (track.path.includes("http")) {
             this.#chui_source_tag.src = track.path
@@ -231,13 +253,15 @@ class Audio {
     #renderProgress = (value) => {
         try {
             if (value > 0 && this.#chui_at.duration > 0) {
-                this.#chui_ap_time.setText(`${this.#calculateTime(value)} - ${this.#calculateTime(this.#chui_at.duration)}`);
+                this.#chui_ap_time1.setText(this.#calculateTime(value));
+                this.#chui_ap_time2.setText(this.#calculateTime(this.#chui_at.duration));
                 this.#chui_ap_seek.value = String(Math.floor(value));
                 const test = Math.floor(this.#chui_ap_seek.value / this.#chui_ap_seek.max * 100)
                 this.#chui_ap_main.style.setProperty('--seek-before-width', `${test}%`);
             }
         } catch (e) {
-            this.#chui_ap_time.setText(`0:00 - 0:00`);
+            this.#chui_ap_time1.setText(`0:00`);
+            this.#chui_ap_time2.setText(`0:00`);
         }
     }
     #calculateTime = (secs) => {
@@ -261,9 +285,9 @@ class Audio {
         chui_track.id = `${index}`
         chui_track.innerText = `${track.artist} - ${track.title}`
         chui_track.addEventListener("dblclick",  async (ev) => {
-            console.log(ev.target.id)
             this.setActive(ev.target.id)
             await this.#start(track)
+            this.#current_audio = index;
         })
         return chui_track;
     }

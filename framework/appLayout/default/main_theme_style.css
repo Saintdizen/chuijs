@@ -19,7 +19,7 @@
         --element_background_disabled_prime: rgba(0, 102, 225, 0.5);
         /* Акцент */
         --blue_prime_background: rgb(0, 122, 245);
-        --blue_prime_background_trans: rgba(0, 122, 245, 0.75);
+        --blue_prime_background_trans: rgba(0, 122, 245, 0.5);
         --red_prime_background: rgb(246, 52, 40);
         /* Бэйджи */
         --badge_error_back: rgba(255, 59, 48, 0.4);
@@ -58,7 +58,7 @@
         --element_background_disabled_prime: rgba(34, 126, 225, 0.5);
         /* Акцент */
         --blue_prime_background: rgb(64, 156, 255);
-        --blue_prime_background_trans: rgba(64, 156, 255, 0.75);
+        --blue_prime_background_trans: rgba(64, 156, 255, 0.5);
         --red_prime_background: rgb(255, 105, 97);
         /* Бэйджи */
         --badge_error_back: rgba(255, 69, 58, 0.4);
