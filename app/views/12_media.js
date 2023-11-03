@@ -1,4 +1,4 @@
-const {Page, Audio, Video, Styles} = require('../../index');
+const {Page, Audio, Video, Styles, Button} = require('../../index');
 
 class MediaPage extends Page {
     constructor() {
@@ -9,6 +9,7 @@ class MediaPage extends Page {
         this.setFullWidth()
         let audio = new Audio({
             autoplay: false,
+            playlist: true,
             width: Styles.SIZE.WEBKIT_FILL,
             height: Styles.SIZE.WEBKIT_FILL
         })
@@ -22,10 +23,23 @@ class MediaPage extends Page {
                 path: "https://archive.org/download/ra2007-07-21/ra2007-07-21d1t05_64kb.mp3"
             },
             {
-                title: "TitleTitleTitleTitleTitleTitleTitleTitleTitleTitle 3", artist: "Artist 3", album: "Album 3", mimetype: Audio.MIMETYPES.MP3,
+                title: "Title 3", artist: "Artist 3", album: "Album 3", mimetype: Audio.MIMETYPES.MP3,
                 path: "https://archive.org/download/slac2002-02-15/slac2002-02-15d1t07_64kb.mp3"
             },
         ])
+
+        let openFolder = new Button({
+            title: "Кнопка с текстом",
+            clickEvent: (e) => console.log(e)
+        });
+
+        let updateList = new Button({
+            title: "Кнопка с текстом",
+            clickEvent: (e) => console.log(e)
+        });
+
+        audio.addControls(openFolder, updateList)
+
         this.add(audio)
 
         /*let video = new Video({

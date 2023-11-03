@@ -6,7 +6,6 @@ const {Label} = require('../chui_label/label');
 let play_list = []
 
 class Audio {
-    #id_contents = require("randomstring").generate();
     #current_audio = 0
     #chui_ap_main = document.createElement(`chui_ap_main`);
     #chui_ap_block = document.createElement(`chui_ap_block`);
@@ -35,16 +34,8 @@ class Audio {
         next_prev: "24px",
         volume: "24px"
     }
-    // Плейлист
-    #chui_playlist_main = document.createElement("chui_playlist_main")
-    #chui_playlist_search = document.createElement("chui_playlist_search")
-    #chui_playlist_search_input = document.createElement("input")
-    #chui_playlist_list = document.createElement("chui_playlist_list")
-    //
-    #chui_playlist_controls = document.createElement("chui_playlist_controls")
-    #chui_playlist_folder = document.createElement("chui_playlist_folder")
-    #chui_playlist_update = document.createElement("chui_playlist_update")
-    constructor(options = { autoplay: Boolean(), pin: String(), width: String(), height: String() }) {
+    #chui_playlist = new Playlist()
+    constructor(options = { autoplay: Boolean(), pin: String(), playlist: Boolean(), width: String(), height: String() }) {
         require('../../modules/chui_functions').setStyles(__dirname + "/audio_styles.css", 'chUiJS_Audio');
         this.#chui_at.setAttribute("name", "media")
         this.#chui_at.controls = false;
@@ -143,40 +134,10 @@ class Audio {
         if (options.pin !== undefined) this.#chui_ap_main.classList.add(options.pin);
         if (options.width !== undefined) this.#chui_ap_main.style.width = options.width;
         if (options.height !== undefined) this.#chui_ap_main.style.height = options.height;
-
-        //
-        this.#chui_playlist_main.appendChild(this.#chui_playlist_search)
-        this.#chui_playlist_search_input.classList.add("chui_playlist_search_input")
-        this.#chui_playlist_search_input.placeholder = "Поиск..."
-        this.#chui_playlist_search.appendChild(this.#chui_playlist_search_input)
-        //
-        this.#chui_playlist_main.appendChild(this.#chui_playlist_list)
-        //
-        this.#chui_playlist_folder.innerText = "Открыть папку"
-        this.#chui_playlist_controls.appendChild(this.#chui_playlist_folder)
-        this.#chui_playlist_update.innerText = "Обновить список"
-        this.#chui_playlist_controls.appendChild(this.#chui_playlist_update)
-        this.#chui_playlist_main.appendChild(this.#chui_playlist_controls)
-        //
-        this.#chui_ap_main.appendChild(this.#chui_playlist_main)
-
-        this.#chui_playlist_search_input.addEventListener("input", (evt) => {
-            for (let item of this.#chui_playlist_list.children) {
-                let text1 = item.textContent.toLowerCase();
-                let text2 = evt.target.value.toLowerCase();
-                if (!text1.includes(text2)) {
-                    item.style.display = "none"
-                } else {
-                    item.removeAttribute("style")
-                }
-            }
-        })
+        if (options.playlist !== undefined) this.#chui_ap_main.appendChild(this.#chui_playlist.getMain())
     }
-    addClickListenerOne(listener = () => {}) {
-        this.#chui_playlist_folder.addEventListener("click", listener)
-    }
-    addClickListenerTwo(listener = () => {}) {
-        this.#chui_playlist_update.addEventListener("click", listener)
+    addControls(...components) {
+        for (let component of components) this.#chui_playlist.getControls().appendChild(component.set())
     }
     set() {
         return this.#chui_ap_main;
@@ -275,10 +236,9 @@ class Audio {
     }
     //
     setPlayList(list = [{ title: String(), artist: String(), album: String(), mimetype: String(), path: String(), artwork: [] }]) {
-        this.#chui_playlist_list.innerHTML = '';
-        this.#chui_playlist_list.id = this.#id_contents;
+        this.#chui_playlist.getPlaylist().innerHTML = '';
         play_list = list;
-        for (let track of play_list) this.#chui_playlist_list.appendChild(this.#setTrack(track, play_list.indexOf(track)));
+        for (let track of play_list) this.#chui_playlist.getPlaylist().appendChild(this.#setTrack(track, play_list.indexOf(track)));
     }
     #setTrack(track = {}, index = Number()) {
         let chui_track = document.createElement("chui_track");
@@ -292,14 +252,11 @@ class Audio {
         return chui_track;
     }
     setActive(index = Number()) {
-        document.getElementById(this.#id_contents).childNodes.forEach(child => {
+        document.getElementById(this.#chui_playlist.getId()).childNodes.forEach(child => {
             child.classList.remove("chui_track_active");
         })
         let element = document.getElementById(`${index}`)
         element.classList.add("chui_track_active")
-    }
-    getPlayList() {
-        return play_list
     }
     static PIN = {
         TOP: "pin_top",
@@ -327,6 +284,47 @@ class Audio {
         OGG: 'audio/ogg',
         VORBIS: 'audio/vorbis',
         WAV: 'audio/vnd.wav'
+    }
+}
+
+class Playlist {
+    #id_contents = require("randomstring").generate();
+    #chui_playlist_main = document.createElement("chui_playlist_main")
+    #chui_playlist_search = document.createElement("chui_playlist_search")
+    #chui_playlist_search_input = document.createElement("input")
+    #chui_playlist_list = document.createElement("chui_playlist_list")
+    #chui_playlist_controls = document.createElement("chui_playlist_controls")
+    constructor() {
+        this.#chui_playlist_main.appendChild(this.#chui_playlist_search)
+        this.#chui_playlist_search_input.classList.add("chui_playlist_search_input")
+        this.#chui_playlist_search_input.placeholder = "Поиск..."
+        this.#chui_playlist_search.appendChild(this.#chui_playlist_search_input)
+        this.#chui_playlist_main.appendChild(this.#chui_playlist_list)
+        this.#chui_playlist_search_input.addEventListener("input", (evt) => {
+            for (let item of this.#chui_playlist_list.children) {
+                let text1 = item.textContent.toLowerCase();
+                let text2 = evt.target.value.toLowerCase();
+                if (!text1.includes(text2)) {
+                    item.style.display = "none"
+                } else {
+                    item.removeAttribute("style")
+                }
+            }
+        })
+        this.#chui_playlist_list.id = this.#id_contents
+    }
+    getControls() {
+        this.#chui_playlist_main.appendChild(this.#chui_playlist_controls)
+        return this.#chui_playlist_controls
+    }
+    getId() {
+        return this.#id_contents
+    }
+    getMain() {
+        return this.#chui_playlist_main
+    }
+    getPlaylist() {
+        return this.#chui_playlist_list
     }
 }
 

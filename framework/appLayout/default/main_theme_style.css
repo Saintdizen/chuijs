@@ -19,7 +19,7 @@
         --element_background_disabled_prime: rgba(0, 102, 225, 0.5);
         /* Акцент */
         --blue_prime_background: rgb(0, 122, 245);
-        --blue_prime_background_trans: rgba(0, 122, 245, 0.5);
+        --blue_prime_background_trans: rgba(0, 122, 245, 0.65);
         --red_prime_background: rgb(246, 52, 40);
         /* Бэйджи */
         --badge_error_back: rgba(255, 59, 48, 0.4);
@@ -31,8 +31,9 @@
         --badge_warning_back: rgba(255, 204, 0, 0.4);
         --badge_warning_text: rgb(146, 81, 0);
         /* Аудиоплеер */
-        --ap_main_background: rgb(230, 230, 230);
-        --ap_slider_background: rgba(255, 255, 255, 0.5);
+        --ap_main_background: rgba(230, 230, 230, 0.5);
+        --ap_main_background_2: rgba(220, 220, 220, 0.75);
+        --ap_slider_background: rgba(220, 220, 220, 0.75);
         --ap_slider_buf_background: rgba(0, 122, 245, 0.5);
     }
 }
@@ -58,7 +59,7 @@
         --element_background_disabled_prime: rgba(34, 126, 225, 0.5);
         /* Акцент */
         --blue_prime_background: rgb(64, 156, 255);
-        --blue_prime_background_trans: rgba(64, 156, 255, 0.5);
+        --blue_prime_background_trans: rgba(64, 156, 255, 0.65);
         --red_prime_background: rgb(255, 105, 97);
         /* Бэйджи */
         --badge_error_back: rgba(255, 69, 58, 0.4);
@@ -70,8 +71,9 @@
         --badge_warning_back: rgba(255, 214, 10, 0.4);
         --badge_warning_text: rgb(255, 212, 38);
         /* Аудиоплеер */
-        --ap_main_background: rgb(68, 68, 68);
-        --ap_slider_background: rgba(30, 30, 30, 0.5);
+        --ap_main_background: rgba(68, 68, 68, 0.5);
+        --ap_main_background_2: rgba(73, 73, 73, 0.75);
+        --ap_slider_background: rgba(73, 73, 73, 0.75);
         --ap_slider_buf_background: rgba(64, 156, 255, 0.5);
     }
 }
