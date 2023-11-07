@@ -2,7 +2,7 @@
   "name": "chuijs",
   "productName": "chuijs",
   "description": "component framework chUiJS",
-  "version": "2.2.6",
+  "version": "2.2.7",
   "private": false,
   "main": "index.js",
   "author": {
@@ -28,7 +28,7 @@
   "dependencies": {
     "@electron/remote": "~2.0.12",
     "dataurl": "~0.1.0",
-    "electron": "~27.0.3",
+    "electron": "~24.8.8",
     "electron-log": "~4.4.8",
     "electron-store": "~8.1.0",
     "electron-updater": "~6.1.4",
