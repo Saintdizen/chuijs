@@ -8,6 +8,7 @@
         /* Основные цвета */
         --main_background: rgb(255, 255, 255);
         --header_background: rgb(255, 255, 255, 0.6);
+        --header_background_drop: rgb(246, 246, 246, 1);
         --main_background_2: rgba(246, 246, 246, 0.6);
         --main_background_overlay: rgba(255, 255, 255, 0.25);
         /* Элементы */
@@ -47,7 +48,8 @@
         --text_color_hover_disable: rgba(255, 255, 255, 0.5);
         /* Основные цвета */
         --main_background: rgb(30, 30, 30);
-        --header_background: rgb(38, 38, 38, 0.6);
+        --header_background: rgba(38, 38, 38, 0.6);
+        --header_background_drop: rgba(56, 56, 56, 1);
         --main_background_2: rgba(56, 56, 56, 0.6);
         --main_background_overlay: rgba(14, 14, 14, 0.25);
         /* Элементы */
