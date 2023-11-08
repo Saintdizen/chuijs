@@ -2,7 +2,8 @@ notification {
     display: none;
     height: max-content;
     width: max-content;
-    max-width: 600px;
+    min-width: 356px;
+    max-width: 356px;
     border-radius: var(--border_radius);
     margin: var(--margin);
     font-size: var(--font_default_size);
@@ -64,7 +65,7 @@ notification_title p {
 notification_date {
     font-size: 8pt;
     font-weight: 500;
-    margin: 3px 0 0 10px;
+    margin: 0px 3px;
     color: var(--text_color);
     white-space: pre;
     text-align: end;
@@ -73,7 +74,7 @@ notification_date {
 notification_text {
     font-size: var(--font_notification_size);
     font-weight: 400;
-    margin: 3px 4px 6px 4px;
+    margin: 3px;
     color: var(--text_color);
     word-break: break-word;
 }

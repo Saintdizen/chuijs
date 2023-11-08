@@ -56,7 +56,7 @@ function getDate() {
     let year = date.getFullYear();
     let hours = ('0' + Number(date.getHours()).toString()).slice(-2);
     let minutes = ('0' + Number(date.getMinutes()).toString()).slice(-2);
-    return `${day}.${month}.${year}\n${hours}:${minutes}`;
+    return `${day}.${month}.${year} ${hours}:${minutes}`;
 }
 
 exports.getDate = getDate
