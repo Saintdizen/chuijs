@@ -15,7 +15,7 @@ chui_vp_block {
     backdrop-filter: var(--global_blur);
     border-bottom-right-radius: var(--border_radius);
     border-bottom-left-radius: var(--border_radius);
-    background: var(--main_background_2);
+    background: var(--header_background);
     opacity: 0;
 }
 

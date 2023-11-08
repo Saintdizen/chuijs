@@ -7,7 +7,7 @@ chui_popup {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: var(--main_background_overlay);
+    background-color: var(--header_background);
     padding: 0;
     border: none;
     backdrop-filter: var(--global_blur);

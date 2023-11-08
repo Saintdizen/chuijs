@@ -63,7 +63,7 @@ menu_bar_dropdown {
     margin-top: 45px;
     display: none;
     position: absolute;
-    background: var(--main_background_2);
+    background: var(--header_background);
     color: var(--text_color);
     border: 1px solid var(--element_background_2);
     border-radius: var(--border_radius);

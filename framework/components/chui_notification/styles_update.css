@@ -8,7 +8,7 @@ update_notification {
     margin: var(--margin);
     font-size: var(--font_default_size);
     padding: 6px 10px;
-    background: var(--main_background_2);
+    background: var(--header_background);
     backdrop-filter: var(--global_blur);
     border: 1px solid var(--element_background_2);
     z-index: 1002;

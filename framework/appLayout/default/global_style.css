@@ -171,7 +171,7 @@ app_menu {
     margin: calc(47px + (var(--margin) * 2)) calc(var(--margin) * 2) calc(var(--margin) * 2) calc(var(--margin) * 2);
     border-radius: var(--border_radius);
     box-shadow: var(--box_shadow_main);
-    background: var(--main_background_2);
+    background: var(--header_background);
     backdrop-filter: var(--global_blur);
     height: -webkit-fill-available;
     width: -webkit-fill-available;
@@ -189,7 +189,7 @@ notification_box {
     margin: calc(47px + (var(--margin) * 2)) calc(var(--margin) * 2) calc(var(--margin) * 2) calc(var(--margin) * 2);
     border-radius: var(--border_radius);
     box-shadow: var(--box_shadow_main);
-    background: var(--main_background_2);
+    background: var(--header_background);
     backdrop-filter: var(--global_blur);
     width: -webkit-fill-available;
     border: 1px solid var(--element_background_2);

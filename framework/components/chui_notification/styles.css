@@ -7,7 +7,7 @@ notification {
     margin: var(--margin);
     font-size: var(--font_default_size);
     padding: var(--main_padding);
-    background: var(--main_background_2);
+    background: var(--header_background);
     backdrop-filter: var(--global_blur);
     box-shadow: var(--box_shadow_main);
     z-index: 1002;
