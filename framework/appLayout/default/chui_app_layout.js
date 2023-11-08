@@ -33,6 +33,21 @@ class Route {
         } else {
             center.classList.remove("header_padding", "test_scroll_track");
         }
+
+        /*const EventEmitter = require('events');
+        const eventEmitter = new EventEmitter();
+
+        const obj_route_evt = {
+            title: page.getTitle(),
+            page: page
+        }
+
+        eventEmitter.on('route', (args) => {
+            console.log(args);
+        });
+
+        eventEmitter.emit('route', obj_route_evt);*/
+
     }
 }
 
