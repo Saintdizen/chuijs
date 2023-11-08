@@ -6,7 +6,7 @@ const main = new Main({
     height: 720,
     render: `${__dirname}/app/app.js`,
     devTools: false,
-    resizable: true,
+    resizable: false,
     //icon: `${__dirname}/icon.png`
     paths: {
         downloadPath: path.join(App.userDataPath(), "downloads")

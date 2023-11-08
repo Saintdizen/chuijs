@@ -84,6 +84,7 @@ class WindowControls {
             this.#box.appendChild(this.#maximize)
             this.#box.appendChild(this.#close)
         }
+        ipcRenderer.on("chui_resizable_false", (e) => this.#maximize.remove())
         return this.#box;
     }
 }

@@ -210,6 +210,7 @@ class Main {
             maximizable: true,
             center: true
         });
+
         this.#window.setMenu(null)
 
         if (!this.#webSecurity) {
@@ -243,6 +244,7 @@ class Main {
                 this.#window.hide();
             });
         }
+        if (this.#resizable === false) this.#window.webContents.send("chui_resizable_false")
     }
 
     toggleDevTools() {
