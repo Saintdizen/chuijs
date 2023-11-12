@@ -1,7 +1,7 @@
 const {
     Page, TextInput, Select, ComboBox,
     DateInput, NumberInput, TextArea, PasswordInput,
-    EmailInput, CheckBox, RadioButton, Button, H, FileInput, Toggle, log
+    EmailInput, CheckBox, RadioButton, Button, H, FileInput, Toggle, log, RadioGroup, Styles
 } = require('../../index');
 const {Icons} = require("../../framework/components/chui_icons/icons");
 
@@ -48,7 +48,31 @@ class Inputs_Buttons_Page extends Page {
         let file_multiple = new FileInput({ title: "FileInput_multiple", multiple: true })
         let checkBox = new CheckBox({ title: "CheckBox" })
         let radio = new RadioButton({ title: "RadioButton" })
-        this.add(h1_inputs, disabler_1, text, email, pass, number, textArea, combo, select, date, file, file_multiple, checkBox, radio)
+
+        let radioGroup = new RadioGroup({
+            styles: {
+                direction: Styles.DIRECTION.ROW,
+                wrap: Styles.WRAP.WRAP,
+                align: Styles.ALIGN.CENTER,
+                justify: Styles.JUSTIFY.CENTER,
+                width: Styles.SIZE.WEBKIT_FILL
+            }
+        });
+        let radio_groups = [
+            {name: "test1", value: "test1"},
+            {name: "test2", value: "test2"},
+            {name: "test3", value: "test3"}
+        ];
+        radioGroup.addOptions(radio_groups)
+
+        let test_radioGroup = new Button({
+            title: "Кнопка с текстом",
+            clickEvent: (e) => {
+                radioGroup.clear()
+            }
+        });
+
+        this.add(h1_inputs, disabler_1, text, email, pass, number, textArea, combo, select, date, file, file_multiple, checkBox, radio, radioGroup, test_radioGroup)
 
         // Кнопки
         let h1_buttons = new H(1, "Кнопки");

@@ -44,6 +44,9 @@ class RadioGroup {
     addChangeListener(listener = () => {}) {
         this.#groupForm.addEventListener("change", listener)
     }
+    clear() {
+        for (let test of this.#groupForm.children) test.children.item(0).checked = false
+    }
     getValue() {
         return new FormData(this.#groupForm).entries().next().value[1]
     }
