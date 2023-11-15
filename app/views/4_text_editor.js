@@ -36,6 +36,9 @@ class TextEditorPage extends Page {
             }
         })
         this.add(textEditor)
+        textEditor.addInputListener((e) => {
+            console.log(e)
+        })
 
         let html = new HtmlBlock(Styles.SIZE.MAX_CONTENT);
         this.add(new Button({

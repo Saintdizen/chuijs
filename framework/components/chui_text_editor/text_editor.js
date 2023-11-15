@@ -56,6 +56,9 @@ class TextEditor {
         })
         this.#chui_text_editor_test.appendChild(this.#chui_text_editor)
     }
+    addInputListener(listener = () => {}) {
+        this.#text_input.addEventListener("input", listener)
+    }
     setValueAsHTML(value) { this.#text_input.innerHTML = value; }
     getValueAsHTML() { return this.#text_input.innerHTML; }
     setValueAsText(value) { this.#text_input.innerText = value; }
