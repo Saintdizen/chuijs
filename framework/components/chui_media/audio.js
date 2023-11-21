@@ -2,7 +2,6 @@ const fs = require("fs");
 const dataurl = require("dataurl");
 const { Icon, Icons } = require("../chui_icons/icons");
 const {Label} = require('../chui_label/label');
-const WaveSurfer = require('wavesurfer.js');
 
 let play_list = []
 
@@ -36,6 +35,7 @@ class Audio {
         volume: "24px"
     }
     #chui_playlist = new Playlist()
+    #chui_ap_equalizer_main = document.createElement('chui_ap_equalizer_main')
     constructor(options = { autoplay: Boolean(), pin: String(), playlist: Boolean(), width: String(), height: String() }) {
         require('../../modules/chui_functions').setStyles(__dirname + "/audio_styles.css", 'chUiJS_Audio');
         this.#chui_at.setAttribute("name", "media")
@@ -137,13 +137,6 @@ class Audio {
         if (options.height !== undefined) this.#chui_ap_main.style.height = options.height;
         if (options.playlist !== undefined) this.#chui_ap_main.appendChild(this.#chui_playlist.getMain())
 
-        /*const wavesurfer = WaveSurfer.create({
-            container: this.#chui_ap_main,
-            waveColor: 'rgb(200, 0, 200)',
-            progressColor: 'rgb(100, 0, 100)',
-            media: this.#chui_at, // <- this is the important part
-        })*/
-
         this.#chui_at.crossOrigin = "anonymous"
         let audioContext = new AudioContext();
         let mediaNode = audioContext.createMediaElementSource(this.#chui_at);
@@ -153,7 +146,7 @@ class Audio {
             filter.type = 'peaking'
             filter.gain.value = 0
             filter.Q.value = 1
-            filter.frequency.value = band
+            filter.frequency.value = Number(band)
             return filter
         })
         let equalizer = filters.reduce((prev, curr) => {
@@ -162,22 +155,52 @@ class Audio {
         }, mediaNode)
         equalizer.connect(audioContext.destination)
         // Create a vertical slider for each band
-        let container = document.createElement('p')
-        filters.forEach((filter) => {
-            console.log(filter.frequency.value)
-            let slider = document.createElement('input')
-            slider.type = 'range'
-            slider.orient = 'vertical'
-            slider.style.appearance = 'slider-vertical'
-            slider.style.width = '30px'
-            slider.min = -12
-            slider.max = 12
-            slider.value = filter.gain.value
-            slider.step = 0.1
-            slider.oninput = (e) => (filter.gain.value = e.target.value)
-            container.appendChild(slider)
-        })
-        this.#chui_ap_main.appendChild(container)
+        filters.forEach((filter) => this.#chui_ap_equalizer_main.appendChild(this.#setSliderTest(filter)))
+        this.#chui_ap_main.appendChild(this.#chui_ap_equalizer_main)
+
+        let presets = [{
+            name: "test",
+            inputs: [
+                { id: "60", value: "6" },
+                { id: "170", value: "4" },
+                { id: "310", value: "1" },
+                { id: "600", value: "-3" },
+                { id: "1000", value: "-1.5" },
+                { id: "3000", value: "0" },
+                { id: "6000", value: "4.8" },
+                { id: "12000", value: "4.6" },
+                { id: "14000", value: "4.4" },
+                { id: "16000", value: "4.2" },
+            ]
+        }]
+        setTimeout(() => {
+            presets.forEach(presets => {
+                console.log(presets.name)
+                presets.inputs.forEach(inputs => {
+                    document.getElementById(inputs.id).value = inputs.value
+                })
+            })
+        }, 1000)
+    }
+
+    #setSliderTest(filter) {
+        let sliderMain = document.createElement("chui_eq_slider_main")
+        let slider = document.createElement('input')
+        slider.id = String(filter.frequency.value)
+        slider.type = 'range'
+        slider.className = 'eq_slider_test'
+        slider.min = -12
+        slider.max = 12
+        slider.value = filter.gain.value
+        slider.step = 0.1
+        slider.oninput = (e) => (filter.gain.value = e.target.value)
+        sliderMain.appendChild(slider)
+
+        let label = document.createElement("slider_label")
+        label.innerText = String(filter.frequency.value)
+
+        sliderMain.appendChild(label)
+        return sliderMain
     }
     addControls(...components) {
         for (let component of components) this.#chui_playlist.getControls().appendChild(component.set())
