@@ -2,6 +2,7 @@ const fs = require("fs");
 const dataurl = require("dataurl");
 const { Icon, Icons } = require("../chui_icons/icons");
 const {Label} = require('../chui_label/label');
+const WaveSurfer = require('wavesurfer.js');
 
 let play_list = []
 
@@ -135,6 +136,48 @@ class Audio {
         if (options.width !== undefined) this.#chui_ap_main.style.width = options.width;
         if (options.height !== undefined) this.#chui_ap_main.style.height = options.height;
         if (options.playlist !== undefined) this.#chui_ap_main.appendChild(this.#chui_playlist.getMain())
+
+        /*const wavesurfer = WaveSurfer.create({
+            container: this.#chui_ap_main,
+            waveColor: 'rgb(200, 0, 200)',
+            progressColor: 'rgb(100, 0, 100)',
+            media: this.#chui_at, // <- this is the important part
+        })*/
+
+        this.#chui_at.crossOrigin = "anonymous"
+        let audioContext = new AudioContext();
+        let mediaNode = audioContext.createMediaElementSource(this.#chui_at);
+        let eqBands = [60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000]
+        let filters = eqBands.map((band) => {
+            let filter = audioContext.createBiquadFilter()
+            filter.type = 'peaking'
+            filter.gain.value = 0
+            filter.Q.value = 1
+            filter.frequency.value = band
+            return filter
+        })
+        let equalizer = filters.reduce((prev, curr) => {
+            prev.connect(curr)
+            return curr
+        }, mediaNode)
+        equalizer.connect(audioContext.destination)
+        // Create a vertical slider for each band
+        let container = document.createElement('p')
+        filters.forEach((filter) => {
+            console.log(filter.frequency.value)
+            let slider = document.createElement('input')
+            slider.type = 'range'
+            slider.orient = 'vertical'
+            slider.style.appearance = 'slider-vertical'
+            slider.style.width = '30px'
+            slider.min = -12
+            slider.max = 12
+            slider.value = filter.gain.value
+            slider.step = 0.1
+            slider.oninput = (e) => (filter.gain.value = e.target.value)
+            container.appendChild(slider)
+        })
+        this.#chui_ap_main.appendChild(container)
     }
     addControls(...components) {
         for (let component of components) this.#chui_playlist.getControls().appendChild(component.set())
@@ -164,6 +207,13 @@ class Audio {
             this.#displayBufferedAmount()
         })
         Audio.#setMediaData(track)
+
+        try {
+            let context = new AudioContext();
+        }
+        catch(e) {
+            alert('Web Audio API is not supported in this browser');
+        }
     }
     async #playAudioNext() {
         this.#current_audio = this.#current_audio + 1
