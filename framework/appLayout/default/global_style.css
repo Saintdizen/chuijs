@@ -88,7 +88,7 @@ center::-webkit-scrollbar-track {
 }
 
 .test_scroll_track::-webkit-scrollbar-track {
-    margin-top: 92px;
+    margin-top: 96px;
 }
 
 ::-webkit-scrollbar-track {
@@ -134,7 +134,7 @@ header_main {
 center {
     width: -webkit-fill-available;
     height: -webkit-fill-available;
-    padding-top: 43px;
+    padding-top: 47px;
     overflow: hidden hidden
 }
 

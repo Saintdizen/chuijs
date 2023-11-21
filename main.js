@@ -1,4 +1,4 @@
-const { Main, MenuItem, Log, path, App} = require('./index');
+const { Main, MenuItem, Log, path, App, ipcMain} = require('./index');
 let json = require("./package.json");
 const main = new Main({
     name: `${json.name} (${json.version})`,
@@ -23,5 +23,8 @@ main.start({
         new MenuItem().quit("Выход"),
     ]
 })
-Log.info("dsaas")
+
+ipcMain.on('CHUIJS_SEND_TO_MAIN', (e, args) => {
+    console.log(args)
+})
 //main.enableAutoUpdateApp(1000, require("./update.json"));

@@ -1,6 +1,6 @@
 /** RENDERER PROCESS */
 /** IMPORTS */
-const {AppLayout, render, Icons, Notification, Styles, Button} = require('../index');
+const {AppLayout, render, Icons, Notification, Styles, Button, ipcRenderer} = require('../index');
 
 const {MainPage} = require('./views/_main');
 const {Inputs_Buttons_Page} = require('./views/1_inputs_buttons');
@@ -70,9 +70,10 @@ class Test extends AppLayout {
                 ]
             }),
             AppLayout.BUTTON({
-                title: "Настройки",
-                icon: Icons.ACTIONS.SETTINGS,
-                clickEvent: async () => {}
+                title: "CHUIJS_SEND_TO_MAIN",
+                clickEvent: async () => {
+                    ipcRenderer.send("CHUIJS_SEND_TO_MAIN", [2,2,2])
+                }
             }),
             AppLayout.DIALOG({
                 title: "Настройки",
