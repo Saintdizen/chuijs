@@ -8,6 +8,9 @@ const os = require("os");
 const request = require('@cypress/request');
 const {transliterate} = require("transliteration");
 // === === ===
+// process.env
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = "true";
+// === === ===
 
 //ПОЛЯ ВВОДА
 const {TextInput} = require('./framework/components/chui_inputs/chui_text/text');
@@ -301,7 +304,6 @@ class Main {
             })
             require("@electron/remote/main").initialize();
             require("@electron/remote/main").enable(this.#window.webContents);
-            process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = "true";
         })
     }
 

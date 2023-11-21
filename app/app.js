@@ -69,12 +69,10 @@ class Test extends AppLayout {
                     })
                 ]
             }),
-            AppLayout.BUTTON({
+            /*AppLayout.BUTTON({
                 title: "CHUIJS_SEND_TO_MAIN",
-                clickEvent: async () => {
-                    ipcRenderer.send("CHUIJS_SEND_TO_MAIN", [2,2,2])
-                }
-            }),
+                clickEvent: async () => {}
+            }),*/
             AppLayout.DIALOG({
                 title: "Настройки",
                 icon: Icons.ACTIONS.SETTINGS,

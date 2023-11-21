@@ -1,4 +1,4 @@
-const { Main, MenuItem, Log, path, App, ipcMain} = require('./index');
+const { Main, MenuItem, path, App} = require('./index');
 let json = require("./package.json");
 const main = new Main({
     name: `${json.name} (${json.version})`,
@@ -13,7 +13,7 @@ const main = new Main({
     }
 });
 main.start({
-    hideOnClose: true,
+    hideOnClose: false,
     tray: [
         new MenuItem().separator(),
         new MenuItem().help(`Версия: ${json.version}`),
@@ -22,9 +22,5 @@ main.start({
         new MenuItem().button('Консоль', () => main.toggleDevTools()),
         new MenuItem().quit("Выход"),
     ]
-})
-
-ipcMain.on('CHUIJS_SEND_TO_MAIN', (e, args) => {
-    console.log(args)
 })
 //main.enableAutoUpdateApp(1000, require("./update.json"));
