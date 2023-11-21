@@ -2,6 +2,7 @@ const fs = require("fs");
 const dataurl = require("dataurl");
 const { Icon, Icons } = require("../chui_icons/icons");
 const {Label} = require('../chui_label/label');
+const {Button} = require("../chui_button/button");
 
 let play_list = []
 
@@ -153,34 +154,81 @@ class Audio {
             prev.connect(curr)
             return curr
         }, mediaNode)
+
         equalizer.connect(audioContext.destination)
         // Create a vertical slider for each band
         filters.forEach((filter) => this.#chui_ap_equalizer_main.appendChild(this.#setSliderTest(filter)))
         this.#chui_ap_main.appendChild(this.#chui_ap_equalizer_main)
 
-        let presets = [{
-            name: "test",
-            inputs: [
-                { id: "60", value: "6" },
-                { id: "170", value: "4" },
-                { id: "310", value: "1" },
-                { id: "600", value: "-3" },
-                { id: "1000", value: "-1.5" },
-                { id: "3000", value: "0" },
-                { id: "6000", value: "4.8" },
-                { id: "12000", value: "4.6" },
-                { id: "14000", value: "4.4" },
-                { id: "16000", value: "4.2" },
-            ]
-        }]
-        setTimeout(() => {
-            presets.forEach(presets => {
-                console.log(presets.name)
-                presets.inputs.forEach(inputs => {
-                    document.getElementById(inputs.id).value = inputs.value
+        let presets = [
+            {
+                name: "default",
+                inputs: [
+                    { id: "60", value: "0" },
+                    { id: "170", value: "0" },
+                    { id: "310", value: "0" },
+                    { id: "600", value: "0" },
+                    { id: "1000", value: "0" },
+                    { id: "3000", value: "0" },
+                    { id: "6000", value: "0" },
+                    { id: "12000", value: "0" },
+                    { id: "14000", value: "0" },
+                    { id: "16000", value: "0" },
+                ]
+            },
+            {
+                name: "test",
+                inputs: [
+                    { id: "60", value: "7" },
+                    { id: "170", value: "5" },
+                    { id: "310", value: "2" },
+                    { id: "600", value: "-4" },
+                    { id: "1000", value: "-2.5" },
+                    { id: "3000", value: "0" },
+                    { id: "6000", value: "5.8" },
+                    { id: "12000", value: "5.6" },
+                    { id: "14000", value: "5.4" },
+                    { id: "16000", value: "5.2" },
+                ]
+            }]
+
+        let test_eq = new Button({
+            title: "test",
+            clickEvent: async () => {
+                filters.forEach((filter) => {
+                    presets.forEach(presets => {
+                        if (presets.name === "test") {
+                            presets.inputs.forEach(inputs => {
+                                if (String(filter.frequency.value) === inputs.id) {
+                                    document.getElementById(inputs.id).value = inputs.value
+                                    filter.gain.value = inputs.value
+                                }
+                            })
+                        }
+                    })
                 })
-            })
-        }, 1000)
+            }
+        });
+
+        let disable_eq = new Button({
+            title: "Отключить",
+            clickEvent: async () => {
+                filters.forEach((filter) => {
+                    presets.forEach(presets => {
+                        if (presets.name === "default") {
+                            presets.inputs.forEach(inputs => {
+                                if (String(filter.frequency.value) === inputs.id) {
+                                    document.getElementById(inputs.id).value = inputs.value
+                                    filter.gain.value = inputs.value
+                                }
+                            })
+                        }
+                    })
+                })
+            }
+        });
+        this.#chui_ap_main.appendChild(disable_eq.set())
+        this.#chui_ap_main.appendChild(test_eq.set())
     }
 
     #setSliderTest(filter) {
@@ -230,13 +278,6 @@ class Audio {
             this.#displayBufferedAmount()
         })
         Audio.#setMediaData(track)
-
-        try {
-            let context = new AudioContext();
-        }
-        catch(e) {
-            alert('Web Audio API is not supported in this browser');
-        }
     }
     async #playAudioNext() {
         this.#current_audio = this.#current_audio + 1
