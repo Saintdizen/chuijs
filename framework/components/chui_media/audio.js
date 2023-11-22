@@ -2,9 +2,10 @@ const fs = require("fs");
 const dataurl = require("dataurl");
 const { Icon, Icons } = require("../chui_icons/icons");
 const {Label} = require('../chui_label/label');
-const {Button} = require("../chui_button/button");
 const {Select} = require("../chui_inputs/chui_select_box/select_box");
 const {Dialog} = require("../chui_modal/modal");
+const Store = require('electron-store');
+const store = new Store();
 
 let play_list = []
 
@@ -140,15 +141,11 @@ class Audio {
             }
         })
         this.#renderVolume()
-
         if (options.pin !== undefined) this.#chui_ap_main.classList.add(options.pin);
         if (options.width !== undefined) this.#chui_ap_main.style.width = options.width;
         if (options.height !== undefined) this.#chui_ap_main.style.height = options.height;
         if (options.playlist !== undefined) this.#chui_ap_main.appendChild(this.#chui_playlist.getMain())
-
-        let dialog = new Dialog({
-            closeOutSideClick: true
-        })
+        let dialog = new Dialog({ closeOutSideClick: true })
         dialog.addToBody(this.#chui_audio_fx)
         this.#chui_ap_main.appendChild(dialog.set())
         this.#chui_ap_fx_icon.addEventListener("click", () => dialog.open())
@@ -309,6 +306,7 @@ class AudioFX {
     #chui_ap_equalizer_block = document.createElement("chui_ap_equalizer_block")
     #audioContext = new AudioContext();
     #eqBands = [60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000]
+    #select = new Select()
     constructor(audio) {
         let mediaNode = this.#audioContext.createMediaElementSource(audio);
         let filters = this.#eqBands.map((band) => {
@@ -326,25 +324,25 @@ class AudioFX {
         equalizer.connect(this.#audioContext.destination)
         filters.forEach((filter) => this.#chui_ap_equalizer_block.appendChild(this.#setSliderTest(filter)))
 
-        let select = new Select()
-        select.setDropdownHeight("208px")
+        this.#select.setDropdownHeight("208px")
         AudioFX.PRESETS.forEach(preset => {
-            select.addOptions(preset.name)
+            this.#select.addOptions(preset.name)
         })
-        select.setDefaultOption("test")
-
-        setTimeout(() => {
-            filters.forEach((filter) => this.#setPreset(filter, select.getValue()))
-        }, 250)
-
-        select.addValueChangeListener((e) => {
+        this.#select.addValueChangeListener((e) => {
             filters.forEach((filter) => this.#setPreset(filter, e.target.value))
         })
-        this.#chui_ap_equalizer_main.appendChild(select.set())
+        this.#chui_ap_equalizer_main.appendChild(this.#select.set())
         this.#chui_ap_equalizer_main.appendChild(this.#chui_ap_equalizer_block)
+        this.#restore(filters, store.get("chuijs.settings.fx_preset"))
     }
     set() {
         return this.#chui_ap_equalizer_main
+    }
+    #restore(filters, name) {
+        setTimeout(() => {
+            this.#select.setDefaultOption(name)
+            filters.forEach((filter) => this.#setPreset(filter, name))
+        }, 250)
     }
     #setPreset(filter, name) {
         AudioFX.PRESETS.forEach(presets => {
@@ -356,6 +354,7 @@ class AudioFX {
                 })
             }
         })
+        store.set("chuijs.settings.fx_preset", name)
     }
     #setSliderTest(filter) {
         let sliderMain = document.createElement("chui_eq_slider_main")
@@ -389,7 +388,6 @@ class AudioFX {
         console.log(test)
         slider.style.setProperty('--fx-before-width', `${test.toFixed(1)}%`);
     }
-
     // ya.music.Audio.fx
     static PRESETS = [
         {
@@ -473,139 +471,131 @@ class AudioFX {
             ]
         },
         {
-            bands: [-4.5, -4.5, -4.5, -2, 1, 5.5, 8, 8, 8, 8],
             name: "Full Treble",
             title: "Усиление ВЧ",
             inputs: [
-                { id: "60", value: "0" },
-                { id: "170", value: "0" },
-                { id: "310", value: "0" },
-                { id: "600", value: "0" },
-                { id: "1000", value: "0" },
-                { id: "3000", value: "0" },
-                { id: "6000", value: "0" },
-                { id: "12000", value: "0" },
-                { id: "14000", value: "0" },
-                { id: "16000", value: "0" },
+                { id: "60", value: "-4.5" },
+                { id: "170", value: "-4.5" },
+                { id: "310", value: "-4.5" },
+                { id: "600", value: "-2" },
+                { id: "1000", value: "1" },
+                { id: "3000", value: "5.5" },
+                { id: "6000", value: "8" },
+                { id: "12000", value: "8" },
+                { id: "14000", value: "8" },
+                { id: "16000", value: "8" },
             ]
         },
         {
-            bands: [3.5, 2.5, -0.5, -3.5, -2, 0.5, 4, 5.5, 6, 6],
             name: "Full Bass & Treble",
             title: "Усиление НЧ и ВЧ",
             inputs: [
-                { id: "60", value: "0" },
-                { id: "170", value: "0" },
-                { id: "310", value: "0" },
-                { id: "600", value: "0" },
-                { id: "1000", value: "0" },
-                { id: "3000", value: "0" },
-                { id: "6000", value: "0" },
-                { id: "12000", value: "0" },
-                { id: "14000", value: "0" },
-                { id: "16000", value: "0" },
+                { id: "60", value: "3.5" },
+                { id: "170", value: "2.5" },
+                { id: "310", value: "-0.5" },
+                { id: "600", value: "-3.5" },
+                { id: "1000", value: "-2" },
+                { id: "3000", value: "0.5" },
+                { id: "6000", value: "4" },
+                { id: "12000", value: "5.5" },
+                { id: "14000", value: "6" },
+                { id: "16000", value: "6" },
             ]
         },
         {
-            bands: [2, 5.5, 2.5, -1.5, -1, 0.5, 2, 4.5, 6, 7],
             name: "Laptop Speakers / Headphone",
             title: "Колонки ноутбука",
             inputs: [
-                { id: "60", value: "0" },
-                { id: "170", value: "0" },
-                { id: "310", value: "0" },
-                { id: "600", value: "0" },
-                { id: "1000", value: "0" },
-                { id: "3000", value: "0" },
-                { id: "6000", value: "0" },
-                { id: "12000", value: "0" },
-                { id: "14000", value: "0" },
-                { id: "16000", value: "0" },
+                { id: "60", value: "2" },
+                { id: "170", value: "5.5" },
+                { id: "310", value: "2.5" },
+                { id: "600", value: "-1.5" },
+                { id: "1000", value: "-1" },
+                { id: "3000", value: "0.5" },
+                { id: "6000", value: "2" },
+                { id: "12000", value: "4.5" },
+                { id: "14000", value: "6" },
+                { id: "16000", value: "7" },
             ]
         },
         {
-            bands: [5, 5, 2.5, 2.5, -0.5, -2, -2, -2, -0.5, -0.5],
             name: "Large Hall",
             title: "Большой зал",
             inputs: [
-                { id: "60", value: "0" },
-                { id: "170", value: "0" },
-                { id: "310", value: "0" },
-                { id: "600", value: "0" },
-                { id: "1000", value: "0" },
-                { id: "3000", value: "0" },
-                { id: "6000", value: "0" },
-                { id: "12000", value: "0" },
-                { id: "14000", value: "0" },
-                { id: "16000", value: "0" },
+                { id: "60", value: "5" },
+                { id: "170", value: "5" },
+                { id: "310", value: "2.5" },
+                { id: "600", value: "2.5" },
+                { id: "1000", value: "-0.5" },
+                { id: "3000", value: "-2" },
+                { id: "6000", value: "-2" },
+                { id: "12000", value: "-2" },
+                { id: "14000", value: "-0.5" },
+                { id: "16000", value: "-0.5" },
             ]
         },
         {
-            bands: [-2, -0.5, 2, 2.5, 2.5, 2.5, 2, 1, 1, 1],
             name: "Live",
             title: "Концерт",
             inputs: [
-                { id: "60", value: "0" },
-                { id: "170", value: "0" },
-                { id: "310", value: "0" },
-                { id: "600", value: "0" },
-                { id: "1000", value: "0" },
-                { id: "3000", value: "0" },
-                { id: "6000", value: "0" },
-                { id: "12000", value: "0" },
-                { id: "14000", value: "0" },
-                { id: "16000", value: "0" },
+                { id: "60", value: "-2" },
+                { id: "170", value: "-0.5" },
+                { id: "310", value: "2" },
+                { id: "600", value: "2.5" },
+                { id: "1000", value: "2.5" },
+                { id: "3000", value: "2.5" },
+                { id: "6000", value: "2" },
+                { id: "12000", value: "1" },
+                { id: "14000", value: "1" },
+                { id: "16000", value: "1" },
             ]
         },
         {
-            bands: [3.5, 3.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 3.5, 3.5],
             name: "Party",
             title: "Вечеринка",
             inputs: [
-                { id: "60", value: "0" },
-                { id: "170", value: "0" },
-                { id: "310", value: "0" },
-                { id: "600", value: "0" },
-                { id: "1000", value: "0" },
-                { id: "3000", value: "0" },
-                { id: "6000", value: "0" },
-                { id: "12000", value: "0" },
-                { id: "14000", value: "0" },
-                { id: "16000", value: "0" },
+                { id: "60", value: "3.5" },
+                { id: "170", value: "3.5" },
+                { id: "310", value: "-0.5" },
+                { id: "600", value: "-0.5" },
+                { id: "1000", value: "-0.5" },
+                { id: "3000", value: "-0.5" },
+                { id: "6000", value: "-0.5" },
+                { id: "12000", value: "-0.5" },
+                { id: "14000", value: "3.5" },
+                { id: "16000", value: "3.5" },
             ]
         },
         {
-            bands: [-0.5, 2, 3.5, 4, 2.5, -0.5, -1, -1, -0.5, -0.5],
             name: "Pop",
             title: "Поп",
             inputs: [
-                { id: "60", value: "0" },
-                { id: "170", value: "0" },
-                { id: "310", value: "0" },
-                { id: "600", value: "0" },
-                { id: "1000", value: "0" },
-                { id: "3000", value: "0" },
-                { id: "6000", value: "0" },
-                { id: "12000", value: "0" },
-                { id: "14000", value: "0" },
-                { id: "16000", value: "0" },
+                { id: "60", value: "-0.5" },
+                { id: "170", value: "2" },
+                { id: "310", value: "3.5" },
+                { id: "600", value: "4" },
+                { id: "1000", value: "2.5" },
+                { id: "3000", value: "-0.5" },
+                { id: "6000", value: "-1" },
+                { id: "12000", value: "-1" },
+                { id: "14000", value: "-0.5" },
+                { id: "16000", value: "-0.5" },
             ]
         },
         {
-            bands: [-0.5, -0.5, -0.5, -2.5, -0.5, 3, 3, -0.5, -0.5, -0.5],
             name: "Reggae",
             title: "Регги",
             inputs: [
-                { id: "60", value: "0" },
-                { id: "170", value: "0" },
-                { id: "310", value: "0" },
-                { id: "600", value: "0" },
-                { id: "1000", value: "0" },
-                { id: "3000", value: "0" },
-                { id: "6000", value: "0" },
-                { id: "12000", value: "0" },
-                { id: "14000", value: "0" },
-                { id: "16000", value: "0" },
+                { id: "60", value: "-0.5" },
+                { id: "170", value: "-0.5" },
+                { id: "310", value: "-0.5" },
+                { id: "600", value: "-2.5" },
+                { id: "1000", value: "-0.5" },
+                { id: "3000", value: "3" },
+                { id: "6000", value: "3" },
+                { id: "12000", value: "-0.5" },
+                { id: "14000", value: "-0.5" },
+                { id: "16000", value: "-0.5" },
             ]
         },
         {
