@@ -303,7 +303,7 @@ chui_ap_volume_block {
     cursor: pointer;
     outline: none;
     background: var(--ap_slider_background);
-    margin: auto 0 auto 6px;
+    margin: 70px 8px;
     -webkit-appearance: none;
     width: auto;
     transform: rotate(-90deg);
