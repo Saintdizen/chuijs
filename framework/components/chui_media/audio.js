@@ -57,6 +57,7 @@ class Audio {
         this.#chui_ap_seek.id = "chui_ap_seek"
         this.#chui_ap_seek.max = "0"
         this.#chui_ap_seek.value = "0"
+        this.#chui_ap_seek.step = 0.01
         // КНОПКИ
         this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, this.#icons_sizes.play_pause).getHTML()
         this.#chui_ap_next.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_NEXT, this.#icons_sizes.next_prev).getHTML()
@@ -207,7 +208,7 @@ class Audio {
     }
     #displayBufferedAmount = () => {
         try {
-            const end = Math.floor(this.#chui_at.buffered.end(0) / this.#chui_ap_seek.max * 100)
+            const end = (this.#chui_at.buffered.end(0) / this.#chui_ap_seek.max * 100).toFixed(2)
             if (end > 100) {
                 this.#chui_ap_seek_buf.style.width = `100%`;
             } else {
@@ -224,8 +225,8 @@ class Audio {
             if (value > 0 && this.#chui_at.duration > 0) {
                 this.#chui_ap_time1.setText(this.#calculateTime(value));
                 this.#chui_ap_time2.setText(this.#calculateTime(this.#chui_at.duration));
-                this.#chui_ap_seek.value = String(Math.floor(value));
-                const test = Math.floor(this.#chui_ap_seek.value / this.#chui_ap_seek.max * 100)
+                this.#chui_ap_seek.value = String(value);
+                const test = (this.#chui_ap_seek.value / this.#chui_ap_seek.max * 100).toFixed(2)
                 this.#chui_ap_main.style.setProperty('--seek-before-width', `${test}%`);
             }
         } catch (e) {
@@ -240,7 +241,7 @@ class Audio {
         return `${minutes}:${returnedSeconds}`;
     }
     #setSliderMax = () => {
-        this.#chui_ap_seek.max = String(Math.floor(this.#chui_at.duration));
+        this.#chui_ap_seek.max = String(this.#chui_at.duration.toFixed(2));
     }
     //
     setPlayList(list = [{ title: String(), artist: String(), album: String(), mimetype: String(), path: String(), artwork: [] }]) {
@@ -365,9 +366,9 @@ class AudioFX {
         slider.value = input.value
         filter.gain.value = slider.value
         val.innerText = String(slider.value)
-        let test = Math.floor(slider.value / slider.max * 100)
+        let test = (slider.value / slider.max * 100).toFixed(1)
         console.log(test)
-        //slider.style.setProperty('--fx-before-width', `${test}px`);
+        slider.style.setProperty('--fx-before-width', `${test}px`);
     }
 
     static PRESETS = [
