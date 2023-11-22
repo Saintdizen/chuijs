@@ -3,6 +3,7 @@ const dataurl = require("dataurl");
 const { Icon, Icons } = require("../chui_icons/icons");
 const {Label} = require('../chui_label/label');
 const {Button} = require("../chui_button/button");
+const {Select} = require("../chui_inputs/chui_select_box/select_box");
 
 let play_list = []
 
@@ -36,12 +37,13 @@ class Audio {
         volume: "24px"
     }
     #chui_playlist = new Playlist()
-    #chui_ap_equalizer_main = document.createElement('chui_ap_equalizer_main')
+    #chui_audio_fx = new AudioFX(this.#chui_at)
     constructor(options = { autoplay: Boolean(), pin: String(), playlist: Boolean(), width: String(), height: String() }) {
         require('../../modules/chui_functions').setStyles(__dirname + "/audio_styles.css", 'chUiJS_Audio');
         this.#chui_at.setAttribute("name", "media")
         this.#chui_at.controls = false;
         this.#chui_at.preload = "metadata"
+        this.#chui_at.crossOrigin = "anonymous"
         this.#chui_at.style.borderRadius = "var(--border_radius)"
         // Настройки
         if (options.autoplay) {
@@ -138,117 +140,9 @@ class Audio {
         if (options.height !== undefined) this.#chui_ap_main.style.height = options.height;
         if (options.playlist !== undefined) this.#chui_ap_main.appendChild(this.#chui_playlist.getMain())
 
-        this.#chui_at.crossOrigin = "anonymous"
-        let audioContext = new AudioContext();
-        let mediaNode = audioContext.createMediaElementSource(this.#chui_at);
-        let eqBands = [60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000]
-        let filters = eqBands.map((band) => {
-            let filter = audioContext.createBiquadFilter()
-            filter.type = 'peaking'
-            filter.gain.value = 0
-            filter.Q.value = 1
-            filter.frequency.value = Number(band)
-            return filter
-        })
-        let equalizer = filters.reduce((prev, curr) => {
-            prev.connect(curr)
-            return curr
-        }, mediaNode)
 
-        equalizer.connect(audioContext.destination)
-        // Create a vertical slider for each band
-        filters.forEach((filter) => this.#chui_ap_equalizer_main.appendChild(this.#setSliderTest(filter)))
-        this.#chui_ap_main.appendChild(this.#chui_ap_equalizer_main)
 
-        let presets = [
-            {
-                name: "default",
-                inputs: [
-                    { id: "60", value: "0" },
-                    { id: "170", value: "0" },
-                    { id: "310", value: "0" },
-                    { id: "600", value: "0" },
-                    { id: "1000", value: "0" },
-                    { id: "3000", value: "0" },
-                    { id: "6000", value: "0" },
-                    { id: "12000", value: "0" },
-                    { id: "14000", value: "0" },
-                    { id: "16000", value: "0" },
-                ]
-            },
-            {
-                name: "test",
-                inputs: [
-                    { id: "60", value: "7" },
-                    { id: "170", value: "5" },
-                    { id: "310", value: "2" },
-                    { id: "600", value: "-4" },
-                    { id: "1000", value: "-2.5" },
-                    { id: "3000", value: "0" },
-                    { id: "6000", value: "5.8" },
-                    { id: "12000", value: "5.6" },
-                    { id: "14000", value: "5.4" },
-                    { id: "16000", value: "5.2" },
-                ]
-            }]
-
-        let test_eq = new Button({
-            title: "test",
-            clickEvent: async () => {
-                filters.forEach((filter) => {
-                    presets.forEach(presets => {
-                        if (presets.name === "test") {
-                            presets.inputs.forEach(inputs => {
-                                if (String(filter.frequency.value) === inputs.id) {
-                                    document.getElementById(inputs.id).value = inputs.value
-                                    filter.gain.value = inputs.value
-                                }
-                            })
-                        }
-                    })
-                })
-            }
-        });
-
-        let disable_eq = new Button({
-            title: "Отключить",
-            clickEvent: async () => {
-                filters.forEach((filter) => {
-                    presets.forEach(presets => {
-                        if (presets.name === "default") {
-                            presets.inputs.forEach(inputs => {
-                                if (String(filter.frequency.value) === inputs.id) {
-                                    document.getElementById(inputs.id).value = inputs.value
-                                    filter.gain.value = inputs.value
-                                }
-                            })
-                        }
-                    })
-                })
-            }
-        });
-        this.#chui_ap_main.appendChild(disable_eq.set())
-        this.#chui_ap_main.appendChild(test_eq.set())
-    }
-
-    #setSliderTest(filter) {
-        let sliderMain = document.createElement("chui_eq_slider_main")
-        let slider = document.createElement('input')
-        slider.id = String(filter.frequency.value)
-        slider.type = 'range'
-        slider.className = 'eq_slider_test'
-        slider.min = -12
-        slider.max = 12
-        slider.value = filter.gain.value
-        slider.step = 0.1
-        slider.oninput = (e) => (filter.gain.value = e.target.value)
-        sliderMain.appendChild(slider)
-
-        let label = document.createElement("slider_label")
-        label.innerText = String(filter.frequency.value)
-
-        sliderMain.appendChild(label)
-        return sliderMain
+        this.#chui_ap_main.appendChild(this.#chui_audio_fx.getMain())
     }
     addControls(...components) {
         for (let component of components) this.#chui_playlist.getControls().appendChild(component.set())
@@ -399,6 +293,114 @@ class Audio {
         VORBIS: 'audio/vorbis',
         WAV: 'audio/vnd.wav'
     }
+}
+
+class AudioFX {
+    #chui_ap_equalizer_main = document.createElement('chui_ap_equalizer_main')
+    #audioContext = new AudioContext();
+    #eqBands = [60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000]
+    constructor(audio) {
+        let mediaNode = this.#audioContext.createMediaElementSource(audio);
+        let filters = this.#eqBands.map((band) => {
+            let filter = this.#audioContext.createBiquadFilter()
+            filter.type = 'peaking'
+            filter.gain.value = 0
+            filter.Q.value = 1
+            filter.frequency.value = Number(band)
+            return filter
+        })
+        let equalizer = filters.reduce((prev, curr) => {
+            prev.connect(curr)
+            return curr
+        }, mediaNode)
+        equalizer.connect(this.#audioContext.destination)
+        // Create a vertical slider for each band
+        filters.forEach((filter) => this.#chui_ap_equalizer_main.appendChild(this.#setSliderTest(filter)))
+
+        let select = new Select({title: 'Select'})
+        select.addOptions("default", "test")
+        select.addValueChangeListener((e) => {
+            filters.forEach((filter) => this.#setPreset(filter, e.target.value))
+        })
+        this.#chui_ap_equalizer_main.appendChild(select.set())
+    }
+    getMain() {
+        return this.#chui_ap_equalizer_main
+    }
+    #setPreset(filter, name) {
+        AudioFX.PRESETS.forEach(presets => {
+            if (presets.name === name) {
+                presets.inputs.forEach(input => {
+                    if (String(filter.frequency.value) === input.id) {
+                        AudioFX.#renderSlider(input, filter)
+                    }
+                })
+            }
+        })
+    }
+    #setSliderTest(filter) {
+        let sliderMain = document.createElement("chui_eq_slider_main")
+        let val = document.createElement("slider_label")
+        let slider = document.createElement('input')
+        let label = document.createElement("slider_label")
+        slider.id = String(filter.frequency.value)
+        slider.type = 'range'
+        slider.className = 'eq_slider_test'
+        slider.min = -12
+        slider.max = 12
+        slider.value = filter.gain.value
+        slider.step = 0.1
+        slider.oninput = (e) => AudioFX.#renderSlider(e.target, filter)
+        val.id = "val_" + String(filter.frequency.value)
+        val.innerText = String(slider.value)
+        label.innerText = String(filter.frequency.value)
+        sliderMain.appendChild(val)
+        sliderMain.appendChild(slider)
+        sliderMain.appendChild(label)
+        return sliderMain
+    }
+    static #renderSlider(input, filter) {
+        let slider = document.getElementById(input.id);
+        let val = document.getElementById("val_" + input.id);
+        slider.value = input.value
+        filter.gain.value = slider.value
+        val.innerText = String(slider.value)
+        let test = Math.floor(slider.value / slider.max * 100)
+        console.log(test)
+        //slider.style.setProperty('--fx-before-width', `${test}px`);
+    }
+
+    static PRESETS = [
+        {
+            name: "default",
+            inputs: [
+                { id: "60", value: "0" },
+                { id: "170", value: "0" },
+                { id: "310", value: "0" },
+                { id: "600", value: "0" },
+                { id: "1000", value: "0" },
+                { id: "3000", value: "0" },
+                { id: "6000", value: "0" },
+                { id: "12000", value: "0" },
+                { id: "14000", value: "0" },
+                { id: "16000", value: "0" },
+            ]
+        },
+        {
+            name: "test",
+            inputs: [
+                { id: "60", value: "7" },
+                { id: "170", value: "5" },
+                { id: "310", value: "2" },
+                { id: "600", value: "-4" },
+                { id: "1000", value: "-2.5" },
+                { id: "3000", value: "0" },
+                { id: "6000", value: "5.8" },
+                { id: "12000", value: "5.6" },
+                { id: "14000", value: "5.4" },
+                { id: "16000", value: "5.2" },
+            ]
+        }]
 }
 
 class Playlist {

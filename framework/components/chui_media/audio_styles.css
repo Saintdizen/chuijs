@@ -281,6 +281,8 @@ chui_eq_slider_main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 200px;
+    width: 50px;
 }
 
 slider_label {
@@ -288,9 +290,66 @@ slider_label {
     font-size: var(--font_labels_size);
 }
 
+
+/* УПРАВЛЕНИЕ ГРОМКОСТЬЮ */
+chui_ap_volume_block {
+    display: flex;
+    margin-left: auto
+}
+
 .eq_slider_test {
-    -webkit-appearance: slider-vertical;
-    -moz-appearance: slider-vertical;
-    appearance: slider-vertical;
-    width: 45px;
+    position: relative;
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    background: var(--ap_slider_background);
+    margin: auto 0 auto 6px;
+    -webkit-appearance: none;
+    width: auto;
+    transform: rotate(-90deg);
+}
+
+.eq_slider_test::before {
+    transition: all 0s;
+    position: absolute;
+    content: '';
+    left: 0;
+    height: 100%;
+    border-radius: 8px;
+    background: var(--blue_prime_background);
+    cursor: pointer;
+    width: var(--fx-before-width);
+}
+
+.eq_slider_test:disabled:before {
+    background: var(--ap_slider_buf_background)
+}
+
+.eq_slider_test::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    border-radius: 8px
+}
+
+
+
+.eq_slider_test::-webkit-slider-thumb {
+    border: none;
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background-color: var(--blue_prime_background);
+    cursor: pointer;
+    margin: -4px 0 0 0
+}
+
+.eq_slider_test:focus {
+    outline: none;
+    border: none;
+}
+
+.eq_slider_test:focus::-webkit-slider-runnable-track {
+    outline: none;
+    border: none;
 }
