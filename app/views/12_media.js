@@ -1,47 +1,44 @@
-const {Page, Audio, Video, Styles, Button} = require('../../index');
+const {Page, Audio, Video, Styles, Button, App, fs, shell, path} = require('../../index');
 
 class MediaPage extends Page {
+    #download_path = undefined;
+    #playlist = []
+
     constructor() {
-        super()
-        this.setTitle('Медиа')
-        this.setMain(true)
-        this.setFullHeight()
-        this.setFullWidth()
+        super();
+        this.setTitle('OfflinePlayer');
+        this.setFullHeight();
+        this.setMain(true);
         let audio = new Audio({
             autoplay: false,
             playlist: true,
             width: Styles.SIZE.WEBKIT_FILL,
             height: Styles.SIZE.WEBKIT_FILL
         })
-        audio.setPlayList([
-            {
-                title: "Title 1", artist: "Artist 1", album: "Album 1", mimetype: Audio.MIMETYPES.MP3,
-                path: "https://archive.org/download/calexico2006-12-02..flac16/calexico2006-12-02d1t02.mp3"
-            },
-            {
-                title: "Title 2", artist: "Artist 2", album: "Album 2", mimetype: Audio.MIMETYPES.MP3,
-                path: "https://archive.org/download/ra2007-07-21/ra2007-07-21d1t05_64kb.mp3"
-            },
-            {
-                title: "Title 3", artist: "Artist 3", album: "Album 3", mimetype: Audio.MIMETYPES.MP3,
-                path: "https://archive.org/download/slac2002-02-15/slac2002-02-15d1t07_64kb.mp3"
-            },
-        ])
+        this.#download_path = path.join(App.userDataPath(), "downloads");
+        this.generatePlaylist();
+        setTimeout(() => audio.setPlayList(this.#playlist), 100)
 
         let openFolder = new Button({
-            title: "Кнопка с текстом",
-            clickEvent: (e) => console.log(e)
+            title: "Открыть папку",
+            clickEvent: async () => await shell.openPath(path.join(App.userDataPath(), "downloads"))
         });
 
         let updateList = new Button({
             title: "Кнопка с текстом",
-            clickEvent: (e) => console.log(e)
+            clickEvent: () => {
+                this.generatePlaylist();
+                setTimeout(() => audio.setPlayList(this.#playlist), 100);
+            }
         });
 
         audio.addControls(openFolder, updateList)
 
-        this.add(audio)
+        this.addRouteEvent((e) => {
+            console.log(e)
+        })
 
+        this.add(audio)
         /*let video = new Video({
             autoplay: true,
             height: "auto",
@@ -68,6 +65,19 @@ class MediaPage extends Page {
             ]
         )
         this.add(video)*/
+    }
+    generatePlaylist() {
+        this.#playlist = []
+        fs.readdir(this.#download_path, (err, files) => {
+            files.forEach(file => {
+                let artist = file.split(" - ")[0]
+                let title = file.split(" - ")[1].replace(".mp3", "")
+                this.#playlist.push({
+                    title: title, artist: artist, album: "", mimetype: Audio.MIMETYPES.MP3,
+                    path: String(path.join(this.#download_path, file))
+                })
+            });
+        });
     }
 }
 

@@ -2,6 +2,7 @@ let {Animation} = require('../chui_animations/animations');
 const {Route} = require("../../appLayout/default/chui_app_layout");
 const {Button} = require("../../components/chui_button/button");
 
+
 class Page {
     #page = document.createElement('page');
     #title = undefined;
@@ -16,6 +17,11 @@ class Page {
             clickEvent: () => new Route().go(options.page)
         })
         this.#page.appendChild(back.set());
+
+
+    }
+    addRouteEvent(event = () => {}) {
+        require("electron").ipcRenderer.addListener("test", event)
     }
     setMenuBar(menubar) {
         this.#menu_bar = menubar.set();

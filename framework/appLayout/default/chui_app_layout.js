@@ -10,6 +10,7 @@ const {UpdateNotification} = require("../../components/chui_notification/notific
 const {ipcRenderer} = require("electron");
 const chui_functions = require('../../modules/chui_functions');
 const {DownloadNotification} = require("../../components/chui_notification/notification_download");
+const EventEmitter = require('node:events');
 
 class Route {
     go(page) {
@@ -33,21 +34,6 @@ class Route {
         } else {
             center.classList.remove("header_padding", "test_scroll_track");
         }
-
-        /*const EventEmitter = require('events');
-        const eventEmitter = new EventEmitter();
-
-        const obj_route_evt = {
-            title: page.getTitle(),
-            page: page
-        }
-
-        eventEmitter.on('route', (args) => {
-            console.log(args);
-        });
-
-        eventEmitter.emit('route', obj_route_evt);*/
-
     }
 }
 
@@ -212,6 +198,13 @@ class AppMenu extends Route {
         let test = this.#routeList.filter(route => route.getTitle().includes(page.getTitle()));
         if (test.length === 1) {
             let button_route = document.createElement('route');
+
+
+            button_route.addEventListener("click", () => {
+                console.log("test")
+                require("@electron/remote").ipcMain.emit("test")
+            })
+
             let title_menu = document.createElement('route_title');
             title_menu.innerHTML = page.getTitle();
             if (page.getMain()) {

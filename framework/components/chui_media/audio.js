@@ -307,23 +307,30 @@ class AudioFX {
     #audioContext = new AudioContext();
     #eqBands = [60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000]
     #select = new Select()
+    #media = undefined;
     constructor(audio) {
-        let mediaNode = this.#audioContext.createMediaElementSource(audio);
-        let filters = this.#eqBands.map((band) => {
+        this.#media = this.#audioContext.createMediaElementSource(audio);
+        let filters = this.#eqBands.map((band, i) => {
             let filter = this.#audioContext.createBiquadFilter()
-            filter.type = 'peaking'
+            if (i === 0) {
+                filter.type = "lowshelf";
+            } else if (i === this.#eqBands.length - 1) {
+                filter.type = "highshelf";
+            } else {
+                filter.type = "peaking";
+            }
             filter.gain.value = 0
             filter.Q.value = 1
-            filter.frequency.value = Number(band)
+            filter.frequency.value = band
             return filter
         })
-        let equalizer = filters.reduce((prev, curr) => {
+        filters.reduce((prev, curr) => {
             prev.connect(curr)
             return curr
-        }, mediaNode)
-        equalizer.connect(this.#audioContext.destination)
+        })
+        this.#media.connect(filters[0]);
+        filters[filters.length - 1].connect(this.#audioContext.destination);
         filters.forEach((filter) => this.#chui_ap_equalizer_block.appendChild(this.#setSliderTest(filter)))
-
         this.#select.setDropdownHeight("208px")
         AudioFX.PRESETS.forEach(preset => {
             this.#select.addOptions(preset.name)
@@ -385,7 +392,6 @@ class AudioFX {
         filter.gain.value = slider.value
         val.innerText = String(slider.value)
         let test = 50 + (slider.value * 5)
-        console.log(test)
         slider.style.setProperty('--fx-before-width', `${test.toFixed(1)}%`);
     }
     // ya.music.Audio.fx
