@@ -313,12 +313,12 @@ chui_ap_volume_block {
     transition: all 0s;
     position: absolute;
     content: '';
-    left: 0;
     height: 100%;
     border-radius: 8px;
     background: var(--blue_prime_background);
     cursor: pointer;
     width: var(--fx-before-width);
+    left: 0%;
 }
 
 .eq_slider_test:disabled:before {

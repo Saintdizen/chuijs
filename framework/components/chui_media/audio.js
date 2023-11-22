@@ -347,10 +347,11 @@ class AudioFX {
         slider.id = String(filter.frequency.value)
         slider.type = 'range'
         slider.className = 'eq_slider_test'
-        slider.min = -12
-        slider.max = 12
-        slider.value = filter.gain.value
         slider.step = 0.1
+        slider.min = -10
+        slider.max = 10
+        slider.value = filter.gain.value
+        slider.style.setProperty('--fx-before-width', `50%`);
         slider.oninput = (e) => AudioFX.#renderSlider(e.target, filter)
         val.id = "val_" + String(filter.frequency.value)
         val.innerText = String(slider.value)
@@ -366,9 +367,9 @@ class AudioFX {
         slider.value = input.value
         filter.gain.value = slider.value
         val.innerText = String(slider.value)
-        let test = (slider.value / slider.max * 100).toFixed(1)
+        let test = 50 + (slider.value * 5)
         console.log(test)
-        slider.style.setProperty('--fx-before-width', `${test}px`);
+        slider.style.setProperty('--fx-before-width', `${test.toFixed(1)}%`);
     }
 
     static PRESETS = [
