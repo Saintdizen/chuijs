@@ -4,6 +4,7 @@ const { Icon, Icons } = require("../chui_icons/icons");
 const {Label} = require('../chui_label/label');
 const {Button} = require("../chui_button/button");
 const {Select} = require("../chui_inputs/chui_select_box/select_box");
+const {Dialog} = require("../chui_modal/modal");
 
 let play_list = []
 
@@ -30,6 +31,8 @@ class Audio {
     #chui_ap_volume_block = document.createElement("chui_ap_volume_block");
     #chui_ap_volume_icon = document.createElement(`chui_ap_volume_icon`);
     #chui_ap_volume = document.createElement(`input`);
+    //
+    #chui_ap_fx_icon = document.createElement(`chui_ap_fx_icon`);
     // Размеры иконок
     #icons_sizes = {
         play_pause: "30px",
@@ -72,6 +75,8 @@ class Audio {
         this.#chui_at.volume = this.#chui_ap_volume.value / 100;
         this.#chui_ap_volume_block.appendChild(this.#chui_ap_volume_icon)
         this.#chui_ap_volume_block.appendChild(this.#chui_ap_volume)
+        this.#chui_ap_fx_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.EQUALIZER, this.#icons_sizes.volume).getHTML()
+        this.#chui_ap_volume_block.appendChild(this.#chui_ap_fx_icon)
         // ИНФОРМАЦИЯ
         this.#chui_ap_info.appendChild(this.#chui_ap_time1.set())
         this.#chui_ap_seek_block.appendChild(this.#chui_ap_seek)
@@ -141,9 +146,12 @@ class Audio {
         if (options.height !== undefined) this.#chui_ap_main.style.height = options.height;
         if (options.playlist !== undefined) this.#chui_ap_main.appendChild(this.#chui_playlist.getMain())
 
-
-
-        this.#chui_ap_main.appendChild(this.#chui_audio_fx.getMain())
+        let dialog = new Dialog({
+            closeOutSideClick: true
+        })
+        dialog.addToBody(this.#chui_audio_fx)
+        this.#chui_ap_main.appendChild(dialog.set())
+        this.#chui_ap_fx_icon.addEventListener("click", () => dialog.open())
     }
     addControls(...components) {
         for (let component of components) this.#chui_playlist.getControls().appendChild(component.set())
@@ -298,6 +306,7 @@ class Audio {
 
 class AudioFX {
     #chui_ap_equalizer_main = document.createElement('chui_ap_equalizer_main')
+    #chui_ap_equalizer_block = document.createElement("chui_ap_equalizer_block")
     #audioContext = new AudioContext();
     #eqBands = [60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000]
     constructor(audio) {
@@ -315,17 +324,25 @@ class AudioFX {
             return curr
         }, mediaNode)
         equalizer.connect(this.#audioContext.destination)
-        // Create a vertical slider for each band
-        filters.forEach((filter) => this.#chui_ap_equalizer_main.appendChild(this.#setSliderTest(filter)))
+        filters.forEach((filter) => this.#chui_ap_equalizer_block.appendChild(this.#setSliderTest(filter)))
 
-        let select = new Select({title: 'Select'})
-        select.addOptions("default", "test")
+        let select = new Select()
+        AudioFX.PRESETS.forEach(preset => {
+            select.addOptions(preset.name)
+        })
+        select.setDefaultOption("test")
+
+        setTimeout(() => {
+            filters.forEach((filter) => this.#setPreset(filter, select.getValue()))
+        }, 250)
+
         select.addValueChangeListener((e) => {
             filters.forEach((filter) => this.#setPreset(filter, e.target.value))
         })
         this.#chui_ap_equalizer_main.appendChild(select.set())
+        this.#chui_ap_equalizer_main.appendChild(this.#chui_ap_equalizer_block)
     }
-    getMain() {
+    set() {
         return this.#chui_ap_equalizer_main
     }
     #setPreset(filter, name) {
