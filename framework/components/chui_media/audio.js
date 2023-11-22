@@ -327,6 +327,7 @@ class AudioFX {
         filters.forEach((filter) => this.#chui_ap_equalizer_block.appendChild(this.#setSliderTest(filter)))
 
         let select = new Select()
+        select.setDropdownHeight("208px")
         AudioFX.PRESETS.forEach(preset => {
             select.addOptions(preset.name)
         })
@@ -389,9 +390,11 @@ class AudioFX {
         slider.style.setProperty('--fx-before-width', `${test.toFixed(1)}%`);
     }
 
+    // ya.music.Audio.fx
     static PRESETS = [
         {
-            name: "default",
+            name: "Default",
+            title: "По умолчанию",
             inputs: [
                 { id: "60", value: "0" },
                 { id: "170", value: "0" },
@@ -406,18 +409,283 @@ class AudioFX {
             ]
         },
         {
-            name: "test",
+            name: "Classical",
+            title: "Классическая музыка",
             inputs: [
-                { id: "60", value: "7" },
-                { id: "170", value: "5" },
-                { id: "310", value: "2" },
-                { id: "600", value: "-4" },
-                { id: "1000", value: "-2.5" },
+                { id: "60", value: "-0.5" },
+                { id: "170", value: "-0.5" },
+                { id: "310", value: "-0.5" },
+                { id: "600", value: "-0.5" },
+                { id: "1000", value: "-0.5" },
+                { id: "3000", value: "-0.5" },
+                { id: "6000", value: "-3.5" },
+                { id: "12000", value: "-3.5" },
+                { id: "14000", value: "-3.5" },
+                { id: "16000", value: "-4.5" },
+            ]
+        },
+        {
+            name: "Club",
+            title: "Клубная музыка",
+            inputs: [
+                { id: "60", value: "-0.5" },
+                { id: "170", value: "-0.5" },
+                { id: "310", value: "4" },
+                { id: "600", value: "2.5" },
+                { id: "1000", value: "2.5" },
+                { id: "3000", value: "2.5" },
+                { id: "6000", value: "1.5" },
+                { id: "12000", value: "-0.5" },
+                { id: "14000", value: "-0.5" },
+                { id: "16000", value: "-0.5" },
+            ]
+        },
+        {
+            name: "Dance",
+            title: "Танцевальная музыка",
+            inputs: [
+                { id: "60", value: "4.5" },
+                { id: "170", value: "3.5" },
+                { id: "310", value: "1" },
+                { id: "600", value: "-0.5" },
+                { id: "1000", value: "-0.5" },
+                { id: "3000", value: "-2.5" },
+                { id: "6000", value: "-3.5" },
+                { id: "12000", value: "-3.5" },
+                { id: "14000", value: "-0.5" },
+                { id: "16000", value: "-0.5" },
+            ]
+        },
+        {
+            name: "Full Bass",
+            title: "Усиление НЧ",
+            inputs: [
+                { id: "60", value: "4" },
+                { id: "170", value: "4.5" },
+                { id: "310", value: "4.5" },
+                { id: "600", value: "2.5" },
+                { id: "1000", value: "0.5" },
+                { id: "3000", value: "-2" },
+                { id: "6000", value: "-4" },
+                { id: "12000", value: "-5" },
+                { id: "14000", value: "-5.5" },
+                { id: "16000", value: "-5.5" },
+            ]
+        },
+        {
+            bands: [-4.5, -4.5, -4.5, -2, 1, 5.5, 8, 8, 8, 8],
+            name: "Full Treble",
+            title: "Усиление ВЧ",
+            inputs: [
+                { id: "60", value: "0" },
+                { id: "170", value: "0" },
+                { id: "310", value: "0" },
+                { id: "600", value: "0" },
+                { id: "1000", value: "0" },
                 { id: "3000", value: "0" },
-                { id: "6000", value: "5.8" },
-                { id: "12000", value: "5.6" },
-                { id: "14000", value: "5.4" },
-                { id: "16000", value: "5.2" },
+                { id: "6000", value: "0" },
+                { id: "12000", value: "0" },
+                { id: "14000", value: "0" },
+                { id: "16000", value: "0" },
+            ]
+        },
+        {
+            bands: [3.5, 2.5, -0.5, -3.5, -2, 0.5, 4, 5.5, 6, 6],
+            name: "Full Bass & Treble",
+            title: "Усиление НЧ и ВЧ",
+            inputs: [
+                { id: "60", value: "0" },
+                { id: "170", value: "0" },
+                { id: "310", value: "0" },
+                { id: "600", value: "0" },
+                { id: "1000", value: "0" },
+                { id: "3000", value: "0" },
+                { id: "6000", value: "0" },
+                { id: "12000", value: "0" },
+                { id: "14000", value: "0" },
+                { id: "16000", value: "0" },
+            ]
+        },
+        {
+            bands: [2, 5.5, 2.5, -1.5, -1, 0.5, 2, 4.5, 6, 7],
+            name: "Laptop Speakers / Headphone",
+            title: "Колонки ноутбука",
+            inputs: [
+                { id: "60", value: "0" },
+                { id: "170", value: "0" },
+                { id: "310", value: "0" },
+                { id: "600", value: "0" },
+                { id: "1000", value: "0" },
+                { id: "3000", value: "0" },
+                { id: "6000", value: "0" },
+                { id: "12000", value: "0" },
+                { id: "14000", value: "0" },
+                { id: "16000", value: "0" },
+            ]
+        },
+        {
+            bands: [5, 5, 2.5, 2.5, -0.5, -2, -2, -2, -0.5, -0.5],
+            name: "Large Hall",
+            title: "Большой зал",
+            inputs: [
+                { id: "60", value: "0" },
+                { id: "170", value: "0" },
+                { id: "310", value: "0" },
+                { id: "600", value: "0" },
+                { id: "1000", value: "0" },
+                { id: "3000", value: "0" },
+                { id: "6000", value: "0" },
+                { id: "12000", value: "0" },
+                { id: "14000", value: "0" },
+                { id: "16000", value: "0" },
+            ]
+        },
+        {
+            bands: [-2, -0.5, 2, 2.5, 2.5, 2.5, 2, 1, 1, 1],
+            name: "Live",
+            title: "Концерт",
+            inputs: [
+                { id: "60", value: "0" },
+                { id: "170", value: "0" },
+                { id: "310", value: "0" },
+                { id: "600", value: "0" },
+                { id: "1000", value: "0" },
+                { id: "3000", value: "0" },
+                { id: "6000", value: "0" },
+                { id: "12000", value: "0" },
+                { id: "14000", value: "0" },
+                { id: "16000", value: "0" },
+            ]
+        },
+        {
+            bands: [3.5, 3.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 3.5, 3.5],
+            name: "Party",
+            title: "Вечеринка",
+            inputs: [
+                { id: "60", value: "0" },
+                { id: "170", value: "0" },
+                { id: "310", value: "0" },
+                { id: "600", value: "0" },
+                { id: "1000", value: "0" },
+                { id: "3000", value: "0" },
+                { id: "6000", value: "0" },
+                { id: "12000", value: "0" },
+                { id: "14000", value: "0" },
+                { id: "16000", value: "0" },
+            ]
+        },
+        {
+            bands: [-0.5, 2, 3.5, 4, 2.5, -0.5, -1, -1, -0.5, -0.5],
+            name: "Pop",
+            title: "Поп",
+            inputs: [
+                { id: "60", value: "0" },
+                { id: "170", value: "0" },
+                { id: "310", value: "0" },
+                { id: "600", value: "0" },
+                { id: "1000", value: "0" },
+                { id: "3000", value: "0" },
+                { id: "6000", value: "0" },
+                { id: "12000", value: "0" },
+                { id: "14000", value: "0" },
+                { id: "16000", value: "0" },
+            ]
+        },
+        {
+            bands: [-0.5, -0.5, -0.5, -2.5, -0.5, 3, 3, -0.5, -0.5, -0.5],
+            name: "Reggae",
+            title: "Регги",
+            inputs: [
+                { id: "60", value: "0" },
+                { id: "170", value: "0" },
+                { id: "310", value: "0" },
+                { id: "600", value: "0" },
+                { id: "1000", value: "0" },
+                { id: "3000", value: "0" },
+                { id: "6000", value: "0" },
+                { id: "12000", value: "0" },
+                { id: "14000", value: "0" },
+                { id: "16000", value: "0" },
+            ]
+        },
+        {
+            name: "Ska",
+            title: "Ска",
+            inputs: [
+                { id: "60", value: "-1" },
+                { id: "170", value: "-2" },
+                { id: "310", value: "-2" },
+                { id: "600", value: "-0.5" },
+                { id: "1000", value: "2" },
+                { id: "3000", value: "2.5" },
+                { id: "6000", value: "4" },
+                { id: "12000", value: "4.5" },
+                { id: "14000", value: "5.5" },
+                { id: "16000", value: "4.5" },
+            ]
+        },
+        {
+            name: "Soft",
+            title: "Мягкое звучание",
+            inputs: [
+                { id: "60", value: "2" },
+                { id: "170", value: "0.5" },
+                { id: "310", value: "-0.5" },
+                { id: "600", value: "-1" },
+                { id: "1000", value: "-0.5" },
+                { id: "3000", value: "2" },
+                { id: "6000", value: "4" },
+                { id: "12000", value: "4.5" },
+                { id: "14000", value: "5.5" },
+                { id: "16000", value: "6" },
+            ]
+        },
+        {
+            name: "Rock",
+            title: "Рок",
+            inputs: [
+                { id: "60", value: "4" },
+                { id: "170", value: "2" },
+                { id: "310", value: "-2.5" },
+                { id: "600", value: "-4" },
+                { id: "1000", value: "-1.5" },
+                { id: "3000", value: "2" },
+                { id: "6000", value: "4" },
+                { id: "12000", value: "5.5" },
+                { id: "14000", value: "5.5" },
+                { id: "16000", value: "5.5" },
+            ]
+        },
+        {
+            name: "Soft Rock",
+            title: "Софт-рок",
+            inputs: [
+                { id: "60", value: "2" },
+                { id: "170", value: "2" },
+                { id: "310", value: "1" },
+                { id: "600", value: "-0.5" },
+                { id: "1000", value: "-2" },
+                { id: "3000", value: "-2.5" },
+                { id: "6000", value: "-1.5" },
+                { id: "12000", value: "-0.5" },
+                { id: "14000", value: "1" },
+                { id: "16000", value: "4" },
+            ]
+        },
+        {
+            name: "Techno",
+            title: "Техно",
+            inputs: [
+                { id: "60", value: "4" },
+                { id: "170", value: "2.5" },
+                { id: "310", value: "-0.5" },
+                { id: "600", value: "-2.5" },
+                { id: "1000", value: "-2" },
+                { id: "3000", value: "-0.5" },
+                { id: "6000", value: "4" },
+                { id: "12000", value: "4.5" },
+                { id: "14000", value: "4.5" },
+                { id: "16000", value: "4" },
             ]
         }]
 }
