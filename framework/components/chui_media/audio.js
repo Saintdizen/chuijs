@@ -156,6 +156,9 @@ class Audio {
     set() {
         return this.#chui_ap_main;
     }
+    restoreFX() {
+        this.#chui_audio_fx.restore();
+    }
     async #convertSong(filePath, type) {
         return await new Promise((resolve, reject) => {
             fs.readFile(filePath, (err, data) => {
@@ -308,9 +311,11 @@ class AudioFX {
     #eqBands = [60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000]
     #select = new Select()
     #media = undefined;
+    #filters = undefined;
+    #store_name = "chuijs.framework.settings.fx_preset"
     constructor(audio) {
         this.#media = this.#audioContext.createMediaElementSource(audio);
-        let filters = this.#eqBands.map((band, i) => {
+        this.#filters = this.#eqBands.map((band, i) => {
             let filter = this.#audioContext.createBiquadFilter()
             if (i === 0) {
                 filter.type = "lowshelf";
@@ -324,31 +329,31 @@ class AudioFX {
             filter.frequency.value = band
             return filter
         })
-        filters.reduce((prev, curr) => {
+        this.#filters.reduce((prev, curr) => {
             prev.connect(curr)
             return curr
         })
-        this.#media.connect(filters[0]);
-        filters[filters.length - 1].connect(this.#audioContext.destination);
-        filters.forEach((filter) => this.#chui_ap_equalizer_block.appendChild(this.#setSliderTest(filter)))
+        this.#media.connect(this.#filters[0]);
+        this.#filters[this.#filters.length - 1].connect(this.#audioContext.destination);
+        this.#filters.forEach((filter) => this.#chui_ap_equalizer_block.appendChild(this.#setSliderTest(filter)))
         this.#select.setDropdownHeight("208px")
         AudioFX.PRESETS.forEach(preset => {
             this.#select.addOptions(preset.name)
         })
         this.#select.addValueChangeListener((e) => {
-            filters.forEach((filter) => this.#setPreset(filter, e.target.value))
+            this.#filters.forEach((filter) => this.#setPreset(filter, e.target.value))
         })
         this.#chui_ap_equalizer_main.appendChild(this.#select.set())
         this.#chui_ap_equalizer_main.appendChild(this.#chui_ap_equalizer_block)
-        this.#restore(filters, store.get("chuijs.settings.fx_preset"))
     }
     set() {
         return this.#chui_ap_equalizer_main
     }
-    #restore(filters, name) {
+    restore() {
         setTimeout(() => {
+            let name = store.get(this.#store_name);
             this.#select.setDefaultOption(name)
-            filters.forEach((filter) => this.#setPreset(filter, name))
+            this.#filters.forEach((filter) => this.#setPreset(filter, name))
         }, 250)
     }
     #setPreset(filter, name) {
@@ -361,7 +366,7 @@ class AudioFX {
                 })
             }
         })
-        store.set("chuijs.settings.fx_preset", name)
+        store.set(this.#store_name, name)
     }
     #setSliderTest(filter) {
         let sliderMain = document.createElement("chui_eq_slider_main")

@@ -10,7 +10,6 @@ const {UpdateNotification} = require("../../components/chui_notification/notific
 const {ipcRenderer} = require("electron");
 const chui_functions = require('../../modules/chui_functions');
 const {DownloadNotification} = require("../../components/chui_notification/notification_download");
-const EventEmitter = require('node:events');
 
 class Route {
     go(page) {
@@ -198,13 +197,6 @@ class AppMenu extends Route {
         let test = this.#routeList.filter(route => route.getTitle().includes(page.getTitle()));
         if (test.length === 1) {
             let button_route = document.createElement('route');
-
-
-            button_route.addEventListener("click", () => {
-                console.log("test")
-                require("@electron/remote").ipcMain.emit("test")
-            })
-
             let title_menu = document.createElement('route_title');
             title_menu.innerHTML = page.getTitle();
             if (page.getMain()) {
@@ -212,6 +204,16 @@ class AppMenu extends Route {
                 button_route.classList.add("route_active");
             }
             button_route.addEventListener('click', () => {
+                const eventAwesome = new CustomEvent("route_event_"+page.constructor.name, {
+                    bubbles: true,
+                    detail: {
+                        class: page.constructor.name,
+                        title: page.getTitle(),
+                        page: page
+                    },
+                });
+                document.dispatchEvent(eventAwesome)
+
                 if (!button_route.classList.contains('route_active')) {
                     for (let act of document.getElementsByTagName('route')) act.classList.remove('route_active');
                     this.go(page);

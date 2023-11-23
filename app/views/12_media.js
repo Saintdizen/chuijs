@@ -8,7 +8,7 @@ class MediaPage extends Page {
         super();
         this.setTitle('OfflinePlayer');
         this.setFullHeight();
-        this.setMain(true);
+        this.setMain(false);
         let audio = new Audio({
             autoplay: false,
             playlist: true,
@@ -34,8 +34,8 @@ class MediaPage extends Page {
 
         audio.addControls(openFolder, updateList)
 
-        this.addRouteEvent((e) => {
-            console.log(e)
+        this.addRouteEvent(this, (e) => {
+            audio.restoreFX();
         })
 
         this.add(audio)

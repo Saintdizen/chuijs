@@ -17,17 +17,15 @@ class Page {
             clickEvent: () => new Route().go(options.page)
         })
         this.#page.appendChild(back.set());
-
-
-    }
-    addRouteEvent(event = () => {}) {
-        require("electron").ipcRenderer.addListener("test", event)
     }
     setMenuBar(menubar) {
         this.#menu_bar = menubar.set();
     }
     getMenuBar() {
         return this.#menu_bar;
+    }
+    addRouteEvent(self, event = () => {}) {
+        document.addEventListener("route_event_"+self.constructor.name, event)
     }
     add(...components) {
         for (let component of components) {
