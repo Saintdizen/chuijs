@@ -77,15 +77,14 @@ chui_ap_seek_buf {
 }
 
 #chui_ap_seek::-webkit-slider-thumb {
-    position: relative;
     -webkit-appearance: none;
     border: none;
     height: 16px;
     width: 16px;
     border-radius: 50%;
-    background-color: rgba(255,255,255,0);
+    background-color: var(--blue_prime_background);
     cursor: pointer;
-    margin: -8px 0 0 0
+    margin: -4px 0 0 0
 }
 
 #chui_ap_seek:focus {
@@ -141,15 +140,14 @@ chui_ap_volume_block {
 }
 
 #chui_ap_volume::-webkit-slider-thumb {
-    position: relative;
     -webkit-appearance: none;
     border: none;
-    height: 0;
-    width: 0;
+    height: 16px;
+    width: 16px;
     border-radius: 50%;
-    background-color: rgba(255,255,255,0);
+    background-color: var(--blue_prime_background);
     cursor: pointer;
-    margin: -8px 0 0 0
+    margin: -4px 0 0 0
 }
 
 #chui_ap_volume:focus {

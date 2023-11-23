@@ -233,9 +233,13 @@ class Audio {
             if (value > 0 && this.#chui_at.duration > 0) {
                 this.#chui_ap_time1.setText(this.#calculateTime(value));
                 this.#chui_ap_time2.setText(this.#calculateTime(this.#chui_at.duration));
-                this.#chui_ap_seek.value = String(value);
+                this.#chui_ap_seek.value = String(value.toFixed(2));
                 const test = (this.#chui_ap_seek.value / this.#chui_ap_seek.max * 100).toFixed(2)
-                this.#chui_ap_main.style.setProperty('--seek-before-width', `${test}%`);
+
+
+                console.log(`${test * 3} - ${this.#chui_ap_seek.value}`)
+
+                this.#chui_ap_main.style.setProperty('--seek-before-width', `${test*3}%`);
             }
         } catch (e) {
             this.#chui_ap_time1.setText(`0:00`);
