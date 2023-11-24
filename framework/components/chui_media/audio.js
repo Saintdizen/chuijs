@@ -61,7 +61,7 @@ class Audio {
         this.#chui_ap_seek.id = "chui_ap_seek"
         this.#chui_ap_seek.max = "0"
         this.#chui_ap_seek.value = "0"
-        this.#chui_ap_seek.step = 0.01
+        this.#chui_ap_seek.step = "0.01"
         // КНОПКИ
         this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, this.#icons_sizes.play_pause).getHTML()
         this.#chui_ap_next.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_NEXT, this.#icons_sizes.next_prev).getHTML()
@@ -72,7 +72,8 @@ class Audio {
         this.#chui_ap_volume.type = "range"
         this.#chui_ap_volume.id = "chui_ap_volume"
         this.#chui_ap_volume.max = "100"
-        this.#chui_ap_volume.value = "50"
+        this.#chui_ap_volume.value = "100"
+        this.#chui_ap_volume.step = "1"
         this.#chui_at.volume = this.#chui_ap_volume.value / 100;
         this.#chui_ap_volume_block.appendChild(this.#chui_ap_volume_icon)
         this.#chui_ap_volume_block.appendChild(this.#chui_ap_volume)
@@ -107,8 +108,8 @@ class Audio {
         navigator.mediaSession.setActionHandler('nexttrack', async () => this.#playAudioNext());
         navigator.mediaSession.setActionHandler('previoustrack', async () => this.#playAudioPrev());
         this.#chui_at.addEventListener("timeupdate", async (e) => {
-            this.#renderProgress(e.target.currentTime)
             this.#displayBufferedAmount()
+            this.#renderProgress(e.target.currentTime)
             if (e.target.currentTime === e.target.duration) await this.#playAudioNext()
         });
         this.#chui_ap_seek.addEventListener('input', () => {
@@ -168,6 +169,7 @@ class Audio {
         });
     };
     async #start(track) {
+        this.#renderProgress("0")
         this.#chui_ap_track_title.innerText = `${track.artist} - ${track.title}`
         this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#icons_sizes.play_pause).getHTML()
         if (track.path.includes("http")) {
@@ -216,7 +218,7 @@ class Audio {
     }
     #displayBufferedAmount = () => {
         try {
-            const end = (this.#chui_at.buffered.end(0) / this.#chui_ap_seek.max * 100).toFixed(2)
+            const end = (this.#chui_at.buffered.end(0) / this.#chui_ap_seek.max * 100).toFixed(3)
             if (end > 100) {
                 this.#chui_ap_seek_buf.style.width = `100%`;
             } else {
@@ -231,15 +233,17 @@ class Audio {
     #renderProgress = (value) => {
         try {
             if (value > 0 && this.#chui_at.duration > 0) {
-                this.#chui_ap_time1.setText(this.#calculateTime(value));
-                this.#chui_ap_time2.setText(this.#calculateTime(this.#chui_at.duration));
-                this.#chui_ap_seek.value = String(value.toFixed(2));
+                let val = value.toFixed(2)
+                let duration = this.#chui_at.duration.toFixed(2)
+                this.#chui_ap_time1.setText(this.#calculateTime(val));
+                this.#chui_ap_time2.setText(this.#calculateTime(duration));
+                this.#chui_ap_seek.value = String(val);
                 const test = (this.#chui_ap_seek.value / this.#chui_ap_seek.max * 100).toFixed(2)
 
-
-                console.log(`${test * 3} - ${this.#chui_ap_seek.value}`)
-
-                this.#chui_ap_main.style.setProperty('--seek-before-width', `${test*3}%`);
+                this.#chui_ap_main.style.setProperty('--seek-before-width', `${test}%`);
+            } else {
+                this.#chui_ap_seek.value = String(value);
+                this.#chui_ap_main.style.setProperty('--seek-before-width', `0%`);
             }
         } catch (e) {
             this.#chui_ap_time1.setText(`0:00`);
@@ -253,7 +257,8 @@ class Audio {
         return `${minutes}:${returnedSeconds}`;
     }
     #setSliderMax = () => {
-        this.#chui_ap_seek.max = String(this.#chui_at.duration.toFixed(2));
+        let dur = this.#chui_at.duration.toFixed(2);
+        this.#chui_ap_seek.max = String(dur);
     }
     //
     setPlayList(list = [{ title: String(), artist: String(), album: String(), mimetype: String(), path: String(), artwork: [] }]) {
@@ -329,7 +334,7 @@ class AudioFX {
                 filter.type = "peaking";
             }
             filter.gain.value = 0
-            filter.Q.value = 1
+            //filter.Q.value = 1
             filter.frequency.value = band
             return filter
         })
@@ -341,12 +346,8 @@ class AudioFX {
         this.#filters[this.#filters.length - 1].connect(this.#audioContext.destination);
         this.#filters.forEach((filter) => this.#chui_ap_equalizer_block.appendChild(this.#setSliderTest(filter)))
         this.#select.setDropdownHeight("208px")
-        AudioFX.PRESETS.forEach(preset => {
-            this.#select.addOptions(preset.name)
-        })
-        this.#select.addValueChangeListener((e) => {
-            this.#filters.forEach((filter) => this.#setPreset(filter, e.target.value))
-        })
+        AudioFX.PRESETS.forEach(preset => this.#select.addOptions(preset.name))
+        this.#select.addValueChangeListener((e) => this.#filters.forEach((filter) => this.#setPreset(filter, e.target.value)))
         this.#chui_ap_equalizer_main.appendChild(this.#select.set())
         this.#chui_ap_equalizer_main.appendChild(this.#chui_ap_equalizer_block)
     }
@@ -364,9 +365,7 @@ class AudioFX {
         AudioFX.PRESETS.forEach(presets => {
             if (presets.name === name) {
                 presets.inputs.forEach(input => {
-                    if (String(filter.frequency.value) === input.id) {
-                        AudioFX.#renderSlider(input, filter)
-                    }
+                    if (String(filter.frequency.value) === input.id) AudioFX.#renderSlider(input, filter)
                 })
             }
         })

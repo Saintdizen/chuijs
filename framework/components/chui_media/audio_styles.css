@@ -79,8 +79,8 @@ chui_ap_seek_buf {
 #chui_ap_seek::-webkit-slider-thumb {
     -webkit-appearance: none;
     border: none;
-    height: 16px;
-    width: 16px;
+    height: 0px;
+    width: 0px;
     border-radius: 50%;
     background-color: var(--blue_prime_background);
     cursor: pointer;
@@ -142,8 +142,8 @@ chui_ap_volume_block {
 #chui_ap_volume::-webkit-slider-thumb {
     -webkit-appearance: none;
     border: none;
-    height: 16px;
-    width: 16px;
+    height: 0px;
+    width: 0px;
     border-radius: 50%;
     background-color: var(--blue_prime_background);
     cursor: pointer;
@@ -342,8 +342,8 @@ chui_ap_volume_block {
 .eq_slider_test::-webkit-slider-thumb {
     border: none;
     -webkit-appearance: none;
-    height: 16px;
-    width: 16px;
+    height: 0px;
+    width: 0px;
     border-radius: 50%;
     background-color: var(--blue_prime_background);
     cursor: pointer;
