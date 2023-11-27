@@ -14,7 +14,7 @@ class MediaPage extends Page {
             playlist: true,
             width: Styles.SIZE.WEBKIT_FILL,
             height: Styles.SIZE.WEBKIT_FILL,
-            pin: Audio.PIN.TOP
+            //pin: Audio.PIN.TOP
         })
         this.#download_path = path.join(App.userDataPath(), "downloads");
         this.generatePlaylist();
