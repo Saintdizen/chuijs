@@ -1,4 +1,4 @@
-const {Page, Audio, Video, Styles, Button, App, fs, shell, path} = require('../../index');
+const {Page, Audio, Styles, App, fs, path} = require('../../index');
 
 class MediaPage extends Page {
     #download_path = undefined;
@@ -13,29 +13,19 @@ class MediaPage extends Page {
             autoplay: false,
             playlist: true,
             width: Styles.SIZE.WEBKIT_FILL,
-            height: Styles.SIZE.WEBKIT_FILL
+            height: Styles.SIZE.WEBKIT_FILL,
+            pin: Audio.PIN.TOP
         })
         this.#download_path = path.join(App.userDataPath(), "downloads");
         this.generatePlaylist();
         setTimeout(() => audio.setPlayList(this.#playlist), 100)
 
-        let openFolder = new Button({
-            title: "Открыть папку",
-            clickEvent: async () => await shell.openPath(path.join(App.userDataPath(), "downloads"))
-        });
-
-        let updateList = new Button({
-            title: "Кнопка с текстом",
-            clickEvent: () => {
-                this.generatePlaylist();
-                setTimeout(() => audio.setPlayList(this.#playlist), 100);
-            }
-        });
-
-        audio.addControls(openFolder, updateList)
+        audio.openFolder(path.join(App.userDataPath(), "downloads"))
 
         this.addRouteEvent(this, (e) => {
             audio.restoreFX();
+            this.generatePlaylist();
+            setTimeout(() => audio.setPlayList(this.#playlist), 100)
         })
 
         this.add(audio)

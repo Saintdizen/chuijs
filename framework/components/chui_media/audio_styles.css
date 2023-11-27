@@ -193,7 +193,7 @@ chui_ap_play_pause, chui_ap_next, chui_ap_prev {
 /* Плейлист */
 chui_playlist_main {
     display: flex;
-    height: max-content;
+    height: -webkit-fill-available;
     flex-direction: column;
     width: -webkit-fill-available;
     backdrop-filter: var(--global_blur);
@@ -201,32 +201,29 @@ chui_playlist_main {
     background: var(--ap_main_background);
     border: none;
     margin-top: var(--margin);
-    padding: 6px;
+    padding: 10px;
 }
 chui_playlist_search {
     display: flex;
     min-height: max-content;
-    flex-direction: column;
+    flex-direction: row;
     width: -webkit-fill-available;
-    border-radius: var(--border_radius);
-    background: var(--ap_main_background_2);
     border: none;
-    margin: 6px 0px;
     height: 35px;
 }
 .chui_playlist_search_input {
     display: flex;
     width: -webkit-fill-available;
     height: max-content;
-    margin: 0;
-    border-radius: var(--border_radius);
+    margin-right: 10px;
     color: var(--text_color);
     align-items: center;
     position: relative;
     padding: var(--main_padding);
-    background: transparent;
     border: 1px solid var(--element_background_2);
     box-shadow: 0 0 1px 0 var(--element_background_2);
+    background: var(--ap_main_background_2);
+    border-radius: var(--border_radius);
 }
 .chui_playlist_search_input:focus {
     border: 1px solid var(--blue_prime_background);
@@ -236,14 +233,14 @@ chui_playlist_search {
 chui_playlist_list {
     overflow: hidden overlay;
     display: flex;
-    height: calc(100% - 35px - 45px - 12px);
+    height: -webkit-fill-available;
     flex-direction: column;
     width: -webkit-fill-available;
     border-radius: var(--border_radius);
     background: var(--ap_main_background_2);
     border: 1px solid var(--element_background_2);
     box-shadow: 0 0 1px 0 var(--element_background_2);
-    margin: 6px 0px;
+    margin-top: 10px;
 }
 
 .chui_track_active {
@@ -264,11 +261,18 @@ chui_track:hover {
     color: var(--text_color_hover);
 }
 
-chui_playlist_controls {
-    margin: var(--margin) 0px;
+chui_playlist_open_folder {
     display: flex;
-    flex-direction: row;
-    height: 45px;
+    height: 35px;
+    width: 35px;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--border_radius);
+    background: var(--ap_main_background_2);
+}
+
+chui_playlist_open_folder:hover {
+    background: var(--blue_prime_background);
 }
 
 chui_ap_equalizer_main {

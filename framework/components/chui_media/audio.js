@@ -5,6 +5,7 @@ const {Label} = require('../chui_label/label');
 const {Select} = require("../chui_inputs/chui_select_box/select_box");
 const {Dialog} = require("../chui_modal/modal");
 const Store = require('electron-store');
+const {shell} = require("electron");
 const store = new Store();
 
 let play_list = []
@@ -151,8 +152,8 @@ class Audio {
         this.#chui_ap_main.appendChild(dialog.set())
         this.#chui_ap_fx_icon.addEventListener("click", () => dialog.open())
     }
-    addControls(...components) {
-        for (let component of components) this.#chui_playlist.getControls().appendChild(component.set())
+    openFolder(path) {
+        this.#chui_playlist.getOpenFolderButton().addEventListener("click", async () => await shell.openPath(path))
     }
     set() {
         return this.#chui_ap_main;
@@ -700,13 +701,15 @@ class Playlist {
     #chui_playlist_search = document.createElement("chui_playlist_search")
     #chui_playlist_search_input = document.createElement("input")
     #chui_playlist_list = document.createElement("chui_playlist_list")
-    #chui_playlist_controls = document.createElement("chui_playlist_controls")
+    #chui_playlist_open_folder = document.createElement("chui_playlist_open_folder")
     constructor() {
-        this.#chui_playlist_main.appendChild(this.#chui_playlist_controls)
         this.#chui_playlist_main.appendChild(this.#chui_playlist_search)
         this.#chui_playlist_search_input.classList.add("chui_playlist_search_input")
         this.#chui_playlist_search_input.placeholder = "Поиск..."
         this.#chui_playlist_search.appendChild(this.#chui_playlist_search_input)
+        //
+        this.#chui_playlist_open_folder.innerHTML = new Icon(Icons.FILE.FOLDER, "12pt").getHTML()
+        this.#chui_playlist_search.appendChild(this.#chui_playlist_open_folder)
         this.#chui_playlist_main.appendChild(this.#chui_playlist_list)
         this.#chui_playlist_search_input.addEventListener("input", (evt) => {
             for (let item of this.#chui_playlist_list.children) {
@@ -721,12 +724,11 @@ class Playlist {
         })
         this.#chui_playlist_list.id = this.#id_contents
     }
-    getControls() {
-
-        return this.#chui_playlist_controls
-    }
     getId() {
         return this.#id_contents
+    }
+    getOpenFolderButton() {
+        return this.#chui_playlist_open_folder
     }
     getMain() {
         return this.#chui_playlist_main
