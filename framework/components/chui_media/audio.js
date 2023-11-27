@@ -702,6 +702,7 @@ class Playlist {
     #chui_playlist_list = document.createElement("chui_playlist_list")
     #chui_playlist_controls = document.createElement("chui_playlist_controls")
     constructor() {
+        this.#chui_playlist_main.appendChild(this.#chui_playlist_controls)
         this.#chui_playlist_main.appendChild(this.#chui_playlist_search)
         this.#chui_playlist_search_input.classList.add("chui_playlist_search_input")
         this.#chui_playlist_search_input.placeholder = "Поиск..."
@@ -721,7 +722,7 @@ class Playlist {
         this.#chui_playlist_list.id = this.#id_contents
     }
     getControls() {
-        this.#chui_playlist_main.appendChild(this.#chui_playlist_controls)
+
         return this.#chui_playlist_controls
     }
     getId() {

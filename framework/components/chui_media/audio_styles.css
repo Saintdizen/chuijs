@@ -16,6 +16,7 @@ chui_ap_block {
     border-radius: var(--border_radius);
     background: var(--ap_main_background);
     border: none;
+    height: max-content;
 }
 
 /* Блок информация */
@@ -192,7 +193,7 @@ chui_ap_play_pause, chui_ap_next, chui_ap_prev {
 /* Плейлист */
 chui_playlist_main {
     display: flex;
-    height: -webkit-fill-available;
+    height: max-content;
     flex-direction: column;
     width: -webkit-fill-available;
     backdrop-filter: var(--global_blur);
@@ -200,6 +201,7 @@ chui_playlist_main {
     background: var(--ap_main_background);
     border: none;
     margin-top: var(--margin);
+    padding: 6px;
 }
 chui_playlist_search {
     display: flex;
@@ -209,8 +211,8 @@ chui_playlist_search {
     border-radius: var(--border_radius);
     background: var(--ap_main_background_2);
     border: none;
-    margin: 12px;
-    height: max-content;
+    margin: 6px 0px;
+    height: 35px;
 }
 .chui_playlist_search_input {
     display: flex;
@@ -234,14 +236,14 @@ chui_playlist_search {
 chui_playlist_list {
     overflow: hidden overlay;
     display: flex;
-    height: 350px;
+    height: calc(100% - 35px - 45px - 12px);
     flex-direction: column;
     width: -webkit-fill-available;
     border-radius: var(--border_radius);
     background: var(--ap_main_background_2);
     border: 1px solid var(--element_background_2);
     box-shadow: 0 0 1px 0 var(--element_background_2);
-    margin: 0 12px 6px 12px;
+    margin: 6px 0px;
 }
 
 .chui_track_active {
@@ -254,6 +256,7 @@ chui_track {
     padding: var(--test_padding);
     color: var(--text_color);
     border-radius: var(--border_radius);
+    height: max-content;
 }
 
 chui_track:hover {
@@ -262,9 +265,10 @@ chui_track:hover {
 }
 
 chui_playlist_controls {
-    margin: 0 var(--margin) var(--margin) var(--margin);
+    margin: var(--margin) 0px;
     display: flex;
     flex-direction: row;
+    height: 45px;
 }
 
 chui_ap_equalizer_main {
