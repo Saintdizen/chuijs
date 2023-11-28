@@ -333,6 +333,7 @@ class AppLayout {
         ipcRenderer.on("sendNotificationDownload", (e, text, body) => {
             let downloadNotificationLoad = new DownloadNotification({ title: text, text: body });
             downloadNotificationLoad.show();
+            ipcRenderer.on("sendNotificationDownloadUpdate", (e, title, text) => downloadNotificationLoad.update(title, text));
             ipcRenderer.on("sendNotificationDownloadComplete", () => downloadNotificationLoad.done());
             ipcRenderer.on("sendNotificationDownloadError", () => downloadNotificationLoad.error());
         })

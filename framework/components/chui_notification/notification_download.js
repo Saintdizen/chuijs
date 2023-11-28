@@ -32,6 +32,10 @@ class DownloadNotification {
         this.#download_notification_content.appendChild(this.#download_notification_body)
         this.#download_notification.appendChild(this.#download_notification_content)
     }
+    update(title = String(), text = String()) {
+        this.#download_notification_title.innerText = title;
+        this.#download_notification_text.innerText = text;
+    }
     show() {
         document.getElementsByTagName('notification_panel')[0].appendChild(this.#download_notification);
         let notification = document.getElementById(this.#id);
@@ -40,12 +44,16 @@ class DownloadNotification {
     }
     done() {
         let notification = document.getElementById(this.#id);
-        notification.classList.add("download_notification_success");
+        setInterval(() => {
+            try { notification.className = "download_notification_success"; } catch (e) { console.log(e) }
+        }, 1)
         setTimeout(() => this.#hideNotification(notification), 2000);
     }
     error() {
         let notification = document.getElementById(this.#id);
-        notification.classList.add("download_notification_error");
+        setInterval(() => {
+            try { notification.className = "download_notification_error"; } catch (e) { console.log(e) }
+        }, 1)
         setTimeout(() => this.#hideNotification(notification), 2000);
     }
     #hideNotification(notification) {

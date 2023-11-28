@@ -7,6 +7,7 @@ const fs = require("fs");
 const os = require("os");
 const request = require('@cypress/request');
 const {transliterate} = require("transliteration");
+let downloadSession = undefined;
 // === === ===
 // process.env
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = "true";
@@ -52,7 +53,7 @@ const {Details} = require('./framework/components/chui_details/details');
 const {Accordion} = require('./framework/components/chui_accordion/accordion')
 const {CodeBlock} = require('./framework/components/chui_code/code')
 const {HtmlBlock} = require('./framework/components/chui_html_block/html_block')
-const {sleep, render, getDefaultIcon} = require('./framework/modules/chui_functions');
+const {sleep, render, getDefaultIcon, formatBytes} = require('./framework/modules/chui_functions');
 const {FileInput, AcceptTypes} = require("./framework/components/chui_inputs/chui_file/file");
 const {TreeView} = require("./framework/components/chui_tree_view/tree_view");
 const {Form} = require("./framework/components/chui_form/form");
@@ -129,36 +130,6 @@ class Main {
             this.#downloadPath = App.downloadsPath();
         }
 
-        app.on('session-created', (session) => {
-            //console.log(session)
-            session.on('will-download', (e, item, contents) => {
-                console.log(item.getFilename())
-                if (contents.getType() === 'webview') {
-                    this.#sendNotificationDownload("Загрузка", item.getFilename())
-                    item.setSavePath(path.join(this.#downloadPath, item.getFilename()))
-                    /*item.on('updated', (event, state) => {
-                        if (state === 'interrupted') {
-                            console.log('Download is interrupted but can be resumed')
-                        } else if (state === 'progressing') {
-                            if (item.isPaused()) {
-                                console.log('Download is paused')
-                            } else {
-                                console.log(`Received bytes: ${item.getReceivedBytes()}`)
-                            }
-                        }
-                    })*/
-                    item.on('done', (event, state) => {
-                        if (state === 'completed') {
-                            console.log('Download successfully')
-                            this.#sendNotificationDownloadComplete()
-                        } else {
-                            console.log(`Download failed: ${state}`)
-                            this.#sendNotificationDownloadError()
-                        }
-                    })
-                }
-            });
-        });
         //app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 
         // Options
@@ -332,33 +303,30 @@ class Main {
             });
         }, start);
     }
-
-    //
-    #sendNotificationDownload(text, body) {
-        this.#window.webContents.send("sendNotificationDownload", text, body);
-    }
-    #sendNotificationDownloadComplete(text, body) {
-        this.#window.webContents.send("sendNotificationDownloadComplete", text, body);
-    }
-    #sendNotificationDownloadError(text, body) {
-        this.#window.webContents.send("sendNotificationDownloadError", text, body);
-    }
-    //
-
     async #sendNotificationUpdateLoad(text, body) {
         this.#window.webContents.send("sendNotificationUpdateLoad", text, body);
     }
-
     async #sendNotificationUpdateLoadClose() {
         this.#window.webContents.send("sendNotificationUpdateLoadClose");
     }
-
     async #sendNotificationUpdate(text, body) {
         this.#window.webContents.send("sendNotificationUpdate", text, body);
     }
-
     async #sendNotificationUpdateClose() {
         this.#window.webContents.send("sendNotificationUpdateClose");
+    }
+
+    sendDownload(text, body) {
+        setTimeout(() => this.#window.webContents.send("sendNotificationDownload", text, body), 1)
+    }
+    sendDownloadUpdate(text, body) {
+        setTimeout(() => this.#window.webContents.send("sendNotificationDownloadUpdate", text, body), 1)
+    }
+    sendDownloadComplete(text, body) {
+        setTimeout(() => this.#window.webContents.send("sendNotificationDownloadComplete", text, body), 250)
+    }
+    sendDownloadError(text, body) {
+        setTimeout(() => this.#window.webContents.send("sendNotificationDownloadError", text, body), 250)
     }
 }
 
@@ -461,6 +429,7 @@ module.exports = {
     Main: Main,
     sleep: sleep,
     render: render,
+    formatBytes: formatBytes,
     MenuItem: MenuItem,
     Styles: Styles,
     AppLayout: AppLayout,
@@ -529,5 +498,7 @@ module.exports = {
     transliterate: transliterate,
     store: new Store(),
     //
-    App: App
+    App: App,
+    //
+    downloadSession: downloadSession
 }
