@@ -54,8 +54,8 @@ class DownloadNotification {
             try {
                 notification.className = className;
                 clearInterval(interval);
-            } catch (e) { console.log(e) }
-        }, 1)
+            } catch (e) { /* ... */ }
+        }, 10)
         setTimeout(() => this.#hideNotification(notification), 2000);
     }
     #hideNotification(notification) {
