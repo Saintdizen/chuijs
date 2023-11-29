@@ -723,6 +723,13 @@ class Playlist {
             }
         })
         this.#chui_playlist_list.id = this.#id_contents
+
+        this.#chui_playlist_list.addEventListener("mouseover", () => {
+            this.#chui_playlist_list.style.overflow = "hidden overlay"
+        })
+        this.#chui_playlist_list.addEventListener("mouseleave", () => {
+            this.#chui_playlist_list.style.overflow = "hidden hidden"
+        })
     }
     getId() {
         return this.#id_contents

@@ -1,15 +1,14 @@
 function render() {
     let player = Mu.blocks.di.repo.player;
-    if (document.getElementById("TESTTT") === null) {
+    if (document.getElementById("mz_download_link") === null) {
         let div1 = document.createElement("div");
-        div1.id = "TESTTT"
+        div1.id = "mz_download_link"
         let div2 = document.createElement("div");
         let span1 = document.createElement("span");
         div1.className = "hq";
         div2.className = "hq__icon player-controls__btn deco-player-controls__button"
         span1.className = "d-icon deco-icon d-icon_share"
         span1.style.rotate = "180deg";
-        span1.id = "test111"
         div1.addEventListener("click", async () => {
             let xhr = new XMLHttpRequest();
             xhr.open("GET", player.getTrack()._$f9);
