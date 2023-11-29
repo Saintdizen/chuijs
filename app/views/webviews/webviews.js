@@ -9,7 +9,7 @@ class WebViewsPage extends Page {
         this.setFullHeight()
         this.disablePadding()
 
-        let web = new WebView("https://music.yandex.ru/");
+        let web = new WebView("https://music.yandex.ru/", false);
         web.insertCustomRes({
             cssPath: __dirname + '/test.css',
             jsPath: __dirname + '/test.js'
@@ -18,6 +18,7 @@ class WebViewsPage extends Page {
         web.addFinishLoadEvent(async () => {
             await web.send("test", "Xyu")
         })
+
         this.add(web)
     }
 }

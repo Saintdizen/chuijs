@@ -1,6 +1,5 @@
-//Mu.blocks.di.repo.player.play();
-
 function render() {
+    let player = Mu.blocks.di.repo.player;
     if (document.getElementById("TESTTT") === null) {
         let div1 = document.createElement("div");
         div1.id = "TESTTT"
@@ -11,14 +10,14 @@ function render() {
         span1.className = "d-icon deco-icon d-icon_share"
         span1.style.rotate = "180deg";
         span1.id = "test111"
-        div1.addEventListener("click", async (evt) => {
+        div1.addEventListener("click", async () => {
             let xhr = new XMLHttpRequest();
-            xhr.open("GET", Mu.blocks.di.repo.player.getTrack()._$f9);
+            xhr.open("GET", player.getTrack()._$f9);
             xhr.responseType = "arraybuffer";
             xhr.onloadend = function () {
                 if (this.status === 200) {
-                    let artist = Mu.blocks.di.repo.player.getTrack().artists[0].name;
-                    let title = Mu.blocks.di.repo.player.getTrack().title;
+                    let artist = player.getTrack().artists[0].name;
+                    let title = player.getTrack().title;
                     let link = document.createElement("a");
                     let blob = new Blob([xhr.response], {type: "audio/mp3"});
                     link.href = URL.createObjectURL(blob);

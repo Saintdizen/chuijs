@@ -43,16 +43,18 @@ class DownloadNotification {
         notification.addEventListener("click", () => this.#hideNotification(notification));
     }
     done() {
-        let notification = document.getElementById(this.#id);
-        setInterval(() => {
-            try { notification.className = "download_notification_success"; } catch (e) { console.log(e) }
-        }, 1)
-        setTimeout(() => this.#hideNotification(notification), 2000);
+        this.#renderTest("download_notification_success");
     }
     error() {
+        this.#renderTest("download_notification_error");
+    }
+    #renderTest(className) {
         let notification = document.getElementById(this.#id);
-        setInterval(() => {
-            try { notification.className = "download_notification_error"; } catch (e) { console.log(e) }
+        let interval = setInterval(() => {
+            try {
+                notification.className = className;
+                clearInterval(interval);
+            } catch (e) { console.log(e) }
         }, 1)
         setTimeout(() => this.#hideNotification(notification), 2000);
     }

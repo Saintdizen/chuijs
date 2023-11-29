@@ -7,7 +7,7 @@ class WebView {
     #main_block = document.createElement('chui_webview')
     #WebView = document.createElement('webview')
     #chui_load = document.createElement('chui_load')
-    constructor(url = String()) {
+    constructor(url = String(), dev = false) {
         require('../../modules/chui_functions').setStyles(__dirname + '/styles.css', 'chUiJS_WebView');
         this.#WebView.setAttribute('id', this.#id)
         this.#WebView.setAttribute('src', url)
@@ -26,6 +26,7 @@ class WebView {
         const loadStop = () => {
             new Animation(this.#WebView).fadeIn();
             this.#main_block.removeChild(this.#chui_load)
+            if (dev) this.#WebView.openDevTools();
         }
         this.#WebView.addEventListener('did-start-loading', loadStart)
         this.#WebView.addEventListener('did-stop-loading', loadStop)
