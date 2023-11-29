@@ -73,6 +73,15 @@ main.start({
     ]
 })
 ```
+#### Donwload Session в main.js
+```javascript
+const { App } = require('chuijs');
+App.get().on('session-created', (session) => {
+    session.on('will-download', (e, item, contents) => {
+        // ...
+    });
+});
+```
 #### TelegramBot API
 ```javascript
 const { TelegramBot } = require('chuijs');
