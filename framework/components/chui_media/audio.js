@@ -354,7 +354,10 @@ class AudioFX {
         })
         this.#media.connect(this.#filters[0]);
         this.#filters[this.#filters.length - 1].connect(this.#audioContext.destination);
+        //
+        this.#chui_ap_equalizer_block.appendChild(this.#setPreampSlider(this.#filters))
         this.#filters.forEach((filter) => this.#chui_ap_equalizer_block.appendChild(this.#setSliderTest(filter)))
+        //
         this.#select.setDropdownHeight("208px")
         AudioFX.PRESETS.forEach(preset => this.#select.addOptions(preset.name))
         this.#select.addValueChangeListener((e) => this.#filters.forEach((filter) => this.#setPreset(filter, e.target.value)))
@@ -374,12 +377,37 @@ class AudioFX {
     #setPreset(filter, name) {
         AudioFX.PRESETS.forEach(presets => {
             if (presets.name === name) {
+                AudioFX.#renderPreampSlider(undefined, presets.preamp)
                 presets.inputs.forEach(input => {
-                    if (String(filter.frequency.value) === input.id) AudioFX.#renderSlider(input, filter)
+                    if (String(filter.frequency.value) === input.id) AudioFX.#renderSlider(input, filter, presets.preamp)
                 })
             }
         })
         store.set(this.#store_name, name)
+    }
+
+    #setPreampSlider(filters) {
+        let sliderMain = document.createElement("chui_eq_slider_main")
+        let val = document.createElement("slider_label")
+        let slider = document.createElement('input')
+        let label = document.createElement("slider_label")
+        sliderMain.id = "preamp_main"
+        slider.id = "preamp"
+        slider.type = 'range'
+        slider.className = 'eq_slider_test'
+        slider.step = "0.1"
+        slider.min = "-10"
+        slider.max = "10"
+        slider.value = "0"
+        slider.style.setProperty('--fx-before-width', `50%`);
+        slider.oninput = (e) => AudioFX.#renderPreampSlider(e.target, undefined, filters)
+        val.id = "val_preamp"
+        val.innerText = String(slider.value)
+        label.innerText = "preamp"
+        sliderMain.appendChild(val)
+        sliderMain.appendChild(slider)
+        sliderMain.appendChild(label)
+        return sliderMain
     }
     #setSliderTest(filter) {
         let sliderMain = document.createElement("chui_eq_slider_main")
@@ -389,10 +417,10 @@ class AudioFX {
         slider.id = String(filter.frequency.value)
         slider.type = 'range'
         slider.className = 'eq_slider_test'
-        slider.step = 0.1
-        slider.min = -10
-        slider.max = 10
-        slider.value = filter.gain.value
+        slider.step = "0.1"
+        slider.min = "-10"
+        slider.max = "10"
+        slider.value = String(filter.gain.value)
         slider.style.setProperty('--fx-before-width', `50%`);
         slider.oninput = (e) => AudioFX.#renderSlider(e.target, filter)
         val.id = "val_" + String(filter.frequency.value)
@@ -403,11 +431,26 @@ class AudioFX {
         sliderMain.appendChild(label)
         return sliderMain
     }
-    static #renderSlider(input, filter) {
+    static #renderPreampSlider(input, preamp, filters = []) {
+        let p_slider = document.getElementById("preamp");
+        let p_val = document.getElementById("val_preamp");
+        if (input === undefined) {
+            p_slider.value = preamp
+        } else {
+            p_slider.value = input.value
+            filters.forEach(filter => {
+                filter.gain.value = Number(p_slider.value)
+            })
+        }
+        p_val.innerText = String(p_slider.value)
+        let p_test = 50 + (p_slider.value * 5)
+        p_slider.style.setProperty('--fx-before-width', `${p_test.toFixed(1)}%`);
+    }
+    static #renderSlider(input, filter, preamp) {
         let slider = document.getElementById(input.id);
         let val = document.getElementById("val_" + input.id);
         slider.value = input.value
-        filter.gain.value = slider.value
+        filter.gain.value = Number(slider.value) + preamp
         val.innerText = String(slider.value)
         let test = 50 + (slider.value * 5)
         slider.style.setProperty('--fx-before-width', `${test.toFixed(1)}%`);
@@ -417,289 +460,307 @@ class AudioFX {
         {
             name: "Default",
             title: "По умолчанию",
+            preamp: 0,
             inputs: [
-                { id: "60", value: "0" },
-                { id: "170", value: "0" },
-                { id: "310", value: "0" },
-                { id: "600", value: "0" },
-                { id: "1000", value: "0" },
-                { id: "3000", value: "0" },
-                { id: "6000", value: "0" },
-                { id: "12000", value: "0" },
-                { id: "14000", value: "0" },
-                { id: "16000", value: "0" },
+                { id: "60", value: 0 },
+                { id: "170", value: 0 },
+                { id: "310", value: 0 },
+                { id: "600", value: 0 },
+                { id: "1000", value: 0 },
+                { id: "3000", value: 0 },
+                { id: "6000", value: 0 },
+                { id: "12000", value: 0 },
+                { id: "14000", value: 0 },
+                { id: "16000", value: 0 },
             ]
         },
         {
             name: "Classical",
             title: "Классическая музыка",
+            preamp: -0.5,
             inputs: [
-                { id: "60", value: "-0.5" },
-                { id: "170", value: "-0.5" },
-                { id: "310", value: "-0.5" },
-                { id: "600", value: "-0.5" },
-                { id: "1000", value: "-0.5" },
-                { id: "3000", value: "-0.5" },
-                { id: "6000", value: "-3.5" },
-                { id: "12000", value: "-3.5" },
-                { id: "14000", value: "-3.5" },
-                { id: "16000", value: "-4.5" },
+                { id: "60", value: -0.5 },
+                { id: "170", value: -0.5 },
+                { id: "310", value: -0.5 },
+                { id: "600", value: -0.5 },
+                { id: "1000", value: -0.5 },
+                { id: "3000", value: -0.5 },
+                { id: "6000", value: -3.5 },
+                { id: "12000", value: -3.5 },
+                { id: "14000", value: -3.5 },
+                { id: "16000", value: -4.5 },
             ]
         },
         {
             name: "Club",
             title: "Клубная музыка",
+            preamp: -3.6,
             inputs: [
-                { id: "60", value: "-0.5" },
-                { id: "170", value: "-0.5" },
-                { id: "310", value: "4" },
-                { id: "600", value: "2.5" },
-                { id: "1000", value: "2.5" },
-                { id: "3000", value: "2.5" },
-                { id: "6000", value: "1.5" },
-                { id: "12000", value: "-0.5" },
-                { id: "14000", value: "-0.5" },
-                { id: "16000", value: "-0.5" },
+                { id: "60", value: -0.5 },
+                { id: "170", value: -0.5 },
+                { id: "310", value: 4 },
+                { id: "600", value: 2.5 },
+                { id: "1000", value: 2.5 },
+                { id: "3000", value: 2.5 },
+                { id: "6000", value: 1.5 },
+                { id: "12000", value: -0.5 },
+                { id: "14000", value: -0.5 },
+                { id: "16000", value: -0.5 },
             ]
         },
         {
             name: "Dance",
             title: "Танцевальная музыка",
+            preamp: -2.2,
             inputs: [
-                { id: "60", value: "4.5" },
-                { id: "170", value: "3.5" },
-                { id: "310", value: "1" },
-                { id: "600", value: "-0.5" },
-                { id: "1000", value: "-0.5" },
-                { id: "3000", value: "-2.5" },
-                { id: "6000", value: "-3.5" },
-                { id: "12000", value: "-3.5" },
-                { id: "14000", value: "-0.5" },
-                { id: "16000", value: "-0.5" },
+                { id: "60", value: 4.5 },
+                { id: "170", value: 3.5 },
+                { id: "310", value: 1 },
+                { id: "600", value: -0.5 },
+                { id: "1000", value: -0.5 },
+                { id: "3000", value: -2.5 },
+                { id: "6000", value: -3.5 },
+                { id: "12000", value: -3.5 },
+                { id: "14000", value: -0.5 },
+                { id: "16000", value: -0.5 },
             ]
         },
         {
             name: "Full Bass",
             title: "Усиление НЧ",
+            preamp: -3.6,
             inputs: [
-                { id: "60", value: "4" },
-                { id: "170", value: "4.5" },
-                { id: "310", value: "4.5" },
-                { id: "600", value: "2.5" },
-                { id: "1000", value: "0.5" },
-                { id: "3000", value: "-2" },
-                { id: "6000", value: "-4" },
-                { id: "12000", value: "-5" },
-                { id: "14000", value: "-5.5" },
-                { id: "16000", value: "-5.5" },
+                { id: "60", value: 4 },
+                { id: "170", value: 4.5 },
+                { id: "310", value: 4.5 },
+                { id: "600", value: 2.5 },
+                { id: "1000", value: 0.5 },
+                { id: "3000", value: -2 },
+                { id: "6000", value: -4 },
+                { id: "12000", value: -5 },
+                { id: "14000", value: -5.5 },
+                { id: "16000", value: -5.5 },
             ]
         },
         {
             name: "Full Treble",
             title: "Усиление ВЧ",
+            preamp: -6,
             inputs: [
-                { id: "60", value: "-4.5" },
-                { id: "170", value: "-4.5" },
-                { id: "310", value: "-4.5" },
-                { id: "600", value: "-2" },
-                { id: "1000", value: "1" },
-                { id: "3000", value: "5.5" },
-                { id: "6000", value: "8" },
-                { id: "12000", value: "8" },
-                { id: "14000", value: "8" },
-                { id: "16000", value: "8" },
+                { id: "60", value: -4.5 },
+                { id: "170", value: -4.5 },
+                { id: "310", value: -4.5 },
+                { id: "600", value: -2 },
+                { id: "1000", value: 1 },
+                { id: "3000", value: 5.5 },
+                { id: "6000", value: 8 },
+                { id: "12000", value: 8 },
+                { id: "14000", value: 8 },
+                { id: "16000", value: 8 },
             ]
         },
         {
             name: "Full Bass & Treble",
             title: "Усиление НЧ и ВЧ",
+            preamp: -5,
             inputs: [
-                { id: "60", value: "3.5" },
-                { id: "170", value: "2.5" },
-                { id: "310", value: "-0.5" },
-                { id: "600", value: "-3.5" },
-                { id: "1000", value: "-2" },
-                { id: "3000", value: "0.5" },
-                { id: "6000", value: "4" },
-                { id: "12000", value: "5.5" },
-                { id: "14000", value: "6" },
-                { id: "16000", value: "6" },
+                { id: "60", value: 3.5 },
+                { id: "170", value: 2.5 },
+                { id: "310", value: -0.5 },
+                { id: "600", value: -3.5 },
+                { id: "1000", value: -2 },
+                { id: "3000", value: 0.5 },
+                { id: "6000", value: 4 },
+                { id: "12000", value: 5.5 },
+                { id: "14000", value: 6 },
+                { id: "16000", value: 6 },
             ]
         },
         {
             name: "Laptop Speakers / Headphone",
             title: "Колонки ноутбука",
+            preamp: -4,
             inputs: [
-                { id: "60", value: "2" },
-                { id: "170", value: "5.5" },
-                { id: "310", value: "2.5" },
-                { id: "600", value: "-1.5" },
-                { id: "1000", value: "-1" },
-                { id: "3000", value: "0.5" },
-                { id: "6000", value: "2" },
-                { id: "12000", value: "4.5" },
-                { id: "14000", value: "6" },
-                { id: "16000", value: "7" },
+                { id: "60", value: 2 },
+                { id: "170", value: 5.5 },
+                { id: "310", value: 2.5 },
+                { id: "600", value: -1.5 },
+                { id: "1000", value: -1 },
+                { id: "3000", value: 0.5 },
+                { id: "6000", value: 2 },
+                { id: "12000", value: 4.5 },
+                { id: "14000", value: 6 },
+                { id: "16000", value: 7 },
             ]
         },
         {
             name: "Large Hall",
             title: "Большой зал",
+            preamp: -3.5,
             inputs: [
-                { id: "60", value: "5" },
-                { id: "170", value: "5" },
-                { id: "310", value: "2.5" },
-                { id: "600", value: "2.5" },
-                { id: "1000", value: "-0.5" },
-                { id: "3000", value: "-2" },
-                { id: "6000", value: "-2" },
-                { id: "12000", value: "-2" },
-                { id: "14000", value: "-0.5" },
-                { id: "16000", value: "-0.5" },
+                { id: "60", value: 5 },
+                { id: "170", value: 5 },
+                { id: "310", value: 2.5 },
+                { id: "600", value: 2.5 },
+                { id: "1000", value: -0.5 },
+                { id: "3000", value: -2 },
+                { id: "6000", value: -2 },
+                { id: "12000", value: -2 },
+                { id: "14000", value: -0.5 },
+                { id: "16000", value: -0.5 },
             ]
         },
         {
             name: "Live",
             title: "Концерт",
+            preamp: -2.6,
             inputs: [
-                { id: "60", value: "-2" },
-                { id: "170", value: "-0.5" },
-                { id: "310", value: "2" },
-                { id: "600", value: "2.5" },
-                { id: "1000", value: "2.5" },
-                { id: "3000", value: "2.5" },
-                { id: "6000", value: "2" },
-                { id: "12000", value: "1" },
-                { id: "14000", value: "1" },
-                { id: "16000", value: "1" },
+                { id: "60", value: -2 },
+                { id: "170", value: -0.5 },
+                { id: "310", value: 2 },
+                { id: "600", value: 2.5 },
+                { id: "1000", value: 2.5 },
+                { id: "3000", value: 2.5 },
+                { id: "6000", value: 2 },
+                { id: "12000", value: 1 },
+                { id: "14000", value: 1 },
+                { id: "16000", value: 1 },
             ]
         },
         {
             name: "Party",
             title: "Вечеринка",
+            preamp: -2.6,
             inputs: [
-                { id: "60", value: "3.5" },
-                { id: "170", value: "3.5" },
-                { id: "310", value: "-0.5" },
-                { id: "600", value: "-0.5" },
-                { id: "1000", value: "-0.5" },
-                { id: "3000", value: "-0.5" },
-                { id: "6000", value: "-0.5" },
-                { id: "12000", value: "-0.5" },
-                { id: "14000", value: "3.5" },
-                { id: "16000", value: "3.5" },
+                { id: "60", value: 3.5 },
+                { id: "170", value: 3.5 },
+                { id: "310", value: -0.5 },
+                { id: "600", value: -0.5 },
+                { id: "1000", value: -0.5 },
+                { id: "3000", value: -0.5 },
+                { id: "6000", value: -0.5 },
+                { id: "12000", value: -0.5 },
+                { id: "14000", value: 3.5 },
+                { id: "16000", value: 3.5 },
             ]
         },
         {
             name: "Pop",
             title: "Поп",
+            preamp: -3.1,
             inputs: [
-                { id: "60", value: "-0.5" },
-                { id: "170", value: "2" },
-                { id: "310", value: "3.5" },
-                { id: "600", value: "4" },
-                { id: "1000", value: "2.5" },
-                { id: "3000", value: "-0.5" },
-                { id: "6000", value: "-1" },
-                { id: "12000", value: "-1" },
-                { id: "14000", value: "-0.5" },
-                { id: "16000", value: "-0.5" },
+                { id: "60", value: -0.5 },
+                { id: "170", value: 2 },
+                { id: "310", value: 3.5 },
+                { id: "600", value: 4 },
+                { id: "1000", value: 2.5 },
+                { id: "3000", value: -0.5 },
+                { id: "6000", value: -1 },
+                { id: "12000", value: -1 },
+                { id: "14000", value: -0.5 },
+                { id: "16000", value: -0.5 },
             ]
         },
         {
             name: "Reggae",
             title: "Регги",
+            preamp: -4,
             inputs: [
-                { id: "60", value: "-0.5" },
-                { id: "170", value: "-0.5" },
-                { id: "310", value: "-0.5" },
-                { id: "600", value: "-2.5" },
-                { id: "1000", value: "-0.5" },
-                { id: "3000", value: "3" },
-                { id: "6000", value: "3" },
-                { id: "12000", value: "-0.5" },
-                { id: "14000", value: "-0.5" },
-                { id: "16000", value: "-0.5" },
+                { id: "60", value: -0.5 },
+                { id: "170", value: -0.5 },
+                { id: "310", value: -0.5 },
+                { id: "600", value: -2.5 },
+                { id: "1000", value: -0.5 },
+                { id: "3000", value: 3 },
+                { id: "6000", value: 3 },
+                { id: "12000", value: -0.5 },
+                { id: "14000", value: -0.5 },
+                { id: "16000", value: -0.5 },
             ]
         },
         {
             name: "Ska",
             title: "Ска",
+            preamp: -5.5,
             inputs: [
-                { id: "60", value: "-1" },
-                { id: "170", value: "-2" },
-                { id: "310", value: "-2" },
-                { id: "600", value: "-0.5" },
-                { id: "1000", value: "2" },
-                { id: "3000", value: "2.5" },
-                { id: "6000", value: "4" },
-                { id: "12000", value: "4.5" },
-                { id: "14000", value: "5.5" },
-                { id: "16000", value: "4.5" },
+                { id: "60", value: -1 },
+                { id: "170", value: -2 },
+                { id: "310", value: -2 },
+                { id: "600", value: -0.5 },
+                { id: "1000", value: 2 },
+                { id: "3000", value: 2.5 },
+                { id: "6000", value: 4 },
+                { id: "12000", value: 4.5 },
+                { id: "14000", value: 5.5 },
+                { id: "16000", value: 4.5 },
             ]
         },
         {
             name: "Soft",
             title: "Мягкое звучание",
+            preamp: -4.8,
             inputs: [
-                { id: "60", value: "2" },
-                { id: "170", value: "0.5" },
-                { id: "310", value: "-0.5" },
-                { id: "600", value: "-1" },
-                { id: "1000", value: "-0.5" },
-                { id: "3000", value: "2" },
-                { id: "6000", value: "4" },
-                { id: "12000", value: "4.5" },
-                { id: "14000", value: "5.5" },
-                { id: "16000", value: "6" },
+                { id: "60", value: 2 },
+                { id: "170", value: 0.5 },
+                { id: "310", value: -0.5 },
+                { id: "600", value: -1 },
+                { id: "1000", value: -0.5 },
+                { id: "3000", value: 2 },
+                { id: "6000", value: 4 },
+                { id: "12000", value: 4.5 },
+                { id: "14000", value: 5.5 },
+                { id: "16000", value: 6 },
             ]
         },
         {
             name: "Rock",
             title: "Рок",
+            preamp: -5,
             inputs: [
-                { id: "60", value: "4" },
-                { id: "170", value: "2" },
-                { id: "310", value: "-2.5" },
-                { id: "600", value: "-4" },
-                { id: "1000", value: "-1.5" },
-                { id: "3000", value: "2" },
-                { id: "6000", value: "4" },
-                { id: "12000", value: "5.5" },
-                { id: "14000", value: "5.5" },
-                { id: "16000", value: "5.5" },
+                { id: "60", value: 4 },
+                { id: "170", value: 2 },
+                { id: "310", value: -2.5 },
+                { id: "600", value: -4 },
+                { id: "1000", value: -1.5 },
+                { id: "3000", value: 2 },
+                { id: "6000", value: 4 },
+                { id: "12000", value: 5.5 },
+                { id: "14000", value: 5.5 },
+                { id: "16000", value: 5.5 },
             ]
         },
         {
             name: "Soft Rock",
             title: "Софт-рок",
+            preamp: -2.7,
             inputs: [
-                { id: "60", value: "2" },
-                { id: "170", value: "2" },
-                { id: "310", value: "1" },
-                { id: "600", value: "-0.5" },
-                { id: "1000", value: "-2" },
-                { id: "3000", value: "-2.5" },
-                { id: "6000", value: "-1.5" },
-                { id: "12000", value: "-0.5" },
-                { id: "14000", value: "1" },
-                { id: "16000", value: "4" },
+                { id: "60", value: 2 },
+                { id: "170", value: 2 },
+                { id: "310", value: 1 },
+                { id: "600", value: -0.5 },
+                { id: "1000", value: -2 },
+                { id: "3000", value: -2.5 },
+                { id: "6000", value: -1.5 },
+                { id: "12000", value: -0.5 },
+                { id: "14000", value: 1 },
+                { id: "16000", value: 4 },
             ]
         },
         {
             name: "Techno",
             title: "Техно",
+            preamp: -3.8,
             inputs: [
-                { id: "60", value: "4" },
-                { id: "170", value: "2.5" },
-                { id: "310", value: "-0.5" },
-                { id: "600", value: "-2.5" },
-                { id: "1000", value: "-2" },
-                { id: "3000", value: "-0.5" },
-                { id: "6000", value: "4" },
-                { id: "12000", value: "4.5" },
-                { id: "14000", value: "4.5" },
-                { id: "16000", value: "4" },
+                { id: "60", value: 4 },
+                { id: "170", value: 2.5 },
+                { id: "310", value: -0.5 },
+                { id: "600", value: -2.5 },
+                { id: "1000", value: -2 },
+                { id: "3000", value: -0.5 },
+                { id: "6000", value: 4 },
+                { id: "12000", value: 4.5 },
+                { id: "14000", value: 4.5 },
+                { id: "16000", value: 4 },
             ]
         }]
 }

@@ -316,6 +316,13 @@ chui_eq_slider_main {
     justify-content: center;
     height: 200px;
     width: 50px;
+    margin-top: 10px;
+}
+
+chui_eq_slider_main[id="preamp_main"] {
+    border-radius: var(--border_radius);
+    border: 1px solid var(--element_background_2);
+    padding: 0px 8px;
 }
 
 slider_label {
