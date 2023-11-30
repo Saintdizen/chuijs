@@ -326,6 +326,7 @@ class Audio {
 class AudioFX {
     #chui_ap_equalizer_main = document.createElement('chui_ap_equalizer_main')
     #chui_ap_equalizer_block = document.createElement("chui_ap_equalizer_block")
+    #chui_ap_equalizer_band_block = document.createElement("chui_ap_equalizer_band_block")
     #audioContext = new AudioContext();
     #eqBands = [60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000]
     #select = new Select()
@@ -355,13 +356,14 @@ class AudioFX {
         this.#media.connect(this.#filters[0]);
         this.#filters[this.#filters.length - 1].connect(this.#audioContext.destination);
         //
-        this.#chui_ap_equalizer_block.appendChild(this.#setPreampSlider(this.#filters))
-        this.#filters.forEach((filter) => this.#chui_ap_equalizer_block.appendChild(this.#setSliderTest(filter)))
+        this.#chui_ap_equalizer_block.appendChild(this.#setSliderPreamp(this.#filters))
+        this.#filters.forEach((filter) => this.#chui_ap_equalizer_band_block.appendChild(this.#setSliderBand(filter)))
         //
         this.#select.setDropdownHeight("208px")
         AudioFX.PRESETS.forEach(preset => this.#select.addOptions(preset.name))
         this.#select.addValueChangeListener((e) => this.#filters.forEach((filter) => this.#setPreset(filter, e.target.value)))
         this.#chui_ap_equalizer_main.appendChild(this.#select.set())
+        this.#chui_ap_equalizer_block.appendChild(this.#chui_ap_equalizer_band_block)
         this.#chui_ap_equalizer_main.appendChild(this.#chui_ap_equalizer_block)
     }
     set() {
@@ -385,8 +387,7 @@ class AudioFX {
         })
         store.set(this.#store_name, name)
     }
-
-    #setPreampSlider(filters) {
+    #setSliderPreamp(filters) {
         let sliderMain = document.createElement("chui_eq_slider_main")
         let val = document.createElement("slider_label")
         let slider = document.createElement('input')
@@ -409,7 +410,7 @@ class AudioFX {
         sliderMain.appendChild(label)
         return sliderMain
     }
-    #setSliderTest(filter) {
+    #setSliderBand(filter) {
         let sliderMain = document.createElement("chui_eq_slider_main")
         let val = document.createElement("slider_label")
         let slider = document.createElement('input')
