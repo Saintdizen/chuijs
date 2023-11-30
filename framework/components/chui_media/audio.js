@@ -440,7 +440,7 @@ class AudioFX {
         } else {
             p_slider.value = input.value
             filters.forEach(filter => {
-                filter.gain.value = Number(p_slider.value)
+                filter.gain.value = Number(input.value)
             })
         }
         p_val.innerText = String(p_slider.value)
