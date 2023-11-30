@@ -152,6 +152,15 @@ class Audio {
         this.#chui_ap_main.appendChild(dialog.set())
         this.#chui_ap_fx_icon.addEventListener("click", () => dialog.open())
     }
+    play() {
+        this.#chui_ap_play_pause.click()
+    }
+    next() {
+        this.#chui_ap_next.click()
+    }
+    prev() {
+        this.#chui_ap_prev.click()
+    }
     openFolder(path) {
         this.#chui_playlist.getOpenFolderButton().addEventListener("click", async () => await shell.openPath(path))
     }
