@@ -307,6 +307,7 @@ chui_ap_equalizer_block {
     flex-direction: row;
     width: max-content;
     height: max-content;
+    margin-top: 10px;
 }
 
 chui_eq_slider_main {
@@ -316,13 +317,22 @@ chui_eq_slider_main {
     justify-content: center;
     height: 200px;
     width: 50px;
-    margin-top: 10px;
 }
 
 chui_eq_slider_main[id="preamp_main"] {
     border-radius: var(--border_radius);
     border: 1px solid var(--element_background_2);
-    padding: 0px 8px;
+    padding: 0 8px;
+}
+
+chui_ap_equalizer_band_block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--element_background_2);
+    border-radius: var(--border_radius);
+    padding: 0 8px;
+    margin-left: 12px;
 }
 
 slider_label {

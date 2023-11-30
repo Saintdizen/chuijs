@@ -329,7 +329,7 @@ class AudioFX {
     #chui_ap_equalizer_band_block = document.createElement("chui_ap_equalizer_band_block")
     #audioContext = new AudioContext();
     #eqBands = [60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000]
-    #select = new Select()
+    #select = new Select({})
     #media = undefined;
     #filters = undefined;
     #store_name = "chuijs.framework.settings.fx_preset"
