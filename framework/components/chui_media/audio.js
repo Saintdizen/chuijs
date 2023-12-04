@@ -325,7 +325,6 @@ class Audio {
 
 class AudioFX {
     #chui_ap_equalizer_main = document.createElement('chui_ap_equalizer_main')
-    #chui_ap_equalizer_block = document.createElement("chui_ap_equalizer_block")
     #chui_ap_equalizer_band_block = document.createElement("chui_ap_equalizer_band_block")
     #audioContext = new AudioContext();
     #eqBands = [60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000]
@@ -356,15 +355,13 @@ class AudioFX {
         this.#media.connect(this.#filters[0]);
         this.#filters[this.#filters.length - 1].connect(this.#audioContext.destination);
         //
-        this.#chui_ap_equalizer_block.appendChild(this.#setSliderPreamp(this.#filters))
         this.#filters.forEach((filter) => this.#chui_ap_equalizer_band_block.appendChild(this.#setSliderBand(filter)))
         //
         this.#select.setDropdownHeight("208px")
         AudioFX.PRESETS.forEach(preset => this.#select.addOptions(preset.name))
         this.#select.addValueChangeListener((e) => this.#filters.forEach((filter) => this.#setPreset(filter, e.target.value)))
         this.#chui_ap_equalizer_main.appendChild(this.#select.set())
-        this.#chui_ap_equalizer_block.appendChild(this.#chui_ap_equalizer_band_block)
-        this.#chui_ap_equalizer_main.appendChild(this.#chui_ap_equalizer_block)
+        this.#chui_ap_equalizer_main.appendChild(this.#chui_ap_equalizer_band_block)
     }
     set() {
         return this.#chui_ap_equalizer_main
@@ -379,36 +376,12 @@ class AudioFX {
     #setPreset(filter, name) {
         AudioFX.PRESETS.forEach(presets => {
             if (presets.name === name) {
-                AudioFX.#renderPreampSlider(undefined, presets.preamp)
                 presets.inputs.forEach(input => {
                     if (String(filter.frequency.value) === input.id) AudioFX.#renderSlider(input, filter, presets.preamp)
                 })
             }
         })
         store.set(this.#store_name, name)
-    }
-    #setSliderPreamp(filters) {
-        let sliderMain = document.createElement("chui_eq_slider_main")
-        let val = document.createElement("slider_label")
-        let slider = document.createElement('input')
-        let label = document.createElement("slider_label")
-        sliderMain.id = "preamp_main"
-        slider.id = "preamp"
-        slider.type = 'range'
-        slider.className = 'eq_slider_test'
-        slider.step = "0.1"
-        slider.min = "-10"
-        slider.max = "10"
-        slider.value = "0"
-        slider.style.setProperty('--fx-before-width', `50%`);
-        slider.oninput = (e) => AudioFX.#renderPreampSlider(e.target, undefined, filters)
-        val.id = "val_preamp"
-        val.innerText = String(slider.value)
-        label.innerText = "preamp"
-        sliderMain.appendChild(val)
-        sliderMain.appendChild(slider)
-        sliderMain.appendChild(label)
-        return sliderMain
     }
     #setSliderBand(filter) {
         let sliderMain = document.createElement("chui_eq_slider_main")
@@ -423,7 +396,7 @@ class AudioFX {
         slider.max = "10"
         slider.value = String(filter.gain.value)
         slider.style.setProperty('--fx-before-width', `50%`);
-        slider.oninput = (e) => AudioFX.#renderSlider(e.target, filter)
+        slider.oninput = (e) => AudioFX.#renderSlider(e.target, filter, 10)
         val.id = "val_" + String(filter.frequency.value)
         val.innerText = String(slider.value)
         label.innerText = String(filter.frequency.value)
@@ -432,26 +405,11 @@ class AudioFX {
         sliderMain.appendChild(label)
         return sliderMain
     }
-    static #renderPreampSlider(input, preamp, filters = []) {
-        let p_slider = document.getElementById("preamp");
-        let p_val = document.getElementById("val_preamp");
-        if (input === undefined) {
-            p_slider.value = preamp
-        } else {
-            p_slider.value = input.value
-            filters.forEach(filter => {
-                filter.gain.value = Number(input.value)
-            })
-        }
-        p_val.innerText = String(p_slider.value)
-        let p_test = 50 + (p_slider.value * 5)
-        p_slider.style.setProperty('--fx-before-width', `${p_test.toFixed(1)}%`);
-    }
     static #renderSlider(input, filter, preamp) {
         let slider = document.getElementById(input.id);
         let val = document.getElementById("val_" + input.id);
         slider.value = input.value
-        filter.gain.value = Number(slider.value) + preamp
+        filter.gain.value = Number(Number(slider.value) + preamp)
         val.innerText = String(slider.value)
         let test = 50 + (slider.value * 5)
         slider.style.setProperty('--fx-before-width', `${test.toFixed(1)}%`);

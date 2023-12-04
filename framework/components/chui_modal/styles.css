@@ -14,12 +14,12 @@ chui_dialog {
 }
 
 dialog_content {
-    margin: 59px auto;
+    margin: auto;
     width: max-content;
     height: max-content;
     display: flex;
     flex-direction: column;
-    padding: 6px;
+    padding: var(--test_padding);
     border-radius: var(--border_radius);
     color: var(--text_color);
     background: var(--main_background);
@@ -29,7 +29,7 @@ dialog_content {
 
 dialog_header {
     display: flex;
-    padding-bottom: 6px;
+    margin-bottom: var(--test_padding);
 }
 
 dialog_body {
@@ -42,5 +42,5 @@ dialog_body {
 
 dialog_footer {
     display: flex;
-    padding-top: 6px;
+    margin-top: var(--test_padding);
 }

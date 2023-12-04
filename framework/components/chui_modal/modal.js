@@ -21,18 +21,18 @@ class Dialog {
             })
         }        
         //ADDS
-        this.#content.appendChild(this.#header)
         this.#content.appendChild(this.#body)
-        this.#content.appendChild(this.#footer)
         this.#dialog.appendChild(this.#content)
     }
     addToHeader(...components) {
+        this.#content.insertBefore(this.#header, this.#body)
         for (let component of components) this.#header.appendChild(component.set());
     }
     addToBody(...components) {
         for (let component of components) this.#body.appendChild(component.set());
     }
     addToFooter(...components) {
+        this.#content.appendChild(this.#footer)
         for (let component of components) this.#footer.appendChild(component.set());
     }
     removeFromHeader(...components) {
