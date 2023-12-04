@@ -379,9 +379,9 @@ class AudioFX {
         //
         this.#toggle_on_off.addChangeListener((e) => {
             if (e.target.checked) {
-                this.#filters.forEach((filter) => this.#setPreset2(filter, store.get(this.#fx_preset), e.target.checked))
+                this.#filters.forEach((filter) => this.#setStatus(filter, store.get(this.#fx_preset), e.target.checked))
             } else {
-                this.#filters.forEach((filter) => this.#setPreset2(filter, "Default", e.target.checked))
+                this.#filters.forEach((filter) => this.#setStatus(filter, "Default", e.target.checked))
             }
         })
     }
@@ -402,7 +402,7 @@ class AudioFX {
             }
         }, 250)
     }
-    #setPreset2(filter, name, status) {
+    #setStatus(filter, name, status) {
         store.delete(this.#fx_status)
         store.set(this.#fx_status, status)
         AudioFX.PRESETS.forEach(presets => {
