@@ -60,7 +60,6 @@ class MediaPage extends Page {
         this.#playlist = []
         fs.readdir(this.#download_path, (err, files) => {
             files.forEach(file => {
-                console.log(file)
                 try {
                     let artist = file.split(" - ")[0]
                     let title = file.split(" - ")[1].replace(".mp3", "")
