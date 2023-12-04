@@ -6,6 +6,7 @@ const {Select} = require("../chui_inputs/chui_select_box/select_box");
 const {Dialog} = require("../chui_modal/modal");
 const Store = require('electron-store');
 const {shell} = require("electron");
+const {Toggle} = require("../chui_inputs/chui_toggle/toggle");
 const store = new Store();
 
 let play_list = []
@@ -325,13 +326,18 @@ class Audio {
 
 class AudioFX {
     #chui_ap_equalizer_main = document.createElement('chui_ap_equalizer_main')
+    #chui_ap_equalizer_controls = document.createElement('chui_ap_equalizer_controls')
+    #chui_ap_equalizer_block = document.createElement('chui_ap_equalizer_block')
+    #chui_ap_equalizer_preamp_block = document.createElement("chui_ap_equalizer_preamp_block")
     #chui_ap_equalizer_band_block = document.createElement("chui_ap_equalizer_band_block")
+    #toggle_on_off = new Toggle();
     #audioContext = new AudioContext();
     #eqBands = [60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000]
     #select = new Select({})
     #media = undefined;
     #filters = undefined;
-    #store_name = "chuijs.framework.settings.fx_preset"
+    #fx_status = "chuijs.framework.settings.fx.status"
+    #fx_preset = "chuijs.framework.settings.fx.preset"
     constructor(audio) {
         this.#media = this.#audioContext.createMediaElementSource(audio);
         this.#filters = this.#eqBands.map((band, i) => {
@@ -355,31 +361,65 @@ class AudioFX {
         this.#media.connect(this.#filters[0]);
         this.#filters[this.#filters.length - 1].connect(this.#audioContext.destination);
         //
-        this.#chui_ap_equalizer_band_block.appendChild(this.#setSliderPreamp(this.#filters))
+        this.#chui_ap_equalizer_preamp_block.appendChild(this.#setSliderPreamp(this.#filters))
         this.#filters.forEach((filter) => this.#chui_ap_equalizer_band_block.appendChild(this.#setSliderBand(filter)))
         //
         this.#select.setDropdownHeight("208px")
         AudioFX.PRESETS.forEach(preset => this.#select.addOptions(preset.name))
         this.#select.addValueChangeListener((e) => this.#filters.forEach((filter) => this.#setPreset(filter, e.target.value)))
-        this.#chui_ap_equalizer_main.appendChild(this.#select.set())
-        this.#chui_ap_equalizer_main.appendChild(this.#chui_ap_equalizer_band_block)
+        //
+        this.#chui_ap_equalizer_controls.appendChild(this.#select.set())
+        this.#chui_ap_equalizer_controls.appendChild(this.#toggle_on_off.set())
+        //
+        this.#chui_ap_equalizer_block.appendChild(this.#chui_ap_equalizer_preamp_block)
+        this.#chui_ap_equalizer_block.appendChild(this.#chui_ap_equalizer_band_block)
+        //
+        this.#chui_ap_equalizer_main.appendChild(this.#chui_ap_equalizer_controls)
+        this.#chui_ap_equalizer_main.appendChild(this.#chui_ap_equalizer_block)
+        //
+        this.#toggle_on_off.addChangeListener((e) => {
+            if (e.target.checked) {
+                this.#filters.forEach((filter) => this.#setPreset2(filter, store.get(this.#fx_preset), e.target.checked))
+            } else {
+                this.#filters.forEach((filter) => this.#setPreset2(filter, "Default", e.target.checked))
+            }
+        })
     }
     set() {
         return this.#chui_ap_equalizer_main
     }
     restore() {
         setTimeout(() => {
-            let name = store.get(this.#store_name);
-            this.#select.setDefaultOption(name)
-            this.#filters.forEach((filter) => this.#setPreset(filter, name))
+            let status = store.get(this.#fx_status)
+            if (status) {
+                this.#toggle_on_off.setValue(status)
+                let name = store.get(this.#fx_preset);
+                this.#select.setDefaultOption(name)
+                this.#filters.forEach((filter) => this.#setPreset(filter, name))
+            } else {
+                this.#toggle_on_off.setValue(status)
+                this.#filters.forEach((filter) => this.#setPreset(filter, "Default"))
+            }
         }, 250)
     }
-    #setPreset(filter, name) {
-        store.delete(this.#store_name)
-        store.set(this.#store_name, name)
+    #setPreset2(filter, name, status) {
+        store.delete(this.#fx_status)
+        store.set(this.#fx_status, status)
         AudioFX.PRESETS.forEach(presets => {
             if (presets.name === name) {
-                AudioFX.#renderPreampSlider(undefined, this.#getPreset(store.get(this.#store_name)), filter)
+                AudioFX.#renderPreampSlider(undefined, this.#getPreset(store.get(this.#fx_preset)), filter)
+                presets.inputs.forEach(input => {
+                    if (String(filter.frequency.value) === input.id) AudioFX.#renderSlider(input, filter, presets.preamp)
+                })
+            }
+        })
+    }
+    #setPreset(filter, name) {
+        store.delete(this.#fx_preset)
+        store.set(this.#fx_preset, name)
+        AudioFX.PRESETS.forEach(presets => {
+            if (presets.name === name) {
+                AudioFX.#renderPreampSlider(undefined, this.#getPreset(store.get(this.#fx_preset)), filter)
                 presets.inputs.forEach(input => {
                     if (String(filter.frequency.value) === input.id) AudioFX.#renderSlider(input, filter, presets.preamp)
                 })
@@ -398,12 +438,12 @@ class AudioFX {
         slider.id = "preamp"
         slider.type = 'range'
         slider.className = 'eq_slider_test'
-        slider.step = "0.1"
+        slider.step = "1"
         slider.min = "-10"
         slider.max = "10"
         slider.value = "0"
         slider.style.setProperty('--fx-before-width', `50%`);
-        slider.oninput = (e) => AudioFX.#renderPreampSlider(e.target, this.#getPreset(store.get(this.#store_name)), filters)
+        slider.oninput = (e) => AudioFX.#renderPreampSlider(e.target, this.#getPreset(store.get(this.#fx_preset)), filters)
         val.id = "val_preamp"
         val.innerText = String(slider.value)
         label.innerText = "AMP"
@@ -486,7 +526,7 @@ class AudioFX {
         {
             name: "Classical",
             title: "Классическая музыка",
-            preamp: -0.5,
+            preamp: -1,
             inputs: [
                 { id: "60", value: -0.5 },
                 { id: "170", value: -0.5 },
@@ -503,7 +543,7 @@ class AudioFX {
         {
             name: "Club",
             title: "Клубная музыка",
-            preamp: -3.6,
+            preamp: -4,
             inputs: [
                 { id: "60", value: -0.5 },
                 { id: "170", value: -0.5 },
@@ -520,7 +560,7 @@ class AudioFX {
         {
             name: "Dance",
             title: "Танцевальная музыка",
-            preamp: -2.2,
+            preamp: -2,
             inputs: [
                 { id: "60", value: 4.5 },
                 { id: "170", value: 3.5 },
@@ -537,7 +577,7 @@ class AudioFX {
         {
             name: "Full Bass",
             title: "Усиление НЧ",
-            preamp: -3.6,
+            preamp: -4,
             inputs: [
                 { id: "60", value: 4 },
                 { id: "170", value: 4.5 },
@@ -605,7 +645,7 @@ class AudioFX {
         {
             name: "Large Hall",
             title: "Большой зал",
-            preamp: -3.5,
+            preamp: -4,
             inputs: [
                 { id: "60", value: 5 },
                 { id: "170", value: 5 },
@@ -622,7 +662,7 @@ class AudioFX {
         {
             name: "Live",
             title: "Концерт",
-            preamp: -2.6,
+            preamp: -3,
             inputs: [
                 { id: "60", value: -2 },
                 { id: "170", value: -0.5 },
@@ -639,7 +679,7 @@ class AudioFX {
         {
             name: "Party",
             title: "Вечеринка",
-            preamp: -2.6,
+            preamp: -3,
             inputs: [
                 { id: "60", value: 3.5 },
                 { id: "170", value: 3.5 },
@@ -656,7 +696,7 @@ class AudioFX {
         {
             name: "Pop",
             title: "Поп",
-            preamp: -3.1,
+            preamp: -3,
             inputs: [
                 { id: "60", value: -0.5 },
                 { id: "170", value: 2 },
@@ -690,7 +730,7 @@ class AudioFX {
         {
             name: "Ska",
             title: "Ска",
-            preamp: -5.5,
+            preamp: -6,
             inputs: [
                 { id: "60", value: -1 },
                 { id: "170", value: -2 },
@@ -707,7 +747,7 @@ class AudioFX {
         {
             name: "Soft",
             title: "Мягкое звучание",
-            preamp: -4.8,
+            preamp: -5,
             inputs: [
                 { id: "60", value: 2 },
                 { id: "170", value: 0.5 },
@@ -741,7 +781,7 @@ class AudioFX {
         {
             name: "Soft Rock",
             title: "Софт-рок",
-            preamp: -2.7,
+            preamp: -3,
             inputs: [
                 { id: "60", value: 2 },
                 { id: "170", value: 2 },
@@ -758,7 +798,7 @@ class AudioFX {
         {
             name: "Techno",
             title: "Техно",
-            preamp: -3.8,
+            preamp: -4,
             inputs: [
                 { id: "60", value: 4 },
                 { id: "170", value: 2.5 },
