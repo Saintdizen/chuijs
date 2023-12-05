@@ -395,20 +395,30 @@ class AudioFX {
                 this.#toggle_on_off.setValue(status)
                 let name = store.get(this.#fx_preset);
                 this.#select.setDefaultOption(name)
-                this.#filters.forEach((filter) => this.#setPreset(filter, name))
+                this.#filters.forEach((filter) => {
+                    this.#setPreset(filter, name)
+                    this.#setStatus(filter, name, status)
+                })
             } else {
                 this.#toggle_on_off.setValue(status)
-                this.#filters.forEach((filter) => this.#setPreset(filter, "Default"))
+                this.#filters.forEach((filter) => {
+                    this.#setPreset(filter, "Default")
+                    this.#setStatus(filter, "Default", status)
+                })
             }
         }, 250)
     }
     #setStatus(filter, name, status) {
         store.delete(this.#fx_status)
         store.set(this.#fx_status, status)
+        document.getElementById("preamp").disabled = !status;
+        this.#select.setDisabled(!status)
+        this.#select.setDefaultOption(name)
         AudioFX.PRESETS.forEach(presets => {
             if (presets.name === name) {
                 AudioFX.#renderPreampSlider(undefined, this.#getPreset(store.get(this.#fx_preset)), filter)
                 presets.inputs.forEach(input => {
+                    document.getElementById(input.id).disabled = !status;
                     if (String(filter.frequency.value) === input.id) AudioFX.#renderSlider(input, filter, presets.preamp)
                 })
             }
