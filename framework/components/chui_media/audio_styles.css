@@ -255,7 +255,7 @@ chui_playlist_list::-webkit-scrollbar-track {
 
 chui_playlist_list::-webkit-scrollbar-thumb {
     border-radius: var(--border_radius);
-    background: var(--main_background);
+    background: var(--blue_prime_background_trans);
 }
 
 chui_playlist_list::-webkit-scrollbar-thumb:hover {

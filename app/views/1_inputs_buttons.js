@@ -41,7 +41,11 @@ class Inputs_Buttons_Page extends Page {
         let combo = new ComboBox({title: 'ComboBox'})
         combo.addOptions("Option 1", "Option 2", "Option 3")
         let select = new Select({title: 'Select'})
-        select.addOptions("Option 1", "Option 2", "Option 3")
+        select.addOptions(
+            { title: "Title Option 1", value: "Value Option 1"},
+            { title: "Title Option 2", value: "Title Option 2" },
+            { title: "Title Option 3", value: "Title Option 3" }
+        )
         //select.setDefaultOption("Option 1")
         let date = new DateInput({title: "DateInput"})
         let file = new FileInput({ title: "FileInput", multiple: false })

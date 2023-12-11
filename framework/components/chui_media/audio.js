@@ -368,7 +368,9 @@ class AudioFX {
         //
         this.#select.setDropdownHeight("208px")
         AudioFX.PRESETS.forEach(preset => this.#select.addOptions(preset.name))
-        this.#select.addValueChangeListener((e) => this.#filters.forEach((filter) => this.#setPreset(filter, e.target.value, true)))
+        this.#select.addValueChangeListener((e) => this.#filters.forEach((filter) => {
+            this.#setPreset(filter, e.target.value, true)
+        }))
         //
         this.#chui_ap_equalizer_controls.appendChild(this.#select.set())
         this.#chui_ap_equalizer_controls.appendChild(this.#toggle_on_off.set())
@@ -408,36 +410,10 @@ class AudioFX {
         store.set(this.#fx_status, false)
         this.#setStatusBlock(false)
     }
-    set() {
-        return this.#chui_ap_equalizer_main
-    }
-    restore() {
-        setTimeout(() => {
-            let status = store.get(this.#fx_status)
-            let preset = store.get(this.#fx_preset)
-            if (status) {
-                this.#fx_ON(this.#audioContext)
-                this.#toggle_on_off.setValue(status)
-                this.#select.setDefaultOption(store.get(this.#fx_preset))
-                this.#setStatusBlock(status)
-            } else {
-                console.log(status)
-                this.#fx_OFF(this.#audioContext)
-                this.#toggle_on_off.setValue(status)
-
-                if (status === undefined || preset === undefined) {
-                    this.#select.setDefaultOption("Default")
-                } else {
-                    this.#select.setDefaultOption(store.get(this.#fx_preset))
-                }
-                this.#setStatusBlock(status)
-            }
-        }, 250)
-    }
     #setPreset(filter, name) {
         store.delete(this.#fx_preset)
         store.set(this.#fx_preset, name)
-        let filter_test = this.#getPreset(name)
+        let filter_test = this.#getPreset(name.id)
         AudioFX.#renderPreampSlider(undefined, filter_test, filter)
         let input = filter_test.inputs.filter(input => input.id === String(filter.frequency.value))[0]
         AudioFX.#renderSlider(input, filter, filter_test.preamp)
@@ -520,6 +496,31 @@ class AudioFX {
         sliderMain.appendChild(slider)
         sliderMain.appendChild(label)
         return sliderMain
+    }
+    restore() {
+        setTimeout(() => {
+            let status = store.get(this.#fx_status)
+            let preset = store.get(this.#fx_preset)
+            if (status) {
+                this.#fx_ON(this.#audioContext)
+                this.#toggle_on_off.setValue(status)
+                this.#select.setDefaultOption(store.get(this.#fx_preset))
+                this.#setStatusBlock(status)
+            } else {
+                console.log(status)
+                this.#fx_OFF(this.#audioContext)
+                this.#toggle_on_off.setValue(status)
+                if (status === undefined || preset === undefined) {
+                    this.#select.setDefaultOption("Default")
+                } else {
+                    this.#select.setDefaultOption(store.get(this.#fx_preset))
+                }
+                this.#setStatusBlock(status)
+            }
+        }, 250)
+    }
+    set() {
+        return this.#chui_ap_equalizer_main
     }
     static #renderPreampSlider(input, preset, filters = []) {
         let p_slider = document.getElementById("preamp");

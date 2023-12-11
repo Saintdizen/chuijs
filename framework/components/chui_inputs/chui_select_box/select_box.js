@@ -87,8 +87,9 @@ class Select {
             option.innerHTML = opt;
             option.setAttribute('option_value', opt);
             option.addEventListener('click', () => {
-                this.#input.value = option.getAttribute('option_value');
-                this.#input.setAttribute('value', option.getAttribute('option_value'));
+                //this.#input.value = option.getAttribute('option_value');
+                this.#input.setAttribute("value", option.getAttribute('option_value'));
+                //this.#input.placeholder = option.getAttribute('option_title');
             });
             this.#dropdown.appendChild(option);
         }
@@ -100,16 +101,12 @@ class Select {
         let opt = this.#dropdown.getElementsByTagName('selectbox_option');
         for (let i = 0; i < opt.length; i++) {
             let test = opt.item(i);
-            if (test.getAttribute('option_value') === value.toString()) {
-                test.click()
-            }
+            if (test.getAttribute('option_value') === value.toString()) test.click()
         }
     }
     addValueChangeListener(listener = () => {}) {
-        let observer = new MutationObserver((mutations) => {
-            mutations.forEach(listener);
-        });
-        observer.observe(this.#input, { 
+        let observer = new MutationObserver((mutations) => mutations.forEach(listener));
+        observer.observe(this.#input, {
             attributes: true,
             childList: false,
             subtree: false,
