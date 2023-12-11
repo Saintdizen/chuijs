@@ -337,10 +337,31 @@ class AudioFX {
     #filters = undefined;
     #fx_status = "chuijs.framework.settings.fx_status"
     #fx_preset = "chuijs.framework.settings.fx_preset"
-    #test = new AudioContext();
+    #audioContext = new AudioContext();
     constructor(audio) {
-        this.#media = this.#test.createMediaElementSource(audio);
-        this.#init(this.#test)
+        this.#media = this.#audioContext.createMediaElementSource(audio);
+
+        this.#filters = undefined;
+        this.#filters = this.#eqBands.map((band, i) => {
+            let filter = this.#audioContext.createBiquadFilter()
+            if (i === 0) {
+                filter.type = "lowshelf";
+            } else if (i === this.#eqBands.length - 1) {
+                filter.type = "highshelf";
+            } else {
+                filter.type = "peaking";
+            }
+            filter.gain.value = 0
+            //filter.Q.value = 1
+            filter.frequency.value = band
+            return filter
+        })
+        this.#filters.reduce((prev, curr) => {
+            prev.connect(curr)
+            return curr
+        })
+        this.#media.connect(this.#filters[0]);
+        this.#filters[this.#filters.length - 1].connect(this.#audioContext.destination);
         //
         this.#chui_ap_equalizer_preamp_block.appendChild(this.#setSliderPreamp(this.#filters))
         this.#filters.forEach((filter) => this.#chui_ap_equalizer_band_block.appendChild(this.#setSliderBand(filter)))
@@ -360,34 +381,32 @@ class AudioFX {
         //
         this.#toggle_on_off.addChangeListener((e) => {
             if (e.target.checked) {
-                this.#select.setDefaultOption(store.get(this.#fx_preset))
+                this.#fx_ON(this.#audioContext)
             } else {
-                this.#filters.forEach((filter) => this.#setPreset2(filter, 'Default', e.target.checked))
+                this.#fx_OFF(this.#audioContext)
             }
         })
     }
-    #init(audioContext) {
-        this.#filters = undefined;
-        this.#filters = this.#eqBands.map((band, i) => {
-            let filter = audioContext.createBiquadFilter()
-            if (i === 0) {
-                filter.type = "lowshelf";
-            } else if (i === this.#eqBands.length - 1) {
-                filter.type = "highshelf";
-            } else {
-                filter.type = "peaking";
-            }
-            filter.gain.value = 0
-            //filter.Q.value = 1
-            filter.frequency.value = band
-            return filter
-        })
-        this.#filters.reduce((prev, curr) => {
-            prev.connect(curr)
-            return curr
-        })
-        this.#media.connect(this.#filters[0]);
-        this.#filters[this.#filters.length - 1].connect(audioContext.destination);
+    #fx_ON(audioContext) {
+        try {
+            this.#media.disconnect(audioContext.destination);
+            this.#media.connect(this.#filters[0]);
+            this.#filters[this.#filters.length - 1].connect(audioContext.destination);
+        } catch (e) {
+            this.#media.connect(this.#filters[0]);
+            this.#filters[this.#filters.length - 1].connect(audioContext.destination);
+        }
+        store.delete(this.#fx_status)
+        store.set(this.#fx_status, true)
+        this.#setStatusBlock(true)
+    }
+    #fx_OFF(audioContext) {
+        this.#filters[this.#filters.length - 1].disconnect(audioContext.destination);
+        this.#media.disconnect(this.#filters[0]);
+        this.#media.connect(audioContext.destination);
+        store.delete(this.#fx_status)
+        store.set(this.#fx_status, false)
+        this.#setStatusBlock(false)
     }
     set() {
         return this.#chui_ap_equalizer_main
@@ -395,52 +414,60 @@ class AudioFX {
     restore() {
         setTimeout(() => {
             let status = store.get(this.#fx_status)
-            console.log(status)
+            let preset = store.get(this.#fx_preset)
             if (status) {
-                let name = store.get(this.#fx_preset);
-                this.#select.setDefaultOption(name)
+                this.#fx_ON(this.#audioContext)
                 this.#toggle_on_off.setValue(status)
+                this.#select.setDefaultOption(store.get(this.#fx_preset))
+                this.#setStatusBlock(status)
             } else {
-                //this.#select.setDefaultOption(store.get(this.#fx_preset))
+                console.log(status)
+                this.#fx_OFF(this.#audioContext)
                 this.#toggle_on_off.setValue(status)
-                this.#filters.forEach((filter) => this.#setPreset2(filter, "Default", status))
+
+                if (status === undefined || preset === undefined) {
+                    this.#select.setDefaultOption("Default")
+                } else {
+                    this.#select.setDefaultOption(store.get(this.#fx_preset))
+                }
+                this.#setStatusBlock(status)
             }
         }, 250)
     }
-    #setPreset2(filter, name, status) {
-        this.#setTest("preamp", status)
-        this.#select.setDisabled(!status)
-        //this.#select.setDefaultOption(name)
-        store.delete(this.#fx_status)
-        store.set(this.#fx_status, status)
-        let filter_test = this.#getPreset(name)
-        AudioFX.#renderPreampSlider(undefined, filter_test, filter)
-        let input = filter_test.inputs.filter(input => input.id === String(filter.frequency.value))[0]
-        this.#setTest(input.id, status)
-        AudioFX.#renderSlider(input, filter, filter_test.preamp)
-    }
-    #setPreset(filter, name, status) {
-        this.#setTest("preamp", status)
-        this.#select.setDisabled(!status)
-        store.delete(this.#fx_status)
-        store.set(this.#fx_status, status)
+    #setPreset(filter, name) {
         store.delete(this.#fx_preset)
         store.set(this.#fx_preset, name)
         let filter_test = this.#getPreset(name)
         AudioFX.#renderPreampSlider(undefined, filter_test, filter)
         let input = filter_test.inputs.filter(input => input.id === String(filter.frequency.value))[0]
-        this.#setTest(input.id, status)
         AudioFX.#renderSlider(input, filter, filter_test.preamp)
     }
-    #setTest(id, status) {
-        let band = document.getElementById(id);
-        band.disabled = !status;
+    #setStatusBlock(status) {
+        //
+        this.#select.setDisabled(!status)
+        //
+        for (let band of this.#eqBands) {
+            let sliderBand = document.getElementById(String(band));
+            sliderBand.disabled = !status;
+            if (status) {
+                sliderBand.style.cursor = "pointer"
+                this.#chui_ap_equalizer_preamp_block.classList.remove("chui_ap_equalizer_disabled")
+                this.#chui_ap_equalizer_band_block.classList.remove("chui_ap_equalizer_disabled")
+            } else {
+                sliderBand.style.cursor = "not-allowed"
+                this.#chui_ap_equalizer_preamp_block.classList.add("chui_ap_equalizer_disabled")
+                this.#chui_ap_equalizer_band_block.classList.add("chui_ap_equalizer_disabled")
+            }
+        }
+        //
+        let sliderPreamp = document.getElementById("preamp");
+        sliderPreamp.disabled = !status;
         if (status) {
-            band.style.cursor = "pointer"
+            sliderPreamp.style.cursor = "pointer"
             this.#chui_ap_equalizer_preamp_block.classList.remove("chui_ap_equalizer_disabled")
             this.#chui_ap_equalizer_band_block.classList.remove("chui_ap_equalizer_disabled")
         } else {
-            band.style.cursor = "not-allowed"
+            sliderPreamp.style.cursor = "not-allowed"
             this.#chui_ap_equalizer_preamp_block.classList.add("chui_ap_equalizer_disabled")
             this.#chui_ap_equalizer_band_block.classList.add("chui_ap_equalizer_disabled")
         }
