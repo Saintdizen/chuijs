@@ -413,7 +413,7 @@ class AudioFX {
     #setPreset(filter, name) {
         store.delete(this.#fx_preset)
         store.set(this.#fx_preset, name)
-        let filter_test = this.#getPreset(name.id)
+        let filter_test = this.#getPreset(name)
         AudioFX.#renderPreampSlider(undefined, filter_test, filter)
         let input = filter_test.inputs.filter(input => input.id === String(filter.frequency.value))[0]
         AudioFX.#renderSlider(input, filter, filter_test.preamp)
