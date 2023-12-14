@@ -84,12 +84,20 @@ class Select {
     addOptions(...options) {
         for (let opt of options) {
             let option = document.createElement(`selectbox_option`);
-            option.innerHTML = opt;
-            option.setAttribute('option_value', opt);
-            option.addEventListener('click', () => {
-                //this.#input.value = option.getAttribute('option_value');
-                this.#input.setAttribute("value", option.getAttribute('option_value'));
-                //this.#input.placeholder = option.getAttribute('option_title');
+            option.innerHTML = opt.title;
+            option.setAttribute('option_title', opt.title);
+            option.setAttribute('option_value', opt.value);
+            option.addEventListener('click', (e) => {
+                const eventAwesome = new CustomEvent("test_event", {
+                    detail: {
+                        title: option.getAttribute('option_title'),
+                        value: option.getAttribute('option_value')
+                    },
+                });
+                this.#Select_main.dispatchEvent(eventAwesome)
+                this.#input.setAttribute("value", option.getAttribute('option_title'));
+                this.#Select_main.setAttribute("option_title", option.getAttribute('option_title'));
+                this.#Select_main.setAttribute("option_value", option.getAttribute('option_value'));
             });
             this.#dropdown.appendChild(option);
         }
@@ -97,22 +105,25 @@ class Select {
     setDropdownHeight(height = String()) {
         this.#dropdown.style.height = height;
     }
-    setDefaultOption(value = Object()) {
+    setDefaultOption(object = Object()) {
         let opt = this.#dropdown.getElementsByTagName('selectbox_option');
         for (let i = 0; i < opt.length; i++) {
             let test = opt.item(i);
-            if (test.getAttribute('option_value') === value.toString()) test.click()
+            if (test.getAttribute('option_value') === object.toString()) test.click()
         }
     }
     addValueChangeListener(listener = () => {}) {
-        let observer = new MutationObserver((mutations) => mutations.forEach(listener));
+        this.#Select_main.addEventListener("test_event", listener)
+
+
+        /*let observer = new MutationObserver((mutations) => mutations.forEach(listener));
         observer.observe(this.#input, {
             attributes: true,
             childList: false,
             subtree: false,
             characterData: false,
             attributeFilter: ['value']
-        });
+        });*/
     }
     getName() { return this.#input.name; }
     getValue() { return this.#input.value; }

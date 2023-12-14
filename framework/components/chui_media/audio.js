@@ -332,7 +332,7 @@ class AudioFX {
     #chui_ap_equalizer_band_block = document.createElement("chui_ap_equalizer_band_block")
     #toggle_on_off = new Toggle();
     #eqBands = [60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000]
-    #select = new Select({})
+    #select = new Select({width: "41%"})
     #media = undefined;
     #filters = undefined;
     #fx_status = "chuijs.framework.settings.fx_status"
@@ -366,10 +366,11 @@ class AudioFX {
         this.#chui_ap_equalizer_preamp_block.appendChild(this.#setSliderPreamp(this.#filters))
         this.#filters.forEach((filter) => this.#chui_ap_equalizer_band_block.appendChild(this.#setSliderBand(filter)))
         //
-        this.#select.setDropdownHeight("208px")
-        AudioFX.PRESETS.forEach(preset => this.#select.addOptions(preset.name))
+        this.#select.setDropdownHeight("230px")
+        AudioFX.PRESETS.forEach(preset => this.#select.addOptions({title: preset.title, value: preset.name}))
+        //
         this.#select.addValueChangeListener((e) => this.#filters.forEach((filter) => {
-            this.#setPreset(filter, e.target.value, true)
+            this.#setPreset(filter, e.detail.value, true)
         }))
         //
         this.#chui_ap_equalizer_controls.appendChild(this.#select.set())
