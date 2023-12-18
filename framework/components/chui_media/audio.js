@@ -62,9 +62,9 @@ class Audio {
         this.#chui_ap_time2 = new Label({text: `0:00`})
         this.#chui_ap_seek.type = "range"
         this.#chui_ap_seek.id = "chui_ap_seek"
-        this.#chui_ap_seek.max = "0"
-        this.#chui_ap_seek.value = "0"
-        this.#chui_ap_seek.step = "0.01"
+        this.#chui_ap_seek.max = "0.0"
+        this.#chui_ap_seek.value = "0.0"
+        this.#chui_ap_seek.step = "any"
         // КНОПКИ
         this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, this.#icons_sizes.play_pause).getHTML()
         this.#chui_ap_next.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_NEXT, this.#icons_sizes.next_prev).getHTML()
@@ -110,24 +110,19 @@ class Audio {
         this.#chui_ap_prev.addEventListener("click", async () => this.#playAudioPrev())
         navigator.mediaSession.setActionHandler('nexttrack', async () => this.#playAudioNext());
         navigator.mediaSession.setActionHandler('previoustrack', async () => this.#playAudioPrev());
-        this.#chui_at.addEventListener("timeupdate", async (e) => {
+        this.#chui_at.addEventListener("timeupdate", async (ev) => {
+            console.log(`${this.#chui_at.currentTime} - ${this.#chui_at.duration}`)
             this.#displayBufferedAmount()
-            this.#renderProgress(e.target.currentTime)
-            if (e.target.currentTime === e.target.duration) await this.#playAudioNext()
-        });
-        this.#chui_ap_seek.addEventListener('input', () => {
-            this.#chui_ap_seek.textContent = this.#calculateTime(this.#chui_ap_seek.value);
-            this.#renderProgress(this.#chui_ap_seek.value)
+            this.#renderProgress(this.#chui_at.currentTime)
+            if (this.#chui_at.currentTime === this.#chui_at.duration) await this.#playAudioNext()
         });
         this.#chui_ap_seek.addEventListener('change', () => {
             this.#chui_at.currentTime = Number(this.#chui_ap_seek.value);
-            this.#renderProgress(this.#chui_ap_seek.value)
         });
-        this.#chui_ap_volume.addEventListener('input', (e) => {
-            const value = e.target.value;
-            this.#chui_at.volume = value / 100;
+        this.#chui_ap_volume.addEventListener('input', () => {
+            this.#chui_at.volume = this.#chui_ap_volume.value / 100;
             this.#renderVolume()
-            if (Number(e.target.value) === 0) {
+            if (Number(this.#chui_ap_volume.value) === 0) {
                 this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_MUTE, this.#icons_sizes.volume).getHTML()
             } else {
                 this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#icons_sizes.volume).getHTML()
@@ -230,7 +225,7 @@ class Audio {
     }
     #displayBufferedAmount = () => {
         try {
-            const end = (this.#chui_at.buffered.end(0) / this.#chui_ap_seek.max * 100).toFixed(3)
+            const end = this.#chui_at.buffered.end(0) / this.#chui_ap_seek.max * 100
             if (end > 100) {
                 this.#chui_ap_seek_buf.style.width = `100%`;
             } else {
@@ -239,22 +234,19 @@ class Audio {
         } catch (e) {}
     }
     #renderVolume = () => {
-        let test = Math.floor(this.#chui_ap_volume.value / this.#chui_ap_volume.max * 100)
+        let test = this.#chui_ap_volume.value / this.#chui_ap_volume.max * 100
         this.#chui_ap_main.style.setProperty('--volume-before-width', `${test}%`);
     }
     #renderProgress = (value) => {
         try {
             if (value > 0 && this.#chui_at.duration > 0) {
-                let val = value.toFixed(2)
-                let duration = this.#chui_at.duration.toFixed(2)
-                this.#chui_ap_time1.setText(this.#calculateTime(val));
-                this.#chui_ap_time2.setText(this.#calculateTime(duration));
-                this.#chui_ap_seek.value = String(val);
-                const test = (this.#chui_ap_seek.value / this.#chui_ap_seek.max * 100).toFixed(2)
-
-                this.#chui_ap_main.style.setProperty('--seek-before-width', `${test}%`);
+                this.#chui_ap_time1.setText(this.#calculateTime(value));
+                this.#chui_ap_time2.setText(this.#calculateTime(this.#chui_at.duration));
+                this.#chui_ap_seek.value = value;
+                const width = this.#chui_ap_seek.value / this.#chui_ap_seek.max * 100
+                this.#chui_ap_main.style.setProperty('--seek-before-width', `${width}%`);
             } else {
-                this.#chui_ap_seek.value = String(value);
+                this.#chui_ap_seek.value = value;
                 this.#chui_ap_main.style.setProperty('--seek-before-width', `0%`);
             }
         } catch (e) {
@@ -269,8 +261,7 @@ class Audio {
         return `${minutes}:${returnedSeconds}`;
     }
     #setSliderMax = () => {
-        let dur = this.#chui_at.duration.toFixed(2);
-        this.#chui_ap_seek.max = String(dur);
+        this.#chui_ap_seek.max = String(this.#chui_at.duration);
     }
     //
     setPlayList(list = [{ title: String(), artist: String(), album: String(), mimetype: String(), path: String(), artwork: [] }]) {
@@ -367,7 +358,7 @@ class AudioFX {
                 filter.type = "peaking";
             }
             filter.gain.value = 0
-            //filter.Q.value = 1
+            filter.Q.value = 1
             filter.frequency.value = band
             return filter
         })
@@ -384,9 +375,7 @@ class AudioFX {
         this.#select.setDropdownHeight("230px")
         AudioFX.PRESETS.forEach(preset => this.#select.addOptions({title: preset.title, value: preset.name}))
         //
-        this.#select.addValueChangeListener((e) => this.#filters.forEach((filter) => {
-            this.#setPreset(filter, e.detail.value, true)
-        }))
+        this.#select.addValueChangeListener((e) => this.#filters.forEach((filter) => this.#setPreset(filter, e.detail.value, true)))
         //
         this.#chui_ap_equalizer_controls.appendChild(this.#select.set())
         this.#chui_ap_equalizer_controls.appendChild(this.#toggle_on_off.set())
@@ -523,7 +512,6 @@ class AudioFX {
                 this.#select.setDefaultOption(store.get(this.#fx_preset))
                 this.#setStatusBlock(status)
             } else {
-                console.log(status)
                 this.#fx_OFF(this.#audioContext)
                 this.#toggle_on_off.setValue(status)
                 if (status === undefined || preset === undefined) {

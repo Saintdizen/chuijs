@@ -88,7 +88,7 @@ class Select {
             option.setAttribute('option_title', opt.title);
             option.setAttribute('option_value', opt.value);
             option.addEventListener('click', (e) => {
-                const eventAwesome = new CustomEvent("test_event", {
+                const eventAwesome = new CustomEvent("chui_select_option_changed", {
                     detail: {
                         title: option.getAttribute('option_title'),
                         value: option.getAttribute('option_value')
@@ -113,17 +113,7 @@ class Select {
         }
     }
     addValueChangeListener(listener = () => {}) {
-        this.#Select_main.addEventListener("test_event", listener)
-
-
-        /*let observer = new MutationObserver((mutations) => mutations.forEach(listener));
-        observer.observe(this.#input, {
-            attributes: true,
-            childList: false,
-            subtree: false,
-            characterData: false,
-            attributeFilter: ['value']
-        });*/
+        this.#Select_main.addEventListener("chui_select_option_changed", listener)
     }
     getName() { return this.#input.name; }
     getValue() { return this.#input.value; }
