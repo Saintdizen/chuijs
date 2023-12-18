@@ -45,36 +45,8 @@ class Test extends AppLayout {
         this.setRoute(new MediaPage())
 
         this.addToHeader([
-            AppLayout.USER_PROFILE({
-                username: "Чувахин Иван",
-                image: {
-                    noImage: true
-                },
-                items: [
-                    AppLayout.USER_PROFILE_ITEM({
-                        title: "Профиль",
-                        clickEvent: () => {
-                            new Notification({
-                                title: "Профиль", text: "Профиль", showTime: 1000
-                            }).show()
-                        }
-                    }),
-                    AppLayout.USER_PROFILE_ITEM({
-                        title: "Выход",
-                        clickEvent: () => {
-                            new Notification({
-                                title: "Выход", text: "Выход", showTime: 1000
-                            }).show()
-                        }
-                    })
-                ]
-            }),
-            /*AppLayout.BUTTON({
-                title: "CHUIJS_SEND_TO_MAIN",
-                clickEvent: async () => {}
-            }),*/
             AppLayout.DIALOG({
-                title: "Настройки",
+                //title: "Настройки",
                 icon: Icons.ACTIONS.SETTINGS,
                 reverse: false,
                 dialogOptions: {
@@ -102,6 +74,30 @@ class Test extends AppLayout {
                     ]
                 }
             }),
+            AppLayout.USER_PROFILE({
+                username: "Чувахин Иван",
+                image: {
+                    noImage: true
+                },
+                items: [
+                    AppLayout.USER_PROFILE_ITEM({
+                        title: "Профиль",
+                        clickEvent: () => {
+                            new Notification({
+                                title: "Профиль", text: "Профиль", showTime: 1000
+                            }).show()
+                        }
+                    }),
+                    AppLayout.USER_PROFILE_ITEM({
+                        title: "Выход",
+                        clickEvent: () => {
+                            new Notification({
+                                title: "Выход", text: "Выход", showTime: 1000
+                            }).show()
+                        }
+                    })
+                ]
+            })
         ])
     }
 }

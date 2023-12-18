@@ -273,11 +273,21 @@ chui_track {
     color: var(--text_color);
     border-radius: var(--border_radius);
     height: max-content;
+    align-items: center;
+    justify-content: space-between;
 }
 
 chui_track:hover {
     background: var(--blue_prime_background);
     color: var(--text_color_hover);
+}
+
+chui_track_name {
+    margin-left: 2px;
+}
+
+chui_track_duration {
+    margin-right: 2px;
 }
 
 chui_playlist_open_folder {

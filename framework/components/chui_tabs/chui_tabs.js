@@ -36,14 +36,11 @@ class Tabs {
             item.getTab().addEventListener('click', (event) => {
                 if (event.target.getAttribute("active") === null) {
                     document.getElementById(this.#id_list).childNodes.forEach(child => {
-                        //child.childNodes.item(0).removeAttribute('style');
                         child.removeAttribute("active");
-                        child.removeAttribute("style");
-                        this.#content.removeAttribute('style')
+                        child.classList.remove("tab_active")
                     })
-                    //event.target.childNodes.item(1).style.background = 'var(--blue_prime_background)';
                     event.target.setAttribute("active", true);
-                    event.target.style.background = 'var(--blue_prime_background)';
+                    event.target.classList.add("tab_active")
                     let contentz = document.getElementById(this.#id_contents);
                     contentz.innerHTML = '';
                     for (let con of item.getContent()) this.#content.appendChild(con.set());
@@ -69,7 +66,7 @@ class Tabs {
             this.#content.addEventListener('animationend', () => this.#content.removeAttribute('style'));
         }
         this.#tabzz[num].getTab().setAttribute("active", true);
-        this.#tabzz[num].getTab().style.background = 'var(--blue_prime_background)';
+        this.#tabzz[num].getTab().classList.add("tab_active")
     }
     set() {
         return this.#tabs;

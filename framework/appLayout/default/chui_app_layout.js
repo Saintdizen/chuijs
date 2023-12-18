@@ -567,6 +567,7 @@ class HeaderDialog {
             this.#header_button_title.innerText = options.title;
             this.#header_button.appendChild(this.#header_button_title)
         } else if (options.title === undefined && options.icon !== undefined) {
+            this.#header_button.style.padding = "8px"
             this.#header_button_icon.innerHTML = new Icon(options.icon, "var(--header_icon_size)").getHTML();
             this.#header_button.appendChild(this.#header_button_icon)
         }

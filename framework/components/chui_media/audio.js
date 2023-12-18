@@ -7,6 +7,7 @@ const {Dialog} = require("../chui_modal/modal");
 const Store = require('electron-store');
 const {shell} = require("electron");
 const {Toggle} = require("../chui_inputs/chui_toggle/toggle");
+const {getAudioDurationInSeconds} = require("get-audio-duration");
 const store = new Store();
 
 let play_list = []
@@ -279,14 +280,30 @@ class Audio {
     }
     #setTrack(track = {}, index = Number()) {
         let chui_track = document.createElement("chui_track");
+        let chui_track_name = document.createElement("chui_track_name");
+        let chui_track_duration = document.createElement("chui_track_duration");
+        //
         chui_track.id = `${index}`
-        chui_track.innerText = `${track.artist} - ${track.title}`
+        chui_track_name.innerText = `${track.artist} - ${track.title}`
+        //
+        getAudioDurationInSeconds(track.path).then(dur => {
+            chui_track_duration.innerText = this.calculateTime(dur);
+            chui_track.appendChild(chui_track_duration);
+        })
         chui_track.addEventListener("dblclick",  async (ev) => {
             this.setActive(ev.target.id)
             await this.#start(track)
             this.#current_audio = index;
         })
+        //
+        chui_track.appendChild(chui_track_name)
         return chui_track;
+    }
+    calculateTime = (secs) => {
+        const minutes = Math.floor(secs / 60);
+        const seconds = Math.floor(secs % 60);
+        const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+        return `${minutes}:${returnedSeconds}`;
     }
     setActive(index = Number()) {
         document.getElementById(this.#chui_playlist.getId()).childNodes.forEach(child => {

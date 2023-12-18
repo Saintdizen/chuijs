@@ -4,13 +4,13 @@ list {
     align-items: center;
     width: max-content;
     border-radius: var(--border_radius);
-    background: var(--header_background);
+    background: transparent;
     margin: var(--margin) 0;
-    padding: var(--test_padding);
+    border: 1px solid var(--element_background_2);
 }
 
 tab {
-    margin: 0 3px;
+    margin: 1px;
     padding: var(--main_padding);
     font-size: var(--font_default_size);
     display: flex;
@@ -37,7 +37,13 @@ content {
     display: flex;
     flex-direction:column;
     width: -webkit-fill-available;
-    background: var(--header_background);
     padding: var(--test_padding);
     border-radius: var(--border_radius);
+    background: transparent;
+    border: 1px solid var(--element_background_2);
+}
+
+.tab_active {
+    background: var(--blue_prime_background);
+    color: var(--text_color_hover);
 }
