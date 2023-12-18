@@ -357,8 +357,6 @@ class AudioFX {
     #audioContext = new AudioContext();
     constructor(audio) {
         this.#media = this.#audioContext.createMediaElementSource(audio);
-
-        this.#filters = undefined;
         this.#filters = this.#eqBands.map((band, i) => {
             let filter = this.#audioContext.createBiquadFilter()
             if (i === 0) {
