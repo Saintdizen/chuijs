@@ -62,8 +62,8 @@ class Audio {
         this.#chui_ap_time2 = new Label({text: `0:00`})
         this.#chui_ap_seek.type = "range"
         this.#chui_ap_seek.id = "chui_ap_seek"
-        this.#chui_ap_seek.max = "0.0"
-        this.#chui_ap_seek.value = "0.0"
+        this.#chui_ap_seek.max = "0"
+        this.#chui_ap_seek.value = "0"
         this.#chui_ap_seek.step = "any"
         // КНОПКИ
         this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, this.#icons_sizes.play_pause).getHTML()
@@ -110,14 +110,13 @@ class Audio {
         this.#chui_ap_prev.addEventListener("click", async () => this.#playAudioPrev())
         navigator.mediaSession.setActionHandler('nexttrack', async () => this.#playAudioNext());
         navigator.mediaSession.setActionHandler('previoustrack', async () => this.#playAudioPrev());
-        this.#chui_at.addEventListener("timeupdate", async (ev) => {
-            console.log(`${this.#chui_at.currentTime} - ${this.#chui_at.duration}`)
+        this.#chui_at.addEventListener("timeupdate", async () => {
             this.#displayBufferedAmount()
             this.#renderProgress(this.#chui_at.currentTime)
             if (this.#chui_at.currentTime === this.#chui_at.duration) await this.#playAudioNext()
         });
-        this.#chui_ap_seek.addEventListener('change', () => {
-            this.#chui_at.currentTime = Number(this.#chui_ap_seek.value);
+        this.#chui_ap_seek.addEventListener('input', () => {
+            this.#chui_at.currentTime = Number(Number(this.#chui_ap_seek.value).toFixed(6));
         });
         this.#chui_ap_volume.addEventListener('input', () => {
             this.#chui_at.volume = this.#chui_ap_volume.value / 100;
@@ -282,11 +281,15 @@ class Audio {
             chui_track.appendChild(chui_track_duration);
         })
         chui_track.addEventListener("dblclick",  async (ev) => {
-            this.setActive(ev.target.id)
+            let target_row = ev.target
+            if (target_row.tagName === "CHUI_TRACK_NAME" || target_row.tagName === "CHUI_TRACK_DURATION") {
+                this.setActive(ev.target.parentNode.id)
+            } else {
+                this.setActive(ev.target.id)
+            }
             await this.#start(track)
             this.#current_audio = index;
         })
-        //
         chui_track.appendChild(chui_track_name)
         return chui_track;
     }
