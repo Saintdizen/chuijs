@@ -27,7 +27,7 @@ class Test extends AppLayout {
 
         // Настройка роутов
         this.setAutoCloseRouteMenu(true);
-        //this.disableAppMenu()
+        this.disableAppMenu()
         this.setRoute(new MainPage());
         this.setRoute(new MainPageRoute());
         this.setRoute(new Inputs_Buttons_Page());
@@ -52,13 +52,11 @@ class Test extends AppLayout {
                         AppLayout.BUTTON({
                             //title: "Музыка",
                             icon: Icons.AUDIO_VIDEO.LIBRARY_MUSIC,
-                            reverse: true,
                             clickEvent: () => new Route().go(new MediaPage())
                         }),
                         AppLayout.BUTTON({
                             //title: "Музыка",
                             icon: Icons.FILE.DOWNLOAD_FOR_OFFLINE,
-                            reverse: true,
                             clickEvent: () => new Route().go(new SpinnerPage())
                         })
                     ]

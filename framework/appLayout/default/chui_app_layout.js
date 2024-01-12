@@ -438,8 +438,7 @@ class HeaderTabs {
         for (let item of this.#header_tabs_list) {
             this.#header_tabs.appendChild(item);
             item.addEventListener('click', (event) => {
-                let tar = event.target
-                if (tar.tagName === "HEADER_BUTTON_ICON" || tar.tagName === "HEADER_BUTTON_TITLE") {
+                if (event.target.tagName === "HEADER_BUTTON_ICON" || event.target.tagName === "HEADER_BUTTON_TITLE") {
                     console.log(event.target.parentNode)
                     this.#setActive(event.target.parentNode)
                 } else {
@@ -450,7 +449,10 @@ class HeaderTabs {
         if (options.width !== undefined) this.#header_tabs.style.width = options.width;
         for (let item of this.#header_tabs_list) {
             if (this.#header_tabs_list.indexOf(item) === options.default) {
-                setTimeout(() => item.click(), 250)
+                setTimeout(() => {
+                    item.click()
+                    this.#setActive(item)
+                }, 250)
             }
         }
     }
