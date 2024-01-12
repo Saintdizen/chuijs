@@ -559,3 +559,8 @@ header_tabs {
 .header_tab_not_clickable {
     pointer-events: none;
 }
+
+.header_tab_active {
+    background: var(--blue_prime_background);
+    color: var(--text_color_hover);
+}

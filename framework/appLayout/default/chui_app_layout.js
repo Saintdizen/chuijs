@@ -451,7 +451,7 @@ class HeaderTabs {
             if (this.#header_tabs_list.indexOf(item) === options.default) {
                 setTimeout(() => {
                     item.click()
-                    this.#setActive(item)
+                    //this.#setActive(item)
                 }, 250)
             }
         }
@@ -463,10 +463,10 @@ class HeaderTabs {
         if (target.getAttribute("active") === null) {
             document.getElementById(this.#id_list).childNodes.forEach(child => {
                 child.removeAttribute("active");
-                child.classList.remove("tab_active", "header_tab_not_clickable")
+                child.classList.remove("header_tab_active", "header_tab_not_clickable")
             })
             target.setAttribute("active", true);
-            target.classList.add("tab_active", "header_tab_not_clickable")
+            target.classList.add("header_tab_active", "header_tab_not_clickable")
         }
     }
 }
