@@ -1,6 +1,6 @@
 /** RENDERER PROCESS */
 /** IMPORTS */
-const {AppLayout, render, Icons, Notification, Styles, Button, ipcRenderer} = require('../index');
+const {AppLayout, render, Icons, Notification, Styles, Button, ipcRenderer, Route} = require('../index');
 
 const {MainPage} = require('./views/_main');
 const {Inputs_Buttons_Page} = require('./views/1_inputs_buttons');
@@ -44,7 +44,29 @@ class Test extends AppLayout {
         this.setRoute(new SpinnerPage());
         this.setRoute(new MediaPage())
 
-        this.addToHeader([
+
+        this.addToHeaderLeftBeforeTitle([
+            AppLayout.TABS({
+                    default: 0,
+                    tabs: [
+                        AppLayout.BUTTON({
+                            //title: "Музыка",
+                            icon: Icons.AUDIO_VIDEO.LIBRARY_MUSIC,
+                            reverse: true,
+                            clickEvent: () => new Route().go(new MediaPage())
+                        }),
+                        AppLayout.BUTTON({
+                            //title: "Музыка",
+                            icon: Icons.FILE.DOWNLOAD_FOR_OFFLINE,
+                            reverse: true,
+                            clickEvent: () => new Route().go(new SpinnerPage())
+                        })
+                    ]
+                }
+            )
+        ])
+
+        this.addToHeaderRight([
             AppLayout.DIALOG({
                 //title: "Настройки",
                 icon: Icons.ACTIONS.SETTINGS,

@@ -548,3 +548,14 @@ wc_maximize:hover, wc_minimize:hover {
 wc_close:hover chui_icon, wc_maximize:hover chui_icon, wc_minimize:hover chui_icon {
     color: white;
 }
+
+header_tabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.header_tab_not_clickable {
+    pointer-events: none;
+}

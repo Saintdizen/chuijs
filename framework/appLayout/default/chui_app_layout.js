@@ -94,6 +94,9 @@ class Header {
     addWC(boolean = Boolean()) {
         this.#header_main.insertBefore(this.#wc_box.set(boolean), this.#header_main.firstChild);
     }
+    addToLeftBeforeTittle(...components) {
+        for (let component of components) this.#header_left_box.insertBefore(component, this.#header_left_box.firstChild);
+    }
     addToLeft(...components) {
         for (let component of components) {
             this.#header_left_box.appendChild(component)
@@ -371,13 +374,24 @@ class AppLayout {
     setRoute(page) {
         this.#appMenu.setRouteTest(page);
     }
-    addToHeader(headerRight = []) {
+    addToHeaderRight(headerRight = []) {
         this.#header.addToRight(...headerRight);
+    }
+    addToHeaderLeft(headerLeft = []) {
+        this.#header.addToLeft(...headerLeft);
+    }
+    addToHeaderLeftBeforeTitle(headerLeft = []) {
+        this.#header.addToLeftBeforeTittle(...headerLeft);
     }
     disableAppMenu() {
         document.getElementById("appMenuButton").remove()
         document.getElementById("page_name").style.marginLeft = "8px"
     }
+    static TABS(options = {
+        width: String(),
+        default: Number(),
+        tabs: []
+    }) { return new HeaderTabs(options).set(); }
     static BUTTON(options = {
         title: String(),
         icon: undefined,
@@ -412,6 +426,47 @@ class AppLayout {
             components: []
         }
     }) { return new HeaderDialog(options).set(); }
+}
+
+class HeaderTabs {
+    #id_list = require("randomstring").generate();
+    #header_tabs_list = undefined;
+    #header_tabs = document.createElement('header_tabs');
+    constructor(options = { width: String(), default: Number(), tabs: [] }) {
+        this.#header_tabs_list = options.tabs;
+        this.#header_tabs.id = this.#id_list;
+        for (let item of this.#header_tabs_list) {
+            this.#header_tabs.appendChild(item);
+            item.addEventListener('click', (event) => {
+                let tar = event.target
+                if (tar.tagName === "HEADER_BUTTON_ICON" || tar.tagName === "HEADER_BUTTON_TITLE") {
+                    console.log(event.target.parentNode)
+                    this.#setActive(event.target.parentNode)
+                } else {
+                    this.#setActive(event.target)
+                }
+            })
+        }
+        if (options.width !== undefined) this.#header_tabs.style.width = options.width;
+        for (let item of this.#header_tabs_list) {
+            if (this.#header_tabs_list.indexOf(item) === options.default) {
+                setTimeout(() => item.click(), 250)
+            }
+        }
+    }
+    set() {
+        return this.#header_tabs;
+    }
+    #setActive(target) {
+        if (target.getAttribute("active") === null) {
+            document.getElementById(this.#id_list).childNodes.forEach(child => {
+                child.removeAttribute("active");
+                child.classList.remove("tab_active", "header_tab_not_clickable")
+            })
+            target.setAttribute("active", true);
+            target.classList.add("tab_active", "header_tab_not_clickable")
+        }
+    }
 }
 
 class UserProfile {
