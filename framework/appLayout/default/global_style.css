@@ -556,11 +556,12 @@ header_tabs {
     flex-direction: row;
 }
 
-.header_tab_not_clickable {
+.header_tab_active {
     pointer-events: none;
+    background: var(--blue_prime_background);
+    color: var(--text_color_hover);
 }
 
-.header_tab_active {
-    background: var(--blue_prime_background);
+.header_tab_active header_button_icon chui_icon {
     color: var(--text_color_hover);
 }

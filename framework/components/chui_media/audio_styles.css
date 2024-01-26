@@ -279,6 +279,13 @@ chui_track {
 
 chui_track:hover {
     background: var(--blue_prime_background);
+}
+
+chui_track:hover chui_track_duration {
+    color: var(--text_color_hover);
+}
+
+chui_track:hover chui_track_name {
     color: var(--text_color_hover);
 }
 
@@ -302,6 +309,10 @@ chui_playlist_open_folder {
 
 chui_playlist_open_folder:hover {
     background: var(--blue_prime_background);
+}
+
+chui_playlist_open_folder:hover chui_icon {
+    color: var(--text_color_hover);
 }
 
 chui_ap_equalizer_main {
@@ -441,4 +452,8 @@ chui_ap_fx_icon, chui_ap_volume_icon, chui_ap_next, chui_ap_play_pause, chui_ap_
 
 chui_ap_fx_icon:hover, chui_ap_volume_icon:hover, chui_ap_next:hover, chui_ap_play_pause:hover, chui_ap_prev:hover {
     background: var(--blue_prime_background);
+}
+
+chui_ap_fx_icon:hover chui_icon, chui_ap_volume_icon:hover chui_icon, chui_ap_next:hover chui_icon, chui_ap_play_pause:hover chui_icon, chui_ap_prev:hover chui_icon {
+    color: var(--text_color_hover);
 }
