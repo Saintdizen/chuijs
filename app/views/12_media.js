@@ -2,7 +2,6 @@ const {Page, Audio, Styles, App, fs, path} = require('../../index');
 
 class MediaPage extends Page {
     #download_path = undefined;
-    #playlist = []
 
     constructor() {
         super();
@@ -17,15 +16,16 @@ class MediaPage extends Page {
             //pin: Audio.PIN.TOP
         })
         this.#download_path = path.join(App.userDataPath(), "downloads");
-        this.generatePlaylist();
-        setTimeout(() => audio.setPlayList(this.#playlist), 100)
+        let pl = this.generatePlaylist()
+        setTimeout(() => audio.setPlayList(pl), 100)
 
         audio.openFolder(path.join(App.userDataPath(), "downloads"))
 
         this.addRouteEvent(this, (e) => {
+            console.log(e)
             audio.restoreFX();
-            this.generatePlaylist();
-            setTimeout(() => audio.setPlayList(this.#playlist), 100)
+            let pl = this.generatePlaylist()
+            setTimeout(() => audio.setPlayList(pl), 100)
         })
 
         this.add(audio)
@@ -57,25 +57,26 @@ class MediaPage extends Page {
         this.add(video)*/
     }
     generatePlaylist() {
-        this.#playlist = []
+        let playlist = []
         fs.readdir(this.#download_path, (err, files) => {
             files.forEach(file => {
                 try {
                     let artist = file.split(" - ")[0]
                     let title = file.split(" - ")[1].replace(".mp3", "")
-                    this.#playlist.push({
+                    playlist.push({
                         title: title, artist: artist, album: "", mimetype: Audio.MIMETYPES.MP3,
                         path: String(path.join(this.#download_path, file))
                     })
                 } catch (e) {
                     let title = file.replace(".mp3", "")
-                    this.#playlist.push({
+                    playlist.push({
                         title: title, artist: title, album: title, mimetype: Audio.MIMETYPES.MP3,
                         path: String(path.join(this.#download_path, file))
                     })
                 }
             });
         });
+        return playlist
     }
 }
 

@@ -11,7 +11,27 @@ const {ipcRenderer} = require("electron");
 const chui_functions = require('../../modules/chui_functions');
 const {DownloadNotification} = require("../../components/chui_notification/notification_download");
 
-class Route {
+
+class Events {
+    #route_event = undefined;
+    constructor() {}
+    route(page) {
+        this.#route_event = new CustomEvent("route_event_"+page.constructor.name, {
+            bubbles: true,
+            detail: {
+                class: page.constructor.name,
+                title: page.getTitle(),
+                page: page
+            },
+        });
+        document.dispatchEvent(this.#route_event)
+    }
+}
+
+class Route extends Events {
+    constructor() {
+        super();
+    }
     go(page) {
         let header_toolbar = document.getElementById("header_toolbar");
         let page_name = document.getElementById("page_name");
@@ -33,6 +53,8 @@ class Route {
         } else {
             center.classList.remove("header_padding", "test_scroll_track");
         }
+
+        this.route(page)
     }
 }
 
@@ -120,7 +142,7 @@ class Center {
     }
 }
 
-class AppMenu extends Route {
+class AppMenu {
     #routeList = [];
     #appMenu = document.createElement('app_menu');
     #appMenuWidth = 400;
@@ -133,7 +155,6 @@ class AppMenu extends Route {
     // ===
     #auto_close = false;
     constructor(header, center) {
-        super();
         this.#appMenu.style.top = `calc(${header.set().style.height})`;
         this.#appMenu.style.width = `${this.#appMenuWidth}px`;
         this.#appMenu.style.left = `calc(-${this.#appMenuWidthTest}px)`;
@@ -194,6 +215,28 @@ class AppMenu extends Route {
         })
         this.#app_menu_search_main.appendChild(this.#app_menu_search_input)
         this.#appMenu.insertBefore(this.#app_menu_search_main, this.#routeViews)
+    }
+    go(page) {
+        let header_toolbar = document.getElementById("header_toolbar");
+        let page_name = document.getElementById("page_name");
+        let center = document.getElementById("center");
+        //
+        header_toolbar.innerHTML = ''
+        page_name.innerHTML = page.getTitle();
+        center.innerHTML = '';
+        center.appendChild(page.render());
+        const _page = document.getElementsByTagName('page')[0];
+        new Animation(_page).fadeIn();
+        _page.addEventListener('animationend', () => {
+            center.removeAttribute('style');
+        });
+        if (page.getMenuBar() !== undefined) {
+            new Animation(page.getMenuBar()).fadeIn();
+            header_toolbar.appendChild(page.getMenuBar());
+            center.classList.add("header_padding", "test_scroll_track");
+        } else {
+            center.classList.remove("header_padding", "test_scroll_track");
+        }
     }
     setRouteTest(page) {
         this.#routeList.push(page);
@@ -439,7 +482,6 @@ class HeaderTabs {
             this.#header_tabs.appendChild(item);
             item.addEventListener('click', (event) => {
                 if (event.target.tagName === "HEADER_BUTTON_ICON" || event.target.tagName === "HEADER_BUTTON_TITLE") {
-                    console.log(event.target.parentNode)
                     this.#setActive(event.target.parentNode)
                 } else {
                     this.#setActive(event.target)

@@ -25,7 +25,9 @@ class Page {
         return this.#menu_bar;
     }
     addRouteEvent(self, event = () => {}) {
-        document.addEventListener("route_event_"+self.constructor.name, event)
+        let event_name = "route_event_"+self.constructor.name
+        document.addEventListener(event_name, event)
+        setTimeout(() => document.removeEventListener(event_name, event), 100)
     }
     add(...components) {
         for (let component of components) {
