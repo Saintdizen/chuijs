@@ -243,6 +243,8 @@ class AppMenu {
         let test = this.#routeList.filter(route => route.getTitle().includes(page.getTitle()));
         if (test.length === 1) {
             let button_route = document.createElement('route');
+            let icon_menu = document.createElement('route_icon');
+            icon_menu.innerHTML = page.getIcon();
             let title_menu = document.createElement('route_title');
             title_menu.innerHTML = page.getTitle();
             if (page.getMain()) {
@@ -273,6 +275,9 @@ class AppMenu {
                     }
                 }
             });
+            if (page.getIcon() !== undefined) {
+                button_route.appendChild(icon_menu)
+            }
             button_route.appendChild(title_menu)
             this.#routeViews.appendChild(button_route)
         } else {

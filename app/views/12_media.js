@@ -1,4 +1,4 @@
-const {Page, Audio, Styles, App, fs, path} = require('../../index');
+const {Page, Audio, Styles, App, fs, path, Icons} = require('../../index');
 
 class MediaPage extends Page {
     #download_path = undefined;
@@ -8,6 +8,7 @@ class MediaPage extends Page {
         this.setTitle('OfflinePlayer');
         this.setFullHeight();
         this.setMain(false);
+        this.setIcon(Icons.FILE.DOWNLOAD_FOR_OFFLINE)
         let audio = new Audio({
             autoplay: false,
             playlist: true,

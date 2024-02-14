@@ -1,11 +1,13 @@
 let {Animation} = require('../chui_animations/animations');
 const {Route} = require("../../appLayout/default/chui_app_layout");
 const {Button} = require("../../components/chui_button/button");
+const {Icon} = require("../../components/chui_icons/icons");
 
 
 class Page {
     #page = document.createElement('page');
     #title = undefined;
+    #icon = undefined;
     #main = false;
     #menu_bar = undefined;
     constructor() {
@@ -49,11 +51,17 @@ class Page {
     disablePadding() {
         this.#page.style.padding = '0px';
     }
+    setIcon(icon) {
+        this.#icon = new Icon(icon, "13pt").getHTML();
+    }
     setTitle(title) {
         this.#title = title;
     }
     setMain(boolean) {
         this.#main = boolean;
+    }
+    getIcon() {
+        return this.#icon;
     }
     getTitle() {
         return this.#title;

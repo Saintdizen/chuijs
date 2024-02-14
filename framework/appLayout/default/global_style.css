@@ -338,6 +338,10 @@ route_title {
     color: var(--text_color);
 }
 
+route_icon {
+    margin-right: var(--margin);
+}
+
 .route_active {
     padding: var(--main_padding);
     background: var(--blue_prime_background);
