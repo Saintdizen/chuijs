@@ -271,15 +271,15 @@ class Audio {
     #setTrack(track = {}, index = Number()) {
         let chui_track = document.createElement("chui_track");
         let chui_track_name = document.createElement("chui_track_name");
-        let chui_track_duration = document.createElement("chui_track_duration");
+        //let chui_track_duration = document.createElement("chui_track_duration");
         //
         chui_track.id = `${index}`
         chui_track_name.innerText = `${track.artist} - ${track.title}`
         //
-        getAudioDurationInSeconds(track.path).then(dur => {
-            chui_track_duration.innerText = this.calculateTime(dur);
-            chui_track.appendChild(chui_track_duration);
-        })
+        // getAudioDurationInSeconds(track.path).then(dur => {
+        //     chui_track_duration.innerText = this.calculateTime(dur);
+        //     chui_track.appendChild(chui_track_duration);
+        // })
         chui_track.addEventListener("dblclick",  async (ev) => {
             let target_row = ev.target
             if (target_row.tagName === "CHUI_TRACK_NAME" || target_row.tagName === "CHUI_TRACK_DURATION") {
