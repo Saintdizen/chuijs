@@ -45,7 +45,7 @@ class YaAudio {
     #chui_playlist = new YaPlaylist()
     #chui_audio_fx = new YaAudioFX(this.#chui_at)
     constructor(options = { autoplay: Boolean(), pin: String(), playlist: Boolean(), width: String(), height: String() }) {
-        require('../../../modules/chui_functions').setStyles(__dirname + "/audio_styles.css", 'chUiJS_Audio');
+        require('../../../modules/chui_functions').setStyles(__dirname + "/ya_audio_styles.css", 'chUiJS_Audio');
         this.#chui_at.setAttribute("name", "media")
         this.#chui_at.controls = false;
         this.#chui_at.preload = "metadata"
