@@ -190,6 +190,22 @@ class Audio {
         })
         Audio.#setMediaData(track)
     }
+    async #start2(track) {
+        this.#renderProgress("0")
+        this.#chui_ap_track_title.innerText = `${track.artist} - ${track.title}`
+        this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#icons_sizes.play_pause).getHTML()
+        if (track.path.includes("http")) {
+            this.#chui_source_tag.src = track.dblclick()
+        } else {
+            this.#chui_source_tag.src = String(await this.#convertSong(track.path, track.mimetype))
+        }
+        this.#chui_at.load()
+        await this.#chui_at.play().then(() => {
+            this.#setSliderMax()
+            this.#displayBufferedAmount()
+        })
+        Audio.#setMediaData(track)
+    }
     async #playAudioNext() {
         this.#current_audio = this.#current_audio + 1
         if (this.#current_audio < play_list.length) {
@@ -271,15 +287,10 @@ class Audio {
     #setTrack(track = {}, index = Number()) {
         let chui_track = document.createElement("chui_track");
         let chui_track_name = document.createElement("chui_track_name");
-        //let chui_track_duration = document.createElement("chui_track_duration");
         //
         chui_track.id = `${index}`
         chui_track_name.innerText = `${track.artist} - ${track.title}`
         //
-        // getAudioDurationInSeconds(track.path).then(dur => {
-        //     chui_track_duration.innerText = this.calculateTime(dur);
-        //     chui_track.appendChild(chui_track_duration);
-        // })
         chui_track.addEventListener("dblclick",  async (ev) => {
             let target_row = ev.target
             if (target_row.tagName === "CHUI_TRACK_NAME" || target_row.tagName === "CHUI_TRACK_DURATION") {
@@ -293,12 +304,33 @@ class Audio {
         chui_track.appendChild(chui_track_name)
         return chui_track;
     }
-    calculateTime = (secs) => {
-        const minutes = Math.floor(secs / 60);
-        const seconds = Math.floor(secs % 60);
-        const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
-        return `${minutes}:${returnedSeconds}`;
+
+    setPlayList2(list = [{ title: String(), artist: String(), album: String(), mimetype: String(), artwork: [], dblclick: () => {} }]) {
+        this.#chui_playlist.getPlaylist().innerHTML = '';
+        play_list = list;
+        for (let track of play_list) this.#chui_playlist.getPlaylist().appendChild(this.#setTrack2(track, play_list.indexOf(track)));
     }
+    #setTrack2(track = {}, index = Number()) {
+        let chui_track = document.createElement("chui_track");
+        let chui_track_name = document.createElement("chui_track_name");
+        //
+        chui_track.id = `${index}`
+        chui_track_name.innerText = `${track.artist} - ${track.title}`
+        //
+        chui_track.addEventListener("dblclick",  async (ev) => {
+            let target_row = ev.target
+            if (target_row.tagName === "CHUI_TRACK_NAME" || target_row.tagName === "CHUI_TRACK_DURATION") {
+                this.setActive(ev.target.parentNode.id)
+            } else {
+                this.setActive(ev.target.id)
+            }
+            await this.#start2(track)
+            this.#current_audio = index;
+        })
+        chui_track.appendChild(chui_track_name)
+        return chui_track;
+    }
+
     setActive(index = Number()) {
         document.getElementById(this.#chui_playlist.getId()).childNodes.forEach(child => {
             child.classList.remove("chui_track_active");
