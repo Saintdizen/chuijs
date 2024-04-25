@@ -2,7 +2,6 @@ const {YMApi, WrappedYMApi} = require('ym-api-meowed');
 const {XMLParser} = require("fast-xml-parser");
 const crypto = require('node:crypto');
 const {DownloadTrackCodec, DownloadTrackQuality} = require("ym-api-meowed/dist/types");
-const {BrowserWindow} = require("@electron/remote");
 
 class YaApi {
     #api = new YMApi();
@@ -13,6 +12,7 @@ class YaApi {
     auth() {
         return new Promise(async (resolve, reject) => {
             try {
+                const {BrowserWindow} = require("@electron/remote");
                 let win = new BrowserWindow({width: 800, height: 600})
                 await win.loadURL(this.url)
                 win.webContents.on("did-start-navigation", async (event, details) => {
