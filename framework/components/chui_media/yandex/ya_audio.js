@@ -1,18 +1,17 @@
 const fs = require("fs");
 const dataurl = require("dataurl");
-const { Icon, Icons } = require("../chui_icons/icons");
-const {Label} = require('../chui_label/label');
-const {Select} = require("../chui_inputs/chui_select_box/select_box");
-const {Dialog} = require("../chui_modal/modal");
+const { Icon, Icons } = require("../../chui_icons/icons");
+const {Label} = require('../../chui_label/label');
+const {Select} = require("../../chui_inputs/chui_select_box/select_box");
+const {Dialog} = require("../../chui_modal/modal");
 const Store = require('electron-store');
 const {shell} = require("electron");
-const {Toggle} = require("../chui_inputs/chui_toggle/toggle");
-const {YaApi} = require("./yandex/ya_api");
+const {Toggle} = require("../../chui_inputs/chui_toggle/toggle");
 const store = new Store();
 
 let play_list = []
 
-class Audio {
+class YaAudio {
     #current_audio = 0
     #chui_ap_main = document.createElement(`chui_ap_main`);
     #chui_ap_block = document.createElement(`chui_ap_block`);
@@ -43,10 +42,10 @@ class Audio {
         next_prev: "24px",
         volume: "24px"
     }
-    #chui_playlist = new Playlist()
-    #chui_audio_fx = new AudioFX(this.#chui_at)
+    #chui_playlist = new YaPlaylist()
+    #chui_audio_fx = new YaAudioFX(this.#chui_at)
     constructor(options = { autoplay: Boolean(), pin: String(), playlist: Boolean(), width: String(), height: String() }) {
-        require('../../modules/chui_functions').setStyles(__dirname + "/audio_styles.css", 'chUiJS_Audio');
+        require('../../../modules/chui_functions').setStyles(__dirname + "/audio_styles.css", 'chUiJS_Audio');
         this.#chui_at.setAttribute("name", "media")
         this.#chui_at.controls = false;
         this.#chui_at.preload = "metadata"
@@ -178,7 +177,11 @@ class Audio {
         this.#renderProgress("0")
         this.#chui_ap_track_title.innerText = `${track.artist} - ${track.title}`
         this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#icons_sizes.play_pause).getHTML()
-        this.#chui_source_tag.src = String(await new YaApi().getLink(track.track_id, global.access_token, global.user_id))
+        if (track.path.includes("http")) {
+            this.#chui_source_tag.src = track.path
+        } else {
+            this.#chui_source_tag.src = String(await this.#convertSong(track.path, track.mimetype))
+        }
         this.#chui_at.load()
         await this.#chui_at.play().then(() => {
             this.#setSliderMax()
@@ -259,7 +262,7 @@ class Audio {
         this.#chui_ap_seek.max = String(this.#chui_at.duration);
     }
     //
-    setPlayList(list = [{ title: String(), artist: String(), album: String(), mimetype: String(), artwork: [] }]) {
+    setPlayList(list = [{ title: String(), artist: String(), album: String(), mimetype: String(), path: String(), artwork: [] }]) {
         this.#chui_playlist.getPlaylist().innerHTML = '';
         play_list = list;
         for (let track of play_list) this.#chui_playlist.getPlaylist().appendChild(this.#setTrack(track, play_list.indexOf(track)));
@@ -320,7 +323,7 @@ class Audio {
     }
 }
 
-class AudioFX {
+class YaAudioFX {
     #chui_ap_equalizer_main = document.createElement('chui_ap_equalizer_main')
     #chui_ap_equalizer_controls = document.createElement('chui_ap_equalizer_controls')
     #chui_ap_equalizer_block = document.createElement('chui_ap_equalizer_block')
@@ -407,9 +410,9 @@ class AudioFX {
         store.delete(this.#fx_preset)
         store.set(this.#fx_preset, name)
         let filter_test = this.#getPreset(name)
-        AudioFX.#renderPreampSlider(undefined, filter_test, filter)
+        YaAudioFX.#renderPreampSlider(undefined, filter_test, filter)
         let input = filter_test.inputs.filter(input => input.id === String(filter.frequency.value))[0]
-        AudioFX.#renderSlider(input, filter, filter_test.preamp)
+        YaAudioFX.#renderSlider(input, filter, filter_test.preamp)
     }
     #setStatusBlock(status) {
         //
@@ -458,7 +461,7 @@ class AudioFX {
         slider.max = "10"
         slider.value = "0"
         slider.style.setProperty('--fx-before-width', `50%`);
-        slider.oninput = (e) => AudioFX.#renderPreampSlider(e.target, this.#getPreset(store.get(this.#fx_preset)), filters)
+        slider.oninput = (e) => YaAudioFX.#renderPreampSlider(e.target, this.#getPreset(store.get(this.#fx_preset)), filters)
         val.id = "val_preamp"
         val.innerText = String(slider.value)
         label.innerText = "AMP"
@@ -481,7 +484,7 @@ class AudioFX {
         slider.max = "10"
         slider.value = String(filter.gain.value)
         slider.style.setProperty('--fx-before-width', `50%`);
-        slider.oninput = (e) => AudioFX.#renderSlider(e.target, filter, Number(document.getElementById("preamp").value))
+        slider.oninput = (e) => YaAudioFX.#renderSlider(e.target, filter, Number(document.getElementById("preamp").value))
         val.id = "val_" + freq_value
         val.innerText = String(slider.value)
         label.innerText = freq_value.replace("000", "K")
@@ -853,7 +856,7 @@ class AudioFX {
         }]
 }
 
-class Playlist {
+class YaPlaylist {
     #id_contents = require("randomstring").generate();
     #chui_playlist_main = document.createElement("chui_playlist_main")
     #chui_playlist_search = document.createElement("chui_playlist_search")
@@ -903,4 +906,4 @@ class Playlist {
     }
 }
 
-exports.Audio = Audio
+exports.YaAudio = YaAudio
