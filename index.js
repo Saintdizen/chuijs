@@ -65,6 +65,7 @@ const {MenuBar} = require("./framework/components/chui_menu_bar/menu_bar");
 const {Image} = require('./framework/components/chui_media/image');
 const {Audio} = require("./framework/components/chui_media/audio");
 const {Video} = require("./framework/components/chui_media/video");
+const {YaAudio} = require("./framework/components/chui_media/yandex/ya_audio");
 
 //VARS
 let isQuiting = false;
@@ -485,6 +486,7 @@ module.exports = {
     DownloadNotification: DownloadNotification,
     Audio: Audio,
     Video: Video,
+    YaAudio: YaAudio,
     //
     BrowserWindow: BrowserWindow,
     ipcMain: ipcMain,
