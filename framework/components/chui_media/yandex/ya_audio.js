@@ -7,6 +7,7 @@ const {Dialog} = require("../../chui_modal/modal");
 const Store = require('electron-store');
 const {shell} = require("electron");
 const {Toggle} = require("../../chui_inputs/chui_toggle/toggle");
+const {YaApi} = require("./ya_api");
 const store = new Store();
 
 let play_list = []
@@ -177,11 +178,7 @@ class YaAudio {
         this.#renderProgress("0")
         this.#chui_ap_track_title.innerText = `${track.artist} - ${track.title}`
         this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#icons_sizes.play_pause).getHTML()
-        if (track.path.includes("http")) {
-            this.#chui_source_tag.src = track.path
-        } else {
-            this.#chui_source_tag.src = String(await this.#convertSong(track.path, track.mimetype))
-        }
+        this.#chui_source_tag.src = String(await new YaApi().getLink(track.track_id, global.access_token, global.user_id))
         this.#chui_at.load()
         await this.#chui_at.play().then(() => {
             this.#setSliderMax()
