@@ -45,30 +45,30 @@ class YaApi {
             await this.#api.init({access_token: access_token, uid: user_id});
             await this.#wapi.init({access_token: access_token, uid: user_id});
             try {
-                let pls = await this.#api.getUserPlaylists(user_id)
-                for (let playlist of pls) {
-                    let tracks = []
-                    let pl = await this.#wapi.getPlaylist(playlist.kind, playlist.uid);
-                    for (let trs of pl.tracks) {
-                        try {
-                            console.log(`${pl.tracks.indexOf(trs) + 1} / ${pl.tracks.length}`)
-                            let tr = await this.#api.getSingleTrack(trs.id);
-                            tracks.push({
-                                track_id: trs.id,
-                                title: tr.title,
-                                artist: tr.artists[0].name,
-                                album: "",
-                                mimetype: 'audio/mpeg'
-                            })
-                        } catch (e) {
-                            console.log(e)
-                        }
-                    }
-                    playlists.push({
-                        playlist_name: `pl_${playlist.kind}`,
-                        tracks: tracks
-                    })
-                }
+                // let pls = await this.#api.getUserPlaylists(user_id)
+                // for (let playlist of pls) {
+                //     let tracks = []
+                //     let pl = await this.#wapi.getPlaylist(playlist.kind, playlist.uid);
+                //     for (let trs of pl.tracks) {
+                //         try {
+                //             console.log(`${pl.tracks.indexOf(trs) + 1} / ${pl.tracks.length}`)
+                //             let tr = await this.#api.getSingleTrack(trs.id);
+                //             tracks.push({
+                //                 track_id: trs.id,
+                //                 title: tr.title,
+                //                 artist: tr.artists[0].name,
+                //                 album: "",
+                //                 mimetype: 'audio/mpeg'
+                //             })
+                //         } catch (e) {
+                //             console.log(e)
+                //         }
+                //     }
+                //     playlists.push({
+                //         playlist_name: `pl_${playlist.kind}`,
+                //         tracks: tracks
+                //     })
+                // }
                 let liketracks = await this.#api.getLikedTracks(user_id)
                 let track_z = []
                 for (let lt of liketracks.library.tracks) {
@@ -89,6 +89,27 @@ class YaApi {
                 playlists.push({
                     playlist_name: `pl_liked`,
                     tracks: track_z
+                })
+                let disliketracks = await this.#api.getDislikedTracks(user_id)
+                let track_zz = []
+                for (let lt of disliketracks.library.tracks) {
+                    try {
+                        console.log(`${liketracks.library.tracks.indexOf(lt) + 1} / ${liketracks.library.tracks.length}`)
+                        let tr = await this.#api.getSingleTrack(Number(lt.id));
+                        track_zz.push({
+                            track_id: tr.id,
+                            title: tr.title,
+                            artist: tr.artists[0].name,
+                            album: "",
+                            mimetype: 'audio/mpeg'
+                        })
+                    } catch (e) {
+                        console.log(e)
+                    }
+                }
+                playlists.push({
+                    playlist_name: `pl_disliked`,
+                    tracks: track_zz
                 })
                 resolve(playlists)
             } catch (e) {
