@@ -66,6 +66,7 @@ const {Image} = require('./framework/components/chui_media/image');
 const {Audio} = require("./framework/components/chui_media/audio");
 const {Video} = require("./framework/components/chui_media/video");
 const {YaAudio} = require("./framework/components/chui_media/yandex/ya_audio");
+const {YaApi} = require("./framework/components/chui_media/yandex/ya_api");
 
 //VARS
 let isQuiting = false;
@@ -480,13 +481,15 @@ module.exports = {
     SlideShow: SlideShow,
     FieldSet: FieldSet,
     Popup: Popup,
-    TelegramBot: TelegramBot,
     MenuBar: MenuBar,
     UpdateNotification: UpdateNotification,
     DownloadNotification: DownloadNotification,
     Audio: Audio,
     Video: Video,
     YaAudio: YaAudio,
+    //
+    TelegramBot: TelegramBot,
+    YaApi: YaApi,
     //
     BrowserWindow: BrowserWindow,
     ipcMain: ipcMain,
