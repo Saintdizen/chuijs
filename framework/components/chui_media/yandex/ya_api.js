@@ -2,7 +2,6 @@ const {YMApi, WrappedYMApi} = require('ym-api-meowed');
 const {XMLParser} = require("fast-xml-parser");
 const crypto = require('node:crypto');
 const {DownloadTrackCodec, DownloadTrackQuality} = require("ym-api-meowed/dist/types");
-const {YaAudio} = require("./ya_audio");
 
 class YaApi {
     #api = new YMApi();
@@ -70,6 +69,27 @@ class YaApi {
                         tracks: tracks
                     })
                 }
+                let liketracks = await this.#api.getLikedTracks(user_id)
+                let track_z = []
+                for (let lt of liketracks.library.tracks) {
+                    try {
+                        console.log(`${liketracks.library.tracks.indexOf(lt) + 1} / ${liketracks.library.tracks.length}`)
+                        let tr = await this.#api.getSingleTrack(Number(lt.id));
+                        track_z.push({
+                            track_id: tr.id,
+                            title: tr.title,
+                            artist: tr.artists[0].name,
+                            album: "",
+                            mimetype: 'audio/mpeg'
+                        })
+                    } catch (e) {
+                        console.log(e)
+                    }
+                }
+                playlists.push({
+                    playlist_name: `pl_liked`,
+                    tracks: track_z
+                })
                 resolve(playlists)
             } catch (e) {
                 console.log(`api error ${e.message}`);
