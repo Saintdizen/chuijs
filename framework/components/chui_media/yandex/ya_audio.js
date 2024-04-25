@@ -364,7 +364,7 @@ class YaAudioFX {
         this.#filters.forEach((filter) => this.#chui_ap_equalizer_band_block.appendChild(this.#setSliderBand(filter)))
         //
         this.#select.setDropdownHeight("230px")
-        AudioFX.PRESETS.forEach(preset => this.#select.addOptions({title: preset.title, value: preset.name}))
+        YaAudioFX.PRESETS.forEach(preset => this.#select.addOptions({title: preset.title, value: preset.name}))
         //
         this.#select.addValueChangeListener((e) => this.#filters.forEach((filter) => this.#setPreset(filter, e.detail.value, true)))
         //
@@ -445,7 +445,7 @@ class YaAudioFX {
         }
     }
     #getPreset(name) {
-        return AudioFX.PRESETS.filter(preset => preset.name === name)[0];
+        return YaAudioFX.PRESETS.filter(preset => preset.name === name)[0];
     }
     #setSliderPreamp(filters) {
         let sliderMain = document.createElement("chui_eq_slider_main")
