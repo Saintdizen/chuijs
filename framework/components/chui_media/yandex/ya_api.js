@@ -2,6 +2,7 @@ const {YMApi, WrappedYMApi} = require('ym-api-meowed');
 const {XMLParser} = require("fast-xml-parser");
 const crypto = require('node:crypto');
 const {DownloadTrackCodec, DownloadTrackQuality} = require("ym-api-meowed/dist/types");
+const {YaAudio} = require("./ya_audio");
 
 class YaApi {
     #api = new YMApi();
@@ -58,7 +59,7 @@ class YaApi {
                                 title: tr.title,
                                 artist: tr.artists[0].name,
                                 album: "",
-                                mimetype: Audio.MIMETYPES.MP3
+                                mimetype: YaAudio.MIMETYPES.MP3
                             })
                         } catch (e) {
                             console.log(e)
