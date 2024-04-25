@@ -59,7 +59,7 @@ class YaApi {
                                 title: tr.title,
                                 artist: tr.artists[0].name,
                                 album: "",
-                                mimetype: YaAudio.MIMETYPES.MP3
+                                mimetype: 'audio/mpeg'
                             })
                         } catch (e) {
                             console.log(e)
