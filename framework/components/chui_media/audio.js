@@ -194,7 +194,7 @@ class Audio {
         this.#renderProgress("0")
         this.#chui_ap_track_title.innerText = `${track.artist} - ${track.title}`
         this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#icons_sizes.play_pause).getHTML()
-        if (track.path.includes("http")) {
+        if (track.path === undefined) {
             this.#chui_source_tag.src = track.dblclick()
         } else {
             this.#chui_source_tag.src = String(await this.#convertSong(track.path, track.mimetype))
