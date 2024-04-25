@@ -2,6 +2,7 @@ const {YMApi, WrappedYMApi} = require('ym-api-meowed');
 const {XMLParser} = require("fast-xml-parser");
 const crypto = require('node:crypto');
 const {DownloadTrackCodec, DownloadTrackQuality} = require("ym-api-meowed/dist/types");
+const {BrowserWindow} = require("@electron/remote");
 
 class YaApi {
     #api = new YMApi();
@@ -12,7 +13,6 @@ class YaApi {
     auth() {
         return new Promise(async (resolve, reject) => {
             try {
-                const {BrowserWindow} = require('@electron/remote')
                 let win = new BrowserWindow({width: 800, height: 600})
                 await win.loadURL(this.url)
                 win.webContents.on("did-start-navigation", async (event, details) => {
@@ -32,6 +32,19 @@ class YaApi {
                         })
                     }
                 })
+            } catch (e) {
+                console.log(`api error ${e.message}`);
+                reject(e)
+            }
+        })
+    }
+
+    getUserData(access_token, user_id) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#api.init({access_token: access_token, uid: user_id});
+                await this.#wapi.init({access_token: access_token, uid: user_id});
+                resolve(await this.#api.getAccountStatus())
             } catch (e) {
                 console.log(`api error ${e.message}`);
                 reject(e)

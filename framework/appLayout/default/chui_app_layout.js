@@ -127,6 +127,9 @@ class Header {
     addToRight(...components) {
         for (let component of components) this.#header_right_box.insertBefore(component, this.#header_right_box.firstChild);
     }
+    removeToRight(...components) {
+        for (let component of components) this.#header_right_box.removeChild(component);
+    }
     set() {
         return this.#header;
     }
@@ -424,6 +427,9 @@ class AppLayout {
     }
     addToHeaderRight(headerRight = []) {
         this.#header.addToRight(...headerRight);
+    }
+    removeToHeaderRight(headerRight = []) {
+        this.#header.removeToRight(...headerRight);
     }
     addToHeaderLeft(headerLeft = []) {
         this.#header.addToLeft(...headerLeft);

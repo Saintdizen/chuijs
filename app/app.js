@@ -69,60 +69,64 @@ class Test extends AppLayout {
             )
         ])
 
+        let auth = AppLayout.BUTTON({
+            title: "Войти",
+            icon: Icons.FILE.APPROVAL,
+            clickEvent: () => {
+                this.addToHeaderRight([user])
+                this.removeToHeaderRight([auth])
+            }
+        })
+
+        let user = AppLayout.USER_PROFILE({
+            username: "Чувахин Иван",
+            image: {
+                noImage: true
+            },
+            items: [
+                AppLayout.USER_PROFILE_ITEM({
+                    title: "Профиль",
+                    clickEvent: () => {
+                        new Notification({
+                            title: "Профиль", text: "Профиль", showTime: 1000
+                        }).show()
+                    }
+                })
+            ]
+        })
+
         this.addToHeaderRight([
-            AppLayout.DIALOG({
-                //title: "Настройки",
-                icon: Icons.ACTIONS.SETTINGS,
-                reverse: false,
-                dialogOptions: {
-                    title: "Заголовок диалогового окна",
-                    closeOutSideClick: true,
-                    style: {
-                        width: Styles.SIZE.WEBKIT_FILL,
-                        height: Styles.SIZE.WEBKIT_FILL,
-                        direction: Styles.DIRECTION.COLUMN,
-                        wrap: Styles.WRAP.NOWRAP,
-                        align: Styles.ALIGN.CENTER,
-                        justify: Styles.JUSTIFY.CENTER,
-                    },
-                    components: [
-                        new Button({
-                            title: "КНОПКА",
-                            icon: Icons.MAPS.MAP,
-                            clickEvent: () => {
-                                new Notification({
-                                    title: "Заголовок", text: "Текст",
-                                    style: Notification.STYLE.WARNING, showTime: 1000
-                                }).show()
-                            }
-                        })
-                    ]
-                }
-            }),
-            AppLayout.USER_PROFILE({
-                username: "Чувахин Иван",
-                image: {
-                    noImage: true
-                },
-                items: [
-                    AppLayout.USER_PROFILE_ITEM({
-                        title: "Профиль",
-                        clickEvent: () => {
-                            new Notification({
-                                title: "Профиль", text: "Профиль", showTime: 1000
-                            }).show()
-                        }
-                    }),
-                    AppLayout.USER_PROFILE_ITEM({
-                        title: "Выход",
-                        clickEvent: () => {
-                            new Notification({
-                                title: "Выход", text: "Выход", showTime: 1000
-                            }).show()
-                        }
-                    })
-                ]
-            })
+            // AppLayout.DIALOG({
+            //     //title: "Настройки",
+            //     icon: Icons.ACTIONS.SETTINGS,
+            //     reverse: false,
+            //     dialogOptions: {
+            //         title: "Заголовок диалогового окна",
+            //         closeOutSideClick: true,
+            //         style: {
+            //             width: Styles.SIZE.WEBKIT_FILL,
+            //             height: Styles.SIZE.WEBKIT_FILL,
+            //             direction: Styles.DIRECTION.COLUMN,
+            //             wrap: Styles.WRAP.NOWRAP,
+            //             align: Styles.ALIGN.CENTER,
+            //             justify: Styles.JUSTIFY.CENTER,
+            //         },
+            //         components: [
+            //             new Button({
+            //                 title: "КНОПКА",
+            //                 icon: Icons.MAPS.MAP,
+            //                 clickEvent: () => {
+            //                     new Notification({
+            //                         title: "Заголовок", text: "Текст",
+            //                         style: Notification.STYLE.WARNING, showTime: 1000
+            //                     }).show()
+            //                 }
+            //             })
+            //         ]
+            //     }
+            // }),
+            //user,
+            auth
         ])
     }
 }
