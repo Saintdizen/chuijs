@@ -184,7 +184,7 @@ class YaAudio {
             this.#setSliderMax()
             this.#displayBufferedAmount()
         })
-        Audio.#setMediaData(track)
+        YaAudio.#setMediaData(track)
     }
     async #playAudioNext() {
         this.#current_audio = this.#current_audio + 1
