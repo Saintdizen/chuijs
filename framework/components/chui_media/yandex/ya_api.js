@@ -62,10 +62,17 @@ class YaApi {
                 for (let playlist of pls) {
                     let tracks = []
                     let pl = await this.#wapi.getPlaylist(playlist.kind, playlist.uid);
+                    YaApi.#sendData("SEND_PLAYLIST_DATA", {
+                        playlistName: pl.title,
+                        max: pl.tracks.length
+                    })
                     for (let trs of pl.tracks) {
                         try {
-                            console.log(`${pl.tracks.indexOf(trs) + 1} / ${pl.tracks.length}`)
                             let tr = await this.#api.getSingleTrack(trs.id);
+                            YaApi.#sendData("SEND_TRACK_DATA", {
+                                trackName: `${tr.artists[0].name} - ${tr.title}`,
+                                index: pl.tracks.indexOf(trs) + 1
+                            })
                             tracks.push({
                                 track_id: trs.id,
                                 title: tr.title,
@@ -84,10 +91,17 @@ class YaApi {
                 }
                 let liketracks = await this.#api.getLikedTracks(user_id)
                 let track_z = []
+                YaApi.#sendData("SEND_PLAYLIST_DATA", {
+                    playlistName: "getLikedTracks",
+                    max: liketracks.library.tracks.length
+                })
                 for (let lt of liketracks.library.tracks) {
                     try {
-                        console.log(`${liketracks.library.tracks.indexOf(lt) + 1} / ${liketracks.library.tracks.length}`)
                         let tr = await this.#api.getSingleTrack(Number(lt.id));
+                        YaApi.#sendData("SEND_TRACK_DATA", {
+                            trackName: `${tr.artists[0].name} - ${tr.title}`,
+                            index: liketracks.library.tracks.indexOf(lt) + 1
+                        })
                         track_z.push({
                             track_id: tr.id,
                             title: tr.title,
@@ -130,6 +144,11 @@ class YaApi {
                 reject(e)
             }
         })
+    }
+
+    static #sendData(channel = String(), data) {
+        let wc = require("@electron/remote").webContents.getAllWebContents()
+        for (let test of wc) test.send(channel, data)
     }
 }
 
