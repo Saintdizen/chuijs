@@ -1,7 +1,7 @@
-const {Page, Audio, Styles, App, fs, path, Icons} = require('../../index');
+const {Page, YaAudio, Styles, App, fs, path, Icons, YaApi} = require('../../index');
 
 class MediaPage extends Page {
-    #download_path = undefined;
+    #download_path = path.join(App.userDataPath(), "downloads");
 
     constructor() {
         super();
@@ -9,27 +9,28 @@ class MediaPage extends Page {
         this.setFullHeight();
         this.setMain(false);
         this.setIcon(Icons.FILE.DOWNLOAD_FOR_OFFLINE)
-        let audio = new Audio({
+        let audio = new YaAudio({
             autoplay: false,
             playlist: true,
             width: Styles.SIZE.WEBKIT_FILL,
             height: Styles.SIZE.WEBKIT_FILL,
             //pin: Audio.PIN.TOP
         })
-        this.#download_path = path.join(App.userDataPath(), "downloads");
+        audio.openFolder(this.#download_path)
+        this.add(audio)
         let pl = this.generatePlaylist()
         setTimeout(() => audio.setPlayList(pl), 100)
 
-        audio.openFolder(path.join(App.userDataPath(), "downloads"))
-
         this.addRouteEvent(this, (e) => {
-            console.log(e)
-            audio.restoreFX();
-            let pl = this.generatePlaylist()
-            setTimeout(() => audio.setPlayList(pl), 100)
+            // console.log(e)
+            // audio.restoreFX();
+            // let pl = this.generatePlaylist()
+            // setTimeout(() => audio.setPlayList(pl), 100)
+
+
         })
 
-        this.add(audio)
+
         /*let video = new Video({
             autoplay: true,
             height: "auto",

@@ -146,6 +146,126 @@ class YaApi {
         })
     }
 
+    getFeed(access_token, user_id) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#wapi.init({access_token: access_token, uid: user_id});
+                let feed = await this.#wapi.getApi().getFeed()
+                resolve(feed)
+            } catch (e) {
+                console.log(`api error ${e.message}`);
+                reject(e)
+            }
+        })
+    }
+
+    getGenres(access_token, user_id) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#wapi.init({access_token: access_token, uid: user_id});
+                let feed = await this.#wapi.getApi().getGenres()
+                resolve(feed)
+            } catch (e) {
+                console.log(`api error ${e.message}`);
+                reject(e)
+            }
+        })
+    }
+
+    getPodcasts(access_token, user_id) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#wapi.init({access_token: access_token, uid: user_id});
+                let feed = await this.#wapi.getApi().getPodcasts()
+                resolve(feed)
+            } catch (e) {
+                console.log(`api error ${e.message}`);
+                reject(e)
+            }
+        })
+    }
+
+    getNewReleases(access_token, user_id) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#wapi.init({access_token: access_token, uid: user_id});
+                let feed = await this.#wapi.getApi().getNewReleases()
+                resolve(feed)
+            } catch (e) {
+                console.log(`api error ${e.message}`);
+                reject(e)
+            }
+        })
+    }
+
+    getChart(access_token, user_id, type) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#wapi.init({access_token: access_token, uid: user_id});
+                // ChartType = "russia" | "world";
+                let feed = await this.#wapi.getApi().getChart(type)
+                resolve(feed)
+            } catch (e) {
+                console.log(`api error ${e.message}`);
+                reject(e)
+            }
+        })
+    }
+
+    // Station
+    getAllStationsList(access_token, user_id, language) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#wapi.init({access_token: access_token, uid: user_id});
+                // Language = "en" | "ru" | string;
+                let feed = await this.#wapi.getApi().getAllStationsList(language)
+                resolve(feed)
+            } catch (e) {
+                console.log(`api error ${e.message}`);
+                reject(e)
+            }
+        })
+    }
+
+    getRecomendedStationsList(access_token, user_id) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#wapi.init({access_token: access_token, uid: user_id});
+                let feed = await this.#wapi.getApi().getRecomendedStationsList()
+                resolve(feed)
+            } catch (e) {
+                console.log(`api error ${e.message}`);
+                reject(e)
+            }
+        })
+    }
+
+    getStationTracks(access_token, user_id, options = { stationId: String(), queue: String() }) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#wapi.init({access_token: access_token, uid: user_id});
+                let feed = await this.#wapi.getApi().getStationTracks(options.stationId, options.queue)
+                resolve(feed)
+            } catch (e) {
+                console.log(`api error ${e.message}`);
+                reject(e)
+            }
+        })
+    }
+
+    getStationInfo(access_token, user_id, stationId = String()) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#wapi.init({access_token: access_token, uid: user_id});
+                let feed = await this.#wapi.getApi().getStationInfo(stationId)
+                resolve(feed)
+            } catch (e) {
+                console.log(`api error ${e.message}`);
+                reject(e)
+            }
+        })
+    }
+
     static #sendData(channel = String(), data) {
         let wc = require("@electron/remote").webContents.getAllWebContents()
         for (let test of wc) test.send(channel, data)
