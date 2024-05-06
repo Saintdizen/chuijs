@@ -266,6 +266,46 @@ class YaApi {
         })
     }
 
+    // SEARCH
+    search(access_token, user_id, query = String()) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#wapi.init({access_token: access_token, uid: user_id});
+                let feed = await this.#wapi.getApi().search(query)
+                resolve(feed)
+            } catch (e) {
+                console.log(`api error ${e.message}`);
+                reject(e)
+            }
+        })
+    }
+
+    searchTracks(access_token, user_id, query = String()) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#wapi.init({access_token: access_token, uid: user_id});
+                let feed = await this.#wapi.getApi().searchTracks(query)
+                resolve(feed)
+            } catch (e) {
+                console.log(`api error ${e.message}`);
+                reject(e)
+            }
+        })
+    }
+
+    searchAll(access_token, user_id, query = String()) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#wapi.init({access_token: access_token, uid: user_id});
+                let feed = await this.#wapi.getApi().searchAll(query)
+                resolve(feed)
+            } catch (e) {
+                console.log(`api error ${e.message}`);
+                reject(e)
+            }
+        })
+    }
+
     static #sendData(channel = String(), data) {
         let wc = require("@electron/remote").webContents.getAllWebContents()
         for (let test of wc) test.send(channel, data)
