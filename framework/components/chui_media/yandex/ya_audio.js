@@ -15,7 +15,11 @@ let play_list = []
 class YaAudio {
     #current_audio = 0
     #chui_ap_main = document.createElement(`chui_ap_main`);
+    //
     #chui_ap_cover = document.createElement(`chui_ap_cover`);
+    #chui_ap_cover_img_back = document.createElement(`chui_ap_cover_img_back`);
+    #cover_img = new Image()
+    //
     #chui_ap_block = document.createElement(`chui_ap_block`);
     #chui_at = document.createElement(`audio`);
     #chui_source_tag = document.createElement(`source`);
@@ -101,8 +105,14 @@ class YaAudio {
         this.#chui_ap_block.appendChild(this.#chui_ap_controls)
         this.#chui_ap_block.appendChild(this.#chui_ap_info)
         //
+        this.#chui_ap_cover.appendChild(this.#chui_ap_cover_img_back)
+        // https://avatars.yandex.net/get-music-content/2810397/2245605c.a.4035118-2/800x800
+        this.#cover_img.className = 'cover_image'
+        this.#cover_img.src = "https://avatars.yandex.net/get-music-content/2810397/2245605c.a.4035118-2/800x800"
+        this.#chui_ap_cover_img_back.appendChild(this.#cover_img)
+
+
         this.#chui_ap_main.appendChild(this.#chui_ap_cover)
-        this.#chui_ap_cover.innerText = 'COVER'
         this.#chui_ap_main.appendChild(this.#chui_ap_block)
         // СОБЫТИЯ
         this.#chui_ap_play_pause.addEventListener("click", async () => this.#playAudioPause())
@@ -144,13 +154,13 @@ class YaAudio {
         if (options.pin !== undefined) this.#chui_ap_main.classList.add(options.pin);
         if (options.width !== undefined) this.#chui_ap_main.style.width = options.width;
         if (options.height !== undefined) this.#chui_ap_main.style.height = options.height;
-        let dialog = new Dialog({ closeOutSideClick: true })
+        let dialog = new Dialog({ closeOutSideClick: true, transparentBackground: true })
         dialog.addToBody(this.#chui_audio_fx)
         this.#chui_ap_main.appendChild(dialog.set())
         this.#chui_ap_fx_icon.addEventListener("click", () => dialog.open())
         dialog.addToBody(this.#chui_audio_fx)
 
-        let playlist_dialog = new Dialog({ closeOutSideClick: true, width: "90%", height: "80%" })
+        let playlist_dialog = new Dialog({ closeOutSideClick: true, width: "80%", height: "70%", transparentBackground: true })
         playlist_dialog.addToBody(this.#chui_playlist)
         this.#chui_ap_main.appendChild(playlist_dialog.set())
         this.#chui_ap_playlist.addEventListener("click", () => playlist_dialog.open())
@@ -186,6 +196,7 @@ class YaAudio {
         this.#chui_ap_track_title.innerText = `${track.artist} - ${track.title}`
         this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#icons_sizes.play_pause).getHTML()
         this.#chui_source_tag.src = String(await new YaApi().getLink(track.track_id, global.access_token, global.user_id))
+        this.#cover_img.src = track.album
         this.#chui_at.load()
         await this.#chui_at.play().then(() => {
             this.#setSliderMax()
@@ -307,8 +318,8 @@ class YaAudio {
             navigator.mediaSession.metadata = new MediaMetadata({
                 title: media.title,
                 artist: media.artist,
-                album: media.album,
-                artwork: media.artwork
+                album: "",
+                artwork: media.album
             });
         }
     }

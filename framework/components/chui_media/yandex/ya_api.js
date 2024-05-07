@@ -106,7 +106,7 @@ class YaApi {
                             track_id: tr.id,
                             title: tr.title,
                             artist: tr.artists[0].name,
-                            album: "",
+                            album: tr.coverUri,
                             mimetype: 'audio/mpeg'
                         })
                     } catch (e) {

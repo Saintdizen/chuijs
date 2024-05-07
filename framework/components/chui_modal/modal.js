@@ -7,7 +7,7 @@ class Dialog {
     #header = document.createElement('dialog_header');
     #body = document.createElement('dialog_body');
     #footer = document.createElement('dialog_footer');
-    constructor(options = { width: String(), height: String(), closeOutSideClick: Boolean() }) {
+    constructor(options = { width: String(), height: String(), closeOutSideClick: Boolean(), transparentBackground: Boolean() }) {
         require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_Dialogs');
         this.#dialog.id = this.#id
         this.#content.style.width = options.width;
@@ -19,7 +19,10 @@ class Dialog {
                     new Animation(elem).fadeOut();
                 }
             })
-        }        
+        }
+        if (options.transparentBackground) {
+            this.#content.style.background = "transparent";
+        }
         //ADDS
         this.#content.appendChild(this.#body)
         this.#dialog.appendChild(this.#content)
