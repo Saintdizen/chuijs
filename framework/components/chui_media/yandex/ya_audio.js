@@ -15,6 +15,7 @@ let play_list = []
 class YaAudio {
     #current_audio = 0
     #chui_ap_main = document.createElement(`chui_ap_main`);
+    #chui_ap_cover = document.createElement(`chui_ap_cover`);
     #chui_ap_block = document.createElement(`chui_ap_block`);
     #chui_at = document.createElement(`audio`);
     #chui_source_tag = document.createElement(`source`);
@@ -37,6 +38,8 @@ class YaAudio {
     #chui_ap_volume = document.createElement(`input`);
     //
     #chui_ap_fx_icon = document.createElement(`chui_ap_fx_icon`);
+    //
+    #chui_ap_playlist = document.createElement(`chui_ap_playlist`);
     // Размеры иконок
     #icons_sizes = {
         play_pause: "30px",
@@ -45,18 +48,13 @@ class YaAudio {
     }
     #chui_playlist = new YaPlaylist()
     #chui_audio_fx = new YaAudioFX(this.#chui_at)
-    constructor(options = { autoplay: Boolean(), pin: String(), playlist: Boolean(), width: String(), height: String() }) {
+    constructor(options = { pin: String(), playlist: Boolean(), width: String(), height: String() }) {
         require('../../../modules/chui_functions').setStyles(__dirname + "/ya_audio_styles.css", 'chUiJS_Audio');
         this.#chui_at.setAttribute("name", "media")
         this.#chui_at.controls = false;
         this.#chui_at.preload = "metadata"
         this.#chui_at.crossOrigin = "anonymous"
         this.#chui_at.style.borderRadius = "var(--border_radius)"
-        // Настройки
-        if (options.autoplay) {
-            this.#chui_at.autoplay = options.autoplay;
-            setTimeout(async () => await this.#start(play_list[this.#current_audio]), 1)
-        }
         // ИНФОРМАЦИЯ
         this.#chui_ap_time1 = new Label({text: `0:00`})
         this.#chui_ap_time2 = new Label({text: `0:00`})
@@ -71,6 +69,7 @@ class YaAudio {
         this.#chui_ap_prev.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_PREVIOUS, this.#icons_sizes.next_prev).getHTML()
         // Заполнение элемента
         // УПРАВЛЕНИЕ ГРОМКОСТЬЮ
+        this.#chui_ap_volume_block.appendChild(this.#chui_ap_playlist)
         this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#icons_sizes.volume).getHTML()
         this.#chui_ap_volume.type = "range"
         this.#chui_ap_volume.id = "chui_ap_volume"
@@ -81,6 +80,7 @@ class YaAudio {
         this.#chui_ap_volume_block.appendChild(this.#chui_ap_volume_icon)
         this.#chui_ap_volume_block.appendChild(this.#chui_ap_volume)
         this.#chui_ap_fx_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.EQUALIZER, this.#icons_sizes.volume).getHTML()
+        this.#chui_ap_playlist.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAYLIST_PLAY, this.#icons_sizes.volume).getHTML()
         this.#chui_ap_volume_block.appendChild(this.#chui_ap_fx_icon)
         // ИНФОРМАЦИЯ
         this.#chui_ap_info.appendChild(this.#chui_ap_time1.set())
@@ -101,6 +101,8 @@ class YaAudio {
         this.#chui_ap_block.appendChild(this.#chui_ap_controls)
         this.#chui_ap_block.appendChild(this.#chui_ap_info)
         //
+        this.#chui_ap_main.appendChild(this.#chui_ap_cover)
+        this.#chui_ap_cover.innerText = 'COVER'
         this.#chui_ap_main.appendChild(this.#chui_ap_block)
         // СОБЫТИЯ
         this.#chui_ap_play_pause.addEventListener("click", async () => this.#playAudioPause())
@@ -142,11 +144,16 @@ class YaAudio {
         if (options.pin !== undefined) this.#chui_ap_main.classList.add(options.pin);
         if (options.width !== undefined) this.#chui_ap_main.style.width = options.width;
         if (options.height !== undefined) this.#chui_ap_main.style.height = options.height;
-        if (options.playlist !== undefined) this.#chui_ap_main.appendChild(this.#chui_playlist.getMain())
         let dialog = new Dialog({ closeOutSideClick: true })
         dialog.addToBody(this.#chui_audio_fx)
         this.#chui_ap_main.appendChild(dialog.set())
         this.#chui_ap_fx_icon.addEventListener("click", () => dialog.open())
+        dialog.addToBody(this.#chui_audio_fx)
+
+        let playlist_dialog = new Dialog({ closeOutSideClick: true, width: "90%", height: "80%" })
+        playlist_dialog.addToBody(this.#chui_playlist)
+        this.#chui_ap_main.appendChild(playlist_dialog.set())
+        this.#chui_ap_playlist.addEventListener("click", () => playlist_dialog.open())
     }
     play() {
         this.#chui_ap_play_pause.click()
@@ -900,6 +907,9 @@ class YaPlaylist {
     }
     getPlaylist() {
         return this.#chui_playlist_list
+    }
+    set() {
+        return this.#chui_playlist_main
     }
 }
 

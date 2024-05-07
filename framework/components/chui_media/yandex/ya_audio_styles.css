@@ -8,6 +8,21 @@ chui_ap_main {
     height: max-content;
 }
 
+chui_ap_cover {
+    display: flex;
+    width: -webkit-fill-available;
+    backdrop-filter: var(--global_blur);
+    border-radius: var(--border_radius);
+    /*background: var(--ap_main_background);*/
+    border: none;
+    height: 100%;
+    margin-bottom: 6px;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    color: var(--text_color);
+}
+
 chui_ap_block {
     display: flex;
     flex-direction: column;
@@ -170,7 +185,7 @@ chui_ap_controls {
 }
 
 /* КНОПКИ */
-chui_ap_play_pause, chui_ap_next, chui_ap_prev {
+chui_ap_play_pause, chui_ap_next, chui_ap_prev, chui_ap_playlist {
     display: flex
 }
 
@@ -193,15 +208,14 @@ chui_ap_play_pause, chui_ap_next, chui_ap_prev {
 /* Плейлист */
 chui_playlist_main {
     display: flex;
-    height: calc(100% - 114px);
     flex-direction: column;
-    width: -webkit-fill-available;
     backdrop-filter: var(--global_blur);
     border-radius: var(--border_radius);
-    background: var(--ap_main_background);
+    /*background: var(--ap_main_background);*/
     border: none;
-    margin-top: var(--margin);
-    padding: 10px;
+    padding: 2px;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
 }
 chui_playlist_search {
     display: flex;
@@ -445,15 +459,15 @@ chui_ap_volume_block {
     border: none;
 }
 
-chui_ap_fx_icon, chui_ap_volume_icon, chui_ap_next, chui_ap_play_pause, chui_ap_prev {
+chui_ap_fx_icon, chui_ap_volume_icon, chui_ap_next, chui_ap_play_pause, chui_ap_prev, chui_ap_playlist {
     border-radius: var(--border_radius);
     padding: 2px;
 }
 
-chui_ap_fx_icon:hover, chui_ap_volume_icon:hover, chui_ap_next:hover, chui_ap_play_pause:hover, chui_ap_prev:hover {
+chui_ap_fx_icon:hover, chui_ap_volume_icon:hover, chui_ap_next:hover, chui_ap_play_pause:hover, chui_ap_prev:hover, chui_ap_playlist:hover {
     background: var(--blue_prime_background);
 }
 
-chui_ap_fx_icon:hover chui_icon, chui_ap_volume_icon:hover chui_icon, chui_ap_next:hover chui_icon, chui_ap_play_pause:hover chui_icon, chui_ap_prev:hover chui_icon {
+chui_ap_fx_icon:hover chui_icon, chui_ap_volume_icon:hover chui_icon, chui_ap_next:hover chui_icon, chui_ap_play_pause:hover chui_icon, chui_ap_prev:hover chui_icon, chui_ap_playlist:hover chui_icon {
     color: var(--text_color_hover);
 }
