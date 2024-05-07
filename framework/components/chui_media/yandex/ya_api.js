@@ -68,16 +68,16 @@ class YaApi {
                     })
                     for (let trs of pl.tracks) {
                         try {
-                            let tr = await this.#api.getSingleTrack(trs.id);
+                            //let tr = await this.#api.getSingleTrack(trs.id);
                             YaApi.#sendData("SEND_TRACK_DATA", {
-                                trackName: `${tr.artists[0].name} - ${tr.title}`,
+                                trackName: `${trs.track.artists[0].name} - ${trs.track.title}`,
                                 index: pl.tracks.indexOf(trs) + 1
                             })
                             tracks.push({
                                 track_id: trs.id,
-                                title: tr.title,
-                                artist: tr.artists[0].name,
-                                album: "",
+                                title: trs.track.title,
+                                artist: trs.track.artists[0].name,
+                                album: trs.track.coverUri,
                                 mimetype: 'audio/mpeg'
                             })
                         } catch (e) {
