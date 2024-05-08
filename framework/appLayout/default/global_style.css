@@ -52,7 +52,7 @@ body {
     padding: 0;
     background: var(--main_background);
     /*border-radius: var(--border_radius);*/
-    /*border: 1px solid var(--element_background_2);*/
+    border: 1px solid var(--border_color);
     display: flex;
     flex-direction: column;
 }
@@ -75,7 +75,7 @@ app_menu_search_main {
     width: -webkit-fill-available;
     color: var(--text_color);
     font-size: var(--font_default_size);
-    border: 1px solid var(--element_background_2);
+    border: 1px solid var(--border_color);
     box-shadow: 0 0 1px 0 var(--element_background_2);
 }
 
@@ -111,15 +111,15 @@ header {
     display: flex;
     z-index: 999;
     flex-direction: column;
-    /*border-top-left-radius: var(--border_radius);
-    border-top-right-radius: var(--border_radius);*/
+    border-bottom-left-radius: var(--border_radius);
+    border-bottom-right-radius: var(--border_radius);
     align-items: start;
-    background-color: transparent;
+    background-color: var(--header_background);
     backdrop-filter: var(--global_blur);
     background-blend-mode: overlay;
     justify-content: space-between;
-    /*-webkit-app-region: no-drag;*/
-    border: 1px solid transparent;
+    border-bottom: 1px solid var(--border_color);
+    /*border: 1px solid transparent;*/
 }
 
 header_main {
@@ -175,7 +175,7 @@ app_menu {
     backdrop-filter: var(--global_blur);
     height: -webkit-fill-available;
     width: -webkit-fill-available;
-    border: 1px solid var(--element_background_2);
+    border: 1px solid var(--border_color);
 }
 
 notification_box {
@@ -192,7 +192,7 @@ notification_box {
     background: var(--header_background);
     backdrop-filter: var(--global_blur);
     width: -webkit-fill-available;
-    border: 1px solid var(--element_background_2);
+    border: 1px solid var(--border_color);
 }
 
 notification_box_controls {
@@ -414,7 +414,7 @@ user_dropdown {
     min-width: 165px;
     flex-direction: column;
     box-shadow: var(--box_shadow_main);
-    border: 1px solid var(--element_background_2);
+    border: 1px solid var(--border_color);
 }
 
 user_dropdown user_item {
@@ -537,7 +537,7 @@ wc_close, wc_maximize, wc_minimize {
     padding: 3px;
     border-radius: 50%;
     /*background: var(--element_background);*/
-    border: 1px solid var(--element_background_2);
+    border: 1px solid var(--border_color);
     box-shadow: 0 0 1px 0 var(--element_background_2);
 }
 

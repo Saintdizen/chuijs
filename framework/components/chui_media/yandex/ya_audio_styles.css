@@ -29,7 +29,7 @@ chui_ap_cover_img_back {
     height: auto;
     /*backdrop-filter: var(--global_blur);*/
     border-radius: var(--border_radius);
-    border: 1px solid var(--element_background_2);
+    border: 1px solid var(--border_color);
     align-items: center;
     justify-content: center;
 }
@@ -265,7 +265,7 @@ chui_playlist_search {
     align-items: center;
     position: relative;
     padding: var(--main_padding);
-    border: 1px solid var(--element_background_2);
+    border: 1px solid var(--border_color);
     box-shadow: 0 0 1px 0 var(--element_background_2);
     background: transparent;
     border-radius: var(--border_radius);
