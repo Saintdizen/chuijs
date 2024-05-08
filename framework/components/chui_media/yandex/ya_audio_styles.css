@@ -239,11 +239,12 @@ chui_ap_play_pause, chui_ap_next, chui_ap_prev, chui_ap_playlist {
 chui_playlist_main {
     display: flex;
     flex-direction: column;
-    backdrop-filter: var(--global_blur);
+    /*backdrop-filter: var(--global_blur);*/
     border-radius: var(--border_radius);
-    /*background: var(--ap_main_background);*/
+    /*background: var(--ap_main_background);*/;
+    background: transparent;
     border: none;
-    padding: 2px;
+    padding: 0px;
     width: -webkit-fill-available;
     height: -webkit-fill-available;
 }
