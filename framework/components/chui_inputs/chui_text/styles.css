@@ -18,7 +18,7 @@ chui_text_main {
     position: relative;
     padding: var(--main_padding);
     background: var(--element_background);
-    border: 1px solid var(--element_background_2);
+    border: none;
     box-shadow: 0 0 1px 0 var(--element_background_2);
 }
 
@@ -29,7 +29,7 @@ chui_text_main {
     background: transparent;
     color: var(--text_color);
     text-align: start;
-    border: 0;
+    border: none;
     font-size: var(--font_default_size);
 }
 
@@ -60,7 +60,7 @@ error_message_text {
 .chui_text_main_disabled {
     cursor: not-allowed;
     background: var(--element_background_disabled);
-    border: 1px solid var(--element_background_disabled_2);
+    border: none;
     box-shadow: 0 0 1px 0 var(--element_background_disabled_2);
 }
 
@@ -72,7 +72,7 @@ error_message_text {
     background: transparent;
     color: var(--text_color_disabled);
     text-align: start;
-    border: 0;
+    border: none;
     font-size: var(--font_default_size);
 }
 

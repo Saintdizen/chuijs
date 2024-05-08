@@ -7,7 +7,7 @@
         --text_color_hover_disable: rgba(255, 255, 255, 0.5);
         /* Основные цвета */
         --main_background: rgb(255, 255, 255);
-        --header_background: rgba(230, 230, 230, 0.5);
+        --header_background: rgba(226, 226, 226, 0.5);
         --header_background_drop: rgb(246, 246, 246, 1);
         --border_color: transparent;
         /* Элементы */
@@ -31,7 +31,7 @@
         --badge_warning_back: rgba(255, 204, 0, 0.4);
         --badge_warning_text: rgb(146, 81, 0);
         /* Аудиоплеер */
-        --ap_main_background: rgba(230, 230, 230, 0.5);
+        --ap_main_background: rgba(226, 226, 226, 0.5);
         --ap_main_background_2: rgba(220, 220, 220, 0.75);
         --ap_slider_background: rgba(220, 220, 220, 0.75);
         --ap_slider_buf_background: rgba(0, 122, 245, 0.5);

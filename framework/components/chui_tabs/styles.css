@@ -6,7 +6,7 @@ list {
     border-radius: var(--border_radius);
     background: transparent;
     margin: var(--margin) 0;
-    border: 1px solid var(--element_background_2);
+    border: none;
 }
 
 tab {
@@ -40,7 +40,7 @@ content {
     padding: var(--test_padding);
     border-radius: var(--border_radius);
     background: transparent;
-    border: 1px solid var(--element_background_2);
+    border: none;
 }
 
 .tab_active {

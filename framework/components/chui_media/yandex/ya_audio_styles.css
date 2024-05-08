@@ -254,25 +254,27 @@ chui_playlist_search {
     flex-direction: row;
     width: -webkit-fill-available;
     border: none;
-    height: 35px;
+    height: auto;
+    align-items: center;
+    justify-content: center;
 }
 .chui_playlist_search_input {
     display: flex;
     width: -webkit-fill-available;
     height: max-content;
-    margin-right: 10px;
+    margin: var(--margin);
     color: var(--text_color);
     align-items: center;
     position: relative;
     padding: var(--main_padding);
-    border: 1px solid var(--border_color);
+    border: none;
     box-shadow: 0 0 1px 0 var(--element_background_2);
-    background: transparent;
+    background: var(--header_background);
     border-radius: var(--border_radius);
 }
 .chui_playlist_search_input:focus {
-    border: 1px solid var(--blue_prime_background);
-    box-shadow: 0 0 2px 1px var(--blue_prime_background);
+    border: none;
+    box-shadow: 0 0 3px 2px var(--blue_prime_background);
 }
 
 chui_playlist_list {
@@ -284,7 +286,6 @@ chui_playlist_list {
     border-radius: var(--border_radius);
     background: transparent;
     border: none;
-    box-shadow: 0 0 1px 0 var(--element_background_2);
     margin-top: 10px;
     padding: 8px;
 }
@@ -350,6 +351,7 @@ chui_playlist_open_folder {
     align-items: center;
     border-radius: var(--border_radius);
     background: var(--ap_main_background_2);
+    margin: var(--margin);
 }
 
 chui_playlist_open_folder:hover {
