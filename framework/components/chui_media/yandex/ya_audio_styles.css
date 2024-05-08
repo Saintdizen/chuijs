@@ -34,6 +34,18 @@ chui_ap_cover_img_back {
     justify-content: center;
 }
 
+chui_ap_cover_img_back_blur {
+    display: flex;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    position: fixed;
+    top: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(30px);
+    z-index: -1;
+}
+
 .cover_image {
     border-radius: var(--border_radius);
     width: 100%;

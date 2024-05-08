@@ -18,6 +18,7 @@ class YaAudio {
     //
     #chui_ap_cover = document.createElement(`chui_ap_cover`);
     #chui_ap_cover_img_back = document.createElement(`chui_ap_cover_img_back`);
+    #chui_ap_cover_img_back_blur = document.createElement(`chui_ap_cover_img_back_blur`);
     #cover_img = new Image()
     //
     #chui_ap_block = document.createElement(`chui_ap_block`);
@@ -105,13 +106,19 @@ class YaAudio {
         this.#chui_ap_block.appendChild(this.#chui_ap_controls)
         this.#chui_ap_block.appendChild(this.#chui_ap_info)
         //
-        this.#chui_ap_cover.appendChild(this.#chui_ap_cover_img_back)
+
         // https://avatars.yandex.net/get-music-content/2810397/2245605c.a.4035118-2/800x800
         this.#cover_img.className = 'cover_image'
         this.#cover_img.src = "https://avatars.yandex.net/get-music-content/2810397/2245605c.a.4035118-2/800x800"
+
+        this.#chui_ap_cover_img_back_blur.style.backgroundImage = "url('https://avatars.yandex.net/get-music-content/2810397/2245605c.a.4035118-2/800x800')"
+        this.#chui_ap_cover_img_back_blur.style.backgroundSize = 'cover'
+
+
         this.#chui_ap_cover_img_back.appendChild(this.#cover_img)
+        this.#chui_ap_cover.appendChild(this.#chui_ap_cover_img_back)
 
-
+        this.#chui_ap_main.appendChild(this.#chui_ap_cover_img_back_blur)
         this.#chui_ap_main.appendChild(this.#chui_ap_cover)
         this.#chui_ap_main.appendChild(this.#chui_ap_block)
         // СОБЫТИЯ
@@ -197,6 +204,8 @@ class YaAudio {
         this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#icons_sizes.play_pause).getHTML()
         this.#chui_source_tag.src = String(await new YaApi().getLink(track.track_id, global.access_token, global.user_id))
         this.#cover_img.src = track.album
+        this.#chui_ap_cover_img_back_blur.style.backgroundImage = `url('${track.album}')`
+
         this.#chui_at.load()
         await this.#chui_at.play().then(() => {
             this.#setSliderMax()
@@ -318,8 +327,8 @@ class YaAudio {
             navigator.mediaSession.metadata = new MediaMetadata({
                 title: media.title,
                 artist: media.artist,
-                album: "",
-                artwork: media.album
+                album: media.artist,
+                artwork: [{ src: media.album }]
             });
         }
     }
