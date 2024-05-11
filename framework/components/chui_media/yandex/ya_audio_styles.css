@@ -36,14 +36,16 @@ chui_ap_cover_img_back {
 
 chui_ap_cover_img_back_blur {
     display: flex;
-    width: -webkit-fill-available;
-    height: -webkit-fill-available;
+    width: calc(100% + 20%);
+    height: calc(100% + 20%);
     position: fixed;
-    top: 0;
-    background-size: cover;
     background-position: center;
-    filter: blur(30px);
     z-index: -1;
+    bottom: 0;
+    top: -10%;
+    left: -10%;
+    right: 0;
+    filter: blur(33px);
 }
 
 .cover_image {
@@ -268,8 +270,8 @@ chui_playlist_search {
     position: relative;
     padding: var(--main_padding);
     border: none;
-    box-shadow: 0 0 1px 0 var(--element_background_2);
-    background: var(--header_background);
+    box-shadow: 0 0 1px 0 var(--ap_input_background);
+    background: var(--ap_input_background);
     border-radius: var(--border_radius);
 }
 .chui_playlist_search_input:focus {
@@ -345,8 +347,8 @@ chui_track_duration {
 
 chui_playlist_open_folder {
     display: flex;
-    height: 35px;
-    width: 35px;
+    height: 33px;
+    width: 33px;
     justify-content: center;
     align-items: center;
     border-radius: var(--border_radius);

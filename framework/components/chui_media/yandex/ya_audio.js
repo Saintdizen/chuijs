@@ -161,13 +161,13 @@ class YaAudio {
         if (options.pin !== undefined) this.#chui_ap_main.classList.add(options.pin);
         if (options.width !== undefined) this.#chui_ap_main.style.width = options.width;
         if (options.height !== undefined) this.#chui_ap_main.style.height = options.height;
-        let dialog = new Dialog({ closeOutSideClick: true, transparentBackground: true })
+        let dialog = new Dialog({ closeOutSideClick: true, customBackground: "var(--ap_main_background)" })
         dialog.addToBody(this.#chui_audio_fx)
         this.#chui_ap_main.appendChild(dialog.set())
         this.#chui_ap_fx_icon.addEventListener("click", () => dialog.open())
         dialog.addToBody(this.#chui_audio_fx)
 
-        let playlist_dialog = new Dialog({ closeOutSideClick: true, width: "80%", height: "70%", transparentBackground: true })
+        let playlist_dialog = new Dialog({ closeOutSideClick: true, width: "80%", height: "70%", customBackground: "var(--ap_main_background)" })
         playlist_dialog.addToBody(this.#chui_playlist)
         this.#chui_ap_main.appendChild(playlist_dialog.set())
         this.#chui_ap_playlist.addEventListener("click", () => playlist_dialog.open())

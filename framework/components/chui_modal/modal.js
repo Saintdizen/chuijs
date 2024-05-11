@@ -7,7 +7,7 @@ class Dialog {
     #header = document.createElement('dialog_header');
     #body = document.createElement('dialog_body');
     #footer = document.createElement('dialog_footer');
-    constructor(options = { width: String(), height: String(), closeOutSideClick: Boolean(), transparentBackground: Boolean() }) {
+    constructor(options = { width: String(), height: String(), closeOutSideClick: Boolean(), customBackground: String() }) {
         require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_Dialogs');
         this.#dialog.id = this.#id
         this.#content.style.width = options.width;
@@ -20,8 +20,8 @@ class Dialog {
                 }
             })
         }
-        if (options.transparentBackground) {
-            this.#content.style.background = "transparent";
+        if (options.customBackground !== undefined) {
+            this.#content.style.background = options.customBackground;
         }
         //ADDS
         this.#content.appendChild(this.#body)

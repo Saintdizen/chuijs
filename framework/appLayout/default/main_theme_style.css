@@ -31,6 +31,7 @@
         --badge_warning_back: rgba(255, 204, 0, 0.4);
         --badge_warning_text: rgb(146, 81, 0);
         /* Аудиоплеер */
+        --ap_input_background: rgba(255, 255, 255, 0.25);
         --ap_main_background: rgba(226, 226, 226, 0.5);
         --ap_main_background_2: rgba(220, 220, 220, 0.75);
         --ap_slider_background: rgba(220, 220, 220, 0.75);
@@ -71,6 +72,7 @@
         --badge_warning_back: rgba(255, 214, 10, 0.4);
         --badge_warning_text: rgb(255, 212, 38);
         /* Аудиоплеер */
+        --ap_input_background: rgba(30, 30, 30, 0.25);
         --ap_main_background: rgba(68, 68, 68, 0.5);
         --ap_main_background_2: rgba(73, 73, 73, 0.75);
         --ap_slider_background: rgba(73, 73, 73, 0.75);
