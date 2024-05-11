@@ -322,7 +322,7 @@ chui_track {
     border-radius: var(--border_radius);
     height: max-content;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 chui_track:hover {
@@ -343,6 +343,15 @@ chui_track_name {
 
 chui_track_duration {
     margin-right: 2px;
+}
+
+chui_track_cover {
+    background-size: cover;
+    display: flex;
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+    border-radius: var(--border_radius);
 }
 
 chui_playlist_open_folder {

@@ -293,14 +293,16 @@ class YaAudio {
     }
     #setTrack(track = {}, index = Number()) {
         let chui_track = document.createElement("chui_track");
+        let chui_track_cover = document.createElement("chui_track_cover")
         let chui_track_name = document.createElement("chui_track_name");
         //
+        chui_track_cover.style.backgroundImage = `url('${track.album}')`
         chui_track.id = `${index}`
         chui_track_name.innerText = `${track.artist} - ${track.title}`
         //
         chui_track.addEventListener("dblclick",  async (ev) => {
             let target_row = ev.target
-            if (target_row.tagName === "CHUI_TRACK_NAME" || target_row.tagName === "CHUI_TRACK_DURATION") {
+            if (target_row.tagName === "CHUI_TRACK_NAME" || target_row.tagName === "CHUI_TRACK_COVER") {
                 this.setActive(ev.target.parentNode.id)
             } else {
                 this.setActive(ev.target.id)
@@ -308,6 +310,7 @@ class YaAudio {
             await this.#start(track)
             this.#current_audio = index;
         })
+        chui_track.appendChild(chui_track_cover)
         chui_track.appendChild(chui_track_name)
         return chui_track;
     }
