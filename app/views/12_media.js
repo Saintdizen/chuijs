@@ -1,4 +1,5 @@
 const {Page, YaAudio, Styles, App, fs, path, Icons, YaApi} = require('../../index');
+const {Dialog} = require("../../framework/components/chui_modal/modal");
 
 class MediaPage extends Page {
     #download_path = path.join(App.userDataPath(), "downloads");
@@ -26,10 +27,19 @@ class MediaPage extends Page {
             // audio.restoreFX();
             // let pl = this.generatePlaylist()
             // setTimeout(() => audio.setPlayList(pl), 100)
-
-
         })
 
+        let playlist_dialog = new Dialog({ closeOutSideClick: true, width: "80%", height: "70%", transparentBack: true })
+        playlist_dialog.addToBody(audio.getPlaylist())
+
+        this.add(playlist_dialog)
+
+        audio.addFunctionButton(
+            YaAudio.FUNCTION_BUTTON({
+                icon: Icons.AUDIO_VIDEO.PLAYLIST_PLAY,
+                clickEvent: () => playlist_dialog.open()
+            })
+        )
 
         /*let video = new Video({
             autoplay: true,
