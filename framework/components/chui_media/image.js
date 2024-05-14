@@ -6,7 +6,7 @@ class Image {
     #chui_image = document.createElement('chui_image');
     #image = document.createElement('img');
     constructor(options = {
-        path: String(), base64: String(),
+        path: String(), base64: String(), httpPath: String(),
         width: String(), height: String(),
         openPopup: Boolean(), disableMargin: Boolean()
     }) {
@@ -14,6 +14,7 @@ class Image {
         if (options.disableMargin) this.#chui_image.style.margin = '0px';
         if (options.path !== undefined) this.#image.setAttribute('src', `data:image/png;base64,${require('fs').readFileSync(options.path).toString("base64")}`)
         if (options.base64 !== undefined) this.#image.setAttribute('src', `data:image/png;base64,${options.base64}`);
+        if (options.httpPath !== undefined) this.#image.setAttribute('src', options.httpPath);
         if (options.width !== undefined) this.#chui_image.style.width = options.width;
         if (options.height !== undefined) this.#chui_image.style.height = options.height;
         if (options.width !== undefined) this.#image.style.width = options.width;

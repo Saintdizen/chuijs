@@ -187,8 +187,8 @@ class YaAudio {
     restoreFX() {
         this.#chui_audio_fx.restore();
     }
-    addFunctionButton(component) {
-        this.#chui_ap_functions_block.appendChild(component)
+    addFunctionButton(...components) {
+        for (let component of components) this.#chui_ap_functions_block.appendChild(component)
     }
     async #convertSong(filePath, type) {
         return await new Promise((resolve, reject) => {
@@ -334,6 +334,43 @@ class YaAudio {
                 artwork: [{ src: media.album }]
             });
         }
+    }
+    static FUNCTION_ACTIVE_BUTTON(options = {
+        title: String(),
+        icon_on: undefined,
+        icon_off: undefined,
+        value: Boolean(),
+        activateEvent: () => {}
+    }) {
+        //
+        let check = document.createElement("input")
+        check.setAttribute("type", "checkbox")
+        check.style.display = "none"
+
+        check.addEventListener("change", (evt) => {
+            if (evt.target.checked) {
+                icon.innerHTML = new Icon(options.icon_on, "24px").getHTML()
+            } else {
+                icon.innerHTML = new Icon(options.icon_off, "24px").getHTML()
+            }
+        })
+        check.addEventListener("change", options.activateEvent)
+        //
+        let button = document.createElement("chui_ap_function_button")
+        button.appendChild(check)
+        button.addEventListener("click", () => check.click())
+        let icon = document.createElement("chui_ap_function_icon")
+        icon.innerHTML = new Icon(options.icon_off, "24px").getHTML()
+        button.appendChild(icon)
+
+        if (options.value === true) {
+            icon.innerHTML = new Icon(options.icon_on, "24px").getHTML()
+            setTimeout(() => check.click(), 100)
+        } else {
+            icon.innerHTML = new Icon(options.icon_off, "24px").getHTML()
+        }
+
+        return button
     }
     static FUNCTION_BUTTON(options = {
         title: String(),

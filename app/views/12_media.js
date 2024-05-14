@@ -1,26 +1,25 @@
-const {Page, YaAudio, Styles, App, fs, path, Icons, YaApi} = require('../../index');
+const {Page, YaAudio, Styles, App, fs, path, Icons, YaApi, Notification, CustomElement} = require('../../index');
 const {Dialog} = require("../../framework/components/chui_modal/modal");
 
 class MediaPage extends Page {
     #download_path = path.join(App.userDataPath(), "downloads");
-
+    #audio = new YaAudio({
+        autoplay: false,
+        playlist: true,
+        width: Styles.SIZE.WEBKIT_FILL,
+        height: Styles.SIZE.WEBKIT_FILL,
+        //pin: Audio.PIN.TOP
+    })
     constructor() {
         super();
         this.setTitle('OfflinePlayer');
         this.setFullHeight();
         this.setMain(false);
         this.setIcon(Icons.FILE.DOWNLOAD_FOR_OFFLINE)
-        let audio = new YaAudio({
-            autoplay: false,
-            playlist: true,
-            width: Styles.SIZE.WEBKIT_FILL,
-            height: Styles.SIZE.WEBKIT_FILL,
-            //pin: Audio.PIN.TOP
-        })
-        audio.openFolder(this.#download_path)
-        this.add(audio)
+        this.#audio.openFolder(this.#download_path)
+        this.add(this.#audio)
         let pl = this.generatePlaylist()
-        setTimeout(() => audio.setPlayList(pl), 100)
+        setTimeout(() => this.#audio.setPlayList(pl), 100)
 
         this.addRouteEvent(this, (e) => {
             // console.log(e)
@@ -30,11 +29,27 @@ class MediaPage extends Page {
         })
 
         let playlist_dialog = new Dialog({ closeOutSideClick: true, width: "80%", height: "70%", transparentBack: true })
-        playlist_dialog.addToBody(audio.getPlaylist())
+        playlist_dialog.addToBody(this.#audio.getPlaylist())
 
         this.add(playlist_dialog)
 
-        audio.addFunctionButton(
+        let ce = new CustomElement({
+            id: "123"
+        })
+
+        this.add(ce)
+
+        this.#audio.addFunctionButton(
+            YaAudio.FUNCTION_ACTIVE_BUTTON({
+                value: true,
+                icon_on: Icons.AUDIO_VIDEO.SHUFFLE_ON,
+                icon_off: Icons.AUDIO_VIDEO.SHUFFLE,
+                activateEvent: (evt) => {
+                    new Notification({
+                        title: "Перемешать", text: evt.target.checked, showTime: 1000
+                    }).show()
+                },
+            }),
             YaAudio.FUNCTION_BUTTON({
                 icon: Icons.AUDIO_VIDEO.PLAYLIST_PLAY,
                 clickEvent: () => playlist_dialog.open()

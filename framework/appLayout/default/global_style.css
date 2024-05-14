@@ -145,7 +145,7 @@ notification_panel {
     display: flex;
     flex-direction: column;
     position: fixed;
-    bottom: 0;
+    top: 46px;
     right: 0;
     padding: var(--margin);
     align-items: flex-end;

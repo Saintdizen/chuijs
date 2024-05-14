@@ -67,6 +67,7 @@ const {Audio} = require("./framework/components/chui_media/audio");
 const {Video} = require("./framework/components/chui_media/video");
 const {YaAudio} = require("./framework/components/chui_media/yandex/ya_audio");
 const {YaApi} = require("./framework/components/chui_media/yandex/ya_api");
+const {CustomElement} = require("./framework/components/chui_custom_element/custom_element");
 
 //VARS
 let isQuiting = false;
@@ -487,6 +488,7 @@ module.exports = {
     Audio: Audio,
     Video: Video,
     YaAudio: YaAudio,
+    CustomElement: CustomElement,
     //
     TelegramBot: TelegramBot,
     YaApi: YaApi,
