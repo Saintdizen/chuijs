@@ -53,7 +53,7 @@ class YaAudio {
     }
     #chui_playlist = new YaPlaylist()
     #chui_audio_fx = new YaAudioFX(this.#chui_at)
-    constructor(options = { pin: String(), playlist: Boolean(), width: String(), height: String() }) {
+    constructor(options = { pin: String(), playlist: Boolean(), width: String(), height: String(), coverPath: String() }) {
         require('../../../modules/chui_functions').setStyles(__dirname + "/ya_audio_styles.css", 'chUiJS_Audio');
         this.#chui_at.setAttribute("name", "media")
         this.#chui_at.controls = false;
@@ -108,10 +108,22 @@ class YaAudio {
 
         // https://avatars.yandex.net/get-music-content/2810397/2245605c.a.4035118-2/800x800
         this.#cover_img.className = 'cover_image'
-        this.#cover_img.src = "https://avatars.yandex.net/get-music-content/2810397/2245605c.a.4035118-2/800x800"
 
-        this.#chui_ap_cover_img_back_blur.style.backgroundImage = "url('https://avatars.yandex.net/get-music-content/2810397/2245605c.a.4035118-2/800x800')"
-        this.#chui_ap_cover_img_back_blur.style.backgroundSize = 'cover'
+
+        console.log()
+
+        if (options.coverPath === undefined) {
+            let def_path = require('path').join(require('@electron/remote').app.getAppPath(), 'framework/modules/chui_icon.png')
+            this.#cover_img.src = `file://${def_path}`
+            this.#chui_ap_cover_img_back_blur.style.backgroundImage = `url('file://${def_path}')`
+            this.#chui_ap_cover_img_back_blur.style.backgroundSize = 'cover'
+        } else {
+            this.#cover_img.src = options.coverPath
+            this.#chui_ap_cover_img_back_blur.style.backgroundImage = `url('${options.coverPath}')`
+            this.#chui_ap_cover_img_back_blur.style.backgroundSize = 'cover'
+        }
+
+
 
 
         this.#chui_ap_cover_img_back.appendChild(this.#cover_img)

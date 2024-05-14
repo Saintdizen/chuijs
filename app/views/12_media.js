@@ -9,6 +9,7 @@ class MediaPage extends Page {
         width: Styles.SIZE.WEBKIT_FILL,
         height: Styles.SIZE.WEBKIT_FILL,
         //pin: Audio.PIN.TOP
+        //coverPath: ""
     })
     constructor() {
         super();
@@ -33,11 +34,11 @@ class MediaPage extends Page {
 
         this.add(playlist_dialog)
 
-        let ce = new CustomElement({
-            id: "123"
-        })
-
-        this.add(ce)
+        // let ce = new CustomElement({
+        //     id: "123"
+        // })
+        //
+        // this.add(ce)
 
         this.#audio.addFunctionButton(
             YaAudio.FUNCTION_ACTIVE_BUTTON({
