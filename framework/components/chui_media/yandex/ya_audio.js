@@ -8,6 +8,7 @@ const Store = require('electron-store');
 const {shell} = require("electron");
 const {Toggle} = require("../../chui_inputs/chui_toggle/toggle");
 const {YaApi} = require("./ya_api");
+const {getDefaultIcon} = require("../../../modules/chui_functions");
 const store = new Store();
 
 let play_list = []
@@ -113,7 +114,7 @@ class YaAudio {
         console.log()
 
         if (options.coverPath === undefined) {
-            let def_path = require('path').join(require('@electron/remote').app.getAppPath(), 'framework/modules/chui_icon.png')
+            let def_path = getDefaultIcon()
             this.#cover_img.src = `file://${def_path}`
             this.#chui_ap_cover_img_back_blur.style.backgroundImage = `url('file://${def_path}')`
             this.#chui_ap_cover_img_back_blur.style.backgroundSize = 'cover'
