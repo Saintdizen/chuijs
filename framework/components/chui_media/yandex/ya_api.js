@@ -68,7 +68,6 @@ class YaApi {
                     })
                     for (let trs of pl.tracks) {
                         try {
-                            //let tr = await this.#api.getSingleTrack(trs.id);
                             YaApi.#sendData("SEND_TRACK_DATA", {
                                 trackName: `${trs.track.artists[0].name} - ${trs.track.title}`,
                                 index: pl.tracks.indexOf(trs) + 1
@@ -86,6 +85,7 @@ class YaApi {
                     }
                     playlists.push({
                         playlist_name: `pl_${playlist.kind}`,
+                        playlist_title: `pl_${playlist.title}`,
                         tracks: tracks
                     })
                 }
@@ -115,6 +115,7 @@ class YaApi {
                 }
                 playlists.push({
                     playlist_name: `pl_liked`,
+                    playlist_title: `Мне нравится`,
                     tracks: track_z
                 })
                 resolve(playlists)
