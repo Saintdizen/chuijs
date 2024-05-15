@@ -29,7 +29,7 @@ chui_ap_cover_img_back {
     height: auto;
     /*backdrop-filter: var(--global_blur);*/
     border-radius: var(--border_radius);
-    border: 1px solid var(--border_color);
+    border: none;
     align-items: center;
     justify-content: center;
 }
@@ -414,7 +414,7 @@ chui_ap_equalizer_preamp_block {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
+    background: var(--ap_main_background);
     border: none;
     border-radius: var(--border_radius);
     padding: 0 8px;
@@ -426,7 +426,7 @@ chui_ap_equalizer_band_block {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background: transparent;
+    background: var(--ap_main_background);
     border: none;
     border-radius: var(--border_radius);
     padding: 0 8px;
@@ -443,7 +443,7 @@ slider_label {
 .chui_ap_equalizer_disabled {
     cursor: not-allowed;
     background: var(--element_background_disabled);
-    border: 1px solid var(--element_background_disabled_2);
+    border: none;
     box-shadow: 0 0 1px 0 var(--element_background_disabled_2);
 }
 

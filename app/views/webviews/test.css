@@ -32,11 +32,11 @@
 }
 
 .theme-white .rup-settings-context, .theme-white .rup-settings__button .d-button-inner, .theme-white .deco-button-slider-control .deco-button-stylable {
-    border: 2px solid !important;
+    border: none !important;
 }
 
 .theme-black .rup-settings-context, .theme-black .rup-settings__button .d-button-inner, .theme-black .deco-button-slider-control .deco-button-stylable {
-    border: 2px solid !important;
+    border: none !important;
 }
 
 .theme-white .deco-pane-popup, .theme-white .deco-text-overlay:after, .theme-white .deco-tooltip {

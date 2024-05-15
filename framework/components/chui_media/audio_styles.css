@@ -226,7 +226,7 @@ chui_playlist_search {
     border-radius: var(--border_radius);
 }
 .chui_playlist_search_input:focus {
-    border: 1px solid var(--blue_prime_background);
+    border: none;
     box-shadow: 0 0 2px 1px var(--blue_prime_background);
 }
 
@@ -378,7 +378,7 @@ slider_label {
 .chui_ap_equalizer_disabled {
     cursor: not-allowed;
     background: var(--element_background_disabled);
-    border: 1px solid var(--element_background_disabled_2);
+    border: none;
     box-shadow: 0 0 1px 0 var(--element_background_disabled_2);
 }
 

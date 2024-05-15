@@ -86,7 +86,7 @@ date_main_block {
     padding: var(--test_padding) 0;
     background: transparent;
     color: var(--text_color);
-    border: 0;
+    border: none;
     font-size: var(--font_default_size);
 }
 
@@ -103,7 +103,7 @@ date_main_block {
 .date_main_block_disabled {
     cursor: not-allowed;
     background: var(--element_background_disabled);
-    border: 1px solid var(--element_background_disabled_2);
+    border: none;
     box-shadow: 0 0 1px 0 var(--element_background_disabled_2);
 }
 
@@ -126,6 +126,6 @@ date_main_block {
     margin: 0;
     padding: var(--test_padding) 0;
     background: transparent;
-    border: 0;
+    border: none;
     font-size: var(--font_default_size);
 }

@@ -32,7 +32,7 @@ chui_file_main {
     background: transparent;
     color: var(--text_color_disabled);
     text-align: start;
-    border: 0;
+    border: none;
     font-size: var(--font_default_size);
 }
 
@@ -52,7 +52,7 @@ chui_file_main {
     padding: 0;
     background: transparent;
     color: var(--text_color);
-    border: 0;
+    border: none;
     font-size: var(--font_default_size);
 }
 

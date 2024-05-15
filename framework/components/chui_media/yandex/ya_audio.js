@@ -173,7 +173,7 @@ class YaAudio {
         if (options.pin !== undefined) this.#chui_ap_main.classList.add(options.pin);
         if (options.width !== undefined) this.#chui_ap_main.style.width = options.width;
         if (options.height !== undefined) this.#chui_ap_main.style.height = options.height;
-        let dialog = new Dialog({ closeOutSideClick: true, customBackground: "var(--ap_main_background)" })
+        let dialog = new Dialog({ closeOutSideClick: true, transparentBack: true })
         dialog.addToBody(this.#chui_audio_fx)
         this.#chui_ap_main.appendChild(dialog.set())
         this.#chui_ap_fx_icon.addEventListener("click", () => dialog.open())
