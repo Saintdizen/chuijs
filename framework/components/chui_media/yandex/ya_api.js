@@ -85,7 +85,7 @@ class YaApi {
                     }
                     playlists.push({
                         playlist_name: `pl_${playlist.kind}`,
-                        playlist_title: `pl_${playlist.title}`,
+                        playlist_title: playlist.title,
                         tracks: tracks
                     })
                 }
