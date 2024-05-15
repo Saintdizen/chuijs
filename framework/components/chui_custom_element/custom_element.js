@@ -6,6 +6,15 @@ class CustomElement {
         this.#chui_custom_element.id = options.id
         this.#chui_custom_element.className = options.className
     }
+    addEventListener(type = String(), listener = () => {}) {
+        this.#chui_custom_element.addEventListener(type, listener)
+    }
+    innerText(innerText = String()) {
+        this.#chui_custom_element.innerText = innerText
+    }
+    innerHTML(innerHTML = String()) {
+        this.#chui_custom_element.innerHTML = innerHTML
+    }
     set() { return this.#chui_custom_element }
 }
 
