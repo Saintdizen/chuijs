@@ -313,6 +313,7 @@ class YaAudio {
         let chui_track_name = document.createElement("chui_track_name");
         let chui_track_downloaded = document.createElement("chui_track_downloaded");
         //
+        chui_track_downloaded.style.marginLeft = 'auto'
         chui_track_downloaded.innerHTML = new Icon(Icons.FILE.FILE_DOWNLOAD_DONE, "24px", "var(--badge_success_text)").getHTML()
         //
         chui_track_cover.style.backgroundImage = `url('${track.album}')`
