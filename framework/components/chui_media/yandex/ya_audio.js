@@ -215,10 +215,13 @@ class YaAudio {
         this.#renderProgress("0")
         this.#chui_ap_track_title.innerText = `${track.artist} - ${track.title}`
         this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#icons_sizes.play_pause).getHTML()
-        this.#chui_source_tag.src = String(await new YaApi().getLink(track.track_id, global.access_token, global.user_id))
+        if (track.path !== "") {
+            this.#chui_source_tag.src = `file://${track.path}`
+        } else {
+            this.#chui_source_tag.src = String(await new YaApi().getLink(track.track_id, global.access_token, global.user_id))
+        }
         this.#cover_img.src = track.album
         this.#chui_ap_cover_img_back_blur.style.backgroundImage = `url('${track.album}')`
-
         this.#chui_at.load()
         await this.#chui_at.play().then(() => {
             this.#setSliderMax()
@@ -308,6 +311,9 @@ class YaAudio {
         let chui_track = document.createElement("chui_track");
         let chui_track_cover = document.createElement("chui_track_cover")
         let chui_track_name = document.createElement("chui_track_name");
+        let chui_track_downloaded = document.createElement("chui_track_downloaded");
+        //
+        chui_track_downloaded.innerHTML = new Icon(Icons.FILE.FILE_DOWNLOAD_DONE, "24px", "var(--badge_success_text)").getHTML()
         //
         chui_track_cover.style.backgroundImage = `url('${track.album}')`
         chui_track.id = `${index}`
@@ -325,6 +331,9 @@ class YaAudio {
         })
         chui_track.appendChild(chui_track_cover)
         chui_track.appendChild(chui_track_name)
+        if (track.path !== "") {
+            chui_track.appendChild(chui_track_downloaded)
+        }
         return chui_track;
     }
     setActive(index = Number()) {
