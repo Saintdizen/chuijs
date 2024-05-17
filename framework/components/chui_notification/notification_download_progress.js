@@ -33,12 +33,13 @@ class DownloadProgressNotification {
         this.#progress_bar.setProgressCountText("0 / 100")
         this.#download_notification_body.appendChild(this.#progress_bar.set())
     }
-    update(title = String(), text = String(), count = String(), value = Number()) {
+    update(title = String(), text = String(), count = String(), value = Number(), max = Number()) {
         this.#download_notification_title.innerText = title;
 
         this.#progress_bar.setProgressText(text)
         this.#progress_bar.setProgressCountText(count)
         this.#progress_bar.setValue(value)
+        this.#progress_bar.setMax(max)
     }
     show() {
         document.getElementsByTagName('notification_panel')[0].appendChild(this.#download_notification);
