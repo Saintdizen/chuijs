@@ -102,7 +102,7 @@ class Test extends AppLayout {
         for (let i = 0; i < 100; i++) {
             notif.show()
             setTimeout(() => {
-                notif.update("Загрузка 'Лист'", `Трек ${i + 1}`, `${i + 1} / 100`, i + 1)
+                notif.update("Загрузка 'Лист'", `Трек ${i + 1}`, `${i + 1} / 100`, i + 1, 100)
             }, 5000)
         }
 
