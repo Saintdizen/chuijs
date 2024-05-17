@@ -95,16 +95,17 @@ class Test extends AppLayout {
             ]
         })
 
-        let notif = new DownloadProgressNotification({
-            title: "Загрузка 'Лист'"
-        })
-
-        for (let i = 0; i < 100; i++) {
-            notif.show()
-            setTimeout(() => {
-                notif.update("Загрузка 'Лист'", `Трек ${i + 1}`, `${i + 1} / 100`, i + 1, 100)
-            }, 5000)
-        }
+        setTimeout(() => {
+            let notif = new DownloadProgressNotification({
+                title: "Загрузка 'Лист'"
+            })
+            for (let i = 0; i < 100; i++) {
+                notif.show()
+                setTimeout(async () => {
+                    notif.update("Загрузка 'Лист'", `Трек ${i + 1}`, i + 1, 100)
+                }, 2000)
+            }
+        }, 1000)
 
         this.addToHeaderRight([
             // AppLayout.DIALOG({
