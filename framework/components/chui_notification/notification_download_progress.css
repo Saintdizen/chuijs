@@ -1,0 +1,121 @@
+/* download */
+notification_download_progress {
+    display: none;
+    height: max-content;
+    width: max-content;
+    min-width: 356px;
+    max-width: 356px;
+    border-radius: var(--border_radius);
+    margin: var(--margin);
+    font-size: var(--font_default_size);
+    padding: 6px 10px;
+    background: var(--header_background);
+    backdrop-filter: var(--global_blur);
+    z-index: 1002;
+    box-shadow: var(--box_shadow_main);
+}
+
+.download_notification_error {
+    background: var(--badge_error_back);
+    box-shadow: var(--box_shadow_main);
+}
+
+.download_notification_success {
+    background: var(--badge_success_back);
+    box-shadow: var(--box_shadow_main);
+}
+
+download_notification_body {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: left;
+    align-items: center;
+}
+
+download_notification_content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+download_notification_header {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    width: -webkit-fill-available;
+}
+
+download_notification_title {
+    font-size: var(--font_default_size);
+    font-weight: 500;
+    margin: 3px;
+    color: var(--text_color);
+    word-break: break-all;
+}
+
+download_notification_title p {
+    margin: 0;
+}
+
+download_notification_date {
+    font-size: 8pt;
+    font-weight: 400;
+    margin: 3px 0 0 10px;
+    color: var(--text_color);
+    white-space: pre;
+    text-align: end;
+}
+
+download_notification_text {
+    font-size: 11pt;
+    font-weight: 400;
+    margin: 6px 3px;
+    color: var(--text_color);
+    word-break: break-word;
+}
+
+download_notification_text p {
+    margin: 0;
+}
+
+download_progress {
+
+}
+
+download_progress_text_block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: -webkit-fill-available;
+    color: var(--text_color);
+    margin: 3px;
+}
+
+download_progress_text, download_progress_count {
+    font-size: 11px;
+}
+
+.download_progress_bar {
+    border-radius: 50px;
+    text-align: start;
+    margin: 3px 0;
+    width: -webkit-fill-available;
+    height: 9px;
+    border: none;
+}
+
+.download_progress_bar::-webkit-progress-bar {
+    background: var(--ap_main_background);
+    border-radius: 50px;
+    border: none;
+}
+
+.download_progress_bar::-webkit-progress-value {
+    background: var(--blue_prime_background);
+    border-radius: 50px;
+}

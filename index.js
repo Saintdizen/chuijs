@@ -68,6 +68,7 @@ const {Video} = require("./framework/components/chui_media/video");
 const {YaAudio} = require("./framework/components/chui_media/yandex/ya_audio");
 const {YaApi} = require("./framework/components/chui_media/yandex/ya_api");
 const {CustomElement} = require("./framework/components/chui_custom_element/custom_element");
+const {DownloadProgressNotification} = require("./framework/components/chui_notification/notification_download_progress");
 
 //VARS
 let isQuiting = false;
@@ -485,6 +486,7 @@ module.exports = {
     MenuBar: MenuBar,
     UpdateNotification: UpdateNotification,
     DownloadNotification: DownloadNotification,
+    DownloadProgressNotification: DownloadProgressNotification,
     Audio: Audio,
     Video: Video,
     YaAudio: YaAudio,
