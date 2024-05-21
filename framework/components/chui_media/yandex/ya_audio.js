@@ -223,9 +223,11 @@ class YaAudio {
         this.#cover_img.src = track.album
         this.#chui_ap_cover_img_back_blur.style.backgroundImage = `url('${track.album}')`
         this.#chui_at.load()
-        await this.#chui_at.play().then(() => {
+        this.#chui_at.play().then(() => {
             this.#setSliderMax()
             this.#displayBufferedAmount()
+        }).catch(error => {
+            console.error(error)
         })
         YaAudio.#setMediaData(track)
     }
