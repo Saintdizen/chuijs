@@ -2,7 +2,7 @@
   "name": "chuijs",
   "productName": "chuijs",
   "description": "component framework chUiJS",
-  "version": "3.0.6",
+  "version": "3.0.7",
   "private": false,
   "main": "index.js",
   "author": {
@@ -30,16 +30,16 @@
     "@electron/remote": "~2.1.2",
     "dataurl": "~0.1.0",
     "electron": "~24.8.8",
-    "electron-log": "~5.1.1",
-    "electron-store": "~8.1.0",
+    "electron-log": "~5.1.4",
+    "electron-store": "~8.2.0",
     "electron-updater": "~6.1.8",
-    "fast-xml-parser": "^4.3.6",
-    "get-audio-duration": "^4.0.1",
+    "fast-xml-parser": "~4.4.0",
+    "get-audio-duration": "~4.0.1",
     "image-size": "~1.1.1",
-    "octokit": "~3.1.2",
+    "octokit": "~4.0.2",
     "randomstring": "~1.3.0",
     "showdown": "~2.1.0",
     "transliteration": "~2.3.5",
-    "ym-api-meowed": "^1.3.2"
+    "ym-api-meowed": "~1.3.2"
   }
 }

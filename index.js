@@ -118,7 +118,6 @@ class Main {
         }
         app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
         app.commandLine.appendSwitch("disable-http-cache");
-        app.commandLine.appendSwitch("disable-http-cache");
         app.commandLine.appendSwitch('enable-transparent-visuals');
         app.commandLine.appendSwitch('enable-gpu-rasterization', "true");
         app.commandLine.appendSwitch('enable-native-gpu-memory-buffers', "true");
@@ -171,6 +170,7 @@ class Main {
             title: this.#appName,
             show: false,
             icon: this.#app_icon,
+            roundedCorners: true,
             webPreferences: {
                 plugins: false,
                 nodeIntegration: true,
