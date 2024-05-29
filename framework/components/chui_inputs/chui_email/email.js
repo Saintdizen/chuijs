@@ -10,7 +10,8 @@ class EmailInput {
         title: String(),
         placeholder: String(),
         width: String(),
-        required: Boolean()
+        required: Boolean(),
+        transparentBack: Boolean()
     }) {
         require('../../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_EmailInput');
         this.#title = options.title;
@@ -38,6 +39,10 @@ class EmailInput {
         })
         this.#chui_email_main.appendChild(this.#input);
         this.#chui_email_input.appendChild(this.#chui_email_main);
+
+        if (options.transparentBack !== undefined && options.transparentBack !== false) {
+            this.#chui_email_main.classList.add("chui_email_main_transparent")
+        }
     }
     getName() { return this.#input.name; }
     getTitle() { return this.#title; }

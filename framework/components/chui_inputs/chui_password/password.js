@@ -12,7 +12,7 @@ class PasswordInput {
     #title = undefined;
     #error_message_password = document.createElement("error_message_password");
     constructor(options = {
-        name: String(), title: String(), placeholder: String(), width: String(), required: Boolean()
+        name: String(), title: String(), placeholder: String(), width: String(), required: Boolean(), transparentBack: Boolean()
     }) {
         require('../../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_PasswordInput');
         this.#title = options.title;
@@ -56,6 +56,10 @@ class PasswordInput {
             this.#password_main.classList.remove("error_border");
             new Animation(this.#error_message_password).fadeOut();
         })
+
+        if (options.transparentBack !== undefined && options.transparentBack !== false) {
+            this.#password_main.classList.add("chui_password_main_transparent")
+        }
     }
     getName() { return this.#input.name; }
     getTitle() { return this.#title; }

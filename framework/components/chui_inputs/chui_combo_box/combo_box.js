@@ -17,6 +17,7 @@ class ComboBox {
         placeholder: String(),
         width: String(),
         required: Boolean(),
+        transparentBack: Boolean()
     }) {
         require('../../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_ComboBox');
         if (options.placeholder !== undefined) this.#input.placeholder = options.placeholder;
@@ -76,12 +77,17 @@ class ComboBox {
             for (let option of dropdown.childNodes) {
                 if (!option.getAttribute('option_value').includes(event.target.value)) {
                     option.style.display = 'none'
+                    console.log(dropdown.childNodes.length)
                 } else {
                     option.style.display = 'block'
                 }
             }
         });
         this.#ComboBox_main.appendChild(this.#ComboBox_second)
+
+        if (options.transparentBack !== undefined && options.transparentBack !== false) {
+            this.#ComboBox_second.classList.add("chui_combobox_transparent")
+        }
     }
     addOptions(...options) {
         for (let opt of options) {

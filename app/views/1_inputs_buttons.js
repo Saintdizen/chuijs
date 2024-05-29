@@ -28,19 +28,19 @@ class Inputs_Buttons_Page extends Page {
             checkBox.setDisabled(e.target.checked);
             radio.setDisabled(e.target.checked);
         });
-        let text = new TextInput({title: "TextInput"})
+        let text = new TextInput({title: "TextInput", transparentBack: true})
         text.setValue("TextInput");
-        let email = new EmailInput({title: "EmailInput"})
+        let email = new EmailInput({title: "EmailInput", transparentBack: true})
         email.setValue("email@input.ru");
-        let pass = new PasswordInput({title: "PasswordInput"})
+        let pass = new PasswordInput({title: "PasswordInput", transparentBack: true})
         pass.setValue("1234567890");
-        let number = new NumberInput({title: "NumberInput", width: "500px"})
+        let number = new NumberInput({title: "NumberInput", width: "500px", transparentBack: true})
         number.setValue("1000");
-        let textArea = new TextArea({title: "TextArea"})
+        let textArea = new TextArea({title: "TextArea", transparentBack: true})
         textArea.setValue("1000");
-        let combo = new ComboBox({title: 'ComboBox'})
+        let combo = new ComboBox({title: 'ComboBox', transparentBack: true})
         combo.addOptions("Option 1", "Option 2", "Option 3")
-        let select = new Select({title: 'Select'})
+        let select = new Select({title: 'Select', transparentBack: true})
         select.addOptions(
             { title: "Title Option 1", value: "Value Option 1"},
             { title: "Title Option 2", value: "Title Option 2" },
@@ -98,10 +98,12 @@ class Inputs_Buttons_Page extends Page {
         let button_text_icon = new Button({
             title: "Кнопка с текстом и иконкой",
             icon: Icons.MAPS.MAP,
-            clickEvent: (e) => console.log(e)
+            clickEvent: (e) => console.log(e),
+            transparentBack: true
         });
         let button_text_icon_reverse = new Button({
             primary: true,
+            transparentBack: true,
             title: "Кнопка с текстом и иконкой",
             icon: Icons.MAPS.MAP,
             reverse: true,

@@ -11,7 +11,7 @@ class NumberInput {
     #id = require("randomstring").generate();
     #input = document.createElement('input');
     #label = document.createElement('label');
-    constructor(options = { name: String(), title: String(), required: Boolean(), width: String() }) {
+    constructor(options = { name: String(), title: String(), required: Boolean(), width: String(), transparentBack: Boolean() }) {
         require('../../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_NumberInput');
         this.#title = options.title;
 
@@ -77,6 +77,10 @@ class NumberInput {
             this.#input.focus();
             this.#input.value--;
         });
+
+        if (options.transparentBack !== undefined && options.transparentBack !== false) {
+            this.#number_main.classList.add("chui_number_main_transparent")
+        }
     }
     getName() { return this.#input.name; }
     getTitle() { return this.#title; }

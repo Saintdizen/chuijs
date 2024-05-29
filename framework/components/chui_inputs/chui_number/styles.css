@@ -20,6 +20,10 @@ number_main {
     box-shadow: 0 0 1px 0 var(--element_background_2);
 }
 
+.chui_number_main_transparent {
+    background: var(--element_background_transparent);
+}
+
 .number_buttons {
     cursor: pointer;
     height: -webkit-fill-available;

@@ -23,51 +23,70 @@ chui_button {
     border: none;
 }
 
+.secondary_button_transparent {
+    cursor: pointer;
+    height: max-content;
+    width: max-content;
+    border-radius: var(--border_radius);
+    padding: var(--main_padding);
+    font-size: var(--font_default_size);
+    font-weight: 400;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: var(--element_background_2_transparent);
+    border: none;
+}
+
 .secondary_button:hover {
     background: var(--blue_prime_background);
+}
+
+.secondary_button_transparent:hover {
+    background: var(--blue_prime_background_trans);
 }
 
 .secondary_button_text {
     color: var(--text_color);
 }
 
-.secondary_button:hover .secondary_button_text {
+.secondary_button:hover .secondary_button_text, .secondary_button_transparent:hover .secondary_button_text {
     color: var(--text_color_hover);
 }
 
-.secondary_button button_icon chui_icon {
+.secondary_button button_icon chui_icon, .secondary_button_transparent button_icon chui_icon {
     color: var(--text_color);
 }
 
-.secondary_button:hover button_icon chui_icon {
+.secondary_button:hover button_icon chui_icon, .secondary_button_transparent:hover button_icon chui_icon {
     color: var(--text_color_hover);
 }
 /* DISABLED STYLES */
-.secondary_button:disabled {
+.secondary_button:disabled, .secondary_button_transparent:disabled {
     cursor: not-allowed;
     color: var(--text_color_disabled);
     background: var(--element_background_disabled);
     border: none;
 }
-
-.secondary_button:disabled:hover {
+.secondary_button:disabled:hover, .secondary_button_transparent:disabled:hover {
     background: var(--element_background_disabled);
     color: var(--text_color_disabled);
 }
 
-.secondary_button:disabled .secondary_button_text {
+.secondary_button:disabled .secondary_button_text, .secondary_button_transparent:disabled .secondary_button_text {
     color: var(--text_color_disabled);
 }
 
-.secondary_button:disabled:hover .secondary_button_text {
+.secondary_button:disabled:hover .secondary_button_text, .secondary_button_transparent:disabled:hover .secondary_button_text {
     color: var(--text_color_disabled);
 }
 
-.secondary_button:disabled button_icon chui_icon {
+.secondary_button:disabled button_icon chui_icon, .secondary_button_transparent:disabled button_icon chui_icon {
     color: var(--text_color_disabled);
 }
 
-.secondary_button:disabled:hover button_icon chui_icon {
+.secondary_button:disabled:hover button_icon chui_icon, .secondary_button_transparent:disabled:hover button_icon chui_icon {
     color: var(--text_color_disabled);
 }
 
@@ -88,50 +107,70 @@ chui_button {
     border: none;
 }
 
+.primary_button_transparent {
+    cursor: pointer;
+    height: max-content;
+    width: max-content;
+    border-radius: var(--border_radius);
+    padding: var(--main_padding);
+    font-size: var(--font_default_size);
+    font-weight: 400;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: var(--element_background_prime_transparent);
+    border: none;
+}
+
 .primary_button:hover {
     background: var(--blue_prime_background);
+}
+
+.primary_button_transparent:hover {
+    background: var(--blue_prime_background_trans);
 }
 
 .primary_button_text {
     color: var(--text_color_hover);
 }
 
-.primary_button:hover .primary_button_text {
+.primary_button:hover .primary_button_text, .primary_button_transparent:hover .primary_button_text {
     color: var(--text_color_hover);
 }
 
-.primary_button button_icon chui_icon {
+.primary_button button_icon chui_icon, .primary_button_transparent button_icon chui_icon {
     color: var(--text_color_hover);
 }
 
-.primary_button:hover button_icon chui_icon {
+.primary_button:hover button_icon chui_icon, .primary_button_transparent:hover button_icon chui_icon {
     color: var(--text_color_hover);
 }
 /* DISABLED STYLES */
-.primary_button:disabled {
+.primary_button:disabled, .primary_button_transparent:disabled {
     cursor: not-allowed;
     color: var(--text_color_hover_disable);
     background: var(--element_background_disabled_prime);
     border: none;
 }
 
-.primary_button:disabled:hover {
+.primary_button:disabled:hover, .primary_button_transparent:disabled:hover {
     background: var(--element_background_disabled_prime);
     color: var(--text_color_hover_disable);
 }
 
-.primary_button:disabled .primary_button_text {
+.primary_button:disabled .primary_button_text, .primary_button_transparent:disabled .primary_button_text {
     color: var(--text_color_hover_disable);
 }
 
-.primary_button:disabled:hover .primary_button_text {
+.primary_button:disabled:hover .primary_button_text, .primary_button_transparent:disabled:hover .primary_button_text {
     color: var(--text_color_hover_disable);
 }
 
-.primary_button:disabled button_icon chui_icon {
+.primary_button:disabled button_icon chui_icon, .primary_button_transparent:disabled button_icon chui_icon {
     color: var(--text_color_hover_disable);
 }
 
-.primary_button:disabled:hover button_icon chui_icon {
+.primary_button:disabled:hover button_icon chui_icon, .primary_button_transparent:disabled:hover button_icon chui_icon {
     color: var(--text_color_hover_disable);
 }

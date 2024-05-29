@@ -14,7 +14,7 @@ class Select {
     #dropdown = document.createElement('selectbox_dropdown');
     constructor(options = {
         name: String(), title: String(), placeholder: String(),
-        width: String(), required: Boolean()
+        width: String(), required: Boolean(), transparentBack: Boolean()
     }) {
         require('../../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_Select');
         if (options.width !== undefined) this.#Select_main.style.width = options.width;
@@ -73,6 +73,10 @@ class Select {
             }
         });
         this.#Select_main.appendChild(this.#Select_second)
+
+        if (options.transparentBack !== undefined && options.transparentBack !== false) {
+            this.#Select_second.classList.add("chui_selectbox_transparent")
+        }
     }
     setBottonOpenVisible(visible = Boolean()) {
         if (!visible) {
