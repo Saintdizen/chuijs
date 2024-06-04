@@ -52,6 +52,19 @@ class YaApi {
         })
     }
 
+    removeTrack(access_token, user_id, p_kind, trackId, albumId, revision) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#api.init({access_token: access_token, uid: user_id});
+                await this.#wapi.init({access_token: access_token, uid: user_id});
+                resolve(await this.#api.removeTracksFromPlaylist(p_kind,[{id: trackId, albumId: albumId}], revision))
+            } catch (e) {
+                console.log(`api error ${e.message}`);
+                reject(e)
+            }
+        })
+    }
+
     getTracks(access_token, user_id) {
         return new Promise(async (resolve, reject) => {
             let playlists = []
