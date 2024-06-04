@@ -304,7 +304,7 @@ class YaAudio {
         this.#chui_ap_seek.max = String(this.#chui_at.duration);
     }
     //
-    setPlayList(list = [{ title: String(), artist: String(), album: String(), mimetype: String(), path: String(), artwork: [] }]) {
+    setPlayList(list = [{ title: String(), artist: String(), album: String(), mimetype: String(), path: String(), artwork: [], remove: () => {}, download: () => {} }]) {
         this.#chui_playlist.getPlaylist().innerHTML = '';
         play_list = list;
         for (let track of play_list) this.#chui_playlist.getPlaylist().appendChild(this.#setTrack(track, play_list.indexOf(track)));
@@ -314,6 +314,16 @@ class YaAudio {
         let chui_track_cover = document.createElement("chui_track_cover")
         let chui_track_name = document.createElement("chui_track_name");
         let chui_track_downloaded = document.createElement("chui_track_downloaded");
+        let chui_track_download = document.createElement("chui_track_download");
+        let chui_track_remove = document.createElement("chui_track_remove");
+        //
+        chui_track_remove.style.marginLeft = '8px'
+        chui_track_remove.innerHTML = new Icon(Icons.ACTIONS.DELETE, "24px").getHTML()
+        chui_track_remove.addEventListener("click", track.remove)
+        //
+        chui_track_download.style.marginLeft = 'auto'
+        chui_track_download.innerHTML = new Icon(Icons.FILE.FILE_DOWNLOAD, "24px").getHTML()
+        chui_track_download.addEventListener("click", track.download)
         //
         chui_track_downloaded.style.marginLeft = 'auto'
         chui_track_downloaded.innerHTML = new Icon(Icons.FILE.FILE_DOWNLOAD_DONE, "24px", "var(--badge_success_text)").getHTML()
@@ -336,7 +346,10 @@ class YaAudio {
         chui_track.appendChild(chui_track_name)
         if (track.path !== "") {
             chui_track.appendChild(chui_track_downloaded)
+        } else {
+            chui_track.appendChild(chui_track_download)
         }
+        chui_track.appendChild(chui_track_remove)
         return chui_track;
     }
     setActive(index = Number()) {
