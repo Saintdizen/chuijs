@@ -317,9 +317,11 @@ class YaAudio {
         let chui_track_download = document.createElement("chui_track_download");
         let chui_track_remove = document.createElement("chui_track_remove");
         //
-        chui_track_remove.style.marginLeft = '8px'
-        chui_track_remove.innerHTML = new Icon(Icons.ACTIONS.DELETE, "24px").getHTML()
-        chui_track_remove.addEventListener("click", track.remove)
+        if (track.remove !== undefined) {
+            chui_track_remove.style.marginLeft = '8px'
+            chui_track_remove.innerHTML = new Icon(Icons.ACTIONS.DELETE, "24px").getHTML()
+            chui_track_remove.addEventListener("click", track.remove)
+        }
         //
         chui_track_download.style.marginLeft = 'auto'
         chui_track_download.innerHTML = new Icon(Icons.FILE.FILE_DOWNLOAD, "24px").getHTML()
