@@ -21,21 +21,24 @@ checkbox {
 
 .checkbox+label::before {
     font-size: var(--font_default_size);
-    content: '\2714';
+    content: '';
     display: flex;
     width: 1.2em;
     height: 1.2em;
     flex-shrink: 0;
-    flex-grow:0;
-    border-radius:25%;
-    margin-right:10px;
-    align-items:center;
-    justify-content:center;
+    flex-grow: 0;
+    border-radius: 25%;
+    margin-right: 10px;
+    align-items: center;
+    justify-content: center;
     color: var(--element_background_2);
-    font-family: 'chui_Ubuntu';
+    font-family: 'chui_Ubuntu', serif;
     background: var(--element_background);
     border: none;
     box-shadow: 0 0 1px 0 var(--element_background_2);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
 }
 
 .checkbox:not(:disabled):not(:checked):hover::before {}
@@ -70,6 +73,7 @@ checkbox {
     color:var(--text_color_hover);
     border: none;
     box-shadow: 0 0 1px 0 var(--blue_prime_background);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
 }
 
 .labelz {
