@@ -329,6 +329,45 @@ class YaApi {
         })
     }
 
+    getTrackSupplement(access_token, user_id, trackId) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#api.init({access_token: access_token, uid: user_id});
+                let feed = await this.#api.getTrackSupplement(trackId)
+                resolve(feed)
+            } catch (e) {
+                console.log(`api error ${e.message}`);
+                reject(e)
+            }
+        })
+    }
+
+    getTrackShareLink(access_token, user_id, trackId) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#api.init({access_token: access_token, uid: user_id});
+                let feed = await this.#api.getTrackShareLink(trackId)
+                resolve(feed)
+            } catch (e) {
+                console.log(`api error ${e.message}`);
+                reject(e)
+            }
+        })
+    }
+
+    getPlaylistW(access_token, user_id, trackId) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#wapi.init({access_token: access_token, uid: user_id});
+                let feed = await this.#wapi.getPlaylist(trackId)
+                resolve(feed)
+            } catch (e) {
+                console.log(`api error ${e.message}`);
+                reject(e)
+            }
+        })
+    }
+
     static #sendData(channel = String(), data) {
         let wc = require("@electron/remote").webContents.getAllWebContents()
         for (let test of wc) test.send(channel, data)

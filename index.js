@@ -186,7 +186,8 @@ class Main {
             resizable: this.#resizable,
             minimizable: true,
             maximizable: true,
-            center: true
+            center: true,
+            hasShadow: true
         });
 
         this.#window.setMenu(null)
