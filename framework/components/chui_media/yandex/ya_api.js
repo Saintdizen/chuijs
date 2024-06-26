@@ -1,7 +1,7 @@
 const {YMApi, WrappedYMApi} = require('ym-api-meowed');
 const {XMLParser} = require("fast-xml-parser");
 const crypto = require('node:crypto');
-const {DownloadTrackCodec, DownloadTrackQuality} = require("ym-api-meowed/dist/types");
+const {DownloadTrackCodec, DownloadTrackQuality} = require("ym-api-meowed/dist/Types");
 
 class YaApi {
     #api = new YMApi();
