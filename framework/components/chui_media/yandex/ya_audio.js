@@ -332,6 +332,7 @@ class YaAudio {
         //
         chui_track_cover.style.backgroundImage = `url('${track.album}')`
         chui_track.id = `${index}`
+        chui_track.setAttribute("name", track.track_id)
         chui_track_name.innerText = `${track.artist} - ${track.title}`
         //
         chui_track.addEventListener("dblclick",  async (ev) => {

@@ -60,7 +60,6 @@ class YaApi {
                 let playlist = await this.#api.getPlaylist(p_kind)
                 let tracks = playlist.tracks.filter(tr => tr.id === trackId)
                 if (tracks.length !== 0) {
-                    console.log(tracks)
                     await this.#api.removeTracksFromPlaylist(
                         playlist.kind,
                         [{id: tracks[0].id, albumId: tracks[0].track.albums[0].id}],
