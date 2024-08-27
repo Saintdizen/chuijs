@@ -316,11 +316,11 @@ class YaApi {
         })
     }
 
-    searchTracks(access_token, user_id, query = String()) {
+    searchTracks(access_token, user_id, query = String(), page = undefined, pageSize = undefined) {
         return new Promise(async (resolve, reject) => {
             try {
                 await this.#wapi.init({access_token: access_token, uid: user_id});
-                let feed = await this.#wapi.getApi().searchTracks(query)
+                let feed = await this.#wapi.getApi().searchTracks(query, {page: page, pageSize: pageSize})
                 resolve(feed)
             } catch (e) {
                 console.log(`api error ${e.message}`);
