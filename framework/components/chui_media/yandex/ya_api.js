@@ -2,6 +2,7 @@ const {YMApi, WrappedYMApi} = require('ym-api-meowed');
 const {XMLParser} = require("fast-xml-parser");
 const crypto = require('node:crypto');
 const {DownloadTrackCodec, DownloadTrackQuality} = require("ym-api-meowed/dist/Types");
+const {SearchType} = require("ym-api-meowed/src/Types");
 
 class YaApi {
     #api = new YMApi();
@@ -294,11 +295,20 @@ class YaApi {
     }
 
     // SEARCH
-    search(access_token, user_id, query = String()) {
+    search(access_token, user_id, query = String(), options = undefined) {
         return new Promise(async (resolve, reject) => {
             try {
+                /*{
+                    page: number;
+                    pageSize: number;
+                }*/
                 await this.#wapi.init({access_token: access_token, uid: user_id});
-                let feed = await this.#wapi.getApi().search(query)
+                let feed = undefined;
+                if (options === undefined) {
+                    feed = await this.#wapi.getApi().search(query)
+                } else {
+                    feed = await this.#wapi.getApi().search(query, options)
+                }
                 resolve(feed)
             } catch (e) {
                 console.log(`api error ${e.message}`);
