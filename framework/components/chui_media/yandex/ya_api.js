@@ -299,8 +299,8 @@ class YaApi {
         return new Promise(async (resolve, reject) => {
             try {
                 /*{
-                    page: number;
-                    pageSize: number;
+                    page?: number;
+                    pageSize?: number;
                 }*/
                 await this.#wapi.init({access_token: access_token, uid: user_id});
                 let feed = undefined;
