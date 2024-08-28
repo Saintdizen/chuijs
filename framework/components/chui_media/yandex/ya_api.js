@@ -407,6 +407,25 @@ class YaApi {
         })
     }
 
+    addTrackToPlaylist(access_token, user_id, p_kind, trackId, albumId) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#api.init({access_token: access_token, uid: user_id});
+                await this.#wapi.init({access_token: access_token, uid: user_id});
+                let playlist = await this.#api.getPlaylist(p_kind)
+                await this.#api.addTracksToPlaylist(
+                    playlist.kind,
+                    [{id: trackId, albumId: albumId}],
+                    playlist.revision
+                )
+                resolve(`Track ${trackId} added`)
+            } catch (e) {
+                console.log(`api error ${e}`);
+                reject(e)
+            }
+        })
+    }
+
     static #sendData(channel = String(), data) {
         let wc = require("@electron/remote").webContents.getAllWebContents()
         for (let test of wc) test.send(channel, data)
