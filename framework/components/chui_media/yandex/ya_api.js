@@ -78,6 +78,19 @@ class YaApi {
         })
     }
 
+    getUserPlaylists(access_token, user_id) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.#wapi.init({access_token: access_token, uid: user_id});
+                let feed = await this.#wapi.getApi().getUserPlaylists(user_id)
+                resolve(feed)
+            } catch (e) {
+                console.log(`api error ${e.message}`);
+                reject(e)
+            }
+        })
+    }
+
     getTracks(access_token, user_id) {
         return new Promise(async (resolve, reject) => {
             let playlists = []
@@ -381,11 +394,11 @@ class YaApi {
         })
     }
 
-    getPlaylistW(access_token, user_id, trackId) {
+    getPlaylist(access_token, user_id, kind) {
         return new Promise(async (resolve, reject) => {
             try {
                 await this.#wapi.init({access_token: access_token, uid: user_id});
-                let feed = await this.#wapi.getPlaylist(trackId)
+                let feed = await this.#wapi.getPlaylist(kind, user_id)
                 resolve(feed)
             } catch (e) {
                 console.log(`api error ${e.message}`);
