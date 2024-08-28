@@ -316,16 +316,16 @@ class YaAudio {
         let chui_track_downloaded = document.createElement("chui_track_downloaded");
         let chui_track_download = document.createElement("chui_track_download");
         let chui_track_remove = document.createElement("chui_track_remove");
+        let chui_track_add_to_playlist = document.createElement("chui_track_add_to_playlist");
         //
-        if (track.remove !== undefined) {
-            chui_track_remove.style.marginLeft = '8px'
-            chui_track_remove.innerHTML = new Icon(Icons.ACTIONS.DELETE, "24px").getHTML()
-            chui_track_remove.addEventListener("click", track.remove)
-        }
+        chui_track_remove.style.marginLeft = '8px'
+        chui_track_remove.innerHTML = new Icon(Icons.ACTIONS.DELETE, "24px").getHTML()
         //
         chui_track_download.style.marginLeft = 'auto'
         chui_track_download.innerHTML = new Icon(Icons.FILE.FILE_DOWNLOAD, "24px").getHTML()
-        chui_track_download.addEventListener("click", track.download)
+        //
+        chui_track_add_to_playlist.style.marginLeft = 'auto'
+        chui_track_add_to_playlist.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAYLIST_ADD, "24px").getHTML()
         //
         chui_track_downloaded.style.marginLeft = 'auto'
         chui_track_downloaded.innerHTML = new Icon(Icons.FILE.FILE_DOWNLOAD_DONE, "24px", "var(--badge_success_text)").getHTML()
@@ -347,12 +347,23 @@ class YaAudio {
         })
         chui_track.appendChild(chui_track_cover)
         chui_track.appendChild(chui_track_name)
-        if (track.path !== "") {
-            chui_track.appendChild(chui_track_downloaded)
-        } else {
-            chui_track.appendChild(chui_track_download)
+        //
+        if (track.addToPlaylist !== undefined) {
+            chui_track_add_to_playlist.addEventListener("click", track.addToPlaylist)
+            chui_track.appendChild(chui_track_add_to_playlist)
         }
-        chui_track.appendChild(chui_track_remove)
+        if (track.download !== undefined) {
+            chui_track_download.addEventListener("click", track.download)
+            if (track.path !== "") {
+                chui_track.appendChild(chui_track_downloaded)
+            } else {
+                chui_track.appendChild(chui_track_download)
+            }
+        }
+        if (track.remove !== undefined) {
+            chui_track_remove.addEventListener("click", track.remove)
+            chui_track.appendChild(chui_track_remove)
+        }
         return chui_track;
     }
     setActive(index = Number()) {
