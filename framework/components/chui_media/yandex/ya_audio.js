@@ -54,8 +54,13 @@ class YaAudio {
     }
     #chui_playlist = new YaPlaylist()
     #chui_audio_fx = new YaAudioFX(this.#chui_at)
-    constructor(options = { pin: String(), playlist: Boolean(), width: String(), height: String(), coverPath: String() }) {
+    //
+    #user = undefined
+    constructor(options = { pin: String(), playlist: Boolean(), width: String(), height: String(), coverPath: String() }, user = { token: undefined, id: undefined }) {
         require('../../../modules/chui_functions').setStyles(__dirname + "/ya_audio_styles.css", 'chUiJS_Audio');
+        //
+        this.#user = user
+        //
         this.#chui_at.setAttribute("name", "media")
         this.#chui_at.controls = false;
         this.#chui_at.preload = "metadata"
@@ -210,7 +215,7 @@ class YaAudio {
         if (track.path !== "") {
             this.#chui_source_tag.src = `file://${track.path}`
         } else {
-            this.#chui_source_tag.src = String(await new YaApi().getLink(track.track_id))
+            this.#chui_source_tag.src = String(await new YaApi(this.#user.token, this.#user.id).getLink(track.track_id))
         }
         this.#cover_img.src = track.album
         this.#chui_ap_cover_img_back_blur.style.backgroundImage = `url('${track.album}')`
