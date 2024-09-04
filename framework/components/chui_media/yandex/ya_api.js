@@ -7,7 +7,12 @@ class YaApi {
     #api = new YMApi();
     #wapi = new WrappedYMApi();
     url = 'https://oauth.yandex.ru/authorize?response_type=token&client_id=23cabbbdc6cd418abb4b39c32c41195d'
-    constructor() { }
+    #access_token = undefined
+    #user_id = undefined
+    constructor() {
+        this.#access_token = global.access_token;
+        this.#user_id = global.user_id;
+    }
 
     auth() {
         return new Promise(async (resolve, reject) => {
@@ -24,8 +29,8 @@ class YaApi {
                         await this.#wapi.init({access_token: found[1], uid: 1});
                         let res = await this.#api.getAccountStatus();
                         win.close()
-                        global.access_token = found[1]
-                        global.user_id = res.account.uid
+                        this.#access_token = found[1]
+                        this.#user_id = res.account.uid
                         resolve({
                             access_token: found[1],
                             user_id: res.account.uid
@@ -39,11 +44,11 @@ class YaApi {
         })
     }
 
-    getUserData(access_token, user_id) {
+    getUserData() {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#api.init({access_token: access_token, uid: user_id});
-                await this.#wapi.init({access_token: access_token, uid: user_id});
+                await this.#api.init({access_token: this.#access_token, uid: this.#user_id});
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
                 resolve(await this.#api.getAccountStatus())
             } catch (e) {
                 console.log(`api error ${e.message}`);
@@ -52,11 +57,11 @@ class YaApi {
         })
     }
 
-    removeTrack(access_token, user_id, p_kind, trackId) {
+    removeTrack(p_kind, trackId) {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#api.init({access_token: access_token, uid: user_id});
-                await this.#wapi.init({access_token: access_token, uid: user_id});
+                await this.#api.init({access_token: this.#access_token, uid: this.#user_id});
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
                 let playlist = await this.#api.getPlaylist(p_kind)
                 let tracks = playlist.tracks.filter(tr => tr.id === trackId)
                 if (tracks.length !== 0) {
@@ -78,11 +83,11 @@ class YaApi {
         })
     }
 
-    getUserPlaylists(access_token, user_id) {
+    getUserPlaylists() {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#wapi.init({access_token: access_token, uid: user_id});
-                let feed = await this.#wapi.getApi().getUserPlaylists(user_id)
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
+                let feed = await this.#wapi.getApi().getUserPlaylists(this.#user_id)
                 resolve(feed)
             } catch (e) {
                 console.log(`api error ${e.message}`);
@@ -91,13 +96,13 @@ class YaApi {
         })
     }
 
-    getTracks(access_token, user_id) {
+    getTracks() {
         return new Promise(async (resolve, reject) => {
             let playlists = []
-            await this.#api.init({access_token: access_token, uid: user_id});
-            await this.#wapi.init({access_token: access_token, uid: user_id});
+            await this.#api.init({access_token: this.#access_token, uid: this.#user_id});
+            await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
             try {
-                let pls = await this.#api.getUserPlaylists(user_id)
+                let pls = await this.#api.getUserPlaylists(this.#user_id)
                 for (let playlist of pls) {
                     let tracks = []
                     let pl = await this.#wapi.getPlaylist(playlist.kind, playlist.uid);
@@ -128,7 +133,7 @@ class YaApi {
                         tracks: tracks
                     })
                 }
-                let liketracks = await this.#api.getLikedTracks(user_id)
+                let liketracks = await this.#api.getLikedTracks(this.#user_id)
                 let track_z = []
                 YaApi.#sendData("SEND_PLAYLIST_DATA", {
                     playlistName: "getLikedTracks",
@@ -165,10 +170,10 @@ class YaApi {
         })
     }
 
-    getLink(track_id = String(), access_token, user_id) {
+    getLink(track_id = String()) {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#wapi.init({access_token: access_token, uid: user_id});
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
                 let di = await this.#wapi.getConcreteDownloadInfo(track_id, DownloadTrackCodec.MP3, DownloadTrackQuality.High)
                 let res = await fetch(di.downloadInfoUrl)
                 let text = await res.text()
@@ -186,10 +191,10 @@ class YaApi {
         })
     }
 
-    getFeed(access_token, user_id) {
+    getFeed() {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#wapi.init({access_token: access_token, uid: user_id});
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
                 let feed = await this.#wapi.getApi().getFeed()
                 resolve(feed)
             } catch (e) {
@@ -199,10 +204,10 @@ class YaApi {
         })
     }
 
-    getGenres(access_token, user_id) {
+    getGenres() {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#wapi.init({access_token: access_token, uid: user_id});
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
                 let feed = await this.#wapi.getApi().getGenres()
                 resolve(feed)
             } catch (e) {
@@ -212,10 +217,10 @@ class YaApi {
         })
     }
 
-    getPodcasts(access_token, user_id) {
+    getPodcasts() {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#wapi.init({access_token: access_token, uid: user_id});
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
                 let feed = await this.#wapi.getApi().getPodcasts()
                 resolve(feed)
             } catch (e) {
@@ -225,10 +230,10 @@ class YaApi {
         })
     }
 
-    getNewReleases(access_token, user_id) {
+    getNewReleases() {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#wapi.init({access_token: access_token, uid: user_id});
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
                 let feed = await this.#wapi.getApi().getNewReleases()
                 resolve(feed)
             } catch (e) {
@@ -238,10 +243,10 @@ class YaApi {
         })
     }
 
-    getChart(access_token, user_id, type) {
+    getChart(type) {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#wapi.init({access_token: access_token, uid: user_id});
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
                 // ChartType = "russia" | "world";
                 let feed = await this.#wapi.getApi().getChart(type)
                 resolve(feed)
@@ -253,10 +258,10 @@ class YaApi {
     }
 
     // Station
-    getAllStationsList(access_token, user_id, language) {
+    getAllStationsList(language) {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#wapi.init({access_token: access_token, uid: user_id});
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
                 // Language = "en" | "ru" | string;
                 let feed = await this.#wapi.getApi().getAllStationsList(language)
                 resolve(feed)
@@ -267,10 +272,10 @@ class YaApi {
         })
     }
 
-    getRecomendedStationsList(access_token, user_id) {
+    getRecomendedStationsList() {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#wapi.init({access_token: access_token, uid: user_id});
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
                 let feed = await this.#wapi.getApi().getRecomendedStationsList()
                 resolve(feed)
             } catch (e) {
@@ -280,11 +285,11 @@ class YaApi {
         })
     }
 
-    getStationTracks(access_token, user_id, options = { stationId: String(), queue: String() }) {
+    getStationTracks(stationId = String(), queue = String()) {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#wapi.init({access_token: access_token, uid: user_id});
-                let feed = await this.#wapi.getApi().getStationTracks(options.stationId, options.queue)
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
+                let feed = await this.#wapi.getApi().getStationTracks(stationId, queue)
                 resolve(feed)
             } catch (e) {
                 console.log(`api error ${e.message}`);
@@ -293,10 +298,10 @@ class YaApi {
         })
     }
 
-    getStationInfo(access_token, user_id, stationId = String()) {
+    getStationInfo(stationId = String()) {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#wapi.init({access_token: access_token, uid: user_id});
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
                 let feed = await this.#wapi.getApi().getStationInfo(stationId)
                 resolve(feed)
             } catch (e) {
@@ -307,14 +312,14 @@ class YaApi {
     }
 
     // SEARCH
-    search(access_token, user_id, query = String(), options = undefined) {
+    search(query = String(), options = undefined) {
         return new Promise(async (resolve, reject) => {
             try {
                 /*{
                     page?: number;
                     pageSize?: number;
                 }*/
-                await this.#wapi.init({access_token: access_token, uid: user_id});
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
                 let feed = undefined;
                 if (options === undefined) {
                     feed = await this.#wapi.getApi().search(query)
@@ -329,10 +334,10 @@ class YaApi {
         })
     }
 
-    searchTracks(access_token, user_id, query = String(), page = undefined, pageSize = undefined) {
+    searchTracks(query = String(), page = undefined, pageSize = undefined) {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#wapi.init({access_token: access_token, uid: user_id});
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
                 let feed = await this.#wapi.getApi().searchTracks(query, {page: page, pageSize: pageSize})
                 resolve(feed)
             } catch (e) {
@@ -342,10 +347,10 @@ class YaApi {
         })
     }
 
-    searchArtists(access_token, user_id, query = String(), page = undefined, pageSize = undefined) {
+    searchArtists(query = String(), page = undefined, pageSize = undefined) {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#wapi.init({access_token: access_token, uid: user_id});
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
                 let feed = await this.#wapi.getApi().searchArtists(query, {page: page, pageSize: pageSize})
                 resolve(feed)
             } catch (e) {
@@ -355,10 +360,10 @@ class YaApi {
         })
     }
 
-    searchAll(access_token, user_id, query = String(), page = undefined, pageSize = undefined) {
+    searchAll(query = String(), page = undefined, pageSize = undefined) {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#wapi.init({access_token: access_token, uid: user_id});
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
                 let feed = await this.#wapi.getApi().searchAll(query, {page: page, pageSize: pageSize})
                 resolve(feed)
             } catch (e) {
@@ -368,10 +373,10 @@ class YaApi {
         })
     }
 
-    getTrackSupplement(access_token, user_id, trackId) {
+    getTrackSupplement(trackId) {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#api.init({access_token: access_token, uid: user_id});
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
                 let feed = await this.#api.getTrackSupplement(trackId)
                 resolve(feed)
             } catch (e) {
@@ -381,10 +386,10 @@ class YaApi {
         })
     }
 
-    getTrackShareLink(access_token, user_id, trackId) {
+    getTrackShareLink(trackId) {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#api.init({access_token: access_token, uid: user_id});
+                await this.#api.init({access_token: this.#access_token, uid: this.#user_id});
                 let feed = await this.#api.getTrackShareLink(trackId)
                 resolve(feed)
             } catch (e) {
@@ -394,11 +399,11 @@ class YaApi {
         })
     }
 
-    getPlaylist(access_token, user_id, kind) {
+    getPlaylist(kind) {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#wapi.init({access_token: access_token, uid: user_id});
-                let feed = await this.#wapi.getPlaylist(kind, user_id)
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
+                let feed = await this.#wapi.getPlaylist(kind, this.#user_id)
                 resolve(feed)
             } catch (e) {
                 console.log(`api error ${e.message}`);
@@ -407,11 +412,11 @@ class YaApi {
         })
     }
 
-    addTrackToPlaylist(access_token, user_id, p_kind, trackId, albumId) {
+    addTrackToPlaylist(p_kind, trackId, albumId) {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.#api.init({access_token: access_token, uid: user_id});
-                await this.#wapi.init({access_token: access_token, uid: user_id});
+                await this.#api.init({access_token: this.#access_token, uid: this.#user_id});
+                await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
                 let playlist = await this.#api.getPlaylist(p_kind)
                 await this.#api.addTracksToPlaylist(
                     playlist.kind,
