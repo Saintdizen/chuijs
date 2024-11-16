@@ -85,13 +85,32 @@ class Select {
             this.#input.style.textAlign = 'left'
         }
     }
+    addOption(title, value) {
+        let option = document.createElement(`selectbox_option`);
+        option.innerHTML = title;
+        option.setAttribute('option_title', title);
+        option.setAttribute('option_value', value);
+        option.addEventListener('click', () => {
+            const eventAwesome = new CustomEvent("chui_select_option_changed", {
+                detail: {
+                    title: option.getAttribute('option_title'),
+                    value: option.getAttribute('option_value')
+                },
+            });
+            this.#Select_main.dispatchEvent(eventAwesome)
+            this.#input.setAttribute("value", option.getAttribute('option_title'));
+            this.#Select_main.setAttribute("option_title", option.getAttribute('option_title'));
+            this.#Select_main.setAttribute("option_value", option.getAttribute('option_value'));
+        });
+        this.#dropdown.appendChild(option);
+    }
     addOptions(...options) {
         for (let opt of options) {
             let option = document.createElement(`selectbox_option`);
             option.innerHTML = opt.title;
             option.setAttribute('option_title', opt.title);
             option.setAttribute('option_value', opt.value);
-            option.addEventListener('click', (e) => {
+            option.addEventListener('click', () => {
                 const eventAwesome = new CustomEvent("chui_select_option_changed", {
                     detail: {
                         title: option.getAttribute('option_title'),

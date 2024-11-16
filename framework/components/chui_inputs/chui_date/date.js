@@ -49,13 +49,13 @@ class DateInput {
         });
         select_year.setDropdownHeight('200px');
         let datez = this.#date_now.getFullYear() + 5;
-        for (let i = 0; i < 150; i++) {
+        for (let i = 0; i < 10; i++) {
             datez--;
-            select_year.addOptions(datez)
+            select_year.addOption(datez, datez)
         }
         for (let i = 0; i < 12; i++) {
-            let test = new Date(2022, i).toLocaleString('default', {month: 'long'}).toUpperCase();
-            select.addOptions(test)
+            let test = new Date(2024, i).toLocaleString('default', {month: 'long'}).toUpperCase();
+            select.addOption(test, test)
         }
         //date_input_controls.appendChild(select.set());
         //date_input_controls.appendChild(select_year.set());
@@ -72,7 +72,7 @@ class DateInput {
             }
             for (let i = 0; i < 12; i++) {
                 let elem = document.getElementById(`month_${i}`);
-                if (elem != null && elem.getAttribute("month-name") === event.target.value) {
+                if (elem != null && elem.getAttribute("month-name") === event.detail.value) {
                     elem.style.display = 'block';
                 }
             }
@@ -80,7 +80,8 @@ class DateInput {
         select_year.addValueChangeListener((event) => {
             date_month_list.innerHTML = '';
             for (let i = 0; i < 12; i++) {
-                let cal = new Calendar(event.target.value, i+1);
+                console.log(event)
+                let cal = new Calendar(event.detail.value, i+1);
                 let date_month_main = document.createElement('date_month_main');
                 date_month_main.setAttribute('month-name', cal.getMonthName());
                 date_month_main.setAttribute('id', `month_${cal.getMonth()}`);

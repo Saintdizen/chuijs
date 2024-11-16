@@ -116,7 +116,7 @@ class Main {
                 this.#app_icon = options.icon;
             }
         }
-        app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
+        //app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
         app.commandLine.appendSwitch("disable-http-cache");
         app.commandLine.appendSwitch('enable-transparent-visuals');
         app.commandLine.appendSwitch('enable-gpu-rasterization', "true");
