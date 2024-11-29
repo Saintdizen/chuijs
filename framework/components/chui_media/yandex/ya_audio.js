@@ -14,9 +14,9 @@ const store = new Store();
 let play_list = []
 
 const icons_sizes = {
-    play_pause: "45px",
+    play_pause: "35px",
     next_prev: "30px",
-    volume: "28px"
+    volume: "25px"
 }
 
 class YaAudio {
@@ -48,7 +48,8 @@ class YaAudio {
     #chui_ap_next = document.createElement(`chui_ap_next`);
     #chui_ap_prev = document.createElement(`chui_ap_prev`);
     //
-    #chui_ap_functions_block = document.createElement("chui_ap_functions_block");
+    #chui_ap_functions_block_left = document.createElement("chui_ap_functions_block_left");
+    #chui_ap_functions_block_right = document.createElement("chui_ap_functions_block_right");
     // Блок управления громкостью
     #chui_ap_volume_block = document.createElement("chui_ap_volume_block");
     #chui_ap_volume_icon = document.createElement(`chui_ap_volume_icon`);
@@ -99,7 +100,7 @@ class YaAudio {
         this.#chui_ap_controls_one.appendChild(this.#chui_ap_prev)
         this.#chui_ap_controls_one.appendChild(this.#chui_ap_play_pause)
         this.#chui_ap_controls_one.appendChild(this.#chui_ap_next)
-        this.#chui_ap_controls_one.appendChild(this.#chui_ap_functions_block)
+        this.#chui_ap_controls_one.appendChild(this.#chui_ap_functions_block_left)
         // ИНФОРМАЦИЯ
         this.#chui_ap_track_title.innerText = 'Исполнитель трека - Наименование трека'
         this.#chui_ap_seek_block.appendChild(this.#chui_ap_seek)
@@ -109,21 +110,16 @@ class YaAudio {
         this.#chui_ap_time_block.appendChild(this.#chui_ap_track_title)
         this.#chui_ap_time_block.appendChild(this.#chui_ap_time2.set())
         this.#chui_ap_info.appendChild(this.#chui_ap_time_block)
-
         //
         this.#chui_ap_block.appendChild(this.#chui_ap_controls_one)
         this.#chui_ap_block.appendChild(this.#chui_ap_info)
         //
-
-        //
-
+        this.#chui_ap_controls.appendChild(this.#chui_ap_functions_block_right)
         this.#chui_ap_controls.appendChild(this.#chui_ap_volume_block)
         //
         this.#chui_ap_main.appendChild(this.#chui_at)
         this.#chui_at.appendChild(this.#chui_source_tag)
         this.#chui_ap_block.appendChild(this.#chui_ap_controls)
-
-        //
         // https://avatars.yandex.net/get-music-content/2810397/2245605c.a.4035118-2/800x800
         this.#cover_img_two.className = 'cover_image'
         if (options.coverPath === undefined) {
@@ -221,8 +217,11 @@ class YaAudio {
     restoreFX() {
         this.#chui_audio_fx.restore();
     }
-    addFunctionButton(...components) {
-        for (let component of components) this.#chui_ap_functions_block.appendChild(component)
+    addFunctionButtonToLeft(...components) {
+        for (let component of components) this.#chui_ap_functions_block_left.appendChild(component)
+    }
+    addFunctionButtonToRight(...components) {
+        for (let component of components) this.#chui_ap_functions_block_right.appendChild(component)
     }
     async #convertSong(filePath, type) {
         return await new Promise((resolve, reject) => {

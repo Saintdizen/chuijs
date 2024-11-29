@@ -40,7 +40,21 @@ class MediaPage extends Page {
         //
         // this.add(ce)
 
-        this.#audio.addFunctionButton(
+        this.#audio.addFunctionButtonToLeft(
+            YaAudio.FUNCTION_BUTTON({
+                icon: Icons.AUDIO_VIDEO.PLAYLIST_PLAY,
+                clickEvent: () => playlist_dialog.open()
+            }),
+            YaAudio.FUNCTION_BUTTON({
+                icon: Icons.AUDIO_VIDEO.PLAYLIST_PLAY,
+                clickEvent: () => playlist_dialog.open()
+            }),
+            YaAudio.FUNCTION_BUTTON({
+                icon: Icons.AUDIO_VIDEO.PLAYLIST_PLAY,
+                clickEvent: () => playlist_dialog.open()
+            })
+        )
+        this.#audio.addFunctionButtonToRight(
             YaAudio.FUNCTION_ACTIVE_BUTTON({
                 value: true,
                 icon_on: Icons.AUDIO_VIDEO.SHUFFLE_ON,
@@ -50,10 +64,6 @@ class MediaPage extends Page {
                         title: "Перемешать", text: evt.target.checked, showTime: 1000
                     }).show()
                 },
-            }),
-            YaAudio.FUNCTION_BUTTON({
-                icon: Icons.AUDIO_VIDEO.PLAYLIST_PLAY,
-                clickEvent: () => playlist_dialog.open()
             })
         )
 

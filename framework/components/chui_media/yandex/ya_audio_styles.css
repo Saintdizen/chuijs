@@ -160,11 +160,15 @@ chui_ap_seek_buf {
 }
 
 /* УПРАВЛЕНИЕ ГРОМКОСТЬЮ */
-chui_ap_functions_block {
+chui_ap_functions_block_left {
     display: flex;
     margin: 6px;
 }
 
+chui_ap_functions_block_right {
+    display: flex;
+    margin: 6px;
+}
 
 /* УПРАВЛЕНИЕ ГРОМКОСТЬЮ */
 chui_ap_volume_block {
