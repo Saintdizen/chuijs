@@ -2,8 +2,12 @@ const { Main, MenuItem, path, App, formatBytes } = require('./index');
 let json = require("./package.json");
 const main = new Main({
     name: `${json.name} (${json.version})`,
-    width: 960,
-    height: 540,
+    sizes: {
+        minWidth: 960,
+        width: 960,
+        minHeight: 540,
+        height: 540
+    },
     render: `${__dirname}/app/app.js`,
     devTools: false,
     resizable: true,

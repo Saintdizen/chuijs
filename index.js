@@ -83,6 +83,8 @@ class Main {
     #appName = undefined;
     #height = undefined;
     #width = undefined;
+    #minHeight = undefined;
+    #minWidth = undefined;
     #renderer = undefined;
     #devToolsOpened = false;
     #webSecurity = true;
@@ -92,8 +94,7 @@ class Main {
 
     constructor(options = {
         name: String(),
-        width: Number(),
-        height: Number(),
+        sizes: { height: Number(), width: Number(), minHeight: Number(), minWidth: Number() },
         render: String(),
         devTools: Boolean(),
         webSecurity: Boolean(),
@@ -137,8 +138,10 @@ class Main {
 
         // Options
         this.#appName = options.name;
-        this.#height = options.height;
-        this.#width = options.width;
+        this.#height = options.sizes.height;
+        this.#width = options.sizes.width;
+        this.#minHeight = options.sizes.minHeight;
+        this.#minWidth = options.sizes.minWidth;
         this.#renderer = options.render;
         this.#webSecurity = options.webSecurity;
         this.#resizable = options.resizable;
@@ -166,6 +169,8 @@ class Main {
             transparent: false,
             width: this.#width,
             height: this.#height,
+            minHeight: this.#minHeight,
+            minWidth: this.#minWidth,
             name: this.#appName,
             title: this.#appName,
             show: false,
