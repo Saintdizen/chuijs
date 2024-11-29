@@ -1,6 +1,5 @@
 const { Animation } = require('../../modules/chui_animations/animations')
 const { Spinner } = require('../chui_spinner/spinner')
-const fs = require("fs");
 
 class WebView {
     #id = require("randomstring").generate()

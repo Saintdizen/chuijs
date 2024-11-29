@@ -13,6 +13,12 @@ const store = new Store();
 
 let play_list = []
 
+const icons_sizes = {
+    play_pause: "45px",
+    next_prev: "30px",
+    volume: "28px"
+}
+
 class YaAudio {
     #current_audio = 0
     #chui_ap_main = document.createElement(`chui_ap_main`);
@@ -21,12 +27,14 @@ class YaAudio {
     #chui_ap_cover_img_back = document.createElement(`chui_ap_cover_img_back`);
     #chui_ap_cover_img_back_blur = document.createElement(`chui_ap_cover_img_back_blur`);
     #cover_img = new Image()
+    #cover_img_two = new Image()
     //
     #chui_ap_block = document.createElement(`chui_ap_block`);
     #chui_at = document.createElement(`audio`);
     #chui_source_tag = document.createElement(`source`);
     // Блок информация
     #chui_ap_info = document.createElement(`chui_ap_info`);
+    #chui_ap_time_block = document.createElement(`chui_ap_time_block`);
     #chui_ap_time1 = undefined;
     #chui_ap_time2 = undefined;
     #chui_ap_seek_block = document.createElement("chui_ap_seek_block")
@@ -35,6 +43,7 @@ class YaAudio {
     #chui_ap_track_title = document.createElement(`chui_ap_track_title`);
     // Блок управления
     #chui_ap_controls = document.createElement(`chui_ap_controls`);
+    #chui_ap_controls_one = document.createElement(`chui_ap_controls_one`);
     #chui_ap_play_pause = document.createElement(`chui_ap_play_pause`);
     #chui_ap_next = document.createElement(`chui_ap_next`);
     #chui_ap_prev = document.createElement(`chui_ap_prev`);
@@ -47,11 +56,6 @@ class YaAudio {
     //
     #chui_ap_fx_icon = document.createElement(`chui_ap_fx_icon`);
     // Размеры иконок
-    #icons_sizes = {
-        play_pause: "30px",
-        next_prev: "24px",
-        volume: "24px"
-    }
     #chui_playlist = new YaPlaylist()
     #chui_audio_fx = new YaAudioFX(this.#chui_at)
     //
@@ -75,12 +79,12 @@ class YaAudio {
         this.#chui_ap_seek.value = "0"
         this.#chui_ap_seek.step = "any"
         // КНОПКИ
-        this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, this.#icons_sizes.play_pause).getHTML()
-        this.#chui_ap_next.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_NEXT, this.#icons_sizes.next_prev).getHTML()
-        this.#chui_ap_prev.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_PREVIOUS, this.#icons_sizes.next_prev).getHTML()
+        this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_CIRCLE_FILLED, icons_sizes.play_pause).getHTML()
+        this.#chui_ap_next.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_NEXT, icons_sizes.next_prev).getHTML()
+        this.#chui_ap_prev.innerHTML = new Icon(Icons.AUDIO_VIDEO.SKIP_PREVIOUS, icons_sizes.next_prev).getHTML()
         // Заполнение элемента
         // УПРАВЛЕНИЕ ГРОМКОСТЬЮ
-        this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#icons_sizes.volume).getHTML()
+        this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, icons_sizes.volume).getHTML()
         this.#chui_ap_volume.type = "range"
         this.#chui_ap_volume.id = "chui_ap_volume"
         this.#chui_ap_volume.max = "100"
@@ -89,29 +93,49 @@ class YaAudio {
         this.#chui_at.volume = this.#chui_ap_volume.value / 100;
         this.#chui_ap_volume_block.appendChild(this.#chui_ap_volume_icon)
         this.#chui_ap_volume_block.appendChild(this.#chui_ap_volume)
-        this.#chui_ap_fx_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.EQUALIZER, this.#icons_sizes.volume).getHTML()
+        this.#chui_ap_fx_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.EQUALIZER, icons_sizes.volume).getHTML()
         this.#chui_ap_volume_block.appendChild(this.#chui_ap_fx_icon)
+        // КНОПКИ
+        this.#chui_ap_controls_one.appendChild(this.#chui_ap_prev)
+        this.#chui_ap_controls_one.appendChild(this.#chui_ap_play_pause)
+        this.#chui_ap_controls_one.appendChild(this.#chui_ap_next)
+        this.#chui_ap_controls_one.appendChild(this.#chui_ap_functions_block)
         // ИНФОРМАЦИЯ
-        this.#chui_ap_info.appendChild(this.#chui_ap_time1.set())
+        this.#chui_ap_track_title.innerText = 'Исполнитель трека - Наименование трека'
         this.#chui_ap_seek_block.appendChild(this.#chui_ap_seek)
         this.#chui_ap_seek_block.appendChild(this.#chui_ap_seek_buf)
         this.#chui_ap_info.appendChild(this.#chui_ap_seek_block)
-        this.#chui_ap_info.appendChild(this.#chui_ap_time2.set())
-        // КНОПКИ
-        this.#chui_ap_controls.appendChild(this.#chui_ap_prev)
-        this.#chui_ap_controls.appendChild(this.#chui_ap_play_pause)
-        this.#chui_ap_controls.appendChild(this.#chui_ap_next)
-        this.#chui_ap_controls.appendChild(this.#chui_ap_track_title)
+        this.#chui_ap_time_block.appendChild(this.#chui_ap_time1.set())
+        this.#chui_ap_time_block.appendChild(this.#chui_ap_track_title)
+        this.#chui_ap_time_block.appendChild(this.#chui_ap_time2.set())
+        this.#chui_ap_info.appendChild(this.#chui_ap_time_block)
+
         //
-        this.#chui_ap_controls.appendChild(this.#chui_ap_functions_block)
+        this.#chui_ap_block.appendChild(this.#chui_ap_controls_one)
+        this.#chui_ap_block.appendChild(this.#chui_ap_info)
+        //
+
+        //
+
         this.#chui_ap_controls.appendChild(this.#chui_ap_volume_block)
         //
         this.#chui_ap_main.appendChild(this.#chui_at)
         this.#chui_at.appendChild(this.#chui_source_tag)
         this.#chui_ap_block.appendChild(this.#chui_ap_controls)
-        this.#chui_ap_block.appendChild(this.#chui_ap_info)
+
         //
         // https://avatars.yandex.net/get-music-content/2810397/2245605c.a.4035118-2/800x800
+        this.#cover_img_two.className = 'cover_image'
+        if (options.coverPath === undefined) {
+            let def_path = getDefaultIcon()
+            this.#cover_img_two.src = `file://${def_path}`
+            this.#chui_ap_cover_img_back_blur.style.backgroundImage = `url('file://${def_path}')`
+            this.#chui_ap_cover_img_back_blur.style.backgroundSize = 'cover'
+        } else {
+            this.#cover_img_two.src = options.coverPath
+            this.#chui_ap_cover_img_back_blur.style.backgroundImage = `url('${options.coverPath}')`
+            this.#chui_ap_cover_img_back_blur.style.backgroundSize = 'cover'
+        }
         this.#cover_img.className = 'cover_image'
         if (options.coverPath === undefined) {
             let def_path = getDefaultIcon()
@@ -150,18 +174,18 @@ class YaAudio {
             this.#chui_at.volume = this.#chui_ap_volume.value / 100;
             this.#renderVolume()
             if (Number(this.#chui_ap_volume.value) === 0) {
-                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_MUTE, this.#icons_sizes.volume).getHTML()
+                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_MUTE, icons_sizes.volume).getHTML()
             } else {
-                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#icons_sizes.volume).getHTML()
+                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, icons_sizes.volume).getHTML()
             }
         });
         this.#chui_ap_volume_icon.addEventListener('click', () => {
             if (!this.#chui_at.muted) {
-                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_OFF, this.#icons_sizes.volume).getHTML()
+                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_OFF, icons_sizes.volume).getHTML()
                 this.#chui_at.muted = true
                 this.#chui_ap_volume.disabled = true
             } else {
-                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, this.#icons_sizes.volume).getHTML()
+                this.#chui_ap_volume_icon.innerHTML = new Icon(Icons.AUDIO_VIDEO.VOLUME_UP, icons_sizes.volume).getHTML()
                 this.#chui_at.muted = false
                 this.#chui_ap_volume.disabled = false
             }
@@ -211,7 +235,7 @@ class YaAudio {
     async #start(track) {
         this.#renderProgress("0")
         this.#chui_ap_track_title.innerText = `${track.artist} - ${track.title}`
-        this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#icons_sizes.play_pause).getHTML()
+        this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE_CIRCLE_FILLED, icons_sizes.play_pause).getHTML()
         if (track.path !== "") {
             this.#chui_source_tag.src = `file://${track.path}`
         } else {
@@ -254,10 +278,10 @@ class YaAudio {
             await this.#start(play_list[this.#current_audio])
         } else if (this.#chui_at.currentTime > 0 && !this.#chui_at.paused) {
             this.#chui_at.pause()
-            this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_ARROW, this.#icons_sizes.play_pause).getHTML()
+            this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PLAY_CIRCLE_FILLED, icons_sizes.play_pause).getHTML()
         } else if (this.#chui_at.currentTime > 0 && this.#chui_at.paused) {
             await this.#chui_at.play()
-            this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#icons_sizes.play_pause).getHTML()
+            this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE_CIRCLE_FILLED, icons_sizes.play_pause).getHTML()
         }
     }
     #displayBufferedAmount = () => {
@@ -398,9 +422,9 @@ class YaAudio {
 
         check.addEventListener("change", (evt) => {
             if (evt.target.checked) {
-                icon.innerHTML = new Icon(options.icon_on, "24px").getHTML()
+                icon.innerHTML = new Icon(options.icon_on, icons_sizes.volume).getHTML()
             } else {
-                icon.innerHTML = new Icon(options.icon_off, "24px").getHTML()
+                icon.innerHTML = new Icon(options.icon_off, icons_sizes.volume).getHTML()
             }
         })
         check.addEventListener("change", options.activateEvent)
@@ -409,14 +433,14 @@ class YaAudio {
         button.appendChild(check)
         button.addEventListener("click", () => check.click())
         let icon = document.createElement("chui_ap_function_icon")
-        icon.innerHTML = new Icon(options.icon_off, "24px").getHTML()
+        icon.innerHTML = new Icon(options.icon_off, icons_sizes.volume).getHTML()
         button.appendChild(icon)
 
         if (options.value === true) {
-            icon.innerHTML = new Icon(options.icon_on, "24px").getHTML()
+            icon.innerHTML = new Icon(options.icon_on, icons_sizes.volume).getHTML()
             setTimeout(() => check.click(), 100)
         } else {
-            icon.innerHTML = new Icon(options.icon_off, "24px").getHTML()
+            icon.innerHTML = new Icon(options.icon_off, icons_sizes.volume).getHTML()
         }
 
         return button
@@ -427,7 +451,7 @@ class YaAudio {
         clickEvent: () => {}
     }) {
         let button = document.createElement("chui_ap_function_button")
-        button.innerHTML = new Icon(options.icon, "24px").getHTML()
+        button.innerHTML = new Icon(options.icon, icons_sizes.volume).getHTML()
         button.addEventListener("click", options.clickEvent)
         return button
     }
