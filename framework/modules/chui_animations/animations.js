@@ -1,3 +1,5 @@
+// transition: all var(--transition_time);
+
 class Animation {
     #element = undefined;
     constructor(element) {
@@ -8,9 +10,11 @@ class Animation {
         if (window.getComputedStyle(this.#element, null).display === 'none') {
             if (this.#element.tagName !== "TABLE") this.#element.style.display = 'flex';
         }
+        this.#element.style.transition = "transform .0s"
         this.#element.style.animationName = 'fade-in';
     }
     fadeOut() {
+        this.#element.style.transition = "transform .0s"
         if (this.#element.style.animationName) {
             this.#element.style.animationName = 'fade-out';
             this.#element.addEventListener('animationend', removeEvents);

@@ -1,4 +1,4 @@
-const {Page, YaAudio, Styles, App, fs, path, Icons, YaApi, Notification, CustomElement} = require('../../index');
+const {Page, YaAudio, Styles, App, fs, path, Icons, YaApi, Notification, CustomElement, Button} = require('../../index');
 const {Dialog} = require("../../framework/components/chui_modal/modal");
 
 class MediaPage extends Page {
@@ -30,6 +30,12 @@ class MediaPage extends Page {
         })
 
         let playlist_dialog = new Dialog({ closeOutSideClick: true, width: "80%", height: "70%", transparentBack: true })
+        playlist_dialog.addToHeader(new Button({
+            title: "close",
+            clickEvent: () => {
+                playlist_dialog.close()
+            }
+        }))
         playlist_dialog.addToBody(this.#audio.getPlaylist())
 
         this.add(playlist_dialog)
@@ -41,14 +47,6 @@ class MediaPage extends Page {
         // this.add(ce)
 
         this.#audio.addFunctionButtonToLeft(
-            YaAudio.FUNCTION_BUTTON({
-                icon: Icons.AUDIO_VIDEO.PLAYLIST_PLAY,
-                clickEvent: () => playlist_dialog.open()
-            }),
-            YaAudio.FUNCTION_BUTTON({
-                icon: Icons.AUDIO_VIDEO.PLAYLIST_PLAY,
-                clickEvent: () => playlist_dialog.open()
-            }),
             YaAudio.FUNCTION_BUTTON({
                 icon: Icons.AUDIO_VIDEO.PLAYLIST_PLAY,
                 clickEvent: () => playlist_dialog.open()

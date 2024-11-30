@@ -2,28 +2,20 @@ chui_dialog {
     display: none;
     position: fixed;
     z-index: 1000;
-    left: 0;
-    top: 0;
-    width: -webkit-fill-available;
-    height: -webkit-fill-available;
-    overflow: auto;
-    background-color: var(--header_background);
-    padding: 0;
-    border: none;
-    backdrop-filter: var(--global_blur);
-}
-
-dialog_content {
-    margin: auto;
+    left: calc(100% / 2);
+    top: calc(100% / 2);
     width: max-content;
     height: max-content;
-    display: flex;
+    overflow: hidden;
+    background-color: var(--ap_main_background);
+    border: none;
+    backdrop-filter: var(--global_blur);
+    border-radius: var(--border_radius);
+    box-shadow: var(--box_shadow_main);
+    margin: auto;
     flex-direction: column;
     padding: var(--test_padding);
-    border-radius: var(--border_radius);
     color: var(--text_color);
-    background: var(--main_background);
-    box-shadow: var(--box_shadow_main);
 }
 
 dialog_header {
