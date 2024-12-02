@@ -9,6 +9,7 @@ const {shell} = require("electron");
 const {Toggle} = require("../../chui_inputs/chui_toggle/toggle");
 const {YaApi} = require("./ya_api");
 const {getDefaultIcon} = require("../../../modules/chui_functions");
+const {Button} = require("../../chui_button/button");
 const store = new Store();
 
 let play_list = []
@@ -58,7 +59,8 @@ class YaAudio {
     #chui_ap_fx_icon = document.createElement(`chui_ap_fx_icon`);
     // Размеры иконок
     #chui_playlist = new YaPlaylist()
-    #chui_audio_fx = new YaAudioFX(this.#chui_at)
+    #dialog_fx = new Dialog({ closeOutSideClick: true, transparentBack: true })
+    #chui_audio_fx = new YaAudioFX(this.#chui_at, this.#dialog_fx)
     //
     #user = undefined
     constructor(options = { pin: String(), playlist: Boolean(), width: String(), height: String(), coverPath: String() }, user = { token: undefined, id: undefined }) {
@@ -190,11 +192,9 @@ class YaAudio {
         if (options.pin !== undefined) this.#chui_ap_main.classList.add(options.pin);
         if (options.width !== undefined) this.#chui_ap_main.style.width = options.width;
         if (options.height !== undefined) this.#chui_ap_main.style.height = options.height;
-        let dialog = new Dialog({ closeOutSideClick: true, transparentBack: true })
-        dialog.addToBody(this.#chui_audio_fx)
-        this.#chui_ap_main.appendChild(dialog.set())
-        this.#chui_ap_fx_icon.addEventListener("click", () => dialog.open())
-        dialog.addToBody(this.#chui_audio_fx)
+        this.#dialog_fx.addToBody(this.#chui_audio_fx)
+        this.#chui_ap_main.appendChild(this.#dialog_fx.set())
+        this.#chui_ap_fx_icon.addEventListener("click", () => this.#dialog_fx.open())
     }
     getPlaylist() {
         return this.#chui_playlist
@@ -477,13 +477,14 @@ class YaAudioFX {
     #chui_ap_equalizer_band_block = document.createElement("chui_ap_equalizer_band_block")
     #toggle_on_off = new Toggle();
     #eqBands = [60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000]
-    #select = new Select({width: "41%"})
+    #select = new Select({width: "41%", transparentBack: true})
+    #close = new Button({icon: Icons.NAVIGATION.CLOSE, transparentBack: true})
     #media = undefined;
     #filters = undefined;
     #fx_status = "chuijs.framework.settings.fx_status"
     #fx_preset = "chuijs.framework.settings.fx_preset"
     #audioContext = new AudioContext();
-    constructor(audio) {
+    constructor(audio, dialog) {
         this.#media = this.#audioContext.createMediaElementSource(audio);
         this.#filters = this.#eqBands.map((band, i) => {
             let filter = this.#audioContext.createBiquadFilter()
@@ -516,6 +517,10 @@ class YaAudioFX {
         //
         this.#chui_ap_equalizer_controls.appendChild(this.#select.set())
         this.#chui_ap_equalizer_controls.appendChild(this.#toggle_on_off.set())
+        this.#close.addClickListener(() => {
+            dialog.close()
+        })
+        this.#chui_ap_equalizer_controls.appendChild(this.#close.set())
         //
         this.#chui_ap_equalizer_block.appendChild(this.#chui_ap_equalizer_preamp_block)
         this.#chui_ap_equalizer_block.appendChild(this.#chui_ap_equalizer_band_block)
