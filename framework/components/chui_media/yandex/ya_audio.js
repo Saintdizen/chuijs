@@ -1,6 +1,6 @@
 const fs = require("fs");
 const dataurl = require("dataurl");
-const { Icon, Icons } = require("../../chui_icons/icons");
+const {Icon, Icons} = require("../../chui_icons/icons");
 const {Label} = require('../../chui_label/label');
 const {Select} = require("../../chui_inputs/chui_select_box/select_box");
 const {Dialog} = require("../../chui_modal/modal");
@@ -59,11 +59,18 @@ class YaAudio {
     #chui_ap_fx_icon = document.createElement(`chui_ap_fx_icon`);
     // Размеры иконок
     #chui_playlist = new YaPlaylist()
-    #dialog_fx = new Dialog({ closeOutSideClick: true, transparentBack: true })
+    #dialog_fx = new Dialog({closeOutSideClick: true, transparentBack: true})
     #chui_audio_fx = new YaAudioFX(this.#chui_at, this.#dialog_fx)
     //
     #user = undefined
-    constructor(options = { pin: String(), playlist: Boolean(), width: String(), height: String(), coverPath: String() }, user = { token: undefined, id: undefined }) {
+
+    constructor(options = {
+        pin: String(),
+        playlist: Boolean(),
+        width: String(),
+        height: String(),
+        coverPath: String()
+    }, user = {token: undefined, id: undefined}) {
         require('../../../modules/chui_functions').setStyles(__dirname + "/ya_audio_styles.css", 'chUiJS_Audio');
         //
         this.#user = user
@@ -196,33 +203,43 @@ class YaAudio {
         this.#chui_ap_main.appendChild(this.#dialog_fx.set())
         this.#chui_ap_fx_icon.addEventListener("click", () => this.#dialog_fx.open())
     }
+
     getPlaylist() {
         return this.#chui_playlist
     }
+
     play() {
         this.#chui_ap_play_pause.click()
     }
+
     next() {
         this.#chui_ap_next.click()
     }
+
     prev() {
         this.#chui_ap_prev.click()
     }
+
     openFolder(path) {
         this.#chui_playlist.getOpenFolderButton().addEventListener("click", async () => await shell.openPath(path))
     }
+
     set() {
         return this.#chui_ap_main;
     }
+
     restoreFX() {
         this.#chui_audio_fx.restore();
     }
+
     addFunctionButtonToLeft(...components) {
         for (let component of components) this.#chui_ap_functions_block_left.appendChild(component)
     }
+
     addFunctionButtonToRight(...components) {
         for (let component of components) this.#chui_ap_functions_block_right.appendChild(component)
     }
+
     async #convertSong(filePath, type) {
         return await new Promise((resolve, reject) => {
             fs.readFile(filePath, (err, data) => {
@@ -231,6 +248,7 @@ class YaAudio {
             });
         });
     };
+
     async #start(track) {
         this.#renderProgress("0")
         this.#chui_ap_track_title.innerText = `${track.artist} - ${track.title}`
@@ -251,6 +269,7 @@ class YaAudio {
         })
         YaAudio.#setMediaData(track)
     }
+
     async #playAudioNext() {
         this.#current_audio = this.#current_audio + 1
         if (this.#current_audio < play_list.length) {
@@ -261,6 +280,7 @@ class YaAudio {
         }
         this.setActive(this.#current_audio)
     }
+
     async #playAudioPrev() {
         this.#current_audio = this.#current_audio - 1
         if (this.#current_audio < 0) {
@@ -271,6 +291,7 @@ class YaAudio {
         }
         this.setActive(this.#current_audio)
     }
+
     async #playAudioPause() {
         if (this.#chui_at.currentTime === 0) {
             this.setActive(this.#current_audio)
@@ -283,6 +304,7 @@ class YaAudio {
             this.#chui_ap_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE_CIRCLE_FILLED, icons_sizes.play_pause).getHTML()
         }
     }
+
     #displayBufferedAmount = () => {
         try {
             const end = this.#chui_at.buffered.end(0) / this.#chui_ap_seek.max * 100
@@ -291,7 +313,8 @@ class YaAudio {
             } else {
                 this.#chui_ap_seek_buf.style.width = `${end}%`;
             }
-        } catch (e) {}
+        } catch (e) {
+        }
     }
     #renderVolume = () => {
         let test = this.#chui_ap_volume.value / this.#chui_ap_volume.max * 100
@@ -323,12 +346,25 @@ class YaAudio {
     #setSliderMax = () => {
         this.#chui_ap_seek.max = String(this.#chui_at.duration);
     }
+
     //
-    setPlayList(list = [{ title: String(), artist: String(), album: String(), mimetype: String(), path: String(), artwork: [], remove: () => {}, download: () => {} }]) {
+    setPlayList(list = [{
+        title: String(),
+        artist: String(),
+        album: String(),
+        mimetype: String(),
+        path: String(),
+        artwork: [],
+        remove: () => {
+        },
+        download: () => {
+        }
+    }]) {
         this.#chui_playlist.getPlaylist().innerHTML = '';
         play_list = list;
         for (let track of play_list) this.#chui_playlist.getPlaylist().appendChild(this.#setTrack(track, play_list.indexOf(track)));
     }
+
     #setTrack(track = {}, index = Number()) {
         let chui_track = document.createElement("chui_track");
         let chui_track_cover = document.createElement("chui_track_cover")
@@ -355,7 +391,7 @@ class YaAudio {
         chui_track.setAttribute("name", track.track_id)
         chui_track_name.innerText = `${track.artist} - ${track.title}`
         //
-        chui_track.addEventListener("dblclick",  async (ev) => {
+        chui_track.addEventListener("dblclick", async (ev) => {
             let target_row = ev.target
             if (target_row.tagName === "CHUI_TRACK_NAME" || target_row.tagName === "CHUI_TRACK_COVER") {
                 this.setActive(ev.target.parentNode.id)
@@ -386,6 +422,7 @@ class YaAudio {
         }
         return chui_track;
     }
+
     setActive(index = Number()) {
         document.getElementById(this.#chui_playlist.getId()).childNodes.forEach(child => {
             child.classList.remove("chui_track_active");
@@ -393,26 +430,30 @@ class YaAudio {
         let element = document.getElementById(`${index}`)
         element.classList.add("chui_track_active")
     }
+
     static PIN = {
         TOP: "pin_top",
         BOTTOM: "pin_bottom"
     }
+
     static #setMediaData(media) {
         if ("mediaSession" in navigator) {
             navigator.mediaSession.metadata = new MediaMetadata({
                 title: media.title,
                 artist: media.artist,
                 album: media.artist,
-                artwork: [{ src: media.album }]
+                artwork: [{src: media.album}]
             });
         }
     }
+
     static FUNCTION_ACTIVE_BUTTON(options = {
         title: String(),
         icon_on: undefined,
         icon_off: undefined,
         value: Boolean(),
-        activateEvent: () => {}
+        activateEvent: () => {
+        }
     }) {
         //
         let check = document.createElement("input")
@@ -444,16 +485,19 @@ class YaAudio {
 
         return button
     }
+
     static FUNCTION_BUTTON(options = {
         title: String(),
         icon: undefined,
-        clickEvent: () => {}
+        clickEvent: () => {
+        }
     }) {
         let button = document.createElement("chui_ap_function_button")
         button.innerHTML = new Icon(options.icon, icons_sizes.volume).getHTML()
         button.addEventListener("click", options.clickEvent)
         return button
     }
+
     static MIMETYPES = {
         AU_SND: 'audio/basic',
         LINEAR_PCM: 'auido/L24',
@@ -484,6 +528,7 @@ class YaAudioFX {
     #fx_status = "chuijs.framework.settings.fx_status"
     #fx_preset = "chuijs.framework.settings.fx_preset"
     #audioContext = new AudioContext();
+
     constructor(audio, dialog) {
         this.#media = this.#audioContext.createMediaElementSource(audio);
         this.#filters = this.#eqBands.map((band, i) => {
@@ -536,6 +581,7 @@ class YaAudioFX {
             }
         })
     }
+
     #fx_ON(audioContext) {
         try {
             this.#media.disconnect(audioContext.destination);
@@ -549,6 +595,7 @@ class YaAudioFX {
         store.set(this.#fx_status, true)
         this.#setStatusBlock(true)
     }
+
     #fx_OFF(audioContext) {
         this.#filters[this.#filters.length - 1].disconnect(audioContext.destination);
         this.#media.disconnect(this.#filters[0]);
@@ -557,6 +604,7 @@ class YaAudioFX {
         store.set(this.#fx_status, false)
         this.#setStatusBlock(false)
     }
+
     #setPreset(filter, name) {
         store.delete(this.#fx_preset)
         store.set(this.#fx_preset, name)
@@ -565,6 +613,7 @@ class YaAudioFX {
         let input = filter_test.inputs.filter(input => input.id === String(filter.frequency.value))[0]
         YaAudioFX.#renderSlider(input, filter, filter_test.preamp)
     }
+
     #setStatusBlock(status) {
         //
         this.#select.setDisabled(!status)
@@ -595,9 +644,11 @@ class YaAudioFX {
             this.#chui_ap_equalizer_band_block.classList.add("chui_ap_equalizer_disabled")
         }
     }
+
     #getPreset(name) {
         return YaAudioFX.PRESETS.filter(preset => preset.name === name)[0];
     }
+
     #setSliderPreamp(filters) {
         let sliderMain = document.createElement("chui_eq_slider_main")
         let val = document.createElement("slider_label")
@@ -621,6 +672,7 @@ class YaAudioFX {
         sliderMain.appendChild(label)
         return sliderMain
     }
+
     #setSliderBand(filter) {
         let freq_value = String(filter.frequency.value);
         let sliderMain = document.createElement("chui_eq_slider_main")
@@ -644,6 +696,7 @@ class YaAudioFX {
         sliderMain.appendChild(label)
         return sliderMain
     }
+
     restore() {
         setTimeout(() => {
             let status = store.get(this.#fx_status)
@@ -665,9 +718,11 @@ class YaAudioFX {
             }
         }, 250)
     }
+
     set() {
         return this.#chui_ap_equalizer_main
     }
+
     static #renderPreampSlider(input, preset, filters = []) {
         let p_slider = document.getElementById("preamp");
         let p_val = document.getElementById("val_preamp");
@@ -688,6 +743,7 @@ class YaAudioFX {
         let p_test = 50 + (p_slider.value * 5)
         p_slider.style.setProperty('--fx-before-width', `${p_test.toFixed(1)}%`);
     }
+
     static #renderSlider(input, filter, preamp) {
         let slider = document.getElementById(input.id);
         let val = document.getElementById("val_" + input.id);
@@ -697,6 +753,7 @@ class YaAudioFX {
         let test = 50 + (slider.value * 5)
         slider.style.setProperty('--fx-before-width', `${test.toFixed(1)}%`);
     }
+
     // ya.music.Audio.fx
     static PRESETS = [
         {
@@ -704,16 +761,16 @@ class YaAudioFX {
             title: "По умолчанию",
             preamp: 0,
             inputs: [
-                { id: "60", value: 0 },
-                { id: "170", value: 0 },
-                { id: "310", value: 0 },
-                { id: "600", value: 0 },
-                { id: "1000", value: 0 },
-                { id: "3000", value: 0 },
-                { id: "6000", value: 0 },
-                { id: "12000", value: 0 },
-                { id: "14000", value: 0 },
-                { id: "16000", value: 0 },
+                {id: "60", value: 0},
+                {id: "170", value: 0},
+                {id: "310", value: 0},
+                {id: "600", value: 0},
+                {id: "1000", value: 0},
+                {id: "3000", value: 0},
+                {id: "6000", value: 0},
+                {id: "12000", value: 0},
+                {id: "14000", value: 0},
+                {id: "16000", value: 0},
             ]
         },
         {
@@ -721,16 +778,16 @@ class YaAudioFX {
             title: "Классическая музыка",
             preamp: -1,
             inputs: [
-                { id: "60", value: -0.5 },
-                { id: "170", value: -0.5 },
-                { id: "310", value: -0.5 },
-                { id: "600", value: -0.5 },
-                { id: "1000", value: -0.5 },
-                { id: "3000", value: -0.5 },
-                { id: "6000", value: -3.5 },
-                { id: "12000", value: -3.5 },
-                { id: "14000", value: -3.5 },
-                { id: "16000", value: -4.5 },
+                {id: "60", value: -0.5},
+                {id: "170", value: -0.5},
+                {id: "310", value: -0.5},
+                {id: "600", value: -0.5},
+                {id: "1000", value: -0.5},
+                {id: "3000", value: -0.5},
+                {id: "6000", value: -3.5},
+                {id: "12000", value: -3.5},
+                {id: "14000", value: -3.5},
+                {id: "16000", value: -4.5},
             ]
         },
         {
@@ -738,16 +795,16 @@ class YaAudioFX {
             title: "Клубная музыка",
             preamp: -4,
             inputs: [
-                { id: "60", value: -0.5 },
-                { id: "170", value: -0.5 },
-                { id: "310", value: 4 },
-                { id: "600", value: 2.5 },
-                { id: "1000", value: 2.5 },
-                { id: "3000", value: 2.5 },
-                { id: "6000", value: 1.5 },
-                { id: "12000", value: -0.5 },
-                { id: "14000", value: -0.5 },
-                { id: "16000", value: -0.5 },
+                {id: "60", value: -0.5},
+                {id: "170", value: -0.5},
+                {id: "310", value: 4},
+                {id: "600", value: 2.5},
+                {id: "1000", value: 2.5},
+                {id: "3000", value: 2.5},
+                {id: "6000", value: 1.5},
+                {id: "12000", value: -0.5},
+                {id: "14000", value: -0.5},
+                {id: "16000", value: -0.5},
             ]
         },
         {
@@ -755,16 +812,16 @@ class YaAudioFX {
             title: "Танцевальная музыка",
             preamp: -2,
             inputs: [
-                { id: "60", value: 4.5 },
-                { id: "170", value: 3.5 },
-                { id: "310", value: 1 },
-                { id: "600", value: -0.5 },
-                { id: "1000", value: -0.5 },
-                { id: "3000", value: -2.5 },
-                { id: "6000", value: -3.5 },
-                { id: "12000", value: -3.5 },
-                { id: "14000", value: -0.5 },
-                { id: "16000", value: -0.5 },
+                {id: "60", value: 4.5},
+                {id: "170", value: 3.5},
+                {id: "310", value: 1},
+                {id: "600", value: -0.5},
+                {id: "1000", value: -0.5},
+                {id: "3000", value: -2.5},
+                {id: "6000", value: -3.5},
+                {id: "12000", value: -3.5},
+                {id: "14000", value: -0.5},
+                {id: "16000", value: -0.5},
             ]
         },
         {
@@ -772,16 +829,16 @@ class YaAudioFX {
             title: "Усиление НЧ",
             preamp: -4,
             inputs: [
-                { id: "60", value: 4 },
-                { id: "170", value: 4.5 },
-                { id: "310", value: 4.5 },
-                { id: "600", value: 2.5 },
-                { id: "1000", value: 0.5 },
-                { id: "3000", value: -2 },
-                { id: "6000", value: -4 },
-                { id: "12000", value: -5 },
-                { id: "14000", value: -5.5 },
-                { id: "16000", value: -5.5 },
+                {id: "60", value: 4},
+                {id: "170", value: 4.5},
+                {id: "310", value: 4.5},
+                {id: "600", value: 2.5},
+                {id: "1000", value: 0.5},
+                {id: "3000", value: -2},
+                {id: "6000", value: -4},
+                {id: "12000", value: -5},
+                {id: "14000", value: -5.5},
+                {id: "16000", value: -5.5},
             ]
         },
         {
@@ -789,16 +846,16 @@ class YaAudioFX {
             title: "Усиление ВЧ",
             preamp: -6,
             inputs: [
-                { id: "60", value: -4.5 },
-                { id: "170", value: -4.5 },
-                { id: "310", value: -4.5 },
-                { id: "600", value: -2 },
-                { id: "1000", value: 1 },
-                { id: "3000", value: 5.5 },
-                { id: "6000", value: 8 },
-                { id: "12000", value: 8 },
-                { id: "14000", value: 8 },
-                { id: "16000", value: 8 },
+                {id: "60", value: -4.5},
+                {id: "170", value: -4.5},
+                {id: "310", value: -4.5},
+                {id: "600", value: -2},
+                {id: "1000", value: 1},
+                {id: "3000", value: 5.5},
+                {id: "6000", value: 8},
+                {id: "12000", value: 8},
+                {id: "14000", value: 8},
+                {id: "16000", value: 8},
             ]
         },
         {
@@ -806,16 +863,16 @@ class YaAudioFX {
             title: "Усиление НЧ и ВЧ",
             preamp: -5,
             inputs: [
-                { id: "60", value: 3.5 },
-                { id: "170", value: 2.5 },
-                { id: "310", value: -0.5 },
-                { id: "600", value: -3.5 },
-                { id: "1000", value: -2 },
-                { id: "3000", value: 0.5 },
-                { id: "6000", value: 4 },
-                { id: "12000", value: 5.5 },
-                { id: "14000", value: 6 },
-                { id: "16000", value: 6 },
+                {id: "60", value: 3.5},
+                {id: "170", value: 2.5},
+                {id: "310", value: -0.5},
+                {id: "600", value: -3.5},
+                {id: "1000", value: -2},
+                {id: "3000", value: 0.5},
+                {id: "6000", value: 4},
+                {id: "12000", value: 5.5},
+                {id: "14000", value: 6},
+                {id: "16000", value: 6},
             ]
         },
         {
@@ -823,16 +880,16 @@ class YaAudioFX {
             title: "Колонки ноутбука",
             preamp: -4,
             inputs: [
-                { id: "60", value: 2 },
-                { id: "170", value: 5.5 },
-                { id: "310", value: 2.5 },
-                { id: "600", value: -1.5 },
-                { id: "1000", value: -1 },
-                { id: "3000", value: 0.5 },
-                { id: "6000", value: 2 },
-                { id: "12000", value: 4.5 },
-                { id: "14000", value: 6 },
-                { id: "16000", value: 7 },
+                {id: "60", value: 2},
+                {id: "170", value: 5.5},
+                {id: "310", value: 2.5},
+                {id: "600", value: -1.5},
+                {id: "1000", value: -1},
+                {id: "3000", value: 0.5},
+                {id: "6000", value: 2},
+                {id: "12000", value: 4.5},
+                {id: "14000", value: 6},
+                {id: "16000", value: 7},
             ]
         },
         {
@@ -840,16 +897,16 @@ class YaAudioFX {
             title: "Большой зал",
             preamp: -4,
             inputs: [
-                { id: "60", value: 5 },
-                { id: "170", value: 5 },
-                { id: "310", value: 2.5 },
-                { id: "600", value: 2.5 },
-                { id: "1000", value: -0.5 },
-                { id: "3000", value: -2 },
-                { id: "6000", value: -2 },
-                { id: "12000", value: -2 },
-                { id: "14000", value: -0.5 },
-                { id: "16000", value: -0.5 },
+                {id: "60", value: 5},
+                {id: "170", value: 5},
+                {id: "310", value: 2.5},
+                {id: "600", value: 2.5},
+                {id: "1000", value: -0.5},
+                {id: "3000", value: -2},
+                {id: "6000", value: -2},
+                {id: "12000", value: -2},
+                {id: "14000", value: -0.5},
+                {id: "16000", value: -0.5},
             ]
         },
         {
@@ -857,16 +914,16 @@ class YaAudioFX {
             title: "Концерт",
             preamp: -3,
             inputs: [
-                { id: "60", value: -2 },
-                { id: "170", value: -0.5 },
-                { id: "310", value: 2 },
-                { id: "600", value: 2.5 },
-                { id: "1000", value: 2.5 },
-                { id: "3000", value: 2.5 },
-                { id: "6000", value: 2 },
-                { id: "12000", value: 1 },
-                { id: "14000", value: 1 },
-                { id: "16000", value: 1 },
+                {id: "60", value: -2},
+                {id: "170", value: -0.5},
+                {id: "310", value: 2},
+                {id: "600", value: 2.5},
+                {id: "1000", value: 2.5},
+                {id: "3000", value: 2.5},
+                {id: "6000", value: 2},
+                {id: "12000", value: 1},
+                {id: "14000", value: 1},
+                {id: "16000", value: 1},
             ]
         },
         {
@@ -874,16 +931,16 @@ class YaAudioFX {
             title: "Вечеринка",
             preamp: -3,
             inputs: [
-                { id: "60", value: 3.5 },
-                { id: "170", value: 3.5 },
-                { id: "310", value: -0.5 },
-                { id: "600", value: -0.5 },
-                { id: "1000", value: -0.5 },
-                { id: "3000", value: -0.5 },
-                { id: "6000", value: -0.5 },
-                { id: "12000", value: -0.5 },
-                { id: "14000", value: 3.5 },
-                { id: "16000", value: 3.5 },
+                {id: "60", value: 3.5},
+                {id: "170", value: 3.5},
+                {id: "310", value: -0.5},
+                {id: "600", value: -0.5},
+                {id: "1000", value: -0.5},
+                {id: "3000", value: -0.5},
+                {id: "6000", value: -0.5},
+                {id: "12000", value: -0.5},
+                {id: "14000", value: 3.5},
+                {id: "16000", value: 3.5},
             ]
         },
         {
@@ -891,16 +948,16 @@ class YaAudioFX {
             title: "Поп",
             preamp: -3,
             inputs: [
-                { id: "60", value: -0.5 },
-                { id: "170", value: 2 },
-                { id: "310", value: 3.5 },
-                { id: "600", value: 4 },
-                { id: "1000", value: 2.5 },
-                { id: "3000", value: -0.5 },
-                { id: "6000", value: -1 },
-                { id: "12000", value: -1 },
-                { id: "14000", value: -0.5 },
-                { id: "16000", value: -0.5 },
+                {id: "60", value: -0.5},
+                {id: "170", value: 2},
+                {id: "310", value: 3.5},
+                {id: "600", value: 4},
+                {id: "1000", value: 2.5},
+                {id: "3000", value: -0.5},
+                {id: "6000", value: -1},
+                {id: "12000", value: -1},
+                {id: "14000", value: -0.5},
+                {id: "16000", value: -0.5},
             ]
         },
         {
@@ -908,16 +965,16 @@ class YaAudioFX {
             title: "Регги",
             preamp: -4,
             inputs: [
-                { id: "60", value: -0.5 },
-                { id: "170", value: -0.5 },
-                { id: "310", value: -0.5 },
-                { id: "600", value: -2.5 },
-                { id: "1000", value: -0.5 },
-                { id: "3000", value: 3 },
-                { id: "6000", value: 3 },
-                { id: "12000", value: -0.5 },
-                { id: "14000", value: -0.5 },
-                { id: "16000", value: -0.5 },
+                {id: "60", value: -0.5},
+                {id: "170", value: -0.5},
+                {id: "310", value: -0.5},
+                {id: "600", value: -2.5},
+                {id: "1000", value: -0.5},
+                {id: "3000", value: 3},
+                {id: "6000", value: 3},
+                {id: "12000", value: -0.5},
+                {id: "14000", value: -0.5},
+                {id: "16000", value: -0.5},
             ]
         },
         {
@@ -925,16 +982,16 @@ class YaAudioFX {
             title: "Ска",
             preamp: -6,
             inputs: [
-                { id: "60", value: -1 },
-                { id: "170", value: -2 },
-                { id: "310", value: -2 },
-                { id: "600", value: -0.5 },
-                { id: "1000", value: 2 },
-                { id: "3000", value: 2.5 },
-                { id: "6000", value: 4 },
-                { id: "12000", value: 4.5 },
-                { id: "14000", value: 5.5 },
-                { id: "16000", value: 4.5 },
+                {id: "60", value: -1},
+                {id: "170", value: -2},
+                {id: "310", value: -2},
+                {id: "600", value: -0.5},
+                {id: "1000", value: 2},
+                {id: "3000", value: 2.5},
+                {id: "6000", value: 4},
+                {id: "12000", value: 4.5},
+                {id: "14000", value: 5.5},
+                {id: "16000", value: 4.5},
             ]
         },
         {
@@ -942,16 +999,16 @@ class YaAudioFX {
             title: "Мягкое звучание",
             preamp: -5,
             inputs: [
-                { id: "60", value: 2 },
-                { id: "170", value: 0.5 },
-                { id: "310", value: -0.5 },
-                { id: "600", value: -1 },
-                { id: "1000", value: -0.5 },
-                { id: "3000", value: 2 },
-                { id: "6000", value: 4 },
-                { id: "12000", value: 4.5 },
-                { id: "14000", value: 5.5 },
-                { id: "16000", value: 6 },
+                {id: "60", value: 2},
+                {id: "170", value: 0.5},
+                {id: "310", value: -0.5},
+                {id: "600", value: -1},
+                {id: "1000", value: -0.5},
+                {id: "3000", value: 2},
+                {id: "6000", value: 4},
+                {id: "12000", value: 4.5},
+                {id: "14000", value: 5.5},
+                {id: "16000", value: 6},
             ]
         },
         {
@@ -959,16 +1016,16 @@ class YaAudioFX {
             title: "Рок",
             preamp: -5,
             inputs: [
-                { id: "60", value: 4 },
-                { id: "170", value: 2 },
-                { id: "310", value: -2.5 },
-                { id: "600", value: -4 },
-                { id: "1000", value: -1.5 },
-                { id: "3000", value: 2 },
-                { id: "6000", value: 4 },
-                { id: "12000", value: 5.5 },
-                { id: "14000", value: 5.5 },
-                { id: "16000", value: 5.5 },
+                {id: "60", value: 4},
+                {id: "170", value: 2},
+                {id: "310", value: -2.5},
+                {id: "600", value: -4},
+                {id: "1000", value: -1.5},
+                {id: "3000", value: 2},
+                {id: "6000", value: 4},
+                {id: "12000", value: 5.5},
+                {id: "14000", value: 5.5},
+                {id: "16000", value: 5.5},
             ]
         },
         {
@@ -976,16 +1033,16 @@ class YaAudioFX {
             title: "Софт-рок",
             preamp: -3,
             inputs: [
-                { id: "60", value: 2 },
-                { id: "170", value: 2 },
-                { id: "310", value: 1 },
-                { id: "600", value: -0.5 },
-                { id: "1000", value: -2 },
-                { id: "3000", value: -2.5 },
-                { id: "6000", value: -1.5 },
-                { id: "12000", value: -0.5 },
-                { id: "14000", value: 1 },
-                { id: "16000", value: 4 },
+                {id: "60", value: 2},
+                {id: "170", value: 2},
+                {id: "310", value: 1},
+                {id: "600", value: -0.5},
+                {id: "1000", value: -2},
+                {id: "3000", value: -2.5},
+                {id: "6000", value: -1.5},
+                {id: "12000", value: -0.5},
+                {id: "14000", value: 1},
+                {id: "16000", value: 4},
             ]
         },
         {
@@ -993,16 +1050,16 @@ class YaAudioFX {
             title: "Техно",
             preamp: -4,
             inputs: [
-                { id: "60", value: 4 },
-                { id: "170", value: 2.5 },
-                { id: "310", value: -0.5 },
-                { id: "600", value: -2.5 },
-                { id: "1000", value: -2 },
-                { id: "3000", value: -0.5 },
-                { id: "6000", value: 4 },
-                { id: "12000", value: 4.5 },
-                { id: "14000", value: 4.5 },
-                { id: "16000", value: 4 },
+                {id: "60", value: 4},
+                {id: "170", value: 2.5},
+                {id: "310", value: -0.5},
+                {id: "600", value: -2.5},
+                {id: "1000", value: -2},
+                {id: "3000", value: -0.5},
+                {id: "6000", value: 4},
+                {id: "12000", value: 4.5},
+                {id: "14000", value: 4.5},
+                {id: "16000", value: 4},
             ]
         }]
 }
@@ -1014,6 +1071,7 @@ class YaPlaylist {
     #chui_playlist_search_input = document.createElement("input")
     #chui_playlist_list = document.createElement("chui_playlist_list")
     #chui_playlist_open_folder = document.createElement("chui_playlist_open_folder")
+
     constructor() {
         this.#chui_playlist_main.appendChild(this.#chui_playlist_search)
         this.#chui_playlist_search_input.classList.add("chui_playlist_search_input")
@@ -1043,18 +1101,23 @@ class YaPlaylist {
             this.#chui_playlist_list.style.overflow = "hidden hidden"
         })
     }
+
     getId() {
         return this.#id_contents
     }
+
     getOpenFolderButton() {
         return this.#chui_playlist_open_folder
     }
+
     getMain() {
         return this.#chui_playlist_main
     }
+
     getPlaylist() {
         return this.#chui_playlist_list
     }
+
     set() {
         return this.#chui_playlist_main
     }

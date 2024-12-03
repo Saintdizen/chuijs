@@ -1,4 +1,16 @@
-const {Page, YaAudio, Styles, App, fs, path, Icons, YaApi, Notification, CustomElement, Button} = require('../../index');
+const {
+    Page,
+    YaAudio,
+    Styles,
+    App,
+    fs,
+    path,
+    Icons,
+    YaApi,
+    Notification,
+    CustomElement,
+    Button
+} = require('../../index');
 const {Dialog} = require("../../framework/components/chui_modal/modal");
 
 class MediaPage extends Page {
@@ -11,6 +23,7 @@ class MediaPage extends Page {
         //pin: Audio.PIN.TOP
         //coverPath: ""
     })
+
     constructor() {
         super();
         this.setTitle('OfflinePlayer');
@@ -29,7 +42,12 @@ class MediaPage extends Page {
             // setTimeout(() => audio.setPlayList(pl), 100)
         })
 
-        let playlist_dialog = new Dialog({ closeOutSideClick: true, width: "80%", height: "70%", transparentBack: true })
+        let playlist_dialog = new Dialog({
+            closeOutSideClick: true,
+            width: "max-content",
+            height: "max-content",
+            transparentBack: true
+        })
         playlist_dialog.addToHeader(new Button({
             title: "close",
             clickEvent: () => {
@@ -92,6 +110,7 @@ class MediaPage extends Page {
         )
         this.add(video)*/
     }
+
     generatePlaylist() {
         let playlist = []
         fs.readdir(this.#download_path, (err, files) => {
