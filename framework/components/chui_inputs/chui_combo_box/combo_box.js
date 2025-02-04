@@ -59,10 +59,12 @@ class ComboBox {
         this.#input.addEventListener('focus', () => {
             this.#button_open.style.transform = 'rotate(180deg)'
             this.#ComboBox_second.style.boxShadow = '0 0 3px 2px var(--blue_prime_background)';
+            this.#dropdown.style.height = (33 * options.optionsLen) + "px"
         })
         this.#input.addEventListener('blur', () => {
             this.#button_open.style.transform = 'rotate(0deg)'
             this.#ComboBox_second.removeAttribute('style')
+            this.#dropdown.style.height = (33 * options.optionsLen) + "px"
         })
         this.#ComboBox_second.addEventListener('click', (event) => {
             if (!this.#input.disabled) {
