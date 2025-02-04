@@ -17,7 +17,8 @@ class ComboBox {
         placeholder: String(),
         width: String(),
         required: Boolean(),
-        transparentBack: Boolean()
+        transparentBack: Boolean(),
+        optionsLen: String(),
     }) {
         require('../../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_ComboBox');
         if (options.placeholder !== undefined) this.#input.placeholder = options.placeholder;
@@ -27,6 +28,11 @@ class ComboBox {
             this.#label.innerText = options.title;
             this.#label.setAttribute('for', this.#id_cb);
             this.#ComboBox_main.appendChild(this.#label);
+        }
+        if (options.optionsLen !== undefined) {
+            this.#dropdown.style.height = (33 * options.optionsLen) + "px";
+        } else {
+            this.#dropdown.style.height = "max-content";
         }
         if (options.name !== undefined) this.#input.name = options.name;
         if (options.required !== undefined) this.#input.required = options.required;
@@ -72,14 +78,17 @@ class ComboBox {
                 new Animation(this.#dropdown).fadeOut();
             }
         });
+
         this.#input.addEventListener('input', (event) => {
             let dropdown = document.getElementById(this.#id);
             for (let option of dropdown.childNodes) {
-                if (!option.getAttribute('option_value').includes(event.target.value)) {
+                console.log("Высота: " + option.offsetHeight + "px");
+                if (!option.getAttribute('option_title').toLowerCase().includes(event.target.value.toLowerCase())) {
                     option.style.display = 'none'
-                    console.log(dropdown.childNodes.length)
+                    dropdown.style.height = 'max-content'
                 } else {
                     option.style.display = 'block'
+                    dropdown.style.height = (33 * options.optionsLen) + "px"
                 }
             }
         });
@@ -89,19 +98,32 @@ class ComboBox {
             this.#ComboBox_second.classList.add("chui_combobox_transparent")
         }
     }
+    addValueChangeListener(listener = () => {}) {
+        this.#ComboBox_main.addEventListener("chui_combo_option_changed", listener)
+    }
     addOptions(...options) {
         for (let opt of options) {
             let option = document.createElement(`combobox_option`);
-            option.innerHTML = opt;
-            option.setAttribute('option_value', opt);
+            option.innerHTML = opt.title;
+            option.setAttribute('option_title', opt.title);
+            option.setAttribute('option_value', opt.value);
             option.addEventListener('click', () => {
-                this.#input.value = option.getAttribute('option_value')
+                const eventAwesome = new CustomEvent("chui_combo_option_changed", {
+                    detail: {
+                        title: option.getAttribute('option_title'),
+                        value: option.getAttribute('option_value')
+                    },
+                });
+                this.#ComboBox_main.dispatchEvent(eventAwesome)
+                this.#input.value = option.getAttribute('option_title');
+                this.#ComboBox_main.setAttribute("option_title", option.getAttribute('option_title'));
+                this.#ComboBox_main.setAttribute("option_value", option.getAttribute('option_value'));
             });
             this.#dropdown.appendChild(option);
         }
     }
     getName() { return this.#input.name; }
-    getValue() { return this.#input.value; }
+    getValue() { return this.#ComboBox_main.getAttribute("option_value"); }
     setDisabled(boolean = Boolean()) {
         this.#input.disabled = boolean
         if (boolean) {

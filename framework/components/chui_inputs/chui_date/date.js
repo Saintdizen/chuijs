@@ -80,7 +80,7 @@ class DateInput {
         select_year.addValueChangeListener((event) => {
             date_month_list.innerHTML = '';
             for (let i = 0; i < 12; i++) {
-                console.log(event)
+                //console.log(event)
                 let cal = new Calendar(event.detail.value, i+1);
                 let date_month_main = document.createElement('date_month_main');
                 date_month_main.setAttribute('month-name', cal.getMonthName());

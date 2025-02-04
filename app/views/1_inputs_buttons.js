@@ -9,7 +9,7 @@ class Inputs_Buttons_Page extends Page {
     constructor() {
         super();
         this.setTitle('Поля ввода и Кнопки');
-        this.setMain(false)
+        this.setMain(true)
 
         // Поля ввода
         let h1_inputs = new H(1, "Поля ввода");
@@ -38,8 +38,15 @@ class Inputs_Buttons_Page extends Page {
         number.setValue("1000");
         let textArea = new TextArea({title: "TextArea", transparentBack: true})
         textArea.setValue("1000");
-        let combo = new ComboBox({title: 'ComboBox', transparentBack: true})
-        combo.addOptions("Option 1", "Option 2", "Option 3")
+        let combo = new ComboBox({title: 'ComboBox', transparentBack: true, optionsLen: 5})
+        combo.addOptions(
+            { title: "Запись на приём к врачу", value: "Value Option 1"},
+            { title: "Сведения о прикреплении к медицинской организации", value: "Title Option 2" },
+            { title: "Поиск медучреждений", value: "Title Option 3" }
+        )
+        combo.addValueChangeListener((e) => {
+            console.log(e)
+        })
         let select = new Select({title: 'Select', transparentBack: true})
         select.addOptions(
             { title: "Title Option 1", value: "Value Option 1"},

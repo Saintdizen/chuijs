@@ -45,29 +45,29 @@ class Test extends AppLayout {
         this.setRoute(new MediaPage())
 
 
-        this.addToHeaderLeftBeforeTitle([
-            AppLayout.TABS({
-                    default: 0,
-                    tabs: [
-                        AppLayout.BUTTON({
-                            //title: "Музыка",
-                            icon: Icons.AUDIO_VIDEO.LIBRARY_MUSIC,
-                            clickEvent: () => new Route().go(new MediaPage())
-                        }),
-                        AppLayout.BUTTON({
-                            //title: "Музыка",
-                            icon: Icons.FILE.DOWNLOAD_FOR_OFFLINE,
-                            clickEvent: () => new Route().go(new SpinnerPage())
-                        }),
-                        AppLayout.BUTTON({
-                            //title: "Музыка",
-                            icon: Icons.FILE.APPROVAL,
-                            clickEvent: () => new Route().go(new SpinnerPage())
-                        })
-                    ]
-                }
-            )
-        ])
+        // this.addToHeaderLeftBeforeTitle([
+        //     AppLayout.TABS({
+        //             default: 0,
+        //             tabs: [
+        //                 AppLayout.BUTTON({
+        //                     //title: "Музыка",
+        //                     icon: Icons.AUDIO_VIDEO.LIBRARY_MUSIC,
+        //                     clickEvent: () => new Route().go(new MediaPage())
+        //                 }),
+        //                 AppLayout.BUTTON({
+        //                     //title: "Музыка",
+        //                     icon: Icons.FILE.DOWNLOAD_FOR_OFFLINE,
+        //                     clickEvent: () => new Route().go(new SpinnerPage())
+        //                 }),
+        //                 AppLayout.BUTTON({
+        //                     //title: "Музыка",
+        //                     icon: Icons.FILE.APPROVAL,
+        //                     clickEvent: () => new Route().go(new SpinnerPage())
+        //                 })
+        //             ]
+        //         }
+        //     )
+        // ])
 
         let auth = AppLayout.BUTTON({
             title: "Войти",
