@@ -142,6 +142,11 @@ class ComboBox {
             this.#ComboBox_second.appendChild(this.#button_open);
         }
     }
+    clear() {
+        this.#ComboBox_main.removeAttribute("option_title");
+        this.#ComboBox_main.removeAttribute("option_value");
+        this.#input.value = ""
+    }
     set() { return this.#ComboBox_main; }
 }
 
