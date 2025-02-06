@@ -4,6 +4,7 @@ class ContentBlock {
     #body = document.createElement(`contentblock`);
     #disableMarginChild = false;
     constructor(options = {
+        display: String(),
         direction: String(),
         wrap: String(),
         align: String(),
@@ -11,6 +12,7 @@ class ContentBlock {
         disableMarginChild: Boolean(),
     }) {
         require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_ContentBlock');
+        if (options.display !== undefined) this.#body.style.display = options.display;
         if (options.direction !== undefined) this.#body.style.flexDirection = options.direction;
         if (options.wrap !== undefined) this.#body.style.flexWrap = options.wrap;
         if (options.align !== undefined) this.#body.style.alignItems = options.align;
