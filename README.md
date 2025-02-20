@@ -126,6 +126,7 @@ async function run() {
 | Button                          | 1.0.0  |          |
 | CheckBox                        | 1.0.0  |          |
 | ComboBox                        | 1.0.0  |          |
+| MultiComboBox                   | 1.0.0  |          |
 | SelectBox                       | 1.0.0  |          |
 | ContentBlock                    | 1.0.0  |          |
 | Details                         | 1.0.0  |          |
