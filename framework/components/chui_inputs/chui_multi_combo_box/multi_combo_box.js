@@ -180,9 +180,10 @@ class MultiComboBox {
         }
     }
     clear() {
-        this.#MultiComboBox_main.removeAttribute("option_title");
-        this.#MultiComboBox_main.removeAttribute("option_value");
         this.#input.value = ""
+        this.#value = []
+        this.#MultiComboBox_options.innerHTML = ""
+        this.#dropdown.childNodes.forEach(child => child.childNodes[0].checked = false)
     }
     set() { return this.#MultiComboBox_main; }
 }
