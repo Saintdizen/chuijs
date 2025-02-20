@@ -1,0 +1,224 @@
+chui_multicombobox {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+    margin: var(--margin);
+    width: 200px
+}
+
+multicombobox {
+    position: relative;
+    display: flex;
+    height: max-content;
+    width: -webkit-fill-available;
+    border-radius: var(--border_radius);
+    padding: 0;
+    font-size: var(--font_default_size);
+    background: var(--element_background);
+    border: none;
+    box-shadow: 0 0 1px 0 var(--element_background_2);
+}
+
+multicombobox_options {
+    display: flex;
+    flex-direction: column;
+}
+
+.chui_multicombobox_transparent {
+    background: var(--element_background_transparent);
+}
+
+.multicombobox_input {
+    width: 100%;
+    margin: 0;
+    padding: var(--test_padding) 0 var(--test_padding) 10px;
+    background: transparent;
+    color: var(--text_color);
+    border: none;
+    font-size: var(--font_default_size);
+}
+
+multicombobox_dropdown {
+    background: var(--element_background);
+    position: absolute;
+    display: none;
+    height: max-content;
+    border-radius: var(--border_radius);
+    margin-top: 36px;
+    padding: var(--test_padding);
+    font-size: var(--font_default_size);
+    flex-direction: column;
+    z-index: 1;
+    width: -webkit-fill-available;
+    overflow: hidden hidden;
+    box-shadow: var(--box_shadow_main);
+    border: none;
+}
+
+multicombobox_dropdown:hover {
+    overflow: hidden overlay
+}
+
+.multicombobox_label {
+    height: max-content;
+    width: max-content;
+    margin: var(--margin);
+    font-size: var(--font_labels_size);
+    font-weight:500;
+    color: var(--text_color)
+}
+
+multicombo_button_open {
+    cursor: pointer;
+    padding: var(--main_padding);
+    color: var(--blue_prime_background);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.option_input_label {
+    padding: var(--test_padding);
+    width: -webkit-fill-available;
+    text-align: start;
+}
+
+.multi_combobox_option {
+    flex-direction: row;
+    border-radius: var(--border_radius);
+    color: var(--text_color);
+    justify-content: center;
+    align-items: center;
+}
+
+.multi_combobox_option:hover {
+    background: var(--blue_prime_background);
+    color: var(--text_color_hover);
+}
+
+/* DISABLED STYLES */
+.multicombobox_disabled {
+    cursor: not-allowed;
+    background: var(--element_background_disabled);
+    border: none;
+    box-shadow: 0 0 1px 0 var(--element_background_disabled_2);
+}
+
+.multicombobox_input_disabled {
+    cursor: not-allowed;
+    background: transparent;
+    color: var(--text_color_disabled);
+    text-align: start;
+    width: 100%;
+    margin: 0;
+    padding: var(--test_padding) 0 var(--test_padding) 10px;
+    border: none;
+    font-size: var(--font_default_size);
+}
+
+.multicombobox_label_disabled {
+    cursor: not-allowed;
+    height: max-content;
+    width: max-content;
+    margin: var(--margin);
+    font-size: var(--font_labels_size);
+    font-weight:500;
+    color: var(--text_color_disabled)
+}
+
+multicombobox_option_added_main {
+    color: var(--text_color);
+    display: flex;
+    flex-direction: row;
+    height: max-content;
+    margin: 3px;
+    width: max-content;
+    background: var(--ap_slider_background);
+    border-radius: var(--border_radius);
+    font-weight: 500;
+    justify-content: center;
+    align-items: center;
+}
+
+multicombobox_option_added_body {
+    padding: 5px 8px;
+    width: max-content;
+    height: max-content;
+}
+
+multicombobox_option_added_remove {
+    width: max-content;
+    height: max-content;
+    font-weight: 600;
+    padding: 5px 8px 5px 0px;
+}
+
+label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    margin: 8px 0px 8px 8px;
+    font-size: var(--font_default_size);
+    content: '';
+    display: flex;
+    width: 1.2em;
+    height: 1.2em;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border-radius: 25%;
+    align-items: center;
+    justify-content: center;
+    color: var(--ap_slider_background);
+    font-family: 'chui_Ubuntu', serif;
+    background: var(--ap_slider_background);
+    border: none;
+    box-shadow: 0 0 1px 0 var(--ap_slider_background);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+}
+
+/* On mouse-over, add a grey background color */
+label:hover input ~ .checkmark {
+    background-color: var(--ap_slider_background);
+}
+
+/* When the checkbox is checked, add a blue background */
+label input:checked ~ .checkmark {
+    background-color: var(--blue_prime_background);
+    color:var(--text_color_hover);
+    border: none;
+    box-shadow: 0 0 1px 0 var(--blue_prime_background);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

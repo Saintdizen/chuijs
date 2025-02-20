@@ -69,6 +69,7 @@ const {YaAudio} = require("./framework/components/chui_media/yandex/ya_audio");
 const {YaApi} = require("./framework/components/chui_media/yandex/ya_api");
 const {CustomElement} = require("./framework/components/chui_custom_element/custom_element");
 const {DownloadProgressNotification} = require("./framework/components/chui_notification/notification_download_progress");
+const {MultiComboBox} = require("./framework/components/chui_inputs/chui_multi_combo_box/multi_combo_box");
 
 //VARS
 let isQuiting = false;
@@ -478,6 +479,7 @@ module.exports = {
     Tab: Tab,
     Notification: Notification,
     ComboBox: ComboBox,
+    MultiComboBox: MultiComboBox,
     RadioGroup: RadioGroup,
     Accordion: Accordion,
     CodeBlock: CodeBlock,

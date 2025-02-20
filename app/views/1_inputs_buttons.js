@@ -1,7 +1,7 @@
 const {
     Page, TextInput, Select, ComboBox,
     DateInput, NumberInput, TextArea, PasswordInput,
-    EmailInput, CheckBox, RadioButton, Button, H, FileInput, Toggle, log, RadioGroup, Styles
+    EmailInput, CheckBox, RadioButton, Button, H, FileInput, Toggle, log, RadioGroup, Styles, MultiComboBox
 } = require('../../index');
 const {Icons} = require("../../framework/components/chui_icons/icons");
 
@@ -82,6 +82,17 @@ class Inputs_Buttons_Page extends Page {
                 radioGroup.clear()
             }
         });
+
+        let multicombo = new MultiComboBox({title: 'MultiComboBox', transparentBack: true, width: "700px"})
+        multicombo.addOptions(
+            { title: "Запись на приём к врачу", value: "Value Option 1"},
+            { title: "Сведения о прикреплении к медицинской организации", value: "Title Option 2" },
+            { title: "Поиск медучреждений", value: "Title Option 3" }
+        )
+        multicombo.addValueChangeListener((e) => {
+            console.log(e.detail.values)
+        })
+        this.add(multicombo)
 
         this.add(h1_inputs, disabler_1, text, email, pass, number, textArea, combo, select, date, file, file_multiple, checkBox, radio, radioGroup, test_radioGroup)
 
