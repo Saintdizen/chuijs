@@ -85,11 +85,13 @@ multicombo_button_open {
 }
 
 .multi_combobox_option {
+    display: flex;
     flex-direction: row;
     border-radius: var(--border_radius);
     color: var(--text_color);
     justify-content: center;
     align-items: center;
+    width: -webkit-fill-available;
 }
 
 .multi_combobox_option:hover {
@@ -221,4 +223,20 @@ label input:checked ~ .checkmark {
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+}
+
+.multi_combobox_section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    width: -webkit-fill-available;
+    height: max-content;
+}
+
+.multi_combobox_section_title {
+    color: var(--text_color);
+    font-weight: 500;
+    font-size: 11pt;
+    padding: 6px;
 }

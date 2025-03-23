@@ -83,12 +83,45 @@ class Inputs_Buttons_Page extends Page {
             }
         });
 
+        let options = [
+            {
+                title: "Секция 1",
+                options: [
+                    {
+                        title: "Запись на приём к врачу",
+                        value: "Value Option 1"
+                    },
+                    {
+                        title: "Сведения о прикреплении к медицинской организации",
+                        value: "Title Option 2"
+                    },
+                    {
+                        title: "Поиск медучреждений",
+                        value: "Title Option 3"
+                    }
+                ]
+            },
+            {
+                title: "Секция 2",
+                options: [
+                    {
+                        title: "Запись на приём к врачу",
+                        value: "Value Option 1"
+                    },
+                    {
+                        title: "Сведения о прикреплении к медицинской организации",
+                        value: "Title Option 2"
+                    },
+                    {
+                        title: "Поиск медучреждений",
+                        value: "Title Option 3"
+                    }
+                ]
+            }
+        ]
+
         let multicombo = new MultiComboBox({title: 'MultiComboBox', transparentBack: true, width: "700px"})
-        multicombo.addOptions(
-            { title: "Запись на приём к врачу", value: "Value Option 1"},
-            { title: "Сведения о прикреплении к медицинской организации", value: "Title Option 2" },
-            { title: "Поиск медучреждений", value: "Title Option 3" }
-        )
+        multicombo.addOptionsWithSections(options)
         multicombo.addValueChangeListener((e) => {
             console.log(e.detail.values)
         })

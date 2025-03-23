@@ -86,18 +86,7 @@ class MultiComboBox {
             }
         });
 
-        this.#input.addEventListener('input', (event) => {
-            let dropdown = document.getElementById(this.#id);
-            for (let option of dropdown.childNodes) {
-                if (!option.getAttribute('option_title').toLowerCase().includes(event.target.value.toLowerCase())) {
-                    option.style.display = 'none'
-                    dropdown.style.height = 'max-content'
-                } else {
-                    option.style.display = 'flex'
-                    dropdown.style.height = (33 * options.optionsLen) + "px"
-                }
-            }
-        });
+
         this.#MultiComboBox_main.appendChild(this.#MultiComboBox_second)
 
         if (options.transparentBack !== undefined && options.transparentBack !== false) {
@@ -106,6 +95,94 @@ class MultiComboBox {
     }
     addValueChangeListener(listener = () => {}) {
         this.#MultiComboBox_main.addEventListener("chui_multi_combo_option_changed", listener)
+    }
+    addOptionsWithSections(options = []) {
+        for (let sect of options) {
+            console.log(sect)
+            const section = document.createElement(`section`);
+            const section_title = document.createElement("label")
+            section.className = "multi_combobox_section"
+            section_title.className = "multi_combobox_section_title"
+            section_title.innerText = sect.title;
+            section.appendChild(section_title)
+
+            for (let opt of sect.options) {
+                const id_name = require("randomstring").generate();
+                const option = document.createElement(`label`);
+                option.className = "multi_combobox_option"
+                option.setAttribute("option_title", opt.title)
+                const checkbox_input_check = document.createElement("input_check");
+                checkbox_input_check.className = "checkmark"
+                const checkbox_input_label = document.createElement("input_text");
+                checkbox_input_label.className = "option_input_label"
+                checkbox_input_label.innerText = opt.title;
+                const checkbox_input = document.createElement("input");
+                checkbox_input.className = "option_input"
+                checkbox_input.type = "checkbox"
+                checkbox_input.id = id_name;
+                checkbox_input.name = id_name;
+                //
+                option.appendChild(checkbox_input)
+                option.appendChild(checkbox_input_check)
+                option.appendChild(checkbox_input_label)
+                section.appendChild(option)
+                //
+                checkbox_input.addEventListener("change", (evt) => {
+                    this.#input.value = ""
+                    const test_main = document.createElement("multicombobox_option_added_main")
+                    test_main.id = id_name
+                    const test_body = document.createElement("multicombobox_option_added_body")
+                    test_body.innerText = sect.title + ": " + opt.title;
+                    const test_remove = document.createElement("multicombobox_option_added_remove")
+                    test_remove.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "10pt").getHTML()
+                    test_main.appendChild(test_body)
+                    test_main.appendChild(test_remove)
+                    //
+                    if (evt.target.checked) {
+                        this.#MultiComboBox_options.appendChild(test_main)
+                        this.#value.push(opt)
+                    } else {
+                        for (let node of this.#MultiComboBox_options.childNodes) {
+                            if (node.id === id_name) {
+                                node.remove()
+                                this.#value.splice(this.#value.indexOf(opt), 1);
+                            }
+                        }
+                    }
+                    //
+                    test_remove.addEventListener("click", () => {
+                        test_main.remove()
+                        checkbox_input.checked = false
+                        this.#value.splice(this.#value.indexOf(opt), 1);
+                    })
+                    //
+                    const eventAwesome = new CustomEvent("chui_multi_combo_option_changed", {
+                        detail: {
+                            values: this.#value
+                        },
+                    });
+                    this.#MultiComboBox_main.dispatchEvent(eventAwesome)
+                })
+            }
+            this.#dropdown.appendChild(section);
+        }
+        this.#input.addEventListener('input', (event) => {
+            let dropdown = document.getElementById(this.#id);
+            for (let section of dropdown.childNodes) {
+                for (let option of section.childNodes) {
+                    let attr = option.getAttribute("option_title")
+                    if (attr) {
+                        if (!attr.toLowerCase().includes(event.target.value.toLowerCase())) {
+                            option.style.display = 'none'
+                            dropdown.style.height = 'max-content'
+                        } else {
+                            option.style.display = 'flex'
+                            dropdown.style.height = (33 * options.optionsLen) + "px"
+                        }
+                    }
+                }
+            }
+        });
     }
     addOptions(...options) {
         for (let opt of options) {
@@ -160,6 +237,18 @@ class MultiComboBox {
             })
             this.#dropdown.appendChild(option);
         }
+        this.#input.addEventListener('input', (event) => {
+            let dropdown = document.getElementById(this.#id);
+            for (let option of dropdown.childNodes) {
+                if (!option.getAttribute('option_title').toLowerCase().includes(event.target.value.toLowerCase())) {
+                    option.style.display = 'none'
+                    dropdown.style.height = 'max-content'
+                } else {
+                    option.style.display = 'flex'
+                    dropdown.style.height = (33 * options.optionsLen) + "px"
+                }
+            }
+        });
     }
     getName() { return this.#input.name; }
     getValue() { return this.#value }
