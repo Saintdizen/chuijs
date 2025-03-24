@@ -140,12 +140,18 @@ class MultiComboBox {
                     //
                     if (evt.target.checked) {
                         this.#MultiComboBox_options.appendChild(test_main)
-                        this.#value.push(opt)
+                        this.#value.push({
+                            section: sect.title,
+                            option: opt
+                        })
                     } else {
                         for (let node of this.#MultiComboBox_options.childNodes) {
                             if (node.id === id_name) {
                                 node.remove()
-                                this.#value.splice(this.#value.indexOf(opt), 1);
+                                this.#value.splice(this.#value.indexOf({
+                                    section: sect.title,
+                                    option: opt
+                                }), 1);
                             }
                         }
                     }
