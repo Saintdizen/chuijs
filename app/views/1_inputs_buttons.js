@@ -126,6 +126,9 @@ class Inputs_Buttons_Page extends Page {
             console.log(e.detail.values)
         })
         this.add(multicombo)
+        setInterval(() => {
+            multicombo.clear()
+        }, 5000)
 
         this.add(h1_inputs, disabler_1, text, email, pass, number, textArea, combo, select, date, file, file_multiple, checkBox, radio, radioGroup, test_radioGroup)
 

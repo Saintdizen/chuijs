@@ -98,7 +98,6 @@ class MultiComboBox {
     }
     addOptionsWithSections(options = []) {
         for (let sect of options) {
-            console.log(sect)
             const section = document.createElement(`section`);
             const section_title = document.createElement("label")
             section.className = "multi_combobox_section"
@@ -278,7 +277,16 @@ class MultiComboBox {
         this.#input.value = ""
         this.#value = []
         this.#MultiComboBox_options.innerHTML = ""
-        this.#dropdown.childNodes.forEach(child => child.childNodes[0].checked = false)
+
+        this.#dropdown.childNodes.forEach(child =>{
+            if (child.tagName === "SECTION") {
+                for (let child2 of child.childNodes) {
+                    child2.childNodes[0].checked = false
+                }
+            } else {
+                child.childNodes[0].checked = false
+            }
+        })
     }
     set() { return this.#MultiComboBox_main; }
 }
