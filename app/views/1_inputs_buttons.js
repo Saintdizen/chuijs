@@ -127,6 +127,7 @@ class Inputs_Buttons_Page extends Page {
         })
         this.add(multicombo)
         setInterval(() => {
+            console.log(multicombo.getValue())
             multicombo.clear()
         }, 5000)
 

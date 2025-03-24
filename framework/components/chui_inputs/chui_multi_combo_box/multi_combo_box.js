@@ -96,6 +96,9 @@ class MultiComboBox {
     addValueChangeListener(listener = () => {}) {
         this.#MultiComboBox_main.addEventListener("chui_multi_combo_option_changed", listener)
     }
+    clearDropdown() {
+        this.#dropdown.innerHTML = "";
+    }
     addOptionsWithSections(options = []) {
         for (let sect of options) {
             const section = document.createElement(`section`);
