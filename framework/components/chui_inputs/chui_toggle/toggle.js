@@ -10,6 +10,12 @@ class Toggle {
         this.#Toggle.appendChild(this.#toggle_input);
         this.#Toggle.appendChild(this.#toggle_span);
     }
+    setMargin(pos = { top: undefined, bottom: undefined, left: undefined, right: undefined }) {
+        if (pos.top !== undefined) this.#Toggle.style.marginTop = pos.top
+        if (pos.bottom !== undefined) this.#Toggle.style.marginBottom = pos.bottom
+        if (pos.left !== undefined) this.#Toggle.style.marginLeft = pos.left
+        if (pos.right !== undefined) this.#Toggle.style.marginRight = pos.right
+    }
     setId(id) {
         this.#Toggle.id = id;
     }

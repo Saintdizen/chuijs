@@ -201,7 +201,7 @@ class YaAudio {
         if (options.height !== undefined) this.#chui_ap_main.style.height = options.height;
         this.#dialog_fx.addToBody(this.#chui_audio_fx)
         this.#chui_ap_main.appendChild(this.#dialog_fx.set())
-        this.#chui_ap_fx_icon.addEventListener("click", () => this.#dialog_fx.open())
+        this.#chui_ap_fx_icon.addEventListener("click", () => this.#dialog_fx.openAndClose())
     }
 
     getPlaylist() {
@@ -560,6 +560,9 @@ class YaAudioFX {
         //
         this.#select.addValueChangeListener((e) => this.#filters.forEach((filter) => this.#setPreset(filter, e.detail.value, true)))
         //
+        this.#toggle_on_off.setMargin({
+            left: "auto"
+        })
         this.#chui_ap_equalizer_controls.appendChild(this.#select.set())
         this.#chui_ap_equalizer_controls.appendChild(this.#toggle_on_off.set())
         this.#close.addClickListener(() => {
