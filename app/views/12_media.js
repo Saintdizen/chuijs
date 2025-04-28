@@ -67,7 +67,7 @@ class MediaPage extends Page {
         this.#audio.addFunctionButtonToLeft(
             YaAudio.FUNCTION_BUTTON({
                 icon: Icons.AUDIO_VIDEO.PLAYLIST_PLAY,
-                clickEvent: () => playlist_dialog.open()
+                clickEvent: () => playlist_dialog.openAndClose()
             })
         )
         this.#audio.addFunctionButtonToRight(
