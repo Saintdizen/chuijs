@@ -9,7 +9,7 @@ class Dialog {
     //
     #width = undefined;
     #height = undefined;
-    #isOpen = false;
+    isOpen = false;
 
     constructor(options = {
         width: String(),
@@ -78,7 +78,7 @@ class Dialog {
     }
 
     open() {
-        this.#isOpen = true
+        this.isOpen = true
         const dialog = document.getElementById(this.#id);
         // if (this.#width === "-webkit-fill-available" && this.#height === "-webkit-fill-available") {
         //     dialog.style.top = "0"
@@ -96,7 +96,7 @@ class Dialog {
     }
 
     openAndClose() {
-        if (!this.#isOpen) {
+        if (!this.isOpen) {
             this.open()
         } else {
             this.close()
@@ -104,7 +104,7 @@ class Dialog {
     }
 
     close() {
-        this.#isOpen = false
+        this.isOpen = false
         const dialog = document.getElementById(this.#id);
         new Animation(dialog).fadeOut();
     }
