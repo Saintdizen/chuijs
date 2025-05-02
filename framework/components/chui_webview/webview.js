@@ -1,5 +1,6 @@
 const { Animation } = require('../../modules/chui_animations/animations')
 const { Spinner } = require('../chui_spinner/spinner')
+const {Log} = require("../../../framework/modules/chui_logger/chui_logger");
 
 class WebView {
     #id = require("randomstring").generate()
@@ -49,7 +50,7 @@ class WebView {
         try {
             await this.#WebView.executeJavaScript(code);
         } catch (err) {
-            console.error(err);
+            Log.error(err)
         }
     }
     insertCustomRes(options = { cssPath: String(), jsPath: String() }) {
@@ -57,14 +58,14 @@ class WebView {
             const fs = require('fs');
             if (options.cssPath !== undefined) {
                 let data = fs.readFileSync(options.cssPath, 'utf8');
-                this.#WebView.insertCSS(String(data)).catch(r => console.log(r));
+                this.#WebView.insertCSS(String(data)).catch(r => Log.error(r));
             }
             if (options.jsPath !== undefined) {
                 try {
                     const data = fs.readFileSync(options.jsPath, 'utf8');
                     await this.#WebView.executeJavaScript(data);
                 } catch (err) {
-                    console.error(err);
+                    Log.error(err);
                 }
             }
         })

@@ -1,10 +1,10 @@
 // === ИНСТРУМЕНТЫ ===
 const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme, session, webContents} = require('electron');
 const Store = require("electron-store");
-const log = require("electron-log");
 const path = require("path");
 const fs = require("fs");
 const os = require("os");
+
 const request = require('@cypress/request');
 const {transliterate} = require("transliteration");
 let downloadSession = undefined;
@@ -70,6 +70,7 @@ const {YaApi} = require("./framework/components/chui_media/yandex/ya_api");
 const {CustomElement} = require("./framework/components/chui_custom_element/custom_element");
 const {DownloadProgressNotification} = require("./framework/components/chui_notification/notification_download_progress");
 const {MultiComboBox} = require("./framework/components/chui_inputs/chui_multi_combo_box/multi_combo_box");
+const {Log} = require("./framework/modules/chui_logger/chui_logger");
 
 //VARS
 let isQuiting = false;
@@ -287,6 +288,23 @@ class Main {
             require("@electron/remote/main").initialize();
             require("@electron/remote/main").enable(this.#window.webContents);
         })
+
+        ipcMain.on("SEND_LOG_TEXT", (e, text, type) => {
+            if (type === "info") {
+                console.info(text)
+            } else if (type === "error") {
+                console.error(text)
+            }
+            this.#writeLog(text)
+        })
+    }
+
+    #writeLog(text) {
+        let today = new Date().toLocaleDateString().replace("/", ".")
+        let log_file_path = path.join(app.getPath("userData"), "logs", `app_${today}.log`)
+        fs.writeFile(log_file_path, `${text}\n`, { flag: 'a+' }, err => {
+            if (err) console.error(err);
+        });
     }
 
     enableAutoUpdateApp(start = Number()) {
@@ -412,30 +430,6 @@ class App {
     static crashDumpsPath() { return new Application().getApp().getPath("crashDumps") }
 }
 
-class Logger {
-    #file_name = "APPLICATION_LOGS.log";
-    #main_format = '[{d}.{m}.{y} {h}:{i}] [{level}] [main] › {text}';
-    #render_format = '[{d}.{m}.{y} {h}:{i}] [{level}] [render] › {text}';
-    constructor() {
-        if (process && process.type === 'renderer') {
-            log.transports.console.format = this.#render_format;
-            // log.transports.file.format = this.#render_format;
-            // log.transports.file.resolvePath = () => path.join(require("@electron/remote").app.getPath("userData"), this.#file_name)
-        } else {
-            log.transports.console.format = this.#render_format;
-            // log.transports.file.format = this.#main_format;
-            // log.transports.file.resolvePath = () => path.join(app.getPath("userData"), this.#file_name)
-        }
-    }
-    getLogger() {
-        return log;
-    }
-}
-class Log {
-    static info(message = String()) { return new Logger().getLogger().info(message) }
-    static error(message = String()) { return new Logger().getLogger().error(message) }
-}
-
 module.exports = {
     Main: Main,
     sleep: sleep,
@@ -507,7 +501,6 @@ module.exports = {
     ipcMain: ipcMain,
     ipcRenderer: ipcRenderer,
     shell: shell,
-    Log: Log,
     path: path,
     fs: fs,
     os: os,
@@ -517,5 +510,6 @@ module.exports = {
     //
     App: App,
     //
-    downloadSession: downloadSession
+    downloadSession: downloadSession,
+    Log: Log
 }

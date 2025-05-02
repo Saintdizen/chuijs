@@ -1,4 +1,4 @@
-const { Main, MenuItem, path, App, formatBytes } = require('./index');
+const { Main, MenuItem, path, App, formatBytes, Log } = require('./index');
 let json = require("./package.json");
 const main = new Main({
     name: `${json.name} (${json.version})`,
@@ -16,6 +16,7 @@ const main = new Main({
         downloadPath: path.join(App.userDataPath(), "downloads")
     }
 });
+
 main.start({
     hideOnClose: false,
     tray: [
@@ -27,11 +28,15 @@ main.start({
         new MenuItem().quit("Выход"),
     ]
 })
+
+Log.info("TEST MAIN")
+Log.error("TEST MAIN")
+
 //main.enableAutoUpdateApp(1000, require("./update.json"));
 
 App.get().on('session-created', (session) => {
     session.on('will-download', (e, item, contents) => {
-        console.log(item.getFilename())
+        Log.info(item.getFilename())
         if (contents.getType() === 'webview') {
             main.sendDownload("Загрузка", item.getFilename())
             item.setSavePath(path.join(path.join(App.userDataPath(), "downloads"), item.getFilename()))

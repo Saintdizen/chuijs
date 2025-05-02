@@ -1,6 +1,6 @@
 /** RENDERER PROCESS */
 /** IMPORTS */
-const {AppLayout, render, Icons, Notification, Styles, Button, ipcRenderer, Route, DownloadProgressNotification} = require('../index');
+const {AppLayout, render, Icons, Notification, Styles, Button, ipcRenderer, Route, DownloadProgressNotification, Log} = require('../index');
 
 const {MainPage} = require('./views/_main');
 const {Inputs_Buttons_Page} = require('./views/1_inputs_buttons');
@@ -143,4 +143,4 @@ class Test extends AppLayout {
     }
 }
 
-render(() => new Test()).catch(e => console.log(e));
+render(() => new Test()).then(() => { Log.info("Приложение готово к работе.") }).catch(e => Log.error(e));

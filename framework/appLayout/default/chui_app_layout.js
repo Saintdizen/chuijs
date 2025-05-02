@@ -10,7 +10,7 @@ const {UpdateNotification} = require("../../components/chui_notification/notific
 const {ipcRenderer} = require("electron");
 const chui_functions = require('../../modules/chui_functions');
 const {DownloadNotification} = require("../../components/chui_notification/notification_download");
-
+const {Log} = require("../../../framework/modules/chui_logger/chui_logger");
 
 class Events {
     #route_event = undefined;
@@ -284,7 +284,8 @@ class AppMenu {
             button_route.appendChild(title_menu)
             this.#routeViews.appendChild(button_route)
         } else {
-            console.error(`Страница "${page.getTitle()}" уже добавлена в меню`)
+            Log
+            Log.error(`Страница "${page.getTitle()}" уже добавлена в меню`)
         }
     }
     setAutoClose() {

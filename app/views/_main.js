@@ -1,4 +1,4 @@
-const {Page, Button, Notification, TextInput, FieldSet, Styles, MenuBar} = require('../../index');
+const {Page, Button, Notification, TextInput, FieldSet, Styles, MenuBar, Log} = require('../../index');
 
 class MainPage extends Page {
     constructor() {
@@ -11,6 +11,8 @@ class MainPage extends Page {
             new Button({
                 title:"Кнопка 1",
                 clickEvent: () => {
+                    Log.info("RENDER INFO")
+                    Log.error("RENDER ERROR")
                     new Notification({ title: "Менюбар", text: "Кнопка 1 нажата", style: Notification.STYLE.SUCCESS, showTime: 5000 }).show()
                 }
             }),

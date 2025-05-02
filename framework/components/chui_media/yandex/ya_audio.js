@@ -10,6 +10,7 @@ const {Toggle} = require("../../chui_inputs/chui_toggle/toggle");
 const {YaApi} = require("./ya_api");
 const {getDefaultIcon} = require("../../../modules/chui_functions");
 const {Button} = require("../../chui_button/button");
+const {Log} = require("../../../../framework/modules/chui_logger/chui_logger");
 const store = new Store();
 
 let play_list = []
@@ -265,7 +266,7 @@ class YaAudio {
             this.#setSliderMax()
             this.#displayBufferedAmount()
         }).catch(error => {
-            console.error(error)
+            Log.error(error)
         })
         YaAudio.#setMediaData(track)
     }

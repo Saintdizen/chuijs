@@ -2,6 +2,7 @@ const {YMApi, WrappedYMApi} = require('ym-api-meowed');
 const {XMLParser} = require("fast-xml-parser");
 const crypto = require('node:crypto');
 const {DownloadTrackCodec, DownloadTrackQuality} = require("ym-api-meowed/dist/Types");
+const {Log} = require("../../../../framework/modules/chui_logger/chui_logger");
 
 class YaApi {
     #api = new YMApi();
@@ -38,7 +39,7 @@ class YaApi {
                     }
                 })
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -51,7 +52,7 @@ class YaApi {
                 await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
                 resolve(await this.#api.getAccountStatus())
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -77,7 +78,7 @@ class YaApi {
                     resolve(`Track ${trackId} remove`)
                 }
             } catch (e) {
-                console.log(`api error ${e}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -90,7 +91,7 @@ class YaApi {
                 let feed = await this.#wapi.getApi().getUserPlaylists(this.#user_id)
                 resolve(feed)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -124,7 +125,7 @@ class YaApi {
                                 mimetype: 'audio/mpeg'
                             })
                         } catch (e) {
-                            console.log(e)
+                            Log.error(e)
                         }
                     }
                     playlists.push({
@@ -154,7 +155,7 @@ class YaApi {
                             mimetype: 'audio/mpeg'
                         })
                     } catch (e) {
-                        console.log(e)
+                        Log.error(e)
                     }
                 }
                 playlists.push({
@@ -164,7 +165,7 @@ class YaApi {
                 })
                 resolve(playlists)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -185,7 +186,7 @@ class YaApi {
                 let sign = crypto.createHash("md5").update("XGRlBW9FXlekgbPrRHuSiA" + path.slice(1) + s).digest("hex");
                 resolve(`https://${host}/get-mp3/${sign}/${ts}${path}?track-id=${track_id}&play=false`)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -198,7 +199,7 @@ class YaApi {
                 let feed = await this.#wapi.getApi().getFeed()
                 resolve(feed)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -211,7 +212,7 @@ class YaApi {
                 let feed = await this.#wapi.getApi().getGenres()
                 resolve(feed)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -224,7 +225,7 @@ class YaApi {
                 let feed = await this.#wapi.getApi().getPodcasts()
                 resolve(feed)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -237,7 +238,7 @@ class YaApi {
                 let feed = await this.#wapi.getApi().getNewReleases()
                 resolve(feed)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -251,7 +252,7 @@ class YaApi {
                 let feed = await this.#wapi.getApi().getChart(type)
                 resolve(feed)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -266,7 +267,7 @@ class YaApi {
                 let feed = await this.#wapi.getApi().getAllStationsList(language)
                 resolve(feed)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -279,7 +280,7 @@ class YaApi {
                 let feed = await this.#wapi.getApi().getRecomendedStationsList()
                 resolve(feed)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -292,7 +293,7 @@ class YaApi {
                 let feed = await this.#wapi.getApi().getStationTracks(stationId, queue)
                 resolve(feed)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -305,7 +306,7 @@ class YaApi {
                 let feed = await this.#wapi.getApi().getStationInfo(stationId)
                 resolve(feed)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -328,7 +329,7 @@ class YaApi {
                 }
                 resolve(feed)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -341,7 +342,7 @@ class YaApi {
                 let feed = await this.#wapi.getApi().searchTracks(query, {page: page, pageSize: pageSize})
                 resolve(feed)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -354,7 +355,7 @@ class YaApi {
                 let feed = await this.#wapi.getApi().searchArtists(query, {page: page, pageSize: pageSize})
                 resolve(feed)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -367,7 +368,7 @@ class YaApi {
                 let feed = await this.#wapi.getApi().searchAll(query, {page: page, pageSize: pageSize})
                 resolve(feed)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -380,7 +381,7 @@ class YaApi {
                 let feed = await this.#api.getTrackSupplement(trackId)
                 resolve(feed)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -393,7 +394,7 @@ class YaApi {
                 let feed = await this.#api.getTrackShareLink(trackId)
                 resolve(feed)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -406,7 +407,7 @@ class YaApi {
                 let feed = await this.#wapi.getPlaylist(kind, this.#user_id)
                 resolve(feed)
             } catch (e) {
-                console.log(`api error ${e.message}`);
+                Log.error(`api error ${e.message}`)
                 reject(e)
             }
         })
@@ -425,7 +426,7 @@ class YaApi {
                 )
                 resolve(`Track ${trackId} added`)
             } catch (e) {
-                console.log(`api error ${e}`);
+                Log.error(`api error ${e}`)
                 reject(e)
             }
         })

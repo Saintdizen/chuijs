@@ -6,7 +6,7 @@ cd node_modules/electron/dist && sudo chown root chrome-sandbox && sudo chmod 47
 ### Структура
 #### exampleApp / app / views / main.js
 ```javascript
-const { Page, Button, TextInput, Notification } = require('chuijs');
+const { Page, Button, TextInput, Notification, Log } = require('chuijs');
 class MainPage extends Page {
     constructor() {
         super();
@@ -53,7 +53,7 @@ class App extends AppLayout {
         this.setRoute(new MainPage());
     }
 }
-render(() => new App()).catch(err => console.log(err))
+render(() => new App()).catch(err => Log.error(err))
 ```
 #### exampleApp / main.js
 ```javascript

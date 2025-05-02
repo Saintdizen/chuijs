@@ -84,7 +84,6 @@ class ComboBox {
         this.#input.addEventListener('input', (event) => {
             let dropdown = document.getElementById(this.#id);
             for (let option of dropdown.childNodes) {
-                console.log("Высота: " + option.offsetHeight + "px");
                 if (!option.getAttribute('option_title').toLowerCase().includes(event.target.value.toLowerCase())) {
                     option.style.display = 'none'
                     dropdown.style.height = 'max-content'

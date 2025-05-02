@@ -1,5 +1,5 @@
 const {Page, Dialog, Button, H, ProgressBar, Styles, Accordion, Details, TreeView, Notification, MenuBar, Image,
-    CheckBox
+    CheckBox, Log
 } = require('../../index');
 const {Popup} = require("../../framework/components/chui_popups/popups");
 
@@ -77,7 +77,7 @@ class OthersComponentsPage extends Page {
                     okText: 'OK',
                     cancelText: 'Отмена',
                 })
-                console.log(confirm_res)
+                Log.info(confirm_res)
             }
         })
         let button_4 = new Button({
@@ -99,7 +99,8 @@ class OthersComponentsPage extends Page {
                         }
                     }
                 });
-                console.log(prompt_res)
+                console.info(prompt_res)
+                Log.info(prompt_res.toString())
             }
         })
         this.add(button_2, button_3, button_4)
@@ -190,7 +191,7 @@ class OthersComponentsPage extends Page {
                         })
                     }
                 }).catch(err => {
-                    console.log(err)
+                    Log.error(err)
                 })
             }
         })
