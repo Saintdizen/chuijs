@@ -19,6 +19,26 @@ const main = new Main({
 
 main.start({
     hideOnClose: false,
+    globalMenu: [
+            {
+                label: json.name,
+                submenu: [
+                    { role: 'quit' }
+                ]
+            },
+            {
+                role: 'help',
+                submenu: [
+                    {
+                        label: 'Learn More',
+                        click: async () => {
+                            const { shell } = require('electron')
+                            await shell.openExternal('https://electronjs.org')
+                        }
+                    }
+                ]
+            }
+        ],
     tray: [
         new MenuItem().separator(),
         new MenuItem().help(`Версия: ${json.version}`),

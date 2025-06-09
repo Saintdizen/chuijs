@@ -120,6 +120,7 @@ class Main {
             }
         }
         //app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
+        app.commandLine.appendSwitch('enable-features=OverlayScrollbar')
         app.commandLine.appendSwitch("disable-http-cache");
         app.commandLine.appendSwitch('enable-transparent-visuals');
         app.commandLine.appendSwitch('enable-gpu-rasterization', "true");
@@ -187,7 +188,7 @@ class Main {
                 webviewTag: true,
                 enableRemoteModule: true,
                 webSecurity: this.#webSecurity,
-                nodeIntegrationInSubFrames: true
+                nodeIntegrationInSubFrames: true,
             },
             frame: false,
             resizable: this.#resizable,
@@ -196,8 +197,6 @@ class Main {
             center: true,
             hasShadow: true
         });
-
-        this.#window.setMenu(null)
 
         if (!this.#webSecurity) {
             this.#window.webContents.session.webRequest.onBeforeSendHeaders((details, callback) => {
@@ -269,7 +268,7 @@ class Main {
         return this.#window;
     }
 
-    start(options = {hideOnClose: Boolean(), tray: [], extensions: []}) {
+    start(options = {hideOnClose: Boolean(), globalMenu: [], tray: [], extensions: []}) {
         nativeTheme.themeSource = "system";
         app.whenReady().then(() => {
             if (options.extensions) {
@@ -277,8 +276,14 @@ class Main {
             }
             if (options.tray) {
                 this.#tray = new Tray(this.#app_icon);
-                context = Menu.buildFromTemplate(options.tray);
+                const context = Menu.buildFromTemplate(options.tray);
                 this.#tray.setContextMenu(context);
+            }
+            if (options.globalMenu) {
+                const menu = Menu.buildFromTemplate(options.globalMenu)
+                Menu.setApplicationMenu(menu)
+            } else {
+                this.#window.setMenu(null)
             }
             this.#createWindow(options.hideOnClose);
             ipcMain.on("show_system_notification", (e, title, body) => {
