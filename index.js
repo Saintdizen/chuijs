@@ -242,12 +242,16 @@ class Main {
         }
     }
 
-    hideAndShow() {
+    #hideAndShow() {
         let visible = this.#window.isVisible()
-        if (!visible) {
-            this.#window.show()
-        } else if (visible) {
+        let focus = this.#window.isFocused()
+
+        if (visible && focus) {
             this.#window.hide()
+        } else if (!visible && !focus) {
+            this.#window.show()
+        } else {
+            this.#window.focus()
         }
     }
 
@@ -278,6 +282,8 @@ class Main {
                 this.#tray = new Tray(this.#app_icon);
                 const context = Menu.buildFromTemplate(options.tray);
                 this.#tray.setContextMenu(context);
+
+                this.#tray.on("click", () => this.#hideAndShow())
             }
             if (options.globalMenu) {
                 const menu = Menu.buildFromTemplate(options.globalMenu)
@@ -306,7 +312,14 @@ class Main {
 
     #writeLog(text) {
         let today = new Date().toLocaleDateString().replace("/", ".")
-        let log_file_path = path.join(app.getPath("userData"), "logs", `app_${today}.log`)
+        let log_dir_path = path.join(app.getPath("userData"), "logs")
+        let log_file_path = path.join(log_dir_path, `app_${today}.log`)
+
+        if (!fs.existsSync(log_dir_path)) {
+            fs.mkdirSync(log_dir_path, { recursive: true });
+            fs.writeFileSync(log_file_path, "", "utf-8");
+        }
+
         fs.writeFile(log_file_path, `${text}\n`, { flag: 'a+' }, err => {
             if (err) console.error(err);
         });

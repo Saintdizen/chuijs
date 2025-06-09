@@ -1,4 +1,4 @@
-const { Main, MenuItem, path, App, formatBytes, Log } = require('./index');
+const { Main, MenuItem, path, App, formatBytes, Log, store } = require('./index');
 let json = require("./package.json");
 const main = new Main({
     name: `${json.name} (${json.version})`,
@@ -17,36 +17,26 @@ const main = new Main({
     }
 });
 
+let test = [
+    new MenuItem().help(`${json.name} (${json.version})`),
+    new MenuItem().submenu("Темы", [
+        new MenuItem().button("По умолчанию", () => {
+            store.set("app.theme", "default")
+            main.restart()
+        }),
+        new MenuItem().button("Breeze", () => {
+            store.set("app.theme", "Breeze")
+            main.restart()
+        })
+    ]),
+    new MenuItem().button('Консоль', () => main.toggleDevTools()),
+    new MenuItem().quit("Выход")
+]
+
 main.start({
     hideOnClose: false,
-    // globalMenu: [
-    //         {
-    //             label: json.name,
-    //             submenu: [
-    //                 { role: 'quit' }
-    //             ]
-    //         },
-    //         {
-    //             role: 'help',
-    //             submenu: [
-    //                 {
-    //                     label: 'Learn More',
-    //                     click: async () => {
-    //                         const { shell } = require('electron')
-    //                         await shell.openExternal('https://electronjs.org')
-    //                     }
-    //                 }
-    //             ]
-    //         }
-    //     ],
-    tray: [
-        new MenuItem().separator(),
-        new MenuItem().help(`Версия: ${json.version}`),
-        new MenuItem().separator(),
-        new MenuItem().button('Скрыть | Показать', () => main.hideAndShow()),
-        new MenuItem().button('Консоль', () => main.toggleDevTools()),
-        new MenuItem().quit("Выход"),
-    ]
+    globalMenu: test,
+    tray: test
 })
 
 Log.info("TEST MAIN")

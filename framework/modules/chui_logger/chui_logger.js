@@ -32,7 +32,14 @@ class Logger {
     }
     #writeLog(text) {
         let today = new Date().toLocaleDateString().replace("/", ".")
-        let log_file_path = path.join(app.getPath("userData"), "logs", `app_${today}.log`)
+        let log_dir_path = path.join(app.getPath("userData"), "logs")
+        let log_file_path = path.join(log_dir_path, `app_${today}.log`)
+
+        if (!fs.existsSync(log_dir_path)) {
+            fs.mkdirSync(log_dir_path, { recursive: true });
+            fs.writeFileSync(log_file_path, "", "utf-8");
+        }
+
         fs.writeFile(log_file_path, `${text}\n`, { flag: 'a+' }, err => {
             if (err) console.error(err);
         });

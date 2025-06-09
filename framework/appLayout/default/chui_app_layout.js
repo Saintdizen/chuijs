@@ -371,10 +371,19 @@ class AppLayout {
     #notificationBox = new NotificationBox(this.#header, this.#center);
     #notificationPanel = document.createElement('notification_panel');
     constructor() {
+        const { store } = require("../../../index");
         require('../../modules/chui_fonts').install();
         // Глобальные стили
-        chui_functions.setStyles(__dirname + "/global_style.css", 'chUiJS_Global_App')
-        chui_functions.setStyles(__dirname + "/main_theme_style.css", 'chUiJS_Main_Theme')
+
+        let theme_name = store.get("app.theme")
+        Log.info(`Тема: ${theme_name}`)
+
+        if (theme_name === undefined) {
+            store.set("app.theme", "default")
+        }
+
+        chui_functions.setStyles(__dirname + `/themes/${store.get("app.theme")}/global_style.css`, 'chUiJS_Global_App')
+        chui_functions.setStyles(__dirname + `/themes/${store.get("app.theme")}/main_theme_style.css`, 'chUiJS_Main_Theme')
         //if (process.platform !== "darwin") document.body.style.border = "1px solid var(--border_color)";
         // ===
 
