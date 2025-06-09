@@ -24,10 +24,6 @@ multicombobox_options {
     flex-direction: column;
 }
 
-.chui_multicombobox_transparent {
-    background: var(--element_background_transparent);
-}
-
 .multicombobox_input {
     width: 100%;
     margin: 0;

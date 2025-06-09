@@ -13,13 +13,10 @@
         --border_color: rgb(240, 240, 240);
         /* Элементы */
         --element_background: rgb(240, 240, 240);
-        --element_background_transparent: rgba(240, 240, 240, 0.4);
         --element_background_disabled: rgba(240, 240, 240, 0.5);
         --element_background_2: rgb(226, 226, 226);
-        --element_background_2_transparent: rgba(226, 226, 226, 0.4);
         --element_background_disabled_2: rgba(226, 226, 226, 0.5);
         --element_background_prime: rgb(0, 102, 225);
-        --element_background_prime_transparent: rgba(0, 102, 225, 0.4);
         --element_background_disabled_prime: rgba(0, 102, 225, 0.5);
         /* Акцент */
         --blue_prime_background: rgb(0, 122, 245);
@@ -57,14 +54,18 @@
         /* Обводка */
         --border_color: rgb(54, 54, 54);
         /* Элементы */
+        /* Кнопка */
+        --button_border_color: rgb(54, 54, 54);
+        --button_border_color_hover: rgb(64, 156, 255);
+        --button_background: rgb(54, 54, 54);
+        --button_background_hover: rgb(64, 156, 255);
+        --button_background_disabled: rgba(54, 54, 54, 0.5);
+        /* Элементы */
         --element_background: rgb(54, 54, 54);
-        --element_background_transparent: rgba(54, 54, 54, 0.4);
         --element_background_disabled: rgba(54, 54, 54, 0.5);
         --element_background_2: rgb(68, 68, 68);
-        --element_background_2_transparent: rgba(68, 68, 68, 0.4);
         --element_background_disabled_2: rgba(68, 68, 68, 0.5);
         --element_background_prime: rgb(34, 126, 225);
-        --element_background_prime_transparent: rgba(34, 126, 225, 0.4);
         --element_background_disabled_prime: rgba(34, 126, 225, 0.5);
         /* Акцент */
         --blue_prime_background: rgb(64, 156, 255);

@@ -20,10 +20,6 @@ selectbox {
     border: 1px solid var(--border_color);
 }
 
-.chui_selectbox_transparent {
-    background: var(--element_background_transparent);
-}
-
 .selectbox_input {
     cursor: pointer;
     width:100%;

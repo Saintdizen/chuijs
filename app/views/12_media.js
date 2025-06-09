@@ -45,8 +45,7 @@ class MediaPage extends Page {
         let playlist_dialog = new Dialog({
             closeOutSideClick: true,
             width: "max-content",
-            height: "max-content",
-            transparentBack: true
+            height: "max-content"
         })
         playlist_dialog.addToHeader(new Button({
             title: "close",

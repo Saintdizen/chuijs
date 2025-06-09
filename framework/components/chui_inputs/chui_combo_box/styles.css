@@ -18,10 +18,6 @@ combobox {
     border: 1px solid var(--border_color);
 }
 
-.chui_combobox_transparent {
-    background: var(--element_background_transparent);
-}
-
 .combobox_input {
     width: 100%;
     margin: 0;

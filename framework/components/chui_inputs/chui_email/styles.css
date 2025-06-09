@@ -20,10 +20,6 @@ chui_email_main {
     border: 1px solid var(--border_color);
 }
 
-.chui_email_main_transparent {
-    background: var(--element_background_transparent);
-}
-
 .email_input {
     width: -webkit-fill-available;
     margin: 0;

@@ -17,7 +17,6 @@ class ComboBox {
         placeholder: String(),
         width: String(),
         required: Boolean(),
-        transparentBack: Boolean(),
         optionsLen: String(),
     }) {
         require('../../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_ComboBox');
@@ -94,10 +93,6 @@ class ComboBox {
             }
         });
         this.#ComboBox_main.appendChild(this.#ComboBox_second)
-
-        if (options.transparentBack !== undefined && options.transparentBack !== false) {
-            this.#ComboBox_second.classList.add("chui_combobox_transparent")
-        }
     }
     addValueChangeListener(listener = () => {}) {
         this.#ComboBox_main.addEventListener("chui_combo_option_changed", listener)

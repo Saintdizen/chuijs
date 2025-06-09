@@ -19,10 +19,6 @@ number_main {
     border: 1px solid var(--border_color);
 }
 
-.chui_number_main_transparent {
-    background: var(--element_background_transparent);
-}
-
 .number_buttons {
     cursor: pointer;
     height: -webkit-fill-available;

@@ -77,23 +77,24 @@ input[type=file]::file-selector-button {
     color: var(--text_color);
     transition: all var(--transition_time);
     font-family: 'chui_Ubuntu';
-    background: var(--element_background_2);
-    border: none;
+    background: var(--button_background);
+    border: 1px solid var(--button_border_color);
 }
 
 input[type=file]::file-selector-button:hover {
-    background: var(--blue_prime_background);
+    background: var(--button_background_hover);
     color: var(--text_color_hover);
+    border: 1px solid var(--button_border_color_hover);
 }
 
 input[type=file]:disabled::file-selector-button {
     cursor: not-allowed;
     color: var(--text_color_disabled);
-    background: var(--element_background_disabled);
-    border: none;
+    background: var(--button_background_disabled);
+    border: 1px solid var(--border_color);
 }
 
 input[type=file]:disabled::file-selector-button:hover {
-    background: var(--element_background_disabled);
+    background: var(--button_background_disabled);
     color: var(--text_color_disabled);
 }

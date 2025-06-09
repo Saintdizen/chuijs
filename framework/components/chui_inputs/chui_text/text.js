@@ -19,8 +19,7 @@ class TextInput {
         disableFocus: Boolean(),
         inputListener: () => {},
         focusListener: () => {},
-        blurListener: () => {},
-        transparentBack: Boolean()
+        blurListener: () => {}
     }) {
         require('../../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_TextInput');
         this.#input.type = 'text';
@@ -60,10 +59,6 @@ class TextInput {
             this.#chui_text_main.classList.remove("error_border");
             new Animation(this.#error_message_text).fadeOut();
         })
-
-        if (options.transparentBack !== undefined && options.transparentBack !== false) {
-            this.#chui_text_main.classList.add("chui_text_main_transparent")
-        }
     }
     addInputListener(listener = () => {}) { this.#input.addEventListener('input', listener); }
     addFocusListener(listener = () => {}) { this.#input.addEventListener('focus', listener); }

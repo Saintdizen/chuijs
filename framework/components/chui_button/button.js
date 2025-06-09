@@ -5,26 +5,11 @@ class Button {
     #button = document.createElement('button');
     #button_text = document.createElement('button_text');
     #button_icon = document.createElement('button_icon');
-    constructor(options = { primary: Boolean(), reverse: Boolean(), title: String(), icon: undefined, transparentBack: Boolean(), clickEvent: () => {} }) {
+    constructor(options = { reverse: Boolean(), title: String(), icon: undefined, clickEvent: () => {} }) {
         require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", "chUiJS_Button")
 
-        if (options.primary !== undefined) {
-            if (options.transparentBack) {
-                this.#button.className = "primary_button_transparent"
-                this.#button_text.className = "primary_button_text"
-            } else {
-                this.#button.className = "primary_button"
-                this.#button_text.className = "primary_button_text"
-            }
-        } else {
-            if (options.transparentBack) {
-                this.#button.className = "secondary_button_transparent"
-                this.#button_text.className = "secondary_button_text"
-            } else {
-                this.#button.className = "secondary_button"
-                this.#button_text.className = "secondary_button_text"
-            }
-        }
+        this.#button.className = "chui_button"
+        this.#button_text.className = "chui_button_text"
 
         if (options.title !== undefined) this.#button_text.innerText = options.title;
         if (options.icon !== undefined) this.#button_icon.innerHTML = new Icon(options.icon, "var(--header_icon_size)").getHTML();
@@ -51,10 +36,6 @@ class Button {
             return false
         })
         this.#chui_button.appendChild(this.#button)
-
-        if (options.transparentBack !== undefined && options.transparentBack !== false) {
-            this.#chui_button.classList.add("chui_email_main_transparent")
-        }
     }
     getText() { return this.#button.innerText; }
     setText(text = String()) { this.#button.innerText = text; }

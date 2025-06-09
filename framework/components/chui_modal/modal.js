@@ -14,8 +14,7 @@ class Dialog {
     constructor(options = {
         width: String(),
         height: String(),
-        closeOutSideClick: Boolean(),
-        transparentBack: String()
+        closeOutSideClick: Boolean()
     }) {
 
         require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_Dialogs');
@@ -43,9 +42,6 @@ class Dialog {
                     new Animation(elem).fadeOut();
                 }
             })
-        }
-        if (options.transparentBack) {
-            this.#dialog.style.background = "var(--ap_main_background)";
         }
         //ADDS
         this.#dialog.appendChild(this.#body)

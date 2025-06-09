@@ -6,8 +6,7 @@ chui_button {
     margin: var(--margin);
 }
 
-/* Secondary button */
-.secondary_button {
+.chui_button {
     cursor: pointer;
     height: max-content;
     width: max-content;
@@ -19,158 +18,54 @@ chui_button {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background: var(--element_background_2);
-    border: none;
+    background: var(--button_background);
+    border: 1px solid var(--button_border_color);
 }
 
-.secondary_button_transparent {
-    cursor: pointer;
-    height: max-content;
-    width: max-content;
-    border-radius: var(--border_radius);
-    padding: var(--main_padding);
-    font-size: var(--font_default_size);
-    font-weight: 400;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background: var(--element_background_2_transparent);
-    border: none;
+.chui_button:hover {
+    background: var(--button_background_hover);
+    border: 1px solid var(--button_border_color_hover);
 }
 
-.secondary_button:hover {
-    background: var(--blue_prime_background);
-}
-
-.secondary_button_transparent:hover {
-    background: var(--blue_prime_background_trans);
-}
-
-.secondary_button_text {
+.chui_button_text {
     color: var(--text_color);
 }
 
-.secondary_button:hover .secondary_button_text, .secondary_button_transparent:hover .secondary_button_text {
+.chui_button:hover .chui_button_text {
     color: var(--text_color_hover);
 }
 
-.secondary_button button_icon chui_icon, .secondary_button_transparent button_icon chui_icon {
+.chui_button button_icon chui_icon {
     color: var(--text_color);
 }
 
-.secondary_button:hover button_icon chui_icon, .secondary_button_transparent:hover button_icon chui_icon {
+.chui_button:hover button_icon chui_icon {
     color: var(--text_color_hover);
 }
 /* DISABLED STYLES */
-.secondary_button:disabled, .secondary_button_transparent:disabled {
+.chui_button:disabled {
     cursor: not-allowed;
     color: var(--text_color_disabled);
-    background: var(--element_background_disabled);
-    border: none;
+    background: var(--button_background_disabled);
+    border: 1px solid var(--button_border_color);
 }
-.secondary_button:disabled:hover, .secondary_button_transparent:disabled:hover {
-    background: var(--element_background_disabled);
+.chui_button:disabled:hover {
+    background: var(--button_background_disabled);
     color: var(--text_color_disabled);
 }
 
-.secondary_button:disabled .secondary_button_text, .secondary_button_transparent:disabled .secondary_button_text {
+.chui_button:disabled .chui_button_text {
     color: var(--text_color_disabled);
 }
 
-.secondary_button:disabled:hover .secondary_button_text, .secondary_button_transparent:disabled:hover .secondary_button_text {
+.chui_button:disabled:hover .chui_button_text {
     color: var(--text_color_disabled);
 }
 
-.secondary_button:disabled button_icon chui_icon, .secondary_button_transparent:disabled button_icon chui_icon {
+.chui_button:disabled button_icon chui_icon {
     color: var(--text_color_disabled);
 }
 
-.secondary_button:disabled:hover button_icon chui_icon, .secondary_button_transparent:disabled:hover button_icon chui_icon {
+.chui_button:disabled:hover button_icon chui_icon {
     color: var(--text_color_disabled);
-}
-
-/* Primary button */
-.primary_button {
-    cursor: pointer;
-    height: max-content;
-    width: max-content;
-    border-radius: var(--border_radius);
-    padding: var(--main_padding);
-    font-size: var(--font_default_size);
-    font-weight: 400;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background: var(--element_background_prime);
-    border: none;
-}
-
-.primary_button_transparent {
-    cursor: pointer;
-    height: max-content;
-    width: max-content;
-    border-radius: var(--border_radius);
-    padding: var(--main_padding);
-    font-size: var(--font_default_size);
-    font-weight: 400;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background: var(--element_background_prime_transparent);
-    border: none;
-}
-
-.primary_button:hover {
-    background: var(--blue_prime_background);
-}
-
-.primary_button_transparent:hover {
-    background: var(--blue_prime_background_trans);
-}
-
-.primary_button_text {
-    color: var(--text_color_hover);
-}
-
-.primary_button:hover .primary_button_text, .primary_button_transparent:hover .primary_button_text {
-    color: var(--text_color_hover);
-}
-
-.primary_button button_icon chui_icon, .primary_button_transparent button_icon chui_icon {
-    color: var(--text_color_hover);
-}
-
-.primary_button:hover button_icon chui_icon, .primary_button_transparent:hover button_icon chui_icon {
-    color: var(--text_color_hover);
-}
-/* DISABLED STYLES */
-.primary_button:disabled, .primary_button_transparent:disabled {
-    cursor: not-allowed;
-    color: var(--text_color_hover_disable);
-    background: var(--element_background_disabled_prime);
-    border: none;
-}
-
-.primary_button:disabled:hover, .primary_button_transparent:disabled:hover {
-    background: var(--element_background_disabled_prime);
-    color: var(--text_color_hover_disable);
-}
-
-.primary_button:disabled .primary_button_text, .primary_button_transparent:disabled .primary_button_text {
-    color: var(--text_color_hover_disable);
-}
-
-.primary_button:disabled:hover .primary_button_text, .primary_button_transparent:disabled:hover .primary_button_text {
-    color: var(--text_color_hover_disable);
-}
-
-.primary_button:disabled button_icon chui_icon, .primary_button_transparent:disabled button_icon chui_icon {
-    color: var(--text_color_hover_disable);
-}
-
-.primary_button:disabled:hover button_icon chui_icon, .primary_button_transparent:disabled:hover button_icon chui_icon {
-    color: var(--text_color_hover_disable);
 }

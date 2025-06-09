@@ -21,10 +21,6 @@ chui_text_main {
     border: 1px solid var(--border_color);
 }
 
-.chui_text_main_transparent {
-    background: var(--element_background_transparent);
-}
-
 .text_input {
     width: -webkit-fill-available;
     margin: 0;

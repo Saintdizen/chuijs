@@ -20,7 +20,6 @@ class MultiComboBox {
         placeholder: String(),
         width: String(),
         required: Boolean(),
-        transparentBack: Boolean(),
         optionsLen: String(),
     }) {
         require('../../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_MultiComboBox');
@@ -88,10 +87,6 @@ class MultiComboBox {
 
 
         this.#MultiComboBox_main.appendChild(this.#MultiComboBox_second)
-
-        if (options.transparentBack !== undefined && options.transparentBack !== false) {
-            this.#MultiComboBox_second.classList.add("chui_multicombobox_transparent")
-        }
     }
     addValueChangeListener(listener = () => {}) {
         this.#MultiComboBox_main.addEventListener("chui_multi_combo_option_changed", listener)

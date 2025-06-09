@@ -60,7 +60,7 @@ class YaAudio {
     #chui_ap_fx_icon = document.createElement(`chui_ap_fx_icon`);
     // Размеры иконок
     #chui_playlist = new YaPlaylist()
-    #dialog_fx = new Dialog({closeOutSideClick: true, transparentBack: true})
+    #dialog_fx = new Dialog({closeOutSideClick: true})
     #chui_audio_fx = new YaAudioFX(this.#chui_at, this.#dialog_fx)
     //
     #user = undefined
@@ -522,8 +522,8 @@ class YaAudioFX {
     #chui_ap_equalizer_band_block = document.createElement("chui_ap_equalizer_band_block")
     #toggle_on_off = new Toggle();
     #eqBands = [60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000]
-    #select = new Select({width: "41%", transparentBack: true})
-    #close = new Button({icon: Icons.NAVIGATION.CLOSE, transparentBack: true})
+    #select = new Select({width: "41%"})
+    #close = new Button({icon: Icons.NAVIGATION.CLOSE})
     #media = undefined;
     #filters = undefined;
     #fx_status = "chuijs.framework.settings.fx_status"

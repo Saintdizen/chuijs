@@ -20,10 +20,6 @@ password_main {
     border: 1px solid var(--border_color);
 }
 
-.chui_password_main_transparent {
-    background: var(--element_background_transparent);
-}
-
 .password_input {
     width: -webkit-fill-available;
     margin: 0;
