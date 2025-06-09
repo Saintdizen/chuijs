@@ -283,7 +283,7 @@ class Main {
                 const menu = Menu.buildFromTemplate(options.globalMenu)
                 Menu.setApplicationMenu(menu)
             } else {
-                this.#window.setMenu(null)
+                Menu.setApplicationMenu(null)
             }
             this.#createWindow(options.hideOnClose);
             ipcMain.on("show_system_notification", (e, title, body) => {
