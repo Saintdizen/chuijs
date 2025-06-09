@@ -12,6 +12,15 @@
         /* Обводка */
         --border_color: rgb(240, 240, 240);
         /* Элементы */
+        /* Кнопка */
+        --button_border_color: rgb(240, 240, 240);
+        --button_border_color_hover: rgb(0, 122, 245);
+        --button_background: rgb(240, 240, 240);
+        --button_background_hover: rgb(0, 122, 245);
+        --button_background_disabled: rgba(240, 240, 240, 0.5);
+        /* Модальное окно */
+        --modal_background: rgb(255, 255, 255);
+        /* Элементы */
         --element_background: rgb(240, 240, 240);
         --element_background_disabled: rgba(240, 240, 240, 0.5);
         --element_background_2: rgb(226, 226, 226);
@@ -23,13 +32,13 @@
         --blue_prime_background_trans: rgba(0, 122, 245, 0.65);
         --red_prime_background: rgb(246, 52, 40);
         /* Бэйджи */
-        --badge_error_back: rgba(255, 59, 48, 0.4);
+        --badge_error_back: rgba(255, 59, 48, 0.5);
         --badge_error_text: rgb(194, 6, 24);
-        --badge_success_back: rgba(52, 199, 89, 0.4);
+        --badge_success_back: rgba(52, 199, 89, 0.5);
         --badge_success_text: rgb(0, 112, 24);
-        --badge_cancel_back: rgba(142, 142, 147, 0.4);
+        --badge_cancel_back: rgba(142, 142, 147, 0.5);
         --badge_cancel_text: rgb(97, 97, 101);
-        --badge_warning_back: rgba(255, 204, 0, 0.4);
+        --badge_warning_back: rgba(255, 204, 0, 0.5);
         --badge_warning_text: rgb(146, 81, 0);
         /* Аудиоплеер */
         --ap_input_background: rgba(255, 255, 255, 0.25);
@@ -60,6 +69,8 @@
         --button_background: rgb(54, 54, 54);
         --button_background_hover: rgb(64, 156, 255);
         --button_background_disabled: rgba(54, 54, 54, 0.5);
+        /* Модальное окно */
+        --modal_background: rgb(27, 27, 27);
         /* Элементы */
         --element_background: rgb(54, 54, 54);
         --element_background_disabled: rgba(54, 54, 54, 0.5);
@@ -72,13 +83,13 @@
         --blue_prime_background_trans: rgba(64, 156, 255, 0.65);
         --red_prime_background: rgb(255, 105, 97);
         /* Бэйджи */
-        --badge_error_back: rgba(255, 69, 58, 0.4);
+        --badge_error_back: rgba(255, 69, 58, 0.5);
         --badge_error_text: rgb(255, 105, 94);
-        --badge_success_back: rgba(48, 209, 88, 0.4);
+        --badge_success_back: rgba(48, 209, 88, 0.5);
         --badge_success_text: rgb(49, 222, 75);
-        --badge_cancel_back: rgba(142, 142, 147, 0.4);
+        --badge_cancel_back: rgba(142, 142, 147, 0.5);
         --badge_cancel_text: rgb(182, 182, 187);
-        --badge_warning_back: rgba(255, 214, 10, 0.4);
+        --badge_warning_back: rgba(255, 214, 10, 0.5);
         --badge_warning_text: rgb(255, 212, 38);
         /* Аудиоплеер */
         --ap_input_background: rgba(30, 30, 30, 0.25);

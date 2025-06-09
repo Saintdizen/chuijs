@@ -7,9 +7,8 @@ chui_dialog {
     width: max-content;
     height: max-content;
     overflow: hidden;
-    background-color: var(--ap_main_background);
-    border: none;
-    backdrop-filter: var(--global_blur);
+    background-color: var(--modal_background);
+    border: 1px solid var(--border_color);
     border-radius: var(--border_radius);
     box-shadow: var(--box_shadow_main);
     margin: auto;
