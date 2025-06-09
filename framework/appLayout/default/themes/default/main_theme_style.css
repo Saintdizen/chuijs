@@ -9,7 +9,8 @@
         --main_background: rgb(255, 255, 255);
         --header_background: rgba(226, 226, 226, 0.5);
         --header_background_drop: rgb(246, 246, 246, 1);
-        --border_color: transparent;
+        /* Обводка */
+        --border_color: rgb(240, 240, 240);
         /* Элементы */
         --element_background: rgb(240, 240, 240);
         --element_background_transparent: rgba(240, 240, 240, 0.4);
@@ -53,7 +54,8 @@
         --main_background: rgb(27, 27, 27);
         --header_background: rgba(40, 40, 40, 0.5);
         --header_background_drop: rgba(48, 48, 48, 1);
-        --border_color: transparent;
+        /* Обводка */
+        --border_color: rgb(54, 54, 54);
         /* Элементы */
         --element_background: rgb(54, 54, 54);
         --element_background_transparent: rgba(54, 54, 54, 0.4);

@@ -41,7 +41,7 @@ class Select {
         //LISTENERS
         this.#input.addEventListener('focus', () => {
             this.#button_open.style.transform = 'rotate(180deg)'
-            this.#Select_second.style.boxShadow = '0 0 3px 2px var(--blue_prime_background)';
+            this.#Select_second.style.border = '1px solid var(--blue_prime_background)';
         })
         this.#input.addEventListener('blur', () => {
             this.#button_open.style.transform = 'rotate(0deg)'

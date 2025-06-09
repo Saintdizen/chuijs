@@ -16,8 +16,7 @@ number_main {
     position: relative;
     padding: var(--test_padding) 43px;
     background: var(--element_background);
-    border: none;
-    box-shadow: 0 0 1px 0 var(--element_background_2);
+    border: 1px solid var(--border_color);
 }
 
 .chui_number_main_transparent {
@@ -64,8 +63,7 @@ input[type=number]::-webkit-inner-spin-button {
 .number_main_disabled {
     cursor: not-allowed;
     background: var(--element_background_disabled);
-    border: none;
-    box-shadow: 0 0 1px 0 var(--element_background_disabled_2);
+    border: 1px solid var(--border_color);
 }
 
 .number_label_disabled {

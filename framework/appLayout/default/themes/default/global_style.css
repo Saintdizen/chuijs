@@ -117,7 +117,7 @@ header {
     backdrop-filter: var(--global_blur);
     background-blend-mode: overlay;
     justify-content: space-between;
-    border-bottom: 1px solid var(--border_color);
+    border-bottom: none;
     /*border: 1px solid transparent;*/
 }
 

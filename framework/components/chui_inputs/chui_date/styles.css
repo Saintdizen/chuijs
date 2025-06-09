@@ -27,7 +27,7 @@ date_select_dropdown {
     color: var(--text_color);
     padding: var(--test_padding);
     background: var(--element_background);
-    border: none;
+    border: 1px solid var(--border_color);
     border-radius: var(--border_radius);
     position:absolute;
     top: -2px;
@@ -74,8 +74,7 @@ date_main_block {
     position: relative;
     display: flex;
     background: var(--element_background);
-    border: none;
-    box-shadow: 0 0 1px 0 var(--element_background_2);
+    border: 1px solid var(--border_color);
 }
 
 .date_input {
@@ -103,8 +102,7 @@ date_main_block {
 .date_main_block_disabled {
     cursor: not-allowed;
     background: var(--element_background_disabled);
-    border: none;
-    box-shadow: 0 0 1px 0 var(--element_background_disabled_2);
+    border: 1px solid var(--border_color);
 }
 
 .date_input_label_disabled {

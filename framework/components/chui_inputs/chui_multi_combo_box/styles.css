@@ -16,8 +16,7 @@ multicombobox {
     padding: 0;
     font-size: var(--font_default_size);
     background: var(--element_background);
-    border: none;
-    box-shadow: 0 0 1px 0 var(--element_background_2);
+    border: 1px solid var(--border_color);
 }
 
 multicombobox_options {
@@ -53,7 +52,7 @@ multicombobox_dropdown {
     width: -webkit-fill-available;
     overflow: hidden hidden;
     box-shadow: var(--box_shadow_main);
-    border: none;
+    border: 1px solid var(--border_color);
 }
 
 multicombobox_dropdown:hover {
@@ -103,8 +102,7 @@ multicombo_button_open {
 .multicombobox_disabled {
     cursor: not-allowed;
     background: var(--element_background_disabled);
-    border: none;
-    box-shadow: 0 0 1px 0 var(--element_background_disabled_2);
+    border: 1px solid var(--border_color);
 }
 
 .multicombobox_input_disabled {

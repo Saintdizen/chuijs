@@ -41,7 +41,7 @@ class ComboBox {
         this.#input.classList.add('combobox_input');
         this.#input.type = 'text';
         this.#input.addEventListener('focus', () => {
-            this.#ComboBox_second.style.boxShadow = '0 0 3px 2px var(--blue_prime_background)';
+            this.#ComboBox_second.style.border = '1px solid var(--blue_prime_background)';
             this.#label.style.color = 'var(--blue_prime_background)';
         })
         this.#input.addEventListener('blur', () => {
@@ -58,7 +58,7 @@ class ComboBox {
         //LISTENERS
         this.#input.addEventListener('focus', () => {
             this.#button_open.style.transform = 'rotate(180deg)'
-            this.#ComboBox_second.style.boxShadow = '0 0 3px 2px var(--blue_prime_background)';
+            this.#ComboBox_second.style.border = '1px solid var(--blue_prime_background)';
             this.#dropdown.style.height = (33 * options.optionsLen) + "px"
         })
         this.#input.addEventListener('blur', () => {

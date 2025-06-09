@@ -4,9 +4,9 @@ const main = new Main({
     name: `${json.name} (${json.version})`,
     sizes: {
         minWidth: 960,
-        width: 960,
+        width: 1600,
         minHeight: 540,
-        height: 540
+        height: 900
     },
     render: `${__dirname}/app/app.js`,
     devTools: false,

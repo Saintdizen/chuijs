@@ -28,17 +28,17 @@ class Inputs_Buttons_Page extends Page {
             checkBox.setDisabled(e.target.checked);
             radio.setDisabled(e.target.checked);
         });
-        let text = new TextInput({title: "TextInput", transparentBack: true})
+        let text = new TextInput({title: "TextInput", transparentBack: false})
         text.setValue("TextInput");
-        let email = new EmailInput({title: "EmailInput", transparentBack: true})
+        let email = new EmailInput({title: "EmailInput", transparentBack: false})
         email.setValue("email@input.ru");
-        let pass = new PasswordInput({title: "PasswordInput", transparentBack: true})
+        let pass = new PasswordInput({title: "PasswordInput", transparentBack: false})
         pass.setValue("1234567890");
-        let number = new NumberInput({title: "NumberInput", width: "500px", transparentBack: true})
+        let number = new NumberInput({title: "NumberInput", width: "500px", transparentBack: false})
         number.setValue("1000");
-        let textArea = new TextArea({title: "TextArea", transparentBack: true})
+        let textArea = new TextArea({title: "TextArea", transparentBack: false})
         textArea.setValue("1000");
-        let combo = new ComboBox({title: 'ComboBox', transparentBack: true, optionsLen: 5})
+        let combo = new ComboBox({title: 'ComboBox', transparentBack: false, optionsLen: 5})
         combo.addOptions(
             { title: "Запись на приём к врачу", value: "Value Option 1"},
             { title: "Сведения о прикреплении к медицинской организации", value: "Title Option 2" },
@@ -47,7 +47,7 @@ class Inputs_Buttons_Page extends Page {
         combo.addValueChangeListener((e) => {
             console.log(e)
         })
-        let select = new Select({title: 'Select', transparentBack: true})
+        let select = new Select({title: 'Select', transparentBack: false})
         select.addOptions(
             { title: "Title Option 1", value: "Value Option 1"},
             { title: "Title Option 2", value: "Title Option 2" },
@@ -120,7 +120,7 @@ class Inputs_Buttons_Page extends Page {
             }
         ]
 
-        let multicombo = new MultiComboBox({title: 'MultiComboBox', transparentBack: true, width: "700px"})
+        let multicombo = new MultiComboBox({title: 'MultiComboBox', transparentBack: false, width: "700px"})
         multicombo.addOptionsWithSections(options)
         multicombo.addValueChangeListener((e) => {
             console.log(e.detail.values)

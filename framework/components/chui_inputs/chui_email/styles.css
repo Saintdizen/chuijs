@@ -17,8 +17,7 @@ chui_email_main {
     position: relative;
     padding: var(--main_padding);
     background: var(--element_background);
-    border: none;
-    box-shadow: 0 0 1px 0 var(--element_background_2);
+    border: 1px solid var(--border_color);
 }
 
 .chui_email_main_transparent {
@@ -73,6 +72,5 @@ email_input .email_input:valid {}
 .chui_email_main_disabled {
     cursor: not-allowed;
     background: var(--element_background_disabled);
-    border: none;
-    box-shadow: 0 0 1px 0 var(--element_background_disabled_2);
+    border: 1px solid var(--border_color);
 }

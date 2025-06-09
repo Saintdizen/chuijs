@@ -200,7 +200,7 @@ class AppMenu {
         this.#app_menu_search_input.classList.add("app_menu_search_input")
         this.#app_menu_search_input.placeholder = "Поиск..."
         this.#app_menu_search_input.addEventListener('focus', () => {
-            this.#app_menu_search_input.style.boxShadow = '0 0 3px 2px var(--blue_prime_background)';
+            this.#app_menu_search_input.style.border = '1px solid var(--blue_prime_background)';
         })
         this.#app_menu_search_input.addEventListener('blur', () => {
             this.#app_menu_search_input.removeAttribute("style");
