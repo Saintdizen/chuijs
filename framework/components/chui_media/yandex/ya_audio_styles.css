@@ -36,16 +36,11 @@ chui_ap_cover_img_back {
 
 chui_ap_cover_img_back_blur {
     display: flex;
-    width: calc(100% + 20%);
-    height: calc(100% + 20%);
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
     position: fixed;
     background-position: center;
-    z-index: -1;
-    bottom: 0;
-    top: -10%;
-    left: -10%;
-    right: 0;
-    filter: blur(33px);
+    filter: var(--global_blur);
 }
 
 .cover_image {
@@ -66,6 +61,7 @@ chui_ap_block {
     height: max-content;
     align-items: center;
     justify-content: space-between;
+    border: 1px solid var(--border_color);
 }
 
 /* Блок информация */

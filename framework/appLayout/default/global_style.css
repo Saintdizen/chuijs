@@ -49,12 +49,13 @@ strong {
 body {
     width: -webkit-fill-available;
     height: -webkit-fill-available;
-    margin: 1px;
+    margin: 0;
     padding: 0;
     background: var(--main_background);
     /*border-radius: var(--border_radius);*/
     display: flex;
     flex-direction: column;
+    margin: 1px;
 }
 
 app_menu_search_main {
@@ -119,7 +120,6 @@ header {
     background-blend-mode: overlay;
     justify-content: space-between;
     border-bottom: 1px solid var(--border_color);
-    /*border: 1px solid transparent;*/
 }
 
 header_main {
@@ -175,6 +175,7 @@ app_menu {
     backdrop-filter: var(--global_blur);
     height: -webkit-fill-available;
     width: -webkit-fill-available;
+    border: 1px solid var(--border_color);
 }
 
 notification_box {
@@ -191,6 +192,7 @@ notification_box {
     background: var(--header_background);
     backdrop-filter: var(--global_blur);
     width: -webkit-fill-available;
+    border: 1px solid var(--border_color);
 }
 
 notification_box_controls {

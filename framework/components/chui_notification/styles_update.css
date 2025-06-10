@@ -12,6 +12,7 @@ update_notification {
     backdrop-filter: var(--global_blur);
     z-index: 1002;
     box-shadow: var(--box_shadow_main);
+    border: 1px solid var(--border_color);
 }
 
 update_notification_body {

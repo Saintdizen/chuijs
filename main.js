@@ -19,16 +19,6 @@ const main = new Main({
 
 let test = [
     new MenuItem().help(`${json.name} (${json.version})`),
-    new MenuItem().submenu("Темы", [
-        new MenuItem().button("По умолчанию", () => {
-            store.set("app.theme", "default")
-            main.restart()
-        }),
-        new MenuItem().button("Breeze", () => {
-            store.set("app.theme", "Breeze")
-            main.restart()
-        })
-    ]),
     new MenuItem().button('Консоль', () => main.toggleDevTools()),
     new MenuItem().quit("Выход")
 ]
