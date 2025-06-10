@@ -2,12 +2,12 @@
     :root {
         /* Текст */
         --text_color: rgb(45, 45, 45);
-        --text_color_disabled: rgba(45, 45, 45, 0.5);
+        --text_color_disabled: rgba(45, 45, 45, 0.65);
         --text_color_hover: rgb(255, 255, 255);
-        --text_color_hover_disable: rgba(255, 255, 255, 0.5);
+        --text_color_hover_disable: rgba(255, 255, 255, 0.65);
         /* Основные цвета */
         --main_background: rgb(255, 255, 255);
-        --header_background: rgba(226, 226, 226, 0.5);
+        --header_background: rgba(226, 226, 226, 0.65);
         --header_background_drop: rgb(246, 246, 246, 1);
         /* Обводка */
         --border_color: rgb(240, 240, 240);
@@ -17,16 +17,16 @@
         --button_border_color_hover: rgb(0, 122, 245);
         --button_background: rgb(240, 240, 240);
         --button_background_hover: rgb(0, 122, 245);
-        --button_background_disabled: rgba(240, 240, 240, 0.5);
+        --button_background_disabled: rgba(240, 240, 240, 0.65);
         /* Модальное окно */
-        --modal_background: rgb(255, 255, 255);
+        --modal_background: rgba(255, 255, 255, 0.7);
         /* Элементы */
         --element_background: rgb(240, 240, 240);
-        --element_background_disabled: rgba(240, 240, 240, 0.5);
+        --element_background_disabled: rgba(240, 240, 240, 0.65);
         --element_background_2: rgb(226, 226, 226);
-        --element_background_disabled_2: rgba(226, 226, 226, 0.5);
+        --element_background_disabled_2: rgba(226, 226, 226, 0.65);
         --element_background_prime: rgb(0, 102, 225);
-        --element_background_disabled_prime: rgba(0, 102, 225, 0.5);
+        --element_background_disabled_prime: rgba(0, 102, 225, 0.65);
         /* Акцент */
         --blue_prime_background: rgb(0, 122, 245);
         --blue_prime_background_trans: rgba(0, 122, 245, 0.65);
@@ -41,11 +41,11 @@
         --badge_warning_back: rgba(255, 204, 0, 0.5);
         --badge_warning_text: rgb(146, 81, 0);
         /* Аудиоплеер */
-        --ap_input_background: rgba(255, 255, 255, 0.25);
-        --ap_main_background: rgba(226, 226, 226, 0.5);
-        --ap_main_background_2: rgba(220, 220, 220, 0.75);
-        --ap_slider_background: rgba(220, 220, 220, 0.75);
-        --ap_slider_buf_background: rgba(0, 122, 245, 0.5);
+        --ap_input_background: rgba(255, 255, 255, 0.65);
+        --ap_main_background: rgba(226, 226, 226, 0.65);
+        --ap_main_background_2: rgba(220, 220, 220, 0.65);
+        --ap_slider_background: rgba(220, 220, 220, 0.65);
+        --ap_slider_buf_background: rgba(0, 122, 245, 0.65);
     }
 }
 
@@ -53,12 +53,12 @@
     :root {
         /* Текст */
         --text_color: rgb(255, 255, 255);
-        --text_color_disabled: rgba(255, 255, 255, 0.5);
+        --text_color_disabled: rgba(255, 255, 255, 0.65);
         --text_color_hover: rgb(255, 255, 255);
-        --text_color_hover_disable: rgba(255, 255, 255, 0.5);
+        --text_color_hover_disable: rgba(255, 255, 255, 0.65);
         /* Основные цвета */
         --main_background: rgb(27, 27, 27);
-        --header_background: rgba(40, 40, 40, 0.5);
+        --header_background: rgba(40, 40, 40, 0.65);
         --header_background_drop: rgba(48, 48, 48, 1);
         /* Обводка */
         --border_color: rgb(54, 54, 54);
@@ -68,16 +68,16 @@
         --button_border_color_hover: rgb(64, 156, 255);
         --button_background: rgb(54, 54, 54);
         --button_background_hover: rgb(64, 156, 255);
-        --button_background_disabled: rgba(54, 54, 54, 0.5);
+        --button_background_disabled: rgba(54, 54, 54, 0.65);
         /* Модальное окно */
-        --modal_background: rgb(27, 27, 27);
+        --modal_background: rgba(27, 27, 27, 0.7);
         /* Элементы */
         --element_background: rgb(54, 54, 54);
-        --element_background_disabled: rgba(54, 54, 54, 0.5);
+        --element_background_disabled: rgba(54, 54, 54, 0.65);
         --element_background_2: rgb(68, 68, 68);
-        --element_background_disabled_2: rgba(68, 68, 68, 0.5);
+        --element_background_disabled_2: rgba(68, 68, 68, 0.65);
         --element_background_prime: rgb(34, 126, 225);
-        --element_background_disabled_prime: rgba(34, 126, 225, 0.5);
+        --element_background_disabled_prime: rgba(34, 126, 225, 0.65);
         /* Акцент */
         --blue_prime_background: rgb(64, 156, 255);
         --blue_prime_background_trans: rgba(64, 156, 255, 0.65);
@@ -92,10 +92,10 @@
         --badge_warning_back: rgba(255, 214, 10, 0.5);
         --badge_warning_text: rgb(255, 212, 38);
         /* Аудиоплеер */
-        --ap_input_background: rgba(30, 30, 30, 0.25);
-        --ap_main_background: rgba(40, 40, 40, 0.5);
-        --ap_main_background_2: rgba(73, 73, 73, 0.75);
-        --ap_slider_background: rgba(73, 73, 73, 0.75);
-        --ap_slider_buf_background: rgba(64, 156, 255, 0.5);
+        --ap_input_background: rgba(30, 30, 30, 0.65);
+        --ap_main_background: rgba(40, 40, 40, 0.65);
+        --ap_main_background_2: rgba(73, 73, 73, 0.65);
+        --ap_slider_background: rgba(73, 73, 73, 0.65);
+        --ap_slider_buf_background: rgba(64, 156, 255, 0.65);
     }
 }

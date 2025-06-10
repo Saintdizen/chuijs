@@ -15,6 +15,7 @@ chui_dialog {
     flex-direction: column;
     padding: var(--test_padding);
     color: var(--text_color);
+    backdrop-filter: var(--global_blur);
 }
 
 dialog_header {
