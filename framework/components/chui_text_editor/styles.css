@@ -13,6 +13,7 @@ chui_text_editor {
     background: var(--element_background);
     border: 1px solid var(--border_main);
     width: -webkit-fill-available;
+    border: 1px solid var(--border_color);
 }
 
 chui_editor_controls {
