@@ -14,7 +14,7 @@ class Dialog {
     constructor(options = {
         width: String(),
         height: String(),
-        closeOutSideClick: Boolean()
+        closeOutSideClick: false
     }) {
 
         require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_Dialogs');
@@ -36,15 +36,20 @@ class Dialog {
         }
 
         if (options.closeOutSideClick) {
-            window.addEventListener('click', (event) => {
-                let elem = document.getElementById(this.#id);
-                if (event.target === elem) {
-                    new Animation(elem).fadeOut();
-                }
+            this.#dialog.addEventListener("animationend", (evt) => {
+                if (evt.animationName === "fade-in") window.addEventListener('click', this.#closeOutsideEvent)
             })
         }
         //ADDS
         this.#dialog.appendChild(this.#body)
+    }
+
+    #closeOutsideEvent = (event) => {
+        const dialog = document.getElementById(this.#id);
+        if (!dialog.contains(event.target)) {
+            window.removeEventListener("click", this.#closeOutsideEvent)
+            this.close()
+        }
     }
 
     addToHeader(...components) {
@@ -100,6 +105,7 @@ class Dialog {
     }
 
     close() {
+        window.removeEventListener("click", this.#closeOutsideEvent)
         this.isOpen = false
         const dialog = document.getElementById(this.#id);
         new Animation(dialog).fadeOut();
