@@ -1,15 +1,25 @@
 const {
     Page, TextInput, Select, ComboBox,
     DateInput, NumberInput, TextArea, PasswordInput,
-    EmailInput, CheckBox, RadioButton, Button, H, FileInput, Toggle, RadioGroup, Styles, MultiComboBox
+    EmailInput, CheckBox, RadioButton, Button, H, FileInput, Toggle, RadioGroup, Styles, MultiComboBox, Icons, Console,
+    Log
 } = require('../../index');
-const {Icons} = require("../../framework/components/chui_icons/icons");
 
 class Inputs_Buttons_Page extends Page {
     constructor() {
         super();
         this.setTitle('Поля ввода и Кнопки');
         this.setMain(true)
+
+        //
+
+        let console = new Console({width: "500px"});
+        console.addText("213123123123123123123123123123123123122131231231231231231231231231231231231221312312312312312312312312312312312312213123123123123123123123123123123123122131231231231231231231231231231231231221312312312312312312312312312312312312213123123123123123123123123123123123122131231231231231231231231231231231231221312312312312312312312312312312312312")
+
+        console.addText("213123123123123123123123123123123123122131231231231231231231231231231231231221312312312312312312312312312312312312213123123123123123123123123123123123122131231231231231231231231231231231231221312312312312312312312312312312312312213123123123123123123123123123123123122131231231231231231231231231231231231221312312312312312312312312312312312312")
+
+
+        this.add(console)
 
         // Поля ввода
         let h1_inputs = new H(1, "Поля ввода");
@@ -45,7 +55,7 @@ class Inputs_Buttons_Page extends Page {
             { title: "Поиск медучреждений", value: "Title Option 3" }
         )
         combo.addValueChangeListener((e) => {
-            console.log(e)
+            Log.info(e)
         })
         let select = new Select({title: 'Select'})
         select.addOptions(
@@ -123,11 +133,11 @@ class Inputs_Buttons_Page extends Page {
         let multicombo = new MultiComboBox({title: 'MultiComboBox', width: "700px"})
         multicombo.addOptionsWithSections(options)
         multicombo.addValueChangeListener((e) => {
-            console.log(e.detail.values)
+            Log.info(e.detail.values)
         })
         this.add(multicombo)
         setInterval(() => {
-            console.log(multicombo.getValue())
+            Log.info(multicombo.getValue())
             multicombo.clear()
         }, 5000)
 
@@ -144,22 +154,22 @@ class Inputs_Buttons_Page extends Page {
         })
         let button_text = new Button({
             title: "Кнопка с текстом",
-            clickEvent: (e) => console.log(e)
+            clickEvent: (e) => Log.info(e)
         });
         let button_icon = new Button({
             icon: Icons.NAVIGATION.CLOSE,
-            clickEvent: (e) => console.log(e)
+            clickEvent: (e) => Log.info(e)
         });
         let button_text_icon = new Button({
             title: "Кнопка с текстом и иконкой",
             icon: Icons.MAPS.MAP,
-            clickEvent: (e) => console.log(e)
+            clickEvent: (e) => Log.info(e)
         });
         let button_text_icon_reverse = new Button({
             title: "Кнопка с текстом и иконкой",
             icon: Icons.MAPS.MAP,
             reverse: true,
-            clickEvent: (e) => console.log(e)
+            clickEvent: (e) => Log.info(e)
         });
         this.add(h1_buttons, disabler_2, button_text, button_icon, button_text_icon, button_text_icon_reverse);
 

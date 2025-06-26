@@ -68,6 +68,7 @@ const {Video} = require("./framework/components/chui_media/video");
 const {YaAudio} = require("./framework/components/chui_media/yandex/ya_audio");
 const {YaApi} = require("./framework/components/chui_media/yandex/ya_api");
 const {CustomElement} = require("./framework/components/chui_custom_element/custom_element");
+const {Console} = require("./framework/components/chui_console/console");
 const {DownloadProgressNotification} = require("./framework/components/chui_notification/notification_download_progress");
 const {MultiComboBox} = require("./framework/components/chui_inputs/chui_multi_combo_box/multi_combo_box");
 const {Log} = require("./framework/modules/chui_logger/chui_logger");
@@ -511,6 +512,7 @@ module.exports = {
     Video: Video,
     YaAudio: YaAudio,
     CustomElement: CustomElement,
+    Console: Console,
     //
     TelegramBot: TelegramBot,
     YaApi: YaApi,

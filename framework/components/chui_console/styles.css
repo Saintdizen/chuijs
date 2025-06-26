@@ -1,0 +1,32 @@
+chui_console {
+    height: max-content;
+    width: max-content;
+    margin: var(--margin);
+    font-size: var(--font_default_size);
+    font-weight: 500;
+    color: var(--text_color);
+    white-space: break-spaces;
+    word-wrap: break-word;
+    font-family: monospace;
+    user-select: text;
+    border: 1px solid var(--border_color);
+    padding: var(--test_padding);
+    border-radius: var(--border_radius);
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    overflow: auto;
+}
+
+chui_console_text {
+    display: block;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+    white-space: break-spaces;
+    word-wrap: break-word;
+    padding: var(--test_padding);
+    text-align: start;
+    user-select: text;
+}
