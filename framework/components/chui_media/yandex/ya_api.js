@@ -426,12 +426,17 @@ class YaApi {
         })
     }
 
-    getPlaylist(kind) {
+    getPlaylist(kind, uid) {
         return new Promise(async (resolve, reject) => {
             try {
                 await this.#wapi.init({access_token: this.#access_token, uid: this.#user_id});
-                let feed = await this.#wapi.getPlaylist(kind, this.#user_id)
-                resolve(feed)
+                if (uid === undefined) {
+                    let feed = await this.#wapi.getPlaylist(kind, this.#user_id)
+                    resolve(feed)
+                } else {
+                    let feed = await this.#wapi.getPlaylist(kind, uid)
+                    resolve(feed)
+                }
             } catch (e) {
                 Log.error(`api error ${e.message}`)
                 reject(e)
