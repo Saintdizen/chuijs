@@ -123,6 +123,33 @@ class YaApi {
         })
     }
 
+    getTracksFromPlaylist(kind) {
+        return new Promise(async (resolve, reject) => {
+            await this.#api.init({access_token: this.#access_token, uid: this.#user_id});
+            try {
+                let tracks = []
+                let pl = await this.#api.getPlaylist(kind, this.#user_id);
+                for (let trs of pl.tracks) {
+                    try {
+                        tracks.push({
+                            track_id: trs.id,
+                            title: trs.track.title,
+                            artist: trs.track.artists[0].name,
+                            album: trs.track.coverUri,
+                            mimetype: 'audio/mpeg'
+                        })
+                    } catch (e) {
+                        Log.error(e)
+                    }
+                }
+                resolve(tracks)
+            } catch (e) {
+                Log.error(`api error ${e.message}`)
+                reject(e)
+            }
+        })
+    }
+
     getTracks() {
         return new Promise(async (resolve, reject) => {
             let playlists = []
