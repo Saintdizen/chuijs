@@ -1,5 +1,5 @@
 // === ИНСТРУМЕНТЫ ===
-const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme, session, webContents} = require('electron');
+const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme, session, webContents, dialog} = require('electron');
 const Store = require("electron-store");
 const path = require("path");
 const fs = require("fs");
@@ -531,5 +531,6 @@ module.exports = {
     App: App,
     //
     downloadSession: downloadSession,
-    Log: Log
+    Log: Log,
+    chooseFile: dialog
 }
