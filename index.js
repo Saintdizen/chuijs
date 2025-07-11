@@ -1,5 +1,6 @@
 // === ИНСТРУМЕНТЫ ===
-const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme, session, webContents, dialog} = require('electron');
+const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme, session, webContents} = require('electron');
+const { dialog } = require('@electron/remote');
 const Store = require("electron-store");
 const path = require("path");
 const fs = require("fs");
