@@ -66,8 +66,6 @@ const {MenuBar} = require("./framework/components/chui_menu_bar/menu_bar");
 const {Image} = require('./framework/components/chui_media/image');
 const {Audio} = require("./framework/components/chui_media/audio");
 const {Video} = require("./framework/components/chui_media/video");
-const {YaAudio} = require("./framework/components/chui_media/yandex/ya_audio");
-const {YaApi} = require("./framework/components/chui_media/yandex/ya_api");
 const {CustomElement} = require("./framework/components/chui_custom_element/custom_element");
 const {Console} = require("./framework/components/chui_console/console");
 const {DownloadProgressNotification} = require("./framework/components/chui_notification/notification_download_progress");
@@ -511,12 +509,10 @@ module.exports = {
     DownloadProgressNotification: DownloadProgressNotification,
     Audio: Audio,
     Video: Video,
-    YaAudio: YaAudio,
     CustomElement: CustomElement,
     Console: Console,
     //
     TelegramBot: TelegramBot,
-    YaApi: YaApi,
     //
     BrowserWindow: BrowserWindow,
     ipcMain: ipcMain,

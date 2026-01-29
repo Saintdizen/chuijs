@@ -2,7 +2,7 @@
   "name": "chuijs",
   "productName": "chuijs",
   "description": "component framework chUiJS",
-  "version": "3.5.9",
+  "version": "3.6.0",
   "private": false,
   "main": "index.js",
   "author": {
@@ -39,7 +39,6 @@
     "octokit": "~4.0.2",
     "randomstring": "~1.3.0",
     "showdown": "~2.1.0",
-    "transliteration": "~2.3.5",
-    "ym-api-meowed": "1.3.5"
+    "transliteration": "~2.3.5"
   }
 }
