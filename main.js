@@ -34,6 +34,10 @@ Log.error("TEST MAIN")
 
 //main.enableAutoUpdateApp(1000, require("./update.json"));
 
+const { systemPreferences } = require('electron');
+// Check or ask for permission
+systemPreferences.getMediaAccessStatus('microphone')
+
 App.get().on('session-created', (session) => {
     session.on('will-download', (e, item, contents) => {
         Log.info(item.getFilename())
