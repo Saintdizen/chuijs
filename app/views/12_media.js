@@ -1,21 +1,17 @@
 const {
     Page,
-    YaAudio,
     Styles,
     App,
-    fs,
+    Audio,
     path,
     Icons,
-    YaApi,
-    Notification,
-    CustomElement,
     Button
 } = require('../../index');
 const {Dialog} = require("../../framework/components/chui_modal/modal");
 
 class MediaPage extends Page {
     #download_path = path.join(App.userDataPath(), "downloads");
-    #audio = new YaAudio({
+    #audio = new Audio({
         autoplay: false,
         playlist: true,
         width: Styles.SIZE.WEBKIT_FILL,
@@ -32,8 +28,6 @@ class MediaPage extends Page {
         this.setIcon(Icons.FILE.DOWNLOAD_FOR_OFFLINE)
         this.#audio.openFolder(this.#download_path)
         this.add(this.#audio)
-        let pl = this.generatePlaylist()
-        setTimeout(() => this.#audio.setPlayList(pl), 100)
 
         this.addRouteEvent(this, (e) => {
             // console.log(e)
@@ -52,7 +46,6 @@ class MediaPage extends Page {
                 playlist_dialog.close()
             }
         }))
-        playlist_dialog.addToBody(this.#audio.getPlaylist())
 
         this.add(playlist_dialog)
 
@@ -61,25 +54,6 @@ class MediaPage extends Page {
         // })
         //
         // this.add(ce)
-
-        this.#audio.addFunctionButtonToLeft(
-            YaAudio.FUNCTION_BUTTON({
-                icon: Icons.AUDIO_VIDEO.PLAYLIST_PLAY,
-                clickEvent: () => playlist_dialog.openAndClose()
-            })
-        )
-        this.#audio.addFunctionButtonToRight(
-            YaAudio.FUNCTION_ACTIVE_BUTTON({
-                value: true,
-                icon_on: Icons.AUDIO_VIDEO.SHUFFLE_ON,
-                icon_off: Icons.AUDIO_VIDEO.SHUFFLE,
-                activateEvent: (evt) => {
-                    new Notification({
-                        title: "Перемешать", text: evt.target.checked, showTime: 1000
-                    }).show()
-                },
-            })
-        )
 
         /*let video = new Video({
             autoplay: true,
@@ -107,29 +81,6 @@ class MediaPage extends Page {
             ]
         )
         this.add(video)*/
-    }
-
-    generatePlaylist() {
-        let playlist = []
-        fs.readdir(this.#download_path, (err, files) => {
-            files.forEach(file => {
-                try {
-                    let artist = file.split(" - ")[0]
-                    let title = file.split(" - ")[1].replace(".mp3", "")
-                    playlist.push({
-                        title: title, artist: artist, album: "", mimetype: Audio.MIMETYPES.MP3,
-                        path: String(path.join(this.#download_path, file))
-                    })
-                } catch (e) {
-                    let title = file.replace(".mp3", "")
-                    playlist.push({
-                        title: title, artist: title, album: title, mimetype: Audio.MIMETYPES.MP3,
-                        path: String(path.join(this.#download_path, file))
-                    })
-                }
-            });
-        });
-        return playlist
     }
 }
 

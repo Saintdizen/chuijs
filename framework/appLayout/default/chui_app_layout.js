@@ -11,6 +11,7 @@ const {ipcRenderer} = require("electron");
 const chui_functions = require('../../modules/chui_functions');
 const {DownloadNotification} = require("../../components/chui_notification/notification_download");
 const {Log} = require("../../../framework/modules/chui_logger/chui_logger");
+const fs = require("fs");
 
 class Events {
     #route_event = undefined;
@@ -441,6 +442,13 @@ class AppLayout {
     disableAppMenu() {
         document.getElementById("appMenuButton").remove()
         document.getElementById("page_name").style.marginLeft = "8px"
+    }
+    setScript(pathToJS = String(), id = String()) {
+        let data = fs.readFileSync(pathToJS, 'utf8');
+        let script = document.createElement('script');
+        script.innerHTML = String(data);
+        script.setAttribute('id', id);
+        if (document.getElementById(id) == null) document.body.appendChild(script);
     }
     static TABS(options = {
         width: String(),

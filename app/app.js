@@ -1,6 +1,8 @@
 /** RENDERER PROCESS */
 /** IMPORTS */
-const {AppLayout, render, Icons, Notification, Styles, Button, ipcRenderer, Route, DownloadProgressNotification, Log} = require('../index');
+const {AppLayout, render, Icons, Notification, Styles, Button, ipcRenderer, Route, DownloadProgressNotification, Log,
+    path
+} = require('../index');
 
 const {MainPage} = require('./views/_main');
 const {Inputs_Buttons_Page} = require('./views/1_inputs_buttons');
@@ -43,6 +45,9 @@ class Test extends AppLayout {
         this.setRoute(new TgTestPage());
         this.setRoute(new SpinnerPage());
         this.setRoute(new MediaPage())
+
+
+        this.setScript(path.join(__dirname, "test.js"), "TEST12312312312")
 
 
         // this.addToHeaderLeftBeforeTitle([

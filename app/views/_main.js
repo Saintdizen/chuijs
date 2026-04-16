@@ -4,7 +4,7 @@ class MainPage extends Page {
     constructor() {
         super();
         this.setTitle('Сказать привет!');
-        this.setMain(false)
+        this.setMain(true)
 
         let menuBar = new MenuBar({test: true});
         menuBar.addMenuItems(
