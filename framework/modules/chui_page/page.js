@@ -69,6 +69,16 @@ class Page {
     getMain() {
         return this.#main;
     }
+    getMediaStream(options = {
+        video: false, // or { width: 1280, height: 720 }
+        audio: false
+    }) {
+        return new Promise((resolve, reject) => {
+            navigator.mediaDevices.getUserMedia(options).then(stream => {
+                resolve(stream);
+            }).catch(reject);
+        })
+    }
     render() {
         return this.#page;
     }

@@ -47,7 +47,7 @@ class Test extends AppLayout {
         this.setRoute(new MediaPage())
 
 
-        this.setScript(path.join(__dirname, "test.js"), "TEST12312312312")
+        //this.setScript(path.join(__dirname, "camera.js"), "TEST12312312312")
 
 
         // this.addToHeaderLeftBeforeTitle([

@@ -1,33 +1,14 @@
 const {
-    Page,
-    Styles,
-    App,
-    Audio,
-    path,
-    Icons,
-    Button
+    Page, Icons, Video, Log
 } = require('../../index');
-const {Dialog} = require("../../framework/components/chui_modal/modal");
 
 class MediaPage extends Page {
-    #download_path = path.join(App.userDataPath(), "downloads");
-    #audio = new Audio({
-        autoplay: false,
-        playlist: true,
-        width: Styles.SIZE.WEBKIT_FILL,
-        height: Styles.SIZE.WEBKIT_FILL,
-        //pin: Audio.PIN.TOP
-        //coverPath: ""
-    })
-
     constructor() {
         super();
-        this.setTitle('OfflinePlayer');
+        this.setTitle('VideoTag');
         this.setFullHeight();
         this.setMain(false);
         this.setIcon(Icons.FILE.DOWNLOAD_FOR_OFFLINE)
-        this.#audio.openFolder(this.#download_path)
-        this.add(this.#audio)
 
         this.addRouteEvent(this, (e) => {
             // console.log(e)
@@ -36,38 +17,24 @@ class MediaPage extends Page {
             // setTimeout(() => audio.setPlayList(pl), 100)
         })
 
-        let playlist_dialog = new Dialog({
-            width: "max-content",
-            height: "max-content"
-        })
-        playlist_dialog.addToHeader(new Button({
-            title: "close",
-            clickEvent: () => {
-                playlist_dialog.close()
-            }
-        }))
-
-        this.add(playlist_dialog)
-
-        // let ce = new CustomElement({
-        //     id: "123"
-        // })
-        //
-        // this.add(ce)
-
-        /*let video = new Video({
-            autoplay: true,
+        let video = new Video({
+            autoplay: false,
             height: "auto",
             width: "450px"
         })
-        video.setPlayList(
+
+        this.getMediaStream({video: true, audio: true}).then(stream => {
+            video.setStream(stream)
+        })
+
+/*        video.setPlayList(
             [
                 {
-                    title: "Title 1", artist: "Artist 1", album: "Album 1", mimetype: VideoPlayer.MIMETYPES.MP4,
+                    title: "Title 1", artist: "Artist 1", album: "Album 1", mimetype: Video.MIMETYPES.MP4,
                     videoPath: "https://cdn.idaprikol.ru/videos/4461fc0c188ac1e8986a606169c1f49b7bc831b68ad56a471c946080c9b3741a_1.mp4"
                 },
                 {
-                    title: "Title 2", artist: "Artist 2", album: "Album 2", mimetype: VideoPlayer.MIMETYPES.MP4,
+                    title: "Title 2", artist: "Artist 2", album: "Album 2", mimetype: Video.MIMETYPES.MP4,
                     videoPath: "https://cdn.idaprikol.ru/videos/35113ec77c05d968b3fe83bf4344b3690a3f7a1de54d6475f0b41dd3809d3695_1.mp4",
                     artwork: [
                         { src: 'https://dummyimage.com/96x96',   sizes: '96x96',   type: 'image/png' },
@@ -79,8 +46,8 @@ class MediaPage extends Page {
                     ]
                 }
             ]
-        )
-        this.add(video)*/
+        )*/
+        this.add(video)
     }
 }
 

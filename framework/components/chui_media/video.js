@@ -142,18 +142,18 @@ class Video {
         });
     };
     async #start(track) {
-        this.#chui_vp_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#size_play_stop).getHTML()
-        if (track.videoPath.includes("http")) {
-            this.#chui_source_tag.src = track.videoPath
-        } else {
-            this.#chui_source_tag.src = String(await this.#convertSong(track.videoPath, track.mimetype))
-        }
-        this.#chui_vt.load()
-        await this.#chui_vt.play().then(() => {
-            this.#setSliderMax()
-            this.#displayBufferedAmount()
-        })
-        VideoPlayer.#setMediaData(track)
+        // this.#chui_vp_play_pause.innerHTML = new Icon(Icons.AUDIO_VIDEO.PAUSE, this.#size_play_stop).getHTML()
+        // if (track.videoPath.includes("http")) {
+        //     this.#chui_source_tag.src = track.videoPath
+        // } else {
+        //     this.#chui_source_tag.src = String(await this.#convertSong(track.videoPath, track.mimetype))
+        // }
+        // this.#chui_vt.load()
+        // await this.#chui_vt.play().then(() => {
+        //     this.#setSliderMax()
+        //     this.#displayBufferedAmount()
+        // })
+        // this.#setMediaData(track)
     }
     async #playNext() {
         this.#current_video = this.#current_video + 1
@@ -216,6 +216,11 @@ class Video {
     }
     #setSliderMax = () => {
         this.#chui_vp_seek.max = String(Math.floor(this.#chui_vt.duration));
+    }
+    setStream(stream) {
+        this.#chui_vt.srcObject = stream;
+        this.#chui_vt.load()
+        this.#chui_vt.play()
     }
     setPlayList(list = [{ title: String(), artist: String(), album: String(), mimetype: String(), videoPath: String(), artwork: [] }]) {
         play_list = list

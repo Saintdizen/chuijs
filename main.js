@@ -1,4 +1,4 @@
-const { Main, MenuItem, path, App, formatBytes, Log, store } = require('./index');
+const { Main, MenuItem, path, App, formatBytes, Log, store, systemPreferences } = require('./index');
 let json = require("./package.json");
 const main = new Main({
     name: `${json.name} (${json.version})`,
@@ -14,7 +14,7 @@ const main = new Main({
     //icon: `${__dirname}/icon.png`
     paths: {
         downloadPath: path.join(App.userDataPath(), "downloads")
-    }
+    },
 });
 
 let test = [
@@ -34,9 +34,22 @@ Log.error("TEST MAIN")
 
 //main.enableAutoUpdateApp(1000, require("./update.json"));
 
-const { systemPreferences } = require('electron');
-// Check or ask for permission
-systemPreferences.getMediaAccessStatus('microphone')
+
+
+async function checkMicPermission() {
+    const status = systemPreferences.getMediaAccessStatus('microphone');
+    if (status !== 'granted') return await systemPreferences.askForMediaAccess('microphone');
+    return true;
+}
+
+async function checkCamPermission() {
+    const status = systemPreferences.getMediaAccessStatus('camera');
+    if (status !== 'granted') return await systemPreferences.askForMediaAccess('camera');
+    return true;
+}
+
+setTimeout(checkMicPermission, 1000);
+setTimeout(checkCamPermission, 1000);
 
 App.get().on('session-created', (session) => {
     session.on('will-download', (e, item, contents) => {

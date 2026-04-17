@@ -1,5 +1,5 @@
 // === ИНСТРУМЕНТЫ ===
-const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme, session, webContents} = require('electron');
+const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme, session, webContents, systemPreferences} = require('electron');
 const { dialog } = require('@electron/remote/main');
 const Store = require("electron-store");
 const path = require("path");
@@ -71,6 +71,7 @@ const {Console} = require("./framework/components/chui_console/console");
 const {DownloadProgressNotification} = require("./framework/components/chui_notification/notification_download_progress");
 const {MultiComboBox} = require("./framework/components/chui_inputs/chui_multi_combo_box/multi_combo_box");
 const {Log} = require("./framework/modules/chui_logger/chui_logger");
+const url = require("node:url");
 
 //VARS
 let isQuiting = false;
@@ -119,9 +120,10 @@ class Main {
                 this.#app_icon = options.icon;
             }
         }
-        //app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
+        // app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
+        app.commandLine.appendSwitch('disable-hid-blocklist')
         app.commandLine.appendSwitch('enable-features=OverlayScrollbar')
-        app.commandLine.appendSwitch("disable-http-cache");
+        // app.commandLine.appendSwitch("disable-http-cache");
         app.commandLine.appendSwitch('enable-transparent-visuals');
         app.commandLine.appendSwitch('enable-gpu-rasterization', "true");
         app.commandLine.appendSwitch('enable-native-gpu-memory-buffers', "true");
@@ -137,7 +139,7 @@ class Main {
             this.#downloadPath = App.downloadsPath();
         }
 
-        //app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
+        // app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 
         // Options
         this.#appName = options.name;
@@ -216,12 +218,21 @@ class Main {
             });
         }
 
-        this.#window.loadURL(`data:text/html;charset=UTF-8,<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><title>${this.#appName}</title></head><body></body></html>`).then(() => {
+        this.#window.loadURL(url.format({
+            pathname: path.join(__dirname, 'index.html'),
+            protocol: 'file:',
+            slashes: true
+        })).then(r => {
             app.on('before-quit', () => {
                 isQuiting = true;
             });
         });
-        this.#window.on("ready-to-show", () => setTimeout(() => this.#window.show(), 650))
+
+        this.#window.on("ready-to-show", () => setTimeout(() => {
+            this.#window.show()
+            // let data = fs.readFileSync(path.join(__dirname, "cam_test.js"), 'utf8');
+            // this.#window.webContents.executeJavaScript(data)
+        }, 650))
 
         if (hideOnClose) {
             this.#window.on('close', (evt) => {
@@ -274,7 +285,16 @@ class Main {
 
     start(options = {hideOnClose: Boolean(), globalMenu: [], tray: [], extensions: []}) {
         nativeTheme.themeSource = "system";
+
         app.whenReady().then(() => {
+            session.defaultSession.setPermissionRequestHandler((webContents, permission, callback) => {
+                if (permission === 'media') {
+                    callback(true); // Approve microphone/camera access
+                } else {
+                    callback(false);
+                }
+            });
+
             if (options.extensions) {
                 for (let extension of options.extensions) session.defaultSession.loadExtension(extension).then(r => Log.info(r)).catch(e => Log.error(e))
             }
@@ -529,5 +549,7 @@ module.exports = {
     //
     downloadSession: downloadSession,
     Log: Log,
-    chooseFile: dialog
+    chooseFile: dialog,
+    //
+    systemPreferences: systemPreferences
 }
