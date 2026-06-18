@@ -3,10 +3,10 @@
     --main_padding: 8px 11px;
     --test_padding: 8px;
     --header_icon_size: 13pt;
-    --font_default_size: 11pt;
-    --font_labels_size: 9pt;
-    --font_notification_size: 10pt;
-    --border_radius: 0.35rem;
+    --font_default_size: 14px;
+    --font_labels_size: 12px;
+    --font_notification_size: 12px;
+    --border_radius: 0.50rem !important;;
     --margin: 6px;
     --box_shadow_main: 0 1px 5px 1px rgb(0 0 0 / 20%);
     --transition_time: .165s
@@ -25,7 +25,8 @@ strong {
 }
 
 * {
-    font-family: 'chui_Ubuntu';
+    font-family: 'chui_I';
+    font-style: normal;
     user-select: none;
     outline: none;
     transition: all var(--transition_time);
@@ -36,7 +37,8 @@ strong {
 }
 
 *:before {
-    font-family: 'chui_Ubuntu';
+    font-family: 'chui_I';
+    font-style: normal;
     user-select: none;
     outline: none;
     transition: all var(--transition_time);

@@ -10,7 +10,7 @@
         --header_background: rgba(226, 226, 226, 0.65);
         --header_background_drop: rgb(246, 246, 246, 1);
         /* Обводка */
-        --border_color: rgb(240, 240, 240);
+        --border_color: rgba(240, 240, 240);
         /* Элементы */
         /* Кнопка */
         --button_border_color: rgb(240, 240, 240);
@@ -61,7 +61,7 @@
         --header_background: rgba(40, 40, 40, 0.65);
         --header_background_drop: rgba(48, 48, 48, 1);
         /* Обводка */
-        --border_color: rgb(54, 54, 54);
+        --border_color: rgb(60, 60, 60);
         /* Элементы */
         /* Кнопка */
         --button_border_color: rgb(54, 54, 54);
