@@ -1,14 +1,14 @@
-const {Page, TextEditor, Styles} = require('../../index');
-const {Button} = require("../../framework/components/chui_button/button");
-const {HtmlBlock} = require("../../framework/components/chui_html_block/html_block");
+const { Page, TextEditor, Styles } = require("../../index");
+const { Button } = require("../../framework/components/chui_button/button");
+const { HtmlBlock } = require("../../framework/components/chui_html_block/html_block");
 
 class TextEditorPage extends Page {
     constructor() {
         super();
-        this.setTitle('Редактор текста');
-        this.setMain(false)
-        this.setFullWidth()
-        this.setFullHeight()
+        this.setTitle("Редактор текста");
+        this.setMain(false);
+        this.setFullWidth();
+        this.setFullHeight();
 
         let textEditor = new TextEditor("500px", {
             title: "TextEditor",
@@ -32,20 +32,23 @@ class TextEditorPage extends Page {
                 INSERT_TABLE: true,
                 INSERT_IMAGE: true,
                 LINE_BREAK: true,
-                CONTENT_CONTROLS: true
-            }
-        })
-        this.add(textEditor)
+                CONTENT_CONTROLS: true,
+            },
+        });
+        this.add(textEditor);
         textEditor.addInputListener((e) => {
-            console.log(e)
-        })
+            console.log(e);
+        });
 
         let html = new HtmlBlock(Styles.SIZE.MAX_CONTENT);
-        this.add(new Button({
-            title: "test",
-            clickEvent: () => html.setHtml(textEditor.getValueAsHTML())
-        }), html)
+        this.add(
+            new Button({
+                title: "test",
+                clickEvent: () => html.setHtml(textEditor.getValueAsHTML()),
+            }),
+            html
+        );
     }
 }
 
-exports.TextEditorPage = TextEditorPage
+exports.TextEditorPage = TextEditorPage;

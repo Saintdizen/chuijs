@@ -1,17 +1,19 @@
-const {setStyles, htmlToMarkdown, markdownToHtml} = require('../../modules/chui_functions');
+const { setStyles, htmlToMarkdown, markdownToHtml } = require("../../modules/chui_functions");
 
 class Label {
     #chui_label = document.createElement(`chui_label`);
-    constructor(options = {
-        id: String(),
-        text: String(),
-        markdownText: String(),
-        textAlign: String(),
-        wordBreak: String(),
-        width: String(),
-        fontSize: String(),
-    }) {
-        setStyles(__dirname + "/styles.css", 'chUiJS_Label');
+    constructor(
+        options = {
+            id: String(),
+            text: String(),
+            markdownText: String(),
+            textAlign: String(),
+            wordBreak: String(),
+            width: String(),
+            fontSize: String(),
+        }
+    ) {
+        setStyles(__dirname + "/styles.css", "chUiJS_Label");
         // Стили текста лейбла
         if (options.text !== undefined && options.markdownText !== undefined) {
             throw new Error("Должна быть установлена одна опция text или markdownText");
@@ -52,4 +54,4 @@ class Label {
     }
 }
 
-exports.Label = Label
+exports.Label = Label;

@@ -1,12 +1,12 @@
-const {Page, SlideShow, H, Styles} = require('../../index');
+const { Page, SlideShow, H, Styles } = require("../../index");
 
 class SlidesPage extends Page {
     constructor() {
         super();
-        this.setTitle('Слайдшоу');
-        this.setMain(false)
-        this.setFullWidth()
-        this.setFullHeight()
+        this.setTitle("Слайдшоу");
+        this.setMain(false);
+        this.setFullWidth();
+        this.setFullHeight();
 
         let slideshow = new SlideShow({
             width: Styles.SIZE.WEBKIT_FILL,
@@ -16,40 +16,44 @@ class SlidesPage extends Page {
                 SlideShow.SLIDE({
                     size: {
                         width: Styles.SIZE.WEBKIT_FILL,
-                        height: Styles.SIZE.WEBKIT_FILL
+                        height: Styles.SIZE.WEBKIT_FILL,
                     },
                     style: {
-                        direction: Styles.DIRECTION.ROW, wrap: Styles.WRAP.WRAP,
-                        align: Styles.ALIGN.CENTER, justify: Styles.JUSTIFY.START,
+                        direction: Styles.DIRECTION.ROW,
+                        wrap: Styles.WRAP.WRAP,
+                        align: Styles.ALIGN.CENTER,
+                        justify: Styles.JUSTIFY.START,
                     },
                     components: [
                         new H(1, "Слайд номер 1"),
                         new H(1, "Слайд номер 1"),
                         new H(1, "Слайд номер 1"),
-                        new H(1, "Слайд номер 1")
-                    ]
+                        new H(1, "Слайд номер 1"),
+                    ],
                 }),
                 SlideShow.SLIDE({
                     size: {
                         width: Styles.SIZE.WEBKIT_FILL,
-                        height: Styles.SIZE.WEBKIT_FILL
+                        height: Styles.SIZE.WEBKIT_FILL,
                     },
                     style: {
-                        direction: Styles.DIRECTION.ROW, wrap: Styles.WRAP.WRAP,
-                        align: Styles.ALIGN.CENTER, justify: Styles.JUSTIFY.END,
+                        direction: Styles.DIRECTION.ROW,
+                        wrap: Styles.WRAP.WRAP,
+                        align: Styles.ALIGN.CENTER,
+                        justify: Styles.JUSTIFY.END,
                     },
                     components: [
                         new H(2, "Слайд номер 2"),
                         new H(2, "Слайд номер 2"),
                         new H(2, "Слайд номер 2"),
-                        new H(2, "Слайд номер 2")
-                    ]
-                })
-            ]
+                        new H(2, "Слайд номер 2"),
+                    ],
+                }),
+            ],
         });
 
-        this.add(slideshow)
+        this.add(slideshow);
     }
 }
 
-exports.SlidesPage = SlidesPage
+exports.SlidesPage = SlidesPage;

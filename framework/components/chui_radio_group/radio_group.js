@@ -1,27 +1,29 @@
-const {RadioButton} = require("../chui_inputs/chui_radio_button/radio_button");
+const { RadioButton } = require("../chui_inputs/chui_radio_button/radio_button");
 
 class RadioGroup {
     #id = require("randomstring").generate();
     #name = require("randomstring").generate();
-    #RadioGroup = document.createElement('chui_radio_group');
-    #groupForm = document.createElement('form');
+    #RadioGroup = document.createElement("chui_radio_group");
+    #groupForm = document.createElement("form");
     //Стили
     #direction = undefined;
     #wrap = undefined;
     #align = undefined;
     #justify = undefined;
     #width = undefined;
-    constructor(options = {
-        styles: {
-            direction: undefined,
-            wrap: undefined,
-            align: undefined,
-            justify: undefined,
-            width: undefined
+    constructor(
+        options = {
+            styles: {
+                direction: undefined,
+                wrap: undefined,
+                align: undefined,
+                justify: undefined,
+                width: undefined,
+            },
         }
-    }) {
-        require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", "chUiJS_RadioGroup")
-        this.#groupForm.classList.add('radioGroupForm')
+    ) {
+        require("../../modules/chui_functions").setStyles(__dirname + "/styles.css", "chUiJS_RadioGroup");
+        this.#groupForm.classList.add("radioGroupForm");
         this.#direction = options.styles.direction;
         this.#wrap = options.styles.wrap;
         this.#align = options.styles.align;
@@ -33,26 +35,30 @@ class RadioGroup {
         if (this.#align !== undefined) this.#groupForm.style.alignItems = this.#align;
         if (this.#justify !== undefined) this.#groupForm.style.justifyContent = this.#justify;
         this.#RadioGroup.id = this.#id;
-        this.#RadioGroup.appendChild(this.#groupForm)
+        this.#RadioGroup.appendChild(this.#groupForm);
     }
     addOptions(options = [{ name: String(), value: String() }]) {
-        options.forEach(option => {
-            const radio = new RadioButton({ title: option.name, stringValue: option.value, name: this.#name })
-            this.#groupForm.appendChild(radio.set())
-        })
+        options.forEach((option) => {
+            const radio = new RadioButton({ title: option.name, stringValue: option.value, name: this.#name });
+            this.#groupForm.appendChild(radio.set());
+        });
     }
     addChangeListener(listener = () => {}) {
-        this.#groupForm.addEventListener("change", listener)
+        this.#groupForm.addEventListener("change", listener);
     }
     clear() {
-        for (let test of this.#groupForm.children) test.children.item(0).checked = false
+        for (let child of this.#groupForm.children) {
+            const input = child.children.item(0);
+            if (input !== null) input.checked = false;
+        }
     }
     getValue() {
-        return new FormData(this.#groupForm).entries().next().value[1]
+        const entry = new FormData(this.#groupForm).entries().next();
+        return entry.done ? undefined : entry.value[1];
     }
     set() {
         return this.#RadioGroup;
     }
 }
 
-exports.RadioGroup = RadioGroup
+exports.RadioGroup = RadioGroup;

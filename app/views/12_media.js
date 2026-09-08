@@ -1,33 +1,31 @@
-const {
-    Page, Icons, Video, Log
-} = require('../../index');
+const { Page, Icons, Video } = require("../../index");
 
 class MediaPage extends Page {
     constructor() {
         super();
-        this.setTitle('VideoTag');
+        this.setTitle("VideoTag");
         this.setFullHeight();
         this.setMain(false);
-        this.setIcon(Icons.FILE.DOWNLOAD_FOR_OFFLINE)
+        this.setIcon(Icons.FILE.DOWNLOAD_FOR_OFFLINE);
 
-        this.addRouteEvent(this, (e) => {
+        this.addRouteEvent(this, () => {
             // console.log(e)
             // audio.restoreFX();
             // let pl = this.generatePlaylist()
             // setTimeout(() => audio.setPlayList(pl), 100)
-        })
+        });
 
         let video = new Video({
             autoplay: false,
             height: "auto",
-            width: "450px"
-        })
+            width: "450px",
+        });
 
-        this.getMediaStream({video: true, audio: true}).then(stream => {
-            video.setStream(stream)
-        })
+        this.getMediaStream({ video: true, audio: true }).then((stream) => {
+            video.setStream(stream);
+        });
 
-/*        video.setPlayList(
+        /*        video.setPlayList(
             [
                 {
                     title: "Title 1", artist: "Artist 1", album: "Album 1", mimetype: Video.MIMETYPES.MP4,
@@ -47,8 +45,8 @@ class MediaPage extends Page {
                 }
             ]
         )*/
-        this.add(video)
+        this.add(video);
     }
 }
 
-exports.MediaPage = MediaPage
+exports.MediaPage = MediaPage;

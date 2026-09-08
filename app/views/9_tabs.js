@@ -1,30 +1,34 @@
-const {Page, Tab, Tabs, TextInput, Styles} = require('../../index');
+const { Page, Tab, Tabs, TextInput, Styles } = require("../../index");
 
 class TabsPage extends Page {
     constructor() {
         super();
-        this.setTitle('Вкладки');
-        this.setMain(false)
+        this.setTitle("Вкладки");
+        this.setMain(false);
 
         let tab_one = new Tab("Вкладка 1");
-        tab_one.addContent(new TextInput({
-            title: 'TextInput 1',
-            width: "500px"
-        }))
+        tab_one.addContent(
+            new TextInput({
+                title: "TextInput 1",
+                width: "500px",
+            })
+        );
         let tab_two = new Tab("Вкладка 2");
-        tab_two.addContent(new TextInput({
-            title: 'TextInput 2',
-            width: "500px"
-        }))
+        tab_two.addContent(
+            new TextInput({
+                title: "TextInput 2",
+                width: "500px",
+            })
+        );
 
         let tabs = new Tabs({
             default: 0,
             width: Styles.SIZE.MAX_CONTENT,
-            tabs: [ tab_one, tab_two ]
+            tabs: [tab_one, tab_two],
         });
 
-        this.add(tabs)
+        this.add(tabs);
     }
 }
 
-exports.TabsPage = TabsPage
+exports.TabsPage = TabsPage;

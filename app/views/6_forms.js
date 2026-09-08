@@ -1,23 +1,34 @@
-const {Page, TextInput, Form, TextArea} = require('../../index');
+const { Page, TextInput, Form, TextArea } = require("../../index");
 
 class FormsPage extends Page {
     constructor() {
         super();
-        this.setTitle('Формы');
-        this.setMain(false)
-        this.setFullWidth()
-        this.setFullHeight()
-        this.add(this.#createForm())
+        this.setTitle("Формы");
+        this.setMain(false);
+        this.setFullWidth();
+        this.setFullHeight();
+        this.add(this.#createForm());
     }
     #createForm() {
         let bot_token = new TextInput({
-            title: "Ключ бота", placeholder: "Ключ бота", width: "400px", required: true
+            title: "Ключ бота",
+            placeholder: "Ключ бота",
+            width: "400px",
+            required: true,
         });
         let chat_id = new TextInput({
-            name: "chat_id", title: "Номер чата", placeholder: "Номер чата", width: "400px", required: true
+            name: "chat_id",
+            title: "Номер чата",
+            placeholder: "Номер чата",
+            width: "400px",
+            required: true,
         });
         let message = new TextArea({
-            name: "text", title: 'Сообщение', placeholder: 'Сообщение', width: '400px', required: true
+            name: "text",
+            title: "Сообщение",
+            placeholder: "Сообщение",
+            width: "400px",
+            required: true,
         });
         return new Form({
             action: "#",
@@ -28,9 +39,9 @@ class FormsPage extends Page {
                 const request = new XMLHttpRequest();
                 request.open("POST", `https://api.telegram.org/bot${bot_token.getValue()}/sendMessage`);
                 request.send(new FormData(e.target));
-            }
+            },
         });
     }
 }
 
-exports.FormsPage = FormsPage
+exports.FormsPage = FormsPage;

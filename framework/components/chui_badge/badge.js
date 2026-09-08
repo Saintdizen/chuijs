@@ -1,14 +1,16 @@
-const {setStyles, markdownToHtml, htmlToMarkdown} = require('../../modules/chui_functions');
+const { setStyles, markdownToHtml, htmlToMarkdown } = require("../../modules/chui_functions");
 
 class Badge {
     #chui_badge = document.createElement(`chui_badge`);
-    constructor(options = {
-        id: String(),
-        text: String(),
-        markdownText: String(),
-        style: undefined
-    }) {
-        setStyles(__dirname + "/styles.css", 'chUiJS_Badge');
+    constructor(
+        options = {
+            id: String(),
+            text: String(),
+            markdownText: String(),
+            style: undefined,
+        }
+    ) {
+        setStyles(__dirname + "/styles.css", "chUiJS_Badge");
         if (options.id !== undefined) this.#chui_badge.id = options.id;
         if (options.style !== undefined) this.#chui_badge.classList.add(options.style);
         // Стили текста баджей
@@ -47,10 +49,10 @@ class Badge {
         return this.#chui_badge;
     }
     static STYLE = {
-        ERROR: 'badge_error',
-        SUCCESS: 'badge_success',
-        WARNING: 'badge_warning'
-    }
+        ERROR: "badge_error",
+        SUCCESS: "badge_success",
+        WARNING: "badge_warning",
+    };
 }
 
-exports.Badge = Badge
+exports.Badge = Badge;

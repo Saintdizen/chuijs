@@ -1,7 +1,7 @@
 class Paragraph {
     #Paragraph = document.createElement(`p`);
     constructor(text = String()) {
-        require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_Paragraph');
+        require("../../modules/chui_functions").setStyles(__dirname + "/styles.css", "chUiJS_Paragraph");
         this.#Paragraph.innerText = text;
     }
     setText(text = String()) {
@@ -12,4 +12,4 @@ class Paragraph {
     }
 }
 
-exports.Paragraph = Paragraph
+exports.Paragraph = Paragraph;

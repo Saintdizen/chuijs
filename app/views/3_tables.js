@@ -1,22 +1,28 @@
-const {Page, Table, TextInput, Styles, ContentBlock} = require('../../index');
+const { Page, Table, TextInput, Styles, ContentBlock } = require("../../index");
 
 class TablesPage extends Page {
     constructor() {
         super();
-        this.setTitle('Таблицы');
-        this.setMain(false)
+        this.setTitle("Таблицы");
+        this.setMain(false);
 
         let filters = new ContentBlock({
-            direction: Styles.DIRECTION.ROW, wrap: Styles.WRAP.WRAP,
-            align: Styles.ALIGN.CENTER, justify: Styles.JUSTIFY.CENTER,
-        })
+            direction: Styles.DIRECTION.ROW,
+            wrap: Styles.WRAP.WRAP,
+            align: Styles.ALIGN.CENTER,
+            justify: Styles.JUSTIFY.CENTER,
+        });
 
-        let filter = new TextInput({ title: "Поиск" })
+        let filter = new TextInput({ title: "Поиск" });
         filter.addInputListener((e) => {
-            cars_table.setFilterByMultiProperty(Table.FILTER_TYPE.PARTIAL_MATCH, ["car", "model", "size"], e.target.value);
-        })
+            cars_table.setFilterByMultiProperty(
+                Table.FILTER_TYPE.PARTIAL_MATCH,
+                ["car", "model", "size"],
+                e.target.value
+            );
+        });
 
-        let cars_table  = new Table({
+        let cars_table = new Table({
             data: [
                 new Cars("Acura", "NSX", 10),
                 new Cars("Alfa Romeo", "SPIDER", 11),
@@ -35,20 +41,20 @@ class TablesPage extends Page {
             userSelect: true,
             customName: ["Марка авто", "Модель авто", "Количество"],
             //columnsWidth: ["20%", "40%", "40%"]
-        })
+        });
 
         //
-        filters.add(filter)
+        filters.add(filter);
         this.add(filters, cars_table);
     }
 }
 
 class Cars {
     constructor(car, model, size) {
-        this.car = car
-        this.model = model
-        this.size = size
+        this.car = car;
+        this.model = model;
+        this.size = size;
     }
 }
 
-exports.TablesPage = TablesPage
+exports.TablesPage = TablesPage;

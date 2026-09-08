@@ -1,81 +1,96 @@
 // === ИНСТРУМЕНТЫ ===
-const {app, BrowserWindow, Menu, Tray, ipcMain, ipcRenderer, shell, nativeTheme, session, webContents, systemPreferences} = require('electron');
-const { dialog } = require('@electron/remote/main');
+const {
+    app,
+    BrowserWindow,
+    Menu,
+    Tray,
+    ipcMain,
+    ipcRenderer,
+    shell,
+    nativeTheme,
+    session,
+    webContents,
+    systemPreferences,
+} = require("electron");
+const { dialog } = require("@electron/remote/main");
 const Store = require("electron-store");
 const path = require("path");
 const fs = require("fs");
 const os = require("os");
 
-const request = require('@cypress/request');
-const {transliterate} = require("transliteration");
+const request = require("@cypress/request");
+const { transliterate } = require("transliteration");
 let downloadSession = undefined;
 // === === ===
 // process.env
-process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = "true";
+process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 // === === ===
 
 //ПОЛЯ ВВОДА
-const {TextInput} = require('./framework/components/chui_inputs/chui_text/text');
-const {DateInput} = require('./framework/components/chui_inputs/chui_date/date');
-const {NumberInput} = require('./framework/components/chui_inputs/chui_number/number');
-const {EmailInput} = require('./framework/components/chui_inputs/chui_email/email');
-const {PasswordInput} = require('./framework/components/chui_inputs/chui_password/password');
-const {Select} = require('./framework/components/chui_inputs/chui_select_box/select_box');
-const {ComboBox} = require('./framework/components/chui_inputs/chui_combo_box/combo_box');
-const {TextArea} = require('./framework/components/chui_inputs/chui_text_area/text_area');
-const {RadioButton} = require('./framework/components/chui_inputs/chui_radio_button/radio_button');
-const {CheckBox} = require('./framework/components/chui_inputs/chui_check_box/check_box');
-const {RadioGroup} = require('./framework/components/chui_radio_group/radio_group');
+const { TextInput } = require("./framework/components/chui_inputs/chui_text/text");
+const { DateInput } = require("./framework/components/chui_inputs/chui_date/date");
+const { NumberInput } = require("./framework/components/chui_inputs/chui_number/number");
+const { EmailInput } = require("./framework/components/chui_inputs/chui_email/email");
+const { PasswordInput } = require("./framework/components/chui_inputs/chui_password/password");
+const { Select } = require("./framework/components/chui_inputs/chui_select_box/select_box");
+const { ComboBox } = require("./framework/components/chui_inputs/chui_combo_box/combo_box");
+const { TextArea } = require("./framework/components/chui_inputs/chui_text_area/text_area");
+const { RadioButton } = require("./framework/components/chui_inputs/chui_radio_button/radio_button");
+const { CheckBox } = require("./framework/components/chui_inputs/chui_check_box/check_box");
+const { RadioGroup } = require("./framework/components/chui_radio_group/radio_group");
 //==========
-const {MenuItem} = require('./framework/tray_bar/chui_menu_items');
-const {AppLayout, Route} = require('./framework/appLayout/default/chui_app_layout');
-const {Page} = require('./framework/modules/chui_page/page');
-const {WebView} = require('./framework/components/chui_webview/webview');
-const {Button} = require('./framework/components/chui_button/button');
-const {Spinner} = require('./framework/components/chui_spinner/spinner');
-const {Icon, Icons} = require('./framework/components/chui_icons/icons');
-const {TextEditor} = require('./framework/components/chui_text_editor/text_editor');
-const {Badge} = require('./framework/components/chui_badge/badge');
-const {Calendar} = require('./framework/components/chui_calendar/calendar');
-const {Notification} = require('./framework/components/chui_notification/notification');
-const {UpdateNotification} = require("./framework/components/chui_notification/notification_update");
-const {DownloadNotification} = require("./framework/components/chui_notification/notification_download");
-const {Tabs, Tab} = require('./framework/components/chui_tabs/chui_tabs');
-const {BarGraph, PieGraph} = require('./framework/components/chui_graphs/graphs');
-const {Toggle} = require('./framework/components/chui_inputs/chui_toggle/toggle');
-const {ContentBlock} = require('./framework/components/chui_content_block/content_block');
-const {ProgressBar} = require('./framework/components/chui_progress_bar/progress_bar');
-const {Label} = require('./framework/components/chui_label/label');
-const {Dialog} = require('./framework/components/chui_modal/modal');
-const {Paragraph} = require('./framework/components/chui_paragraph/paragraph');
-const {H} = require('./framework/components/chui_hx/hx');
-const {Table} = require('./framework/components/chui_table/table');
-const {Details} = require('./framework/components/chui_details/details');
-const {Accordion} = require('./framework/components/chui_accordion/accordion')
-const {CodeBlock} = require('./framework/components/chui_code/code')
-const {HtmlBlock} = require('./framework/components/chui_html_block/html_block')
-const {sleep, render, getDefaultIcon, formatBytes} = require('./framework/modules/chui_functions');
-const {FileInput, AcceptTypes} = require("./framework/components/chui_inputs/chui_file/file");
-const {TreeView} = require("./framework/components/chui_tree_view/tree_view");
-const {Form} = require("./framework/components/chui_form/form");
-const {SlideShow} = require("./framework/components/chui_slideshow/slideshow");
-const {FieldSet} = require("./framework/components/chui_fieldset/fieldset");
-const {Popup} = require("./framework/components/chui_popups/popups");
-const {TelegramBot} = require("./framework/components/telegram_bot/chui_telegram_bot");
-const {MenuBar} = require("./framework/components/chui_menu_bar/menu_bar");
-const {Image} = require('./framework/components/chui_media/image');
-const {Audio} = require("./framework/components/chui_media/audio");
-const {Video} = require("./framework/components/chui_media/video");
-const {CustomElement} = require("./framework/components/chui_custom_element/custom_element");
-const {Console} = require("./framework/components/chui_console/console");
-const {DownloadProgressNotification} = require("./framework/components/chui_notification/notification_download_progress");
-const {MultiComboBox} = require("./framework/components/chui_inputs/chui_multi_combo_box/multi_combo_box");
-const {Log} = require("./framework/modules/chui_logger/chui_logger");
+const { MenuItem } = require("./framework/tray_bar/chui_menu_items");
+const { AppLayout } = require("./framework/appLayout/default/chui_app_layout");
+const { Route } = require("./framework/modules/chui_route/route");
+const { Page } = require("./framework/modules/chui_page/page");
+const { WebView } = require("./framework/components/chui_webview/webview");
+const { Button } = require("./framework/components/chui_button/button");
+const { Spinner } = require("./framework/components/chui_spinner/spinner");
+const { Icon, Icons } = require("./framework/components/chui_icons/icons");
+const { TextEditor } = require("./framework/components/chui_text_editor/text_editor");
+const { Badge } = require("./framework/components/chui_badge/badge");
+const { Calendar } = require("./framework/components/chui_calendar/calendar");
+const { Notification } = require("./framework/components/chui_notification/notification");
+const { UpdateNotification } = require("./framework/components/chui_notification/notification_update");
+const { DownloadNotification } = require("./framework/components/chui_notification/notification_download");
+const { Tabs, Tab } = require("./framework/components/chui_tabs/chui_tabs");
+const { BarGraph, PieGraph } = require("./framework/components/chui_graphs/graphs");
+const { Toggle } = require("./framework/components/chui_inputs/chui_toggle/toggle");
+const { ContentBlock } = require("./framework/components/chui_content_block/content_block");
+const { ProgressBar } = require("./framework/components/chui_progress_bar/progress_bar");
+const { Label } = require("./framework/components/chui_label/label");
+const { Dialog } = require("./framework/components/chui_modal/modal");
+const { Paragraph } = require("./framework/components/chui_paragraph/paragraph");
+const { H } = require("./framework/components/chui_hx/hx");
+const { Table } = require("./framework/components/chui_table/table");
+const { Details } = require("./framework/components/chui_details/details");
+const { Accordion } = require("./framework/components/chui_accordion/accordion");
+const { CodeBlock } = require("./framework/components/chui_code/code");
+const { HtmlBlock } = require("./framework/components/chui_html_block/html_block");
+const { sleep, render, getDefaultIcon, formatBytes } = require("./framework/modules/chui_functions");
+const { FileInput, AcceptTypes } = require("./framework/components/chui_inputs/chui_file/file");
+const { TreeView } = require("./framework/components/chui_tree_view/tree_view");
+const { Form } = require("./framework/components/chui_form/form");
+const { SlideShow } = require("./framework/components/chui_slideshow/slideshow");
+const { FieldSet } = require("./framework/components/chui_fieldset/fieldset");
+const { Popup } = require("./framework/components/chui_popups/popups");
+const { TelegramBot } = require("./framework/components/telegram_bot/chui_telegram_bot");
+const { MenuBar } = require("./framework/components/chui_menu_bar/menu_bar");
+const { ContextMenu } = require("./framework/components/chui_context_menu/context_menu");
+const { Image } = require("./framework/components/chui_media/image");
+const { Audio } = require("./framework/components/chui_media/audio");
+const { Video } = require("./framework/components/chui_media/video");
+const { CustomElement } = require("./framework/components/chui_custom_element/custom_element");
+const { Console } = require("./framework/components/chui_console/console");
+const {
+    DownloadProgressNotification,
+} = require("./framework/components/chui_notification/notification_download_progress");
+const { MultiComboBox } = require("./framework/components/chui_inputs/chui_multi_combo_box/multi_combo_box");
+const { Log, writeLog } = require("./framework/modules/chui_logger/chui_logger");
 const url = require("node:url");
 
 //VARS
 let isQuiting = false;
-let context = null;
 
 class Main {
     #tray = undefined;
@@ -95,43 +110,45 @@ class Main {
     // ПУТИ
     #downloadPath = undefined;
 
-    constructor(options = {
-        name: String(),
-        sizes: { height: Number(), width: Number(), minHeight: Number(), minWidth: Number() },
-        render: String(),
-        devTools: Boolean(),
-        webSecurity: Boolean(),
-        resizable: Boolean(),
-        paths: {
-            downloadPath: String(),
+    constructor(
+        options = {
+            name: String(),
+            sizes: { height: Number(), width: Number(), minHeight: Number(), minWidth: Number() },
+            render: String(),
+            devTools: Boolean(),
+            webSecurity: Boolean(),
+            resizable: Boolean(),
+            paths: {
+                downloadPath: String(),
+            },
         }
-    }) {
+    ) {
         this.#app_icon = options.icon;
         if (this.#app_icon === undefined) {
             if (process.platform === "darwin") {
-                this.#app_icon = Main.#resizeIconTray(getDefaultIcon())
+                this.#app_icon = Main.#resizeIconTray(getDefaultIcon());
             } else {
                 this.#app_icon = getDefaultIcon();
             }
         } else {
             if (process.platform === "darwin") {
-                this.#app_icon = Main.#resizeIconTray(options.icon)
+                this.#app_icon = Main.#resizeIconTray(options.icon);
             } else {
                 this.#app_icon = options.icon;
             }
         }
         // app.commandLine.appendSwitch('--enable-features', 'OverlayScrollbar')
-        app.commandLine.appendSwitch('disable-hid-blocklist')
-        app.commandLine.appendSwitch('enable-features=OverlayScrollbar')
+        app.commandLine.appendSwitch("disable-hid-blocklist");
+        app.commandLine.appendSwitch("enable-features=OverlayScrollbar");
         // app.commandLine.appendSwitch("disable-http-cache");
-        app.commandLine.appendSwitch('enable-transparent-visuals');
-        app.commandLine.appendSwitch('enable-gpu-rasterization', "true");
-        app.commandLine.appendSwitch('enable-native-gpu-memory-buffers', "true");
-        app.commandLine.appendSwitch('high-dpi-support', "true");
-        app.commandLine.appendSwitch('device-scale-factor', "true");
-        app.commandLine.appendSwitch('disable-touch-adjustment', "true");
-        app.commandLine.appendSwitch('main-frame-resizes-are-orientation-changes', "true");
-        app.commandLine.appendSwitch('disable-pinch', "true");
+        app.commandLine.appendSwitch("enable-transparent-visuals");
+        app.commandLine.appendSwitch("enable-gpu-rasterization", "true");
+        app.commandLine.appendSwitch("enable-native-gpu-memory-buffers", "true");
+        app.commandLine.appendSwitch("high-dpi-support", "true");
+        app.commandLine.appendSwitch("device-scale-factor", "true");
+        app.commandLine.appendSwitch("disable-touch-adjustment", "true");
+        app.commandLine.appendSwitch("main-frame-resizes-are-orientation-changes", "true");
+        app.commandLine.appendSwitch("disable-pinch", "true");
 
         try {
             this.#downloadPath = options.paths.downloadPath;
@@ -155,7 +172,7 @@ class Main {
     }
 
     static #resizeIconTray(image) {
-        return require('electron').nativeImage.createFromPath(image).resize({width: 16, height: 16});
+        return require("electron").nativeImage.createFromPath(image).resize({ width: 16, height: 16 });
     }
 
     static #keyToChangeLower(obj, keyToChange, value) {
@@ -197,50 +214,57 @@ class Main {
             minimizable: true,
             maximizable: true,
             center: true,
-            hasShadow: true
+            hasShadow: true,
         });
 
         if (!this.#webSecurity) {
             this.#window.webContents.session.webRequest.onBeforeSendHeaders((details, callback) => {
-                const {requestHeaders} = details;
-                Main.#keyToChangeLower(requestHeaders, 'Access-Control-Allow-Origin', ['*']);
-                Main.#keyToChangeLower(requestHeaders, 'X-Frame-Options', ['*']);
-                callback({requestHeaders});
-            },);
+                const { requestHeaders } = details;
+                Main.#keyToChangeLower(requestHeaders, "Access-Control-Allow-Origin", ["*"]);
+                Main.#keyToChangeLower(requestHeaders, "X-Frame-Options", ["*"]);
+                callback({ requestHeaders });
+            });
             this.#window.webContents.session.webRequest.onHeadersReceived((details, callback) => {
-                const {responseHeaders} = details;
-                Main.#keyToChangeLower(responseHeaders, 'Access-Control-Allow-Origin', ['*']);
-                Main.#keyToChangeLower(responseHeaders, 'Access-Control-Allow-Headers', ['*']);
-                Main.#keyToChangeLower(responseHeaders, 'X-Frame-Options', ['*']);
+                const { responseHeaders } = details;
+                Main.#keyToChangeLower(responseHeaders, "Access-Control-Allow-Origin", ["*"]);
+                Main.#keyToChangeLower(responseHeaders, "Access-Control-Allow-Headers", ["*"]);
+                Main.#keyToChangeLower(responseHeaders, "X-Frame-Options", ["*"]);
                 callback({
-                    responseHeaders, cancel: false
+                    responseHeaders,
+                    cancel: false,
                 });
             });
         }
 
-        this.#window.loadURL(url.format({
-            pathname: path.join(__dirname, 'index.html'),
-            protocol: 'file:',
-            slashes: true
-        })).then(r => {
-            app.on('before-quit', () => {
-                isQuiting = true;
+        this.#window
+            .loadURL(
+                url.format({
+                    pathname: path.join(__dirname, "index.html"),
+                    protocol: "file:",
+                    slashes: true,
+                })
+            )
+            .then(() => {
+                app.on("before-quit", () => {
+                    isQuiting = true;
+                });
             });
-        });
 
-        this.#window.on("ready-to-show", () => setTimeout(() => {
-            this.#window.show()
-            // let data = fs.readFileSync(path.join(__dirname, "cam_test.js"), 'utf8');
-            // this.#window.webContents.executeJavaScript(data)
-        }, 650))
+        this.#window.on("ready-to-show", () =>
+            setTimeout(() => {
+                this.#window.show();
+                // let data = fs.readFileSync(path.join(__dirname, "cam_test.js"), 'utf8');
+                // this.#window.webContents.executeJavaScript(data)
+            }, 650)
+        );
 
         if (hideOnClose) {
-            this.#window.on('close', (evt) => {
+            this.#window.on("close", (evt) => {
                 if (!isQuiting) evt.preventDefault();
                 this.#window.hide();
             });
         }
-        if (this.#resizable === false) this.#window.webContents.send("chui_resizable_false")
+        if (this.#resizable === false) this.#window.webContents.send("chui_resizable_false");
     }
 
     toggleDevTools() {
@@ -254,41 +278,41 @@ class Main {
     }
 
     #hideAndShow() {
-        let visible = this.#window.isVisible()
-        let focus = this.#window.isFocused()
+        let visible = this.#window.isVisible();
+        let focus = this.#window.isFocused();
 
         if (visible && focus) {
-            this.#window.hide()
+            this.#window.hide();
         } else if (!visible && !focus) {
-            this.#window.show()
+            this.#window.show();
         } else {
-            this.#window.focus()
+            this.#window.focus();
         }
     }
 
     stop() {
-        if (process.platform !== 'darwin') {
+        if (process.platform !== "darwin") {
             app.quit();
         } else {
-            app.exit(0)
+            app.exit(0);
         }
     }
 
     restart() {
         app.relaunch();
-        app.exit(0)
+        app.exit(0);
     }
 
     getWindow() {
         return this.#window;
     }
 
-    start(options = {hideOnClose: Boolean(), globalMenu: [], tray: [], extensions: []}) {
+    start(options = { hideOnClose: Boolean(), globalMenu: [], tray: [], extensions: [] }) {
         nativeTheme.themeSource = "system";
 
         app.whenReady().then(() => {
             session.defaultSession.setPermissionRequestHandler((webContents, permission, callback) => {
-                if (permission === 'media') {
+                if (permission === "media") {
                     callback(true); // Approve microphone/camera access
                 } else {
                     callback(false);
@@ -296,66 +320,58 @@ class Main {
             });
 
             if (options.extensions) {
-                for (let extension of options.extensions) session.defaultSession.loadExtension(extension).then(r => Log.info(r)).catch(e => Log.error(e))
+                for (let extension of options.extensions)
+                    session.defaultSession
+                        .loadExtension(extension)
+                        .then((r) => Log.info(r))
+                        .catch((e) => Log.error(e));
             }
             if (options.tray) {
                 this.#tray = new Tray(this.#app_icon);
                 const context = Menu.buildFromTemplate(options.tray);
                 this.#tray.setContextMenu(context);
 
-                this.#tray.on("click", () => this.#hideAndShow())
+                this.#tray.on("click", () => this.#hideAndShow());
             }
             if (options.globalMenu) {
-                const menu = Menu.buildFromTemplate(options.globalMenu)
-                Menu.setApplicationMenu(menu)
+                const menu = Menu.buildFromTemplate(options.globalMenu);
+                Menu.setApplicationMenu(menu);
             } else {
-                Menu.setApplicationMenu(null)
+                Menu.setApplicationMenu(null);
             }
             this.#createWindow(options.hideOnClose);
             ipcMain.on("show_system_notification", (e, title, body) => {
-                let {Notification} = require('electron');
-                new Notification({title, body}).show();
-            })
+                let { Notification } = require("electron");
+                new Notification({ title, body }).show();
+            });
             require("@electron/remote/main").initialize();
             require("@electron/remote/main").enable(this.#window.webContents);
-        })
+        });
 
         ipcMain.on("SEND_LOG_TEXT", (e, text, type) => {
             if (type === "info") {
-                console.info(text)
+                console.info(text);
             } else if (type === "error") {
-                console.error(text)
+                console.error(text);
             }
-            this.#writeLog(text)
-        })
-    }
-
-    #writeLog(text) {
-        let today = new Date().toLocaleDateString().replace("/", ".")
-        let log_dir_path = path.join(app.getPath("userData"), "logs")
-        let log_file_path = path.join(log_dir_path, `app_${today}.log`)
-
-        if (!fs.existsSync(log_dir_path)) {
-            fs.mkdirSync(log_dir_path, { recursive: true });
-            fs.writeFileSync(log_file_path, "", "utf-8");
-        }
-
-        fs.writeFile(log_file_path, `${text}\n`, { flag: 'a+' }, err => {
-            if (err) console.error(err);
+            writeLog(text);
         });
     }
 
     enableAutoUpdateApp(start = Number()) {
         setTimeout(async () => {
-            const {autoUpdater} = require("electron-updater");
+            const { autoUpdater } = require("electron-updater");
             autoUpdater.autoInstallOnAppQuit = false;
             let updates = await autoUpdater.checkForUpdates();
             if (updates !== null) {
                 if (updates.versionInfo.version > app.getVersion()) {
-                    await this.#sendNotificationUpdateLoad(this.#appName, `Загрузка новой версии ${updates.versionInfo.version}`);
+                    await this.#sendNotificationUpdateLoad(
+                        this.#appName,
+                        `Загрузка новой версии ${updates.versionInfo.version}`
+                    );
                 }
             }
-            autoUpdater.on('update-downloaded', async () => {
+            autoUpdater.on("update-downloaded", async () => {
                 await this.#sendNotificationUpdateLoadClose();
                 await this.#sendNotificationUpdate(this.#appName, `Загрузка завершена`);
                 setTimeout(async () => await this.#sendNotificationUpdateClose(), 3000);
@@ -366,7 +382,7 @@ class Main {
                         Log.info("Установка обновления...");
                         autoUpdater.quitAndInstall();
                     }
-                })
+                });
             });
         }, start);
     }
@@ -384,60 +400,60 @@ class Main {
     }
 
     sendDownload(text, body) {
-        setTimeout(() => this.#window.webContents.send("sendNotificationDownload", text, body), 1)
+        setTimeout(() => this.#window.webContents.send("sendNotificationDownload", text, body), 1);
     }
     sendDownloadUpdate(text, body) {
-        setTimeout(() => this.#window.webContents.send("sendNotificationDownloadUpdate", text, body), 1)
+        setTimeout(() => this.#window.webContents.send("sendNotificationDownloadUpdate", text, body), 1);
     }
     sendDownloadComplete(text, body) {
-        setTimeout(() => this.#window.webContents.send("sendNotificationDownloadComplete", text, body), 250)
+        setTimeout(() => this.#window.webContents.send("sendNotificationDownloadComplete", text, body), 250);
     }
     sendDownloadError(text, body) {
-        setTimeout(() => this.#window.webContents.send("sendNotificationDownloadError", text, body), 250)
+        setTimeout(() => this.#window.webContents.send("sendNotificationDownloadError", text, body), 250);
     }
 }
 
 class Styles {
-    static WORD_BREAK = {NORMAL: "normal", BREAK_ALL: "break-all", KEEP_ALL: "keep-all", BREAK_WORD: "break-word"}
-    static TEXT_ALIGN = {CENTER: 'center', END: 'end', START: 'start'};
-    static ALIGN = {CENTER: 'center', END: 'flex-end', START: 'flex-start', BASELINE: 'baseline', STRETCH: 'stretch'};
+    static WORD_BREAK = { NORMAL: "normal", BREAK_ALL: "break-all", KEEP_ALL: "keep-all", BREAK_WORD: "break-word" };
+    static TEXT_ALIGN = { CENTER: "center", END: "end", START: "start" };
+    static ALIGN = { CENTER: "center", END: "flex-end", START: "flex-start", BASELINE: "baseline", STRETCH: "stretch" };
     static JUSTIFY = {
-        CENTER: 'center',
-        END: 'flex-end',
-        START: 'flex-start',
-        SPACE_AROUND: 'space-around',
-        SPACE_BEETWEEN: 'space-between',
-        SPACE_EVENLY: 'space-evenly'
+        CENTER: "center",
+        END: "flex-end",
+        START: "flex-start",
+        SPACE_AROUND: "space-around",
+        SPACE_BEETWEEN: "space-between",
+        SPACE_EVENLY: "space-evenly",
     };
-    static DIRECTION = {ROW: 'row', COLUMN: 'column'};
-    static WRAP = {NOWRAP: 'nowrap', WRAP: 'wrap'};
+    static DIRECTION = { ROW: "row", COLUMN: "column" };
+    static WRAP = { NOWRAP: "nowrap", WRAP: "wrap" };
     static SIZE = {
-        AUTO: 'auto',
-        FIT_CONTENT: 'fit-content',
-        MAX_CONTENT: 'max-content',
-        MIN_CONTENT: 'min-content',
-        WEBKIT_FILL: '-webkit-fill-available',
-        INHERIT: 'inherit'
+        AUTO: "auto",
+        FIT_CONTENT: "fit-content",
+        MAX_CONTENT: "max-content",
+        MIN_CONTENT: "min-content",
+        WEBKIT_FILL: "-webkit-fill-available",
+        INHERIT: "inherit",
     };
 }
 
 class Application {
     getApp() {
-        if (process && process.type === 'renderer') {
+        if (process && process.type === "renderer") {
             return require("@electron/remote").app;
         } else {
             return app;
         }
     }
     getSession() {
-        if (process && process.type === 'renderer') {
+        if (process && process.type === "renderer") {
             return require("@electron/remote").session;
         } else {
             return session;
         }
     }
     getWebContents() {
-        if (process && process.type === 'renderer') {
+        if (process && process.type === "renderer") {
             return require("@electron/remote").webContents;
         } else {
             return webContents;
@@ -446,26 +462,64 @@ class Application {
 }
 
 class App {
-    static get() { return new Application().getApp() }
-    static getSession() { return new Application().getSession() }
-    static getWebContents() { return new Application().getWebContents() }
+    static get() {
+        return new Application().getApp();
+    }
+    static getSession() {
+        return new Application().getSession();
+    }
+    static getWebContents() {
+        return new Application().getWebContents();
+    }
     // ПУТИ
-    static homePath() { return new Application().getApp().getPath("home") }
-    static appDataPath() { return new Application().getApp().getPath("appData") }
-    static userDataPath() { return new Application().getApp().getPath("userData") }
-    static sessionDataPath() { return new Application().getApp().getPath("sessionData") }
-    static logsPath() { return new Application().getApp().getPath("logs") }
-    static tempPath() { return new Application().getApp().getPath("temp") }
-    static exePath() { return new Application().getApp().getPath("exe") }
-    static modulePath() { return new Application().getApp().getPath("module") }
-    static desktopPath() { return new Application().getApp().getPath("desktop") }
-    static documentsPath() { return new Application().getApp().getPath("documents") }
-    static downloadsPath() { return new Application().getApp().getPath("downloads") }
-    static musicPath() { return new Application().getApp().getPath("music") }
-    static picturesPath() { return new Application().getApp().getPath("pictures") }
-    static videosPath() { return new Application().getApp().getPath("videos") }
-    static recentPath() { return new Application().getApp().getPath("recent") }
-    static crashDumpsPath() { return new Application().getApp().getPath("crashDumps") }
+    static homePath() {
+        return new Application().getApp().getPath("home");
+    }
+    static appDataPath() {
+        return new Application().getApp().getPath("appData");
+    }
+    static userDataPath() {
+        return new Application().getApp().getPath("userData");
+    }
+    static sessionDataPath() {
+        return new Application().getApp().getPath("sessionData");
+    }
+    static logsPath() {
+        return new Application().getApp().getPath("logs");
+    }
+    static tempPath() {
+        return new Application().getApp().getPath("temp");
+    }
+    static exePath() {
+        return new Application().getApp().getPath("exe");
+    }
+    static modulePath() {
+        return new Application().getApp().getPath("module");
+    }
+    static desktopPath() {
+        return new Application().getApp().getPath("desktop");
+    }
+    static documentsPath() {
+        return new Application().getApp().getPath("documents");
+    }
+    static downloadsPath() {
+        return new Application().getApp().getPath("downloads");
+    }
+    static musicPath() {
+        return new Application().getApp().getPath("music");
+    }
+    static picturesPath() {
+        return new Application().getApp().getPath("pictures");
+    }
+    static videosPath() {
+        return new Application().getApp().getPath("videos");
+    }
+    static recentPath() {
+        return new Application().getApp().getPath("recent");
+    }
+    static crashDumpsPath() {
+        return new Application().getApp().getPath("crashDumps");
+    }
 }
 
 module.exports = {
@@ -524,6 +578,7 @@ module.exports = {
     FieldSet: FieldSet,
     Popup: Popup,
     MenuBar: MenuBar,
+    ContextMenu: ContextMenu,
     UpdateNotification: UpdateNotification,
     DownloadNotification: DownloadNotification,
     DownloadProgressNotification: DownloadProgressNotification,
@@ -551,5 +606,5 @@ module.exports = {
     Log: Log,
     chooseFile: dialog,
     //
-    systemPreferences: systemPreferences
-}
+    systemPreferences: systemPreferences,
+};

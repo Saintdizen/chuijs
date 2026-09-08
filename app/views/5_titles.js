@@ -1,9 +1,9 @@
-const {Page, H, Label, Styles} = require('../../index');
+const { Page, H, Label, Styles } = require("../../index");
 
 class TitlesPage extends Page {
     constructor() {
         super();
-        this.setTitle('Текстовые блоки');
+        this.setTitle("Текстовые блоки");
         this.setMain(false);
         this.setFullWidth();
         this.setFullHeight();
@@ -17,10 +17,10 @@ class TitlesPage extends Page {
 
         let label = new Label({
             markdownText: "NORMAL **BOLD**",
-            wordBreak: Styles.WORD_BREAK.BREAK_ALL
+            wordBreak: Styles.WORD_BREAK.BREAK_ALL,
         });
         this.add(label);
     }
 }
 
-exports.TitlesPage = TitlesPage
+exports.TitlesPage = TitlesPage;
