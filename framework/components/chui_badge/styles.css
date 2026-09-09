@@ -1,13 +1,20 @@
+/* ── Badge — плоский статусный тег-пилюля (macOS) ─────────────────── */
 chui_badge {
-    font-weight: 400;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     height: max-content;
     width: max-content;
-    padding: var(--main_padding);
+    box-sizing: border-box;
+    padding: 2px 8px;
     margin: var(--margin);
-    border-radius: var(--border_radius);
-    font-size: var(--font_default_size);
-    background: var(--badge_cancel_back);
-    color: var(--badge_cancel_text);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.5;
+    background: var(--fill_subtle);
+    color: var(--text_color_secondary);
 }
 
 chui_badge p {
@@ -15,16 +22,29 @@ chui_badge p {
 }
 
 .badge_error {
-    background: var(--badge_error_back);
-    color: var(--badge_error_text);
+    background: var(--red_prime_background_trans);
+    color: var(--red_prime_background);
 }
 
 .badge_success {
-    background: var(--badge_success_back);
-    color: var(--badge_success_text);
+    background: var(--green_prime_background_trans);
+    color: var(--green_prime_background);
 }
 
 .badge_warning {
-    background: var(--badge_warning_back);
+    background: var(--warning_background_trans);
     color: var(--badge_warning_text);
+}
+
+/* Статус-точка перед текстом цветных бейджей (macOS) */
+.badge_error::before,
+.badge_success::before,
+.badge_warning::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex: none;
+    background: currentColor;
+    opacity: 0.95;
 }

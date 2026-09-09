@@ -1,29 +1,48 @@
+/* ── ProgressBar — тонкий скруглённый трек (макет) ────────────────── */
 progress_block {
-    width: max-content;
+    width: -webkit-fill-available;
     height: max-content;
     margin: var(--margin);
-    font-size: var(--font_labels_size);
+    font-size: 12px;
     color: var(--text_color);
-    text-align: center;
-    font-weight: 500
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: start;
+    font-weight: 500;
 }
 
 progress {
-    border-radius: 50px;
-    text-align: start;
-    margin: var(--margin);
-    width: -webkit-fill-available;
-    height: 15px;
+    appearance: none;
+    -webkit-appearance: none;
     border: none;
+    width: 100%;
+    height: 7px;
+    margin: 0;
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 progress::-webkit-progress-bar {
-    background: var(--element_background);
-    border-radius: 50px;
-    border: none;
+    background: var(--fill_subtle_2);
+    border-radius: 4px;
 }
 
 progress::-webkit-progress-value {
     background: var(--blue_prime_background);
-    border-radius: 50px;
+    border-radius: 4px;
+    transition: width 0.22s ease;
+}
+
+progress_count {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text_color_disabled);
+}
+
+progress_text {
+    display: block;
+    width: -webkit-fill-available;
+    font-size: 12px;
+    color: var(--text_color);
 }

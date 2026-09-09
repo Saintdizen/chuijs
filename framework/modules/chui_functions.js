@@ -68,6 +68,20 @@ function getDate() {
     return `${day}.${month}.${year} ${hours}:${minutes}`;
 }
 
+function getDateAgo(date = new Date()) {
+    const now = new Date();
+    const diffSec = Math.floor((now - date) / 1000);
+    if (diffSec < 15) return "только что";
+    if (diffSec < 60) return "меньше минуты назад";
+    const min = Math.floor(diffSec / 60);
+    if (min < 60) return `${min} мин назад`;
+    const h = Math.floor(min / 60);
+    if (h < 24) return `${h} ч назад`;
+    const d = Math.floor(h / 24);
+    if (d < 7) return `${d} дн назад`;
+    return getDate();
+}
+
 function formatBytes(bytes, decimals = 2) {
     if (!+bytes) return "0 Bytes";
     const k = 1024;
@@ -78,6 +92,7 @@ function formatBytes(bytes, decimals = 2) {
 }
 
 exports.getDate = getDate;
+exports.getDateAgo = getDateAgo;
 exports.sleep = sleep;
 exports.style_parse = style_parse;
 exports.render = render;

@@ -2,21 +2,7 @@
 /** IMPORTS */
 const { AppLayout, render, Icons, Notification, DownloadProgressNotification, Log } = require("../index");
 
-const { MainPage } = require("./views/_main");
-const { Inputs_Buttons_Page } = require("./views/1_inputs_buttons");
-const { OthersComponentsPage } = require("./views/0_others");
-const { Notifications_Badges_Page } = require("./views/2_notifications_badges");
-const { TablesPage } = require("./views/3_tables");
-const { TextEditorPage } = require("./views/4_text_editor");
-const { TitlesPage } = require("./views/5_titles");
-const { FormsPage } = require("./views/6_forms");
-const { SlidesPage } = require("./views/7_slideshow");
-const { WebViewsPage } = require("./views/webviews/webviews");
-const { TabsPage } = require("./views/9_tabs");
-const { TgTestPage } = require("./views/10_tg_test");
-const { SpinnerPage } = require("./views/11_spinners");
-const { MediaPage } = require("./views/12_media");
-const { MainPageRoute } = require("./views/routes_pages/main");
+const { Maket } = require("./views/0_maket");
 
 class Test extends AppLayout {
     constructor() {
@@ -28,21 +14,7 @@ class Test extends AppLayout {
         // Настройка роутов
         this.setAutoCloseRouteMenu(true);
         //this.disableAppMenu()
-        this.setRoute(new MainPage());
-        this.setRoute(new MainPageRoute());
-        this.setRoute(new Inputs_Buttons_Page());
-        this.setRoute(new Notifications_Badges_Page());
-        this.setRoute(new TablesPage());
-        this.setRoute(new TextEditorPage());
-        this.setRoute(new OthersComponentsPage());
-        this.setRoute(new TitlesPage());
-        this.setRoute(new FormsPage());
-        this.setRoute(new SlidesPage());
-        this.setRoute(new WebViewsPage());
-        this.setRoute(new TabsPage());
-        this.setRoute(new TgTestPage());
-        this.setRoute(new SpinnerPage());
-        this.setRoute(new MediaPage());
+        this.setRoute(new Maket());
 
         //this.setScript(path.join(__dirname, "camera.js"), "TEST12312312312")
 
@@ -98,17 +70,17 @@ class Test extends AppLayout {
             ],
         });
 
-        setTimeout(() => {
-            let notif = new DownloadProgressNotification({
-                title: "Загрузка 'Лист'",
-            });
-            for (let i = 0; i < 100; i++) {
-                notif.show();
-                setTimeout(async () => {
-                    notif.update("Загрузка 'Лист'", `Трек ${i + 1}`, i + 1, 100);
-                }, 2000);
-            }
-        }, 1000);
+        // setTimeout(() => {
+        //     let notif = new DownloadProgressNotification({
+        //         title: "Загрузка 'Лист'",
+        //     });
+        //     for (let i = 0; i < 100; i++) {
+        //         notif.show();
+        //         setTimeout(async () => {
+        //             notif.update("Загрузка 'Лист'", `Трек ${i + 1}`, i + 1, 100);
+        //         }, 2000);
+        //     }
+        // }, 1000);
 
         this.addToHeaderRight([
             // AppLayout.DIALOG({

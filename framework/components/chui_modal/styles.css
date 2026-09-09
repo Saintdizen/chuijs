@@ -1,3 +1,18 @@
+/* ── Dialog — стеклянная плашка, крупный радиус (макет) ───────────── */
+@media (prefers-color-scheme: light) {
+    :root {
+        --dlg_bg: rgba(248, 248, 252, 0.82);
+        --dlg_border: rgba(0, 0, 0, 0.08);
+        --dlg_shadow: 0 2px 6px rgba(0, 0, 0, 0.05), 0 10px 26px rgba(0, 0, 0, 0.1);
+    }
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --dlg_bg: rgba(38, 38, 44, 0.82);
+        --dlg_border: rgba(255, 255, 255, 0.1);
+        --dlg_shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 12px 30px rgba(0, 0, 0, 0.3);
+    }
+}
 chui_dialog {
     display: none;
     position: fixed;
@@ -7,31 +22,48 @@ chui_dialog {
     width: max-content;
     height: max-content;
     overflow: hidden;
-    background-color: var(--modal_background);
-    border: 1px solid var(--border_color);
-    border-radius: var(--border_radius);
-    box-shadow: var(--box_shadow_main);
+    box-sizing: border-box;
+    background-color: var(--dlg_bg);
+    border: 1px solid var(--dlg_border);
+    border-radius: 20px;
+    box-shadow: var(--dlg_shadow);
     margin: auto;
     flex-direction: column;
-    padding: var(--test_padding);
+    padding: 20px;
     color: var(--text_color);
     backdrop-filter: var(--global_blur);
+    -webkit-backdrop-filter: var(--global_blur);
 }
 
 dialog_header {
     display: flex;
-    margin-bottom: var(--test_padding);
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+dialog_header chui_label,
+dialog_header h1,
+dialog_header h2,
+dialog_header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
 }
 
 dialog_body {
-    /*padding: 6px 0px;*/
     display: flex;
     height: -webkit-fill-available;
     width: -webkit-fill-available;
     overflow: auto;
+    flex-direction: column;
 }
 
 dialog_footer {
     display: flex;
-    margin-top: var(--test_padding);
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
 }

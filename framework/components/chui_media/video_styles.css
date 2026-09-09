@@ -1,10 +1,13 @@
 chui_vp_main {
     display: flex;
     flex-direction: column;
-    border-radius: var(--border_radius);
+    border-radius: 12px;
     --seek-before-width: 0%;
     --volume-before-width: 0%;
     border: none;
+    overflow: hidden;
+    position: relative;
+    background: #000;
 }
 
 chui_vp_block {
@@ -12,17 +15,29 @@ chui_vp_block {
     position: absolute;
     width: -webkit-fill-available;
     bottom: 0;
-    backdrop-filter: var(--global_blur);
-    border-bottom-right-radius: var(--border_radius);
-    border-bottom-left-radius: var(--border_radius);
-    background: var(--header_background);
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.65));
     opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+chui_vp_main:hover chui_vp_block {
+    opacity: 1;
 }
 
 /* Блок информация */
 chui_vp_info {
     display: flex;
-    margin: 16px 12px;
+    margin: 16px 12px 8px;
+    color: #fff;
+}
+
+chui_vp_info chui_icon,
+chui_vp_info label {
+    color: #fff;
 }
 
 chui_vp_seek_buf {
@@ -151,11 +166,25 @@ chui_vp_volume_block {
 chui_vp_controls {
     display: flex;
     justify-content: left;
-    margin: var(--margin);
-    align-items: center
+    margin: 8px;
+    align-items: center;
+    gap: 4px;
 }
 
 /* КНОПКИ */
 chui_vp_play_pause, chui_vp_next, chui_vp_prev {
-    display: flex
+    display: flex;
+    border-radius: 8px;
+    padding: 4px;
+    cursor: pointer;
+    transition: background 0.12s ease;
+    color: #fff;
+}
+
+chui_vp_play_pause:hover, chui_vp_next:hover, chui_vp_prev:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+chui_vp_controls chui_icon {
+    color: #fff;
 }

@@ -11,6 +11,8 @@ class Button {
         this.#button.className = "chui_button";
         this.#button_text.className = "chui_button_text";
 
+        if (options.style !== undefined) this.#button.classList.add(options.style);
+
         if (options.title !== undefined) this.#button_text.innerText = options.title;
         if (options.icon !== undefined)
             this.#button_icon.innerHTML = new Icon(options.icon, "var(--header_icon_size)").getHTML();
@@ -53,6 +55,12 @@ class Button {
     set() {
         return this.#chui_button;
     }
+
+    static STYLE = {
+        PRIMARY: "chui_button_primary",
+        SECONDARY: "chui_button_secondary",
+        DANGER: "chui_button_danger",
+    };
 }
 
 exports.Button = Button;

@@ -1,4 +1,19 @@
+/* ── RadioGroup — контейнер радиокнопок (макет) ──────────────────── */
+chui_radio_group {
+    display: flex;
+    width: max-content;
+    height: max-content;
+    margin: var(--margin);
+}
+
 .radioGroupForm {
     display: flex;
+    flex-wrap: wrap;
+    gap: 4px 10px;
     width: inherit;
+    margin: 0;
+}
+
+.radioGroupForm radiobutton {
+    margin: 0;
 }

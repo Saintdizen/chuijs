@@ -1,19 +1,42 @@
+/* ── Form — плоский контейнер формы (макет) ───────────────────────── */
 chui_form_main {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    height: max-content;
+    margin: var(--margin);
     color: var(--text_color);
 }
 
-.chui_form_submit_button {
-    border: none;
-    cursor: pointer;
+chui_form_main form {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: -webkit-fill-available;
     height: max-content;
-    width: max-content;
-    border-radius: var(--border_radius);
-    padding: var(--main_padding);
-    font-size: var(--font_default_size);
-    font-weight: 400;
-    margin: var(--margin);
-    background: var(--element_background_2);
+    margin: 0;
+    padding: 12px;
+    background: var(--input_background);
+    border: 1px solid var(--glass_line);
+    border-radius: 14px;
+}
+
+.chui_form_submit_button {
+    cursor: pointer;
+    box-sizing: border-box;
+    height: 36px;
+    border-radius: 10px;
+    padding: 0 14px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    margin: 2px 0 0;
+    background: var(--fill_subtle);
     color: var(--text_color);
+    border: none;
+    transition: background 0.12s ease;
 }
 
 .chui_form_submit_button:hover {

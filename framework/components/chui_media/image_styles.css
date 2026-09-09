@@ -1,13 +1,14 @@
 chui_image {
     height: max-content;
     width: max-content;
-    border-radius: var(--border_radius);
+    border-radius: 12px;
     margin: var(--margin);
-    display: flex
+    display: flex;
+    box-sizing: border-box;
 }
 
 img {
-    border-radius: var(--border_radius)
+    border-radius: 12px;
 }
 
 /* IMAGE POPUP */
@@ -20,10 +21,11 @@ chui_image_popup {
     width: -webkit-fill-available;
     height: -webkit-fill-available;
     overflow: auto;
-    background-color: var(--header_background);
+    background-color: rgba(0, 0, 0, 0.6);
     padding: 0;
     border: none;
-    backdrop-filter: var(--global_blur)
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
 }
 
 popup_content_test {
@@ -41,22 +43,25 @@ image_popup_content {
 }
 
 image_popup_close {
-    color: var(--text_color);
+    color: var(--text_color_hover);
     position: absolute;
-    top: 48px;
-    right: 48px;
-    width: 60px;
-    height: 60px;
+    top: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: var(--border_radius);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.12);
+    cursor: pointer;
+    transition: background 0.12s ease;
 }
 
 image_popup_close:hover {
-    background-color: var(--element_background);
+    background: rgba(255, 255, 255, 0.24);
 }
 
 image_popup_close:hover chui_icon {
-    color: var(--text_color);
+    color: #ffffff;
 }

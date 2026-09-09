@@ -1,15 +1,19 @@
 const { Animation } = require("../../modules/chui_animations/animations");
-const { setStyles, markdownToHtml, getDate } = require("../../modules/chui_functions");
+const { setStyles, markdownToHtml, getDate, getDateAgo } = require("../../modules/chui_functions");
+const { Icon, Icons } = require("../chui_icons/icons");
 
 class Notification {
     #id = require("randomstring").generate();
     #time = 5000;
+    #created = new Date();
     #notification = document.createElement(`notification`);
+    #notification_icon = document.createElement("notification_icon");
     #notification_content = document.createElement("notification_content");
     #notification_header = document.createElement("notification_header");
     #notification_title = document.createElement("notification_title");
     #notification_date = document.createElement("notification_date");
     #notification_text = document.createElement("notification_text");
+    #notification_close = document.createElement("notification_close");
     constructor(
         options = {
             title: String(),
@@ -39,7 +43,8 @@ class Notification {
             if (options.markdownText !== undefined)
                 this.#notification_text.innerHTML = markdownToHtml(options.markdownText);
         }
-        this.#notification_date.innerHTML = getDate();
+        this.#notification_date.title = getDate();
+        this.#notification_date.innerText = getDateAgo(this.#created);
         //
         if (options.style !== undefined) this.#notification.classList.add(options.style);
         //
@@ -48,7 +53,28 @@ class Notification {
         //
         this.#notification_content.appendChild(this.#notification_header);
         this.#notification_content.appendChild(this.#notification_text);
+        // Иконка типа слева, крестик закрытия справа — как в макете
+        this.#notification_icon.innerHTML = new Icon(this.#iconForStyle(options.style), "17px").getHTML();
+        this.#notification_close.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "13px").getHTML();
+        this.#notification_close.addEventListener("click", (e) => {
+            e.stopPropagation();
+            this.#removeNotification(this.#notification);
+        });
+        this.#notification.appendChild(this.#notification_icon);
         this.#notification.appendChild(this.#notification_content);
+        this.#notification.appendChild(this.#notification_close);
+    }
+    #iconForStyle(style) {
+        switch (style) {
+            case Notification.STYLE.ERROR:
+                return Icons.ALERT.ERROR;
+            case Notification.STYLE.SUCCESS:
+                return Icons.ACTIONS.CHECK_CIRCLE;
+            case Notification.STYLE.WARNING:
+                return Icons.ALERT.WARNING;
+            default:
+                return Icons.SOCIAL.NOTIFICATIONS;
+        }
     }
     show(showOnSystem = Boolean()) {
         document.getElementsByTagName("notification_panel")[0].appendChild(this.#notification);

@@ -1,99 +1,146 @@
+/* ── ComboBox — плоское поле с фильтрацией списка (макет) ─────────── */
 chui_combobox {
     display: flex;
     flex-direction: column;
     height: max-content;
     margin: var(--margin);
-    width: 200px
+    width: 200px;
+    box-sizing: border-box;
 }
 
 combobox {
     position: relative;
-    display:flex;
-    height: max-content;
+    display: flex;
+    align-items: center;
+    height: 40px;
     width: -webkit-fill-available;
-    border-radius: var(--border_radius);
+    border-radius: 8px;
     padding: 0;
     font-size: var(--font_default_size);
-    background: var(--element_background);
-    border: 1px solid var(--border_color);
+    background: var(--field_background);
+    border: 1px solid var(--field_border);
+    box-shadow: var(--field_inset);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+combobox:hover {
+    border-color: var(--field_border_hover);
+    background: var(--field_hover_background);
+}
+
+combobox:focus-within {
+    border-color: var(--blue_prime_background);
+    box-shadow: 0 0 0 4px var(--input_ring);
+    background: var(--field_hover_background);
 }
 
 .combobox_input {
+    height: 100%;
     width: 100%;
     margin: 0;
-    padding: var(--test_padding) 0 var(--test_padding) 10px;
+    padding: 0 0 0 12px;
     background: transparent;
     color: var(--text_color);
     border: none;
+    outline: none;
     font-size: var(--font_default_size);
+}
+
+.combobox_input::placeholder {
+    color: var(--input_placeholder);
+}
+
+.combobox_input:disabled {
+    cursor: not-allowed;
 }
 
 combobox_dropdown {
-    background: var(--element_background);
-    position:absolute;
-    display:none;
-    height: max-content;
-    border-radius: var(--border_radius);
-    margin-top: 36px;
-    padding: var(--test_padding);
-    font-size: var(--font_default_size);
+    background-color: var(--glass_background);
+    backdrop-filter: var(--global_blur);
+    -webkit-backdrop-filter: var(--global_blur);
+    position: absolute;
+    display: none;
     flex-direction: column;
-    z-index: 1;
+    height: max-content;
+    border-radius: 12px;
+    top: calc(100% + 5px);
+    left: 0;
+    right: 0;
+    padding: 5px;
+    font-size: var(--font_default_size);
+    z-index: 100;
     width: -webkit-fill-available;
-    overflow: hidden hidden;
-    box-shadow: var(--box_shadow_main);
-    border: 1px solid var(--border_color);
-}
-
-combobox_dropdown:hover {
-    overflow: hidden overlay
+    overflow-y: auto;
+    box-shadow: var(--shadow_dropdown);
+    border: 1px solid var(--glass_line);
+    box-sizing: border-box;
 }
 
 .combobox_label {
     height: max-content;
     width: max-content;
-    margin: var(--margin);
-    font-size: var(--font_labels_size);
-    font-weight:500;
-    color: var(--text_color)
+    margin: 0 0 5px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--input_label);
 }
 
 combo_button_open {
     cursor: pointer;
-    padding: var(--main_padding);
-    color: var(--blue_prime_background)
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 30px;
+    margin-right: 4px;
+    border-radius: 8px;
+    color: var(--blue_prime_background);
+    transition: transform 0.15s ease;
+}
+
+combo_button_open:hover {
+    background: var(--chip_background);
 }
 
 combobox_option {
     cursor: pointer;
     text-align: start;
-    padding: var(--test_padding);
-    border-radius: var(--border_radius);
-    color: var(--text_color)
+    box-sizing: border-box;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text_color);
+    flex: none;
 }
 
 combobox_option:hover {
-    padding: var(--main_padding);
-    background: var(--blue_prime_background);
-    color: var(--text_color_hover);
+    background: var(--fill_subtle_2);
+    color: var(--text_color);
 }
 
 /* DISABLED STYLES */
 .combobox_disabled {
     cursor: not-allowed;
-    background: var(--element_background_disabled);
-    border: 1px solid var(--border_color);
+    background: var(--field_background_disabled);
+    border: 1px solid var(--field_border);
+}
+
+.combobox_disabled:hover {
+    border-color: var(--field_border);
 }
 
 .combobox_input_disabled {
     cursor: not-allowed;
-    background: transparent;
-    color: var(--text_color_disabled);
-    text-align: start;
+    height: 100%;
     width: 100%;
     margin: 0;
-    padding: var(--test_padding) 0 var(--test_padding) 10px;
+    padding: 0 0 0 12px;
+    background: transparent;
+    color: var(--text_color_disabled);
     border: none;
+    outline: none;
     font-size: var(--font_default_size);
 }
 
@@ -101,8 +148,9 @@ combobox_option:hover {
     cursor: not-allowed;
     height: max-content;
     width: max-content;
-    margin: var(--margin);
-    font-size: var(--font_labels_size);
-    font-weight:500;
-    color: var(--text_color_disabled)
+    margin: 0 0 5px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--text_color_disabled);
 }

@@ -74,7 +74,6 @@ const { Form } = require("./framework/components/chui_form/form");
 const { SlideShow } = require("./framework/components/chui_slideshow/slideshow");
 const { FieldSet } = require("./framework/components/chui_fieldset/fieldset");
 const { Popup } = require("./framework/components/chui_popups/popups");
-const { TelegramBot } = require("./framework/components/telegram_bot/chui_telegram_bot");
 const { MenuBar } = require("./framework/components/chui_menu_bar/menu_bar");
 const { ContextMenu } = require("./framework/components/chui_context_menu/context_menu");
 const { Image } = require("./framework/components/chui_media/image");
@@ -586,8 +585,6 @@ module.exports = {
     Video: Video,
     CustomElement: CustomElement,
     Console: Console,
-    //
-    TelegramBot: TelegramBot,
     //
     BrowserWindow: BrowserWindow,
     ipcMain: ipcMain,

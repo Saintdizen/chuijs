@@ -43,14 +43,10 @@ class TreeView {
                 setTimeout(() => {
                     button.children[1].children[0].style.transform = "rotate(0deg)";
                     panel.style.maxHeight = null;
-                    button.style.borderBottomLeftRadius = "var(--border_radius)";
-                    button.style.borderBottomRightRadius = "var(--border_radius)";
                 }, 1);
             } else {
                 setTimeout(() => {
                     button.children[1].children[0].style.transform = "rotate(180deg)";
-                    button.style.borderBottomLeftRadius = "0px";
-                    button.style.borderBottomRightRadius = "0px";
                     panel.style.maxHeight = panel.scrollHeight + "px";
                     panel.addEventListener("transitionend", () => {
                         if (panel.style.maxHeight) panel.style.maxHeight = "max-content";

@@ -151,17 +151,14 @@ class Table {
         }
         const row = this.#tHead.insertRow();
         this.#setWidthColumns(row);
-        row.style.borderBottom = "1px solid var(--element_background)";
         for (let head of cols) {
             const cell = row.insertCell();
-            if (cell.cellIndex !== 0) cell.style.borderLeft = "1px solid var(--element_background)";
             let cell_title = document.createElement("cell_title");
             cell_title.innerText = head;
             cell.appendChild(cell_title);
             if (this.#sorted) {
                 let flag = 1;
                 let sort_button = document.createElement("sort_button");
-                sort_button.style.marginLeft = "10px";
                 sort_button.innerText = "";
                 cell.appendChild(sort_button);
                 cell.addEventListener("click", () => {
@@ -169,15 +166,15 @@ class Table {
                         sort_button.innerHTML = new Icon(
                             Icons.NAVIGATION.EXPAND_MORE,
                             "20px",
-                            "var(--button_text_color)"
+                            "var(--blue_prime_background)"
                         ).getHTML();
                         this.#sortTable(Table.#SORT_METHOD.ASC, cell.cellIndex);
                         flag = 2;
-                    } else if (flag === 2) {
+                    } else                     if (flag === 2) {
                         sort_button.innerHTML = new Icon(
                             Icons.NAVIGATION.EXPAND_LESS,
                             "20px",
-                            "var(--button_text_color)"
+                            "var(--blue_prime_background)"
                         ).getHTML();
                         this.#sortTable(Table.#SORT_METHOD.DESC, cell.cellIndex);
                         flag = 3;
@@ -192,12 +189,10 @@ class Table {
                     }
                 });
             }
-            cell.style.color = "var(--button_text_color)";
             cell.style.display = "flex";
             cell.style.flexDirection = "row";
             cell.style.justifyContent = "space-between";
             cell.style.alignItems = "center";
-            if (cell.cellIndex !== 0) cell.style.borderLeft = "1px solid transparent";
         }
     }
     #setTable(data = []) {
@@ -205,12 +200,8 @@ class Table {
         for (let dat of data) {
             let row = this.#tBody.insertRow();
             this.#setWidthColumns(row);
-            if (data.indexOf(dat) !== data.length - 1) row.style.borderBottom = "1px solid var(--element_background)";
             for (let col of this.#columns) {
                 let cell = row.insertCell();
-                if (cell.cellIndex !== 0) {
-                    cell.style.borderLeft = "1px solid var(--element_background)";
-                }
                 cell.innerHTML = dat[col];
             }
         }

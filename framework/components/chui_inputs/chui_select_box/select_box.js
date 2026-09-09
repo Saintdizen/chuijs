@@ -39,7 +39,7 @@ class Select {
         this.#button_open.innerHTML = new Icon(
             Icons.HARDWARE.KEYBOARD_ARROW_DOWN,
             undefined,
-            "var(--blue_prime_background)"
+            "var(--text_color_tertiary)"
         ).getHTML();
         this.#button_open_disabled.innerHTML = new Icon(
             Icons.HARDWARE.KEYBOARD_ARROW_DOWN,

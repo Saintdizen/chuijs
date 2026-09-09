@@ -221,7 +221,7 @@ chui_playlist_search {
     position: relative;
     padding: var(--main_padding);
     border: none;
-    box-shadow: 0 0 1px 0 var(--element_background_2);
+    box-shadow: 0 0 1px 0 var(--field_border);
     background: var(--ap_main_background_2);
     border-radius: var(--border_radius);
 }
@@ -239,7 +239,7 @@ chui_playlist_list {
     border-radius: var(--border_radius);
     background: var(--ap_main_background_2);
     border: none;
-    box-shadow: 0 0 1px 0 var(--element_background_2);
+    box-shadow: 0 0 1px 0 var(--field_border);
     margin-top: 10px;
     padding: 8px;
 }
@@ -262,57 +262,72 @@ chui_playlist_list::-webkit-scrollbar-thumb:hover {
     background: var(--blue_prime_background)
 }
 
-.chui_track_active {
-    color: var(--text_color_hover);
-    background: var(--blue_prime_background_trans);
-}
-
 chui_track {
     display: flex;
-    padding: var(--test_padding);
+    padding: 6px 8px;
     color: var(--text_color);
-    border-radius: var(--border_radius);
+    border-radius: 8px;
     height: max-content;
     align-items: center;
     justify-content: space-between;
+    transition: background 0.12s ease;
 }
 
 chui_track:hover {
-    background: var(--blue_prime_background);
+    background: var(--fill_subtle);
 }
 
-chui_track:hover chui_track_duration {
-    color: var(--text_color_hover);
-}
-
+chui_track:hover chui_track_duration,
 chui_track:hover chui_track_name {
-    color: var(--text_color_hover);
+    color: var(--text_color);
 }
 
 chui_track_name {
     margin-left: 2px;
+    font-size: 13px;
+    font-weight: 500;
 }
 
 chui_track_duration {
     margin-right: 2px;
+    font-size: 12px;
+    color: var(--text_color_tertiary);
 }
 
+.chui_track_active,
+.chui_track_active:hover {
+    color: var(--text_color);
+    background: var(--blue_prime_background_trans);
+}
+
+.chui_track_active chui_track_name,
+.chui_track_active:hover chui_track_name {
+    color: var(--blue_prime_background);
+    font-weight: 600;
+}
+
+.chui_track_active chui_track_duration,
+.chui_track_active:hover chui_track_duration {
+    color: var(--blue_prime_background);
+}
 chui_playlist_open_folder {
     display: flex;
     height: 35px;
     width: 35px;
     justify-content: center;
     align-items: center;
-    border-radius: var(--border_radius);
+    border-radius: 8px;
     background: var(--ap_main_background_2);
+    cursor: pointer;
+    transition: background 0.12s ease;
 }
 
 chui_playlist_open_folder:hover {
-    background: var(--blue_prime_background);
+    background: var(--fill_subtle_2);
 }
 
 chui_playlist_open_folder:hover chui_icon {
-    color: var(--text_color_hover);
+    color: var(--blue_prime_background);
 }
 
 chui_ap_equalizer_main {
@@ -446,14 +461,16 @@ chui_ap_volume_block {
 }
 
 chui_ap_fx_icon, chui_ap_volume_icon, chui_ap_next, chui_ap_play_pause, chui_ap_prev {
-    border-radius: var(--border_radius);
-    padding: 2px;
+    border-radius: 8px;
+    padding: 5px;
+    cursor: pointer;
+    transition: background 0.12s ease;
 }
 
 chui_ap_fx_icon:hover, chui_ap_volume_icon:hover, chui_ap_next:hover, chui_ap_play_pause:hover, chui_ap_prev:hover {
-    background: var(--blue_prime_background);
+    background: var(--fill_subtle_2);
 }
 
 chui_ap_fx_icon:hover chui_icon, chui_ap_volume_icon:hover chui_icon, chui_ap_next:hover chui_icon, chui_ap_play_pause:hover chui_icon, chui_ap_prev:hover chui_icon {
-    color: var(--text_color_hover);
+    color: var(--blue_prime_background);
 }

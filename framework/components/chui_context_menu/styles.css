@@ -1,3 +1,4 @@
+/* ── ContextMenu — стеклянное контекстное меню (макет) ────────────── */
 @keyframes context-scale-in {
     from {
         opacity: 0;
@@ -26,15 +27,18 @@ chui_context_menu {
     flex-direction: column;
     align-items: stretch;
     width: max-content;
-    min-width: 165px;
+    min-width: 180px;
     height: max-content;
-    padding: var(--test_padding);
-    background: var(--header_background_drop);
+    padding: 6px;
+    background-color: var(--glass_background);
     color: var(--text_color);
-    border-radius: var(--border_radius);
-    box-shadow: var(--box_shadow_main);
+    border: 1px solid var(--glass_line);
+    border-radius: 14px;
+    box-shadow: var(--shadow_dropdown);
     transform-origin: top left;
-    backdrop-filter: blur(10px);
+    backdrop-filter: var(--global_blur);
+    -webkit-backdrop-filter: var(--global_blur);
+    font-size: var(--font_default_size);
 }
 
 context_menu_item {
@@ -45,19 +49,19 @@ context_menu_item {
     width: -webkit-fill-available;
     white-space: nowrap;
     cursor: pointer;
-    padding: var(--test_padding);
-    border-radius: var(--border_radius);
+    padding: 6px 8px;
+    border-radius: 8px;
     color: var(--text_color);
+    gap: 6px;
+    box-sizing: border-box;
 }
 
 context_menu_item:hover {
-    background: var(--blue_prime_background);
-    color: var(--text_color_hover);
+    background: var(--fill_subtle);
 }
 
-context_menu_item:hover context_menu_item_icon chui_icon,
-context_menu_item:hover context_menu_item_arrow chui_icon {
-    color: var(--text_color_hover);
+context_menu_item:hover context_menu_item_title {
+    color: var(--text_color);
 }
 
 context_menu_item_icon {
@@ -65,25 +69,32 @@ context_menu_item_icon {
     align-items: center;
     justify-content: center;
     width: 18px;
-    margin-right: 8px;
+    flex: none;
 }
 
 context_menu_item_icon chui_icon {
     font-size: 15px;
+    color: var(--text_color_tertiary);
+}
+
+context_menu_item:hover context_menu_item_icon chui_icon,
+context_menu_item:hover context_menu_item_arrow chui_icon {
+    color: var(--blue_prime_background);
 }
 
 context_menu_item_title {
     display: block;
-    font-size: var(--font_default_size);
-    font-weight: 400;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text_color_secondary);
 }
 
 context_menu_item_shortcut {
     display: block;
     margin-left: auto;
     padding-left: 24px;
-    font-size: var(--font_labels_size);
-    opacity: 0.7;
+    font-size: 12px;
+    color: var(--text_color_tertiary);
 }
 
 context_menu_item_arrow {
@@ -91,11 +102,12 @@ context_menu_item_arrow {
     align-items: center;
     justify-content: center;
     width: 14px;
-    margin-left: 8px;
+    flex: none;
 }
 
 context_menu_item_arrow chui_icon {
     font-size: 14px;
+    color: var(--text_color_tertiary);
 }
 
 context_menu_submenu {
@@ -107,20 +119,23 @@ context_menu_submenu {
     flex-direction: column;
     align-items: stretch;
     width: max-content;
-    min-width: 165px;
+    min-width: 180px;
     height: max-content;
-    padding: var(--test_padding);
-    background: var(--header_background_drop);
+    padding: 6px;
+    background-color: var(--glass_background);
     color: var(--text_color);
-    border-radius: var(--border_radius);
-    box-shadow: var(--box_shadow_main);
+    border: 1px solid var(--glass_line);
+    border-radius: 14px;
+    box-shadow: var(--shadow_dropdown);
+    backdrop-filter: var(--global_blur);
+    -webkit-backdrop-filter: var(--global_blur);
     transition: none;
 }
 
 context_menu_separator {
     height: 1px;
-    margin: 4px 2px;
-    background: var(--element_background_2);
+    margin: 4px 6px;
+    background: var(--glass_line);
 }
 
 context_menu_item_disabled {

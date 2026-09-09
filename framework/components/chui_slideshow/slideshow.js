@@ -10,6 +10,7 @@ class SlideShow {
     #chui_prev_slide = document.createElement("chui_prev_slide");
     //
     #slides_list = undefined;
+    #chui_slides_dots = undefined;
     constructor(
         options = {
             width: String(),
@@ -26,10 +27,23 @@ class SlideShow {
         this.#chui_next_slide.addEventListener("click", () => this.#changeSlide(1));
         this.#chui_prev_slide.addEventListener("click", () => this.#changeSlide(-1));
         this.#chui_slides_main.appendChild(this.#chui_slides_list);
-        this.#chui_next_slide.appendChild(new Icon(Icons.CONTENT.REDO, "14pt", "var(--button_text_color)").set());
-        this.#chui_prev_slide.appendChild(new Icon(Icons.CONTENT.UNDO, "14pt", "var(--button_text_color)").set());
+        this.#chui_next_slide.appendChild(
+            new Icon(Icons.NAVIGATION.CHEVRON_RIGHT, "16px", "var(--text_color)").set()
+        );
+        this.#chui_prev_slide.appendChild(
+            new Icon(Icons.NAVIGATION.CHEVRON_LEFT, "16px", "var(--text_color)").set()
+        );
         this.#chui_slides_main.appendChild(this.#chui_next_slide);
         this.#chui_slides_main.appendChild(this.#chui_prev_slide);
+
+        this.#chui_slides_dots = document.createElement("chui_slides_dots");
+        for (let i = 0; i < this.#slides_list.length; i++) {
+            const dot = document.createElement("i");
+            dot.addEventListener("click", () => this.#goToSlide(i));
+            this.#chui_slides_dots.appendChild(dot);
+        }
+        this.#chui_slides_main.appendChild(this.#chui_slides_dots);
+
         if (options.autoplay !== undefined && options.autoplay.status) {
             const interval = (options.autoplay.interval || 10) * 1000;
             setInterval(() => this.#changeSlide(1), interval);
@@ -39,21 +53,38 @@ class SlideShow {
         const firstSlide = this.#slides_list[0].set();
         firstSlide.style.display = "flex";
         this.#chui_slides_list.appendChild(firstSlide);
+        this.#updateDots();
         new Animation(firstSlide).fadeIn();
         //
+    }
+    #goToSlide(index = Number()) {
+        if (index === this.#default_slide) return;
+        this.#default_slide = index;
+        this.#renderSlide();
     }
     #changeSlide(n = Number()) {
         let sum_slides = this.#slides_list.length;
         this.#default_slide = this.#default_slide + n;
         if (this.#default_slide > sum_slides - 1) this.#default_slide = 0;
         if (this.#default_slide < 0) this.#default_slide = sum_slides - 1;
+        this.#renderSlide();
+    }
+    #renderSlide() {
         for (let child of this.#chui_slides_list.childNodes) {
             this.#chui_slides_list.removeChild(child);
         }
         let slide = this.#slides_list[this.#default_slide].set();
         this.#chui_slides_list.appendChild(slide);
         slide.style.display = "none";
+        this.#updateDots();
         new Animation(slide).fadeIn();
+    }
+    #updateDots() {
+        if (!this.#chui_slides_dots) return;
+        const dots = this.#chui_slides_dots.children;
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].classList.toggle("on", i === this.#default_slide);
+        }
     }
     set() {
         return this.#chui_slides_main;

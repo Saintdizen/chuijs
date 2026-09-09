@@ -1,0 +1,9 @@
+/* Стили для CustomElement из макета всех компонентов */
+.custom_maket_class {
+    border: 1px solid var(--border_color);
+    border-radius: var(--border_radius);
+    padding: 12px;
+    background: var(--background);
+    color: var(--text_color);
+    user-select: none;
+}

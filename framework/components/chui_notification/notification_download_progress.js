@@ -1,15 +1,19 @@
 const { Animation } = require("../../modules/chui_animations/animations");
-const { setStyles, getDate } = require("../../modules/chui_functions");
+const { setStyles, getDate, getDateAgo } = require("../../modules/chui_functions");
+const { Icon, Icons } = require("../chui_icons/icons");
 
 class DownloadProgressNotification {
     #id = require("randomstring").generate();
+    #created = new Date();
     #download_notification = document.createElement(`notification_download_progress`);
+    #download_notification_icon = document.createElement("download_notification_icon");
     #download_notification_content = document.createElement("download_notification_content");
     #download_notification_header = document.createElement("download_notification_header");
     #id_download_notification_title = require("randomstring").generate();
     #download_notification_title = document.createElement("download_notification_title");
     #download_notification_date = document.createElement("download_notification_date");
     #download_notification_body = document.createElement("download_notification_body");
+    #download_notification_close = document.createElement("download_notification_close");
     //
     #id_progress = require("randomstring").generate();
     #ProgressBar = document.createElement(`progress`);
@@ -20,7 +24,7 @@ class DownloadProgressNotification {
     #id_progress_text = require("randomstring").generate();
     #progress_text = document.createElement("download_progress_text");
     constructor(options = { title: String(), text: String(), type: String() }) {
-        setStyles(__dirname + "/notification_download_progress.css", "chUiJS_downloadNotification");
+        setStyles(__dirname + "/notification_download_progress.css", "chUiJS_downloadProgressNotification");
         this.#download_notification.id = this.#id;
         this.#download_notification_title.id = this.#id_download_notification_title;
         if (options.title !== undefined) {
@@ -29,12 +33,21 @@ class DownloadProgressNotification {
             throw new Error("Должна быть установлена опция title");
         }
         this.#download_notification_body.style.width = "-webkit-fill-available";
-        this.#download_notification_date.innerHTML = getDate();
+        this.#download_notification_date.title = getDate();
+        this.#download_notification_date.innerText = getDateAgo(this.#created);
         this.#download_notification_header.appendChild(this.#download_notification_title);
         this.#download_notification_header.appendChild(this.#download_notification_date);
         this.#download_notification_content.appendChild(this.#download_notification_header);
         this.#download_notification_content.appendChild(this.#download_notification_body);
+        this.#download_notification.appendChild(this.#download_notification_icon);
         this.#download_notification.appendChild(this.#download_notification_content);
+        this.#download_notification_icon.innerHTML = new Icon(Icons.FILE.FILE_DOWNLOAD, "18px").getHTML();
+        this.#download_notification_close.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "13px").getHTML();
+        this.#download_notification_close.addEventListener("click", (e) => {
+            e.stopPropagation();
+            this.#hideNotification(this.#download_notification);
+        });
+        this.#download_notification.appendChild(this.#download_notification_close);
 
         //
         if (options.max !== undefined) this.#ProgressBar.max = options.max;
@@ -77,9 +90,11 @@ class DownloadProgressNotification {
     }
     #renderTest(className) {
         let notification = document.getElementById(this.#id);
+        let iconName = className === "download_notification_success" ? Icons.ACTIONS.CHECK_CIRCLE : Icons.ALERT.ERROR;
         let interval = setInterval(() => {
             try {
                 notification.className = className;
+                this.#download_notification_icon.innerHTML = new Icon(iconName, "18px").getHTML();
                 clearInterval(interval);
             } catch (e) {
                 /* ... */

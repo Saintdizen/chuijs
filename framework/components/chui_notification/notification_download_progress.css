@@ -1,39 +1,80 @@
-/* download */
+/* ── Apple-Flat: скачивание с прогрессом ──────────────────────────── */
 notification_download_progress {
     display: none;
     height: max-content;
     width: max-content;
-    min-width: 356px;
-    max-width: 356px;
-    border-radius: var(--border_radius);
+    min-width: 340px;
+    max-width: 420px;
+    box-sizing: border-box;
+    border-radius: 14px;
     margin: var(--margin);
     font-size: var(--font_default_size);
-    padding: 6px 10px;
-    background: var(--header_background);
+    color: var(--text_color);
+    padding: 12px 12px 12px 13px;
+    background-color: var(--ntf_bg);
+    border: 1px solid var(--glass_line);
+    box-shadow: var(--ntf_shadow);
     backdrop-filter: var(--global_blur);
+    -webkit-backdrop-filter: var(--global_blur);
+    overflow: hidden;
     z-index: 1002;
-    box-shadow: var(--box_shadow_main);
-    border: 1px solid var(--border_color);
+    cursor: pointer;
+    transition: background .2s ease;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+@media (prefers-color-scheme: light) {
+    notification_download_progress {
+        --ntf_bg: rgba(248, 248, 252, 0.8);
+        --ntf_border: rgba(0, 0, 0, 0.08);
+        --ntf_shadow: 0 2px 6px rgba(0, 0, 0, 0.05), 0 10px 26px rgba(0, 0, 0, 0.1);
+        --ntf_success_bg: rgba(52, 199, 89, 0.16);
+        --ntf_success_border: rgba(52, 199, 89, 0.34);
+        --ntf_error_bg: rgba(255, 59, 48, 0.12);
+        --ntf_error_border: rgba(255, 59, 48, 0.3);
+        --ntf_icon_bg: rgba(120, 120, 128, 0.16);
+        --ntf_icon_color: rgba(45, 45, 45, 0.65);
+        --ntf_icon_success: rgb(52, 199, 89);
+        --ntf_icon_error: rgb(255, 59, 48);
+    }
+}
+@media (prefers-color-scheme: dark) {
+    notification_download_progress {
+        --ntf_bg: rgba(38, 38, 44, 0.82);
+        --ntf_border: rgba(255, 255, 255, 0.1);
+        --ntf_shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 12px 30px rgba(0, 0, 0, 0.3);
+        --ntf_success_bg: rgba(48, 209, 88, 0.2);
+        --ntf_success_border: rgba(48, 209, 88, 0.38);
+        --ntf_error_bg: rgba(255, 69, 58, 0.22);
+        --ntf_error_border: rgba(255, 69, 58, 0.4);
+        --ntf_icon_bg: rgba(120, 120, 128, 0.24);
+        --ntf_icon_color: rgba(255, 255, 255, 0.8);
+        --ntf_icon_success: rgb(48, 209, 88);
+        --ntf_icon_error: rgb(255, 69, 58);
+    }
 }
 
 .download_notification_error {
-    background: var(--badge_error_back);
-    box-shadow: var(--box_shadow_main);
-    border: 1px solid var(--badge_error_back);
+    background: var(--ntf_error_bg);
+    border: 1px solid var(--ntf_error_border);
+    box-shadow: var(--ntf_shadow);
 }
 
 .download_notification_success {
-    background: var(--badge_success_back);
-    box-shadow: var(--box_shadow_main);
-    border: 1px solid var(--badge_success_back);
+    background: var(--ntf_success_bg);
+    border: 1px solid var(--ntf_success_border);
+    box-shadow: var(--ntf_shadow);
 }
 
 download_notification_body {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex: 1;
-    justify-content: left;
-    align-items: center;
+    justify-content: center;
+    align-items: stretch;
+    gap: 4px;
 }
 
 download_notification_content {
@@ -47,18 +88,18 @@ download_notification_content {
 download_notification_header {
     display: flex;
     flex-direction: row;
-    flex: 1;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
+    gap: 10px;
     width: -webkit-fill-available;
 }
 
 download_notification_title {
     font-size: var(--font_default_size);
-    font-weight: 500;
-    margin: 3px;
+    font-weight: 600;
+    line-height: 1.35;
     color: var(--text_color);
-    word-break: break-all;
+    word-break: break-word;
 }
 
 download_notification_title p {
@@ -66,19 +107,19 @@ download_notification_title p {
 }
 
 download_notification_date {
-    font-size: 8pt;
+    font-size: 10px;
     font-weight: 400;
-    margin: 3px 0 0 10px;
-    color: var(--text_color);
-    white-space: pre;
+    color: var(--text_color_disabled);
+    white-space: nowrap;
     text-align: end;
+    opacity: .9;
 }
 
 download_notification_text {
-    font-size: 11pt;
+    font-size: var(--font_notification_size);
     font-weight: 400;
-    margin: 6px 3px;
-    color: var(--text_color);
+    line-height: 1.5;
+    color: var(--text_color_disabled);
     word-break: break-word;
 }
 
@@ -86,39 +127,97 @@ download_notification_text p {
     margin: 0;
 }
 
-download_progress {
-
-}
-
 download_progress_text_block {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: -webkit-fill-available;
-    color: var(--text_color);
-    margin: 3px;
+    color: var(--text_color_disabled);
+    font-size: 11px;
 }
 
-download_progress_text, download_progress_count {
+download_progress_text,
+download_progress_count {
     font-size: 11px;
 }
 
 .download_progress_bar {
     border-radius: 50px;
     text-align: start;
-    margin: 3px 0;
     width: -webkit-fill-available;
-    height: 9px;
+    height: 6px;
     border: none;
+    overflow: hidden;
 }
 
 .download_progress_bar::-webkit-progress-bar {
-    background: var(--ap_main_background);
+    background: var(--element_background_2);
     border-radius: 50px;
     border: none;
 }
 
 .download_progress_bar::-webkit-progress-value {
     background: var(--blue_prime_background);
+    border-radius: 50px;
+}
+/* ── Иконка-плашка + крестик (как в макете) ────────────────────────── */
+download_notification_icon {
+    width: 34px;
+    height: 34px;
+    flex: none;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: var(--ntf_icon_bg);
+    color: var(--ntf_icon_color);
+    margin-top: 1px;
+}
+download_notification_icon chui_icon {
+    font-size: 18px;
+    color: inherit;
+}
+
+notification_download_progress.download_notification_success download_notification_icon,
+.download_notification_success download_notification_icon {
+    color: var(--ntf_icon_success);
+}
+notification_download_progress.download_notification_error download_notification_icon,
+.download_notification_error download_notification_icon {
+    color: var(--ntf_icon_error);
+}
+
+download_notification_close {
+    width: 24px;
+    height: 24px;
+    flex: none;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    color: var(--text_color_disabled);
+    cursor: pointer;
+    margin: -2px -4px 0 0;
+}
+download_notification_close chui_icon {
+    font-size: 13px;
+    color: inherit;
+    pointer-events: none;
+}
+download_notification_close:hover {
+    background: var(--ntf_icon_bg);
+    color: var(--text_color);
+}
+
+/* прогресс-бар — аккуратный тонкий, как в макете */
+.download_progress_bar::-webkit-progress-bar {
+    background: var(--fill_subtle_2, var(--element_background_2));
+    border-radius: 50px;
+    border: none;
+}
+.download_progress_bar {
+    height: 5px;
     border-radius: 50px;
 }

@@ -34,20 +34,20 @@ Log.error("TEST MAIN");
 
 //main.enableAutoUpdateApp(1000, require("./update.json"));
 
-async function checkMicPermission() {
-    const status = systemPreferences.getMediaAccessStatus("microphone");
-    if (status !== "granted") return await systemPreferences.askForMediaAccess("microphone");
-    return true;
-}
+// async function checkMicPermission() {
+//     const status = systemPreferences.getMediaAccessStatus("microphone");
+//     if (status !== "granted") return await systemPreferences.askForMediaAccess("microphone");
+//     return true;
+// }
 
-async function checkCamPermission() {
-    const status = systemPreferences.getMediaAccessStatus("camera");
-    if (status !== "granted") return await systemPreferences.askForMediaAccess("camera");
-    return true;
-}
+// async function checkCamPermission() {
+//     const status = systemPreferences.getMediaAccessStatus("camera");
+//     if (status !== "granted") return await systemPreferences.askForMediaAccess("camera");
+//     return true;
+// }
 
-setTimeout(checkMicPermission, 1000);
-setTimeout(checkCamPermission, 1000);
+// setTimeout(checkMicPermission, 1000);
+// setTimeout(checkCamPermission, 1000);
 
 App.get().on("session-created", (session) => {
     session.on("will-download", (e, item, contents) => {

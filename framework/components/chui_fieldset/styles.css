@@ -1,25 +1,34 @@
+/* ── FieldSet — плоская рамка с легендой (макет) ──────────────────── */
 chui_fieldset {
+    display: flex;
     height: max-content;
     width: max-content;
-    border-radius: var(--border_radius);
+    border-radius: 14px;
     margin: var(--margin);
+    box-sizing: border-box;
 }
 
-fieldset {
+chui_fieldset fieldset {
+    box-sizing: border-box;
     height: -webkit-fill-available;
     width: -webkit-fill-available;
-    border: none;
-    border-radius: var(--border_radius);
-    padding: 0 6px 6px 6px;
+    margin: 0;
+    padding: 10px 12px 12px;
     display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: var(--input_background);
+    border: 1px solid var(--glass_line);
+    border-radius: 14px;
 }
 
-legend {
-    color: var(--blue_prime_background);
-    padding: var(--test_padding);
-    font-size: var(--font_default_size);
-    font-weight: 500;
+chui_fieldset legend {
+    color: var(--text_color);
+    padding: 2px 8px;
+    margin: 0 0 0 4px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
     border: none;
-    border-radius: var(--border_radius);
-    margin-left: var(--margin);
+    border-radius: 7px;
 }

@@ -10,10 +10,6 @@ class ProgressBar {
         this.#ProgressBar.id = this.#id;
         this.#progress_count.setAttribute("for", this.#id);
         this.#progress_text.setAttribute("for", this.#id);
-        this.#progress_text.style.width = "-webkit-fill-available";
-        this.#progress_text.style.display = "block";
-        this.#progress_text.style.margin = "0px 10px";
-        this.#progress_text.style.textAlign = "initial";
         this.#main.appendChild(this.#progress_count);
         this.#main.appendChild(this.#ProgressBar);
         this.#main.appendChild(this.#progress_text);

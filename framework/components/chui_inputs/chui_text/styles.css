@@ -1,24 +1,36 @@
+/* ── TextInput — flat-поле (макет) ─────────────────────────────────── */
 chui_text_input {
     display: flex;
     flex-direction: column;
     width: 200px;
     height: max-content;
-    margin: var(--margin)
+    margin: var(--margin);
 }
 
 chui_text_main {
     display: flex;
     width: -webkit-fill-available;
-    height: max-content;
+    min-height: 40px;
+    box-sizing: border-box;
     margin: 0;
-    border-radius: var(--border_radius);
-    background: var(--element_background);
-    color: var(--text_color);
+    padding: 0 13px;
     align-items: center;
     position: relative;
-    padding: var(--main_padding);
-    background: var(--element_background);
-    border: 1px solid var(--border_color);
+    border-radius: 8px;
+    background: var(--field_background);
+    border: 1px solid var(--field_border);
+    box-shadow: var(--field_inset);
+    color: var(--text_color);
+    transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+chui_text_main:hover {
+    border-color: var(--field_border_hover);
+    background: var(--field_hover_background);
+}
+chui_text_main:focus-within {
+    border-color: var(--blue_prime_background);
+    box-shadow: 0 0 0 4px var(--input_ring);
+    background: var(--field_hover_background);
 }
 
 .text_input {
@@ -29,37 +41,48 @@ chui_text_main {
     color: var(--text_color);
     text-align: start;
     border: none;
+    outline: none;
     font-size: var(--font_default_size);
+    line-height: 20px;
+}
+.text_input::placeholder {
+    color: var(--input_placeholder);
 }
 
-.input_label {
+chui_text_input > .input_label,
+chui_text_input label.input_label {
     height: max-content;
     width: max-content;
-    margin: var(--margin);
-    font-size: var(--font_labels_size);
-    font-weight:500;
-    color: var(--text_color)
+    margin: 0 0 5px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    color: var(--input_label);
 }
 
 error_message_text {
     display: none;
     height: max-content;
     width: max-content;
-    margin: var(--margin) var(--margin) 0 var(--margin);
-    font-size: var(--font_labels_size);
-    font-weight:500;
-    color: var(--red_prime_background)
+    margin: 6px 0 0 4px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--red_prime_background);
 }
 
 .error_border {
-    border: none;
+    border: 1px solid var(--red_prime_background);
+    box-shadow: 0 0 0 4px var(--badge_error_back);
 }
 
 /* DISABLED STYLES */
 .chui_text_main_disabled {
     cursor: not-allowed;
-    background: var(--element_background_disabled);
-    border: 1px solid var(--border_color);
+    background: var(--field_background_disabled);
+    border: 1px solid var(--field_border);
+}
+.chui_text_main_disabled:hover {
+    border-color: var(--field_border);
 }
 
 .text_input_disabled {
@@ -74,12 +97,13 @@ error_message_text {
     font-size: var(--font_default_size);
 }
 
-.input_label_disabled {
+chui_text_input > .input_label_disabled,
+chui_text_input label.input_label_disabled {
     cursor: not-allowed;
     height: max-content;
     width: max-content;
-    margin: var(--margin);
-    font-size: var(--font_labels_size);
-    font-weight:500;
-    color: var(--text_color_disabled)
+    margin: 0 0 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text_color_disabled);
 }

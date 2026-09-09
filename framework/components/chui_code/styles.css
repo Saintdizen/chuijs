@@ -1,10 +1,22 @@
+/* ── CodeBlock — сниппет кода ── */
 .chui_code {
+    position: relative;
+    box-sizing: border-box;
     height: max-content;
     width: max-content;
+    max-width: 100%;
     margin: var(--margin);
-    font-size: var(--font_default_size);
+    padding: 12px;
+    background: var(--input_background);
+    border: 1px solid var(--glass_line);
+    border-radius: 12px;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 12px;
     font-weight: 400;
-    color: var(--text_color);
+    line-height: 1.6;
+    color: var(--text_color_secondary);
     white-space: pre-wrap;
-    font-family: monospace;
+    word-break: break-word;
+    overflow: auto;
 }
+

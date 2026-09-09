@@ -1,16 +1,20 @@
 const { Animation } = require("../../modules/chui_animations/animations");
 const { Spinner } = require("../chui_spinner/spinner");
-const { setStyles, getDate } = require("../../modules/chui_functions");
+const { setStyles, getDate, getDateAgo } = require("../../modules/chui_functions");
+const { Icon, Icons } = require("../chui_icons/icons");
 
 class UpdateNotification {
     #id = require("randomstring").generate();
+    #created = new Date();
     #update_notification = document.createElement(`update_notification`);
+    #update_notification_icon = document.createElement("update_notification_icon");
     #update_notification_content = document.createElement("update_notification_content");
     #update_notification_header = document.createElement("update_notification_header");
     #update_notification_title = document.createElement("update_notification_title");
     #update_notification_date = document.createElement("update_notification_date");
     #update_notification_body = document.createElement("update_notification_body");
     #update_notification_text = document.createElement("update_notification_text");
+    #update_notification_close = document.createElement("update_notification_close");
     constructor(options = { title: String(), text: String(), spinner: Boolean() }) {
         setStyles(__dirname + "/styles_update.css", "chUiJS_UpdateNotification");
         this.#update_notification.id = this.#id;
@@ -26,7 +30,8 @@ class UpdateNotification {
         } else {
             throw new Error("Должна быть установлена опция text");
         }
-        this.#update_notification_date.innerHTML = getDate();
+        this.#update_notification_date.title = getDate();
+        this.#update_notification_date.innerText = getDateAgo(this.#created);
         //
         this.#update_notification_header.appendChild(this.#update_notification_title);
         this.#update_notification_header.appendChild(this.#update_notification_date);
@@ -38,7 +43,20 @@ class UpdateNotification {
         }
         this.#update_notification_body.appendChild(this.#update_notification_text);
         this.#update_notification_content.appendChild(this.#update_notification_body);
+        // Иконка слева, крестик справа — как в макете
+        if (options.spinner) {
+            this.#update_notification_icon.style.display = "none";
+        } else {
+            this.#update_notification_icon.innerHTML = new Icon(Icons.NOTIFICATION.SYSTEM_UPDATE, "18px").getHTML();
+        }
+        this.#update_notification_close.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "13px").getHTML();
+        this.#update_notification_close.addEventListener("click", (e) => {
+            e.stopPropagation();
+            this.hide();
+        });
+        this.#update_notification.appendChild(this.#update_notification_icon);
         this.#update_notification.appendChild(this.#update_notification_content);
+        this.#update_notification.appendChild(this.#update_notification_close);
     }
     show(showOnSystem = Boolean()) {
         document.getElementsByTagName("notification_panel")[0].appendChild(this.#update_notification);
