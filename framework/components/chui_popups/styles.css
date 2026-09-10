@@ -7,7 +7,7 @@ chui_popup {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: var(--header_background);
+    background-color: var(--modal_scrim);
     padding: 0;
     border: none;
     backdrop-filter: var(--global_blur);
@@ -20,22 +20,25 @@ popup_content {
     height: max-content;
     display: flex;
     flex-direction: column;
-    border-radius: var(--border_radius);
+    border-radius: var(--radius_md);
     color: var(--text_color);
-    background: var(--element_background_2);
-    box-shadow: var(--box_shadow_drop);
-    border: none;
+    background: var(--modal_background);
+    box-shadow: var(--box_shadow_modal);
+    border: 1px solid var(--border_color);
+    backdrop-filter: var(--global_blur);
 }
 
 popup_body {
-    padding: 10px;
+    padding: var(--test_padding);
     display: flex;
     height: -webkit-fill-available;
     width: -webkit-fill-available;
     overflow: auto;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    /* stretch, а не center: поле ввода в prompt заполняет карточку,
+       а центрирование текста задаётся через text-align у title/message */
+    align-items: stretch;
 }
 
 popup_buttons {
@@ -43,7 +46,7 @@ popup_buttons {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 8px;
+    padding: var(--test_padding);
 }
 
 popup_title {
@@ -51,80 +54,48 @@ popup_title {
     text-align: center;
     font-size: var(--font_default_size);
     font-weight: 500;
-    padding: 6px;
+    padding: var(--margin);
 }
 
 popup_message {
     display: block;
     text-align: center;
     font-size: var(--font_labels_size);
-    font-weight: 500;
-    padding: 6px;
+    font-weight: 400;
+    padding: var(--margin);
 }
-/* ALERT */
-popup_button_ok {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: -webkit-fill-available;
-    padding: 10px;
-    border-radius: var(--border_radius);
-    color: var(--text_color);
-    font-weight: 500;
-    font-size: var(--font_default_size);
-}
-
-popup_button_ok:hover {
-    color: var(--text_color_hover);
-    background: var(--blue_prime_background);
-}
-/* CONFIRM */
-popup_button_accept {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: -webkit-fill-available;
-    padding: 10px;
-    border-radius: var(--border_radius);
-    color: var(--text_color);
-    font-weight: 500;
-    font-size: var(--font_default_size);
-}
-
-popup_button_accept:hover {
-    color: var(--text_color_hover);
-    background: var(--blue_prime_background);
-}
-
-popup_button_cancel {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: -webkit-fill-available;
-    padding: 10px;
-    border-radius: var(--border_radius);
-    color: var(--text_color);
-    font-weight: 500;
-    font-size: var(--font_default_size);
-}
-
-popup_button_cancel:hover {
-    color: var(--text_color_hover);
-    background: var(--red_prime_background);
-}
-
+/* Кнопки — как .chui_button: заполненный контрол с хайрлайном, но равной ширины */
 popup_button_ok,
 popup_button_accept,
 popup_button_cancel {
     cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: -webkit-fill-available;
+    padding: var(--main_padding);
+    margin: var(--margin);
+    border-radius: var(--border_radius);
+    background: var(--button_background);
+    border: 1px solid var(--button_border_color);
+    color: var(--text_color);
+    font-weight: 400;
+    font-size: var(--font_default_size);
+}
+
+popup_button_ok:hover,
+popup_button_accept:hover,
+popup_button_cancel:hover {
+    background: var(--button_background_hover);
+    border: 1px solid var(--button_border_color_hover);
+    color: var(--text_color_hover);
 }
 
 popup_button_ok:active,
 popup_button_accept:active,
 popup_button_cancel:active {
     background: var(--element_background_prime);
+    border: 1px solid var(--button_border_color_hover);
     color: var(--text_color_hover);
 }

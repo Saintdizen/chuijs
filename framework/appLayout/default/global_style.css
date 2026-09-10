@@ -168,7 +168,6 @@ header {
     align-items: start;
     background-color: var(--header_background);
     backdrop-filter: var(--global_blur);
-    background-blend-mode: overlay;
     justify-content: space-between;
     border-bottom: 1px solid var(--border_color);
 }
@@ -278,25 +277,29 @@ notification_button {
     border-radius: var(--border_radius);
     padding: var(--test_padding);
     margin: var(--margin);
-    font-size: 22pt;
     background: transparent;
     color: var(--text_color);
     -webkit-app-region: no-drag;
+    transition: background-color var(--transition_time) ease, color var(--transition_time) ease;
 }
 
 notification_button:hover {
-    background: var(--blue_prime_background);
+    background: var(--element_background);
 }
 
-.notification_button_active {
-    background: var(--blue_prime_background);
+notification_button:active {
+    background: var(--element_background_hover);
 }
 
-.notification_button_active chui_icon {
+/* Открытый ящик уведомлений: акцент, а не ховер */
+.notification_button_active,
+.notification_button_active:hover {
+    background: var(--blue_prime_background);
     color: var(--text_color_hover);
 }
 
-notification_button:hover chui_icon {
+.notification_button_active chui_icon,
+.notification_button_active:hover chui_icon {
     color: var(--text_color_hover);
 }
 
@@ -309,26 +312,38 @@ app_menu_button {
     border-radius: var(--border_radius);
     padding: var(--test_padding);
     margin: var(--margin);
-    font-size: 22pt;
     background: transparent;
     color: var(--text_color);
     -webkit-app-region: no-drag;
+    transition: background-color var(--transition_time) ease, color var(--transition_time) ease;
 }
 
 app_menu_button:hover {
-    background: var(--blue_prime_background);
+    background: var(--element_background);
 }
 
-.app_menu_button_active {
-    background: var(--blue_prime_background);
+app_menu_button:active {
+    background: var(--element_background_hover);
 }
 
-.app_menu_button_active chui_icon {
+/* Открытое меню маршрутов: акцент, а не ховер */
+.app_menu_button_active,
+.app_menu_button_active:hover {
+    background: var(--blue_prime_background);
     color: var(--text_color_hover);
 }
 
-app_menu_button:hover chui_icon {
+.app_menu_button_active chui_icon,
+.app_menu_button_active:hover chui_icon {
     color: var(--text_color_hover);
+}
+
+/* Клавиатурный фокус элементов шапки (мышь его не показывает) */
+notification_button:focus-visible,
+app_menu_button:focus-visible,
+header_button:focus-visible {
+    outline: var(--focus_outline);
+    outline-offset: var(--focus_outline_offset);
 }
 
 route_views {
@@ -525,7 +540,7 @@ header_button {
     display: flex;
     flex-direction: row;
     -webkit-app-region: no-drag;
-
+    transition: background-color var(--transition_time) ease, color var(--transition_time) ease;
 }
 
 header_button header_button_title {
@@ -533,22 +548,18 @@ header_button header_button_title {
 }
 
 header_button:hover {
-    background: var(--blue_prime_background);
+    background: var(--element_background);
 }
 
-header_button:hover header_button_title {
-    color: var(--text_color_hover);
+header_button:active {
+    background: var(--element_background_hover);
 }
 
-header_button:hover chui_icon {
-    color: var(--text_color_hover);
-}
-
-/*Управление окном*/
+/*Управление окном — те же кнопки-иконки, что и остальные в шапке:
+  прозрачный фон, видимый символ, нейтральный ховер. */
 wc_box {
     -webkit-app-region: no-drag;
-    color: var(--text_color);
-    margin: 0 3px;
+    margin: 0 var(--margin);
     padding: 0 3px;
     display: flex;
     align-items: center;
@@ -556,23 +567,35 @@ wc_box {
 }
 
 wc_close, wc_maximize, wc_minimize {
+    cursor: pointer;
     margin: 6px 3px;
-    padding: 3px;
-    border-radius: 50%;
-    /*background: var(--element_background);*/
-    box-shadow: 0 0 1px 0 var(--border_color);
-}
-
-wc_close:hover {
-    background-color: var(--red_prime_background);
+    padding: 5px;
+    border-radius: var(--radius_circle);
+    background: transparent;
+    color: var(--text_color);
+    transition: background-color var(--transition_time) ease, color var(--transition_time) ease;
 }
 
 wc_maximize:hover, wc_minimize:hover {
-    background-color: var(--blue_prime_background);
+    background: var(--element_background);
 }
 
-wc_close:hover chui_icon, wc_maximize:hover chui_icon, wc_minimize:hover chui_icon {
-    color: white;
+wc_maximize:active, wc_minimize:active {
+    background: var(--element_background_hover);
+}
+
+/* Закрытие окна — единственное место, где уместен красный */
+wc_close:hover {
+    background: var(--red_prime_background);
+}
+
+wc_close:hover chui_icon {
+    color: var(--text_color_hover);
+}
+
+wc_close:focus-visible, wc_maximize:focus-visible, wc_minimize:focus-visible {
+    outline: var(--focus_outline);
+    outline-offset: var(--focus_outline_offset);
 }
 
 header_tabs {

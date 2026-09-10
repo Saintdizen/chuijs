@@ -58,7 +58,7 @@ class MultiComboBox {
         this.#button_open_disabled.style.cursor = "not-allowed";
         this.#dropdown.setAttribute('id', this.#id);
         this.#MultiComboBox_second.appendChild(this.#MultiComboBox_options)
-        this.#MultiComboBox_second.appendChild(this.#input)
+        this.#MultiComboBox_options.appendChild(this.#input)
         this.#MultiComboBox_second.appendChild(this.#button_open)
         this.#MultiComboBox_second.appendChild(this.#dropdown)
         //LISTENERS
@@ -74,7 +74,8 @@ class MultiComboBox {
         })
         this.#MultiComboBox_second.addEventListener('click', (event) => {
             if (!this.#input.disabled) {
-                if (event.target.parentNode === this.#MultiComboBox_second) {
+                if (event.target.closest('multicombobox_dropdown') === null &&
+                    event.target.closest('multicombobox_option_added_main') === null) {
                     this.#input.focus()
                     new Animation(this.#dropdown).fadeIn();
                     setOptionDisplay(document.getElementById(this.#id));
@@ -134,12 +135,13 @@ class MultiComboBox {
                         test_main.id = id_name
                         const test_body = document.createElement("multicombobox_option_added_body")
                         test_body.innerText = sect.title + ": " + opt.title;
+                        test_body.title = sect.title + ": " + opt.title;
                         const test_remove = document.createElement("multicombobox_option_added_remove")
                         test_remove.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "10pt").getHTML()
                         test_remove.addEventListener("click", () => checkbox_input.click())
                         test_main.appendChild(test_body)
                         test_main.appendChild(test_remove)
-                        this.#MultiComboBox_options.appendChild(test_main)
+                        this.#MultiComboBox_options.insertBefore(test_main, this.#input)
                         this.#value.push({
                             id: id_name,
                             section: sect.title,
@@ -203,6 +205,7 @@ class MultiComboBox {
                 test_main.id = opt.title
                 const test_body = document.createElement("multicombobox_option_added_body")
                 test_body.innerText = opt.title;
+                test_body.title = opt.title;
                 const test_remove = document.createElement("multicombobox_option_added_remove")
                 test_remove.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "10pt").getHTML()
                 test_main.appendChild(test_body)
@@ -211,7 +214,7 @@ class MultiComboBox {
                 test_remove.addEventListener("click", () => checkbox_input.click())
                 //
                 if (evt.target.checked) {
-                    this.#MultiComboBox_options.appendChild(test_main)
+                    this.#MultiComboBox_options.insertBefore(test_main, this.#input)
                     this.#value.push(opt)
                 } else {
                     for (let node of this.#MultiComboBox_options.childNodes) {
@@ -275,7 +278,9 @@ class MultiComboBox {
     clear() {
         this.#input.value = ""
         this.#value = []
-        this.#MultiComboBox_options.innerHTML = ""
+        for (let node of [...this.#MultiComboBox_options.childNodes]) {
+            if (node !== this.#input) node.remove()
+        }
         for (let checkbox of this.#dropdown.querySelectorAll('input[type="checkbox"]')) {
             checkbox.checked = false;
         }

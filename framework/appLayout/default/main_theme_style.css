@@ -33,6 +33,9 @@
         --button_background_disabled: rgba(120, 120, 128, 0.09);
         /* Модальное окно */
         --modal_background: rgba(250, 250, 252, 0.78);
+        /* Занавес под всплывающим слоем: подложка обязана отличаться от --modal_background,
+           иначе материал модалки на ней не читается. */
+        --modal_scrim: rgba(0, 0, 0, 0.18);
         /* Элементы */
         --element_background: rgba(120, 120, 128, 0.2);
         --element_background_hover: rgba(120, 120, 128, 0.32);
@@ -85,6 +88,9 @@
         --button_background_disabled: rgba(120, 120, 128, 0.14);
         /* Модальное окно */
         --modal_background: rgba(30, 30, 32, 0.78);
+        /* Занавес под всплывающим слоем: подложка обязана отличаться от --modal_background,
+           иначе материал модалки на ней не читается. */
+        --modal_scrim: rgba(0, 0, 0, 0.5);
         /* Элементы */
         --element_background: rgba(120, 120, 128, 0.3);
         --element_background_hover: rgba(120, 120, 128, 0.45);
