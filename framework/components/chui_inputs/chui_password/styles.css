@@ -1,7 +1,7 @@
 chui_password_input {
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: var(--control_width);
     height: max-content;
     margin: var(--margin);
 }
@@ -55,7 +55,7 @@ see_pass_button {
 }
 
 .error_border {
-    border: none;
+    border: 1px solid var(--red_prime_background);
 }
 
 error_message_password {

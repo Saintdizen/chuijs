@@ -1,7 +1,7 @@
 chui_email_input {
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: var(--control_width);
     height: max-content;
     margin: var(--margin);
 }
@@ -30,8 +30,6 @@ chui_email_main {
     border: none;
     font-size: var(--font_default_size);
 }
-
-email_input .email_input:valid {}
 
 .email_label {
     height: max-content;

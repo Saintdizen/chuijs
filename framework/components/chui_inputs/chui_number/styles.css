@@ -1,7 +1,7 @@
 chui_number_input {
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: var(--control_width);
     height: max-content;
     margin: var(--margin);
 }

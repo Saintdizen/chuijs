@@ -1,4 +1,5 @@
 const { Animation } = require('../../../modules/chui_animations/animations');
+const { shouldOpenDropdownUp } = require('../../../modules/chui_functions');
 const { Icon, Icons } = require('../../chui_icons/icons');
 
 class Select {
@@ -30,7 +31,7 @@ class Select {
         this.#input.classList.add('selectbox_input');
         this.#input.type = 'text';
         if (options.name !== undefined) this.#input.name = options.name;
-        this.#input.disabled = true
+        this.#input.readOnly = true
         this.#button_open.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN, undefined, "var(--blue_prime_background)").getHTML();
         this.#button_open_disabled.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN, undefined, "var(--text_color_disabled)").getHTML();
         this.#button_open_disabled.style.cursor = "not-allowed";
@@ -40,25 +41,26 @@ class Select {
         this.#Select_second.appendChild(this.#dropdown)
         //LISTENERS
         this.#input.addEventListener('focus', () => {
-            this.#button_open.style.transform = 'rotate(180deg)'
-            this.#Select_second.style.border = '1px solid var(--blue_prime_background)';
+            if (this.#disabled_trigger) return;
+            this.#setOpenState(true)
         })
         this.#input.addEventListener('blur', () => {
-            this.#button_open.style.transform = 'rotate(0deg)'
-            this.#Select_second.removeAttribute('style')
+            this.#setOpenState(false)
         })
         this.#Select_second.addEventListener('click', (event) => {
-            if (!this.#disabled_trigger) {
-                if (event.target.parentNode === this.#Select_second) {
-                    this.#input.focus()
-                    //this.#setWidthDropDown()
-                    new Animation(this.#dropdown).fadeIn();
-                    setOptionDisplay(document.getElementById(this.#id));
-                }
+            if (this.#disabled_trigger) return;
+            if (event.target.parentNode === this.#Select_second) {
+                this.#setOpenState(true)
+                this.#input.focus()
+                //this.#setWidthDropDown()
+                new Animation(this.#dropdown).fadeIn();
+                setOptionDisplay(document.getElementById(this.#id));
+                this.#setDropdownDirection();
             }
         });
         window.addEventListener('click', (event) => {
             if (event.target.parentNode !== this.#Select_second) {
+                this.#setOpenState(false)
                 new Animation(this.#dropdown).fadeOut();
             }
         });
@@ -139,6 +141,7 @@ class Select {
     setDisabled(boolean = Boolean()) {
         this.#disabled_trigger = boolean
         if (boolean) {
+            this.#setOpenState(false)
             this.#Select_second.classList.add("selectbox_disabled")
             this.#input.className = "selectbox_input_disabled"
             this.#label.className = "select_label_disabled"
@@ -151,6 +154,20 @@ class Select {
             this.#button_open_disabled.remove();
             this.#Select_second.appendChild(this.#button_open);
         }
+    }
+    #setOpenState(opened = Boolean()) {
+        this.#button_open.style.transform = opened ? 'rotate(180deg)' : 'rotate(0deg)'
+        if (opened) {
+            this.#Select_second.style.border = '1px solid var(--blue_prime_background)';
+        } else {
+            this.#Select_second.removeAttribute('style')
+        }
+    }
+    #setDropdownDirection() {
+        const openUp = shouldOpenDropdownUp(this.#dropdown, this.#Select_second);
+        this.#dropdown.style.top = openUp ? 'auto' : '';
+        this.#dropdown.style.bottom = openUp ? '100%' : '';
+        this.#dropdown.style.marginTop = openUp ? '0' : '';
     }
     set() { return this.#Select_main; }
     #setWidthDropDown() {

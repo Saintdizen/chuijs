@@ -150,7 +150,8 @@ class AppMenu {
     #routeList = [];
     #appMenu = document.createElement('app_menu');
     #appMenuWidth = 400;
-    #appMenuWidthTest = 425;
+    #appMenuOffset = 25;
+    get #appMenuSlide() { return this.#appMenuWidth + this.#appMenuOffset; }
     #routeViews = document.createElement('route_views');
     #appMenuButton = document.createElement('app_menu_button');
     // Блок поиска
@@ -161,32 +162,32 @@ class AppMenu {
     constructor(header, center) {
         this.#appMenu.style.top = `calc(${header.set().style.height})`;
         this.#appMenu.style.width = `${this.#appMenuWidth}px`;
-        this.#appMenu.style.left = `calc(-${this.#appMenuWidthTest}px)`;
+        this.#appMenu.style.left = `calc(-${this.#appMenuSlide}px)`;
         this.#appMenu.style.height = `calc(100% - ${header.set().style.height})`;
         //
         this.#appMenuButton.id = "appMenuButton"
         this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU, "var(--header_icon_size)").getHTML();
         this.#appMenuButton.addEventListener("click", () => {
             if (this.#appMenuButton.classList.contains("app_menu_button_active")) {
-                this.#appMenu.style.transform = `translateX(-${this.#appMenuWidth}px)`;
+                this.#appMenu.style.transform = `translateX(-${this.#appMenuSlide}px)`;
                 this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU, "var(--header_icon_size)").getHTML();
             } else {
-                this.#appMenu.style.transform = `translateX(${this.#appMenuWidthTest}px)`;
+                this.#appMenu.style.transform = `translateX(${this.#appMenuSlide}px)`;
                 this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU_OPEN, "var(--header_icon_size)").getHTML();
             }
             this.#appMenuButton.classList.toggle("app_menu_button_active")
         })
         header.set().addEventListener('click', (e) => {
             if (e.target !== this.#appMenuButton) {
-                this.#appMenu.style.transform = `translateX(-${this.#appMenuWidth}px)`;
+                this.#appMenu.style.transform = `translateX(-${this.#appMenuSlide}px)`;
                 this.#appMenuButton.classList.remove("app_menu_button_active")
                 this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU, "var(--header_icon_size)").getHTML();
             }
         })
         center.addEventListener('click', (e) => {
             if (!this.#appMenu.contains(e.target)) {
-                if (this.#appMenu.style.transform === `translateX(${this.#appMenuWidthTest}px)`) {
-                    this.#appMenu.style.transform = `translateX(-${this.#appMenuWidthTest}px)`;
+                if (this.#appMenu.style.transform === `translateX(${this.#appMenuSlide}px)`) {
+                    this.#appMenu.style.transform = `translateX(-${this.#appMenuSlide}px)`;
                     this.#appMenuButton.classList.toggle("app_menu_button_active")
                     this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU, "var(--header_icon_size)").getHTML();
                 }
@@ -271,8 +272,8 @@ class AppMenu {
                     this.go(page);
                     button_route.classList.add("route_active");
                     if (this.#auto_close) {
-                        if (this.#appMenu.style.transform === `translateX(${this.#appMenuWidth + 25}px)`) {
-                            this.#appMenu.style.transform = `translateX(-${this.#appMenuWidth + 25}px)`;
+                        if (this.#appMenu.style.transform === `translateX(${this.#appMenuSlide}px)`) {
+                            this.#appMenu.style.transform = `translateX(-${this.#appMenuSlide}px)`;
                             this.#appMenuButton.classList.toggle("app_menu_button_active");
                             this.#appMenuButton.innerHTML = new Icon(Icons.NAVIGATION.MENU, "var(--header_icon_size)").getHTML();
                         }
@@ -285,7 +286,6 @@ class AppMenu {
             button_route.appendChild(title_menu)
             this.#routeViews.appendChild(button_route)
         } else {
-            Log
             Log.error(`Страница "${page.getTitle()}" уже добавлена в меню`)
         }
     }

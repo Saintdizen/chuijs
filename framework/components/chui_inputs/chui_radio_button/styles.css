@@ -41,7 +41,10 @@ radiobutton {
     background: radial-gradient(circle, var(--text_color_hover) 22%, var(--blue_prime_background) 22%);
 }
 
-.radiobutton:focus+label::before {}
+.radiobutton:focus-visible+label::before {
+    outline: var(--focus_outline);
+    outline-offset: var(--focus_outline_offset);
+}
 
 .radiobutton:checked+label::before {
     background: radial-gradient(circle, var(--text_color_hover) 22%, var(--blue_prime_background) 22%);

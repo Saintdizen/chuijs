@@ -1,5 +1,8 @@
 const { Animation } = require('../../../modules/chui_animations/animations');
+const { shouldOpenDropdownUp } = require('../../../modules/chui_functions');
 const { Icon, Icons } = require('../../chui_icons/icons');
+
+const OPTION_ROW_HEIGHT = 33;
 
 class ComboBox {
     #id = require("randomstring").generate();
@@ -11,6 +14,7 @@ class ComboBox {
     #button_open = document.createElement('combo_button_open');
     #button_open_disabled = document.createElement('combo_button_open');
     #dropdown = document.createElement('combobox_dropdown');
+    #dropdown_height = "max-content";
     constructor(options = {
         name: String(),
         title: String(),
@@ -29,10 +33,9 @@ class ComboBox {
             this.#ComboBox_main.appendChild(this.#label);
         }
         if (options.optionsLen !== undefined) {
-            this.#dropdown.style.height = (33 * options.optionsLen) + "px";
-        } else {
-            this.#dropdown.style.height = "max-content";
+            this.#dropdown_height = (OPTION_ROW_HEIGHT * options.optionsLen) + "px";
         }
+        this.#dropdown.style.height = this.#dropdown_height;
         if (options.name !== undefined) this.#input.name = options.name;
         if (options.required !== undefined) this.#input.required = options.required;
         this.#input.setAttribute('id', this.#id_cb);
@@ -58,12 +61,12 @@ class ComboBox {
         this.#input.addEventListener('focus', () => {
             this.#button_open.style.transform = 'rotate(180deg)'
             this.#ComboBox_second.style.border = '1px solid var(--blue_prime_background)';
-            this.#dropdown.style.height = (33 * options.optionsLen) + "px"
+            this.#dropdown.style.height = this.#dropdown_height
         })
         this.#input.addEventListener('blur', () => {
             this.#button_open.style.transform = 'rotate(0deg)'
             this.#ComboBox_second.removeAttribute('style')
-            this.#dropdown.style.height = (33 * options.optionsLen) + "px"
+            this.#dropdown.style.height = this.#dropdown_height
         })
         this.#ComboBox_second.addEventListener('click', (event) => {
             if (!this.#input.disabled) {
@@ -71,6 +74,7 @@ class ComboBox {
                     this.#input.focus()
                     new Animation(this.#dropdown).fadeIn();
                     setOptionDisplay(document.getElementById(this.#id));
+                    this.#setDropdownDirection();
                 }
             }
         });
@@ -82,13 +86,17 @@ class ComboBox {
 
         this.#input.addEventListener('input', (event) => {
             let dropdown = document.getElementById(this.#id);
+            let query = event.target.value.toLowerCase();
             for (let option of dropdown.childNodes) {
-                if (!option.getAttribute('option_title').toLowerCase().includes(event.target.value.toLowerCase())) {
+                if (typeof option.getAttribute !== "function") continue;
+                let title = option.getAttribute('option_title');
+                if (title === null) continue;
+                if (!title.toLowerCase().includes(query)) {
                     option.style.display = 'none'
                     dropdown.style.height = 'max-content'
                 } else {
                     option.style.display = 'block'
-                    dropdown.style.height = (33 * options.optionsLen) + "px"
+                    dropdown.style.height = this.#dropdown_height
                 }
             }
         });
@@ -140,6 +148,12 @@ class ComboBox {
         this.#ComboBox_main.removeAttribute("option_title");
         this.#ComboBox_main.removeAttribute("option_value");
         this.#input.value = ""
+    }
+    #setDropdownDirection() {
+        const openUp = shouldOpenDropdownUp(this.#dropdown, this.#ComboBox_second);
+        this.#dropdown.style.top = openUp ? 'auto' : '';
+        this.#dropdown.style.bottom = openUp ? '100%' : '';
+        this.#dropdown.style.marginTop = openUp ? '0' : '';
     }
     set() { return this.#ComboBox_main; }
 }

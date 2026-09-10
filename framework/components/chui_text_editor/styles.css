@@ -11,7 +11,6 @@ chui_text_editor {
     display: flex;
     flex-direction: column;
     background: var(--element_background);
-    border: 1px solid var(--border_main);
     width: -webkit-fill-available;
     border: 1px solid var(--border_color);
 }
@@ -134,7 +133,9 @@ text_editor_div_value {
 
 text_editor_selectbox_dropdown {
     overflow: overlay;
-    background: var(--element_background);
+    background: var(--header_background);
+    backdrop-filter: var(--global_blur);
+    -webkit-backdrop-filter: var(--global_blur);
     color: var(--text_color);
     outline: none;
     position:absolute;
@@ -147,8 +148,8 @@ text_editor_selectbox_dropdown {
     font-size: var(--font_default_size);
     flex-direction: column;
     z-index: 1;
-    border: 1px solid var(--border_main);
-    box-shadow: 0 2px 10px 2px rgb(0 0 0 / 25%);
+    border: 1px solid var(--border_color);
+    box-shadow: var(--box_shadow_drop);
 }
 
 text_editor_select_button_open {
@@ -168,7 +169,6 @@ text_editor_selectbox_option:hover {
 
 text_editor_selectbox_option:hover font {
     color: var(--text_color_hover);
-    text-shadow: var(--text_shadow_hover);
 }
 
 /* chUiJS_TextEditorPanel */

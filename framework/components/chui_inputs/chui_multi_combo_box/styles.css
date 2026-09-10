@@ -4,7 +4,7 @@ chui_multicombobox {
     flex-direction: column;
     height: max-content;
     margin: var(--margin);
-    width: 200px
+    width: var(--control_width)
 }
 
 multicombobox {
@@ -35,7 +35,9 @@ multicombobox_options {
 }
 
 multicombobox_dropdown {
-    background: var(--element_background);
+    background: var(--header_background);
+    backdrop-filter: var(--global_blur);
+    -webkit-backdrop-filter: var(--global_blur);
     position: absolute;
     display: none;
     height: max-content;
@@ -130,7 +132,7 @@ multicombobox_option_added_main {
     height: max-content;
     margin: 3px;
     width: max-content;
-    background: var(--ap_slider_background);
+    background: var(--element_background_2);
     border-radius: var(--border_radius);
     font-weight: 500;
     justify-content: center;
@@ -159,64 +161,39 @@ label input {
 }
 
 .checkmark {
-    margin: 8px 0px 8px 8px;
-    font-size: var(--font_default_size);
-    content: '';
+    margin: 8px 0 8px 8px;
     display: flex;
     width: 1.2em;
     height: 1.2em;
     flex-shrink: 0;
     flex-grow: 0;
-    border-radius: 25%;
+    border-radius: var(--radius_sm);
     align-items: center;
     justify-content: center;
-    color: var(--ap_slider_background);
-    font-family: 'chui_I';
-    background: var(--ap_slider_background);
+    color: transparent;
+    background: var(--element_background);
     border: none;
-    box-shadow: 0 0 1px 0 var(--ap_slider_background);
+    box-shadow: 0 0 1px 0 var(--element_background_2);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 50% 50%;
 }
 
-/* On mouse-over, add a grey background color */
-label:hover input ~ .checkmark {
-    background-color: var(--ap_slider_background);
+.multi_combobox_option:hover .checkmark {
+    background-color: var(--element_background_2);
 }
 
-/* When the checkbox is checked, add a blue background */
-label input:checked ~ .checkmark {
+.multi_combobox_option input:checked ~ .checkmark {
     background-color: var(--blue_prime_background);
-    color:var(--text_color_hover);
+    color: var(--text_color_hover);
     border: none;
     box-shadow: 0 0 1px 0 var(--blue_prime_background);
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-/* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
-    display: block;
-}
-
-/* Style the checkmark/indicator */
-.container .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+.multi_combobox_option input:focus-visible ~ .checkmark {
+    outline: var(--focus_outline);
+    outline-offset: var(--focus_outline_offset);
 }
 
 .multi_combobox_section {

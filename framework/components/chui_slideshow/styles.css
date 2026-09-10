@@ -32,11 +32,20 @@ chui_next_slide {
 }
 
 chui_next_slide:hover, chui_prev_slide:hover {
-    background-color: var(--blue_prime_background)
+    background-color: var(--blue_prime_background);
+    color: var(--text_color_hover)
+}
+
+chui_next_slide:active, chui_prev_slide:active {
+    background-color: var(--element_background_prime)
+}
+
+chui_next_slide:hover chui_icon, chui_prev_slide:hover chui_icon {
+    color: var(--text_color_hover);
 }
 
 .text {
-    color: #f2f2f2;
+    color: var(--text_color);
     font-size: 15px;
     padding: var(--main_padding);
     position: absolute;
@@ -46,8 +55,8 @@ chui_next_slide:hover, chui_prev_slide:hover {
 }
 
 .numbertext {
-    color: #f2f2f2;
-    font-size: 12px;
+    color: var(--text_color);
+    font-size: var(--font_labels_size);
     padding: var(--main_padding);
     position: absolute;
     top: 0
@@ -58,13 +67,13 @@ chui_next_slide:hover, chui_prev_slide:hover {
     height: 15px;
     width: 15px;
     margin: 0 2px;
-    background-color: #bbb;
-    border-radius: 50%;
+    background-color: var(--element_background_2);
+    border-radius: var(--radius_circle);
     display: inline-block
 }
 
 .active, .dot:hover {
-    background-color: #717171;
+    background-color: var(--blue_prime_background);
 }
 
 /* SLIDES */

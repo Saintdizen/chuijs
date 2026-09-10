@@ -39,6 +39,20 @@ function getDefaultIcon() {
     return require('path').join(__dirname, 'chui_icon.png');
 }
 
+const DROPDOWN_VIEWPORT_MARGIN = 8;
+
+/**
+ * Проверяет, нужно ли открывать выпадающий список вверх.
+ * Список переворачивается, только если снизу места не хватает, а сверху его достаточно.
+ */
+function shouldOpenDropdownUp(dropdown = new HTMLElement(), anchor = new HTMLElement()) {
+    const anchorRect = anchor.getBoundingClientRect();
+    const dropdownHeight = dropdown.offsetHeight;
+    const spaceBelow = window.innerHeight - anchorRect.bottom - DROPDOWN_VIEWPORT_MARGIN;
+    const spaceAbove = anchorRect.top - DROPDOWN_VIEWPORT_MARGIN;
+    return dropdownHeight > spaceBelow && dropdownHeight <= spaceAbove;
+}
+
 function markdownToHtml(text = String()) {
     let showdown = require('showdown');
     return new showdown.Converter().makeHtml(text);
@@ -75,5 +89,6 @@ exports.render = render
 exports.markdownToHtml = markdownToHtml
 exports.htmlToMarkdown = htmlToMarkdown
 exports.getDefaultIcon = getDefaultIcon
+exports.shouldOpenDropdownUp = shouldOpenDropdownUp
 exports.setStyles = setStyles
 exports.formatBytes = formatBytes

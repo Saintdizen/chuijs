@@ -6,9 +6,29 @@
     --font_default_size: 14px;
     --font_labels_size: 12px;
     --font_notification_size: 12px;
-    --border_radius: 0.50rem !important;;
+    --button_text_color: var(--text_color);
     --margin: 6px;
+
+    /* Скругления */
+    --border_radius: 0.5rem;
+    --radius_sm: 6px;
+    --radius_md: 10px;
+    --radius_pill: 999px;
+    --radius_circle: 50%;
+
+    /* Ширина управляющих элементов */
+    --control_width: 200px;
+
+    /* Тени */
     --box_shadow_main: 0 1px 5px 1px rgb(0 0 0 / 20%);
+    --box_shadow_drop: 0 6px 24px 4px rgb(0 0 0 / 20%);
+    --box_shadow_modal: 0 10px 40px 6px rgb(0 0 0 / 30%);
+
+    /* Фокус */
+    --focus_outline: 2px solid var(--blue_prime_background);
+    --focus_outline_offset: 2px;
+
+    /* Тайминг анимаций */
     --transition_time: .165s
 }
 
@@ -29,7 +49,12 @@ strong {
     font-style: normal;
     user-select: none;
     outline: none;
-    transition: all var(--transition_time);
+    transition: background-color var(--transition_time) ease,
+    color var(--transition_time) ease,
+    border-color var(--transition_time) ease,
+    box-shadow var(--transition_time) ease,
+    opacity var(--transition_time) ease,
+    transform var(--transition_time) ease;
     animation-duration: var(--transition_time);
     position: relative;
     font-size: var(--font_default_size);
@@ -41,11 +66,31 @@ strong {
     font-style: normal;
     user-select: none;
     outline: none;
-    transition: all var(--transition_time);
+    transition: background-color var(--transition_time) ease,
+    color var(--transition_time) ease,
+    border-color var(--transition_time) ease,
+    box-shadow var(--transition_time) ease,
+    opacity var(--transition_time) ease,
+    transform var(--transition_time) ease;
     animation-duration: var(--transition_time);
     position: relative;
     font-size: var(--font_default_size);
     line-height: normal;
+}
+
+:root *:focus-visible:not(input):not(textarea):not(select):not([contenteditable="true"]) {
+    outline: var(--focus_outline);
+    outline-offset: var(--focus_outline_offset);
+}
+
+input,
+textarea,
+[contenteditable="true"],
+chui_editor_text_input,
+chui_console,
+chui_console_text,
+.chui_code {
+    user-select: text;
 }
 
 body {
@@ -327,8 +372,11 @@ route {
 }
 
 route:hover {
-    padding: var(--main_padding);
     background: var(--blue_prime_background);
+}
+
+route:active {
+    background: var(--element_background_prime);
 }
 
 route:hover route_title {
@@ -345,7 +393,6 @@ route_icon {
 }
 
 .route_active {
-    padding: var(--main_padding);
     background: var(--blue_prime_background);
     color: var(--text_color_hover);
 }
@@ -407,7 +454,9 @@ user_dropdown {
     margin-top: 45px;
     display: none;
     position: absolute;
-    background: var(--header_background_drop);
+    background: var(--header_background);
+    backdrop-filter: var(--global_blur);
+    -webkit-backdrop-filter: var(--global_blur);
     color: var(--text_color);
     border-radius: var(--border_radius);
     padding: var(--test_padding);
@@ -429,8 +478,6 @@ user_dropdown user_item {
 }
 
 user_dropdown user_item:hover {
-    background-color: #ddd;
-    padding: var(--main_padding);
     background: var(--blue_prime_background);
     color: var(--text_color_hover);
 }
@@ -469,6 +516,7 @@ header_button {
     margin: var(--margin) 0 var(--margin) var(--margin);
     font-size: var(--font_default_size);
     background: transparent;
+    color: var(--text_color);
     font-weight: 500;
     display: flex;
     flex-direction: row;
@@ -478,36 +526,6 @@ header_button {
 
 header_button header_button_title {
     color: var(--text_color);
-}
-
-header_button:hover {
-    background: var(--blue_prime_background);
-}
-
-header_button:hover header_button_title {
-    color: var(--text_color_hover);
-}
-
-header_button:hover chui_icon {
-    color: var(--text_color_hover);
-}
-
-/* chUiJS_HeaderButton */
-header_button {
-    cursor: pointer;
-    outline: none;
-    height: max-content;
-    width: max-content;
-    border: none;
-    border-radius: var(--border_radius);
-    padding: var(--main_padding);
-    margin: var(--margin) 0 var(--margin) var(--margin);
-    font-size: var(--font_default_size);
-    background: transparent;
-    color: var(--text_color);
-    font-weight: 500;
-    display: flex;
-    flex-direction: row;
 }
 
 header_button:hover {

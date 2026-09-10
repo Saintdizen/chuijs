@@ -2,7 +2,7 @@
     display: inline-block;
     width: 50px;
     height: 25px;
-    border-radius: 50px;
+    border-radius: var(--radius_pill);
     margin: var(--margin);
     background: var(--element_background);
     border: none;
@@ -54,9 +54,14 @@ input:checked + .slider:before {
 }
 
 .slider.round {
-    border-radius: 50px;
+    border-radius: var(--radius_pill);
 }
 
 .slider.round:before {
-    border-radius: 50px;
+    border-radius: var(--radius_circle);
+}
+
+.switch:has(input:focus-visible) {
+    outline: var(--focus_outline);
+    outline-offset: var(--focus_outline_offset);
 }

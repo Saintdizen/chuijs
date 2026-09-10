@@ -1,33 +1,38 @@
 canvas {
-    "background": "var(--main_background)",
-    "height": "max-content",
-    "width": "max-content",
-    "border-radius": "var(--border_radius)",
-    "margin": "var(--margin)",
+    background: var(--main_background);
+    height: max-content;
+    width: max-content;
+    border-radius: var(--border_radius);
+    margin: var(--margin);
 }
 
 chui_piechart {
-    "display": "flex",
-    "align-items": "center",
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 legends {
-    "margin": "15px"
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
 }
 
 legend {
-    "display": "flex",
-    "align-items": "center",
+    display: flex;
+    align-items: center;
+    margin: 2px 0;
 }
 
 legend_color {
-    "width": "20px",
-    "height": "20px",
-    "border-radius": "var(--border_radius)"
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    border-radius: var(--border_radius);
 }
 
 legend_label {
-    "color": "var(--text_color)",
-    "font-weight": "400",
-    "margin": "var(--margin)"
+    color: var(--text_color);
+    font-weight: 400;
+    margin: var(--margin);
 }

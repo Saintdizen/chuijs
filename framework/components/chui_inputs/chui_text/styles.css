@@ -1,7 +1,7 @@
 chui_text_input {
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: var(--control_width);
     height: max-content;
     margin: var(--margin)
 }
@@ -17,7 +17,6 @@ chui_text_main {
     align-items: center;
     position: relative;
     padding: var(--main_padding);
-    background: var(--element_background);
     border: 1px solid var(--border_color);
 }
 
@@ -52,7 +51,7 @@ error_message_text {
 }
 
 .error_border {
-    border: none;
+    border: 1px solid var(--red_prime_background);
 }
 
 /* DISABLED STYLES */

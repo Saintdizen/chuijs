@@ -3,7 +3,7 @@ chui_selectbox {
     flex-direction: column;
     height: max-content;
     margin: var(--margin);
-    width: 200px
+    width: var(--control_width)
 }
 
 selectbox {
@@ -36,7 +36,9 @@ selectbox {
 
 selectbox_dropdown {
     overflow: hidden hidden;
-    background: var(--element_background);
+    background: var(--header_background);
+    backdrop-filter: var(--global_blur);
+    -webkit-backdrop-filter: var(--global_blur);
     color: var(--text_color);
     outline: none;
     position:absolute;
@@ -72,8 +74,12 @@ selectbox_option {
 }
 
 selectbox_option:hover {
-    padding: var(--main_padding);
     background: var(--blue_prime_background);
+    color: var(--text_color_hover);
+}
+
+selectbox_option:active {
+    background: var(--element_background_prime);
     color: var(--text_color_hover);
 }
 

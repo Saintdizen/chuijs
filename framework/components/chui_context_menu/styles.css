@@ -1,4 +1,4 @@
-/* ── ContextMenu — стеклянное контекстное меню (макет) ────────────── */
+/* ── ContextMenu — контекстное меню ───────────────────────── */
 @keyframes context-scale-in {
     from {
         opacity: 0;
@@ -20,25 +20,38 @@
     }
 }
 
-chui_context_menu {
-    position: fixed;
-    z-index: 5000;
+/* Общая "стеклянная" поверхность меню и подменю (как у notification / menu_bar_dropdown) */
+chui_context_menu,
+context_menu_submenu {
     display: none;
     flex-direction: column;
     align-items: stretch;
     width: max-content;
     min-width: 180px;
     height: max-content;
-    padding: 6px;
-    background-color: var(--glass_background);
+    padding: var(--margin);
+    background-color: var(--header_background);
     color: var(--text_color);
-    border: 1px solid var(--glass_line);
-    border-radius: 14px;
-    box-shadow: var(--shadow_dropdown);
-    transform-origin: top left;
+    border: 1px solid var(--border_color);
+    border-radius: var(--border_radius);
+    box-shadow: var(--box_shadow_main);
     backdrop-filter: var(--global_blur);
     -webkit-backdrop-filter: var(--global_blur);
     font-size: var(--font_default_size);
+}
+
+chui_context_menu {
+    position: fixed;
+    z-index: 5000;
+    transform-origin: top left;
+}
+
+context_menu_submenu {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 100%;
+    transition: none;
 }
 
 context_menu_item {
@@ -49,19 +62,16 @@ context_menu_item {
     width: -webkit-fill-available;
     white-space: nowrap;
     cursor: pointer;
-    padding: 6px 8px;
-    border-radius: 8px;
+    padding: var(--main_padding);
+    border-radius: var(--border_radius);
     color: var(--text_color);
     gap: 6px;
     box-sizing: border-box;
 }
 
 context_menu_item:hover {
-    background: var(--fill_subtle);
-}
-
-context_menu_item:hover context_menu_item_title {
-    color: var(--text_color);
+    background: var(--blue_prime_background);
+    color: var(--text_color_hover);
 }
 
 context_menu_item_icon {
@@ -74,27 +84,14 @@ context_menu_item_icon {
 
 context_menu_item_icon chui_icon {
     font-size: 15px;
-    color: var(--text_color_tertiary);
-}
-
-context_menu_item:hover context_menu_item_icon chui_icon,
-context_menu_item:hover context_menu_item_arrow chui_icon {
-    color: var(--blue_prime_background);
+    color: inherit;
 }
 
 context_menu_item_title {
     display: block;
-    font-size: 13px;
+    font-size: var(--font_default_size);
     font-weight: 500;
-    color: var(--text_color_secondary);
-}
-
-context_menu_item_shortcut {
-    display: block;
-    margin-left: auto;
-    padding-left: 24px;
-    font-size: 12px;
-    color: var(--text_color_tertiary);
+    color: inherit;
 }
 
 context_menu_item_arrow {
@@ -107,38 +104,32 @@ context_menu_item_arrow {
 
 context_menu_item_arrow chui_icon {
     font-size: 14px;
-    color: var(--text_color_tertiary);
+    color: inherit;
 }
 
-context_menu_submenu {
-    position: absolute;
-    z-index: 10;
-    top: 0;
-    left: 100%;
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-    width: max-content;
-    min-width: 180px;
-    height: max-content;
-    padding: 6px;
-    background-color: var(--glass_background);
-    color: var(--text_color);
-    border: 1px solid var(--glass_line);
-    border-radius: 14px;
-    box-shadow: var(--shadow_dropdown);
-    backdrop-filter: var(--global_blur);
-    -webkit-backdrop-filter: var(--global_blur);
-    transition: none;
+context_menu_item:hover chui_icon {
+    color: var(--text_color_hover);
+}
+
+context_menu_item_shortcut {
+    display: block;
+    margin-left: auto;
+    padding-left: 24px;
+    font-size: var(--font_labels_size);
+    color: var(--text_color_disabled);
+}
+
+context_menu_item:hover context_menu_item_shortcut {
+    color: var(--text_color_hover_disable);
 }
 
 context_menu_separator {
     height: 1px;
     margin: 4px 6px;
-    background: var(--glass_line);
+    background: var(--border_color);
 }
 
-context_menu_item_disabled {
+.context_menu_item_disabled {
     cursor: default;
     opacity: 0.5;
     pointer-events: none;

@@ -48,6 +48,10 @@ details_button:hover {
     background: var(--blue_prime_background);
 }
 
+details_button:active {
+    background: var(--element_background_prime);
+}
+
 details_button:hover details_button_text {
     color: var(--text_color_hover);
 }

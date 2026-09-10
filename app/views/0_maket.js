@@ -409,12 +409,44 @@ class Maket extends Page {
     // MenuBar (в шапку страницы)
     // ----------------------------------------------------------
     #menuBar() {
+        const notify = (text) =>
+            new Notification({ title: "Меню", text, style: Notification.STYLE.SUCCESS, showTime: 3000 }).show();
+        const menuItem = (title, icon) =>
+            new Button({ title, icon, reverse: true, clickEvent: () => notify(title) });
+
         let menuBar = new MenuBar({ test: true });
         menuBar.addMenuItems(
-            new Button({ title: "Кнопка 1", clickEvent: () => Log.info("Кнопка 1") }),
+            new Button({ icon: Icons.NAVIGATION.MENU, clickEvent: () => notify("Главное меню") }),
             MenuBar.DROPDOWN({
-                title: "Меню",
-                items: [new Button({ title: "Пункт меню", clickEvent: () => Log.info("Пункт меню") })],
+                title: "Файл",
+                items: [
+                    menuItem("Создать", Icons.CONTENT.ADD),
+                    menuItem("Открыть", Icons.FILE.FOLDER_OPEN),
+                    menuItem("Сохранить", Icons.CONTENT.SAVE),
+                    menuItem("Экспорт", Icons.FILE.FILE_UPLOAD),
+                ],
+            }),
+            MenuBar.DROPDOWN({
+                title: "Правка",
+                items: [
+                    menuItem("Копировать", Icons.CONTENT.CONTENT_COPY),
+                    menuItem("Вставить", Icons.CONTENT.SEND),
+                    menuItem("Удалить", Icons.ACTIONS.DELETE),
+                ],
+            }),
+            MenuBar.DROPDOWN({
+                title: "Вид",
+                items: [
+                    menuItem("Обновить", Icons.ACTIONS.AUTORENEW),
+                    menuItem("Настройки", Icons.ACTIONS.SETTINGS),
+                ],
+            }),
+            MenuBar.DROPDOWN({
+                title: "Справка",
+                items: [
+                    menuItem("Справка", Icons.ACTIONS.HELP_OUTLINE),
+                    menuItem("О программе", Icons.ACTIONS.INFO),
+                ],
             })
         );
         this.setMenuBar(menuBar);

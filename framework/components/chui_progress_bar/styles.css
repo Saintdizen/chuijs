@@ -9,7 +9,7 @@ progress_block {
 }
 
 progress {
-    border-radius: 50px;
+    border-radius: var(--radius_pill);
     text-align: start;
     margin: var(--margin);
     width: -webkit-fill-available;
@@ -19,11 +19,11 @@ progress {
 
 progress::-webkit-progress-bar {
     background: var(--element_background);
-    border-radius: 50px;
+    border-radius: var(--radius_pill);
     border: none;
 }
 
 progress::-webkit-progress-value {
     background: var(--blue_prime_background);
-    border-radius: 50px;
+    border-radius: var(--radius_pill);
 }

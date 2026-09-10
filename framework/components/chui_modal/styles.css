@@ -9,8 +9,8 @@ chui_dialog {
     overflow: hidden;
     background-color: var(--modal_background);
     border: 1px solid var(--border_color);
-    border-radius: var(--border_radius);
-    box-shadow: var(--box_shadow_main);
+    border-radius: var(--radius_md);
+    box-shadow: var(--box_shadow_modal);
     margin: auto;
     flex-direction: column;
     padding: var(--test_padding);
