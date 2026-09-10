@@ -56,12 +56,8 @@ class DateInput {
                 if (event.target.parentNode === this.#date_main_block) {
                     this.#input.focus()
                     new Animation(this.#dropdown).fadeIn();
+                    window.addEventListener('click', this.#window_click_event);
                 }
-            }
-        });
-        window.addEventListener('click', (event) => {
-            if (!this.#date_main_block.contains(event.target)) {
-                new Animation(this.#dropdown).fadeOut();
             }
         });
         this.#date_main_block.appendChild(this.#input);
@@ -108,7 +104,7 @@ class DateInput {
                             date_day.addEventListener("click", () => {
                                 const selected = new Date(cal.getYear(), cal.getMonth(), Number(cell));
                                 this.#input.value = formatLocalDate(selected);
-                                new Animation(this.#dropdown).fadeOut();
+                                this.#closeDropdown();
                             });
                         }
                     } else {
@@ -167,6 +163,13 @@ class DateInput {
             this.#date_dropdown_open_disabled.remove();
             this.#date_main_block.appendChild(this.#date_dropdown_open);
         }
+    }
+    #window_click_event = (event) => {
+        if (!this.#date_main_block.contains(event.target)) this.#closeDropdown();
+    }
+    #closeDropdown() {
+        window.removeEventListener('click', this.#window_click_event);
+        new Animation(this.#dropdown).fadeOut();
     }
     set() { return this.#chui_date_input; }
 }

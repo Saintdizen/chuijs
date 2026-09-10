@@ -27,6 +27,7 @@ class Tabs {
     #id_list = require("randomstring").generate();
     #list = document.createElement('list');
     #content = document.createElement('content');
+    #animationend_event = () => this.#content.removeAttribute('style');
     constructor(options = { width: String(), default: Number(), tabs: [] }) {
         require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_Tabs');
         this.#tabzz = options.tabs;
@@ -45,7 +46,8 @@ class Tabs {
                     contentz.innerHTML = '';
                     for (let con of item.getContent()) this.#content.appendChild(con.set());
                     new Animation(this.#content).fadeIn();
-                    this.#content.addEventListener('animationend', () => this.#content.removeAttribute('style'));
+                    this.#content.removeEventListener('animationend', this.#animationend_event);
+                    this.#content.addEventListener('animationend', this.#animationend_event);
                 }
             })
             this.#list.appendChild(item.set());
@@ -63,7 +65,8 @@ class Tabs {
         for (let con of this.#tabzz[num].getContent()) {
             this.#content.appendChild(con.set())
             new Animation(this.#content).fadeIn();
-            this.#content.addEventListener('animationend', () => this.#content.removeAttribute('style'));
+            this.#content.removeEventListener('animationend', this.#animationend_event);
+            this.#content.addEventListener('animationend', this.#animationend_event);
         }
         this.#tabzz[num].getTab().setAttribute("active", true);
         this.#tabzz[num].getTab().classList.add("tab_active")

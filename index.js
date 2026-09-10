@@ -373,6 +373,7 @@ class Main {
                 setTimeout(async () => await this.#sendNotificationUpdateClose(), 3000);
                 Log.info("Обновление скачано!");
                 this.#window.webContents.send("checkUpdatesTrue", true, updates.versionInfo.version);
+                ipcMain.removeAllListeners("updateInstallConfirm");
                 ipcMain.on("updateInstallConfirm", (e, check) => {
                     if (check) {
                         Log.info("Установка обновления...");

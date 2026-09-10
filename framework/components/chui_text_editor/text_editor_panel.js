@@ -105,11 +105,7 @@ class TextEditorSelects {
                 this.#input.focus()
                 new Animation(this.#dropdown).fadeIn();
                 TextEditorSelects.#setOptionDisplay(document.getElementById(this.#id));
-            }
-        });
-        window.addEventListener('click', (event) => {
-            if (event.target.parentNode !== this.#Select_second) {
-                new Animation(this.#dropdown).fadeOut();
+                window.addEventListener('click', this.#window_click_event);
             }
         });
         this.#input.addEventListener('input', (event) => {
@@ -123,6 +119,12 @@ class TextEditorSelects {
             }
         });
         this.#Select_main.appendChild(this.#Select_second)
+    }
+    #window_click_event = (event) => {
+        if (event.target.parentNode !== this.#Select_second) {
+            window.removeEventListener('click', this.#window_click_event);
+            new Animation(this.#dropdown).fadeOut();
+        }
     }
     addOptionsFontSize(...options) {
         for (let opt of options) {

@@ -80,15 +80,10 @@ class MultiComboBox {
                     new Animation(this.#dropdown).fadeIn();
                     setOptionDisplay(document.getElementById(this.#id));
                     this.#setDropdownDirection();
+                    window.addEventListener('click', this.#window_click_event);
                 }
             }
         });
-        window.addEventListener('click', (event) => {
-            if (!this.#MultiComboBox_second.contains(event.target)) {
-                new Animation(this.#dropdown).fadeOut();
-            }
-        });
-
 
         this.#MultiComboBox_main.appendChild(this.#MultiComboBox_second)
     }
@@ -161,23 +156,8 @@ class MultiComboBox {
             }
             this.#dropdown.appendChild(section);
         }
-        this.#input.addEventListener('input', (event) => {
-            let dropdown = document.getElementById(this.#id);
-            for (let section of dropdown.childNodes) {
-                for (let option of section.childNodes) {
-                    let attr = option.getAttribute("option_title")
-                    if (attr) {
-                        if (!attr.toLowerCase().includes(event.target.value.toLowerCase())) {
-                            option.style.display = 'none'
-                            dropdown.style.height = 'max-content'
-                        } else {
-                            option.style.display = 'flex'
-                            dropdown.style.height = this.#dropdown_height
-                        }
-                    }
-                }
-            }
-        });
+        this.#input.removeEventListener('input', this.#filter_options_event);
+        this.#input.addEventListener('input', this.#filter_sections_event);
     }
     addOptions(...options) {
         for (let opt of options) {
@@ -233,22 +213,47 @@ class MultiComboBox {
             })
             this.#dropdown.appendChild(option);
         }
-        this.#input.addEventListener('input', (event) => {
-            let dropdown = document.getElementById(this.#id);
-            let query = event.target.value.toLowerCase();
-            for (let option of dropdown.childNodes) {
-                if (typeof option.getAttribute !== "function") continue;
-                let title = option.getAttribute('option_title');
-                if (title === null) continue;
-                if (!title.toLowerCase().includes(query)) {
-                    option.style.display = 'none'
-                    dropdown.style.height = 'max-content'
-                } else {
-                    option.style.display = 'flex'
-                    dropdown.style.height = this.#dropdown_height
+        this.#input.removeEventListener('input', this.#filter_sections_event);
+        this.#input.addEventListener('input', this.#filter_options_event);
+    }
+    #window_click_event = (event) => {
+        if (!this.#MultiComboBox_second.contains(event.target)) {
+            window.removeEventListener('click', this.#window_click_event);
+            new Animation(this.#dropdown).fadeOut();
+        }
+    }
+    #filter_sections_event = (event) => {
+        let dropdown = document.getElementById(this.#id);
+        for (let section of dropdown.childNodes) {
+            for (let option of section.childNodes) {
+                let attr = option.getAttribute("option_title")
+                if (attr) {
+                    if (!attr.toLowerCase().includes(event.target.value.toLowerCase())) {
+                        option.style.display = 'none'
+                        dropdown.style.height = 'max-content'
+                    } else {
+                        option.style.display = 'flex'
+                        dropdown.style.height = this.#dropdown_height
+                    }
                 }
             }
-        });
+        }
+    }
+    #filter_options_event = (event) => {
+        let dropdown = document.getElementById(this.#id);
+        let query = event.target.value.toLowerCase();
+        for (let option of dropdown.childNodes) {
+            if (typeof option.getAttribute !== "function") continue;
+            let title = option.getAttribute('option_title');
+            if (title === null) continue;
+            if (!title.toLowerCase().includes(query)) {
+                option.style.display = 'none'
+                dropdown.style.height = 'max-content'
+            } else {
+                option.style.display = 'flex'
+                dropdown.style.height = this.#dropdown_height
+            }
+        }
     }
     getName() { return this.#input.name; }
     getValue() { return this.#value }

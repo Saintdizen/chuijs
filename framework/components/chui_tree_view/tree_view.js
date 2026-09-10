@@ -35,6 +35,10 @@ class TreeView {
     static ExpandButton(options = { title: String(), subButtons: [], components: [] }) {
         let button = document.createElement('tree_view_button');
         let panel = document.createElement('tree_view_panel')
+        const transitionEndEvent = (event) => {
+            const target = event.currentTarget;
+            if (target.style.maxHeight) target.style.maxHeight = "max-content";
+        };
         button.addEventListener('click', (e) => {
             button.classList.toggle('tree_view_button_active')
             let panel = button.nextElementSibling;
@@ -52,9 +56,8 @@ class TreeView {
                     button.style.borderBottomLeftRadius = '0px';
                     button.style.borderBottomRightRadius = '0px';
                     panel.style.maxHeight = panel.scrollHeight + "px";
-                    panel.addEventListener('transitionend', () => {
-                        if (panel.style.maxHeight) panel.style.maxHeight = "max-content";
-                    });
+                    panel.removeEventListener('transitionend', transitionEndEvent);
+                    panel.addEventListener('transitionend', transitionEndEvent);
                 }, 1);
             }
         })

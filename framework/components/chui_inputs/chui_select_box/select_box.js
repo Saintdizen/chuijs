@@ -56,12 +56,7 @@ class Select {
                 new Animation(this.#dropdown).fadeIn();
                 setOptionDisplay(document.getElementById(this.#id));
                 this.#setDropdownDirection();
-            }
-        });
-        window.addEventListener('click', (event) => {
-            if (event.target.parentNode !== this.#Select_second) {
-                this.#setOpenState(false)
-                new Animation(this.#dropdown).fadeOut();
+                window.addEventListener('click', this.#window_click_event);
             }
         });
         this.#input.addEventListener('input', (event) => {
@@ -154,6 +149,14 @@ class Select {
             this.#button_open_disabled.remove();
             this.#Select_second.appendChild(this.#button_open);
         }
+    }
+    #window_click_event = (event) => {
+        if (event.target.parentNode !== this.#Select_second) this.#closeDropdown();
+    }
+    #closeDropdown() {
+        window.removeEventListener('click', this.#window_click_event);
+        this.#setOpenState(false);
+        new Animation(this.#dropdown).fadeOut();
     }
     #setOpenState(opened = Boolean()) {
         this.#button_open.style.transform = opened ? 'rotate(180deg)' : 'rotate(0deg)'

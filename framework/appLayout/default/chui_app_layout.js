@@ -65,6 +65,7 @@ class WindowControls {
     #close = document.createElement("wc_close")
     #maximize = document.createElement("wc_maximize")
     #minimize = document.createElement("wc_minimize")
+    #resizable_listener_bound = false
     constructor() {
         this.#close.innerHTML = new Icon(Icons.NAVIGATION.CLOSE, "16px").getHTML();
         this.#maximize.innerHTML = new Icon(Icons.CONTENT.ADD, "16px").getHTML();
@@ -92,7 +93,10 @@ class WindowControls {
             this.#box.appendChild(this.#maximize)
             this.#box.appendChild(this.#close)
         }
-        ipcRenderer.on("chui_resizable_false", (e) => this.#maximize.remove())
+        if (!this.#resizable_listener_bound) {
+            this.#resizable_listener_bound = true
+            ipcRenderer.on("chui_resizable_false", () => this.#maximize.remove())
+        }
         return this.#box;
     }
 }
@@ -551,19 +555,13 @@ class UserProfile {
         this.#user_main.appendChild(this.#user_dropdown)
         this.#user_button.addEventListener("click", () => {
             if (this.#user_dropdown.style.display === "flex") {
-                this.#user_button.classList.remove("user_button");
-                new Animation(this.#user_dropdown).fadeOut();
+                this.#closeDropdown();
             } else {
                 this.#user_button.classList.add("user_button");
                 new Animation(this.#user_dropdown).fadeIn();
+                window.addEventListener('click', this.#window_click_event);
             }
         })
-        window.addEventListener('click', (event) => {
-            if (event.target.parentNode !== this.#user_main) {
-                this.#user_button.classList.remove("user_button");
-                new Animation(this.#user_dropdown).fadeOut();
-            }
-        });
         //
         if (options.image !== undefined) {
             if (!options.image.noImage) {
@@ -578,6 +576,14 @@ class UserProfile {
         for (let item of options.items) this.#user_dropdown.appendChild(item);
     }
 
+    #window_click_event = (event) => {
+        if (event.target.parentNode !== this.#user_main) this.#closeDropdown();
+    }
+    #closeDropdown() {
+        window.removeEventListener('click', this.#window_click_event);
+        this.#user_button.classList.remove("user_button");
+        new Animation(this.#user_dropdown).fadeOut();
+    }
     set() {
         return this.#user_main;
     }
