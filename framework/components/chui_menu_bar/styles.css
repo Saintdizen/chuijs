@@ -1,92 +1,77 @@
-/* ── MenuBar — плоские пункты меню с hover-подложкой (макет) ─────── */
 chui_menu_bar_main {
     display: flex;
-    align-items: center;
-    gap: 2px;
     width: max-content;
     height: max-content;
     padding: 2px;
 }
 
-chui_menu_bar_button,
-menu_bar_drop_down_button {
+chui_menu_bar_button {
     cursor: pointer;
-    height: 30px;
-    box-sizing: border-box;
+    height: max-content;
     width: max-content;
-    border-radius: 8px;
-    padding: 0 11px;
-    margin: 0 1px;
-    font-size: 13px;
-    font-weight: 500;
+    border-radius: var(--border_radius);
+    padding: var(--main_padding);
+    font-size: var(--font_default_size);
+    font-weight: 400;
     border: none;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 6px;
     color: var(--text_color);
-    background: transparent;
-    transition: background 0.12s ease;
+    margin: 2px
 }
 
-chui_menu_bar_button:hover,
-menu_bar_drop_down_button:hover {
-    background: var(--fill_subtle_2);
-    color: var(--text_color);
+chui_menu_bar_button:hover {
+    background: var(--blue_prime_background);
+    color: var(--text_color_hover);
 }
 
 menu_bar_drop_down_main {
     position: relative;
     display: flex;
-    margin: 0;
-    padding: 0;
-    background: transparent;
+    margin: auto 6px
+}
+
+menu_bar_drop_down_button:hover {
+    background: var(--blue_prime_background);
+    color: var(--text_color_hover);
+}
+
+.menu_bar_drop_down_button {
+    background: var(--blue_prime_background);
+    color: var(--text_color_hover);
+}
+
+menu_bar_drop_down_button {
+    cursor: pointer;
+    height: max-content;
+    width: max-content;
+    border-radius: var(--border_radius);
+    padding: var(--main_padding);
+    font-size: var(--font_default_size);
+    font-weight: 400;
     border: none;
-}
-
-.menu_bar_drop_down_button,
-menu_bar_drop_down_button.menu_bar_drop_down_button {
-    background: var(--accent_soft);
-    color: var(--blue_prime_background);
-}
-
-.menu_bar_drop_down_button:hover,
-menu_bar_drop_down_button.menu_bar_drop_down_button:hover {
-    background: var(--accent_soft);
-    color: var(--blue_prime_background);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: var(--text_color);
 }
 
 menu_bar_dropdown {
+    margin-top: 45px;
     display: none;
     position: absolute;
-    top: calc(100% + 6px);
-    left: 0;
-    z-index: 1000;
-    min-width: max-content;
+    background: var(--header_background);
+    color: var(--text_color);
+    border: none;
+    border-radius: var(--border_radius);
     padding: 6px;
+    z-index: 1;
+    left: 0;
+    min-width: max-content;
     flex-direction: column;
-    background-color: var(--glass_background);
     backdrop-filter: var(--global_blur);
-    -webkit-backdrop-filter: var(--global_blur);
-    color: var(--text_color);
-    border: 1px solid var(--glass_line);
-    border-radius: 14px;
-    box-shadow: var(--shadow_dropdown);
-    overflow: hidden;
-}
-
-menu_bar_dropdown chui_button {
-    margin: 0;
-}
-
-menu_bar_dropdown button.chui_button {
-    background: transparent;
-    color: var(--text_color);
-    box-shadow: none;
-}
-
-menu_bar_dropdown button.chui_button:hover {
-    background: var(--fill_subtle_2);
-    color: var(--text_color);
+    box-shadow: var(--box_shadow_main);
 }

@@ -1,19 +1,12 @@
-/* ── Label — подпись-текст (макет) ─────────────────────────────────── */
 chui_label {
     height: max-content;
     width: max-content;
     margin: var(--margin);
-    font-size: 13px;
-    font-weight: 600;
+    font-size: var(--font_default_size);
+    font-weight:500;
     color: var(--text_color);
-    line-height: 1.4;
-    user-select: text;
 }
 
 chui_label p {
     margin: 0;
-}
-
-chui_label p strong {
-    font-weight: 700;
 }

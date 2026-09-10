@@ -1,58 +1,33 @@
-/* ── Table — плоская таблица: только тонкие разделители строк (макет) ── */
 table {
+    border: 1px solid var(--element_background);
+    border-radius: var(--border_radius);
+    margin: var(--margin);
     display: grid;
     width: inherit;
     height: max-content;
-    margin: var(--margin);
-    overflow: auto;
-    border: none;
-    border-radius: 10px;
-    color: var(--text_color);
-    font-size: 13px;
-    font-variant-numeric: tabular-nums;
-    background: transparent;
+    overflow: auto
 }
 
 thead {
-    display: block;
-    width: 100%;
+    background: var(--element_background);
+    font-weight: 500;
     height: max-content;
-}
-
-thead tr {
-    border-bottom: 1px solid var(--glass_line);
-}
-
-thead td {
-    color: var(--text_color_disabled);
-    font-size: 10.5px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    width: 100%
 }
 
 tbody {
-    display: block;
-    width: 100%;
-    height: max-content;
     overflow: visible;
-}
-
-tbody tr {
-    border-bottom: 1px solid var(--glass_line);
-}
-
-tbody tr:last-child {
-    border-bottom: none;
+    height: max-content;
+    width: 100%
 }
 
 tr {
     display: grid;
-    grid-row-start: 1;
-    grid-row-end: 3;
-    width: 100%;
     height: max-content;
+    width: 100%;
     margin: 0;
+    grid-row-start: 1;
+    grid-row-end: 3
 }
 
 td {
@@ -60,24 +35,9 @@ td {
     white-space: break-spaces;
     word-break: break-all;
     align-items: center;
-    padding: 7px 10px;
-    line-height: 1.35;
+    padding: var(--main_padding);
 }
 
-cell_title {
-    color: var(--text_color_disabled);
-    font-weight: 600;
-    letter-spacing: 0.05em;
-}
-
-sort_button {
+cell_title, sort_button {
     color: var(--blue_prime_background);
-    display: flex;
-    align-items: center;
-    margin-left: 8px;
-    cursor: pointer;
-}
-
-sort_button chui_icon {
-    font-size: 16px;
 }

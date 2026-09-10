@@ -1,18 +1,7 @@
-/* ── Paragraph — плоский абзац текста (макет) ─────────────────────── */
 p {
-    box-sizing: border-box;
-    width: -webkit-fill-available;
-    max-width: 100%;
     height: max-content;
-    margin: var(--margin);
-    color: var(--text_color_secondary);
-    font-size: 13px;
-    line-height: 1.5;
-    letter-spacing: 0.01em;
-}
-
-p b,
-p strong {
+    width: max-content;
     color: var(--text_color);
-    font-weight: 600;
+    margin: var(--margin);
+    font-size: var(--font_default_size);
 }

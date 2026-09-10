@@ -1,64 +1,59 @@
-const { Animation } = require("../../modules/chui_animations/animations");
+const {Animation} = require('../../modules/chui_animations/animations');
 
 class Dialog {
     #id = require("randomstring").generate();
     #dialog = document.createElement(`chui_dialog`);
-    #header = document.createElement("dialog_header");
-    #body = document.createElement("dialog_body");
-    #footer = document.createElement("dialog_footer");
+    #header = document.createElement('dialog_header');
+    #body = document.createElement('dialog_body');
+    #footer = document.createElement('dialog_footer');
     //
     #width = undefined;
     #height = undefined;
     isOpen = false;
 
-    constructor(
-        options = {
-            width: String(),
-            height: String(),
-            closeOutSideClick: false,
-        }
-    ) {
-        require("../../modules/chui_functions").setStyles(__dirname + "/styles.css", "chUiJS_Dialogs");
-        this.#dialog.id = this.#id;
+    constructor(options = {
+        width: String(),
+        height: String(),
+        closeOutSideClick: false
+    }) {
+
+        require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_Dialogs');
+        this.#dialog.id = this.#id
 
         if (options.width === undefined) {
             this.#width = "max-content";
             this.#dialog.style.width = "max-content";
         } else {
-            this.#width = options.width;
+            this.#width = options.width
             this.#dialog.style.width = options.width;
         }
         if (options.height === undefined) {
             this.#height = "max-content";
             this.#dialog.style.height = "max-content";
         } else {
-            this.#height = options.height;
+            this.#height = options.height
             this.#dialog.style.height = options.height;
         }
 
         if (options.closeOutSideClick) {
             this.#dialog.addEventListener("animationend", (evt) => {
-                if (evt.animationName === "fade-in") window.addEventListener("click", this.#closeOutsideEvent);
-            });
+                if (evt.animationName === "fade-in") window.addEventListener('click', this.#closeOutsideEvent)
+            })
         }
         //ADDS
-        this.#dialog.appendChild(this.#body);
+        this.#dialog.appendChild(this.#body)
     }
 
     #closeOutsideEvent = (event) => {
         const dialog = document.getElementById(this.#id);
         if (!dialog.contains(event.target)) {
-            window.removeEventListener("click", this.#closeOutsideEvent);
-            this.close();
+            window.removeEventListener("click", this.#closeOutsideEvent)
+            this.close()
         }
-    };
-
-    #resizeHandler = (event) => {
-        this.#setCenter(document.getElementById(this.#id), event.currentTarget);
-    };
+    }
 
     addToHeader(...components) {
-        this.#dialog.insertBefore(this.#header, this.#body);
+        this.#dialog.insertBefore(this.#header, this.#body)
         for (let component of components) this.#header.appendChild(component.set());
     }
 
@@ -67,7 +62,7 @@ class Dialog {
     }
 
     addToFooter(...components) {
-        this.#dialog.appendChild(this.#footer);
+        this.#dialog.appendChild(this.#footer)
         for (let component of components) this.#footer.appendChild(component.set());
     }
 
@@ -84,7 +79,7 @@ class Dialog {
     }
 
     open() {
-        this.isOpen = true;
+        this.isOpen = true
         const dialog = document.getElementById(this.#id);
         // if (this.#width === "-webkit-fill-available" && this.#height === "-webkit-fill-available") {
         //     dialog.style.top = "0"
@@ -96,23 +91,22 @@ class Dialog {
         //     this.#setCenter(dialog, window)
         // }
 
-        window.addEventListener("resize", this.#resizeHandler);
+        window.addEventListener("resize", (event) => this.#setCenter(dialog, event.currentTarget))
         new Animation(dialog).fadeIn();
-        this.#setCenter(dialog, window);
+        this.#setCenter(dialog, window)
     }
 
     openAndClose() {
         if (!this.isOpen) {
-            this.open();
+            this.open()
         } else {
-            this.close();
+            this.close()
         }
     }
 
     close() {
-        window.removeEventListener("click", this.#closeOutsideEvent);
-        window.removeEventListener("resize", this.#resizeHandler);
-        this.isOpen = false;
+        window.removeEventListener("click", this.#closeOutsideEvent)
+        this.isOpen = false
         const dialog = document.getElementById(this.#id);
         new Animation(dialog).fadeOut();
     }
@@ -123,20 +117,20 @@ class Dialog {
 
     #setCenter(element, window) {
         // Ширина
-        const width = parseInt(window.getComputedStyle(element).width) + "px";
+        const width = parseInt(window.getComputedStyle(element).width) + "px"
         if (element.style.width === "-webkit-fill-available") {
-            element.style.left = "0";
+            element.style.left = "0"
         } else {
             element.style.left = `calc(100% / 2 - ${width} / 2)`;
         }
         // Высота
-        const height = parseInt(window.getComputedStyle(element).height) + "px";
+        const height = parseInt(window.getComputedStyle(element).height) + "px"
         if (element.style.height === "-webkit-fill-available") {
-            element.style.top = "0";
+            element.style.top = "0"
         } else {
             element.style.top = `calc(100% / 2 - ${height} / 2)`;
         }
     }
 }
 
-exports.Dialog = Dialog;
+exports.Dialog = Dialog

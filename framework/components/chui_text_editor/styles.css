@@ -1,73 +1,58 @@
-/* ── TextEditor — rich-редактор, плоский тулбар (макет) ───────────── */
 chui_text_editor_test {
     display: flex;
     flex-direction: column;
     width: -webkit-fill-available;
     height: max-content;
-    margin: var(--margin);
-    box-sizing: border-box;
+    margin: var(--margin)
 }
 
 chui_text_editor {
-    box-sizing: border-box;
-    border-radius: 12px;
+    border-radius: var(--border_radius);
     display: flex;
     flex-direction: column;
-    background: var(--input_background);
-    border: 1px solid var(--glass_line);
+    background: var(--element_background);
+    border: 1px solid var(--border_main);
     width: -webkit-fill-available;
-    overflow: hidden;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-chui_text_editor:focus-within {
-    border-color: var(--blue_prime_background);
-    box-shadow: 0 0 0 4px var(--input_ring);
+    border: 1px solid var(--border_color);
 }
 
 chui_editor_controls {
     width: -webkit-fill-available;
     display: flex;
-    padding: 4px 6px;
-    border-bottom: 1px solid var(--glass_line);
-    background: var(--input_background);
+    padding: 6px
 }
 
 chui_editor_text_input {
-    display: block;
     width: -webkit-fill-available;
-    min-height: 60px;
-    font-size: 14px;
-    line-height: 1.55;
-    padding: 8px 12px 12px;
-    color: var(--text_color);
-    outline: none;
+    font-size: var(--font_default_size);
+    padding: 0 10px 6px 10px;
+    height: calc(100% - 40px);
+    overflow: overlay;
     text-align: start;
-    overflow: auto;
+    color: var(--text_color);
 }
 
 chui_editor_text_input div {
-    margin-bottom: 10px;
+    margin-bottom: 10px
 }
 
 chui_editor_status_row {
     width: -webkit-fill-available;
     display: flex;
-    padding: 6px;
+    padding: 6px
 }
 
 .text_editor_label {
     height: max-content;
     width: max-content;
-    margin: 0 0 5px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    color: var(--input_label);
+    margin: var(--margin);
+    font-size: var(--font_labels_size);
+    font-weight:500;
+    color: var(--text_color)
 }
 
 chui_editor_text_input p {
-    margin: 5px 0;
+    margin: 5px 0
 }
 
 p img {
@@ -75,204 +60,159 @@ p img {
     padding: 0;
     width: auto;
     height: auto;
-    border: 2px solid transparent;
-    border-radius: 10px;
+    border:  2px solid transparent;
+    border-radius: var(--border_radius)
 }
 
-/* ── Кнопки тулбара ── */
+/* chUiJS_TextEditorButtons */
 chui_button_format {
     height: max-content;
     width: max-content;
-    border-radius: 7px;
-    padding: 5px;
-    margin: 0 1px;
-    font-size: 12px;
+    border-radius: var(--border_radius);
+    padding: 6px;
+    margin: 0 3px;
+    font-size: 11pt;
     font-weight: 500;
-    color: var(--text_color_secondary);
-    cursor: pointer;
-    transition: background 0.12s ease, color 0.12s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    color: var(--text_color)
 }
 
 chui_button_format:hover {
-    background: var(--fill_subtle_2);
+    background: var(--blue_prime_background);
+}
+
+/* chUiJS_TextEditorSelects */
+chui_text_editor_select_box {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    height: max-content;
+    width: auto
+}
+
+text_editor_select_box {
+    position: relative;
+    display:flex;
+    outline: none;
+    height: max-content;
+    width: -webkit-fill-available;
+    border-radius: var(--border_radius);
+    padding: 0;
+    margin: 0 3px;
+    font-size: var(--font_default_size);
     color: var(--text_color);
 }
 
-chui_button_format:active {
-    transform: scale(0.95);
+text_editor_select_box:hover {
+    background: var(--blue_prime_background);
 }
 
-/* ── Панель тулбара ── */
+.text_editor_selectbox_input {
+    width:100%;
+    display: block;
+    outline: none;
+    margin: 0;
+    padding: 6px 0 6px 6px;
+    background: transparent;
+    color: var(--text_color);
+    text-align: start;
+    border: none;
+    font-size: var(--font_default_size);
+}
+
+text_editor_div_value {
+    width:100%;
+    display: block;
+    outline: none;
+    margin: 0;
+    padding: 6px 0 6px 6px;
+    background: transparent;
+    color: var(--text_color);
+    text-align: start;
+    border: none;
+    font-size: var(--font_default_size);
+}
+
+text_editor_selectbox_dropdown {
+    overflow: overlay;
+    background: var(--element_background);
+    color: var(--text_color);
+    outline: none;
+    position:absolute;
+    display:none;
+    height: max-content;
+    width: max-content;
+    border-radius: var(--border_radius);
+    margin-top: 0;
+    padding: 6px;
+    font-size: var(--font_default_size);
+    flex-direction: column;
+    z-index: 1;
+    border: 1px solid var(--border_main);
+    box-shadow: 0 2px 10px 2px rgb(0 0 0 / 25%);
+}
+
+text_editor_select_button_open {
+    outline: none;
+    padding: 6px 6px 6px 3px;
+}
+
+text_editor_selectbox_option {
+    text-align: start;
+    padding: 6px 12px;
+    border-radius: var(--border_radius)
+}
+
+text_editor_selectbox_option:hover {
+    background: var(--blue_prime_background)
+}
+
+text_editor_selectbox_option:hover font {
+    color: var(--text_color_hover);
+    text-shadow: var(--text_shadow_hover);
+}
+
+/* chUiJS_TextEditorPanel */
 text_editor_panel {
     height: max-content;
     width: -webkit-fill-available;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 2px;
+    justify-content: center;
+    align-items: center
 }
 
 text_editor_block {
     height: max-content;
     width: max-content;
     display: flex;
-    align-items: center;
 }
 
-text_editor_block:not(:last-child)::after {
-    content: "";
-    width: 1px;
-    height: 18px;
-    background: var(--glass_line);
-    margin: 0 5px;
-}
-
-/* ── Селекты тулбара ── */
-chui_text_editor_select_box {
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
-    height: max-content;
-    width: auto;
-}
-
-text_editor_select_box {
-    position: relative;
-    display: flex;
-    align-items: center;
-    outline: none;
-    height: 28px;
-    width: max-content;
-    border-radius: 7px;
-    padding: 0 4px 0 6px;
-    margin: 0 2px;
-    font-size: var(--font_default_size);
-    color: var(--text_color);
-    cursor: pointer;
-    transition: background 0.12s ease;
-}
-
-text_editor_select_box:hover {
-    background: var(--fill_subtle);
-}
-
-.text_editor_selectbox_input {
-    display: none;
-}
-
-text_editor_div_value {
-    display: flex;
-    align-items: center;
-    outline: none;
-    margin: 0;
-    padding: 0;
-    background: transparent;
-    color: var(--text_color_secondary);
-    text-align: start;
-    border: none;
-    font-size: 12px;
-}
-
-text_editor_selectbox_dropdown {
-    overflow-y: auto;
-    background-color: var(--glass_background);
-    backdrop-filter: var(--global_blur);
-    -webkit-backdrop-filter: var(--global_blur);
-    color: var(--text_color);
-    outline: none;
-    position: absolute;
-    display: none;
-    height: max-content;
-    width: max-content;
-    min-width: 140px;
-    border-radius: 12px;
-    margin-top: 0;
-    top: calc(100% + 5px);
-    left: 0;
-    padding: 5px;
-    font-size: var(--font_default_size);
-    flex-direction: column;
-    z-index: 1000;
-    border: 1px solid var(--glass_line);
-    box-shadow: var(--shadow_dropdown);
-}
-
-text_editor_select_button_open {
-    outline: none;
-    display: inline-flex;
-    align-items: center;
-    color: var(--text_color_tertiary);
-    padding: 0 2px 0 4px;
-}
-
-text_editor_selectbox_option {
-    text-align: start;
-    padding: 6px 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    color: var(--text_color);
-    font-size: 13px;
-}
-
-text_editor_selectbox_option:hover {
-    background: var(--fill_subtle_2);
-}
-
-text_editor_selectbox_option:hover font {
-    color: var(--text_color);
-}
-
-text_editor_selectbox_option font,
-text_editor_selectbox_option h1,
-text_editor_selectbox_option h2,
-text_editor_selectbox_option h3,
-text_editor_selectbox_option h4,
-text_editor_selectbox_option h5,
-text_editor_selectbox_option h6,
-text_editor_selectbox_option pre,
-text_editor_selectbox_option p {
-    pointer-events: none;
-}
-
-/* ── Таблица внутри редактора ── */
 .text_editor_table {
     display: table;
     border-radius: 0;
     width: -webkit-fill-available;
     border-collapse: collapse;
-    border: 1px solid var(--glass_line);
+    border: 1px solid var(--blue_prime_background);
 }
 
 .text_editor_table_body {
-    border: 1px solid var(--glass_line);
-    width: auto;
+    border: 1px solid var(--blue_prime_background);
+    width: auto
 }
 
 .text_editor_table_row {
     width: auto;
-    display: table-row;
+    display: table-row
 }
 
 .text_editor_table_cell {
     height: max-content;
     width: auto;
     display: table-cell;
-    border: 1px solid var(--glass_line);
-    padding: 4px 8px;
-    font-size: 13px;
+    border: 1px solid var(--blue_prime_background)
 }
 
 pre {
-    font-family: ui-monospace, Menlo, Consolas, monospace;
-    font-weight: 400;
-    font-size: 12.5px;
-    line-height: 1.5;
-    background: var(--input_background);
-    border-radius: 8px;
-    padding: 8px 10px;
-    white-space: pre-wrap;
+    font-family: 'chui_mono';
+    font-weight: 400
 }

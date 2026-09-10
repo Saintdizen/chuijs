@@ -1,26 +1,23 @@
-/* ── Console — терминал ── */
 chui_console {
-    box-sizing: border-box;
     height: max-content;
     width: max-content;
-    min-width: 240px;
-    max-width: 100%;
     margin: var(--margin);
-    padding: 12px 12px 8px;
-    background: rgb(17, 17, 17);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    font-family: ui-monospace, Menlo, Consolas, monospace;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 1.6;
-    color: var(--green_prime_background);
+    font-size: var(--font_default_size);
+    font-weight: 500;
+    color: var(--text_color);
+    white-space: break-spaces;
+    word-wrap: break-word;
+    font-family: monospace;
+    user-select: text;
+    border: 1px solid var(--border_color);
+    padding: var(--test_padding);
+    border-radius: var(--border_radius);
+
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
+    align-items: start;
+    justify-content: start;
     overflow: auto;
-    user-select: text;
 }
 
 chui_console_text {
@@ -29,7 +26,7 @@ chui_console_text {
     width: -webkit-fill-available;
     white-space: break-spaces;
     word-wrap: break-word;
-    padding: 2px 0;
+    padding: var(--test_padding);
     text-align: start;
     user-select: text;
 }

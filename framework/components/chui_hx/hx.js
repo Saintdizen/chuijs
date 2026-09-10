@@ -1,8 +1,8 @@
 class H {
     #h = undefined;
     constructor(num = Number(), text = String()) {
-        require("../../modules/chui_functions").setStyles(__dirname + "/styles.css", "chUiJS_HX");
-        this.#h = document.createElement(`h${num}`);
+        require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_HX');
+        this.#h = document.createElement(`h${num}`)
         this.#h.innerText = text;
     }
     setText(text = String()) {
@@ -13,4 +13,4 @@ class H {
     }
 }
 
-exports.H = H;
+exports.H = H

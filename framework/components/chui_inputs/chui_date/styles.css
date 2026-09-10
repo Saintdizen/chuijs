@@ -1,4 +1,9 @@
-/* ── DateInput — flat-поле даты с календарём (макет) ──────────────── */
+date_input_controls {
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
 chui_date_input {
     display: flex;
     flex-direction: column;
@@ -7,165 +12,118 @@ chui_date_input {
     margin: var(--margin);
 }
 
-.date_input_label {
-    height: max-content;
-    width: max-content;
-    margin: 0 0 5px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    color: var(--input_label);
+::-webkit-calendar-picker-indicator {
+    display: none
 }
 
-.date_input_label_disabled {
-    color: var(--text_color_disabled);
-}
-
-date_main_block {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 40px;
-    width: max-content;
-    background: var(--field_background);
-    border: 1px solid var(--field_border);
-    border-radius: 8px;
-    color: var(--text_color);
-    box-shadow: var(--field_inset);
-    transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-}
-
-date_main_block:hover {
-    border-color: var(--field_border_hover);
-    background: var(--field_hover_background);
-}
-
-date_main_block:focus-within,
-date_main_block.date_open {
-    border-color: var(--blue_prime_background);
-    box-shadow: 0 0 0 4px var(--input_ring);
-}
-
-date_main_block.date_open label {
-    color: var(--blue_prime_background);
-}
-
-.date_main_block_disabled {
-    cursor: not-allowed;
-    background: var(--field_background_disabled);
-}
-
-.date_input {
-    cursor: pointer;
-    height: 100%;
-    width: 150px;
-    display: block;
-    text-align: center;
-    margin: 0;
-    padding: 0 0 0 10px;
-    background: transparent;
-    color: var(--text_color);
-    border: none;
-    outline: none;
-    font-size: var(--font_default_size);
-}
-
-.date_input::-webkit-calendar-picker-indicator {
-    display: none;
-}
-
-.date_input:disabled {
-    cursor: not-allowed;
-    color: var(--text_color_disabled);
-}
-
-date_dropdown_open {
-    cursor: pointer;
-    flex: none;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 34px;
-    height: 30px;
-    margin-right: 4px;
-    border-radius: 8px;
-    color: var(--blue_prime_background);
-}
-
-date_dropdown_open:hover {
-    background: var(--chip_background);
+::-webkit-datetime-edit-text {
+    padding: 0;
+    width: 100%
 }
 
 date_select_dropdown {
     display: none;
     flex-direction: column;
-    position: absolute;
-    top: calc(100% + 5px);
-    left: 0;
-    z-index: 1000;
-    min-width: 246px;
-    width: max-content;
-    padding: 8px;
-    background-color: var(--glass_background);
-    backdrop-filter: var(--global_blur);
-    -webkit-backdrop-filter: var(--global_blur);
-    border: 1px solid var(--glass_line);
-    border-radius: 12px;
-    box-shadow: var(--shadow_dropdown);
+    color: var(--text_color);
+    padding: var(--test_padding);
+    background: var(--element_background);
+    border: 1px solid var(--border_color);
+    border-radius: var(--border_radius);
+    position:absolute;
+    top: -2px;
+    left: -2px;
+    z-index: 1;
+    box-shadow: var(--box_shadow_main);
 }
 
-date_dropdown_controls {
+date_week {
     display: flex;
-    flex-direction: row;
-    gap: 6px;
-    margin-bottom: 6px;
-}
-
-date_grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
-    width: 100%;
-}
-
-date_week_day {
-    padding: 4px 0;
-    text-align: center;
-    font-size: 10.5px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    color: var(--text_color_tertiary);
 }
 
 date_day {
     cursor: pointer;
-    height: 28px;
-    padding: 0;
-    display: grid;
-    place-items: center;
-    text-align: center;
-    border-radius: 8px;
-    color: var(--text_color);
-    font-size: 13px;
-    transition: background 0.1s ease, color 0.1s ease;
+    display: block;
+    width: 20px;
+    border-radius: var(--border_radius);
+    padding: var(--test_padding);
+    text-align: center
 }
 
-date_day:hover {
-    background: var(--fill_subtle_2);
-}
-
-date_day.date_day_today {
-    box-shadow: inset 0 0 0 1px var(--blue_prime_background);
-    font-weight: 500;
-}
-
-date_day.date_day_selected {
+.date_day:hover {
     background: var(--blue_prime_background);
     color: var(--text_color_hover);
-    font-weight: 500;
 }
 
-date_day_empty {
-    pointer-events: none;
+date_dropdown_open {
+    cursor: pointer;
+    padding: var(--test_padding) 10px var(--test_padding) 0;
+    height: auto;
+    margin: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--badge_cancel_text)
+}
+
+date_main_block {
+    height: max-content;
+    width: max-content;
+    border-radius: var(--border_radius);
+    font-size: var(--font_default_size);
+    color: var(--text_color);
+    position: relative;
+    display: flex;
+    background: var(--element_background);
+    border: 1px solid var(--border_color);
+}
+
+.date_input {
+    width:100%;
+    display: block;
+    text-align: center;
+    margin: 0;
+    padding: var(--test_padding) 0;
+    background: transparent;
+    color: var(--text_color);
+    border: none;
+    font-size: var(--font_default_size);
+}
+
+.date_input_label {
+    height: max-content;
+    width: max-content;
+    margin: var(--margin);
+    font-size: var(--font_labels_size);
+    font-weight:500;
+    color: var(--text_color)
+}
+
+/* DISABLED STYLES */
+.date_main_block_disabled {
+    cursor: not-allowed;
+    background: var(--element_background_disabled);
+    border: 1px solid var(--border_color);
+}
+
+.date_input_label_disabled {
+    cursor: not-allowed;
+    color: var(--text_color_disabled);
+    height: max-content;
+    width: max-content;
+    margin: var(--margin);
+    font-size: var(--font_labels_size);
+    font-weight:500
+}
+
+.date_input_disabled {
+    cursor: not-allowed;
+    color: var(--text_color_disabled);
+    width:100%;
+    display: block;
+    text-align: center;
+    margin: 0;
+    padding: var(--test_padding) 0;
+    background: transparent;
+    border: none;
+    font-size: var(--font_default_size);
 }

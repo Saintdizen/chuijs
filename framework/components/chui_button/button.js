@@ -1,26 +1,23 @@
-const { Icon } = require("../chui_icons/icons");
+const {Icon} = require("../chui_icons/icons");
 
 class Button {
-    #chui_button = document.createElement("chui_button");
-    #button = document.createElement("button");
-    #button_text = document.createElement("button_text");
-    #button_icon = document.createElement("button_icon");
+    #chui_button = document.createElement('chui_button');
+    #button = document.createElement('button');
+    #button_text = document.createElement('button_text');
+    #button_icon = document.createElement('button_icon');
     constructor(options = { reverse: Boolean(), title: String(), icon: undefined, clickEvent: () => {} }) {
-        require("../../modules/chui_functions").setStyles(__dirname + "/styles.css", "chUiJS_Button");
+        require('../../modules/chui_functions').setStyles(__dirname + "/styles.css", "chUiJS_Button")
 
-        this.#button.className = "chui_button";
-        this.#button_text.className = "chui_button_text";
-
-        if (options.style !== undefined) this.#button.classList.add(options.style);
+        this.#button.className = "chui_button"
+        this.#button_text.className = "chui_button_text"
 
         if (options.title !== undefined) this.#button_text.innerText = options.title;
-        if (options.icon !== undefined)
-            this.#button_icon.innerHTML = new Icon(options.icon, "var(--header_icon_size)").getHTML();
+        if (options.icon !== undefined) this.#button_icon.innerHTML = new Icon(options.icon, "var(--header_icon_size)").getHTML();
 
         if (options.title !== undefined && options.icon === undefined) {
             this.#button.appendChild(this.#button_text);
         } else if (options.title === undefined && options.icon !== undefined) {
-            this.#button.style.padding = "var(--test_padding)";
+            this.#button.style.padding = "var(--test_padding)"
             this.#button.appendChild(this.#button_icon);
         } else {
             if (options.reverse) {
@@ -34,33 +31,19 @@ class Button {
             }
         }
 
-        if (options.clickEvent !== undefined) this.#button.addEventListener("click", options.clickEvent);
+        if (options.clickEvent !== undefined) this.#button.addEventListener('click', options.clickEvent);
         this.#button.addEventListener("mousedown", () => {
-            return false;
-        });
-        this.#chui_button.appendChild(this.#button);
+            return false
+        })
+        this.#chui_button.appendChild(this.#button)
     }
-    getText() {
-        return this.#button.innerText;
-    }
-    setText(text = String()) {
-        this.#button.innerText = text;
-    }
-    addClickListener(listener = () => {}) {
-        this.#button.addEventListener("click", listener);
-    }
+    getText() { return this.#button.innerText; }
+    setText(text = String()) { this.#button.innerText = text; }
+    addClickListener(listener = () => {}) { this.#button.addEventListener('click', listener); }
     setDisabled(boolean = Boolean()) {
-        this.#button.disabled = boolean;
+        this.#button.disabled = boolean
     }
-    set() {
-        return this.#chui_button;
-    }
-
-    static STYLE = {
-        PRIMARY: "chui_button_primary",
-        SECONDARY: "chui_button_secondary",
-        DANGER: "chui_button_danger",
-    };
+    set() { return this.#chui_button; }
 }
 
-exports.Button = Button;
+exports.Button = Button

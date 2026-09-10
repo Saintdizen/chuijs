@@ -1,53 +1,33 @@
-/* ── Graphs — плоские графики (макет) ─────────────────────────────── */
 canvas {
-    display: block;
-    height: max-content;
-    width: max-content;
-    border-radius: 12px;
-    margin: var(--margin);
+    "background": "var(--main_background)",
+    "height": "max-content",
+    "width": "max-content",
+    "border-radius": "var(--border_radius)",
+    "margin": "var(--margin)",
 }
 
 chui_piechart {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 4px;
-    width: max-content;
-    height: max-content;
-    margin: var(--margin);
-}
-
-chui_piechart canvas {
-    margin: 0;
+    "display": "flex",
+    "align-items": "center",
 }
 
 legends {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin: 0 0 0 16px;
+    "margin": "15px"
 }
 
-legends legend {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 0;
-    padding: 0;
-    width: max-content;
+legend {
+    "display": "flex",
+    "align-items": "center",
 }
 
-legends legend_color {
-    width: 12px;
-    height: 12px;
-    flex: none;
-    border-radius: 4px;
+legend_color {
+    "width": "20px",
+    "height": "20px",
+    "border-radius": "var(--border_radius)"
 }
 
-legends legend_label {
-    color: var(--text_color_secondary);
-    font-size: 12.5px;
-    font-weight: 400;
-    margin: 0;
-    white-space: nowrap;
+legend_label {
+    "color": "var(--text_color)",
+    "font-weight": "400",
+    "margin": "var(--margin)"
 }

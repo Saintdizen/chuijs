@@ -1,24 +1,23 @@
-let { Animation } = require("../chui_animations/animations");
-const { Route } = require("../../modules/chui_route/route");
-const { Button } = require("../../components/chui_button/button");
-const { Icon } = require("../../components/chui_icons/icons");
+let {Animation} = require('../chui_animations/animations');
+const {Route} = require("../../appLayout/default/chui_app_layout");
+const {Button} = require("../../components/chui_button/button");
+const {Icon} = require("../../components/chui_icons/icons");
+
 
 class Page {
-    #page = document.createElement("page");
+    #page = document.createElement('page');
     #title = undefined;
     #icon = undefined;
     #main = false;
     #menu_bar = undefined;
     constructor() {
-        require("../chui_functions").setStyles(__dirname + "/styles.css", "chUiJS_Page");
+        require('../chui_functions').setStyles(__dirname + "/styles.css", "chUiJS_Page")
     }
     setBackButton(options = { title: "", icon: undefined, reverse: false, page: undefined }) {
         let back = new Button({
-            title: options.title,
-            icon: options.icon,
-            reverse: options.reverse,
-            clickEvent: () => new Route().go(options.page),
-        });
+            title: options.title, icon: options.icon, reverse: options.reverse,
+            clickEvent: () => new Route().go(options.page)
+        })
         this.#page.appendChild(back.set());
     }
     setMenuBar(menubar) {
@@ -28,30 +27,29 @@ class Page {
         return this.#menu_bar;
     }
     addRouteEvent(self, event = () => {}) {
-        let event_name = "route_event_" + self.constructor.name;
-        document.addEventListener(event_name, event);
-        setTimeout(() => document.removeEventListener(event_name, event), 100);
+        let event_name = "route_event_"+self.constructor.name
+        document.addEventListener(event_name, event)
+        setTimeout(() => document.removeEventListener(event_name, event), 100)
     }
     add(...components) {
         for (let component of components) {
-            const element = component.set();
-            this.#page.appendChild(element);
-            new Animation(element).fadeIn();
+            new Animation(component.set()).fadeIn()
+            this.#page.appendChild(component.set());
         }
     }
     remove(...components) {
         for (let component of components) {
-            new Animation(component.set()).fadeOutAndRemove();
+            new Animation(component.set()).fadeOutAndRemove()
         }
     }
     setFullHeight() {
-        this.#page.style.height = "-webkit-fill-available";
+        this.#page.style.height = '-webkit-fill-available';
     }
     setFullWidth() {
-        this.#page.style.width = "-webkit-fill-available";
+        this.#page.style.width = '-webkit-fill-available';
     }
     disablePadding() {
-        this.#page.style.padding = "0px";
+        this.#page.style.padding = '0px';
     }
     setIcon(icon) {
         this.#icon = new Icon(icon, "13pt").getHTML();
@@ -71,24 +69,19 @@ class Page {
     getMain() {
         return this.#main;
     }
-    getMediaStream(
-        options = {
-            video: false, // or { width: 1280, height: 720 }
-            audio: false,
-        }
-    ) {
+    getMediaStream(options = {
+        video: false, // or { width: 1280, height: 720 }
+        audio: false
+    }) {
         return new Promise((resolve, reject) => {
-            navigator.mediaDevices
-                .getUserMedia(options)
-                .then((stream) => {
-                    resolve(stream);
-                })
-                .catch(reject);
-        });
+            navigator.mediaDevices.getUserMedia(options).then(stream => {
+                resolve(stream);
+            }).catch(reject);
+        })
     }
     render() {
         return this.#page;
     }
 }
 
-exports.Page = Page;
+exports.Page = Page

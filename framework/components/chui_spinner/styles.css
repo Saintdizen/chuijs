@@ -1,31 +1,18 @@
-/* chui_spinner — плоский индикатор загрузки (flat / apple-like).
-   Один круг: полупрозрачный трек + акцентная дуга. Цвета — токены темы,
-   поэтому автоматически адаптируются к светлой/тёмной схеме. */
 chui_spiner {
     width: max-content;
     height: max-content;
-    display: inline-flex;
-    line-height: 0;
+    display: flex;
 }
 
 spinner {
-    box-sizing: border-box;
-    display: inline-block;
     border-radius: 50%;
-    border-style: solid;
-    border-color: var(--text_color_disabled, rgba(128, 128, 128, 0.35));
-    border-top-color: var(--blue_prime_background);
-    animation: chui_spinner_rotate 0.9s linear infinite;
-    will-change: transform;
+    animation: spinner 2s linear infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Увеличенные размеры вращаются чуть медленнее — вид спокойнее */
-chui_spiner spinner[style*="width: 75px"],
-chui_spiner spinner[style*="width: 90px"] {
-    animation-duration: 1s;
-}
-
-@keyframes chui_spinner_rotate {
+@keyframes spinner {
     from {
         transform: rotate(0deg);
     }
@@ -33,3 +20,4 @@ chui_spiner spinner[style*="width: 90px"] {
         transform: rotate(360deg);
     }
 }
+

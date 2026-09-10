@@ -1,315 +1,174 @@
-const { Animation } = require("../../../modules/chui_animations/animations");
-const { setStyles } = require("../../../modules/chui_functions");
-const { Select } = require("../chui_select_box/select_box");
-const { Icon, Icons } = require("../../chui_icons/icons");
-
-const pad = (n) => String(n).padStart(2, "0");
-const toIso = (year, month, day) => `${year}-${pad(month + 1)}-${pad(day)}`;
+const {Animation} = require('../../../modules/chui_animations/animations');
+const {Calendar} = require('../../chui_calendar/calendar');
+const {Select} = require('../chui_select_box/select_box');
+const {Icon, Icons} = require('../../chui_icons/icons');
 
 class DateInput {
     #id = require("randomstring").generate();
-    #root = document.createElement("chui_date_input");
-    #block = document.createElement("date_main_block");
-    #input = document.createElement("input");
-    #label = document.createElement("label");
-    #openButton = document.createElement("date_dropdown_open");
-    #openButtonDisabled = document.createElement("date_dropdown_open");
-    #dropdown = document.createElement("date_select_dropdown");
-    #controls = document.createElement("date_dropdown_controls");
-    #grid = document.createElement("date_grid");
-    #monthSelect = new Select({});
-    #yearSelect = new Select({});
-    #monthNames = [];
-    #weekDayNames = [];
-    #viewYear;
-    #viewMonth;
-    #selected = "";
-    #disabled = false;
-    #open = false;
-
-    constructor(
-        options = {
-            name: String(),
-            title: String(),
-            required: Boolean(),
-        }
-    ) {
-        setStyles(__dirname + "/styles.css", "chUiJS_DateInput");
-
-        // Локализованные названия месяцев и дней недели (неделя начинается с воскресенья)
-        for (let i = 0; i < 12; i++) {
-            this.#monthNames.push(new Date(2024, i, 1).toLocaleString("default", { month: "long" }).toUpperCase());
-        }
-        for (let i = 0; i < 7; i++) {
-            this.#weekDayNames.push(
-                new Date(2024, 0, 7 + i).toLocaleString("default", { weekday: "short" }).toUpperCase()
-            );
-        }
-
-        // Поле ввода
-        this.#input.type = "date";
+    #chui_date_input = document.createElement('chui_date_input');
+    #date_main_block = document.createElement('date_main_block');
+    #input = document.createElement('input');
+    #label = document.createElement('label');
+    #date_dropdown_open = document.createElement('date_dropdown_open');
+    #date_dropdown_open_disabled = document.createElement('date_dropdown_open');
+    #dropdown = document.createElement('date_select_dropdown');
+    #dropdown_id = require("randomstring").generate();
+    #date_now = new Date();
+    constructor(options = { name: String(), title: String(), required: Boolean() }) {
+        require('../../../modules/chui_functions').setStyles(__dirname + "/styles.css", 'chUiJS_DateInput');
+        this.#date_main_block.style.display = 'flex';
+        this.#input.type = 'date';
         this.#input.className = "date_input";
         this.#input.id = this.#id;
         if (options.name !== undefined) this.#input.name = options.name;
         if (options.required !== undefined) this.#input.required = options.required;
-
-        // Заголовок
+        this.#date_dropdown_open.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN, undefined, "var(--blue_prime_background)").getHTML();
+        this.#date_dropdown_open_disabled.innerHTML = new Icon(Icons.HARDWARE.KEYBOARD_ARROW_DOWN, undefined, "var(--text_color_disabled)").getHTML();
+        this.#date_dropdown_open_disabled.style.cursor = "not-allowed";
         if (options.title !== undefined) {
-            this.#label.classList.add("date_input_label");
+            this.#label.classList.add('date_input_label')
             this.#label.innerText = options.title;
-            this.#label.setAttribute("for", this.#id);
-            this.#root.appendChild(this.#label);
+            this.#label.setAttribute('for', this.#id);
+            this.#chui_date_input.appendChild(this.#label);
         }
-
-        // Кнопки раскрытия
-        this.#openButton.innerHTML = new Icon(
-            Icons.HARDWARE.KEYBOARD_ARROW_DOWN,
-            undefined,
-            "var(--blue_prime_background)"
-        ).getHTML();
-        this.#openButtonDisabled.innerHTML = new Icon(
-            Icons.HARDWARE.KEYBOARD_ARROW_DOWN,
-            undefined,
-            "var(--text_color_disabled)"
-        ).getHTML();
-        this.#openButtonDisabled.style.cursor = "not-allowed";
-        this.#openButtonDisabled.style.display = "none";
-
-        // Селекты месяца и года
-        this.#fillMonthOptions();
-        this.#fillYearOptions();
-        this.#controls.appendChild(this.#monthSelect.set());
-        this.#controls.appendChild(this.#yearSelect.set());
-        this.#monthSelect.set().style.flex = "1 1 0%";
-        this.#yearSelect.set().style.flex = "0 0 92px";
-        this.#monthSelect.set().style.margin = "0";
-        this.#yearSelect.set().style.margin = "0";
-
-        // Сборка выпадающего блока
-        this.#dropdown.appendChild(this.#controls);
-        this.#dropdown.appendChild(this.#grid);
-
-        this.#block.appendChild(this.#input);
-        this.#block.appendChild(this.#openButton);
-        this.#block.appendChild(this.#openButtonDisabled);
-        this.#block.appendChild(this.#dropdown);
-        this.#root.appendChild(this.#block);
-
-        // Текущий месяц для первичного показа
-        let now = new Date();
-        this.#viewYear = now.getFullYear();
-        this.#viewMonth = now.getMonth();
-
-        this.#monthSelect.addValueChangeListener((event) => {
-            this.#viewMonth = Number(event.detail.value);
-            this.#renderGrid();
+        this.#input.addEventListener('focus', () => {
+            this.#date_main_block.style.border = '1px solid var(--blue_prime_background)';
+            this.#label.style.color = 'var(--blue_prime_background)';
+        })
+        this.#input.addEventListener('blur', () => {
+            this.#date_main_block.removeAttribute("style");
+            this.#label.removeAttribute("style");
         });
-        this.#yearSelect.addValueChangeListener((event) => {
-            this.#viewYear = Number(event.detail.value);
-            this.#renderGrid();
+        this.#dropdown.setAttribute('id', this.#dropdown_id);
+        let select = new Select({
+            width: '-webkit-fill-available'
         });
-
-        // Клик по полю открывает/закрывает календарь
-        this.#root.addEventListener("click", (event) => {
-            if (this.#disabled) return;
-            // Переключаем только по клику на самом поле (не на календаре)
-            if (!this.#block.contains(event.target)) return;
-            if (this.#dropdown.contains(event.target)) return;
-            if (this.#open) {
-                this.close();
-            } else {
-                this.open();
-            }
+        select.setDropdownHeight('200px');
+        let select_year = new Select({
+            width: '-webkit-fill-available'
         });
-        // Синхронизация при ручном вводе даты в нативное поле
-        this.#input.addEventListener("change", () => {
-            this.#selected = this.#input.value;
-            this.#syncViewToSelected();
-            this.#emitChange();
-        });
-
-        this.#renderGrid();
-    }
-
-    // === НАПОЛНЕНИЕ СЕЛЕКТОВ ===
-    #fillMonthOptions() {
+        select_year.setDropdownHeight('200px');
+        let datez = this.#date_now.getFullYear() + 5;
+        for (let i = 0; i < 10; i++) {
+            datez--;
+            select_year.addOption(datez, datez)
+        }
         for (let i = 0; i < 12; i++) {
-            this.#monthSelect.addOption(this.#monthNames[i], i);
+            let test = new Date(2024, i).toLocaleString('default', {month: 'long'}).toUpperCase();
+            select.addOption(test, test)
         }
-    }
-    #fillYearOptions() {
-        let current = new Date().getFullYear();
-        for (let year = current - 6; year <= current + 6; year++) {
-            this.#yearSelect.addOption(String(year), year);
-        }
-    }
-
-    // === ПАРСИНГ И СЕТКА ===
-    #syncViewToSelected() {
-        let parsed = this.#parseIso(this.#selected);
-        if (parsed !== null) {
-            this.#viewYear = parsed.year;
-            this.#viewMonth = parsed.month;
-        }
-    }
-    #parseIso(value) {
-        let match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
-        if (match === null) return null;
-        return { year: Number(match[1]), month: Number(match[2]) - 1, day: Number(match[3]) };
-    }
-
-    #renderGrid() {
-        this.#grid.innerHTML = "";
-        // Шапка недели
-        for (let name of this.#weekDayNames) {
-            let head = document.createElement("date_week_day");
-            head.innerText = name;
-            this.#grid.appendChild(head);
-        }
-        // Ячейки дней
-        let first = new Date(this.#viewYear, this.#viewMonth, 1);
-        let offset = first.getDay();
-        let daysInMonth = new Date(this.#viewYear, this.#viewMonth + 1, 0).getDate();
-        let total = Math.ceil((offset + daysInMonth) / 7) * 7;
-        let today = new Date();
-        let selected = this.#parseIso(this.#selected);
-        for (let i = 0; i < total; i++) {
-            if (i < offset) {
-                this.#grid.appendChild(document.createElement("date_day_empty"));
-                continue;
+        //date_input_controls.appendChild(select.set());
+        //date_input_controls.appendChild(select_year.set());
+        let date_month_list = document.createElement('date_month_list');
+        this.#dropdown.appendChild(select.set());
+        this.#dropdown.appendChild(select_year.set());
+        this.#dropdown.appendChild(date_month_list);
+        select.addValueChangeListener((event) => {
+            for (let i = 0; i < 12; i++) {
+                let elem = document.getElementById(`month_${i}`);
+                if (elem != null && elem.style.display === 'block') {
+                    elem.style.display = 'none';
+                }
             }
-            let day = i - offset + 1;
-            let cell = document.createElement("date_day");
-            cell.innerText = String(day);
-            if (
-                today.getFullYear() === this.#viewYear &&
-                today.getMonth() === this.#viewMonth &&
-                today.getDate() === day
-            ) {
-                cell.classList.add("date_day_today");
+            for (let i = 0; i < 12; i++) {
+                let elem = document.getElementById(`month_${i}`);
+                if (elem != null && elem.getAttribute("month-name") === event.detail.value) {
+                    elem.style.display = 'block';
+                }
             }
-            if (
-                selected !== null &&
-                selected.year === this.#viewYear &&
-                selected.month === this.#viewMonth &&
-                selected.day === day
-            ) {
-                cell.classList.add("date_day_selected");
+        })
+        select_year.addValueChangeListener((event) => {
+            date_month_list.innerHTML = '';
+            for (let i = 0; i < 12; i++) {
+                //console.log(event)
+                let cal = new Calendar(event.detail.value, i+1);
+                let date_month_main = document.createElement('date_month_main');
+                date_month_main.setAttribute('month-name', cal.getMonthName());
+                date_month_main.setAttribute('id', `month_${cal.getMonth()}`);
+                date_month_main.style.width = 'fit-content'
+                for (let row of cal.getCalendar()) {
+                    let date_week = document.createElement('date_week');
+                    let index = 0;
+                    for (let cell of row) {
+                        let date_day = document.createElement('date_day');
+                        if (cell !== undefined) {
+                            date_day.innerText = cell;
+                            date_day.classList = 'date_day';
+                            date_day.addEventListener("click", () => {
+                                let today = this.#date_now;
+                                today.setDate(cell);
+                                today.setFullYear(cal.getYear())
+                                today.setMonth(cal.getMonth())
+                                this.#input.value = today.toISOString().substr(0, 10);
+                                new Animation(this.#dropdown).fadeOut();
+                            })
+                        } else {
+                            index++;
+                        }
+                        date_week.appendChild(date_day);
+                    }
+                    if (index !== 7) {
+                        date_month_main.appendChild(date_week);
+                    }
+                }
+                date_month_list.appendChild(date_month_main)
+                if (cal.getMonth() === this.#date_now.getMonth()) {
+                    select.setDefaultOption(this.#date_now.toLocaleString('default', {month: 'long'}).toUpperCase());
+                    date_month_main.style.display = 'block';
+                } else {
+                    date_month_main.style.display = 'none';
+                }
             }
-            cell.addEventListener("click", (event) => this.#selectDay(day, event));
-            this.#grid.appendChild(cell);
-        }
+            this.#dropdown.appendChild(date_month_list);
+        })
+        select.setDefaultOption(this.#date_now.toLocaleString('default', {month: 'long'}).toUpperCase());
+        select_year.setDefaultOption(this.#date_now.getFullYear());
+        //LISTENERS
+        this.#chui_date_input.addEventListener('click', (event) => {
+            if (!this.#input.disabled) {
+                if (event.target.parentNode === this.#date_main_block) {
+                    this.#input.focus()
+                    new Animation(this.#dropdown).fadeIn();
+                }
+            }
+        });
+        window.addEventListener('click', (event) => {
+            if (!event.target in getElementsWithDepth(this.#date_main_block)) {
+                new Animation(this.#dropdown).fadeOut();
+            }
+        });
+        this.#date_main_block.appendChild(this.#input);
+        this.#date_main_block.appendChild(this.#date_dropdown_open);
+        this.#date_main_block.appendChild(this.#dropdown);
+        this.#chui_date_input.appendChild(this.#date_main_block);
     }
-
-    #selectDay(day, event) {
-        // Не даём клику по ячейке всплыть до корня и заново открыть календарь
-        if (event !== undefined) event.stopPropagation();
-        this.#selected = toIso(this.#viewYear, this.#viewMonth, day);
-        this.#input.value = this.#selected;
-        this.#emitChange();
-        this.#renderGrid();
-        this.close();
-    }
-
-    #emitChange() {
-        this.#root.dispatchEvent(
-            new CustomEvent("chui_date_input_changed", {
-                detail: { value: this.#selected },
-            })
-        );
-    }
-
-    // === ОТКРЫТИЕ / ЗАКРЫТИЕ ===
-    open() {
-        if (this.#disabled || this.#open) return;
-        this.#open = true;
-        this.#syncViewToSelected();
-        this.#monthSelect.setDefaultOption(this.#viewMonth);
-        this.#yearSelect.setDefaultOption(this.#viewYear);
-        this.#renderGrid();
-        this.#block.classList.add("date_open");
-        new Animation(this.#dropdown).fadeIn();
-        this.#positionDropdown();
-        document.addEventListener("mousedown", this.#onDocumentMouseDown);
-        document.addEventListener("keydown", this.#onDocumentKeyDown);
-    }
-    close() {
-        if (!this.#open) return;
-        this.#open = false;
-        this.#block.classList.remove("date_open");
-        new Animation(this.#dropdown).fadeOut();
-        document.removeEventListener("mousedown", this.#onDocumentMouseDown);
-        document.removeEventListener("keydown", this.#onDocumentKeyDown);
-    }
-
-    #onDocumentMouseDown = (event) => {
-        if (!this.#root.contains(event.target)) this.close();
-    };
-    #onDocumentKeyDown = (event) => {
-        if (event.key === "Escape") this.close();
-    };
-
-    #positionDropdown() {
-        let rect = this.#dropdown.getBoundingClientRect();
-        let overflowBottom = rect.bottom - (window.innerHeight - 8);
-        let overflowRight = rect.right - (window.innerWidth - 8);
-        if (overflowBottom > 0 || overflowRight > 0) {
-            this.#dropdown.style.transition = "none";
-            if (overflowBottom > 0) this.#dropdown.style.top = `-${rect.height + 4}px`;
-            if (overflowRight > 0) this.#dropdown.style.left = `-${overflowRight}px`;
-            void this.#dropdown.offsetWidth;
-            this.#dropdown.style.removeProperty("transition");
-        }
-    }
-
-    // === ПУБЛИЧНЫЙ API ===
-    getName() {
-        return this.#input.name;
-    }
-    getTitle() {
-        return this.#label.innerText;
-    }
-    getValue() {
-        return this.#input.value;
-    }
-    setValue(date = String()) {
-        let iso = "";
-        if (date instanceof Date && !isNaN(date.getTime())) {
-            iso = toIso(date.getFullYear(), date.getMonth(), date.getDate());
-        } else {
-            iso = String(date);
-        }
-        this.#selected = iso;
-        this.#input.value = iso;
-        if (this.#open) {
-            this.#syncViewToSelected();
-            this.#monthSelect.setDefaultOption(this.#viewMonth);
-            this.#yearSelect.setDefaultOption(this.#viewYear);
-            this.#renderGrid();
-        }
-    }
+    getName() { return this.#input.name; }
+    getTitle() { return this.#label.innerText; }
+    getValue() { return this.#input.value; }
+    setValue(date = String()) { this.#input.value = date; }
     setDisabled(boolean = Boolean()) {
-        this.#disabled = boolean;
-        this.#input.disabled = boolean;
+        this.#input.disabled = boolean
         if (boolean) {
-            this.#openButton.style.display = "none";
-            this.#openButtonDisabled.style.display = "inline-flex";
-            this.#block.classList.add("date_main_block_disabled");
-            this.#label.classList.add("date_input_label_disabled");
+            this.#date_main_block.classList.add("date_main_block_disabled")
+            this.#input.className = "date_input_disabled"
+            this.#label.className = "date_input_label_disabled"
+            this.#date_dropdown_open.remove();
+            this.#date_main_block.appendChild(this.#date_dropdown_open_disabled);
         } else {
-            this.#openButtonDisabled.style.display = "none";
-            this.#openButton.style.display = "inline-flex";
-            this.#block.classList.remove("date_main_block_disabled");
-            this.#label.classList.remove("date_input_label_disabled");
+            this.#date_main_block.classList.remove("date_main_block_disabled")
+            this.#input.className = "date_input"
+            this.#label.className = "date_input_label"
+            this.#date_dropdown_open_disabled.remove();
+            this.#date_main_block.appendChild(this.#date_dropdown_open);
         }
-        if (boolean) this.close();
     }
-    addValueChangeListener(listener = () => {}) {
-        this.#root.addEventListener("chui_date_input_changed", listener);
-    }
-    set() {
-        return this.#root;
-    }
+    set() { return this.#chui_date_input; }
 }
 
-exports.DateInput = DateInput;
+const getElementsWithDepth = (el, level = 0) =>
+  [...el.children].reduce((acc, n) => {
+    acc.push(...getElementsWithDepth(n, level + 1));
+    return acc;
+  }, [ { el, level } ]);
+
+exports.DateInput = DateInput
