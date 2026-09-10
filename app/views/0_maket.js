@@ -25,6 +25,8 @@ const {
     ProgressBar,
     Spinner,
     ContentBlock,
+    Card,
+    Hero,
     FieldSet,
     Details,
     Accordion,
@@ -56,59 +58,575 @@ const {
     Icon,
 } = require("../../index");
 const { Popup } = require("../../framework/components/chui_popups/popups");
+const { setStyles } = require("../../framework/modules/chui_functions");
+
+const STYLES_ID = "chUiJS_Maket";
+
+/** Иконки, которые показывает галерея раздела «Icons». */
+const ICON_NAMES = [
+    Icons.NAVIGATION.MENU,
+    Icons.NAVIGATION.CLOSE,
+    Icons.NAVIGATION.CHECK,
+    Icons.NAVIGATION.APPS,
+    Icons.NAVIGATION.MORE_VERT,
+    Icons.NAVIGATION.ARROW_BACK,
+    Icons.NAVIGATION.REFRESH,
+    Icons.ACTIONS.SEARCH,
+    Icons.ACTIONS.LANGUAGE,
+    Icons.ACTIONS.EVENT,
+    Icons.ACTIONS.DASHBOARD,
+    Icons.ACTIONS.LIST,
+    Icons.ACTIONS.OPEN_IN_NEW,
+    Icons.ACTIONS.ASSIGNMENT,
+    Icons.ACTIONS.TODAY,
+    Icons.ACTIONS.TOUCH_APP,
+    Icons.ACTIONS.PENDING,
+    Icons.ACTIONS.CALENDAR_MONTH,
+    Icons.ACTIONS.EXTENSION,
+    Icons.ACTIONS.HOURGLASS_EMPTY,
+    Icons.ACTIONS.PERM_MEDIA,
+    Icons.ACTIONS.SMART_BUTTON,
+    Icons.ACTIONS.TERMINAL,
+    Icons.ACTIONS.SETTINGS,
+    Icons.ACTIONS.INFO,
+    Icons.ACTIONS.HELP_OUTLINE,
+    Icons.ACTIONS.AUTORENEW,
+    Icons.ACTIONS.DELETE,
+    Icons.ACTIONS.CHECK_CIRCLE,
+    Icons.ACTIONS.DESCRIPTION,
+    Icons.ACTIONS.LOCK,
+    Icons.TOGGLE.CHECK_BOX,
+    Icons.TOGGLE.RADIO_BUTTON_CHECKED,
+    Icons.SOCIAL.NOTIFICATIONS,
+    Icons.SOCIAL.PUBLIC,
+    Icons.SOCIAL.SCIENCE,
+    Icons.SOCIAL.PERSON,
+    Icons.NOTIFICATION.ACCOUNT_TREE,
+    Icons.MAPS.LAYERS,
+    Icons.MAPS.MAP,
+    Icons.IMAGE.EDIT,
+    Icons.IMAGE.TUNE,
+    Icons.IMAGE.PALETTE,
+    Icons.HARDWARE.KEYBOARD,
+    Icons.HARDWARE.KEYBOARD_ARROW_DOWN,
+    Icons.FILE.GRID_VIEW,
+    Icons.FILE.APPROVAL,
+    Icons.FILE.FOLDER_OPEN,
+    Icons.FILE.FILE_UPLOAD,
+    Icons.FILE.FILE_DOWNLOAD,
+    Icons.CONTENT.ADD,
+    Icons.CONTENT.SAVE,
+    Icons.CONTENT.CONTENT_COPY,
+    Icons.CONTENT.CONTENT_PASTE,
+    Icons.CONTENT.SEND,
+    Icons.CONTENT.MAIL,
+    Icons.CONTENT.REMOVE,
+    Icons.EDITOR.TEXT_FIELDS,
+    Icons.EDITOR.TABLE_ROWS,
+    Icons.EDITOR.EDIT_NOTE,
+    Icons.EDITOR.BAR_CHART,
+    Icons.EDITOR.CHECKLIST,
+    Icons.EDITOR.TABLE_CHART,
+    Icons.EDITOR.PIE_CHART,
+    Icons.EDITOR.FORMAT_BOLD,
+    Icons.DEVICE.WIDGETS,
+    Icons.COMMUNICATION.CHAT_BUBBLE,
+    Icons.ALERT.ERROR,
+];
+
+/** Сущности фреймворка, которые показывает витрина. */
+const COMPONENT_NAMES = [
+    "Page",
+    "H",
+    "Paragraph",
+    "Label",
+    "CodeBlock",
+    "HtmlBlock",
+    "Button",
+    "TextInput",
+    "NumberInput",
+    "EmailInput",
+    "PasswordInput",
+    "DateInput",
+    "TextArea",
+    "FileInput",
+    "CheckBox",
+    "RadioButton",
+    "RadioGroup",
+    "Toggle",
+    "Select",
+    "ComboBox",
+    "MultiComboBox",
+    "Badge",
+    "ProgressBar",
+    "Spinner",
+    "ContentBlock",
+    "Card",
+    "Hero",
+    "FieldSet",
+    "Details",
+    "CustomElement",
+    "Form",
+    "Table",
+    "Tabs",
+    "Tab",
+    "Accordion",
+    "TreeView",
+    "BarGraph",
+    "PieGraph",
+    "TextEditor",
+    "Console",
+    "SlideShow",
+    "Image",
+    "Audio",
+    "Video",
+    "WebView",
+    "Notification",
+    "UpdateNotification",
+    "DownloadNotification",
+    "DownloadProgressNotification",
+    "Dialog",
+    "Popup",
+    "ContextMenu",
+    "MenuBar",
+    "Calendar",
+    "Icon",
+    "Icons",
+];
+
+/** Обёртка макета: обычный <div>, к которому можно добавлять компоненты фреймворка. */
+class MaketBox {
+    #element;
+    constructor(className) {
+        this.#element = document.createElement("div");
+        this.#element.className = className;
+    }
+    add(...components) {
+        for (let component of components) this.#element.appendChild(component.set());
+        return this;
+    }
+    append(...nodes) {
+        for (let node of nodes) this.#element.appendChild(node);
+        return this;
+    }
+    set() {
+        return this.#element;
+    }
+}
+
+/** Создаёт <div> с классом и, при необходимости, текстом. */
+const div = (className, text) => {
+    let element = document.createElement("div");
+    element.className = className;
+    if (text !== undefined) element.innerText = text;
+    return element;
+};
+
+/** Создаёт <div> с классом и вложенными узлами. */
+const wrap = (className, ...nodes) => {
+    let element = div(className);
+    for (let node of nodes) element.appendChild(node);
+    return element;
+};
+
+/** Добавляет компоненты фреймворка в готовый узел. */
+const mount = (parent, ...components) => {
+    for (let component of components) parent.appendChild(component.set());
+    return parent;
+};
+
+/** Горизонтальная группа компонентов внутри карточки. */
+const row = (parent, ...components) => {
+    let element = wrap("maket_row");
+    mount(element, ...components);
+    parent.appendChild(element);
+    return element;
+};
+
+/** Вертикальная группа компонентов внутри карточки. */
+const col = (parent, ...components) => {
+    let element = wrap("maket_col");
+    mount(element, ...components);
+    parent.appendChild(element);
+    return element;
+};
+
+/** Мелкая подпись-разделитель внутри карточки. */
+const note = (parent, text) => {
+    let element = div("maket_note", text);
+    parent.appendChild(element);
+    return element;
+};
 
 class Maket extends Page {
+    #sections = [];
+    #cards = [];
+    #empty = div("maket_empty", "Ничего не найдено — измените запрос в фильтре.");
+
     constructor() {
         super();
+        setStyles(__dirname + "/maket.css", STYLES_ID);
         this.setTitle("Макет всех компонентов");
         this.setMain(true);
         this.setFullWidth();
 
-        // Обёртка для безопасной отрисовки каждого раздела
-        this.#section("Текст: H1-H6", () => this.#headings());
-        this.#section("Label, Paragraph, CodeBlock", () => this.#text());
-        this.#section("Кнопки (Button)", () => this.#buttons());
-        this.#section("Поля ввода", () => this.#inputs());
-        this.#section("CheckBox, RadioButton, RadioGroup, Toggle", () => this.#selections());
-        this.#section("Select, ComboBox, MultiComboBox", () => this.#combos());
-        this.#section("Badge, ProgressBar, Spinner", () => this.#badgesProgressSpinners());
-        this.#section("Контейнеры: ContentBlock, FieldSet, HtmlBlock, Details, CustomElement", () =>
-            this.#containers()
+        this.#sections = this.#catalogue();
+        this.#menuBar();
+
+        let root = new MaketBox("maket");
+        root.append(this.#hero(), this.#toolbar(), this.#nav(), this.#grid());
+        this.add(root);
+    }
+
+    /** Описание разделов: из него собираются навигация, карточки и их содержимое. */
+    #catalogue() {
+        return [
+            {
+                id: "typography",
+                icon: Icons.EDITOR.TEXT_FIELDS,
+                title: "Типографика",
+                desc: "H1–H6, Label, Paragraph",
+                keywords: "заголовки текст подпись абзац",
+                wide: false,
+                render: (body) => this.#typography(body),
+            },
+            {
+                id: "code",
+                icon: Icons.EDITOR.EDIT_NOTE,
+                title: "Код и разметка",
+                desc: "CodeBlock, HtmlBlock, markdown",
+                keywords: "код разметка markdown html",
+                wide: false,
+                render: (body) => this.#code(body),
+            },
+            {
+                id: "buttons",
+                icon: Icons.ACTIONS.TOUCH_APP,
+                title: "Button",
+                desc: "Текст, иконка, обратный порядок, disabled",
+                keywords: "кнопка нажатие",
+                wide: false,
+                render: (body) => this.#buttons(body),
+            },
+            {
+                id: "inputs",
+                icon: Icons.ACTIONS.ASSIGNMENT,
+                title: "Поля ввода",
+                desc: "Text, Number, Email, Password, Date, Area, File",
+                keywords: "ввод форма поле файл",
+                wide: true,
+                render: (body) => this.#inputs(body),
+            },
+            {
+                id: "selection",
+                icon: Icons.TOGGLE.CHECK_BOX,
+                title: "Выбор",
+                desc: "CheckBox, RadioButton, RadioGroup, Toggle",
+                keywords: "галочка переключатель выбор радиокнопка",
+                wide: false,
+                render: (body) => this.#selection(body),
+            },
+            {
+                id: "combos",
+                icon: Icons.NAVIGATION.ARROW_DROP_DOWN,
+                title: "Выпадающие списки",
+                desc: "Select, ComboBox, MultiComboBox",
+                keywords: "список выбор dropdown",
+                wide: false,
+                render: (body) => this.#combos(body),
+            },
+            {
+                id: "indicators",
+                icon: Icons.ACTIONS.PENDING,
+                title: "Индикаторы",
+                desc: "Badge, ProgressBar, Spinner",
+                keywords: "бейдж прогресс спиннер загрузка",
+                wide: false,
+                render: (body) => this.#indicators(body),
+            },
+            {
+                id: "containers",
+                icon: Icons.DEVICE.WIDGETS,
+                title: "Контейнеры",
+                desc: "ContentBlock, FieldSet, Details, CustomElement",
+                keywords: "блок контейнер группа раскрывающийся",
+                wide: false,
+                render: (body) => this.#containers(body),
+            },
+            {
+                id: "card",
+                icon: Icons.FILE.GRID_VIEW,
+                title: "Card",
+                desc: "Заголовок, описание, иконка и содержимое",
+                keywords: "карточка панель контейнер card",
+                wide: true,
+                render: (body) => this.#cardDemo(body),
+            },
+            {
+                id: "hero",
+                icon: Icons.IMAGE.PALETTE,
+                title: "Hero",
+                desc: "Шапка страницы: иконка, заголовок, описание и статистика",
+                keywords: "шапка заголовок баннер hero статистика",
+                wide: true,
+                render: (body) => this.#heroDemo(body),
+            },
+            {
+                id: "form",
+                icon: Icons.CONTENT.SEND,
+                title: "Form",
+                desc: "Форма с валидацией и отправкой",
+                keywords: "форма отправка валидация",
+                wide: false,
+                render: (body) => this.#form(body),
+            },
+            {
+                id: "table",
+                icon: Icons.EDITOR.TABLE_CHART,
+                title: "Table",
+                desc: "Сортировка, фильтр по нескольким свойствам, выделение",
+                keywords: "таблица сортировка поиск данные",
+                wide: true,
+                render: (body) => this.#table(body),
+            },
+            {
+                id: "tabs",
+                icon: Icons.ACTIONS.DASHBOARD,
+                title: "Tabs",
+                desc: "Вкладки с произвольным содержимым",
+                keywords: "вкладки табы",
+                wide: false,
+                render: (body) => this.#tabs(body),
+            },
+            {
+                id: "accordion",
+                icon: Icons.EDITOR.CHECKLIST,
+                title: "Accordion",
+                desc: "Раскрывающиеся разделы",
+                keywords: "аккордеон разделы",
+                wide: false,
+                render: (body) => this.#accordion(body),
+            },
+            {
+                id: "tree",
+                icon: Icons.NOTIFICATION.ACCOUNT_TREE,
+                title: "TreeView",
+                desc: "Дерево кнопок и вложенных разделов",
+                keywords: "дерево навигация иерархия",
+                wide: false,
+                render: (body) => this.#tree(body),
+            },
+            {
+                id: "graphs",
+                icon: Icons.EDITOR.BAR_CHART,
+                title: "Графики",
+                desc: "BarGraph и PieGraph на canvas",
+                keywords: "график диаграмма столбцы круговая",
+                wide: true,
+                render: (body) => this.#graphs(body),
+            },
+            {
+                id: "editor",
+                icon: Icons.ACTIONS.DESCRIPTION,
+                title: "TextEditor",
+                desc: "Форматирование текста, вставка таблиц и изображений",
+                keywords: "редактор текст форматирование",
+                wide: true,
+                render: (body) => this.#editor(body),
+            },
+            {
+                id: "console",
+                icon: Icons.ACTIONS.TERMINAL,
+                title: "Console",
+                desc: "Буфер вывода с построчной записью",
+                keywords: "консоль терминал вывод лог",
+                wide: false,
+                render: (body) => this.#console(body),
+            },
+            {
+                id: "slideshow",
+                icon: Icons.ACTIONS.PERM_MEDIA,
+                title: "SlideShow",
+                desc: "Слайды с навигацией и автопрокруткой",
+                keywords: "слайды карусель галерея",
+                wide: false,
+                render: (body) => this.#slideshow(body),
+            },
+            {
+                id: "media",
+                icon: Icons.IMAGE.EDIT,
+                title: "Медиа",
+                desc: "Image, Audio, Video",
+                keywords: "картинка изображение звук видео плеер",
+                wide: false,
+                render: (body) => this.#media(body),
+            },
+            {
+                id: "webview",
+                icon: Icons.SOCIAL.PUBLIC,
+                title: "WebView",
+                desc: "Встроенная веб-страница",
+                keywords: "браузер страница web",
+                wide: false,
+                render: (body) => this.#webview(body),
+            },
+            {
+                id: "notifications",
+                icon: Icons.SOCIAL.NOTIFICATIONS,
+                title: "Уведомления",
+                desc: "Notification и специальные уведомления",
+                keywords: "уведомление сообщение загрузка обновление",
+                wide: false,
+                render: (body) => this.#notifications(body),
+            },
+            {
+                id: "dialog",
+                icon: Icons.NAVIGATION.APPS,
+                title: "Dialog и Popup",
+                desc: "Модальное окно и системные диалоги",
+                keywords: "диалог модальное окно подтверждение",
+                wide: false,
+                render: (body) => this.#dialogs(body),
+            },
+            {
+                id: "contextmenu",
+                icon: Icons.NAVIGATION.MORE_VERT,
+                title: "ContextMenu",
+                desc: "Меню по правой кнопке мыши",
+                keywords: "контекстное меню пкм",
+                wide: false,
+                render: (body) => this.#contextMenu(body),
+            },
+            {
+                id: "icons",
+                icon: Icons.IMAGE.PALETTE,
+                title: "Icons",
+                desc: `Галерея шрифтовых иконок (${ICON_NAMES.length})`,
+                keywords: "иконки шрифт пиктограммы",
+                wide: true,
+                render: (body) => this.#icons(body),
+            },
+            {
+                id: "calendar",
+                icon: Icons.ACTIONS.CALENDAR_MONTH,
+                title: "Calendar",
+                desc: "Модель месяца, отрисованная сеткой",
+                keywords: "календарь месяц дата",
+                wide: false,
+                render: (body) => this.#calendar(body),
+            },
+            {
+                id: "menubar",
+                icon: Icons.NAVIGATION.MENU,
+                title: "MenuBar",
+                desc: "Меню в шапке приложения",
+                keywords: "меню шапка навигация",
+                wide: false,
+                render: (body) => this.#menubar(body),
+            },
+        ];
+    }
+
+    // ----------------------------------------------------------
+    // Каркас витрины
+    // ----------------------------------------------------------
+
+    #hero() {
+        // Шапка страницы — компонент Hero (framework/components/chui_hero)
+        return new Hero({
+            title: "Витрина компонентов chUiJS",
+            description:
+                "Все компоненты фреймворка на одной странице: ввод, контейнеры, данные, медиа и уведомления. " +
+                "Разделы собраны в карточки, сверху — фильтр, ниже — переходы к нужной карточке.",
+            icon: Icons.IMAGE.PALETTE,
+            stats: [
+                { value: String(this.#sections.length), label: "разделов" },
+                { value: String(COMPONENT_NAMES.length), label: "компонентов" },
+                { value: String(ICON_NAMES.length), label: "иконок" },
+            ],
+        }).set();
+    }
+
+    #toolbar() {
+        let search = new TextInput({ title: "Фильтр по разделам", placeholder: "Таблица, ввод, медиа…" });
+        let reset = new Button({
+            title: "Показать все",
+            icon: Icons.ACTIONS.AUTORENEW,
+            clickEvent: () => {
+                search.setValue("");
+                this.#filter("");
+            },
+        });
+        search.addInputListener((e) => this.#filter(e.target.value));
+        return wrap(
+            "maket_toolbar",
+            search.set(),
+            reset.set(),
+            div("maket_toolbar_hint", "Карточки скрываются, если запрос не найден в названии или описании раздела.")
         );
-        this.#section("Form", () => this.#forms());
-        this.#section("Table", () => this.#tables());
-        this.#section("Tabs", () => this.#tabs());
-        this.#section("Accordion", () => this.#accordion());
-        this.#section("TreeView", () => this.#treeView());
-        this.#section("Графики: BarGraph, PieGraph", () => this.#graphs());
-        this.#section("TextEditor", () => this.#textEditor());
-        this.#section("Console", () => this.#console());
-        this.#section("SlideShow", () => this.#slideShow());
-        this.#section("Медиа: Image, Audio, Video", () => this.#media());
-        this.#section("WebView", () => this.#webView());
-        this.#section("Уведомления", () => this.#notifications());
-        this.#section("Dialog, Popup", () => this.#dialogs());
-        this.#section("ContextMenu", () => this.#contextMenu());
-        this.#section("Icons", () => this.#icons());
-        this.#section("Calendar", () => this.#calendar());
-        this.#section("MenuBar", () => this.#menuBar());
     }
 
-    /** Рисует компоненты секции с заголовком. */
-    #section(title, fn) {
+    #nav() {
+        let chips = this.#sections.map((section) => {
+            let chip = document.createElement("button");
+            chip.type = "button";
+            chip.className = "maket_chip";
+            chip.innerText = section.title;
+            chip.addEventListener("click", () => {
+                let card = document.getElementById(`maket_${section.id}`);
+                if (card !== null) card.scrollIntoView({ behavior: "smooth", block: "start" });
+            });
+            return chip;
+        });
+        return wrap("maket_nav", ...chips);
+    }
+
+    #grid() {
+        let grid = div("maket_grid");
+        for (let section of this.#sections) grid.appendChild(this.#card(section));
+        grid.appendChild(this.#empty);
+        return grid;
+    }
+
+    #card(section) {
+        let card = new Card({
+            id: `maket_${section.id}`,
+            title: section.title,
+            description: section.desc,
+            icon: section.icon,
+        });
+        let element = card.set();
+        if (section.wide) element.classList.add("maket_card_wide");
+        element.dataset.search = `${section.title} ${section.desc} ${section.keywords}`.toLowerCase();
+        let body = card.getBody();
         try {
-            this.add(new H(2, title));
-            fn();
+            section.render(body);
         } catch (e) {
-            Log.error(`Не удалось отрисовать секцию «${title}»: ${e}`);
+            body.appendChild(div("maket_error", `Раздел не отрисован: ${e.message}`));
+            Log.error(`Не удалось отрисовать раздел «${section.title}»: ${e}`);
         }
+        this.#cards.push(element);
+        return element;
+    }
+
+    #filter(query) {
+        let value = String(query).trim().toLowerCase();
+        let visible = 0;
+        for (let card of this.#cards) {
+            let matched = value === "" || card.dataset.search.includes(value);
+            card.classList.toggle("maket_hidden", !matched);
+            if (matched) visible++;
+        }
+        this.#empty.classList.toggle("maket_empty_visible", visible === 0);
     }
 
     // ----------------------------------------------------------
-    // H1-H6
+    // Разделы витрины
     // ----------------------------------------------------------
-    #headings() {
-        this.add(
+
+    #typography(body) {
+        col(
+            body,
             new H(1, "Заголовок H1"),
             new H(2, "Заголовок H2"),
             new H(3, "Заголовок H3"),
@@ -116,82 +634,114 @@ class Maket extends Page {
             new H(5, "Заголовок H5"),
             new H(6, "Заголовок H6")
         );
-    }
-
-    // ----------------------------------------------------------
-    // Label, Paragraph, CodeBlock
-    // ----------------------------------------------------------
-    #text() {
-        this.add(
-            new Label({ text: "Label — простая подпись" }),
-            new Label({ markdownText: "Label — **жирная** подпись", wordBreak: Styles.WORD_BREAK.BREAK_ALL }),
-            new Paragraph("Paragraph — обычный абзац текста."),
-            new CodeBlock("const text = 'Пример кода';", { width: Styles.SIZE.MAX_CONTENT })
+        note(body, "Label и Paragraph");
+        col(
+            body,
+            new Label({ text: "Label — обычная подпись" }),
+            new Label({ markdownText: "Label с **markdown**-разметкой", wordBreak: Styles.WORD_BREAK.BREAK_ALL }),
+            new Paragraph("Paragraph — абзац текста, наследует базовую типографику страницы.")
         );
     }
 
-    // ----------------------------------------------------------
-    // Кнопки
-    // ----------------------------------------------------------
-    #buttons() {
+    #code(body) {
+        note(body, "CodeBlock");
+        col(
+            body,
+            new CodeBlock("const maket = new Maket();\nrender(() => maket);", { width: Styles.SIZE.WEBKIT_FILL }),
+            new CodeBlock("npm run start", { width: Styles.SIZE.MAX_CONTENT })
+        );
+        note(body, "HtmlBlock");
+        let html = new HtmlBlock(Styles.SIZE.WEBKIT_FILL);
+        html.setHtml(
+            '<p>HtmlBlock принимает <b>HTML</b>-разметку: <i>курсив</i>, <code>код</code> и <a href="#">ссылку</a>.</p>'
+        );
+        mount(body, html);
+    }
+
+    #buttons(body) {
         const notify = (text) =>
-            new Notification({ title: "Кнопка нажата", text, style: Notification.STYLE.SUCCESS, showTime: 3000 }).show();
-        this.add(
-            new Button({ title: "Кнопка с текстом", clickEvent: () => notify("Текст") }),
-            new Button({ icon: Icons.NAVIGATION.CLOSE, clickEvent: () => notify("Иконка") }),
-            new Button({ title: "Текст + иконка", icon: Icons.MAPS.MAP, clickEvent: () => notify("Оба") }),
-            new Button({ title: "Иконка справа", icon: Icons.MAPS.MAP, reverse: true, clickEvent: () => notify("reverse") }),
-            new Button({ title: "Отключённая", disabled: true })
+            new Notification({
+                title: "Кнопка нажата",
+                text,
+                style: Notification.STYLE.SUCCESS,
+                showTime: 3000,
+            }).show();
+        row(
+            body,
+            new Button({ title: "Основная", clickEvent: () => notify("Основная кнопка") }),
+            new Button({
+                title: "С иконкой",
+                icon: Icons.ACTIONS.SMART_BUTTON,
+                clickEvent: () => notify("Кнопка с иконкой"),
+            }),
+            new Button({ icon: Icons.NAVIGATION.CLOSE, clickEvent: () => notify("Только иконка") }),
+            new Button({
+                title: "Иконка справа",
+                icon: Icons.MAPS.MAP,
+                reverse: true,
+                clickEvent: () => notify("Обратный порядок"),
+            }),
+            new Button({ title: "Недоступная", disabled: true })
         );
     }
 
-    // ----------------------------------------------------------
-    // Поля ввода
-    // ----------------------------------------------------------
-    #inputs() {
-        let disabler = new CheckBox({ title: "Выключить все поля ввода" });
+    #inputs(body) {
+        let disabler = new CheckBox({ title: "Отключить все поля ниже" });
         let text = new TextInput({ title: "TextInput", placeholder: "Текст" });
         let number = new NumberInput({ title: "NumberInput", width: "300px" });
         let email = new EmailInput({ title: "EmailInput" });
-        let pass = new PasswordInput({ title: "PasswordInput" });
+        let password = new PasswordInput({ title: "PasswordInput" });
         let date = new DateInput({ title: "DateInput" });
         let area = new TextArea({ title: "TextArea", width: "300px" });
         let file = new FileInput({ title: "FileInput", multiple: false });
-        let fileMultiple = new FileInput({ title: "FileInput (несколько файлов)", multiple: true });
-        let fields = [text, number, email, pass, date, area, file, fileMultiple];
-        disabler.addChangeListener((e) => fields.forEach((c) => c.setDisabled(e.target.checked)));
-        this.add(disabler, text, number, email, pass, date, area, file, fileMultiple);
+        let files = new FileInput({ title: "FileInput (несколько)", multiple: true });
+        let fields = [text, number, email, password, date, area, file, files];
+        disabler.addChangeListener((e) => fields.forEach((field) => field.setDisabled(e.target.checked)));
+        mount(body, disabler);
+        row(body, text, number, email, password, date);
+        row(body, area, file, files);
     }
 
-    // ----------------------------------------------------------
-    // CheckBox, RadioButton, RadioGroup, Toggle
-    // ----------------------------------------------------------
-    #selections() {
-        let checkBox = new CheckBox({ title: "CheckBox" });
-        let radio = new RadioButton({ title: "RadioButton" });
-        let radioGroup = new RadioGroup({
+    #selection(body) {
+        let toggle = new Toggle();
+        toggle.setValue(true);
+        row(body, new CheckBox({ title: "CheckBox" }), new RadioButton({ title: "RadioButton" }), toggle);
+
+        note(body, "RadioGroup");
+        let group = new RadioGroup({
             styles: {
                 direction: Styles.DIRECTION.ROW,
                 wrap: Styles.WRAP.WRAP,
                 align: Styles.ALIGN.CENTER,
-                justify: Styles.JUSTIFY.CENTER,
+                justify: Styles.JUSTIFY.START,
                 width: Styles.SIZE.WEBKIT_FILL,
             },
         });
-        radioGroup.addOptions([
+        group.addOptions([
             { name: "group1", value: "value1" },
             { name: "group2", value: "value2" },
             { name: "group3", value: "value3" },
         ]);
-        let toggle = new Toggle();
-        toggle.setValue(true);
-        this.add(checkBox, radio, new Label({ text: "RadioGroup:" }), radioGroup, new Label({ text: "Toggle:" }), toggle);
+        mount(body, group);
+        row(
+            body,
+            new Button({
+                title: "Показать выбор",
+                icon: Icons.ACTIONS.LIST,
+                clickEvent: () => {
+                    let value;
+                    try {
+                        value = group.getValue();
+                    } catch {
+                        value = "вариант не выбран";
+                    }
+                    new Notification({ title: "RadioGroup", text: value, showTime: 2500 }).show();
+                },
+            })
+        );
     }
 
-    // ----------------------------------------------------------
-    // Select, ComboBox, MultiComboBox
-    // ----------------------------------------------------------
-    #combos() {
+    #combos(body) {
         let select = new Select({ title: "Select" });
         select.addOptions(
             { title: "Option 1", value: "value-1" },
@@ -204,7 +754,7 @@ class Maket extends Page {
             { title: "Пункт 2", value: "2" },
             { title: "Пункт 3", value: "3" }
         );
-        let multi = new MultiComboBox({ title: "MultiComboBox", width: "500px" });
+        let multi = new MultiComboBox({ title: "MultiComboBox", width: "300px" });
         multi.addOptionsWithSections([
             {
                 title: "Секция 1",
@@ -221,38 +771,45 @@ class Maket extends Page {
                 ],
             },
         ]);
-        this.add(select, combo, multi);
+        col(body, select, combo, multi);
     }
 
-    // ----------------------------------------------------------
-    // Badge, ProgressBar, Spinner
-    // ----------------------------------------------------------
-    #badgesProgressSpinners() {
-        let badgeError = new Badge({ text: "Badge ERROR", style: Badge.STYLE.ERROR });
-        let badgeSuccess = new Badge({ text: "Badge SUCCESS", style: Badge.STYLE.SUCCESS });
-        let badgeWarning = new Badge({ text: "Badge WARNING", style: Badge.STYLE.WARNING });
-        let badgeDefault = new Badge({ text: "Badge по умолчанию" });
+    #indicators(body) {
+        row(
+            body,
+            new Badge({ text: "ERROR", style: Badge.STYLE.ERROR }),
+            new Badge({ text: "SUCCESS", style: Badge.STYLE.SUCCESS }),
+            new Badge({ text: "WARNING", style: Badge.STYLE.WARNING }),
+            new Badge({ text: "По умолчанию" })
+        );
 
+        note(body, "ProgressBar");
         let progress = new ProgressBar({ max: 100 });
         progress.setValue(40);
         progress.setWidth(Styles.SIZE.WEBKIT_FILL);
-        this.add(badgeError, badgeSuccess, badgeWarning, badgeDefault, progress);
-
-        this.add(
+        mount(body, progress);
+        let timer;
+        row(
+            body,
             new Button({
-                title: "Заполнить прогресс до 100%",
+                title: "Заполнить до 100%",
+                icon: Icons.ACTIONS.AUTORENEW,
                 clickEvent: () => {
-                    let v = 0;
-                    let t = setInterval(() => {
-                        v += 10;
-                        progress.setValue(v);
-                        if (v >= 100) clearInterval(t);
+                    clearInterval(timer);
+                    let value = 0;
+                    progress.setValue(value);
+                    timer = setInterval(() => {
+                        value += 10;
+                        progress.setValue(value);
+                        if (value >= 100) clearInterval(timer);
                     }, 200);
                 },
             })
         );
 
-        this.add(
+        note(body, "Spinner");
+        row(
+            body,
             new Spinner(Spinner.SIZE.V_SMALL, "auto"),
             new Spinner(Spinner.SIZE.SMALL, "auto"),
             new Spinner(Spinner.SIZE.DEFAULT, "auto"),
@@ -261,19 +818,16 @@ class Maket extends Page {
         );
     }
 
-    // ----------------------------------------------------------
-    // ContentBlock, FieldSet, HtmlBlock, Details, CustomElement
-    // ----------------------------------------------------------
-    #containers() {
+    #containers(body) {
         let block = new ContentBlock({
             direction: Styles.DIRECTION.COLUMN,
             wrap: Styles.WRAP.NOWRAP,
             align: Styles.ALIGN.START,
-            justify: Styles.JUSTIFY.CENTER,
+            justify: Styles.JUSTIFY.START,
         });
-        block.add(new Paragraph("Контент внутри ContentBlock"));
-        block.add(new Button({ title: "Кнопка в блоке" }));
-        this.add(block);
+        block.add(new Paragraph("ContentBlock — контейнер с настраиваемой flex-раскладкой."));
+        block.add(new Button({ title: "Кнопка внутри блока" }));
+        mount(body, block);
 
         let fieldset = new FieldSet({
             title: "FieldSet",
@@ -281,19 +835,15 @@ class Maket extends Page {
                 direction: Styles.DIRECTION.COLUMN,
                 wrap: Styles.WRAP.NOWRAP,
                 align: Styles.ALIGN.START,
-                justify: Styles.JUSTIFY.CENTER,
+                justify: Styles.JUSTIFY.START,
             },
-            components: [new TextInput({ title: "Имя" }), new TextInput({ title: "Email" })],
+            components: [new TextInput({ title: "Имя" }), new TextInput({ title: "Почта" })],
         });
-        this.add(fieldset);
-
-        let html = new HtmlBlock(Styles.SIZE.MAX_CONTENT);
-        html.setHtml("<p>HtmlBlock — <b>HTML</b>-содержимое</p>");
-        this.add(html);
+        mount(body, fieldset);
 
         let details = new Details({ title: "Details — раскрывающийся блок", width: Styles.SIZE.WEBKIT_FILL });
-        details.add(new Paragraph("Скрытое содержимое Details"));
-        this.add(details);
+        details.add(new Paragraph("Скрытое содержимое Details."));
+        mount(body, details);
 
         let custom = new CustomElement({
             tag: "div",
@@ -301,17 +851,55 @@ class Maket extends Page {
             className: "custom_maket_class",
             pathToCSS: __dirname + "/styles.css",
         });
-        custom.innerHTML("Кастомный элемент (CustomElement)");
+        custom.innerText("CustomElement — свой тег, класс и внешний CSS");
         custom.addEventListener("click", () =>
-            new Notification({ title: "CustomElement", text: "Клик!", showTime: 2000 }).show()
+            new Notification({ title: "CustomElement", text: "Клик по элементу", showTime: 2000 }).show()
         );
-        this.add(custom);
+        mount(body, custom);
     }
 
-    // ----------------------------------------------------------
-    // Form
-    // ----------------------------------------------------------
-    #forms() {
+    #cardDemo(body) {
+        note(body, "Card — шапка собирается из icon, title и description");
+        let full = new Card({
+            title: "Карточка раздела",
+            description: "Иконка, заголовок и описание",
+            icon: Icons.FILE.GRID_VIEW,
+            width: "320px",
+        });
+        full.add(
+            new Paragraph("Внутрь карточки добавляются любые компоненты фреймворка."),
+            new Button({ title: "Действие" })
+        );
+
+        note(body, "Без описания и без шапки");
+        let compact = new Card({ title: "Только заголовок", width: "240px" });
+        compact.add(new Badge({ text: "Card", style: Badge.STYLE.SUCCESS }));
+
+        let plain = new Card({ width: "240px" });
+        plain.add(new Paragraph("Шапка не выводится, если не заданы icon, title и description."));
+
+        row(body, full, compact, plain);
+    }
+
+    #heroDemo(body) {
+        note(body, "Hero — шапка страницы из иконки, заголовка, описания и статистики");
+        let full = new Hero({
+            title: "Шапка страницы",
+            description: "Иконка, заголовок, описание и строка со статистикой.",
+            icon: Icons.IMAGE.PALETTE,
+            stats: [
+                { value: "12", label: "разделов" },
+                { value: "48", label: "компонентов" },
+            ],
+        });
+
+        note(body, "Без иконки, описания и статистики");
+        let plain = new Hero({ title: "Только заголовок" });
+
+        col(body, full, plain);
+    }
+
+    #form(body) {
         let name = new TextInput({ name: "name", title: "Имя", placeholder: "Имя", width: "300px", required: true });
         let email = new TextInput({
             name: "email",
@@ -320,9 +908,9 @@ class Maket extends Page {
             width: "300px",
             required: true,
         });
-        let msg = new TextArea({ name: "text", title: "Сообщение", width: "300px", required: true });
+        let message = new TextArea({ name: "text", title: "Сообщение", width: "300px", required: true });
         let form = new Form({
-            components: [name, email, msg, Form.SubmitButton("Отправить")],
+            components: [name, email, message, Form.SubmitButton("Отправить")],
             submitEvent: (e) => {
                 e.preventDefault();
                 new Notification({
@@ -333,13 +921,10 @@ class Maket extends Page {
                 }).show();
             },
         });
-        this.add(form);
+        mount(body, form);
     }
 
-    // ----------------------------------------------------------
-    // Table
-    // ----------------------------------------------------------
-    #tables() {
+    #table(body) {
         let search = new TextInput({ title: "Поиск по таблице" });
         let table = new Table({
             data: [
@@ -356,122 +941,61 @@ class Maket extends Page {
         search.addInputListener((e) => {
             table.setFilterByMultiProperty(Table.FILTER_TYPE.PARTIAL_MATCH, ["car", "model", "size"], e.target.value);
         });
-        this.add(search, table);
+        mount(body, search);
+        body.appendChild(wrap("maket_scroll_x", table.set()));
     }
 
-    // ----------------------------------------------------------
-    // Tabs
-    // ----------------------------------------------------------
-    #tabs() {
-        let tabOne = new Tab("Вкладка 1");
-        tabOne.addContent(new TextInput({ title: "Поле 1", width: "300px" }));
-        let tabTwo = new Tab("Вкладка 2");
-        tabTwo.addContent(new Paragraph("Содержимое вкладки 2"));
-        let tabThree = new Tab("Вкладка 3");
-        tabThree.addContent(new Button({ title: "Кнопка" }));
-        let tabs = new Tabs({ default: 0, width: Styles.SIZE.MAX_CONTENT, tabs: [tabOne, tabTwo, tabThree] });
-        this.add(tabs);
+    #tabs(body) {
+        let first = new Tab("Вкладка 1");
+        first.addContent(new TextInput({ title: "Поле 1", width: "300px" }));
+        let second = new Tab("Вкладка 2");
+        second.addContent(new Paragraph("Содержимое вкладки 2"));
+        let third = new Tab("Вкладка 3");
+        third.addContent(new Button({ title: "Кнопка" }));
+        let tabs = new Tabs({ default: 0, width: Styles.SIZE.WEBKIT_FILL, tabs: [first, second, third] });
+        mount(body, tabs);
     }
 
-    // ----------------------------------------------------------
-    // Accordion
-    // ----------------------------------------------------------
-    #accordion() {
+    #accordion(body) {
         let accordion = new Accordion([
             { b_text: "Раздел 1", p_text: "Текст раздела 1" },
             { b_text: "Раздел 2", p_text: "Текст раздела 2" },
             { b_text: "Раздел 3", p_text: "Текст раздела 3" },
         ]);
-        this.add(accordion);
+        mount(body, accordion);
     }
 
-    // ----------------------------------------------------------
-    // TreeView
-    // ----------------------------------------------------------
-    #treeView() {
-        let treeView = new TreeView({
-            width: "400px",
+    #tree(body) {
+        let tree = new TreeView({
+            width: Styles.SIZE.WEBKIT_FILL,
             components: [
-                TreeView.Button({ title: "Главная", listener: () => Log.info("Главная") }),
+                TreeView.Button({ title: "Главная", listener: () => Log.info("TreeView: Главная") }),
                 TreeView.ExpandButton({
                     title: "Страницы",
                     subButtons: [
-                        TreeView.Button({ title: "Страница 1", listener: () => Log.info("Страница 1") }),
-                        TreeView.Button({ title: "Страница 2", listener: () => Log.info("Страница 2") }),
+                        TreeView.Button({ title: "Страница 1", listener: () => Log.info("TreeView: Страница 1") }),
+                        TreeView.Button({ title: "Страница 2", listener: () => Log.info("TreeView: Страница 2") }),
                     ],
                 }),
             ],
         });
-        this.add(treeView);
+        mount(body, tree);
     }
 
-    // ----------------------------------------------------------
-    // MenuBar (в шапку страницы)
-    // ----------------------------------------------------------
-    #menuBar() {
-        const notify = (text) =>
-            new Notification({ title: "Меню", text, style: Notification.STYLE.SUCCESS, showTime: 3000 }).show();
-        const menuItem = (title, icon) =>
-            new Button({ title, icon, reverse: true, clickEvent: () => notify(title) });
-
-        let menuBar = new MenuBar({ test: true });
-        menuBar.addMenuItems(
-            new Button({ icon: Icons.NAVIGATION.MENU, clickEvent: () => notify("Главное меню") }),
-            MenuBar.DROPDOWN({
-                title: "Файл",
-                items: [
-                    menuItem("Создать", Icons.CONTENT.ADD),
-                    menuItem("Открыть", Icons.FILE.FOLDER_OPEN),
-                    menuItem("Сохранить", Icons.CONTENT.SAVE),
-                    menuItem("Экспорт", Icons.FILE.FILE_UPLOAD),
-                ],
-            }),
-            MenuBar.DROPDOWN({
-                title: "Правка",
-                items: [
-                    menuItem("Копировать", Icons.CONTENT.CONTENT_COPY),
-                    menuItem("Вставить", Icons.CONTENT.SEND),
-                    menuItem("Удалить", Icons.ACTIONS.DELETE),
-                ],
-            }),
-            MenuBar.DROPDOWN({
-                title: "Вид",
-                items: [
-                    menuItem("Обновить", Icons.ACTIONS.AUTORENEW),
-                    menuItem("Настройки", Icons.ACTIONS.SETTINGS),
-                ],
-            }),
-            MenuBar.DROPDOWN({
-                title: "Справка",
-                items: [
-                    menuItem("Справка", Icons.ACTIONS.HELP_OUTLINE),
-                    menuItem("О программе", Icons.ACTIONS.INFO),
-                ],
-            })
-        );
-        this.setMenuBar(menuBar);
-    }
-
-    // ----------------------------------------------------------
-    // BarGraph, PieGraph
-    // ----------------------------------------------------------
-    #graphs() {
+    #graphs(body) {
         let bar = new BarGraph({
             colors: ["#0a84ff", "#34c759", "#ff9f0a", "#ff3b30"],
-            data: { "Янв": 100, "Фев": 200, "Мар": 150, "Апр": 120 },
+            data: { Янв: 100, Фев: 200, Мар: 150, Апр: 120, Май: 90 },
         });
         let pie = new PieGraph({
             colors: ["#0a84ff", "#34c759", "#ff9f0a"],
             legend: true,
-            data: { "Первый": 50, "Второй": 30, "Третий": 20 },
+            data: { Первый: 50, Второй: 30, Третий: 20 },
         });
-        this.add(bar, pie);
+        body.appendChild(wrap("maket_row", bar.set(), pie.set()));
     }
 
-    // ----------------------------------------------------------
-    // TextEditor
-    // ----------------------------------------------------------
-    #textEditor() {
+    #editor(body) {
         let editor = new TextEditor("100%", {
             title: "TextEditor",
             controls: {
@@ -493,96 +1017,81 @@ class Maket extends Page {
                 LINE_BREAK: true,
             },
         });
-        this.add(editor);
+        mount(body, editor);
     }
 
-    // ----------------------------------------------------------
-    // Console
-    // ----------------------------------------------------------
-    #console() {
-        let console_ = new Console({ width: "600px" });
-        console_.addText("Первая строка Console");
-        console_.addText("Вторая строка Console");
-        this.add(console_);
+    #console(body) {
+        let console_ = new Console({ width: Styles.SIZE.WEBKIT_FILL, height: "240px" });
+        console_.addText("$ npm run start");
+        console_.addText("chUiJS: приложение запущено");
+        console_.addText("Console.addText() добавляет строку в буфер");
+        mount(body, console_);
     }
 
-    // ----------------------------------------------------------
-    // SlideShow
-    // ----------------------------------------------------------
-    #slideShow() {
+    #slideshow(body) {
+        const slide = (title, text) =>
+            SlideShow.SLIDE({
+                size: { width: Styles.SIZE.WEBKIT_FILL, height: Styles.SIZE.WEBKIT_FILL },
+                style: {
+                    direction: Styles.DIRECTION.ROW,
+                    wrap: Styles.WRAP.WRAP,
+                    align: Styles.ALIGN.CENTER,
+                    justify: Styles.JUSTIFY.CENTER,
+                },
+                components: [new H(3, title), new Paragraph(text)],
+            });
         let slideshow = new SlideShow({
             width: Styles.SIZE.WEBKIT_FILL,
             height: "300px",
             autoplay: { status: false, interval: 5 },
             slides: [
-                SlideShow.SLIDE({
-                    size: { width: Styles.SIZE.WEBKIT_FILL, height: Styles.SIZE.WEBKIT_FILL },
-                    style: {
-                        direction: Styles.DIRECTION.ROW,
-                        wrap: Styles.WRAP.WRAP,
-                        align: Styles.ALIGN.CENTER,
-                        justify: Styles.JUSTIFY.CENTER,
-                    },
-                    components: [new H(3, "Слайд 1"), new Paragraph("Первый слайд")],
-                }),
-                SlideShow.SLIDE({
-                    size: { width: Styles.SIZE.WEBKIT_FILL, height: Styles.SIZE.WEBKIT_FILL },
-                    style: {
-                        direction: Styles.DIRECTION.ROW,
-                        wrap: Styles.WRAP.WRAP,
-                        align: Styles.ALIGN.CENTER,
-                        justify: Styles.JUSTIFY.CENTER,
-                    },
-                    components: [new H(3, "Слайд 2"), new Paragraph("Второй слайд")],
-                }),
+                slide("Слайд 1", "Первый слайд"),
+                slide("Слайд 2", "Второй слайд"),
+                slide("Слайд 3", "Третий слайд"),
             ],
         });
-        this.add(slideshow);
+        mount(body, slideshow);
     }
 
-    // ----------------------------------------------------------
-    // Image, Audio, Video
-    // ----------------------------------------------------------
-    #media() {
-        // 1x1 прозрачный PNG в base64, чтобы показать рендер Image без файла
-        const tinyPng =
-            "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
-        let image = new Image({ base64: tinyPng, width: "120px", height: "90px", openPopup: false });
-        this.add(image);
-
-        let audio = new Audio({ width: "500px" });
-        this.add(audio);
-
-        let video = new Video({ autoplay: false, width: "450px", height: "auto" });
-        this.add(video);
+    #media(body) {
+        let image = new Image({
+            path: __dirname + "/../../framework/modules/chui_icon.png",
+            width: "96px",
+            height: "96px",
+            openPopup: true,
+        });
+        row(body, image);
+        note(body, "Audio и Video");
+        mount(body, new Audio({ width: Styles.SIZE.WEBKIT_FILL }));
+        mount(body, new Video({ autoplay: false, width: Styles.SIZE.WEBKIT_FILL, height: "auto" }));
     }
 
-    // ----------------------------------------------------------
-    // WebView
-    // ----------------------------------------------------------
-    #webView() {
-        let web = new WebView("about:blank", false);
-        this.add(web);
+    #webview(body) {
+        const html =
+            '<body style="margin:0;height:100vh;display:flex;align-items:center;justify-content:center;' +
+            'font:600 15px system-ui;background:#0a84ff;color:#fff">WebView внутри карточки макета</body>';
+        let web = new WebView("data:text/html;charset=utf-8," + encodeURIComponent(html), false);
+        body.appendChild(wrap("maket_frame", web.set()));
     }
 
-    // ----------------------------------------------------------
-    // Notification + специальные уведомления
-    // ----------------------------------------------------------
-    #notifications() {
-        let mk = (title, style) =>
+    #notifications(body) {
+        let simple = (title, style) =>
             new Button({
                 title,
                 clickEvent: () =>
                     new Notification({ title, text: "Текст уведомления", style, showTime: 4000 }).show(),
             });
-        this.add(
-            mk("Notification обычное"),
-            mk("Notification успех", Notification.STYLE.SUCCESS),
-            mk("Notification предупреждение", Notification.STYLE.WARNING),
-            mk("Notification ошибка", Notification.STYLE.ERROR)
+        note(body, "Notification");
+        row(
+            body,
+            simple("Обычное", undefined),
+            simple("Успех", Notification.STYLE.SUCCESS),
+            simple("Предупреждение", Notification.STYLE.WARNING),
+            simple("Ошибка", Notification.STYLE.ERROR)
         );
-
-        this.add(
+        note(body, "Специальные уведомления");
+        row(
+            body,
             new Button({
                 title: "UpdateNotification",
                 clickEvent: () =>
@@ -590,78 +1099,78 @@ class Maket extends Page {
             }),
             new Button({
                 title: "DownloadNotification",
-                clickEvent: () =>
-                    new DownloadNotification({ title: "Скачивание", text: "Файл загружается" }).show(),
+                clickEvent: () => new DownloadNotification({ title: "Скачивание", text: "Файл загружается" }).show(),
             }),
             new Button({
                 title: "DownloadProgressNotification",
-                clickEvent: () => {
-                    let notif = new DownloadProgressNotification({ title: "Загрузка файла", max: 100 });
-                    notif.show();
-                    let v = 0;
-                    let t = setInterval(() => {
-                        v += 10;
-                        notif.update("Загрузка файла", `Файл ${v}`, v, 100);
-                        if (v >= 100) {
-                            notif.done();
-                            clearInterval(t);
-                        }
-                    }, 300);
-                },
+                clickEvent: () => this.#downloadProgress(),
             })
         );
     }
 
-    // ----------------------------------------------------------
-    // Dialog, Popup
-    // ----------------------------------------------------------
-    #dialogs() {
-        let dialog = new Dialog({ width: "400px", height: "250px", closeOutSideClick: true });
-        dialog.addToHeader(new Paragraph("Содержимое диалога"));
-        dialog.addToHeader(new Button({ title: "Закрыть", clickEvent: () => dialog.close() }));
-        this.add(new Button({ title: "Открыть Dialog", clickEvent: () => dialog.open() }), dialog);
+    #downloadProgress() {
+        let notification = new DownloadProgressNotification({ title: "Загрузка файла", max: 100 });
+        notification.show();
+        let value = 0;
+        let timer = setInterval(() => {
+            value += 10;
+            notification.update("Загрузка файла", `Файл ${value}`, value, 100);
+            if (value >= 100) {
+                notification.done();
+                clearInterval(timer);
+            }
+        }, 300);
+    }
+
+    #dialogs(body) {
+        let dialog = new Dialog({ width: "420px", height: "260px", closeOutSideClick: true });
+        dialog.addToHeader(new Paragraph("Dialog — модальное окно"));
+        dialog.addToHeader(new Button({ title: "Закрыть", icon: Icons.NAVIGATION.CLOSE, clickEvent: () => dialog.close() }));
+        dialog.addToBody(new Paragraph("Содержимое задаётся через addToBody()."));
+        dialog.addToFooter(new Button({ title: "Понятно", clickEvent: () => dialog.close() }));
+
+        note(body, "Dialog");
+        row(body, new Button({ title: "Открыть Dialog", icon: Icons.NAVIGATION.APPS, clickEvent: () => dialog.open() }));
+        mount(body, dialog);
 
         let popup = new Popup();
-        this.add(
+        note(body, "Popup");
+        row(
+            body,
             new Button({
-                title: "Popup.alert",
+                title: "alert",
                 clickEvent: () => popup.alert({ title: "Информация", message: "Обычное сообщение" }),
             }),
-            new Button({
-                title: "Popup.confirm",
-                clickEvent: async () => {
-                    let res = await popup.confirm({
-                        title: "Подтверждение",
-                        message: "Вы уверены?",
-                        okText: "OK",
-                        cancelText: "Отмена",
-                    });
-                    Log.info("confirm: " + res);
-                },
-            }),
-            new Button({
-                title: "Popup.prompt",
-                clickEvent: async () => {
-                    let res = await popup.prompt({
-                        title: "Ввод данных",
-                        message: "Введите пароль",
-                        okText: "Войти",
-                        cancelText: "Отмена",
-                        inputs: {
-                            password: { placeholder: "Пароль", errorMessage: "Заполните поле" },
-                        },
-                    });
-                    Log.info("prompt: " + res);
-                },
-            })
+            new Button({ title: "confirm", clickEvent: () => this.#popupConfirm(popup) }),
+            new Button({ title: "prompt", clickEvent: () => this.#popupPrompt(popup) })
         );
     }
 
-    // ----------------------------------------------------------
-    // ContextMenu (прикрепляется к кнопке, открывается ПКМ)
-    // ----------------------------------------------------------
-    #contextMenu() {
-        let button = new Button({ title: "ПКМ по кнопке — контекстное меню" });
+    async #popupConfirm(popup) {
+        let result = await popup.confirm({
+            title: "Подтверждение",
+            message: "Вы уверены?",
+            okText: "OK",
+            cancelText: "Отмена",
+        });
+        Log.info("Popup.confirm: " + result);
+    }
+
+    async #popupPrompt(popup) {
+        let result = await popup.prompt({
+            title: "Ввод данных",
+            message: "Введите пароль",
+            okText: "Войти",
+            cancelText: "Отмена",
+            inputs: {
+                password: { placeholder: "Пароль", errorMessage: "Заполните поле" },
+            },
+        });
+        Log.info("Popup.prompt: " + result);
+    }
+
+    #contextMenu(body) {
+        let button = new Button({ title: "Нажмите ПКМ по кнопке" });
         let menu = new ContextMenu({
             items: [
                 ContextMenu.Item({ title: "Копировать", icon: Icons.CONTENT.CONTENT_COPY, shortcut: "Ctrl+C" }),
@@ -673,42 +1182,116 @@ class Maket extends Page {
             ],
         });
         menu.attach(button.set());
-        this.add(button);
+        row(body, button);
+    }
+
+    #icons(body) {
+        let gallery = div("maket_icons");
+        for (let name of ICON_NAMES) {
+            let item = div("maket_icon");
+            item.title = name;
+            item.appendChild(new Icon(name, "22px").set());
+            item.appendChild(div("maket_icon_name", name));
+            item.addEventListener("click", () =>
+                new Notification({ title: "Icon", text: name, showTime: 2000 }).show()
+            );
+            gallery.appendChild(item);
+        }
+        body.appendChild(gallery);
+    }
+
+    #calendar(body) {
+        const today = new Date();
+        const calendar = new Calendar(today.getFullYear(), today.getMonth() + 1);
+        const weeks = calendar.getCalendar();
+
+        body.appendChild(div("maket_cal_title", `${calendar.getMonthName()} ${calendar.getYear()}`));
+        let grid = div("maket_cal");
+        for (let name of weeks[0]) grid.appendChild(div("maket_cal_week", name || ""));
+
+        let lastWeek = 0;
+        for (let i = 1; i < weeks.length; i++) {
+            if (weeks[i].some((day) => day !== undefined)) lastWeek = i;
+        }
+        for (let i = 1; i <= lastWeek; i++) {
+            for (let day of weeks[i]) {
+                if (day === undefined) {
+                    grid.appendChild(div("maket_cal_day maket_cal_day_empty", ""));
+                    continue;
+                }
+                let cell = div("maket_cal_day", String(day));
+                if (Number(day) === today.getDate()) cell.classList.add("maket_cal_day_today");
+                grid.appendChild(cell);
+            }
+        }
+        body.appendChild(grid);
+        note(body, `Сегодня: ${today.toLocaleDateString()}`);
+    }
+
+    #menubar(body) {
+        note(body, "Меню вынесено в шапку приложения");
+        mount(
+            body,
+            new Paragraph("MenuBar собирается из кнопок и выпадающих списков и передаётся в Page.setMenuBar().")
+        );
+        row(
+            body,
+            ...["Файл", "Правка", "Вид", "Справка"].map(
+                (section) =>
+                    new Button({
+                        title: section,
+                        icon: Icons.NAVIGATION.ARROW_DROP_DOWN,
+                        reverse: true,
+                        clickEvent: () =>
+                            new Notification({
+                                title: "Меню",
+                                text: `Раздел «${section}» — в шапке окна`,
+                                showTime: 2500,
+                            }).show(),
+                    })
+            )
+        );
     }
 
     // ----------------------------------------------------------
-    // Icons
+    // Меню приложения
     // ----------------------------------------------------------
-    #icons() {
-        let names = [
-            Icons.NAVIGATION.CLOSE,
-            Icons.NAVIGATION.CHECK,
-            Icons.MAPS.MAP,
-            Icons.FILE.FILE_DOWNLOAD,
-            Icons.FILE.APPROVAL,
-            Icons.CONTENT.CONTENT_COPY,
-            Icons.CONTENT.SEND,
-            Icons.CONTENT.MAIL,
-            Icons.ACTIONS.SETTINGS,
-            Icons.ACTIONS.CHECK_CIRCLE,
-            Icons.ACTIONS.DELETE,
-            Icons.ACTIONS.DESCRIPTION,
-            Icons.ACTIONS.LOCK,
-            Icons.SOCIAL.PERSON,
-            Icons.ALERT.ERROR,
-            Icons.EDITOR.FORMAT_BOLD,
-        ];
-        for (let n of names) this.add(new Icon(n, "24px"));
-    }
 
-    // ----------------------------------------------------------
-    // Calendar — логическая модель без DOM, отрисовывается только сетка
-    // ----------------------------------------------------------
-    #calendar() {
-        let now = new Date();
-        let cal = new Calendar(now.getFullYear(), now.getMonth() + 1);
-        Log.info(`Calendar ${cal.getMonthName()} ${cal.getYear()} заполнен`);
-        this.add(new Paragraph(`Calendar — данные за ${cal.getMonthName()} ${cal.getYear()} сформированы (см. консоль).`));
+    #menuBar() {
+        const notify = (title) =>
+            new Notification({ title: "Меню", text: title, style: Notification.STYLE.SUCCESS, showTime: 3000 }).show();
+        const item = (title, icon) => new Button({ title, icon, reverse: true, clickEvent: () => notify(title) });
+
+        let menuBar = new MenuBar({ test: true });
+        menuBar.addMenuItems(
+            new Button({ icon: Icons.NAVIGATION.MENU, clickEvent: () => notify("Главное меню") }),
+            MenuBar.DROPDOWN({
+                title: "Файл",
+                items: [
+                    item("Создать", Icons.CONTENT.ADD),
+                    item("Открыть", Icons.FILE.FOLDER_OPEN),
+                    item("Сохранить", Icons.CONTENT.SAVE),
+                    item("Экспорт", Icons.FILE.FILE_UPLOAD),
+                ],
+            }),
+            MenuBar.DROPDOWN({
+                title: "Правка",
+                items: [
+                    item("Копировать", Icons.CONTENT.CONTENT_COPY),
+                    item("Вставить", Icons.CONTENT.CONTENT_PASTE),
+                    item("Удалить", Icons.ACTIONS.DELETE),
+                ],
+            }),
+            MenuBar.DROPDOWN({
+                title: "Вид",
+                items: [item("Обновить", Icons.ACTIONS.AUTORENEW), item("Настройки", Icons.ACTIONS.SETTINGS)],
+            }),
+            MenuBar.DROPDOWN({
+                title: "Справка",
+                items: [item("Справка", Icons.ACTIONS.HELP_OUTLINE), item("О программе", Icons.ACTIONS.INFO)],
+            })
+        );
+        this.setMenuBar(menuBar);
     }
 }
 

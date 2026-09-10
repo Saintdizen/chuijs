@@ -67,7 +67,7 @@ chui_next_slide:hover chui_icon, chui_prev_slide:hover chui_icon {
     height: 15px;
     width: 15px;
     margin: 0 2px;
-    background-color: var(--element_background_2);
+    background-color: var(--element_background);
     border-radius: var(--radius_circle);
     display: inline-block
 }

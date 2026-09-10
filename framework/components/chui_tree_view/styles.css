@@ -17,6 +17,7 @@ chui_tree_view_main_test {
     font-size: var(--font_default_size);
     font-weight:500;
     border-radius: var(--border_radius);
+    background: var(--element_background);
     border: none;
 }
 

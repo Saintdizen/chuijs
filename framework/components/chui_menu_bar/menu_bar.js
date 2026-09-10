@@ -37,17 +37,18 @@ class MenuBarDropDown {
         // Слушатели
         this.#mb_dd_button.addEventListener("click", this.#mb_dd_button_click_event);
         this.#mb_dd_dropdown.addEventListener("click", this.#mb_dd_dropdown_click_event);
-        window.addEventListener('click', this.#window_click_event);
     }
     #open() {
         this.#is_open = true;
         this.#mb_dd_button.classList.add(MENU_BAR_DROP_DOWN_ACTIVE_CLASS);
         new Animation(this.#mb_dd_dropdown).fadeIn();
+        window.addEventListener('click', this.#window_click_event);
     }
     #close() {
         this.#is_open = false;
         this.#mb_dd_button.classList.remove(MENU_BAR_DROP_DOWN_ACTIVE_CLASS);
         new Animation(this.#mb_dd_dropdown).fadeOut();
+        window.removeEventListener('click', this.#window_click_event);
     }
     #mb_dd_button_click_event = () => {
         if (this.#is_open) this.#close(); else this.#open();

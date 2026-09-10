@@ -12,7 +12,7 @@ chui_form_main {
     font-size: var(--font_default_size);
     font-weight: 400;
     margin: var(--margin);
-    background: var(--element_background_2);
+    background: var(--button_background);
     color: var(--text_color);
 }
 

@@ -1,5 +1,5 @@
 canvas {
-    background: var(--main_background);
+    background: var(--element_background_2);
     height: max-content;
     width: max-content;
     border-radius: var(--border_radius);

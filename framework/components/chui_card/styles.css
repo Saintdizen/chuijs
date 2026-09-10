@@ -1,0 +1,72 @@
+chui_card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+    width: max-content;
+    height: max-content;
+    padding: 14px 16px 16px 16px;
+    border: 1px solid var(--border_color);
+    border-radius: var(--radius_md);
+    background: var(--element_background_2);
+    box-shadow: var(--box_shadow_main);
+    font-size: var(--font_default_size);
+    color: var(--text_color);
+    text-align: left;
+}
+
+chui_card card_head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border_color);
+}
+
+chui_card card_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius_sm);
+    background: var(--button_background);
+}
+
+chui_card card_icon chui_icon {
+    font-size: 20px;
+    color: var(--blue_prime_background);
+}
+
+chui_card card_titles {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+}
+
+chui_card card_title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text_color);
+}
+
+chui_card card_description {
+    font-size: 12px;
+    color: var(--text_color_disabled);
+}
+
+chui_card card_body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    width: -webkit-fill-available;
+}
+
+/* У <p> из chui_paragraph ширина max-content, поэтому абзац растягиваем по карточке */
+chui_card card_body > p {
+    align-self: stretch;
+    width: -webkit-fill-available;
+}

@@ -75,12 +75,8 @@ class ComboBox {
                     new Animation(this.#dropdown).fadeIn();
                     setOptionDisplay(document.getElementById(this.#id));
                     this.#setDropdownDirection();
+                    window.addEventListener('click', this.#window_click_event);
                 }
-            }
-        });
-        window.addEventListener('click', (event) => {
-            if (event.target.parentNode !== this.#ComboBox_second) {
-                new Animation(this.#dropdown).fadeOut();
             }
         });
 
@@ -148,6 +144,12 @@ class ComboBox {
         this.#ComboBox_main.removeAttribute("option_title");
         this.#ComboBox_main.removeAttribute("option_value");
         this.#input.value = ""
+    }
+    #window_click_event = (event) => {
+        if (event.target.parentNode !== this.#ComboBox_second) {
+            window.removeEventListener('click', this.#window_click_event);
+            new Animation(this.#dropdown).fadeOut();
+        }
     }
     #setDropdownDirection() {
         const openUp = shouldOpenDropdownUp(this.#dropdown, this.#ComboBox_second);

@@ -6,7 +6,7 @@
     margin: var(--margin);
     background: var(--element_background);
     border: none;
-    box-shadow: 0 0 1px 0 var(--element_background_2);
+    box-shadow: 0 0 1px 0 var(--border_color);
 }
 
 .switch input {

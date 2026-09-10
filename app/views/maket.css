@@ -1,0 +1,256 @@
+/* Витрина компонентов chUiJS: каркас страницы макета.
+   Стили относятся только к оформлению макета, компоненты фреймворка не переопределяются. */
+
+.maket {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: -webkit-fill-available;
+    padding: 2px 2px 36px 2px;
+    box-sizing: border-box;
+    /* AppLayout кладёт страницу в <center>, поэтому центрирование текста наследуется */
+    text-align: left;
+}
+
+/* ---------- Шапка витрины — компонент Hero (framework/components/chui_hero) ---------- */
+
+.maket_toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.maket_toolbar_hint {
+    padding-bottom: 8px;
+    font-size: 12px;
+    color: var(--text_color_disabled);
+}
+
+/* ---------- Навигация по секциям ---------- */
+.maket_nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px 12px;
+    border: 1px solid var(--border_color);
+    border-radius: var(--radius_md);
+    background: var(--header_background);
+    backdrop-filter: var(--global_blur);
+    box-shadow: var(--box_shadow_main);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.maket_chip {
+    cursor: pointer;
+    height: max-content;
+    width: max-content;
+    padding: 5px 11px;
+    border: 1px solid var(--border_color);
+    border-radius: var(--radius_pill);
+    background: var(--button_background);
+    color: var(--text_color);
+    font-size: 12px;
+    font-weight: 500;
+    font-family: inherit;
+}
+
+.maket_chip:hover {
+    background: var(--blue_prime_background);
+    border-color: var(--button_border_color_hover);
+    color: var(--text_color_hover);
+}
+
+.maket_chip:active {
+    background: var(--element_background_prime);
+    color: var(--text_color_hover);
+}
+
+/* ---------- Сетка карточек ---------- */
+.maket_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(470px, 1fr));
+    gap: 12px;
+    align-items: start;
+    width: -webkit-fill-available;
+}
+
+/* Карточки разделов — компонент Card (framework/components/chui_card) */
+.maket_grid > chui_card {
+    width: -webkit-fill-available;
+    scroll-margin-top: 76px;
+}
+
+.maket_card_wide {
+    grid-column: span 2;
+}
+
+/* Группы внутри карточки */
+.maket_row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    width: -webkit-fill-available;
+}
+
+.maket_col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: -webkit-fill-available;
+}
+
+.maket_note {
+    margin-top: 2px;
+    font-size: 10px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text_color_disabled);
+}
+
+.maket_scroll_x {
+    width: -webkit-fill-available;
+    overflow-x: auto;
+}
+
+.maket_frame {
+    display: flex;
+    width: -webkit-fill-available;
+    height: 260px;
+    border: 1px solid var(--border_color);
+    border-radius: var(--radius_md);
+    overflow: hidden;
+    background: var(--element_background);
+}
+
+/* Календарь, построенный по данным компонента Calendar */
+.maket_cal_title {
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: var(--text_color);
+}
+
+.maket_cal {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    width: -webkit-fill-available;
+}
+
+.maket_cal_week,
+.maket_cal_day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+    border-radius: var(--radius_sm);
+    font-size: 12px;
+}
+
+.maket_cal_week {
+    font-weight: 600;
+    color: var(--text_color_disabled);
+}
+
+.maket_cal_day {
+    border: 1px solid var(--border_color);
+    background: var(--element_background);
+    color: var(--text_color);
+}
+
+.maket_cal_day_today {
+    border-color: var(--button_border_color_hover);
+    background: var(--blue_prime_background);
+    font-weight: 600;
+    color: var(--text_color_hover);
+}
+
+.maket_cal_day_empty {
+    border-color: transparent;
+    background: transparent;
+}
+
+/* ---------- Служебные элементы ---------- */
+.maket_error {
+    padding: 8px 10px;
+    border-radius: var(--radius_sm);
+    background: var(--badge_error_back);
+    color: var(--badge_error_text);
+    font-size: 12px;
+}
+
+.maket_empty {
+    display: none;
+    padding: 28px;
+    text-align: center;
+    color: var(--text_color_disabled);
+    font-size: 13px;
+}
+
+.maket_empty_visible {
+    display: block;
+}
+
+.maket_hidden {
+    display: none !important;
+}
+
+/* ---------- Галерея иконок ---------- */
+.maket_icons {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(86px, 1fr));
+    gap: 6px;
+    width: -webkit-fill-available;
+    max-height: 360px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.maket_icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 9px 4px;
+    border: 1px solid var(--border_color);
+    border-radius: var(--radius_sm);
+    background: var(--element_background);
+}
+
+.maket_icon chui_icon {
+    font-size: 22px;
+    color: var(--text_color);
+}
+
+.maket_icon_name {
+    font-size: 10px;
+    line-height: 1.2;
+    text-align: center;
+    word-break: break-all;
+    color: var(--text_color_disabled);
+}
+
+.maket_icon:hover {
+    background: var(--blue_prime_background);
+    border-color: var(--button_border_color_hover);
+}
+
+.maket_icon:hover chui_icon,
+.maket_icon:hover .maket_icon_name {
+    color: var(--text_color_hover);
+}
+
+@media (max-width: 1080px) {
+    .maket_grid {
+        grid-template-columns: 1fr;
+    }
+
+    .maket_card_wide {
+        grid-column: auto;
+    }
+}

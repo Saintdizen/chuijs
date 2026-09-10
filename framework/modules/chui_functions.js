@@ -5,12 +5,13 @@ function sleep(ms) {
 }
 
 function setStyles(pathToCSS = String(), component = String()) {
+    if (document.getElementById(component) != null) return;
     let data = fs.readFileSync(pathToCSS, 'utf8');
     let style = document.createElement('style');
     style.innerHTML = String(data);
     style.type = 'text/css';
     style.setAttribute('id', component);
-    if (document.getElementById(component) == null) document.head.appendChild(style);
+    document.head.appendChild(style);
 }
 
 function style_parse(json, component) {
@@ -31,8 +32,20 @@ function style_parse(json, component) {
     if (document.getElementById(component) == null) document.head.appendChild(style);
 }
 
-const render = async (rendez) =>  {
-    window.addEventListener('DOMContentLoaded', rendez)
+const render = (rendez) => {
+    return new Promise((resolve, reject) => {
+        const run = () => {
+            try {
+                const result = rendez();
+                if (result instanceof Promise) result.then(resolve, reject);
+                else resolve(result);
+            } catch (e) {
+                reject(e);
+            }
+        };
+        if (document.readyState === 'loading') window.addEventListener('DOMContentLoaded', run, { once: true });
+        else run();
+    });
 }
 
 function getDefaultIcon() {

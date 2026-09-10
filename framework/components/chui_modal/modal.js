@@ -52,6 +52,12 @@ class Dialog {
         }
     }
 
+    #resizeEvent = () => {
+        const dialog = document.getElementById(this.#id);
+        if (dialog === null) return;
+        this.#setCenter(dialog, window)
+    }
+
     addToHeader(...components) {
         this.#dialog.insertBefore(this.#header, this.#body)
         for (let component of components) this.#header.appendChild(component.set());
@@ -91,7 +97,7 @@ class Dialog {
         //     this.#setCenter(dialog, window)
         // }
 
-        window.addEventListener("resize", (event) => this.#setCenter(dialog, event.currentTarget))
+        window.addEventListener("resize", this.#resizeEvent)
         new Animation(dialog).fadeIn();
         this.#setCenter(dialog, window)
     }
@@ -106,6 +112,7 @@ class Dialog {
 
     close() {
         window.removeEventListener("click", this.#closeOutsideEvent)
+        window.removeEventListener("resize", this.#resizeEvent)
         this.isOpen = false
         const dialog = document.getElementById(this.#id);
         new Animation(dialog).fadeOut();

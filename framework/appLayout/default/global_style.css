@@ -1,6 +1,6 @@
 :root {
     --global_blur: saturate(180%) blur(30px);
-    --main_padding: 8px 11px;
+    --main_padding: 8px 13px;
     --test_padding: 8px;
     --header_icon_size: 13pt;
     --font_default_size: 14px;
@@ -10,19 +10,19 @@
     --margin: 6px;
 
     /* Скругления */
-    --border_radius: 0.5rem;
-    --radius_sm: 6px;
-    --radius_md: 10px;
+    --border_radius: 10px;
+    --radius_sm: 8px;
+    --radius_md: 12px;
     --radius_pill: 999px;
     --radius_circle: 50%;
 
     /* Ширина управляющих элементов */
     --control_width: 200px;
 
-    /* Тени */
-    --box_shadow_main: 0 1px 5px 1px rgb(0 0 0 / 20%);
-    --box_shadow_drop: 0 6px 24px 4px rgb(0 0 0 / 20%);
-    --box_shadow_modal: 0 10px 40px 6px rgb(0 0 0 / 30%);
+    /* Тени — плоский стиль: минимум, только для отделения всплывающих слоёв */
+    --box_shadow_main: 0 1px 2px rgb(0 0 0 / 12%);
+    --box_shadow_drop: 0 10px 30px rgb(0 0 0 / 16%);
+    --box_shadow_modal: 0 16px 48px rgb(0 0 0 / 22%);
 
     /* Фокус */
     --focus_outline: 2px solid var(--blue_prime_background);
@@ -37,7 +37,11 @@ html {
     height: -webkit-fill-available;
     margin: 0;
     padding: 0;
-    background: var(--border_color);
+    /* Рамка окна. --border_color полупрозрачный (хайрлайн), поэтому под ним
+       нужна непрозрачная подложка: без неё он композитится с базовым цветом
+       окна (белым) и вокруг приложения появляется белая рамка. */
+    background: var(--main_background);
+    box-shadow: inset 0 0 0 1px var(--border_color);
 }
 
 strong {
@@ -124,7 +128,7 @@ app_menu_search_main {
     color: var(--text_color);
     font-size: var(--font_default_size);
     border: none;
-    box-shadow: 0 0 1px 0 var(--element_background_2);
+    box-shadow: 0 0 1px 0 var(--border_color);
 }
 
 ::-webkit-scrollbar {
@@ -145,7 +149,7 @@ center::-webkit-scrollbar-track {
 
 ::-webkit-scrollbar-thumb {
     border-radius: var(--border_radius);
-    background: var(--element_background_2);
+    background: var(--scrollbar_thumb);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -556,7 +560,7 @@ wc_close, wc_maximize, wc_minimize {
     padding: 3px;
     border-radius: 50%;
     /*background: var(--element_background);*/
-    box-shadow: 0 0 1px 0 var(--element_background_2);
+    box-shadow: 0 0 1px 0 var(--border_color);
 }
 
 wc_close:hover {

@@ -4,7 +4,7 @@ list {
     align-items: center;
     width: max-content;
     border-radius: var(--border_radius);
-    background: transparent;
+    background: var(--element_background);
     margin: var(--margin) 0;
     border: none;
 }

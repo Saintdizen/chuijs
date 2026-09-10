@@ -44,6 +44,8 @@ const {Tabs, Tab} = require('./framework/components/chui_tabs/chui_tabs');
 const {BarGraph, PieGraph} = require('./framework/components/chui_graphs/graphs');
 const {Toggle} = require('./framework/components/chui_inputs/chui_toggle/toggle');
 const {ContentBlock} = require('./framework/components/chui_content_block/content_block');
+const {Card} = require('./framework/components/chui_card/card');
+const {Hero} = require('./framework/components/chui_hero/hero');
 const {ProgressBar} = require('./framework/components/chui_progress_bar/progress_bar');
 const {Label} = require('./framework/components/chui_label/label');
 const {Dialog} = require('./framework/components/chui_modal/modal');
@@ -90,6 +92,7 @@ class Main {
     #minHeight = undefined;
     #minWidth = undefined;
     #renderer = undefined;
+    #devTools = false;
     #devToolsOpened = false;
     #webSecurity = true;
     #resizable = true;
@@ -151,8 +154,7 @@ class Main {
         this.#renderer = options.render;
         this.#webSecurity = options.webSecurity;
         this.#resizable = options.resizable;
-        // ===
-        if (options.devTools) this.#window.webContents.openDevTools();
+        this.#devTools = options.devTools;
     }
 
     static #resizeIconTray(image) {
@@ -229,6 +231,11 @@ class Main {
             });
         });
 
+        if (this.#devTools) {
+            this.#window.webContents.openDevTools();
+            this.#devToolsOpened = true;
+        }
+
         this.#window.on("ready-to-show", () => setTimeout(() => {
             this.#window.show()
             // let data = fs.readFileSync(path.join(__dirname, "cam_test.js"), 'utf8');
@@ -241,7 +248,11 @@ class Main {
                 this.#window.hide();
             });
         }
-        if (this.#resizable === false) this.#window.webContents.send("chui_resizable_false")
+        if (this.#resizable === false) {
+            this.#window.webContents.on("did-finish-load", () => {
+                this.#window.webContents.send("chui_resizable_false")
+            })
+        }
     }
 
     toggleDevTools() {
@@ -503,6 +514,8 @@ module.exports = {
     Dialog: Dialog,
     Label: Label,
     ContentBlock: ContentBlock,
+    Card: Card,
+    Hero: Hero,
     ProgressBar: ProgressBar,
     Toggle: Toggle,
     Image: Image,
