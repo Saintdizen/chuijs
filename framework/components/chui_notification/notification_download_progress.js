@@ -20,7 +20,7 @@ class DownloadProgressNotification {
     #id_progress_text = require("randomstring").generate();
     #progress_text = document.createElement('download_progress_text');
     constructor(options = { title: String(), text: String(), type: String() }) {
-        setStyles(__dirname + "/notification_download_progress.css", 'chUiJS_downloadNotification');
+        setStyles(__dirname + "/notification_download_progress.css", 'chUiJS_downloadProgressNotification');
         this.#download_notification.id = this.#id;
         this.#download_notification_title.id = this.#id_download_notification_title
         if (options.title !== undefined) {
