@@ -6,5 +6,7 @@ page {
     align-items: baseline;
 }
 .header_padding {
-    padding-top: 96px;
+    /* 45px (#header_main) + 35px (компактный меню-бар) — править согласованно
+       с framework/components/chui_menu_bar/styles.css */
+    padding-top: 80px;
 }

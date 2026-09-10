@@ -1,8 +1,23 @@
 chui_menu_bar_main {
+    /* Компактный режим. В шапке меню-бар — служебная полоса, а не контрол страницы,
+       поэтому общесистемные отступы (--main_padding 8px 13px, --test_padding 8px,
+       --margin 6px) уменьшены здесь локально. Токены переопределяются на корне полосы:
+       Button пишет padding: var(--test_padding) инлайном, стилями его иначе не перебить. */
+    --main_padding: 5px 10px;
+    --test_padding: 5px;
     display: flex;
+    align-items: center;
     width: max-content;
     height: max-content;
-    padding: 2px;
+    padding: 3px;
+    gap: 2px;
+}
+
+/* Button и MenuBar.DROPDOWN несут свои внешние отступы (--margin и auto 6px) —
+   внутри полосы их заменяет gap, иначе полоса распухает по вертикали. */
+chui_menu_bar_main > chui_button,
+menu_bar_drop_down_main {
+    margin: 0;
 }
 
 chui_menu_bar_button {
@@ -19,7 +34,7 @@ chui_menu_bar_button {
     align-items: center;
     justify-content: center;
     color: var(--text_color);
-    margin: 2px
+    margin: 0
 }
 
 chui_menu_bar_button:hover {
@@ -35,7 +50,6 @@ chui_menu_bar_button:active {
 menu_bar_drop_down_main {
     position: relative;
     display: flex;
-    margin: auto 6px
 }
 
 menu_bar_drop_down_button:hover {
